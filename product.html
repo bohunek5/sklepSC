@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cooken - Produkt</title>
-  
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
   <!-- Theme CSS -->
   <link rel="stylesheet" href="/assets/xo-webcomponents.min.css">
   <link rel="stylesheet" href="/assets/main.min.css">
-  
+
   <!-- Model Viewer library for 3D/AR models -->
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
-  
+
   <style>
     :root {
       --primary-color: #0b1a30;
@@ -42,7 +45,12 @@
       padding-top: 80px;
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       font-family: 'Outfit', sans-serif;
       color: var(--primary-color);
     }
@@ -156,7 +164,7 @@
       background: var(--white);
       z-index: 999;
       padding: 40px 8%;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
       transform: translateY(-20px);
       opacity: 0;
       visibility: hidden;
@@ -226,11 +234,12 @@
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
       display: flex;
       align-items: center;
       gap: 6px;
     }
+
     /* Purchase controls */
     .product-purchase-box {
       display: flex;
@@ -239,13 +248,13 @@
       margin-top: 30px;
       margin-bottom: 30px;
     }
-    
+
     .purchase-actions-row {
       display: flex;
       gap: 15px;
       align-items: center;
     }
-    
+
     .quantity-selector {
       display: flex;
       border: 1px solid #ddd;
@@ -254,7 +263,7 @@
       height: 52px;
       background: var(--white);
     }
-    
+
     .quantity-btn {
       width: 45px;
       height: 100%;
@@ -264,11 +273,11 @@
       cursor: pointer;
       transition: var(--transition);
     }
-    
+
     .quantity-btn:hover {
       background: #f0f0f0;
     }
-    
+
     .quantity-input {
       width: 40px;
       text-align: center;
@@ -278,7 +287,7 @@
       background: transparent;
       outline: none;
     }
-    
+
     .add-to-cart-btn {
       flex-grow: 1;
       height: 52px;
@@ -296,7 +305,7 @@
       z-index: 1;
       transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+
     .add-to-cart-btn::before {
       content: '';
       position: absolute;
@@ -308,19 +317,19 @@
       top: -100%;
       transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+
     .add-to-cart-btn:hover::before {
       top: 0;
     }
-    
+
     .add-to-cart-btn:not(:hover)::before {
       animation: slideOutBottom 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-    
+
     .add-to-cart-btn:hover {
       color: var(--white) !important;
     }
-    
+
     .buy-it-now-btn {
       width: 100%;
       height: 52px;
@@ -342,7 +351,7 @@
       justify-content: center;
       gap: 8px;
     }
-    
+
     .buy-it-now-btn::before {
       content: '';
       position: absolute;
@@ -354,28 +363,29 @@
       top: -100%;
       transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+
     .buy-it-now-btn:hover::before {
       top: 0;
     }
-    
+
     .buy-it-now-btn:not(:hover)::before {
       animation: slideOutBottom 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-    
+
     .buy-it-now-btn:hover {
       color: var(--white) !important;
     }
-    
+
     @keyframes slideOutBottom {
       0% {
         top: 0;
       }
+
       100% {
         top: 100%;
       }
     }
-    
+
     .express-checkout-options {
       margin-top: 10px;
       text-align: center;
@@ -384,7 +394,7 @@
       background: rgba(0, 0, 0, 0.02);
       border: 1px solid rgba(0, 0, 0, 0.05);
     }
-    
+
     .express-checkout-title {
       display: block;
       font-size: 10px;
@@ -394,14 +404,14 @@
       margin-bottom: 12px;
       font-weight: 700;
     }
-    
+
     .payment-icons-row {
       display: flex;
       justify-content: center;
       gap: 10px;
       flex-wrap: wrap;
     }
-    
+
     .payment-pill {
       display: flex;
       align-items: center;
@@ -411,58 +421,71 @@
       border-radius: 6px;
       font-size: 12px;
       font-weight: 700;
-      border: 1px solid rgba(0,0,0,0.08);
+      border: 1px solid rgba(0, 0, 0, 0.08);
       background: #fff;
       cursor: pointer;
       transition: all 0.2s ease;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
     }
-    
+
     .payment-pill:hover {
-      border-color: rgba(0,0,0,0.2);
+      border-color: rgba(0, 0, 0, 0.2);
       transform: translateY(-1px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     }
-    
+
     .shop-pay-pill {
       background: #5a31f4;
       color: #fff !important;
       border-color: #5a31f4;
     }
-    
+
     .shop-pay-pill i {
       font-style: italic;
       font-weight: 900;
     }
-    
+
     .paypal-pill {
       background: #ffc439;
       color: #003087 !important;
       border-color: #ffc439;
     }
-    
+
     .paypal-pill i {
       font-style: italic;
       font-weight: 800;
     }
-    
+
     .gpay-pill {
       background: #000;
       color: #fff !important;
       border-color: #000;
     }
-    
+
     .blik-pill {
       background: #fff;
       color: #e30613 !important;
       border-color: #e30613;
     }
-    
+
     @keyframes pulse-green {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.7); }
-      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(46, 125, 50, 0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 125, 50, 0); }
-    }border-color: var(--primary-color);
+      0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.7);
+      }
+
+      70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 6px rgba(46, 125, 50, 0);
+      }
+
+      100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(46, 125, 50, 0);
+      }
+    }
+
+    border-color: var(--primary-color);
     }
 
     .product-thumbnails {
@@ -480,7 +503,8 @@
       background-color: var(--light-bg);
     }
 
-    .thumbnail:hover, .thumbnail.active {
+    .thumbnail:hover,
+    .thumbnail.active {
       border-color: var(--accent-color);
     }
 
@@ -556,7 +580,8 @@
       transition: var(--transition);
     }
 
-    .size-swatch:hover, .size-swatch.active {
+    .size-swatch:hover,
+    .size-swatch.active {
       border-color: var(--primary-color);
       background: var(--primary-color);
       color: var(--white);
@@ -575,7 +600,10 @@
     .color-swatch-dot.active::after {
       content: '';
       position: absolute;
-      top: -4px; left: -4px; right: -4px; bottom: -4px;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
       border: 1px solid var(--primary-color);
       border-radius: 50%;
     }
@@ -704,9 +732,11 @@
         grid-template-columns: 1fr;
         gap: 40px;
       }
+
       .product-main-img {
         height: 450px;
       }
+
       .footer-grid {
         grid-template-columns: 1fr 1fr;
       }
@@ -716,18 +746,23 @@
       .mockup-header {
         padding: 15px 5%;
       }
+
       .mockup-nav {
         display: none;
       }
+
       .menu-toggle {
         display: block;
       }
+
       .product-title {
         font-size: 28px;
       }
+
       .footer-grid {
         grid-template-columns: 1fr;
       }
+
       .footer-bottom {
         flex-direction: column;
         gap: 15px;
@@ -746,13 +781,13 @@
       border: 1px solid transparent;
       transition: var(--transition);
     }
-    
+
     .mockup-search-container:focus-within {
       background: var(--white);
       border-color: var(--accent-color);
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     }
-    
+
     .mockup-search-container input {
       border: none;
       background: transparent;
@@ -761,11 +796,11 @@
       width: 140px;
       transition: width 0.3s ease;
     }
-    
+
     .mockup-search-container input:focus {
       width: 200px;
     }
-    
+
     .mockup-search-container button {
       background: none;
       border: none;
@@ -781,8 +816,9 @@
     }
   </style>
 </head>
+
 <body>
-  
+
   <header class="mockup-header">
     <button class="menu-toggle" id="menuToggle">☰</button>
     <div class="mockup-header-logo">
@@ -803,10 +839,19 @@
         <button id="headerSearchBtn">🔍</button>
       </div>
       <button class="mockup-action-icon" aria-label="Konto użytkownika">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
       </button>
       <a href="/cart.html" class="mockup-action-icon" aria-label="Koszyk">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="8" cy="21" r="1" />
+          <circle cx="19" cy="21" r="1" />
+          <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+        </svg>
       </a>
     </div>
   </header>
@@ -827,42 +872,52 @@
       <div class="gallery-main-wrapper" style="position: relative;">
         <!-- Standard Image -->
         <img src="" alt="" class="product-main-img" id="mainImg">
-        <video id="mainImgVideo" loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; z-index: 2;"></video>
-        
+
         <!-- 3D Model Viewer -->
-        <div id="modelViewerContainer" style="display: none; width: 100%; height: 100%; min-height: 500px; position: relative;">
+        <div id="modelViewerContainer"
+          style="display: none; width: 100%; height: 100%; min-height: 500px; position: relative;">
           <!-- model-viewer element will be dynamically appended here -->
         </div>
 
         <!-- 360 Viewer Container -->
-        <div id="sixtyViewerContainer" style="display: none; width: 100%; height: 100%; min-height: 500px; position: relative; overflow: hidden; background: #fff; cursor: ew-resize; align-items: center; justify-content: center;">
-          <img id="sixtyImg" src="" alt="360 View" style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none;">
-          <div class="product-360__loading" id="sixtyLoading" style="position: absolute; background: rgba(255,255,255,0.9); padding: 15px 30px; border-radius: 30px; font-weight: 600; box-shadow: 0 5px 15px rgba(0,0,0,0.1); font-size: 13px;">Wczytywanie 360°...</div>
-          
+        <div id="sixtyViewerContainer"
+          style="display: none; width: 100%; height: 100%; min-height: 500px; position: relative; overflow: hidden; background: #fff; cursor: ew-resize; align-items: center; justify-content: center;">
+          <img id="sixtyImg" src="" alt="360 View"
+            style="max-width: 100%; max-height: 100%; object-fit: contain; pointer-events: none;">
+          <div class="product-360__loading" id="sixtyLoading"
+            style="position: absolute; background: rgba(255,255,255,0.9); padding: 15px 30px; border-radius: 30px; font-weight: 600; box-shadow: 0 5px 15px rgba(0,0,0,0.1); font-size: 13px;">
+            Wczytywanie 360°...</div>
+
           <!-- Play / Pause / Prev / Next controls -->
-          <div class="product-360__controls" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; background: rgba(255,255,255,0.9); padding: 8px 15px; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); z-index: 10; align-items: center;">
-            <button class="action-btn-circle" id="sixtyPrev" style="width: 35px; height: 35px; font-size: 12px; margin: 0; border: none; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">◀</button>
-            <button class="action-btn-circle" id="sixtyPlay" style="width: 35px; height: 35px; font-size: 12px; margin: 0; border: none; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">▶</button>
-            <button class="action-btn-circle" id="sixtyPause" style="width: 35px; height: 35px; font-size: 12px; margin: 0; border: none; background: #fff; cursor: pointer; display: none; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">⏸</button>
-            <button class="action-btn-circle" id="sixtyNext" style="width: 35px; height: 35px; font-size: 12px; margin: 0; border: none; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">▶</button>
+          <div class="product-360__controls"
+            style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; background: rgba(255,255,255,0.9); padding: 8px 15px; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); z-index: 10; align-items: center;">
+            <button class="action-btn-circle" id="sixtyPrev"
+              style="width: 35px; height: 35px; font-size: 12px; margin: 0; border: none; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">◀</button>
+            <button class="action-btn-circle" id="sixtyPlay"
+              style="width: 35px; height: 35px; font-size: 12px; margin: 0; border: none; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">▶</button>
+            <button class="action-btn-circle" id="sixtyPause"
+              style="width: 35px; height: 35px; font-size: 12px; margin: 0; border: none; background: #fff; cursor: pointer; display: none; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">⏸</button>
+            <button class="action-btn-circle" id="sixtyNext"
+              style="width: 35px; height: 35px; font-size: 12px; margin: 0; border: none; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">▶</button>
           </div>
         </div>
 
         <!-- Media triggers on top of the main image/canvas -->
-        <div class="gallery-media-triggers" style="position: absolute; bottom: 20px; right: 20px; display: flex; gap: 10px; z-index: 10;">
+        <div class="gallery-media-triggers"
+          style="position: absolute; bottom: 20px; right: 20px; display: flex; gap: 10px; z-index: 10;">
           <button class="media-trigger-btn active" id="triggerImage">🖼️ Galeria</button>
           <button class="media-trigger-btn" id="trigger3D" style="display: none;">👁️ 3D / AR</button>
           <button class="media-trigger-btn" id="trigger360" style="display: none;">🔄 360˚</button>
         </div>
       </div>
-      
+
       <div class="product-thumbnails" id="qvThumbnails"></div>
     </section>
-    
+
     <section class="product-meta">
       <div class="product-brand" id="pCategory">COOKEN LINE</div>
       <h1 class="product-title" id="pTitle"></h1>
-      
+
       <div class="product-rating">
         ★★★★★ <span>(14 recenzji)</span>
       </div>
@@ -892,21 +947,27 @@
           </div>
           <button class="add-to-cart-btn" id="addToCart">Dodaj do koszyka</button>
         </div>
-        
+
         <button class="buy-it-now-btn" id="buyItNow">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
           Kup teraz (Szybka płatność)
         </button>
 
         <!-- Two simple rows detailing fast delivery and easy returns -->
-        <div class="delivery-returns-info" style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #eee; font-size: 14px; color: #555; line-height: 1.6;">
+        <div class="delivery-returns-info"
+          style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #eee; font-size: 14px; color: #555; line-height: 1.6;">
           <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-            <i data-lucide="zap" style="width: 18px; height: 18px; color: var(--accent-color); flex-shrink: 0;"></i>
-            <span style="font-weight: 500; color: var(--primary-color);">Szybka wysyłka w 24h na terenie całego kraju</span>
+            <span style="color: var(--accent-color); font-size: 16px;">⚡</span>
+            <span style="font-weight: 500; color: var(--primary-color);">Szybka wysyłka w 24h na terenie całego
+              kraju</span>
           </div>
           <div style="display: flex; align-items: center; gap: 10px;">
-            <i data-lucide="refresh-cw" style="width: 18px; height: 18px; color: var(--accent-color); flex-shrink: 0;"></i>
-            <span style="font-weight: 500; color: var(--primary-color);">Bezproblemowy zwrot do 30 dni bez podania przyczyny</span>
+            <span style="color: var(--accent-color); font-size: 16px;">🔄</span>
+            <span style="font-weight: 500; color: var(--primary-color);">Bezproblemowy zwrot do 30 dni bez podania
+              przyczyny</span>
           </div>
         </div>
       </div>
@@ -919,11 +980,14 @@
         </div>
         <div class="tab-pane active" id="descTab"></div>
         <div class="tab-pane" id="shippingTab">
-          <p>Oferujemy szybką wysyłkę na terenie całej Europy. Zamówienia złożone do godziny 12:00 wysyłamy tego samego dnia. Darmowa dostawa dla zakupów od 500 zł.</p>
+          <p>Oferujemy szybką wysyłkę na terenie całej Europy. Zamówienia złożone do godziny 12:00 wysyłamy tego samego
+            dnia. Darmowa dostawa dla zakupów od 500 zł.</p>
         </div>
         <div class="tab-pane" id="reviewsTab">
-          <p><strong>Karol B.</strong> ★★★★★<br>Świetna jakość, produkt wygląda niesamowicie profesjonalnie. Bardzo polecam!</p>
-          <p style="margin-top: 15px;"><strong>Anna K.</strong> ★★★★★<br>Najpiękniejsza rzecz jaką kupiłam do kuchni. Bardzo polecam.</p>
+          <p><strong>Karol B.</strong> ★★★★★<br>Świetna jakość, produkt wygląda niesamowicie profesjonalnie. Bardzo
+            polecam!</p>
+          <p style="margin-top: 15px;"><strong>Anna K.</strong> ★★★★★<br>Najpiękniejsza rzecz jaką kupiłam do kuchni.
+            Bardzo polecam.</p>
         </div>
       </div>
     </section>
@@ -933,88 +997,126 @@
   <section class="product-detailed-description" style="max-width: 1200px; margin: 60px auto; padding: 0 5%;">
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; margin-bottom: 60px;">
       <div>
-        <h2 style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 700; color: var(--primary-color); margin-bottom: 20px; line-height: 1.2;">
+        <h2
+          style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 700; color: var(--primary-color); margin-bottom: 20px; line-height: 1.2;">
           Zaawansowane Systemy Oświetleniowe LED
         </h2>
         <p style="font-size: 16px; color: #555; line-height: 1.8; margin-bottom: 20px;">
-          Nasze produkty są tworzone z myślą o profesjonalistach poszukujących niezawodnych i precyzyjnych rozwiązań. Używamy najwyższej klasy komponentów, gwarantując stałą jasność diod oraz stabilność zasilania. Idealne do nowoczesnych projektów hoteli, biur, salonów oraz luksusowych przestrzeni mieszkalnych.
+          Nasze produkty są tworzone z myślą o profesjonalistach poszukujących niezawodnych i precyzyjnych rozwiązań.
+          Używamy najwyższej klasy komponentów, gwarantując stałą jasność diod oraz stabilność zasilania. Idealne do
+          nowoczesnych projektów hoteli, biur, salonów oraz luksusowych przestrzeni mieszkalnych.
         </p>
         <p style="font-size: 16px; color: #555; line-height: 1.8;">
-          Systemy zasilaczy Scharfer z unikalną 7-letnią gwarancją i zaawansowanymi sterownikami radiowymi RF Prescot gwarantują bezproblemowe użytkowanie i pełną integrację ze standardami inteligentnego domu.
+          Systemy zasilaczy Scharfer z unikalną 7-letnią gwarancją i zaawansowanymi sterownikami radiowymi RF Prescot
+          gwarantują bezproblemowe użytkowanie i pełną integrację ze standardami inteligentnego domu.
         </p>
       </div>
       <div>
-        <img src="/images/products/controller_rgbw.webp" alt="Profesjonalne komponenty LED" style="width: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); object-fit: cover; max-height: 350px;">
+        <img src="/images/products/controller_rgbw.webp" alt="Profesjonalne komponenty LED"
+          style="width: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); object-fit: cover; max-height: 350px;">
       </div>
     </div>
 
     <!-- 3-column features showcase grid -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; padding-top: 40px; border-top: 1px solid #eee;">
+    <div
+      style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; padding-top: 40px; border-top: 1px solid #eee;">
       <div style="text-align: center; padding: 20px;">
-        <div style="color: var(--accent-color); margin-bottom: 20px; display: flex; justify-content: center;">
-          <i data-lucide="shield-check" style="width: 38px; height: 38px; stroke-width: 1.5;"></i>
-        </div>
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; color: var(--primary-color); margin-bottom: 10px;">7 Lat Gwarancji</h3>
-        <p style="font-size: 14px; color: #666; line-height: 1.6;">Wszystkie zasilacze Scharfer objęte są pełną, 7-letnią gwarancją producenta, co potwierdza ich najwyższą bezawaryjność.</p>
+        <div style="font-size: 36px; margin-bottom: 15px;">🛡️</div>
+        <h3
+          style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; color: var(--primary-color); margin-bottom: 10px;">
+          7 Lat Gwarancji</h3>
+        <p style="font-size: 14px; color: #666; line-height: 1.6;">Wszystkie zasilacze Scharfer objęte są pełną,
+          7-letnią gwarancją producenta, co potwierdza ich najwyższą bezawaryjność.</p>
       </div>
       <div style="text-align: center; padding: 20px;">
-        <div style="color: var(--accent-color); margin-bottom: 20px; display: flex; justify-content: center;">
-          <i data-lucide="zap" style="width: 38px; height: 38px; stroke-width: 1.5;"></i>
-        </div>
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; color: var(--primary-color); margin-bottom: 10px;">Wysoka Wydajność</h3>
-        <p style="font-size: 14px; color: #666; line-height: 1.6;">Minimalne straty energii, brak tętnienia światła (flicker-free) i precyzyjna stabilizacja napięcia wyjściowego.</p>
+        <div style="font-size: 36px; margin-bottom: 15px;">⚡</div>
+        <h3
+          style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; color: var(--primary-color); margin-bottom: 10px;">
+          Wysoka Wydajność</h3>
+        <p style="font-size: 14px; color: #666; line-height: 1.6;">Minimalne straty energii, brak tętnienia światła
+          (flicker-free) i precyzyjna stabilizacja napięcia wyjściowego.</p>
       </div>
       <div style="text-align: center; padding: 20px;">
-        <div style="color: var(--accent-color); margin-bottom: 20px; display: flex; justify-content: center;">
-          <i data-lucide="wifi" style="width: 38px; height: 38px; stroke-width: 1.5;"></i>
-        </div>
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; color: var(--primary-color); margin-bottom: 10px;">Sterowanie RF 2.4GHz</h3>
-        <p style="font-size: 14px; color: #666; line-height: 1.6;">Zasięg radiowy do 30 metrów, możliwość łączenia sterowników w strefy i bezprzewodowa synchronizacja sygnału.</p>
+        <div style="font-size: 36px; margin-bottom: 15px;">🌐</div>
+        <h3
+          style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; color: var(--primary-color); margin-bottom: 10px;">
+          Sterowanie RF 2.4GHz</h3>
+        <p style="font-size: 14px; color: #666; line-height: 1.6;">Zasięg radiowy do 30 metrów, możliwość łączenia
+          sterowników w strefy i bezprzewodowa synchronizacja sygnału.</p>
       </div>
     </div>
   </section>
 
   <!-- Sekcja Blogowa pod produktem -->
-  <section class="product-blog-section" style="background: var(--light-bg); padding: 80px 5%; border-top: 1px solid #eee; border-bottom: 1px solid #eee;">
+  <section class="product-blog-section"
+    style="background: var(--light-bg); padding: 80px 5%; border-top: 1px solid #eee; border-bottom: 1px solid #eee;">
     <div style="max-width: 1200px; margin: 0 auto;">
-      <h2 style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 700; color: var(--primary-color); text-align: center; margin-bottom: 10px;">Z naszego bloga</h2>
-      <p style="text-align: center; color: #666; margin-bottom: 50px; font-size: 16px;">Dowiedz się więcej o nowoczesnym oświetleniu i sterowaniu LED</p>
-      
+      <h2
+        style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 700; color: var(--primary-color); text-align: center; margin-bottom: 10px;">
+        Z naszego bloga</h2>
+      <p style="text-align: center; color: #666; margin-bottom: 50px; font-size: 16px;">Dowiedz się więcej o nowoczesnym
+        oświetleniu i sterowaniu LED</p>
+
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
         <!-- Card 1 -->
-        <article class="blog-card" style="background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s ease; cursor: pointer; position: relative;" onclick="window.location.href='/blog.html#blog-1'">
-          <div style="position: relative; overflow: hidden; height: 200px;">
-            <img src="/images/contemporary-apartment-interior-with-stylish-decor-2026-03-10-02-45-38-utc.webp" alt="Blog post 1" style="width: 100%; height: 100%; object-fit: cover;">
-            <span style="position: absolute; top: 15px; left: 15px; background: #ffffff; color: var(--primary-color, #0b1a30); padding: 5px 12px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; border-radius: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10;">Techniczne</span>
-          </div>
+        <article class="blog-card"
+          style="background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s ease; cursor: pointer;"
+          onclick="window.location.href='/blog.html#blog-1'">
+          <img src="/images/blog-1-dobor-zasilacza-hero.png" alt="Blog post 1"
+            style="width: 100%; height: 200px; object-fit: cover;">
           <div style="padding: 25px;">
-            <h3 style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; margin-top: 0; margin-bottom: 15px; line-height: 1.4;"><a href="/blog.html#blog-1" style="color: var(--primary-color); text-decoration: none;">Jak dobrać odpowiednie profile aluminiowe LED?</a></h3>
-            <p style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 20px;">Odpowiednio dobrany profil aluminiowy to nie tylko estetyka, ale przede wszystkim trwałość taśmy LED. Zobacz, na co zwrócić uwagę przed zakupem.</p>
-            <a href="/blog.html#blog-1" style="color: var(--primary-color); font-weight: 600; text-decoration: none; font-size: 13px; display: inline-flex; align-items: center; gap: 5px;">Czytaj dalej ➔</a>
+            <span
+              style="font-size: 11px; text-transform: uppercase; color: var(--accent-color); font-weight: 600; letter-spacing: 1px;">Poradnik</span>
+            <h3
+              style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; margin-top: 10px; margin-bottom: 15px; line-height: 1.4;">
+              <a href="/blog.html#blog-1" style="color: var(--primary-color); text-decoration: none;">Jak dobrać
+                zasilacz LED do taśmy?</a></h3>
+            <p style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 20px;">Zasilacz LED dobiera się do
+              konkretnej taśmy, a nie „na oko”. Zobacz, jak obliczyć moc, sprawdzić napięcie i bezpiecznie zasilić
+              taśmę.</p>
+            <a href="/blog.html#blog-1"
+              style="color: var(--primary-color); font-weight: 600; text-decoration: none; font-size: 13px; display: inline-flex; align-items: center; gap: 5px;">Czytaj
+              dalej ➔</a>
           </div>
         </article>
         <!-- Card 2 -->
-        <article class="blog-card" style="background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s ease; cursor: pointer; position: relative;" onclick="window.location.href='/blog.html#blog-2'">
-          <div style="position: relative; overflow: hidden; height: 200px;">
-            <img src="/images/elegant-interior-design-with-neutral-colors-2026-03-25-07-06-00-utc.webp" alt="Blog post 2" style="width: 100%; height: 100%; object-fit: cover;">
-            <span style="position: absolute; top: 15px; left: 15px; background: #ffffff; color: var(--primary-color, #0b1a30); padding: 5px 12px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; border-radius: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10;">Inspiracje</span>
-          </div>
+        <article class="blog-card"
+          style="background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s ease; cursor: pointer;"
+          onclick="window.location.href='/blog.html#blog-2'">
+          <img src="/images/blog-2-typy-zasilaczy-hero.png" alt="Blog post 2"
+            style="width: 100%; height: 200px; object-fit: cover;">
           <div style="padding: 25px;">
-            <h3 style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; margin-top: 0; margin-bottom: 15px; line-height: 1.4;"><a href="/blog.html#blog-2" style="color: var(--primary-color); text-decoration: none;">CRI97: Dlaczego wierność barw ma kluczowe znaczenie?</a></h3>
-            <p style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 20px;">Czym różni się oświetlenie z wysokim wskaźnikiem oddawania barw od standardowych źródeł światła? Wyjaśniamy wpływ parametru CRI na wygląd wnętrza.</p>
-            <a href="/blog.html#blog-2" style="color: var(--primary-color); font-weight: 600; text-decoration: none; font-size: 13px; display: inline-flex; align-items: center; gap: 5px;">Czytaj dalej ➔</a>
+            <span
+              style="font-size: 11px; text-transform: uppercase; color: var(--accent-color); font-weight: 600; letter-spacing: 1px;">Techniczne</span>
+            <h3
+              style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; margin-top: 10px; margin-bottom: 15px; line-height: 1.4;">
+              <a href="/blog.html#blog-2" style="color: var(--primary-color); text-decoration: none;">Zasilacze LED -
+                gdzie użyć którego?</a></h3>
+            <p style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 20px;">Desktop, slim, siatkowy czy
+              hermetyczny IP67? Zobacz praktyczne porównanie typów zasilaczy w zależności od miejsca montażu.</p>
+            <a href="/blog.html#blog-2"
+              style="color: var(--primary-color); font-weight: 600; text-decoration: none; font-size: 13px; display: inline-flex; align-items: center; gap: 5px;">Czytaj
+              dalej ➔</a>
           </div>
         </article>
         <!-- Card 3 -->
-        <article class="blog-card" style="background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s ease; cursor: pointer; position: relative;" onclick="window.location.href='/blog.html#blog-3'">
-          <div style="position: relative; overflow: hidden; height: 200px;">
-            <img src="/images/hero_cob.webp" alt="Blog post 3" style="width: 100%; height: 100%; object-fit: cover;">
-            <span style="position: absolute; top: 15px; left: 15px; background: #ffffff; color: var(--primary-color, #0b1a30); padding: 5px 12px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; border-radius: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 10;">Porównania</span>
-          </div>
+        <article class="blog-card"
+          style="background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s ease; cursor: pointer;"
+          onclick="window.location.href='/blog.html#blog-3'">
+          <img src="/images/blog-3-do-czego-zasilacz-hero.png" alt="Blog post 3"
+            style="width: 100%; height: 200px; object-fit: cover;">
           <div style="padding: 25px;">
-            <h3 style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; margin-top: 0; margin-bottom: 15px; line-height: 1.4;"><a href="/blog.html#blog-3" style="color: var(--primary-color); text-decoration: none;">Taśmy LED COB vs SMD – co sprawdzi się lepiej?</a></h3>
-            <p style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 20px;">Jednolita linia światła bez widocznych punktów czy klasyczna wydajność diod SMD? Porównujemy dwa najpopularniejsze typy taśm LED.</p>
-            <a href="/blog.html#blog-3" style="color: var(--primary-color); font-weight: 600; text-decoration: none; font-size: 13px; display: inline-flex; align-items: center; gap: 5px;">Czytaj dalej ➔</a>
+            <span
+              style="font-size: 11px; text-transform: uppercase; color: var(--accent-color); font-weight: 600; letter-spacing: 1px;">Podstawy</span>
+            <h3
+              style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; margin-top: 10px; margin-bottom: 15px; line-height: 1.4;">
+              <a href="/blog.html#blog-3" style="color: var(--primary-color); text-decoration: none;">Do czego służą
+                zasilacze LED?</a></h3>
+            <p style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 20px;">Dlaczego nie wolno podłączać
+              taśmy bezpośrednio do gniazdka 230V? Dowiedz się, jaką rolę pełni zasilacz w bezpiecznej instalacji.</p>
+            <a href="/blog.html#blog-3"
+              style="color: var(--primary-color); font-weight: 600; text-decoration: none; font-size: 13px; display: inline-flex; align-items: center; gap: 5px;">Czytaj
+              dalej ➔</a>
           </div>
         </article>
       </div>
@@ -1023,10 +1125,14 @@
 
   <!-- Sekcja Polecane Produkty -->
   <section class="recommended-products-section" style="max-width: 1200px; margin: 80px auto; padding: 0 5%;">
-    <h2 style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 700; color: var(--primary-color); text-align: center; margin-bottom: 10px;">Polecane produkty</h2>
-    <p style="text-align: center; color: #666; margin-bottom: 50px; font-size: 16px;">Mogą Ci się również spodobać te rozwiązania</p>
-    
-    <div id="recommendedGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+    <h2
+      style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 700; color: var(--primary-color); text-align: center; margin-bottom: 10px;">
+      Polecane produkty</h2>
+    <p style="text-align: center; color: #666; margin-bottom: 50px; font-size: 16px;">Mogą Ci się również spodobać te
+      rozwiązania</p>
+
+    <div id="recommendedGrid"
+      style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
       <!-- Loaded dynamically via JS -->
     </div>
   </section>
@@ -1037,7 +1143,8 @@
         <div class="footer-logo">
           <img src="/images/logo.png" alt="Cooken Logo White">
         </div>
-        <p style="margin-top: 15px;">Prescot LED to profesjonalny dostawca najwyższej jakości taśm LED, profili aluminiowych, nowoczesnych sterowników oraz niezawodnych zasilaczy hermetycznych.</p>
+        <p style="margin-top: 15px;">Prescot LED to profesjonalny dostawca najwyższej jakości taśm LED, profili
+          aluminiowych, nowoczesnych sterowników oraz niezawodnych zasilaczy hermetycznych.</p>
       </div>
       <div class="footer-col">
         <h3>Link</h3>
@@ -1059,10 +1166,13 @@
       </div>
       <div class="footer-col">
         <h3>Newsletter</h3>
-        <p style="margin-bottom: 20px;">Zapisz się, aby otrzymywać informacje o nowych kolekcjach i ofertach specjalnych.</p>
+        <p style="margin-bottom: 20px;">Zapisz się, aby otrzymywać informacje o nowych kolekcjach i ofertach
+          specjalnych.</p>
         <div style="display: flex; gap: 10px;">
-          <input type="email" placeholder="Twój e-mail" style="padding: 12px 15px; border: 1px solid #333; background: #222; color: #fff; width: 100%; border-radius: 4px; font-size: 13px;">
-          <button style="padding: 12px 25px; background: var(--accent-color); border: none; color: #000; font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; border-radius: 4px;">OK</button>
+          <input type="email" placeholder="Twój e-mail"
+            style="padding: 12px 15px; border: 1px solid #333; background: #222; color: #fff; width: 100%; border-radius: 4px; font-size: 13px;">
+          <button
+            style="padding: 12px 25px; background: var(--accent-color); border: none; color: #000; font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; border-radius: 4px;">OK</button>
         </div>
       </div>
     </div>
@@ -1089,33 +1199,11 @@
     document.getElementById('pPrice').textContent = `${product.price.toFixed(2)} zł`;
     document.getElementById('pDesc').textContent = product.description;
     document.getElementById('descTab').innerHTML = `<p>${product.description}</p>`;
-    
+
     // Main Image & Gallery
     const mainImg = document.getElementById('mainImg');
-    const mainImgVideo = document.getElementById('mainImgVideo');
     mainImg.src = product.images[0];
     mainImg.alt = product.title;
-
-    if (product.video && mainImgVideo) {
-      mainImgVideo.src = product.video;
-    }
-
-    const galleryWrapper = document.querySelector('.gallery-main-wrapper');
-    if (galleryWrapper && mainImgVideo) {
-      galleryWrapper.addEventListener('mouseenter', () => {
-        if (product.video) {
-          mainImgVideo.style.opacity = '1';
-          mainImgVideo.play().catch(err => console.log("Main video play interrupted:", err));
-        }
-      });
-      galleryWrapper.addEventListener('mouseleave', () => {
-        if (product.video) {
-          mainImgVideo.style.opacity = '0';
-          mainImgVideo.pause();
-          mainImgVideo.currentTime = 0;
-        }
-      });
-    }
 
     const qvThumbnails = document.getElementById('qvThumbnails');
     product.images.forEach((imgSrc, i) => {
@@ -1194,7 +1282,7 @@
       document.getElementById(`${tab}Header`).addEventListener('click', (e) => {
         document.querySelectorAll('.tab-header').forEach(h => h.classList.remove('active'));
         document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-        
+
         e.target.classList.add('active');
         document.getElementById(tab).classList.add('active');
       });
@@ -1215,7 +1303,7 @@
     }
     if (product.has360) {
       trigger360.style.display = 'flex';
-      
+
       // Preload 360 images
       const imagesCount = product.images360Count || 39;
       const pattern = product.images360Pattern;
@@ -1234,7 +1322,7 @@
         };
         preloadedImages.push(img);
       }
-      
+
       // Set initial image
       sixtyImg.src = pattern.replace('{index}', 1);
     }
@@ -1247,7 +1335,7 @@
       triggerImage.classList.remove('active');
       trigger3D.classList.remove('active');
       trigger360.classList.remove('active');
-      
+
       // Stop 360 interval if playing
       stopSixtyAutoPlay();
     }
@@ -1262,7 +1350,7 @@
       resetGalleryTabs();
       modelViewerContainer.style.display = 'block';
       trigger3D.classList.add('active');
-      
+
       // Lazy load model-viewer if not already inside container
       if (!modelViewerContainer.querySelector('model-viewer')) {
         modelViewerContainer.innerHTML = `
@@ -1288,7 +1376,7 @@
     // 3. 360 Degree Rotation Logic
     let activeSixtyIndex = 1;
     const totalSixtyImages = product.images360Count || 39;
-    
+
     function showSixtyImage(index) {
       if (index < 1) index = totalSixtyImages;
       if (index > totalSixtyImages) index = 1;
@@ -1397,7 +1485,7 @@
     // Header Search bar logic
     const headerSearchInput = document.getElementById('headerSearchInput');
     const headerSearchBtn = document.getElementById('headerSearchBtn');
-    
+
     function performHeaderSearch() {
       if (headerSearchInput) {
         const q = headerSearchInput.value.trim();
@@ -1406,7 +1494,7 @@
         }
       }
     }
-    
+
     if (headerSearchInput) {
       headerSearchInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
@@ -1428,7 +1516,7 @@
         const remaining = products.filter(p => p.id !== product.id && p.category !== product.category).slice(0, 4 - recommended.length);
         recommended = [...recommended, ...remaining];
       }
-      
+
       recommended.forEach(p => {
         const cardHTML = `
           <div class="mockup-product-card" data-id="${p.id}">
@@ -1438,12 +1526,8 @@
                 <video class="mockup-product-video" src="${p.video}" loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
               ` : ''}
               <div class="product-actions-hover">
-                <button class="action-btn-circle qv-add-cart-btn" data-id="${p.id}" aria-label="Dodaj do koszyka">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-                </button>
-                <button class="action-btn-circle qv-eye-btn" data-id="${p.id}" aria-label="Szybki podgląd">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                </button>
+                <button class="action-btn-circle qv-add-cart-btn" data-id="${p.id}">🛒</button>
+                <button class="action-btn-circle qv-eye-btn" data-id="${p.id}">👁️</button>
               </div>
             </div>
             <div class="mockup-product-info">
@@ -1489,18 +1573,18 @@
     // Delivery Countdown & Estimator Logic
     const countdownEl = document.getElementById('deliveryCountdown');
     const deliveryDateEl = document.getElementById('estimatedDeliveryDate');
-    
+
     function updateDeliveryEstimator() {
       if (!countdownEl || !deliveryDateEl) return;
-      
+
       const now = new Date();
       // Set the shipping cut-off time to 18:00 (6:00 PM) today
       const cutoff = new Date();
       cutoff.setHours(18, 0, 0, 0);
-      
+
       let targetTime;
       let shippingToday = true;
-      
+
       if (now < cutoff) {
         targetTime = cutoff;
       } else {
@@ -1509,55 +1593,52 @@
         targetTime.setDate(cutoff.getDate() + 1);
         shippingToday = false;
       }
-      
+
       // Calculate remaining time
       const diffMs = targetTime - now;
       const hours = Math.floor(diffMs / (1000 * 60 * 60));
       const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((diffMs % (1000 * 60)) / 1000);
-      
+
       // Format countdown text: e.g. 04g 12m 30s
       const hStr = String(hours).padStart(2, '0');
       const mStr = String(minutes).padStart(2, '0');
       const sStr = String(seconds).padStart(2, '0');
       countdownEl.textContent = `${hStr}g ${mStr}m ${sStr}s`;
-      
+
       // Calculate estimated delivery date: shipping date + 1 business day
       let shippingDate = new Date(now);
       if (!shippingToday) {
         shippingDate.setDate(shippingDate.getDate() + 1);
       }
-      
+
       // If shipping date falls on Sunday, move to Monday
       if (shippingDate.getDay() === 0) {
         shippingDate.setDate(shippingDate.getDate() + 1);
       }
-      
+
       // Delivery date = shipping date + 1 business day
       let deliveryDate = new Date(shippingDate);
       deliveryDate.setDate(deliveryDate.getDate() + 1);
-      
+
       // Skip Saturday and Sunday for delivery
       if (deliveryDate.getDay() === 6) { // Saturday -> Monday
         deliveryDate.setDate(deliveryDate.getDate() + 2);
       } else if (deliveryDate.getDay() === 0) { // Sunday -> Monday
         deliveryDate.setDate(deliveryDate.getDate() + 1);
       }
-      
+
       // Format delivery date in Polish
       const options = { weekday: 'long', day: 'numeric', month: 'long' };
       const formattedDate = deliveryDate.toLocaleDateString('pl-PL', options);
       // Capitalize first letter
       deliveryDateEl.textContent = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
     }
-    
+
     // Run estimator immediately and update every second
     updateDeliveryEstimator();
     setInterval(updateDeliveryEstimator, 1000);
   </script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script>
-    lucide.createIcons();
-  </script>
 </body>
+
 </html>

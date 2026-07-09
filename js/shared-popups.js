@@ -148,33 +148,6 @@ export function initSharedPopups() {
   injectNewsletterPopup();
   injectSearchOverlay();
   injectMobileMenuOverlay();
-  updateGlobalCartBadge();
-  initPremiumButtons();
-  setInterval(initPremiumButtons, 500);
-
-  // Programmatically replace search icon emoji with Lucide search icon
-  const headerSearchBtn = document.getElementById('headerSearchBtn');
-  if (headerSearchBtn && headerSearchBtn.textContent.trim() === '🔍') {
-    headerSearchBtn.innerHTML = '<i data-lucide="search" style="width: 16px; height: 16px; display: block; margin: auto;"></i>';
-  }
-
-  // Load Lucide script dynamically if not present to render icons
-  if (!window.lucide) {
-    const script = document.createElement('script');
-    script.src = 'https://unpkg.com/lucide@latest';
-    script.onload = () => {
-      if (window.lucide) {
-        window.lucide.createIcons();
-      }
-    };
-    document.head.appendChild(script);
-  } else {
-    window.lucide.createIcons();
-  }
-
-  window.addEventListener('storage', () => {
-    updateGlobalCartBadge();
-  });
 
   // Inject Global Style overrides (Shadows, Mobile sliding drawer, etc.)
   const styleEl = document.createElement('style');
@@ -261,75 +234,6 @@ export function initSharedPopups() {
       border-color: #ff5a00;
       box-shadow: 0 8px 25px rgba(0,0,0,0.05);
       transform: translateY(-2px);
-    }
-
-    /* Premium Hover Buttons */
-    .mockup-btn, .add-to-cart-btn, .buy-it-now-btn, .checkout-btn {
-      position: relative !important;
-      overflow: hidden !important;
-      background-color: var(--primary-color) !important; /* Navy Blue #0b1a30 */
-      color: #fff !important;
-      border: 2px solid var(--primary-color) !important;
-      display: inline-flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      gap: 10px !important;
-      cursor: pointer !important;
-      transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      text-decoration: none !important;
-    }
-    
-    .mockup-btn:hover, .add-to-cart-btn:hover, .buy-it-now-btn:hover, .checkout-btn:hover {
-      background-color: #ffffff !important; /* white background */
-      border-color: var(--primary-color) !important; /* navy blue border */
-      color: var(--primary-color) !important; /* navy blue text */
-    }
-    
-    .btn-text-wrapper {
-      display: inline-block !important;
-      position: relative !important;
-      height: 1.4em !important;
-      line-height: 1.4em !important;
-      overflow: hidden !important;
-      vertical-align: middle !important;
-    }
-    
-    .btn-text-original, .btn-text-hover {
-      display: block !important;
-      transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1), color 0.4s cubic-bezier(0.76, 0, 0.24, 1) !important;
-      line-height: 1.4em !important;
-    }
-    
-    .btn-text-hover {
-      position: absolute !important;
-      top: -100% !important;
-      left: 0 !important;
-      width: 100% !important;
-    }
-    
-    .mockup-btn:hover .btn-text-original,
-    .add-to-cart-btn:hover .btn-text-original,
-    .buy-it-now-btn:hover .btn-text-original,
-    .checkout-btn:hover .btn-text-original {
-      transform: translateY(100%) !important;
-      color: var(--primary-color) !important;
-    }
-    
-    .mockup-btn:hover .btn-text-hover,
-    .add-to-cart-btn:hover .btn-text-hover,
-    .buy-it-now-btn:hover .btn-text-hover,
-    .checkout-btn:hover .btn-text-hover {
-      transform: translateY(100%) !important;
-      color: var(--primary-color) !important;
-    }
-
-    /* Cart Badge - White circle, black text/border */
-    .cart-badge {
-      background: #ffffff !important;
-      color: #000000 !important;
-      border: 1.5px solid #000000 !important;
-      font-weight: 800 !important;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15) !important;
     }
   `;
   document.head.appendChild(styleEl);
@@ -468,7 +372,6 @@ export function initSharedPopups() {
 
   function updateLocalStorage() {
     localStorage.setItem('cooken_cart', JSON.stringify(cart));
-    updateGlobalCartBadge();
   }
 
   if (cartDrawerCheckout) {
@@ -692,7 +595,7 @@ export function initSharedPopups() {
 
       // Filter up to 4 matches
       const filtered = products.filter(p => p.title.toLowerCase().includes(q) || p.category.toLowerCase().includes(q)).slice(0, 4);
-      
+
       if (filtered.length === 0) {
         pcSearchSuggestions.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: #999; padding: 20px 0; font-size: 14px;">Brak pasujących produktów.</div>`;
         return;
@@ -721,7 +624,7 @@ export function initSharedPopups() {
           <button class="close-mobile-menu" style="background:none; border:none; font-size:24px; cursor:pointer; color:#1a1a1a; outline:none;">&times;</button>
         </div>
       `);
-      
+
       mobMenu.querySelector('.close-mobile-menu').addEventListener('click', () => {
         mobMenu.classList.remove('active');
         if (mobOverlay) {
@@ -802,7 +705,7 @@ export function initSharedPopups() {
     mainAddToCart.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      
+
       const urlParams = new URLSearchParams(window.location.search);
       const pId = parseInt(urlParams.get('id')) || 1;
       const product = products.find(p => p.id === pId);
@@ -844,7 +747,7 @@ export function initSharedPopups() {
     mainBuyItNow.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      
+
       const urlParams = new URLSearchParams(window.location.search);
       const pId = parseInt(urlParams.get('id')) || 1;
       const product = products.find(p => p.id === pId);
@@ -880,91 +783,3 @@ export function initSharedPopups() {
     });
   }
 }
-
-export function updateGlobalCartBadge() {
-  const cartLinks = document.querySelectorAll('a[href="/cart.html"]');
-  if (cartLinks.length === 0) return;
-  
-  const storedCart = JSON.parse(localStorage.getItem('cooken_cart')) || [];
-  const totalQty = storedCart.reduce((sum, item) => sum + (item.qty || 1), 0);
-  
-  cartLinks.forEach(link => {
-    let badge = link.querySelector('.cart-badge');
-    if (!badge) {
-      badge = document.createElement('span');
-      badge.className = 'cart-badge';
-      badge.style.cssText = `
-        position: absolute;
-        top: -6px;
-        right: -6px;
-        background: var(--accent-color, #ff5a00);
-        color: #000;
-        font-size: 10px;
-        font-weight: 800;
-        min-width: 18px;
-        height: 18px;
-        border-radius: 9px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 2px solid #fff;
-        padding: 0 4px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        font-family: 'Outfit', sans-serif;
-      `;
-      link.style.position = 'relative';
-      link.appendChild(badge);
-    }
-    badge.textContent = totalQty;
-    badge.style.display = totalQty > 0 ? 'flex' : 'none';
-  });
-}
-
-export function initPremiumButtons() {
-  const buttons = document.querySelectorAll('.mockup-btn, .add-to-cart-btn, .buy-it-now-btn, .checkout-btn');
-  buttons.forEach(btn => {
-    // Avoid double wrapping and only wrap if there's actual text
-    if (btn.querySelector('.btn-text-wrapper') || btn.classList.contains('premium-hover-init')) return;
-    
-    // Extract inline elements like SVGs
-    const svgIcon = btn.querySelector('svg');
-    let text = '';
-    
-    // Gather and remove text nodes
-    btn.childNodes.forEach(node => {
-      if (node.nodeType === Node.TEXT_NODE) {
-        text += node.textContent;
-        node.textContent = ''; // clear text node
-      }
-    });
-    
-    text = text.trim();
-    if (!text) {
-      // Fallback
-      text = btn.textContent.trim();
-      if (!text) return;
-      btn.innerHTML = '';
-    }
-    
-    const wrapper = document.createElement('span');
-    wrapper.className = 'btn-text-wrapper';
-    
-    const original = document.createElement('span');
-    original.className = 'btn-text-original';
-    original.textContent = text;
-    
-    const hoverSpan = document.createElement('span');
-    hoverSpan.className = 'btn-text-hover';
-    hoverSpan.textContent = text;
-    
-    wrapper.appendChild(original);
-    wrapper.appendChild(hoverSpan);
-    
-    if (svgIcon) {
-      btn.appendChild(svgIcon);
-    }
-    btn.appendChild(wrapper);
-    btn.classList.add('premium-hover-init');
-  });
-}
-

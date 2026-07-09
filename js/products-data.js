@@ -75,7 +75,7 @@ export const products = [
     ],
     "colors": [],
     "sizes": [],
-    "video": "/videos/rgb_pilot.mp4"
+    "video": "/videos/rgb_salon.mp4"
   },
   {
     "id": 1004,
@@ -88,8 +88,7 @@ export const products = [
       "/images/products/controller_rgbw.webp"
     ],
     "colors": [],
-    "sizes": [],
-    "video": "/videos/rgb_salon.mp4"
+    "sizes": []
   },
   {
     "id": 1005,
