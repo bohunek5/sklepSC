@@ -258,6 +258,7 @@
 
     .slide {
       position: absolute;
+      pointer-events: none;
       top: 0;
       left: 0;
       width: 100%;
@@ -280,6 +281,7 @@
 
     .slide.active {
       z-index: 10;
+      pointer-events: auto;
       clip-path: inset(0 0 0 0) !important;
     }
 
@@ -303,7 +305,11 @@
     }
 
     .desktop-bg {
-      display: block;
+      display: block !important;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      object-position: center !important;
     }
     
     .mobile-bg {
@@ -311,9 +317,7 @@
     }
     
     @media (max-width: 768px) {
-      .desktop-bg {
-        display: none !important;
-      }
+      /* removed hide */
       .mobile-bg {
         display: block !important;
         background-position: center center;
@@ -1022,6 +1026,12 @@
         padding: 20px !important;
       }
       
+      /* SVG mobile border radius sync */
+      .glass-border-svg, .glass-border-svg rect {
+        rx: 20px !important;
+        ry: 20px !important;
+        border-radius: 20px !important;
+      }
       /* Newsletter Box RWD */
       #newsBox {
         grid-template-columns: 1fr !important;
@@ -1555,9 +1565,14 @@
       .menu-toggle {
         display: none !important; /* Hide hamburger as we have bottom nav */
       }
+      
       .mockup-header-logo img {
-        height: 28px; /* Slightly smaller for top bar if needed */
+        height: 38px !important;
+        width: auto !important;
+        object-fit: contain !important;
+        max-width: 150px !important;
       }
+    
     }
 
 
@@ -1639,7 +1654,8 @@
       transform: translateY(-2px);
     }
 </style>
-  </head>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
 <body>
 
     
@@ -1758,7 +1774,7 @@
     <div class="slide active" data-tech="cct">
       <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
         <video class="slide-video desktop-bg" src="/videos/cct_salon.mp4" muted playsinline preload="auto" poster="/images/elegant-interior-design-with-neutral-colors-2026-03-25-07-06-00-utc.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
-        <video class="slide-video mobile-bg" src="/videos/cct_lewa_pion.mp4" muted playsinline preload="auto" poster="/images/image2.jpeg" style="width: 100%; height: 100%; object-fit: cover;"></video>
+        
       </div>
       <div class="slide-banner-box" style="z-index: 2;">
         <svg class="glass-border-svg">
@@ -1775,7 +1791,7 @@
     <div class="slide" data-tech="digital">
       <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
         <video class="slide-video desktop-bg" src="/videos/cyfrowe_tasmy.mp4" muted playsinline preload="auto" poster="/images/hero_digital.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
-        <video class="slide-video mobile-bg" src="/videos/CW PION.mp4" muted playsinline preload="auto" poster="/images/image3.jpeg" style="width: 100%; height: 100%; object-fit: cover;"></video>
+        
       </div>
       <div class="slide-banner-box" style="z-index: 2;">
         <svg class="glass-border-svg">
@@ -1793,7 +1809,7 @@
     <div class="slide" data-tech="rgb">
       <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
         <video class="slide-video desktop-bg" src="/videos/rgb_salon.mp4" muted playsinline preload="auto" poster="/images/AdobeStock_288132271.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
-        <video class="slide-video mobile-bg" src="/videos/CW PION.mp4" muted playsinline preload="auto" poster="/images/image3.jpeg" style="width: 100%; height: 100%; object-fit: cover;"></video>
+        
       </div>
       <div class="slide-banner-box" style="z-index: 2;">
         <svg class="glass-border-svg">
@@ -1810,7 +1826,7 @@
     <div class="slide" data-tech="mono">
       <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
         <video class="slide-video desktop-bg" src="/videos/sterownik_mono.mp4" muted playsinline preload="auto" poster="/images/banner_controllers.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
-        <video class="slide-video mobile-bg" src="/videos/PRESCOT LED START PION FILM ZAPETLIC.mp4" muted playsinline preload="auto" poster="/images/image0.jpeg" style="width: 100%; height: 100%; object-fit: cover;"></video>
+        
       </div>
       <div class="slide-banner-box" style="z-index: 2;">
         <svg class="glass-border-svg">
@@ -1827,7 +1843,7 @@
     <div class="slide" data-tech="bread">
       <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
         <video class="slide-video desktop-bg" src="/videos/envato_video_gen_Oct_31_2025_17_15_42.mp4" muted playsinline preload="auto" poster="/images/kuchnia.jpg" style="width: 100%; height: 100%; object-fit: cover;"></video>
-        <video class="slide-video mobile-bg" src="/videos/PRESCOT LED START PION FILM ZAPETLIC V2.mp4" muted playsinline preload="auto" poster="/images/image4.jpeg" style="width: 100%; height: 100%; object-fit: cover;"></video>
+        
       </div>
       <div class="slide-banner-box" style="z-index: 2;">
         <svg class="glass-border-svg">
@@ -1844,7 +1860,7 @@
     <div class="slide" data-tech="cob">
       <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
         <video class="slide-video desktop-bg" src="/videos/ok 3.mp4" muted playsinline preload="auto" poster="/images/hero_cob.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
-        <video class="slide-video mobile-bg" src="/videos/PRESCOT LED START PION FILM ZAPETLIC.mp4" muted playsinline preload="auto" poster="/images/wiz1.png" style="width: 100%; height: 100%; object-fit: cover;"></video>
+        
       </div>
       <div class="slide-banner-box" style="z-index: 2;">
         <svg class="glass-border-svg">
@@ -1861,7 +1877,7 @@
     <div class="slide" data-tech="digital_cct">
       <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
         <video class="slide-video desktop-bg" src="/videos/DIGITAL CCT EFEKT.mp4" muted playsinline preload="auto" poster="/images/elegant-interior-design-with-neutral-colors-2026-03-25-07-06-00-utc.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
-        <video class="slide-video mobile-bg" src="/videos/cct_lewa_pion.mp4" muted playsinline preload="auto" poster="/images/image2.jpeg" style="width: 100%; height: 100%; object-fit: cover;"></video>
+        
       </div>
       <div class="slide-banner-box" style="z-index: 2;">
         <svg class="glass-border-svg">
@@ -2369,9 +2385,14 @@
       .menu-toggle {
         display: none !important; /* Hide hamburger as we have bottom nav */
       }
+      
       .mockup-header-logo img {
-        height: 28px; /* Slightly smaller for top bar if needed */
+        height: 38px !important;
+        width: auto !important;
+        object-fit: contain !important;
+        max-width: 150px !important;
       }
+    
     }
 
 
@@ -2654,9 +2675,7 @@
       
       // Select the active video tag matching screen size
       const isMobile = window.innerWidth <= 768;
-      const activeVideo = isMobile 
-        ? activeSlide.querySelector('video.mobile-bg') 
-        : activeSlide.querySelector('video.desktop-bg');
+      const activeVideo = activeSlide.querySelector('video');
       
       let fallbackDuration = 10000; // 10s safety fallback
 
