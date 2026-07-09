@@ -146,23 +146,23 @@ document.addEventListener('DOMContentLoaded', () => {
         Kontakt
       </a>
     </nav>
-  \`;
+  `;
 
   // Render products
   const pContainer = document.getElementById('m-products-container');
   if (pContainer) {
     products.forEach(p => {
       const img = p.images && p.images[0] ? p.images[0] : '/images/placeholder.png';
-      pContainer.insertAdjacentHTML('beforeend', \`
-        <div class="m-product-card" onclick="window.location.href='/product.html?id=\${p.id}'">
-          <img src="\${img}" alt="\${p.title}">
+      pContainer.insertAdjacentHTML('beforeend', `
+        <div class="m-product-card" onclick="window.location.href='/product.html?id=${p.id}'">
+          <img src="${img}" alt="${p.title}">
           <div class="m-product-card-body">
-            <div class="m-product-cat">\${p.category || 'Inne'}</div>
-            <div class="m-product-title">\${p.title}</div>
-            <div class="m-product-price">\${p.price.toFixed(2)} PLN</div>
+            <div class="m-product-cat">${p.category || 'Inne'}</div>
+            <div class="m-product-title">${p.title}</div>
+            <div class="m-product-price">${p.price.toFixed(2)} PLN</div>
           </div>
         </div>
-      \`);
+      `);
     });
   }
 });
@@ -171,12 +171,12 @@ document.addEventListener('DOMContentLoaded', () => {
 window.switchMobileTab = function(tabId) {
   // Update nav items
   document.querySelectorAll('.m-nav-item').forEach(el => el.classList.remove('active'));
-  const activeNav = document.querySelector(\`.m-nav-item[href="#\${tabId}"]\`);
+  const activeNav = document.querySelector(`.m-nav-item[href="#${tabId}"]`);
   if (activeNav) activeNav.classList.add('active');
 
   // Update views
   document.querySelectorAll('.m-view').forEach(el => el.classList.remove('active'));
-  const activeView = document.getElementById(\`m-view-\${tabId}\`);
+  const activeView = document.getElementById(`m-view-${tabId}`);
   if (activeView) {
     activeView.classList.add('active');
     window.scrollTo(0, 0);
