@@ -1144,39 +1144,54 @@
     .mockup-search-container {
       display: flex;
       align-items: center;
-      background: #f1f1f1;
-      
-      padding: 6px 15px;
+      background: rgba(0, 0, 0, 0.04);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 8px 18px;
       margin-right: 15px;
-      border: 1px solid transparent;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 99px;
       transition: var(--transition);
     }
     
     .mockup-search-container:focus-within {
-      background: var(--white);
-      border-color: var(--accent-color);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      background: rgba(0, 0, 0, 0.08);
+      border-color: rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     }
     
     .mockup-search-container input {
       border: none;
       background: transparent;
       outline: none;
-      font-size: 13px;
+      font-size: 12px;
+      font-family: 'Courier New', Courier, monospace;
       width: 140px;
       transition: width 0.3s ease;
+      color: var(--primary-color);
+    }
+    
+    .mockup-search-container input::placeholder {
+      font-family: 'Courier New', Courier, monospace;
+      color: rgba(11, 26, 48, 0.6);
     }
     
     .mockup-search-container input:focus {
-      width: 200px;
+      width: 220px;
     }
     
     .mockup-search-container button {
       background: none;
       border: none;
       cursor: pointer;
-      font-size: 13px;
-      color: #666;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mockup-search-container button svg {
+      width: 16px;
+      height: 16px;
     }
 
     @media (max-width: 1024px) {
@@ -1335,10 +1350,12 @@
       top: 100%;
       left: 50%;
       transform: translateX(-50%) translateY(20px);
-      background: #fff;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-      border-radius: 8px;
-      border: 1px solid #f0f0f0;
+      border-radius: 24px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
       width: 700px;
       opacity: 0;
       visibility: hidden;
@@ -1347,552 +1364,16 @@
       padding: 30px;
     }
     .has-mega-menu:hover .mega-menu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(-50%) translateY(0);
-    }
-    .mega-menu-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 30px;
-    }
-    .mega-menu-col h4 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--primary-color);
-      margin-bottom: 15px;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 8px;
-    }
-    .mega-menu-col ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .mega-menu-col ul li a {
-      color: #666;
-      font-size: 13px;
-      text-decoration: none;
-      transition: color 0.2s;
-      display: block;
-      padding: 0 !important;
-      background: transparent !important;
-    }
-    .mega-menu-col ul li a:hover {
-      color: var(--accent-color);
-      background: transparent !important;
-    }
-    .mega-menu-banner {
-      min-height: 180px;
-    }
-
-</style>
-  <link rel="stylesheet" href="/assets/mobile-app.css">
-</head>
-<body>
-
-    
-    
-  <div class="desktop-layout">
-  
-  <header class="mockup-header" id="mainHeader">
-    <button class="menu-toggle" id="menuToggle">☰</button>
-    <div class="mockup-header-logo">
-      <a href="/index.html"><img src="/images/logo-white.png" alt="Prescot Logo" id="headerLogo"></a>
-    </div>
-    <nav class="mockup-nav">
-      <ul>
-        <li><a href="/index.html" class="active">Home</a></li>
-        
-        <li class="has-mega-menu">
-          <a href="/shop.html">Sklep <i class="ph ph-caret-down" style="font-size: 12px; margin-left: 4px;"></i></a>
-          <div class="mega-menu">
-            <div class="mega-menu-content">
-              <div class="mega-menu-col">
-                <h4>Oświetlenie LED</h4>
-                <ul>
-                  <li><a href="/shop.html?cat=Tasma%20LED">Taśmy LED COB</a></li>
-                  <li><a href="/shop.html?cat=Tasma%20LED">Taśmy LED SMD</a></li>
-                  <li><a href="/shop.html?cat=Tasma%20LED">Taśmy Neony</a></li>
-                  <li><a href="/shop.html?cat=Tasma%20LED">Zestawy LED</a></li>
-                </ul>
-              </div>
-              <div class="mega-menu-col">
-                <h4>Akcesoria i Zasilanie</h4>
-                <ul>
-                  <li><a href="/shop.html?cat=Sterowniki%20LED">Sterowniki LED</a></li>
-                  <li><a href="/shop.html?cat=Zasilacze">Zasilacze Hermetyczne</a></li>
-                  <li><a href="/shop.html?cat=Profile">Profile aluminiowe</a></li>
-                  <li><a href="/shop.html?cat=Akcesoria">Kable i złączki</a></li>
-                </ul>
-              </div>
-              <div class="mega-menu-col mega-menu-banner" style="background: url('/images/katalog_front.webp') center/cover; padding: 20px; border-radius: 8px; display: flex; flex-direction: column; justify-content: flex-end;">
-                <h4 style="color: #fff; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Nowy Katalog 2026</h4>
-                <a href="/images/Pobierz_katalog_Prescot.pdf" target="_blank" style="display: inline-block; background: var(--primary-color); color: #fff; padding: 8px 15px; border-radius: 4px; font-size: 12px; text-align: center; font-weight: 600;">Pobierz teraz</a>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <li><a href="/blog.html">Blog</a></li>
-        <li><a href="/about.html">O nas</a></li>
-        <li><a href="/contact.html">Kontakt</a></li>
-      </ul>
-    </nav>
-    <div class="mockup-actions">
-      <div class="mockup-search-container">
-        <input type="text" placeholder="Szukaj produktów..." id="headerSearchInput">
-        <button id="headerSearchBtn">🔍</button>
-      </div>
-      <button class="mockup-action-icon" aria-label="Konto użytkownika">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      </button>
-            <a href="#" class="mockup-action-icon wishlist-trigger" aria-label="Lista Życzeń">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-      </a>
-      <a href="/cart.html" class="mockup-action-icon" aria-label="Koszyk">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-      </a>
-    </div>
-  </header>
-
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <ul>
-      <li><a href="/index.html">Home</a></li>
-      
-        <li class="has-mega-menu">
-          <a href="/shop.html">Sklep <i class="ph ph-caret-down" style="font-size: 12px; margin-left: 4px;"></i></a>
-          <div class="mega-menu">
-            <div class="mega-menu-content">
-              <div class="mega-menu-col">
-                <h4>Oświetlenie LED</h4>
-                <ul>
-                  <li><a href="/shop.html?cat=Tasma%20LED">Taśmy LED COB</a></li>
-                  <li><a href="/shop.html?cat=Tasma%20LED">Taśmy LED SMD</a></li>
-                  <li><a href="/shop.html?cat=Tasma%20LED">Taśmy Neony</a></li>
-                  <li><a href="/shop.html?cat=Tasma%20LED">Zestawy LED</a></li>
-                </ul>
-              </div>
-              <div class="mega-menu-col">
-                <h4>Akcesoria i Zasilanie</h4>
-                <ul>
-                  <li><a href="/shop.html?cat=Sterowniki%20LED">Sterowniki LED</a></li>
-                  <li><a href="/shop.html?cat=Zasilacze">Zasilacze Hermetyczne</a></li>
-                  <li><a href="/shop.html?cat=Profile">Profile aluminiowe</a></li>
-                  <li><a href="/shop.html?cat=Akcesoria">Kable i złączki</a></li>
-                </ul>
-              </div>
-              <div class="mega-menu-col mega-menu-banner" style="background: url('/images/katalog_front.webp') center/cover; padding: 20px; border-radius: 8px; display: flex; flex-direction: column; justify-content: flex-end;">
-                <h4 style="color: #fff; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Nowy Katalog 2026</h4>
-                <a href="/images/Pobierz_katalog_Prescot.pdf" target="_blank" style="display: inline-block; background: var(--primary-color); color: #fff; padding: 8px 15px; border-radius: 4px; font-size: 12px; text-align: center; font-weight: 600;">Pobierz teraz</a>
-              </div>
-            </div>
-          </div>
-        </li>
-
-      <li><a href="/blog.html">Blog</a></li>
-      <li><a href="/about.html">O nas</a></li>
-      <li><a href="/contact.html">Kontakt</a></li>
-    </ul>
-  </div>
-  
-  <section class="mockup-hero-slider">
-    <!-- SVG Defs for Glowing Borders -->
-    <svg style="position: absolute; width: 0; height: 0; pointer-events: none;">
-      <defs>
-        <filter id="glowBlur" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="5" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-    </svg>
-
-    <!-- Slide 1: CCT -->
-    <div class="slide active" data-tech="cct">
-      <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-        <video class="slide-video desktop-bg" src="/videos/cct_salon.mp4" muted playsinline preload="auto" poster="/images/elegant-interior-design-with-neutral-colors-2026-03-25-07-06-00-utc.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
-        <video class="slide-video mobile-bg" src="/videos/cct_lewa_pion.mp4" muted playsinline preload="auto" poster="/images/image2.jpeg" style="width: 100%; height: 100%; object-fit: cover;"></video>
-      </div>
-      <div class="slide-banner-box" style="z-index: 2;">
-        <svg class="glass-border-svg">
-          <rect class="track" pathLength="100" />
-          <rect class="car" pathLength="100" />
-        </svg>
-        <h1>Taśmy LED CCT</h1>
-        <p>Regulowana temperatura bieli</p>
-        <a href="/shop.html" class="mockup-btn">Kup teraz</a>
-      </div>
-    </div>
-    
-    <!-- Slide 2: Digital -->
-    <div class="slide" data-tech="digital">
-      <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-        <video class="slide-video desktop-bg" src="/videos/cyfrowe_tasmy.mp4" muted playsinline preload="auto" poster="/images/hero_digital.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
-        <video class="slide-video mobile-bg" src="/videos/CW PION.mp4" muted playsinline preload="auto" poster="/images/image3.jpeg" style="width: 100%; height: 100%; object-fit: cover;"></video>
-      </div>
-      <div class="slide-banner-box" style="z-index: 2;">
-        <svg class="glass-border-svg">
-          <rect class="track" pathLength="100" />
-          <rect class="car" pathLength="100" />
-        </svg>
-        <h1>Inteligentne taśmy LED</h1>
-        <p>Zyskaj pełną kontrolę i programuj efekty świetlne</p>
-        <a href="/shop.html" class="mockup-btn">Kup teraz</a>
-      </div>
-    </div>
-    
-    <!-- Slide 3: RGBW -->
-    <div class="slide" data-tech="rgb">
-      <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-        <video class="slide-video desktop-bg" src="/videos/rgb_salon.mp4" muted playsinline preload="auto" poster="/images/AdobeStock_288132271.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
-        <video class="slide-video mobile-bg" src="/videos/CW PION.mp4" muted playsinline preload="auto" poster="/images/image3.jpeg" style="width: 100%; height: 100%; object-fit: cover;"></video>
-      </div>
-      <div class="slide-banner-box" style="z-index: 2;">
-        <svg class="glass-border-svg">
-          <rect class="track" pathLength="100" />
-          <rect class="car" pathLength="100" />
-        </svg>
-        <h1>Taśmy LED RGBW</h1>
-        <p>Polska produkcja i aż 5 lat gwarancji</p>
-        <a href="/shop.html" class="mockup-btn">Kup teraz</a>
-      </div>
-    </div>
-    
-    <!-- Slide 4: Mono -->
-    <div class="slide" data-tech="mono">
-      <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-        <video class="slide-video desktop-bg" src="/videos/sterownik_mono.mp4" muted playsinline preload="auto" poster="/images/banner_controllers.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
-        <video class="slide-video mobile-bg" src="/videos/PRESCOT LED START PION FILM ZAPETLIC.mp4" muted playsinline preload="auto" poster="/images/image0.jpeg" style="width: 100%; height: 100%; object-fit: cover;"></video>
-      </div>
-      <div class="slide-banner-box" style="z-index: 2;">
-        <svg class="glass-border-svg">
-          <rect class="track" pathLength="100" />
-          <rect class="car" pathLength="100" />
-        </svg>
-        <h1>Sterowniki LED Mono</h1>
-        <p>Steruj jasnością i dostosuj otoczenie do swoich potrzeb</p>
-        <a href="/shop.html" class="mockup-btn">Kup teraz</a>
-      </div>
-    </div>
-    
-    <!-- Slide 5: Bread -->
-    <div class="slide" data-tech="bread">
-      <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-        <video class="slide-video desktop-bg" src="/videos/envato_video_gen_Oct_31_2025_17_15_42.mp4" muted playsinline preload="auto" poster="/images/kuchnia.jpg" style="width: 100%; height: 100%; object-fit: cover;"></video>
-        <video class="slide-video mobile-bg" src="/videos/PRESCOT LED START PION FILM ZAPETLIC V2.mp4" muted playsinline preload="auto" poster="/images/image4.jpeg" style="width: 100%; height: 100%; object-fit: cover;"></video>
-      </div>
-      <div class="slide-banner-box" style="z-index: 2;">
-        <svg class="glass-border-svg">
-          <rect class="track" pathLength="100" />
-          <rect class="car" pathLength="100" />
-        </svg>
-        <h1>Taśmy LED do pieczywa</h1>
-        <p>Wypieki świeże i apetyczne w ciepłym świetle</p>
-        <a href="/shop.html" class="mockup-btn">Kup teraz</a>
-      </div>
-    </div>
-    
-    <!-- Slide 6: COB -->
-    <div class="slide" data-tech="cob">
-      <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-        <video class="slide-video desktop-bg" src="/videos/ok 3.mp4" muted playsinline preload="auto" poster="/images/hero_cob.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
-        <video class="slide-video mobile-bg" src="/videos/PRESCOT LED START PION FILM ZAPETLIC.mp4" muted playsinline preload="auto" poster="/images/wiz1.png" style="width: 100%; height: 100%; object-fit: cover;"></video>
-      </div>
-      <div class="slide-banner-box" style="z-index: 2;">
-        <svg class="glass-border-svg">
-          <rect class="track" pathLength="100" />
-          <rect class="car" pathLength="100" />
-        </svg>
-        <h1>Taśmy LED COB</h1>
-        <p>Idealnie jednolite linie światła bez punktów</p>
-        <a href="/shop.html" class="mockup-btn">Kup teraz</a>
-      </div>
-    </div>
-    
-    <!-- Slide 7: Digital CCT -->
-    <div class="slide" data-tech="digital_cct">
-      <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-        <video class="slide-video desktop-bg" src="/videos/DIGITAL CCT EFEKT.mp4" muted playsinline preload="auto" poster="/images/elegant-interior-design-with-neutral-colors-2026-03-25-07-06-00-utc.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
-        <video class="slide-video mobile-bg" src="/videos/cct_lewa_pion.mp4" muted playsinline preload="auto" poster="/images/image2.jpeg" style="width: 100%; height: 100%; object-fit: cover;"></video>
-      </div>
-      <div class="slide-banner-box" style="z-index: 2;">
-        <svg class="glass-border-svg">
-          <rect class="track" pathLength="100" />
-          <rect class="car" pathLength="100" />
-        </svg>
-        <h1>Cyfrowe taśmy CCT</h1>
-        <p>To Ty decydujesz o barwie i efektach</p>
-        <a href="/shop.html" class="mockup-btn">Kup teraz</a>
-      </div>
-    </div>
-    
-    <div class="slider-arrows">
-      <button class="slider-arrow" id="prevSlide">←</button>
-      <button class="slider-arrow" id="nextSlide">→</button>
-    </div>
-  </section>
-
-  <!-- Brands Showcase Section -->
-  <section class="mockup-brands">
-    <div class="brands-wrapper">
-      <div class="brand-item">MeanWell</div>
-      <div class="brand-item">Prescot</div>
-      <div class="brand-item">Tuya Smart</div>
-      <div class="brand-item">MiBoxer</div>
-      <div class="brand-item">LedLabs</div>
-    </div>
-  </section>
-
-  <!-- Advantages Section -->
-  <section class="mockup-advantages" style="padding: 60px 8%; background: #ffffff; border-bottom: 1px solid #f0f0f0;">
-    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; text-align: center;">
-      <!-- Advantage 1 -->
-      <div class="advantage-item" style="padding: 20px; transition: transform 0.3s ease;">
-        <div style="width: 70px; height: 70px; background: rgba(255, 90, 0, 0.05); color: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; transition: all 0.3s;">
-          <i data-lucide="shield-check" style="width: 32px; height: 32px;"></i>
-        </div>
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: var(--primary-color); margin-bottom: 12px;">7 Lat Gwarancji</h3>
-        <p style="font-size: 14px; color: #555; line-height: 1.6; margin: 0;">Niezawodność potwierdzona najdłuższą gwarancją na rynku na wybrane zasilacze i taśmy LED.</p>
-      </div>
-      <!-- Advantage 2 -->
-      <div class="advantage-item" style="padding: 20px; transition: transform 0.3s ease;">
-        <div style="width: 70px; height: 70px; background: rgba(255, 90, 0, 0.05); color: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; transition: all 0.3s;">
-          <i data-lucide="truck" style="width: 32px; height: 32px;"></i>
-        </div>
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: var(--primary-color); margin-bottom: 12px;">Szybka Wysyłka 24h</h3>
-        <p style="font-size: 14px; color: #555; line-height: 1.6; margin: 0;">Zamówienia realizujemy błyskawicznie, zapewniając bezpieczną dostawę na terenie całego kraju.</p>
-      </div>
-      <!-- Advantage 3 -->
-      <div class="advantage-item" style="padding: 20px; transition: transform 0.3s ease;">
-        <div style="width: 70px; height: 70px; background: rgba(255, 90, 0, 0.05); color: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; transition: all 0.3s;">
-          <i data-lucide="phone-call" style="width: 32px; height: 32px;"></i>
-        </div>
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: var(--primary-color); margin-bottom: 12px;">Wsparcie Ekspertów</h3>
-        <p style="font-size: 14px; color: #555; line-height: 1.6; margin: 0;">Pomagamy w doborze zasilaczy, sterowników oraz projektowaniu kompletnych linii światła LED.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Categories Showcase Section -->
-  <section class="mockup-categories" style="padding: 60px 4%; background: #fafafa;">
-    <div class="mockup-section-header" style="text-align: center; margin-bottom: 40px;">
-      <span style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-color); font-weight: 700;">PROFESJONALNE OŚWIETLENIE</span>
-      <h2 class="mockup-section-title" style="font-size: 32px; font-weight: 700; margin-top: 10px; margin-bottom: 0;">Nasze Kategorie</h2>
-    </div>
-    <div class="categories-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
-      <!-- Category 1: Taśmy LED -->
-      <a href="/shop.html?category=Ta%C5%9Bmy%20LED" class="category-card" style="position: relative; overflow: hidden; border-radius: 16px; height: 280px; text-decoration: none; display: flex; align-items: flex-end; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
-        <div class="category-bg" style="position: absolute; top:0; left:0; width:100%; height:100%; background-image: url('/images/products/tasma_4000k.webp'); background-size: cover; background-position: center; transition: transform 0.6s ease;"></div>
-        <div class="category-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%);"></div>
-        <div class="category-info" style="position: relative; z-index: 2;">
-          <h3 style="color: #fff; font-size: 18px; font-weight: 700; margin: 0 0 5px 0;">Taśmy LED</h3>
-          <span style="color: rgba(255,255,255,0.7); font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">ZOBACZ PRODUKTY →</span>
-        </div>
-      </a>
-      
-      <!-- Category 2: Sterowniki LED -->
-      <a href="/shop.html?category=Sterowniki%20LED" class="category-card" style="position: relative; overflow: hidden; border-radius: 16px; height: 280px; text-decoration: none; display: flex; align-items: flex-end; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
-        <div class="category-bg" style="position: absolute; top:0; left:0; width:100%; height:100%; background-image: url('/images/products/controller_rgb.webp'); background-size: cover; background-position: center; transition: transform 0.6s ease;"></div>
-        <div class="category-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%);"></div>
-        <div class="category-info" style="position: relative; z-index: 2;">
-          <h3 style="color: #fff; font-size: 18px; font-weight: 700; margin: 0 0 5px 0;">Sterowniki LED</h3>
-          <span style="color: rgba(255,255,255,0.7); font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">ZOBACZ PRODUKTY →</span>
-        </div>
-      </a>
-      
-      <!-- Category 3: Zasilacze LED -->
-      <a href="/shop.html?category=Zasilacze%20LED" class="category-card" style="position: relative; overflow: hidden; border-radius: 16px; height: 280px; text-decoration: none; display: flex; align-items: flex-end; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
-        <div class="category-bg" style="position: absolute; top:0; left:0; width:100%; height:100%; background-image: url('/images/products/scharfer_100w.webp'); background-size: cover; background-position: center; transition: transform 0.6s ease;"></div>
-        <div class="category-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%);"></div>
-        <div class="category-info" style="position: relative; z-index: 2;">
-          <h3 style="color: #fff; font-size: 18px; font-weight: 700; margin: 0 0 5px 0;">Zasilacze LED</h3>
-          <span style="color: rgba(255,255,255,0.7); font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">ZOBACZ PRODUKTY →</span>
-        </div>
-      </a>
-      
-      <!-- Category 4: Wizualizacje 3D & 360 -->
-      <a href="/shop.html" class="category-card" style="position: relative; overflow: hidden; border-radius: 16px; height: 280px; text-decoration: none; display: flex; align-items: flex-end; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
-        <div class="category-bg" style="position: absolute; top:0; left:0; width:100%; height:100%; background-image: url('/images/products/product_8291636215978.jpg'); background-size: cover; background-position: center; transition: transform 0.6s ease;"></div>
-        <div class="category-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%);"></div>
-        <div class="category-info" style="position: relative; z-index: 2;">
-          <h3 style="color: #fff; font-size: 18px; font-weight: 700; margin: 0 0 5px 0;">Wizualizacje 3D & 360</h3>
-          <span style="color: rgba(255,255,255,0.7); font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">SPRAWDŹ DETALE →</span>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <style>
-    .category-card:hover .category-bg {
-      transform: scale(1.08);
-    }
-    .category-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.1) !important;
-    }
-  
-    /* Fixed Button Styles */
-    .add-to-cart-btn, .buy-it-now-btn, .m-btn-primary, .mockup-btn {
-      background: transparent !important;
-      color: var(--primary-color) !important;
-      border: 2px solid var(--primary-color) !important;
-      border-radius: 99px !important;
-      transition: all 0.3s ease !important;
-      position: relative;
-      overflow: visible !important;
-    }
-    .add-to-cart-btn::before, .buy-it-now-btn::before, .m-btn-primary::before, .mockup-btn::before {
-      display: none !important;
-    }
-    .add-to-cart-btn:hover, .buy-it-now-btn:hover, .m-btn-primary:hover, .mockup-btn:hover {
-      background: transparent !important;
-      border-color: var(--primary-color) !important;
-      color: var(--primary-color) !important;
-    }
-    
-
-    /* Clean Product Card Style */
-    .mockup-product-card {
-      background: #ffffff;
-      border: 1px solid #f0f0f0;
-      border-radius: 12px;
-      padding: 15px;
-      text-align: left;
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .mockup-product-card:hover {
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      border-color: transparent;
-      transform: translateY(-2px);
-    }
-    .mockup-product-media {
-      background: #f9f9f9;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 5px;
-      position: relative;
-    }
-    .mockup-product-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--primary-color);
-      margin: 0;
-    }
-    .mockup-product-title a {
-      color: inherit;
-      text-decoration: none;
-    }
-    .mockup-product-category {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #888;
-      margin: 0;
-    }
-    .mockup-product-price {
-      font-family: 'Outfit', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--accent-color);
-      margin: 0;
-      margin-top: auto;
-    }
-    
-
-    /* Clean Blog Layout */
-    .mockup-blog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
-    .mockup-blog-card {
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid #f0f0f0;
-      transition: all 0.3s ease;
-    }
-    .mockup-blog-card:hover {
-      box-shadow: 0 15px 30px rgba(0,0,0,0.05);
-      transform: translateY(-3px);
-    }
-    .mockup-blog-img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-    }
-    .mockup-blog-content {
-      padding: 25px;
-    }
-    .mockup-blog-date {
-      font-size: 12px;
-      color: #888;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-      display: block;
-    }
-    .mockup-blog-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--primary-color);
-      margin-bottom: 15px;
-      line-height: 1.3;
-    }
-    .mockup-blog-excerpt {
-      font-size: 14px;
-      color: #666;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-    .mockup-blog-link {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--primary-color);
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      border-bottom: 2px solid var(--accent-color);
-      padding-bottom: 2px;
-      transition: all 0.3s ease;
-    }
-    .mockup-blog-link:hover {
-      color: var(--accent-color);
-    }
-    
-
-    /* Mega Menu Styles */
-    .has-mega-menu {
-      position: relative;
-    }
-    .has-mega-menu > a {
-      display: flex;
-      align-items: center;
-    }
-    .mega-menu {
       position: absolute;
       top: 100%;
       left: 50%;
       transform: translateX(-50%) translateY(20px);
-      background: #fff;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-      border-radius: 8px;
-      border: 1px solid #f0f0f0;
+      border-radius: 24px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
       width: 700px;
       opacity: 0;
       visibility: hidden;
@@ -1916,7 +1397,7 @@
       font-weight: 600;
       color: var(--primary-color);
       margin-bottom: 15px;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
       padding-bottom: 8px;
     }
     .mega-menu-col ul {
@@ -1928,17 +1409,22 @@
       gap: 12px;
     }
     .mega-menu-col ul li a {
-      color: #666;
-      font-size: 13px;
+      color: var(--primary-color);
+      font-size: 12px;
+      font-weight: 600;
       text-decoration: none;
-      transition: color 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       display: block;
-      padding: 0 !important;
+      padding: 10px 15px !important;
       background: transparent !important;
+      border-radius: 99px;
     }
     .mega-menu-col ul li a:hover {
-      color: var(--accent-color);
-      background: transparent !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      color: var(--primary-color) !important;
+      transform: translateX(4px);
     }
     .mega-menu-banner {
       min-height: 180px;
