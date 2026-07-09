@@ -475,13 +475,23 @@
       stroke-dashoffset: 100 !important;
     }
     .slide.active[data-tech="digital"] .glass-border-svg .car {
-      animation: digitalBuild 12s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+      animation: digitalBuild 12s ease-in-out forwards !important;
     }
     @keyframes digitalBuild {
       0% {
-        stroke-dashoffset: 100;
+        stroke-dasharray: 4 6;
+        stroke-dashoffset: 200;
+      }
+      60% {
+        stroke-dasharray: 4 6;
+        stroke-dashoffset: 80;
+      }
+      80% {
+        stroke-dasharray: 8 2;
+        stroke-dashoffset: 40;
       }
       100% {
+        stroke-dasharray: 100 0;
         stroke-dashoffset: 0;
       }
     }
