@@ -1354,7 +1354,7 @@
       position: absolute;
       top: 100%;
       left: 50%;
-      transform: translateX(-50%) translateY(20px);
+      transform: translateX(-50%) translateY(10px) scale(0.96); transform-origin: top center;
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(30px);
       -webkit-backdrop-filter: blur(30px);
@@ -1371,7 +1371,7 @@
     .has-mega-menu:hover .mega-menu {
       opacity: 1;
       visibility: visible;
-      transform: translateX(-50%) translateY(0);
+      transform: translateX(-50%) translateY(0) scale(1);
     }
     .mega-menu-content {
       display: grid;
@@ -1448,7 +1448,48 @@
     }
     .scroll-down-arrow:hover { opacity: 1 !important; }
     .scroll-down-arrow .arrow-bounce { animation: arrow-bounce 2s infinite; }
-</style>
+
+    /* Apple style dropdown */
+    .mockup-nav .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      padding: 8px 0;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0,0,0,0.05);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px) scale(0.95);
+      transform-origin: top left;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 100;
+    }
+    .mockup-nav .has-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(10px) scale(1);
+    }
+    .mockup-nav .dropdown-menu li {
+      list-style: none;
+    }
+    .mockup-nav .dropdown-menu a {
+      color: var(--primary-color) !important;
+      padding: 10px 20px;
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s;
+    }
+    .mockup-nav .dropdown-menu a:hover {
+      background: rgba(0, 0, 0, 0.05);
+      color: var(--accent-color) !important;
+    }
+
+  </style>
   <link rel="stylesheet" href="/assets/mobile-app.css">
 </head>
 <body>
@@ -1788,10 +1829,6 @@
 
   <!-- Categories Showcase Section -->
   <section class="mockup-categories" style="padding: 60px 4%; background: #fafafa;">
-    <div class="mockup-section-header" style="text-align: center; margin-bottom: 40px;">
-      <span style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-color); font-weight: 700;">PROFESJONALNE OŚWIETLENIE</span>
-      <h2 class="mockup-section-title" style="font-size: 32px; font-weight: 700; margin-top: 10px; margin-bottom: 0;">Nasze Kategorie</h2>
-    </div>
     <div class="categories-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
       <!-- Category 1: Taśmy LED -->
       <a href="/shop.html?category=Ta%C5%9Bmy%20LED" class="category-card" style="position: relative; overflow: hidden; border-radius: 16px; height: 280px; text-decoration: none; display: flex; align-items: flex-end; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
@@ -1993,7 +2030,7 @@
       position: absolute;
       top: 100%;
       left: 50%;
-      transform: translateX(-50%) translateY(20px);
+      transform: translateX(-50%) translateY(10px) scale(0.96); transform-origin: top center;
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(30px);
       -webkit-backdrop-filter: blur(30px);
@@ -2010,7 +2047,7 @@
     .has-mega-menu:hover .mega-menu {
       opacity: 1;
       visibility: visible;
-      transform: translateX(-50%) translateY(0);
+      transform: translateX(-50%) translateY(0) scale(1);
     }
     .mega-menu-content {
       display: grid;
@@ -2087,13 +2124,54 @@
     }
     .scroll-down-arrow:hover { opacity: 1 !important; }
     .scroll-down-arrow .arrow-bounce { animation: arrow-bounce 2s infinite; }
-</style>
+
+    /* Apple style dropdown */
+    .mockup-nav .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      padding: 8px 0;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0,0,0,0.05);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px) scale(0.95);
+      transform-origin: top left;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 100;
+    }
+    .mockup-nav .has-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(10px) scale(1);
+    }
+    .mockup-nav .dropdown-menu li {
+      list-style: none;
+    }
+    .mockup-nav .dropdown-menu a {
+      color: var(--primary-color) !important;
+      padding: 10px 20px;
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s;
+    }
+    .mockup-nav .dropdown-menu a:hover {
+      background: rgba(0, 0, 0, 0.05);
+      color: var(--accent-color) !important;
+    }
+
+  </style>
 
   
   
   <section class="mockup-products">
     <div class="mockup-section-header">
-      <span>TOP SELLING ITEMS</span>
+      <span>NAJLEPIEJ SPRZEDAJĄCE SIĘ</span>
       <h2 class="mockup-section-title">Trending Products</h2>
     </div>
     <div class="mockup-grid" id="trendingGrid">
