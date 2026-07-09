@@ -1,40 +1,6 @@
 const defaultProducts = [
-  {
-    "id": 8291636215978,
-    "title": "Product AR/3D",
-    "category": "3D & AR",
-    "price": 60,
-    "compareAtPrice": 70,
-    "description": "Cheer on your favorite red and white team in eye-popping style with these red & white striped game overalls! High-quality modern design, realistic 3D viewing and augmented reality support.",
-    "images": [
-      "/images/products/product_8291636215978.jpg"
-    ],
-    "colors": [
-      "#ffffff",
-      "#000000",
-      "Gray"
-    ],
-    "sizes": [],
-    "has3D": true,
-    "modelSrc": "/models/product-3D.glb",
-    "posterSrc": "/images/product-3D-poster.jpg"
-  },
-  {
-    "id": 8291636740266,
-    "title": "360 product",
-    "category": "360 View",
-    "price": 70,
-    "compareAtPrice": 80,
-    "description": "Fully interactive 360-degree product visualization. Rotate and inspect the object from every angle with high-fidelity detailing.",
-    "images": [
-      "/images/products/product_8291636740266.jpg"
-    ],
-    "colors": [],
-    "sizes": [],
-    "has360": true,
-    "images360Count": 39,
-    "images360Pattern": "/images/360/product360-{index}.jpg"
-  },
+  
+  
   {
     "id": 1001,
     "title": "Sterownik LED Mono PR-MONO-12A",
@@ -43,7 +9,7 @@ const defaultProducts = [
     "compareAtPrice": 59,
     "description": "Jednokanałowy bezprzewodowy sterownik LED Mono (2.4GHz RF, 12A max). Umożliwia płynną regulację jasności taśm jednokolorowych. Zasięg sterowania do 30m, praca w temperaturze -25~40°C.",
     "images": [
-      "/images/products/controller_mono.webp"
+      "/images/kuchnia.jpg"
     ],
     "colors": [],
     "sizes": [],
@@ -57,7 +23,7 @@ const defaultProducts = [
     "compareAtPrice": 65,
     "description": "Dwukanałowy bezprzewodowy sterownik LED Dual White CCT (2.4GHz RF, 12A max). Przeznaczony do płynnej regulacji jasności oraz temperatury barwowej taśm CCT (ciepła-zimna biel).",
     "images": [
-      "/images/products/controller_cct.webp"
+      "/images/wiz1.png"
     ],
     "colors": [],
     "sizes": [],
@@ -71,7 +37,7 @@ const defaultProducts = [
     "compareAtPrice": 69,
     "description": "Trzykanałowy bezprzewodowy sterownik LED RGB (2.4GHz GFSK RF, 12A max). Pozwala wybrać dowolny kolor z palety 16 milionów barw i kontrolować nasycenie oraz jasność.",
     "images": [
-      "/images/products/controller_rgb.webp"
+      "/images/stairs.jpg"
     ],
     "colors": [],
     "sizes": [],
@@ -85,7 +51,7 @@ const defaultProducts = [
     "compareAtPrice": 75,
     "description": "Czterokanałowy bezprzewodowy sterownik LED RGBW (2.4GHz RF, 12A max). Obsługuje taśmy wielokolorowe z dodatkową diodą bieli (ciepłej, zimnej lub neutralnej).",
     "images": [
-      "/images/products/controller_rgbw.webp"
+      "/images/szafy.jpg"
     ],
     "colors": [],
     "sizes": []
@@ -98,7 +64,7 @@ const defaultProducts = [
     "compareAtPrice": 79,
     "description": "Pięciokanałowy bezprzewodowy sterownik LED RGBCCT (2.4GHz RF, 12A max). Zaawansowane sterowanie taśmami wielokolorowymi z pełną regulacją temperatury bieli.",
     "images": [
-      "/images/products/controller_rgbcct.webp"
+      "/images/stranda.webp"
     ],
     "colors": [],
     "sizes": [],
@@ -112,7 +78,7 @@ const defaultProducts = [
     "compareAtPrice": 49,
     "description": "Wodoodporny zasilacz LED Scharfer 12V o mocy 18W (model SCH-18-12) w klasie szczelności IP67. Zapewnia stabilne napięcie wyjściowe, pełną kompatybilność i 7-letnią niezawodną gwarancję.",
     "images": [
-      "/images/products/scharfer_18w.webp"
+      "/images/lb2.jpg"
     ],
     "colors": [],
     "sizes": []
@@ -125,7 +91,7 @@ const defaultProducts = [
     "compareAtPrice": 59,
     "description": "Hermetyczny zasilacz LED Scharfer 12V o mocy 30W IP67 (model SCH-30-12). Stabilne zasilanie dla domowych i meblowych instalacji LED. Powermax Technology Inside, 7 lat gwarancji.",
     "images": [
-      "/images/products/scharfer_30w.webp"
+      "/images/oprawa.jpg"
     ],
     "colors": [],
     "sizes": []
@@ -138,7 +104,7 @@ const defaultProducts = [
     "compareAtPrice": 79,
     "description": "Wodoodporny zasilacz LED Scharfer 12V o mocy 60W IP67 (model SCH-60-12). Bezpieczne, stabilne zasilanie do średnich i wymagających instalacji oświetleniowych, 7 lat gwarancji.",
     "images": [
-      "/images/products/scharfer_60w.webp"
+      "/images/parking.jpg"
     ],
     "colors": [],
     "sizes": []
