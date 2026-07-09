@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prescot LED - Blog & Inspiracje</title>
-
+  
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <!-- Theme CSS -->
   <link rel="stylesheet" href="/assets/xo-webcomponents.min.css">
   <link rel="stylesheet" href="/assets/main.min.css">
-
+  
   <style>
     :root {
       --primary-color: #0b1a30;
@@ -39,16 +36,10 @@
       background-color: var(--white);
       line-height: 1.6;
       overflow-x: hidden;
-      padding-top: 80px;
-      /* Space for fixed header */
+      padding-top: 80px; /* Space for fixed header */
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
+    h1, h2, h3, h4, h5, h6 {
       font-family: 'Outfit', sans-serif;
       color: var(--primary-color);
     }
@@ -69,7 +60,7 @@
       right: 0;
       z-index: 1000;
       transition: var(--transition);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
     }
 
     .mockup-header-logo img {
@@ -163,7 +154,7 @@
       background: var(--white);
       z-index: 999;
       padding: 40px 8%;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.05);
       transform: translateY(-20px);
       opacity: 0;
       visibility: hidden;
@@ -270,14 +261,16 @@
       position: absolute;
       top: 15px;
       left: 15px;
-      background: var(--accent-color);
-      color: #000;
+      background: #ffffff !important;
+      color: var(--primary-color, #0b1a30) !important;
       padding: 5px 12px;
       font-size: 10px;
       text-transform: uppercase;
       letter-spacing: 1px;
-      font-weight: 600;
+      font-weight: 700;
       border-radius: 2px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+      z-index: 10;
     }
 
     .blog-content {
@@ -476,7 +469,6 @@
         grid-template-columns: 1fr;
         gap: 50px;
       }
-
       .footer-grid {
         grid-template-columns: 1fr 1fr;
       }
@@ -486,23 +478,18 @@
       .mockup-header {
         padding: 15px 5%;
       }
-
       .mockup-nav {
         display: none;
       }
-
       .menu-toggle {
         display: block;
       }
-
       .blog-grid {
         grid-template-columns: 1fr;
       }
-
       .footer-grid {
         grid-template-columns: 1fr;
       }
-
       .footer-bottom {
         flex-direction: column;
         gap: 15px;
@@ -521,13 +508,13 @@
       border: 1px solid transparent;
       transition: var(--transition);
     }
-
+    
     .mockup-search-container:focus-within {
       background: var(--white);
       border-color: var(--accent-color);
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     }
-
+    
     .mockup-search-container input {
       border: none;
       background: transparent;
@@ -536,11 +523,11 @@
       width: 140px;
       transition: width 0.3s ease;
     }
-
+    
     .mockup-search-container input:focus {
       width: 200px;
     }
-
+    
     .mockup-search-container button {
       background: none;
       border: none;
@@ -556,7 +543,6 @@
     }
   </style>
 </head>
-
 <body>
 
   <header class="mockup-header">
@@ -579,19 +565,10 @@
         <button id="headerSearchBtn">🔍</button>
       </div>
       <button class="mockup-action-icon" aria-label="Konto użytkownika">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-          <circle cx="12" cy="7" r="4" />
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </button>
       <a href="/cart.html" class="mockup-action-icon" aria-label="Koszyk">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="8" cy="21" r="1" />
-          <circle cx="19" cy="21" r="1" />
-          <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
       </a>
     </div>
   </header>
@@ -619,8 +596,8 @@
       <!-- Article 1 -->
       <article class="blog-card" style="cursor: pointer;" onclick="openBlogModal('blog-1')">
         <div class="blog-media">
-          <img src="/images/blog-1-dobor-zasilacza-hero.png" alt="Jak dobrać zasilacz LED do taśmy" class="blog-img">
-          <span class="blog-tag">Poradniki</span>
+          <img src="/images/contemporary-apartment-interior-with-stylish-decor-2026-03-10-02-45-38-utc.webp" alt="Jak dobrać odpowiednie profile aluminiowe LED" class="blog-img">
+          <span class="blog-tag">Techniczne</span>
         </div>
         <div class="blog-content">
           <div>
@@ -629,10 +606,8 @@
               <span>•</span>
               <span>5 min czytania</span>
             </div>
-            <h2 class="blog-title"><a href="#" onclick="event.preventDefault(); openBlogModal('blog-1')">Jak dobrać
-                zasilacz LED do taśmy?</a></h2>
-            <p class="blog-excerpt">Zasilacz LED dobiera się do konkretnej taśmy, a nie „na oko”. Zobacz, jak obliczyć
-              moc, sprawdzić napięcie i bezpiecznie zasilić taśmę.</p>
+            <h2 class="blog-title"><a href="#" onclick="event.preventDefault(); openBlogModal('blog-1')">Jak dobrać odpowiednie profile aluminiowe LED?</a></h2>
+            <p class="blog-excerpt">Odpowiednio dobrany profil aluminiowy to nie tylko estetyka, ale przede wszystkim trwałość taśmy LED. Zobacz, na co zwrócić uwagę przed zakupem.</p>
           </div>
           <a href="#" class="blog-readmore" onclick="event.preventDefault(); openBlogModal('blog-1')">Czytaj więcej</a>
         </div>
@@ -641,20 +616,18 @@
       <!-- Article 2 -->
       <article class="blog-card" style="cursor: pointer;" onclick="openBlogModal('blog-2')">
         <div class="blog-media">
-          <img src="/images/blog-2-typy-zasilaczy-hero.png" alt="Zasilacze LED - gdzie użyć którego" class="blog-img">
-          <span class="blog-tag">Techniczne</span>
+          <img src="/images/elegant-interior-design-with-neutral-colors-2026-03-25-07-06-00-utc.webp" alt="CRI97: Dlaczego wierność barw ma znaczenie" class="blog-img">
+          <span class="blog-tag">Inspiracje</span>
         </div>
         <div class="blog-content">
           <div>
             <div class="blog-meta">
-              <span>6 Lipca, 2026</span>
+              <span>4 Lipca, 2026</span>
               <span>•</span>
               <span>4 min czytania</span>
             </div>
-            <h2 class="blog-title"><a href="#" onclick="event.preventDefault(); openBlogModal('blog-2')">Zasilacze LED -
-                gdzie użyć którego?</a></h2>
-            <p class="blog-excerpt">Desktop, slim, siatkowy czy hermetyczny IP67? Zobacz praktyczne porównanie typów
-              zasilaczy w zależności od miejsca montażu.</p>
+            <h2 class="blog-title"><a href="#" onclick="event.preventDefault(); openBlogModal('blog-2')">CRI97: Dlaczego wierność barw ma kluczowe znaczenie?</a></h2>
+            <p class="blog-excerpt">Czym różni się oświetlenie z wysokim wskaźnikiem oddawania barw od standardowych źródeł światła? Wyjaśniamy wpływ parametru CRI na wygląd wnętrza.</p>
           </div>
           <a href="#" class="blog-readmore" onclick="event.preventDefault(); openBlogModal('blog-2')">Czytaj więcej</a>
         </div>
@@ -663,20 +636,18 @@
       <!-- Article 3 -->
       <article class="blog-card" style="cursor: pointer;" onclick="openBlogModal('blog-3')">
         <div class="blog-media">
-          <img src="/images/blog-3-do-czego-zasilacz-hero.png" alt="Do czego służą zasilacze LED" class="blog-img">
-          <span class="blog-tag">Podstawy</span>
+          <img src="/images/hero_cob.webp" alt="Taśmy LED COB vs SMD" class="blog-img">
+          <span class="blog-tag">Porównania</span>
         </div>
         <div class="blog-content">
           <div>
             <div class="blog-meta">
-              <span>3 Lipca, 2026</span>
+              <span>2 Lipca, 2026</span>
               <span>•</span>
-              <span>3 min czytania</span>
+              <span>6 min czytania</span>
             </div>
-            <h2 class="blog-title"><a href="#" onclick="event.preventDefault(); openBlogModal('blog-3')">Do czego służą
-                zasilacze LED?</a></h2>
-            <p class="blog-excerpt">Dlaczego nie wolno podłączać taśmy bezpośrednio do gniazdka 230V? Dowiedz się, jaką
-              rolę pełni zasilacz w bezpiecznej instalacji.</p>
+            <h2 class="blog-title"><a href="#" onclick="event.preventDefault(); openBlogModal('blog-3')">Taśmy LED COB vs SMD – co sprawdzi się lepiej?</a></h2>
+            <p class="blog-excerpt">Jednolita linia światła bez widocznych punktów czy klasyczna wydajność diod SMD? Porównujemy dwa najpopularniejsze typy taśm LED.</p>
           </div>
           <a href="#" class="blog-readmore" onclick="event.preventDefault(); openBlogModal('blog-3')">Czytaj więcej</a>
         </div>
@@ -685,20 +656,18 @@
       <!-- Article 4 -->
       <article class="blog-card" style="cursor: pointer;" onclick="openBlogModal('blog-4')">
         <div class="blog-media">
-          <img src="/images/blog-4-stopnie-ip-hero.png" alt="Stopnie IP - dlaczego są ważne" class="blog-img">
-          <span class="blog-tag">Bezpieczeństwo</span>
+          <img src="/images/hero_digital.webp" alt="Jak zaprojektować inteligentne oświetlenie LED" class="blog-img">
+          <span class="blog-tag">Oświetlenie</span>
         </div>
         <div class="blog-content">
           <div>
             <div class="blog-meta">
-              <span>1 Lipca, 2026</span>
+              <span>25 Czerwca, 2026</span>
               <span>•</span>
               <span>4 min czytania</span>
             </div>
-            <h2 class="blog-title"><a href="#" onclick="event.preventDefault(); openBlogModal('blog-4')">Stopnie IP -
-                dlaczego są ważne?</a></h2>
-            <p class="blog-excerpt">Wyjaśniamy oznaczenia IP20, IP33, IP44 i IP67 w zasilaczach LED. Dowiedz się, które
-              IP wybrać do szafki, mebli i na zewnątrz.</p>
+            <h2 class="blog-title"><a href="#" onclick="event.preventDefault(); openBlogModal('blog-4')">Jak zaprojektować inteligentne oświetlenie LED?</a></h2>
+            <p class="blog-excerpt">Poznaj wady i zalety tradycyjnych systemów radiowych w porównaniu z nowoczesnymi rozwiązaniami smart home i asystentami głosowymi.</p>
           </div>
           <a href="#" class="blog-readmore" onclick="event.preventDefault(); openBlogModal('blog-4')">Czytaj więcej</a>
         </div>
@@ -711,24 +680,24 @@
         <h3 class="widget-title">Najnowsze artykuły</h3>
         <ul class="recent-posts-list">
           <li class="recent-post-item">
-            <img src="/images/lb2.jpg" alt="Recent 1" class="recent-post-img">
+            <img src="/images/contemporary-apartment-interior-with-stylish-decor-2026-03-10-02-45-38-utc.webp" alt="Recent 1" class="recent-post-img">
             <div>
-              <h4 class="recent-post-title"><a href="#">Jak dobrać odpowiednie profile LED?</a></h4>
+              <h4 class="recent-post-title"><a href="#" onclick="event.preventDefault(); openBlogModal('blog-1')">Jak dobrać odpowiednie profile LED?</a></h4>
               <div class="recent-post-date">8 Lipca, 2026</div>
             </div>
           </li>
           <li class="recent-post-item">
-            <img src="/images/wizaj.png" alt="Recent 2" class="recent-post-img">
+            <img src="/images/elegant-interior-design-with-neutral-colors-2026-03-25-07-06-00-utc.webp" alt="Recent 2" class="recent-post-img">
             <div>
-              <h4 class="recent-post-title"><a href="#">CRI97: Dlaczego wierność barw ma znaczenie?</a></h4>
+              <h4 class="recent-post-title"><a href="#" onclick="event.preventDefault(); openBlogModal('blog-2')">CRI97: Dlaczego wierność barw ma znaczenie?</a></h4>
               <div class="recent-post-date">4 Lipca, 2026</div>
             </div>
           </li>
           <li class="recent-post-item">
-            <img src="/images/wow.jpg" alt="Recent 3" class="recent-post-img">
+            <img src="/images/AdobeStock_395675282.webp" alt="Recent 3" class="recent-post-img">
             <div>
-              <h4 class="recent-post-title"><a href="#">Systemy szynoprzewodów LED</a></h4>
-              <div class="recent-post-date">29 Czerwca, 2026</div>
+              <h4 class="recent-post-title"><a href="#" onclick="event.preventDefault(); openBlogModal('blog-3')">Taśmy LED COB vs SMD – co wybrać?</a></h4>
+              <div class="recent-post-date">2 Lipca, 2026</div>
             </div>
           </li>
         </ul>
@@ -737,14 +706,10 @@
       <div class="sidebar-widget">
         <h3 class="widget-title">Kategorie</h3>
         <ul style="list-style:none; display:flex; flex-direction:column; gap:10px; font-size:14px; color:#666;">
-          <li style="cursor:pointer; transition:var(--transition);"><span
-              style="color:var(--accent-color); font-weight:700;">•</span> Trendy (8)</li>
-          <li style="cursor:pointer; transition:var(--transition);"><span
-              style="color:var(--accent-color); font-weight:700;">•</span> Inspiracje (12)</li>
-          <li style="cursor:pointer; transition:var(--transition);"><span
-              style="color:var(--accent-color); font-weight:700;">•</span> Poradniki (5)</li>
-          <li style="cursor:pointer; transition:var(--transition);"><span
-              style="color:var(--accent-color); font-weight:700;">•</span> Oświetlenie (3)</li>
+          <li style="cursor:pointer; transition:var(--transition);"><span style="color:var(--accent-color); font-weight:700;">•</span> Trendy (8)</li>
+          <li style="cursor:pointer; transition:var(--transition);"><span style="color:var(--accent-color); font-weight:700;">•</span> Inspiracje (12)</li>
+          <li style="cursor:pointer; transition:var(--transition);"><span style="color:var(--accent-color); font-weight:700;">•</span> Poradniki (5)</li>
+          <li style="cursor:pointer; transition:var(--transition);"><span style="color:var(--accent-color); font-weight:700;">•</span> Oświetlenie (3)</li>
         </ul>
       </div>
     </aside>
@@ -756,8 +721,7 @@
         <div class="footer-logo">
           <img src="/images/logo.png" alt="Cooken Logo White">
         </div>
-        <p style="margin-top: 15px;">Prescot LED to profesjonalny dostawca najwyższej jakości taśm LED, profili
-          aluminiowych, nowoczesnych sterowników oraz niezawodnych zasilaczy hermetycznych.</p>
+        <p style="margin-top: 15px;">Prescot LED to profesjonalny dostawca najwyższej jakości taśm LED, profili aluminiowych, nowoczesnych sterowników oraz niezawodnych zasilaczy hermetycznych.</p>
       </div>
       <div class="footer-col">
         <h3>Link</h3>
@@ -779,13 +743,10 @@
       </div>
       <div class="footer-col">
         <h3>Newsletter</h3>
-        <p style="margin-bottom: 20px;">Zapisz się, aby otrzymywać informacje o nowych kolekcjach i ofertach
-          specjalnych.</p>
+        <p style="margin-bottom: 20px;">Zapisz się, aby otrzymywać informacje o nowych kolekcjach i ofertach specjalnych.</p>
         <div style="display: flex; gap: 10px;">
-          <input type="email" placeholder="Twój e-mail"
-            style="padding: 12px 15px; border: 1px solid #333; background: #222; color: #fff; width: 100%; border-radius: 4px; font-size: 13px;">
-          <button
-            style="padding: 12px 25px; background: var(--accent-color); border: none; color: #000; font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; border-radius: 4px;">OK</button>
+          <input type="email" placeholder="Twój e-mail" style="padding: 12px 15px; border: 1px solid #333; background: #222; color: #fff; width: 100%; border-radius: 4px; font-size: 13px;">
+          <button style="padding: 12px 25px; background: var(--accent-color); border: none; color: #000; font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; border-radius: 4px;">OK</button>
         </div>
       </div>
     </div>
@@ -796,10 +757,11 @@
   </footer>
 
   <script type="module">
+
     // Header Search bar logic
     const headerSearchInput = document.getElementById('headerSearchInput');
     const headerSearchBtn = document.getElementById('headerSearchBtn');
-
+    
     function performHeaderSearch() {
       if (headerSearchInput) {
         const q = headerSearchInput.value.trim();
@@ -808,7 +770,7 @@
         }
       }
     }
-
+    
     if (headerSearchInput) {
       headerSearchInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
@@ -830,12 +792,12 @@
     });
 
     // Blog Modal Functions
-    window.openBlogModal = function (blogId) {
+    window.openBlogModal = function(blogId) {
       const modal = document.getElementById('blogModal');
       const body = document.getElementById('blogModalBody');
       modal.style.display = 'flex';
       body.innerHTML = '<div style="text-align:center; padding:50px; font-size:18px;">Wczytywanie artykułu...</div>';
-
+      
       fetch(`/blog/${blogId}.html`)
         .then(res => {
           if (!res.ok) throw new Error('Nie znaleziono artykułu');
@@ -849,11 +811,11 @@
         });
     }
 
-    window.closeBlogModal = function () {
+    window.closeBlogModal = function() {
       document.getElementById('blogModal').style.display = 'none';
     }
 
-    window.addEventListener('click', function (e) {
+    window.addEventListener('click', function(e) {
       const modal = document.getElementById('blogModal');
       if (e.target === modal) {
         closeBlogModal();
@@ -873,15 +835,11 @@
   </script>
 
   <!-- Blog Modal -->
-  <div id="blogModal" class="blog-modal"
-    style="display:none; position:fixed; z-index:10000; left:0; top:0; width:100%; height:100%; overflow:hidden; background-color:rgba(0,0,0,0.8); backdrop-filter:blur(8px); align-items:center; justify-content:center;">
-    <div class="blog-modal-content"
-      style="background:#ffffff; color:#0b1a30; margin:auto; padding:30px; border-radius:16px; width:90%; max-width:1020px; max-height:85vh; overflow-y:auto; position:relative; box-shadow:0 10px 40px rgba(0,0,0,0.3);">
-      <span class="close-blog-modal" onclick="closeBlogModal()"
-        style="position:sticky; top:0; float:right; font-size:32px; font-weight:bold; cursor:pointer; color:#0b1a30; z-index:10001; width:40px; height:40px; background:#f0f2f5; display:flex; align-items:center; justify-content:center; border-radius:50%; transition:all 0.2s;">&times;</span>
+  <div id="blogModal" class="blog-modal" style="display:none; position:fixed; z-index:10000; left:0; top:0; width:100%; height:100%; overflow:hidden; background-color:rgba(0,0,0,0.8); backdrop-filter:blur(8px); align-items:center; justify-content:center;">
+    <div class="blog-modal-content" style="background:#ffffff; color:#0b1a30; margin:auto; padding:30px; border-radius:16px; width:90%; max-width:1020px; max-height:85vh; overflow-y:auto; position:relative; box-shadow:0 10px 40px rgba(0,0,0,0.3);">
+      <span class="close-blog-modal" onclick="closeBlogModal()" style="position:sticky; top:0; float:right; font-size:32px; font-weight:bold; cursor:pointer; color:#0b1a30; z-index:10001; width:40px; height:40px; background:#f0f2f5; display:flex; align-items:center; justify-content:center; border-radius:50%; transition:all 0.2s;">&times;</span>
       <div id="blogModalBody" style="margin-top: 10px; font-size: 16px; color: #333;">Wczytywanie artykułu...</div>
     </div>
   </div>
 </body>
-
 </html>
