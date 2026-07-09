@@ -114,9 +114,11 @@
     }
 
     .mockup-nav a.active {
-      background: transparent;
-      border-color: var(--primary-color);
+      background: rgba(255, 255, 255, 0.6);
+      border-color: rgba(255, 255, 255, 0.2);
       color: var(--primary-color) !important;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     /* Scrolled states */
@@ -2124,38 +2126,55 @@
     </div>
     
     <div class="mockup-blog-grid">
+      
       <!-- Article 1 -->
-      <article class="mockup-blog-card">
-        <img src="/images/kuchnia.jpg" alt="Taśmy COB" class="mockup-blog-img">
-        <div class="mockup-blog-content">
-          <span class="mockup-blog-date">12 Lipca 2026</span>
-          <h3 class="mockup-blog-title">Taśmy LED COB vs SMD - co wybrać do salonu?</h3>
-          <p class="mockup-blog-excerpt">Dowiedz się dlaczego technologia COB rewolucjonizuje rynek oświetlenia domowego i biurowego, eliminując efekt widocznych punktów świetlnych.</p>
-          <a href="#" class="mockup-blog-link">Czytaj więcej</a>
+      <article class="mockup-blog-card" style="cursor: pointer;" onclick="window.location.href='/blog.html#blog-1'">
+        <div class="mockup-blog-media" style="position: relative;">
+          <img src="/images/contemporary-apartment-interior-with-stylish-decor-2026-03-10-02-45-38-utc.webp" alt="Jak dobrać zasilacz LED do taśmy" class="mockup-blog-img" style="width: 100%; height: 250px; object-fit: cover;">
+          <span class="mockup-blog-tag" style="position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.9); color: var(--primary-color); padding: 5px 15px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">Poradniki</span>
+        </div>
+        <div class="mockup-blog-content" style="padding: 25px;">
+          <div class="mockup-blog-meta" style="font-size: 13px; color: #888; margin-bottom: 10px;">
+            <span>8 Lipca, 2026</span> • <span>5 min czytania</span>
+          </div>
+          <h3 class="mockup-blog-title" style="font-size: 20px; margin-bottom: 15px; line-height: 1.4;">Jak dobrać zasilacz LED do taśmy?</h3>
+          <p class="mockup-blog-excerpt" style="color: #666; line-height: 1.6; margin-bottom: 20px;">Zasilacz LED dobiera się do konkretnej taśmy, a nie „na oko”. Zobacz, jak obliczyć moc, sprawdzić napięcie i bezpiecznie zasilić taśmę.</p>
+          <a href="/blog.html#blog-1" class="mockup-blog-link" style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; font-size: 13px; text-decoration: none;">Czytaj więcej</a>
         </div>
       </article>
 
       <!-- Article 2 -->
-      <article class="mockup-blog-card">
-        <img src="/images/szafy.jpg" alt="Sterowanie oświetleniem" class="mockup-blog-img">
-        <div class="mockup-blog-content">
-          <span class="mockup-blog-date">05 Lipca 2026</span>
-          <h3 class="mockup-blog-title">Inteligentne sterowanie oświetleniem w biurze</h3>
-          <p class="mockup-blog-excerpt">Zarządzaj strefami, automatyzuj natężenie światła i oszczędzaj energię. Praktyczny przewodnik po sterownikach DALI i MiBoxer.</p>
-          <a href="#" class="mockup-blog-link">Czytaj więcej</a>
+      <article class="mockup-blog-card" style="cursor: pointer;" onclick="window.location.href='/blog.html#blog-2'">
+        <div class="mockup-blog-media" style="position: relative;">
+          <img src="/images/kuchnia.jpg" alt="Zasilacze LED - gdzie użyć którego" class="mockup-blog-img" style="width: 100%; height: 250px; object-fit: cover;">
+          <span class="mockup-blog-tag" style="position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.9); color: var(--primary-color); padding: 5px 15px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">Techniczne</span>
+        </div>
+        <div class="mockup-blog-content" style="padding: 25px;">
+          <div class="mockup-blog-meta" style="font-size: 13px; color: #888; margin-bottom: 10px;">
+            <span>6 Lipca, 2026</span> • <span>4 min czytania</span>
+          </div>
+          <h3 class="mockup-blog-title" style="font-size: 20px; margin-bottom: 15px; line-height: 1.4;">Zasilacze LED - gdzie użyć którego?</h3>
+          <p class="mockup-blog-excerpt" style="color: #666; line-height: 1.6; margin-bottom: 20px;">Desktop, slim, siatkowy czy hermetyczny IP67? Zobacz praktyczne porównanie typów zasilaczy w zależności od miejsca montażu.</p>
+          <a href="/blog.html#blog-2" class="mockup-blog-link" style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; font-size: 13px; text-decoration: none;">Czytaj więcej</a>
         </div>
       </article>
 
       <!-- Article 3 -->
-      <article class="mockup-blog-card">
-        <img src="/images/stairs.jpg" alt="Zasilacze Premium" class="mockup-blog-img">
-        <div class="mockup-blog-content">
-          <span class="mockup-blog-date">28 Czerwca 2026</span>
-          <h3 class="mockup-blog-title">Dlaczego zasilacz ma znaczenie?</h3>
-          <p class="mockup-blog-excerpt">Zasilacz to serce systemu LED. Analizujemy różnice między tanimi zamiennikami a certyfikowanymi zasilaczami Mean Well i Pos Power.</p>
-          <a href="#" class="mockup-blog-link">Czytaj więcej</a>
+      <article class="mockup-blog-card" style="cursor: pointer;" onclick="window.location.href='/blog.html#blog-3'">
+        <div class="mockup-blog-media" style="position: relative;">
+          <img src="/images/szafy.jpg" alt="Do czego służą zasilacze LED" class="mockup-blog-img" style="width: 100%; height: 250px; object-fit: cover;">
+          <span class="mockup-blog-tag" style="position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.9); color: var(--primary-color); padding: 5px 15px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">Podstawy</span>
+        </div>
+        <div class="mockup-blog-content" style="padding: 25px;">
+          <div class="mockup-blog-meta" style="font-size: 13px; color: #888; margin-bottom: 10px;">
+            <span>3 Lipca, 2026</span> • <span>3 min czytania</span>
+          </div>
+          <h3 class="mockup-blog-title" style="font-size: 20px; margin-bottom: 15px; line-height: 1.4;">Do czego służą zasilacze LED?</h3>
+          <p class="mockup-blog-excerpt" style="color: #666; line-height: 1.6; margin-bottom: 20px;">Dlaczego nie wolno podłączać taśmy bezpośrednio do gniazdka 230V? Dowiedz się, jaką rolę pełni zasilacz w bezpiecznej instalacji.</p>
+          <a href="/blog.html#blog-3" class="mockup-blog-link" style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; font-size: 13px; text-decoration: none;">Czytaj więcej</a>
         </div>
       </article>
+
     </div>
   </section>
         
