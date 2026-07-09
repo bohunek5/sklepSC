@@ -1087,6 +1087,13 @@
       box-shadow: inset 0 3px 5px rgba(0,0,0,0.1) !important;
       transition: all 0.1s ease !important;
     }
+
+    /* Pressed effect for buttons and links */
+    .add-to-cart-btn:active, .buy-it-now-btn:active, .action-btn:active, .nav-links a:active, .mega-menu-col ul li a:active, .btn:active, .pagination-btn:active, .action-btn-circle:active {
+      transform: scale(0.96) translateY(2px);
+      box-shadow: inset 0 3px 5px rgba(0,0,0,0.2);
+    }
+    
 </style>
 </head>
 
@@ -1282,16 +1289,15 @@
       
           <!-- Stock Alert -->
           <div class="stock-alert">
-            <i class="ph-fill ph-fire"></i> HURRY UP! ONLY 1 LEFT IN STOCK
+            <i class="ph-fill ph-fire"></i> DOŁĄCZ DO GRONA ZADOWOLONYCH KLIENTÓW
           </div>
           <div class="stock-bar"><div class="stock-bar-fill"></div></div>
 
           <!-- Icons Row -->
-          <div class="product-icons-row">
-            <div class="product-icon-item"><i class="ph ph-ruler"></i> Size Guide</div>
-            <div class="product-icon-item"><i class="ph ph-intersect"></i> Compare Color</div>
-            <div class="product-icon-item"><i class="ph ph-question"></i> Ask a Question</div>
-            <div class="product-icon-item"><i class="ph ph-share-network"></i> Share</div>
+          <div class="product-icons-row" style="align-items: center;">
+            <button class="add-to-cart-btn" style="padding: 8px 16px; font-size: 13px; width: auto; margin-right: 15px;">Parametry</button>
+            <div class="product-icon-item"><i class="ph ph-intersect"></i> Barwa światła</div>
+            <div class="product-icon-item"><i class="ph ph-question"></i> Zadaj pytanie</div>
           </div>
     
           <div class="product-purchase-box">
@@ -1311,6 +1317,8 @@
           </svg>
           Kup teraz (Szybka płatność)
         </button>
+
+        <div id="productVariantsContainer" style="margin-top: 20px;"></div>
 
         <!-- Two simple rows detailing fast delivery and easy returns -->
         <div class="delivery-returns-info"
@@ -1619,6 +1627,28 @@
       });
     } else {
       document.getElementById('sizeContainer').style.display = 'none';
+
+    // Render Controller Variants
+    const variantsContainer = document.getElementById('productVariantsContainer');
+    if (product.variants && product.variants.length > 0 && product.variants[0].name) {
+      const variantsHTML = product.variants.map(v => `
+        <a href="/product.html?id=${v.id}" style="text-decoration: none; color: inherit;">
+          <div class="variant-tile" style="display: inline-block; width: 80px; height: 80px; margin-right: 10px; margin-bottom: 10px; border: 2px solid ${v.id === pId ? 'var(--primary-color)' : '#eee'}; border-radius: 8px; overflow: hidden; position: relative; cursor: pointer; transition: 0.3s;"
+               onmouseenter="this.querySelector('video').style.opacity=1"
+               onmouseleave="this.querySelector('video').style.opacity=0">
+            <img src="${v.image}" style="width: 100%; height: 100%; object-fit: cover;">
+            ${v.video ? `<video src="${v.video}" loop muted playsinline autoplay style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:0.3s; pointer-events:none;"></video>` : ''}
+          </div>
+        </a>
+      `).join('');
+      variantsContainer.innerHTML = `
+        <h4 style="margin-bottom: 10px; font-size: 14px; font-weight: 600;">Dostępne modele:</h4>
+        <div style="display: flex; flex-wrap: wrap;">
+          ${variantsHTML}
+        </div>
+      `;
+    }
+
     }
 
     // Quantity selectors
