@@ -75,7 +75,7 @@ const defaultProducts = [
     ],
     "colors": [],
     "sizes": [],
-    "video": "/videos/rgb_salon.mp4"
+    "video": "/videos/rgb_pilot.mp4"
   },
   {
     "id": 1004,
@@ -88,7 +88,8 @@ const defaultProducts = [
       "/images/products/controller_rgbw.webp"
     ],
     "colors": [],
-    "sizes": []
+    "sizes": [],
+    "video": "/videos/rgb_salon.mp4"
   },
   {
     "id": 1005,
