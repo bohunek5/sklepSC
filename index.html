@@ -641,21 +641,38 @@
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       color: var(--white);
       font-size: 20px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: var(--transition);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    @keyframes water-ripple {
+      0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.6); transform: scale(1); }
+      50% { transform: scale(0.95); }
+      100% { box-shadow: 0 0 0 20px rgba(255,255,255,0); transform: scale(1); }
     }
 
     .slider-arrow:hover {
-      background: var(--white);
-      color: var(--primary-color);
-      border-color: var(--white);
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.6);
+      color: #fff;
+      animation: water-ripple 1s infinite;
+    }
+    
+    .slider-arrow:active {
+      animation: none;
+      transform: scale(0.9);
+      background: rgba(255, 255, 255, 0.5);
     }
 
     /* Categories section */
@@ -2329,8 +2346,66 @@
       }, duration);
     }
 
-    prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
-    nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+    let audioCtx = null;
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function playPlumSound() {
+      initAudio();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.1);
+      
+      gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + 0.02);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
+      
+      osc.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.2);
+    }
+
+    function playHoverSound() {
+      if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') return;
+      const osc = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.1);
+      
+      gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.03, audioCtx.currentTime + 0.02);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+      
+      osc.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.1);
+    }
+
+    prevBtn.addEventListener('click', () => {
+      playPlumSound();
+      showSlide(currentSlide - 1);
+    });
+    nextBtn.addEventListener('click', () => {
+      playPlumSound();
+      showSlide(currentSlide + 1);
+    });
+    
+    prevBtn.addEventListener('mouseenter', playHoverSound);
+    nextBtn.addEventListener('mouseenter', playHoverSound);
 
     // Initialize first slide transition on page load
     document.addEventListener('DOMContentLoaded', () => {
