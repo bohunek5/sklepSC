@@ -930,12 +930,112 @@
       }
     }
 
-  </style>
+  
+    /* Mobile specific toolbar imitating Envato screen */
+    .mobile-shop-toolbar-v2 {
+      display: none;
+      background: var(--primary-color);
+      padding: 15px 20px;
+      margin-top: 70px;
+    }
+    @media (max-width: 768px) {
+      .mobile-shop-toolbar-v2 {
+        display: block;
+      }
+      .shop-toolbar {
+        display: none !important; /* Hide desktop toolbar on mobile */
+      }
+      .shop-sidebar {
+        display: none !important; /* Hide desktop sidebar on mobile */
+      }
+      .mockup-header {
+        background: var(--primary-color) !important; /* Force dark header on shop mobile */
+      }
+      .mockup-header-logo img {
+        filter: brightness(0) invert(1);
+      }
+      .mockup-action-icon {
+        color: #fff !important;
+        background: rgba(255,255,255,0.1) !important;
+      }
+      .menu-toggle {
+        color: #fff !important;
+      }
+      
+      /* Hide search/wishlist/account on mobile header to match Envato */
+      .mockup-search-container, .wishlist-trigger, .mockup-action-icon[aria-label="Konto użytkownika"] {
+        display: none !important;
+      }
+    }
+    .mobile-search-pill {
+      display: flex;
+      align-items: center;
+      background: #1a2a42;
+      border-radius: 99px;
+      padding: 5px 5px 5px 15px;
+      margin-bottom: 15px;
+    }
+    .mobile-search-pill svg {
+      color: #8892b0;
+      flex-shrink: 0;
+    }
+    .mobile-search-pill input {
+      background: transparent;
+      border: none;
+      color: #fff;
+      padding: 10px;
+      width: 100%;
+      outline: none;
+      font-family: 'Inter', sans-serif;
+    }
+    .mobile-search-pill input::placeholder {
+      color: #8892b0;
+    }
+    .mobile-search-btn-green {
+      background: #00d26a; /* Envato green */
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    
+    .mobile-filter-pills {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 5px;
+    }
+    .mobile-filter-pills::-webkit-scrollbar {
+      display: none;
+    }
+    .mobile-pill {
+      background: #1a2a42;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .mobile-pill svg {
+      color: #8892b0;
+    }
+
+</style>
 </head>
 <body>
   
   <header class="mockup-header">
-    <button class="menu-toggle" id="menuToggle">☰</button>
+    
     <div class="mockup-header-logo">
       <a href="/index.html"><img src="/images/logo.png" alt="Cooken Logo"></a>
     </div>
@@ -994,6 +1094,10 @@
       <a href="/cart.html" class="mockup-action-icon" aria-label="Koszyk">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
       </a>
+    
+      <button class="menu-toggle" id="menuToggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
     </div>
   </header>
 
