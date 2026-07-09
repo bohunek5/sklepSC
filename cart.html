@@ -497,54 +497,39 @@
     .mockup-search-container {
       display: flex;
       align-items: center;
-      background: rgba(0, 0, 0, 0.04);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      padding: 8px 18px;
+      background: #f1f1f1;
+      border-radius: 20px;
+      padding: 6px 15px;
       margin-right: 15px;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      border-radius: 99px;
+      border: 1px solid transparent;
       transition: var(--transition);
     }
     
     .mockup-search-container:focus-within {
-      background: rgba(0, 0, 0, 0.08);
-      border-color: rgba(0, 0, 0, 0.1);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      background: var(--white);
+      border-color: var(--accent-color);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     }
     
     .mockup-search-container input {
       border: none;
       background: transparent;
       outline: none;
-      font-size: 12px;
-      font-family: 'Courier New', Courier, monospace;
+      font-size: 13px;
       width: 140px;
       transition: width 0.3s ease;
-      color: var(--primary-color);
-    }
-    
-    .mockup-search-container input::placeholder {
-      font-family: 'Courier New', Courier, monospace;
-      color: rgba(11, 26, 48, 0.6);
     }
     
     .mockup-search-container input:focus {
-      width: 220px;
+      width: 200px;
     }
     
     .mockup-search-container button {
       background: none;
       border: none;
       cursor: pointer;
-      color: var(--primary-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .mockup-search-container button svg {
-      width: 16px;
-      height: 16px;
+      font-size: 13px;
+      color: #666;
     }
 
     @media (max-width: 1024px) {
@@ -566,12 +551,10 @@
       top: 100%;
       left: 50%;
       transform: translateX(-50%) translateY(20px);
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: #fff;
       box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-      border-radius: 24px;
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+      border: 1px solid #f0f0f0;
       width: 700px;
       opacity: 0;
       visibility: hidden;
@@ -595,7 +578,7 @@
       font-weight: 600;
       color: var(--primary-color);
       margin-bottom: 15px;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
+      border-bottom: 1px solid #eee;
       padding-bottom: 8px;
     }
     .mega-menu-col ul {
@@ -607,22 +590,17 @@
       gap: 12px;
     }
     .mega-menu-col ul li a {
-      color: var(--primary-color);
-      font-size: 12px;
-      font-weight: 600;
+      color: #666;
+      font-size: 13px;
       text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: color 0.2s;
       display: block;
-      padding: 10px 15px !important;
+      padding: 0 !important;
       background: transparent !important;
-      border-radius: 99px;
     }
     .mega-menu-col ul li a:hover {
-      background: rgba(0, 0, 0, 0.04) !important;
-      color: var(--primary-color) !important;
-      transform: translateX(4px);
+      color: var(--accent-color);
+      background: transparent !important;
     }
     .mega-menu-banner {
       min-height: 180px;
@@ -678,10 +656,8 @@
     </nav>
     <div class="mockup-actions">
       <div class="mockup-search-container">
-        <input type="text" placeholder="Czego szukasz..." id="headerSearchInput">
-        <button id="headerSearchBtn" aria-label="Szukaj">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        </button>
+        <input type="text" placeholder="Szukaj produktów..." id="headerSearchInput">
+        <button id="headerSearchBtn">🔍</button>
       </div>
       <button class="mockup-action-icon" aria-label="Konto użytkownika">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
