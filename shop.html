@@ -671,7 +671,8 @@
       }
     }
   
-    /* Mega Menu Styles */
+    
+    /* New Apple-style Dropdown Menu */
     .has-mega-menu {
       position: relative;
     }
@@ -679,73 +680,80 @@
       display: flex;
       align-items: center;
     }
-    .mega-menu {
+    .apple-dropdown {
       position: absolute;
-      top: 100%;
+      top: calc(100% + 10px);
       left: 50%;
-      transform: translateX(-50%) translateY(10px) scale(0.96); transform-origin: top center;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(30px);
-      -webkit-backdrop-filter: blur(30px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-      border-radius: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      width: 700px;
+      transform: translateX(-50%) translateY(10px) scale(0.98);
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(40px) saturate(180%);
+      -webkit-backdrop-filter: blur(40px) saturate(180%);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.1), 0 1px 0 rgba(255,255,255,0.5) inset;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      width: 260px;
       opacity: 0;
       visibility: hidden;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
       z-index: 1000;
-      padding: 30px;
+      padding: 12px;
+      overflow: hidden;
     }
-    .has-mega-menu:hover .mega-menu {
+    .has-mega-menu:hover .apple-dropdown {
       opacity: 1;
       visibility: visible;
       transform: translateX(-50%) translateY(0) scale(1);
     }
-    .mega-menu-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 30px;
+    .apple-dropdown-section {
+      margin-bottom: 8px;
     }
-    .mega-menu-col h4 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 15px;
+    .apple-dropdown-section:last-child {
+      margin-bottom: 0;
+    }
+    .apple-dropdown-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #888;
       font-weight: 600;
-      color: var(--primary-color);
-      margin-bottom: 15px;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-      padding-bottom: 8px;
+      padding: 8px 12px 4px;
     }
-    .mega-menu-col ul {
+    .apple-dropdown ul {
       list-style: none;
       padding: 0;
       margin: 0;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 2px;
     }
-    .mega-menu-col ul li a {
-      color: var(--primary-color);
-      font-size: 13px;
-      font-weight: 600;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      display: block;
-      padding: 12px 20px !important;
-      background: transparent !important;
-      border-radius: 99px;
-      border: 1px solid transparent;
-    }
-    .mega-menu-col ul li a:hover {
-      background: rgba(0, 0, 0, 0.04) !important;
+    .apple-dropdown ul li a {
       color: var(--primary-color) !important;
-      transform: translateX(4px);
+      font-size: 13px !important;
+      font-weight: 500 !important;
+      text-decoration: none !important;
+      text-transform: none !important;
+      letter-spacing: 0 !important;
+      transition: all 0.2s ease !important;
+      display: flex !important;
+      align-items: center !important;
+      padding: 10px 12px !important;
+      background: transparent !important;
+      border-radius: 8px !important;
+      border: none !important;
+      box-shadow: none !important;
     }
-    .mega-menu-banner {
-      min-height: 180px;
+    .apple-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--accent-color) !important;
+      transform: none !important;
     }
+    /* Disable the concaved effect on this new dropdown */
+    .apple-dropdown ul li a:active {
+      transform: scale(0.98) !important;
+      box-shadow: none !important;
+      background: rgba(0, 0, 0, 0.08) !important;
+    }
+
 
     /* Concave Active States */
     .mockup-nav ul li a:active,
@@ -1045,30 +1053,26 @@
         
         <li class="has-mega-menu">
           <a href="/shop.html" class="active">Sklep <i class="ph ph-caret-down" style="font-size: 12px; margin-left: 4px;"></i></a>
-          <div class="mega-menu">
-            <div class="mega-menu-content">
-              <div class="mega-menu-col">
-                <h4>Oświetlenie LED</h4>
-                <ul>
-                  <li><a href="/shop.html?cat=Tasma%20LED">Taśmy LED COB</a></li>
-                  <li><a href="/shop.html?cat=Tasma%20LED">Taśmy LED SMD</a></li>
-                  <li><a href="/shop.html?cat=Tasma%20LED">Taśmy Neony</a></li>
-                  <li><a href="/shop.html?cat=Tasma%20LED">Zestawy LED</a></li>
-                </ul>
-              </div>
-              <div class="mega-menu-col">
-                <h4>Akcesoria i Zasilanie</h4>
-                <ul>
-                  <li><a href="/shop.html?cat=Sterowniki%20LED">Sterowniki LED</a></li>
-                  <li><a href="/shop.html?cat=Zasilacze">Zasilacze Hermetyczne</a></li>
-                  <li><a href="/shop.html?cat=Profile">Profile aluminiowe</a></li>
-                  <li><a href="/shop.html?cat=Akcesoria">Kable i złączki</a></li>
-                </ul>
-              </div>
-              <div class="mega-menu-col mega-menu-banner" style="background: url('/images/katalog_front.webp') center/cover; padding: 20px; border-radius: 8px; display: flex; flex-direction: column; justify-content: flex-end;">
-                <h4 style="color: #fff; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Nowy Katalog 2026</h4>
-                <a href="/images/Pobierz_katalog_Prescot.pdf" target="_blank" style="display: inline-block; background: var(--primary-color); color: #fff; padding: 8px 15px; border-radius: 4px; font-size: 12px; text-align: center; font-weight: 600;">Pobierz teraz</a>
-              </div>
+          
+          <div class="apple-dropdown">
+            <div class="apple-dropdown-section">
+              <div class="apple-dropdown-title">Oświetlenie LED</div>
+              <ul>
+                <li><a href="/shop.html?cat=Tasma%20LED">Taśmy LED COB</a></li>
+                <li><a href="/shop.html?cat=Tasma%20LED">Taśmy LED SMD</a></li>
+                <li><a href="/shop.html?cat=Tasma%20LED">Taśmy Neony</a></li>
+                <li><a href="/shop.html?cat=Tasma%20LED">Zestawy LED</a></li>
+              </ul>
+            </div>
+            <div style="height: 1px; background: rgba(0,0,0,0.05); margin: 8px 0;"></div>
+            <div class="apple-dropdown-section">
+              <div class="apple-dropdown-title">Akcesoria i Zasilanie</div>
+              <ul>
+                <li><a href="/shop.html?cat=Sterowniki%20LED">Sterowniki LED</a></li>
+                <li><a href="/shop.html?cat=Zasilacze">Zasilacze Hermetyczne</a></li>
+                <li><a href="/shop.html?cat=Profile">Profile aluminiowe</a></li>
+                <li><a href="/shop.html?cat=Akcesoria">Kable i złączki</a></li>
+              </ul>
             </div>
           </div>
         </li>
@@ -1108,30 +1112,26 @@
       
         <li class="has-mega-menu">
           <a href="/shop.html">Sklep <i class="ph ph-caret-down" style="font-size: 12px; margin-left: 4px;"></i></a>
-          <div class="mega-menu">
-            <div class="mega-menu-content">
-              <div class="mega-menu-col">
-                <h4>Oświetlenie LED</h4>
-                <ul>
-                  <li><a href="/shop.html?cat=Tasma%20LED">Taśmy LED COB</a></li>
-                  <li><a href="/shop.html?cat=Tasma%20LED">Taśmy LED SMD</a></li>
-                  <li><a href="/shop.html?cat=Tasma%20LED">Taśmy Neony</a></li>
-                  <li><a href="/shop.html?cat=Tasma%20LED">Zestawy LED</a></li>
-                </ul>
-              </div>
-              <div class="mega-menu-col">
-                <h4>Akcesoria i Zasilanie</h4>
-                <ul>
-                  <li><a href="/shop.html?cat=Sterowniki%20LED">Sterowniki LED</a></li>
-                  <li><a href="/shop.html?cat=Zasilacze">Zasilacze Hermetyczne</a></li>
-                  <li><a href="/shop.html?cat=Profile">Profile aluminiowe</a></li>
-                  <li><a href="/shop.html?cat=Akcesoria">Kable i złączki</a></li>
-                </ul>
-              </div>
-              <div class="mega-menu-col mega-menu-banner" style="background: url('/images/katalog_front.webp') center/cover; padding: 20px; border-radius: 8px; display: flex; flex-direction: column; justify-content: flex-end;">
-                <h4 style="color: #fff; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Nowy Katalog 2026</h4>
-                <a href="/images/Pobierz_katalog_Prescot.pdf" target="_blank" style="display: inline-block; background: var(--primary-color); color: #fff; padding: 8px 15px; border-radius: 4px; font-size: 12px; text-align: center; font-weight: 600;">Pobierz teraz</a>
-              </div>
+          
+          <div class="apple-dropdown">
+            <div class="apple-dropdown-section">
+              <div class="apple-dropdown-title">Oświetlenie LED</div>
+              <ul>
+                <li><a href="/shop.html?cat=Tasma%20LED">Taśmy LED COB</a></li>
+                <li><a href="/shop.html?cat=Tasma%20LED">Taśmy LED SMD</a></li>
+                <li><a href="/shop.html?cat=Tasma%20LED">Taśmy Neony</a></li>
+                <li><a href="/shop.html?cat=Tasma%20LED">Zestawy LED</a></li>
+              </ul>
+            </div>
+            <div style="height: 1px; background: rgba(0,0,0,0.05); margin: 8px 0;"></div>
+            <div class="apple-dropdown-section">
+              <div class="apple-dropdown-title">Akcesoria i Zasilanie</div>
+              <ul>
+                <li><a href="/shop.html?cat=Sterowniki%20LED">Sterowniki LED</a></li>
+                <li><a href="/shop.html?cat=Zasilacze">Zasilacze Hermetyczne</a></li>
+                <li><a href="/shop.html?cat=Profile">Profile aluminiowe</a></li>
+                <li><a href="/shop.html?cat=Akcesoria">Kable i złączki</a></li>
+              </ul>
             </div>
           </div>
         </li>

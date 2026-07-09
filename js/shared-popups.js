@@ -122,7 +122,22 @@ function injectCartDrawer() {
           <span>Razem:</span>
           <span id="cartDrawerTotal">0,00 zł</span>
         </div>
-        <button id="cartDrawerCheckout" style="width: 100%; padding: 16px; background: #1a1a1a; color: #fff; border: none; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: 12px; cursor: pointer; border-radius: 4px; transition: background 0.3s;">Przejdź do kasy</button>
+                <style>
+          .cart-checkout-btn {
+            width: 100%; padding: 16px; background: #1a1a1a; color: #fff; border: none; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: 12px; cursor: pointer; border-radius: 4px; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+          }
+          .cart-checkout-btn:hover {
+            background: #ffaa00;
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 170, 0, 0.3);
+          }
+          .cart-checkout-btn:active {
+            transform: scale(0.98);
+            box-shadow: none;
+          }
+        </style>
+        <button id="cartDrawerCheckout" class="cart-checkout-btn">Przejdź do kasy</button>
       </div>
     </div>
     <!-- Cart Drawer Overlay -->
