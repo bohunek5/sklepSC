@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="m-hero">
           <div class="m-hero-video-wrapper">
             <!-- Using the Prescot LED AR/3D video as hero background -->
-            <video src="/videos/cct_hotel.mp4" autoplay loop muted playsinline style="width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; object-fit: cover;"></video>
+            <video src="/videos/cct_salon.mp4" autoplay loop muted playsinline style="width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; object-fit: cover;"></video>
           </div>
           <div class="m-hero-overlay"></div>
           
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </p>
             
             <button class="m-btn-primary" onclick="window.switchMobileTab('oferta')">
-              Przeglądaj Produkty
+              Przeglądaj Sklep B2B
             </button>
             <button class="m-btn-outline" onclick="window.switchMobileTab('info')">
               Poznaj Technologie
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             <div class="m-trust-bar">
               <div class="m-trust-item">
-                <span class="m-trust-val">7</span>
+                <span class="m-trust-val">5</span>
                 <span class="m-trust-lbl">Lat Gwarancji</span>
               </div>
               <div class="m-trust-item">
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <img src="/images/products/tasma_4000k.webp" alt="Taśmy LED">
             <div class="m-feature-content">
               <h3 class="m-feature-title">Taśmy Premium z CRI>80</h3>
-              <p class="m-feature-text">Profesjonalne taśmy LED Delux Pro o wysokim strumieniu świetlnym i 7-letniej gwarancji producenta.</p>
+              <p class="m-feature-text">Profesjonalne taśmy LED Delux Pro o wysokim strumieniu świetlnym i wieloletniej gwarancji producenta.</p>
             </div>
           </div>
         </div>
@@ -131,38 +131,38 @@ document.addEventListener('DOMContentLoaded', () => {
     <nav class="m-bottom-nav">
       <a href="#home" class="m-nav-item active" onclick="window.switchMobileTab('home'); return false;">
         <i class="ph ph-house"></i>
-        Strona Główna
+        Home
       </a>
       <a href="#oferta" class="m-nav-item" onclick="window.switchMobileTab('oferta'); return false;">
         <i class="ph ph-shopping-bag"></i>
-        Produkty
+        Sklep B2B
       </a>
       <a href="#info" class="m-nav-item" onclick="window.switchMobileTab('info'); return false;">
-        <i class="ph ph-info"></i>
-        O Nas
+        <i class="ph ph-lightbulb"></i>
+        Technologie
       </a>
-      <a href="#kontakt" class="m-nav-item" onclick="window.switchMobileTab('info'); return false;">
+      <a href="#kontakt" class="m-nav-item" onclick="window.location.href='/contact.html'; return false;">
         <i class="ph ph-envelope"></i>
         Kontakt
       </a>
     </nav>
-  `;
+  \`;
 
   // Render products
   const pContainer = document.getElementById('m-products-container');
   if (pContainer) {
     products.forEach(p => {
       const img = p.images && p.images[0] ? p.images[0] : '/images/placeholder.png';
-      pContainer.insertAdjacentHTML('beforeend', `
-        <div class="m-product-card" onclick="window.location.href='/product.html?id=${p.id}'">
-          <img src="${img}" alt="${p.title}">
+      pContainer.insertAdjacentHTML('beforeend', \`
+        <div class="m-product-card" onclick="window.location.href='/product.html?id=\${p.id}'">
+          <img src="\${img}" alt="\${p.title}">
           <div class="m-product-card-body">
-            <div class="m-product-cat">${p.category || 'Inne'}</div>
-            <div class="m-product-title">${p.title}</div>
-            <div class="m-product-price">${p.price.toFixed(2)} PLN</div>
+            <div class="m-product-cat">\${p.category || 'Inne'}</div>
+            <div class="m-product-title">\${p.title}</div>
+            <div class="m-product-price">\${p.price.toFixed(2)} PLN</div>
           </div>
         </div>
-      `);
+      \`);
     });
   }
 });
@@ -171,12 +171,12 @@ document.addEventListener('DOMContentLoaded', () => {
 window.switchMobileTab = function(tabId) {
   // Update nav items
   document.querySelectorAll('.m-nav-item').forEach(el => el.classList.remove('active'));
-  const activeNav = document.querySelector(`.m-nav-item[href="#${tabId}"]`);
+  const activeNav = document.querySelector(\`.m-nav-item[href="#\${tabId}"]\`);
   if (activeNav) activeNav.classList.add('active');
 
   // Update views
   document.querySelectorAll('.m-view').forEach(el => el.classList.remove('active'));
-  const activeView = document.getElementById(`m-view-${tabId}`);
+  const activeView = document.getElementById(\`m-view-\${tabId}\`);
   if (activeView) {
     activeView.classList.add('active');
     window.scrollTo(0, 0);

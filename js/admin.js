@@ -1,5 +1,7 @@
 import { products } from './products-data.js';
 
+let deletedProducts = JSON.parse(localStorage.getItem('sklepSC_deletedProducts')) || [];
+
 // Setup basic functionality on load
 document.addEventListener('DOMContentLoaded', () => {
   // Navigation
@@ -25,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadDashboardData();
   loadOrdersData();
   loadProductsData();
+  loadTrashData();
 });
 
 // Expose switchView to global for inline onclick
@@ -139,8 +142,8 @@ function loadProductsData() {
       <td style="font-size: 18px;">${mediaIcons}</td>
       <td><span class="status completed">Aktywny</span></td>
       <td>
-        <button class="action-btn" onclick="editProduct(${prod.id})" title="Edytuj"><i class="ph ph-pencil-simple"></i></button>
-        <button class="action-btn" onclick="deleteProduct(${prod.id})" title="Usuń" style="color: var(--danger);"><i class="ph ph-trash"></i></button>
+        <button class="action-btn btn-edit" onclick="editProduct(${prod.id})" title="Edytuj"><i class="ph ph-pencil-simple"></i> Edytuj</button>
+        <button class="action-btn btn-delete" onclick="deleteProduct(${prod.id})" title="Usuń" style="color: var(--danger);"><i class="ph ph-trash"></i> Kosz</button>
       </td>
     `;
     tbody.appendChild(tr);
@@ -262,13 +265,78 @@ window.saveProduct = function() {
 };
 
 window.deleteProduct = function(id) {
-  if(confirm("Czy na pewno chcesz usunąć ten produkt?")) {
+  if(confirm("Czy na pewno chcesz przenieść ten produkt do kosza?")) {
     const idx = products.findIndex(p => p.id === id);
     if(idx > -1) {
-      products.splice(idx, 1);
+      const deletedProd = products.splice(idx, 1)[0];
+      deletedProd.deletedAt = new Date().toLocaleString();
+      deletedProducts.push(deletedProd);
+      
       localStorage.setItem('sklepSC_products', JSON.stringify(products));
+      localStorage.setItem('sklepSC_deletedProducts', JSON.stringify(deletedProducts));
+      
       loadProductsData();
+      loadTrashData();
       window.dispatchEvent(new Event('storage'));
     }
+  }
+};
+
+window.loadTrashData = function() {
+  const tbody = document.getElementById('trash-list');
+  if(!tbody) return;
+  tbody.innerHTML = '';
+  
+  deletedProducts.forEach(prod => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="status cancelled">Produkt</span></td>
+      <td>
+        <div class="product-name">${prod.title}</div>
+        <div class="product-sku">ID: ${prod.id}</div>
+      </td>
+      <td>${prod.deletedAt || 'Nieznana data'}</td>
+      <td>
+        <button class="action-btn btn-restore" onclick="restoreProduct(${prod.id})" title="Przywróć"><i class="ph ph-arrow-u-up-left"></i> Przywróć</button>
+        <button class="action-btn btn-delete" onclick="permanentDeleteProduct(${prod.id})" title="Usuń Trwale"><i class="ph ph-trash"></i> Usuń</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+};
+
+window.restoreProduct = function(id) {
+  const idx = deletedProducts.findIndex(p => p.id === id);
+  if(idx > -1) {
+    const prod = deletedProducts.splice(idx, 1)[0];
+    delete prod.deletedAt;
+    products.push(prod);
+    
+    localStorage.setItem('sklepSC_products', JSON.stringify(products));
+    localStorage.setItem('sklepSC_deletedProducts', JSON.stringify(deletedProducts));
+    
+    loadProductsData();
+    loadTrashData();
+    window.dispatchEvent(new Event('storage'));
+  }
+};
+
+window.permanentDeleteProduct = function(id) {
+  if(confirm("UWAGA! Usunięcie z kosza jest nieodwracalne. Chcesz kontynuować?")) {
+    const idx = deletedProducts.findIndex(p => p.id === id);
+    if(idx > -1) {
+      deletedProducts.splice(idx, 1);
+      localStorage.setItem('sklepSC_deletedProducts', JSON.stringify(deletedProducts));
+      loadTrashData();
+    }
+  }
+};
+
+window.emptyTrash = function() {
+  if(deletedProducts.length === 0) return;
+  if(confirm("Czy na pewno chcesz trwale usunąć WSZYSTKIE elementy z kosza? Operacji nie można cofnąć!")) {
+    deletedProducts = [];
+    localStorage.setItem('sklepSC_deletedProducts', JSON.stringify(deletedProducts));
+    loadTrashData();
   }
 };

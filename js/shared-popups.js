@@ -1,7 +1,109 @@
 import { products } from './products-data.js';
 
 // --- CART STATE ---
+let wishlist = JSON.parse(localStorage.getItem('cooken_wishlist')) || [];
 let cart = JSON.parse(localStorage.getItem('cooken_cart')) || [];
+
+
+// --- INJECT WISHLIST DRAWER HTML ---
+function injectWishlistDrawer() {
+  const drawerHTML = `
+    <!-- Wishlist Drawer Markup -->
+    <div id="wishlistDrawer" style="position: fixed; top: 0; right: -450px; width: 450px; height: 100vh; background: #fff; box-shadow: -10px 0 30px rgba(0,0,0,0.1); z-index: 2000; transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; max-width: 100%;">
+      <div style="padding: 25px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Twoja Lista Życzeń</h3>
+        <button id="closeWishlistDrawer" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+      </div>
+      <div id="wishlistDrawerItems" style="flex-grow: 1; padding: 25px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px;">
+        <!-- Items loaded dynamically -->
+      </div>
+    </div>
+    <!-- Wishlist Drawer Overlay -->
+    <div id="wishlistDrawerOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); z-index: 1999; opacity: 0; pointer-events: none; transition: opacity 0.4s;"></div>
+  `;
+  if (!document.getElementById('wishlistDrawer')) {
+    document.body.insertAdjacentHTML('beforeend', drawerHTML);
+  }
+}
+
+
+// --- INJECT PRODUCT MODALS (Size Guide, Compare Color, Ask Question) ---
+function injectProductModals() {
+  const modalsHTML = `
+    <!-- General Modal Overlay -->
+    <div id="productModalsOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 2500; opacity: 0; pointer-events: none; transition: opacity 0.3s;"></div>
+    
+    <!-- Size Guide / Dimensions Modal -->
+    <div id="modalSizeGuide" class="product-feature-modal" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); width: 600px; max-width: 90%; background: #fff; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); z-index: 2501; opacity: 0; pointer-events: none; transition: all 0.3s;">
+      <div style="padding: 20px 30px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 600; margin: 0;">Wymiary i parametry</h3>
+        <button class="close-product-modal" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+      </div>
+      <div style="padding: 30px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+          <tr style="border-bottom: 1px solid #eee;">
+            <th style="text-align: left; padding: 10px 0; color: #666;">Typ taśmy</th>
+            <td style="text-align: right; padding: 10px 0; font-weight: 500;">COB / SMD</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #eee;">
+            <th style="text-align: left; padding: 10px 0; color: #666;">Napięcie zasilania</th>
+            <td style="text-align: right; padding: 10px 0; font-weight: 500;">24V DC</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #eee;">
+            <th style="text-align: left; padding: 10px 0; color: #666;">Szerokość PCB</th>
+            <td style="text-align: right; padding: 10px 0; font-weight: 500;">8mm / 10mm</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #eee;">
+            <th style="text-align: left; padding: 10px 0; color: #666;">Możliwość cięcia</th>
+            <td style="text-align: right; padding: 10px 0; font-weight: 500;">Co 5cm / 2.5cm</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Compare Color Modal -->
+    <div id="modalCompareColor" class="product-feature-modal" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); width: 800px; max-width: 90%; background: #fff; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); z-index: 2501; opacity: 0; pointer-events: none; transition: all 0.3s;">
+      <div style="padding: 20px 30px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 600; margin: 0;">Porównaj barwę światła</h3>
+        <button class="close-product-modal" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+      </div>
+      <div style="padding: 30px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; text-align: center;">
+        <div>
+          <div style="height: 150px; background: linear-gradient(to bottom, rgba(255,166,77,0.4), transparent); border-radius: 8px; border: 1px solid #eee; margin-bottom: 10px;"></div>
+          <strong style="font-size: 16px;">3000K</strong>
+          <p style="font-size: 12px; color: #666; margin-top: 5px;">Biała ciepła (Relaks)</p>
+        </div>
+        <div>
+          <div style="height: 150px; background: linear-gradient(to bottom, rgba(255,235,180,0.4), transparent); border-radius: 8px; border: 1px solid #eee; margin-bottom: 10px;"></div>
+          <strong style="font-size: 16px;">4000K</strong>
+          <p style="font-size: 12px; color: #666; margin-top: 5px;">Biała neutralna (Praca)</p>
+        </div>
+        <div>
+          <div style="height: 150px; background: linear-gradient(to bottom, rgba(230,245,255,0.4), transparent); border-radius: 8px; border: 1px solid #eee; margin-bottom: 10px;"></div>
+          <strong style="font-size: 16px;">6000K</strong>
+          <p style="font-size: 12px; color: #666; margin-top: 5px;">Biała zimna (Skupienie)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ask a Question Modal -->
+    <div id="modalAskQuestion" class="product-feature-modal" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); width: 500px; max-width: 90%; background: #fff; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); z-index: 2501; opacity: 0; pointer-events: none; transition: all 0.3s;">
+      <div style="padding: 20px 30px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 600; margin: 0;">Zadaj pytanie</h3>
+        <button class="close-product-modal" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+      </div>
+      <div style="padding: 30px; display: flex; flex-direction: column; gap: 15px;">
+        <input type="text" placeholder="Twoje imię" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter', sans-serif;">
+        <input type="email" placeholder="Twój adres e-mail" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter', sans-serif;">
+        <textarea placeholder="O co chcesz zapytać?" rows="4" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Inter', sans-serif; resize: none;"></textarea>
+        <button style="width: 100%; padding: 15px; background: var(--primary-color); color: #fff; border: none; border-radius: 4px; font-weight: 600; text-transform: uppercase; cursor: pointer; letter-spacing: 1px; font-size: 12px;" onclick="alert('Pytanie wysłane. Skontaktujemy się z Tobą wkrótce!'); document.querySelector('#productModalsOverlay').click();">Wyślij Pytanie</button>
+      </div>
+    </div>
+  `;
+  if (!document.getElementById('productModalsOverlay')) {
+    document.body.insertAdjacentHTML('beforeend', modalsHTML);
+  }
+}
 
 // --- INJECT CART DRAWER HTML ---
 function injectCartDrawer() {
@@ -143,6 +245,8 @@ function injectMobileMenuOverlay() {
 
 // --- INIT POPUPS AND DRAWER ACTIONS ---
 export function initSharedPopups() {
+  injectWishlistDrawer();
+  injectProductModals();
   injectCartDrawer();
   injectQuickViewModal();
   injectNewsletterPopup();
@@ -269,6 +373,141 @@ export function initSharedPopups() {
   // Mobile Menu Drawer Elements
   const mobMenu = document.getElementById('mobileMenu');
   const mobOverlay = document.getElementById('mobileMenuOverlay');
+
+  
+  // --- WISHLIST DRAWER LOGIC ---
+  const wishlistDrawer = document.getElementById('wishlistDrawer');
+  const wishlistDrawerOverlay = document.getElementById('wishlistDrawerOverlay');
+  const closeWishlistDrawer = document.getElementById('closeWishlistDrawer');
+  const wishlistDrawerItems = document.getElementById('wishlistDrawerItems');
+
+  function openWishlist() {
+    renderWishlist();
+    wishlistDrawer.style.right = '0px';
+    wishlistDrawerOverlay.style.opacity = '1';
+    wishlistDrawerOverlay.style.pointerEvents = 'all';
+  }
+
+  window.openWishlistDrawer = openWishlist;
+
+  function closeWishlist() {
+    wishlistDrawer.style.right = '-450px';
+    wishlistDrawerOverlay.style.opacity = '0';
+    wishlistDrawerOverlay.style.pointerEvents = 'none';
+  }
+
+  if (closeWishlistDrawer) closeWishlistDrawer.addEventListener('click', closeWishlist);
+  if (wishlistDrawerOverlay) wishlistDrawerOverlay.addEventListener('click', closeWishlist);
+
+  // Link Header Wishlist Icon to open Wishlist Drawer (Find icons with heart emoji or specific class)
+  document.querySelectorAll('.mockup-action-icon, a, .wishlist-trigger').forEach(btn => {
+    if (btn.classList.contains('wishlist-trigger') || btn.textContent.includes('🤍') || btn.textContent.includes('❤️') || (btn.href && btn.href.includes('wishlist'))) {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openWishlist();
+      });
+    }
+  });
+
+  function renderWishlist() {
+    wishlistDrawerItems.innerHTML = '';
+    wishlist = JSON.parse(localStorage.getItem('cooken_wishlist')) || [];
+
+    if (wishlist.length === 0) {
+      wishlistDrawerItems.innerHTML = `<div style="text-align: center; color: #999; margin-top: 50px;">Twoja lista życzeń jest pusta</div>`;
+      return;
+    }
+
+    wishlist.forEach((item, index) => {
+      const itemHTML = `
+        <div style="display: flex; gap: 15px; border-bottom: 1px solid #eee; padding-bottom: 15px; position: relative;">
+          <img src="${item.image}" style="width: 70px; height: 90px; object-fit: cover; background: #f7f7f7;">
+          <div style="flex-grow: 1;">
+            <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 4px; color: #1a1a1a;">${item.title}</h4>
+            <div style="font-size: 14px; font-weight: 600; color: #ff4d4d; margin-top: 10px;">${parseFloat(item.price).toFixed(2)} zł</div>
+            <button class="wishlist-move-cart" data-index="${index}" style="margin-top: 10px; background: transparent; color: var(--primary-color); border: 1px solid var(--primary-color); padding: 5px 10px; font-size: 11px; text-transform: uppercase; border-radius: 4px; cursor: pointer;">Do koszyka</button>
+          </div>
+          <button class="wishlist-drawer-remove" data-index="${index}" style="position: absolute; top: 0; right: 0; background: none; border: none; font-size: 18px; color: #999; cursor: pointer;">&times;</button>
+        </div>
+      `;
+      wishlistDrawerItems.insertAdjacentHTML('beforeend', itemHTML);
+    });
+
+    document.querySelectorAll('.wishlist-drawer-remove').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const index = parseInt(e.currentTarget.dataset.index);
+        wishlist.splice(index, 1);
+        updateWishlistStorage();
+        renderWishlist();
+      });
+    });
+
+    document.querySelectorAll('.wishlist-move-cart').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const index = parseInt(e.currentTarget.dataset.index);
+        const item = wishlist[index];
+        
+        // Add to cart
+        const existingIndex = cart.findIndex(c => c.id === item.id);
+        if (existingIndex > -1) {
+          cart[existingIndex].qty += 1;
+        } else {
+          cart.push({
+            id: item.id,
+            title: item.title,
+            price: item.price,
+            image: item.image,
+            qty: 1,
+            color: null,
+            size: null
+          });
+        }
+        localStorage.setItem('cooken_cart', JSON.stringify(cart));
+        window.dispatchEvent(new Event('storage'));
+        
+        // Remove from wishlist
+        wishlist.splice(index, 1);
+        updateWishlistStorage();
+        
+        closeWishlist();
+        window.openCartDrawer();
+      });
+    });
+  }
+
+  function updateWishlistStorage() {
+    localStorage.setItem('cooken_wishlist', JSON.stringify(wishlist));
+  }
+
+  // --- CONNECT ADD TO WISHLIST BUTTONS ON PRODUCTS ---
+  document.querySelectorAll('.add-to-wishlist-btn, .mockup-product-card .action-btn-circle:first-child').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const card = e.target.closest('.mockup-product-card');
+      const pId = parseInt(card ? card.dataset.id : (new URLSearchParams(window.location.search).get('id') || 1));
+      const p = products.find(prod => prod.id === pId);
+      
+      if (!p) return;
+
+      wishlist = JSON.parse(localStorage.getItem('cooken_wishlist')) || [];
+      const existing = wishlist.find(item => item.id === p.id);
+      
+      if (!existing) {
+        wishlist.push({
+          id: p.id,
+          title: p.title,
+          price: p.price,
+          image: p.images[0]
+        });
+        updateWishlistStorage();
+        alert('Dodano do listy życzeń!');
+      } else {
+        alert('Produkt jest już na liście życzeń.');
+      }
+    });
+  });
 
   // --- CART DRAWER LOGIC ---
   function openCart() {
@@ -656,6 +895,64 @@ export function initSharedPopups() {
       mobOverlay.style.pointerEvents = 'none';
     });
   }
+
+  
+  // --- PRODUCT FEATURE MODALS LOGIC ---
+  const modOverlay = document.getElementById('productModalsOverlay');
+  const allFeatureModals = document.querySelectorAll('.product-feature-modal');
+  
+  function closeAllProductModals() {
+    if(modOverlay) {
+      modOverlay.style.opacity = '0';
+      modOverlay.style.pointerEvents = 'none';
+    }
+    allFeatureModals.forEach(modal => {
+      modal.style.opacity = '0';
+      modal.style.pointerEvents = 'none';
+      modal.style.transform = 'translate(-50%, -50%) scale(0.9)';
+    });
+  }
+
+  function openProductModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if(modal && modOverlay) {
+      modOverlay.style.opacity = '1';
+      modOverlay.style.pointerEvents = 'all';
+      modal.style.opacity = '1';
+      modal.style.pointerEvents = 'all';
+      modal.style.transform = 'translate(-50%, -50%) scale(1)';
+    }
+  }
+
+  if(modOverlay) modOverlay.addEventListener('click', closeAllProductModals);
+  document.querySelectorAll('.close-product-modal').forEach(btn => {
+    btn.addEventListener('click', closeAllProductModals);
+  });
+
+  // Bind clicks on product-icon-item
+  document.querySelectorAll('.product-icon-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const text = item.textContent.trim();
+      if(text.includes('Size Guide') || text.includes('Wymiary')) {
+        openProductModal('modalSizeGuide');
+      } else if(text.includes('Compare Color') || text.includes('Porównaj')) {
+        openProductModal('modalCompareColor');
+      } else if(text.includes('Ask a Question') || text.includes('pytanie')) {
+        openProductModal('modalAskQuestion');
+      } else if(text.includes('Share') || text.includes('Udostępnij')) {
+        if (navigator.share) {
+          navigator.share({
+            title: document.title,
+            url: window.location.href
+          }).catch(console.error);
+        } else {
+          navigator.clipboard.writeText(window.location.href).then(() => {
+            alert('Link skopiowany do schowka!');
+          });
+        }
+      }
+    });
+  });
 
   // --- NEWSLETTER POPUP LOGIC ---
   function openNews() {

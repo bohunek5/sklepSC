@@ -453,7 +453,76 @@
         display: none;
       }
     }
-  </style>
+  
+    /* Mega Menu Styles */
+    .has-mega-menu {
+      position: relative;
+    }
+    .has-mega-menu > a {
+      display: flex;
+      align-items: center;
+    }
+    .mega-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #fff;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      border-radius: 8px;
+      border: 1px solid #f0f0f0;
+      width: 700px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+      padding: 30px;
+    }
+    .has-mega-menu:hover .mega-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+    .mega-menu-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 30px;
+    }
+    .mega-menu-col h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 8px;
+    }
+    .mega-menu-col ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .mega-menu-col ul li a {
+      color: #666;
+      font-size: 13px;
+      text-decoration: none;
+      transition: color 0.2s;
+      display: block;
+      padding: 0 !important;
+      background: transparent !important;
+    }
+    .mega-menu-col ul li a:hover {
+      color: var(--accent-color);
+      background: transparent !important;
+    }
+    .mega-menu-banner {
+      min-height: 180px;
+    }
+
+</style>
 </head>
 <body>
   
@@ -465,7 +534,37 @@
     <nav class="mockup-nav">
       <ul>
         <li><a href="/index.html">Home</a></li>
-        <li><a href="/shop.html">Sklep</a></li>
+        
+        <li class="has-mega-menu">
+          <a href="/shop.html">Sklep <i class="ph ph-caret-down" style="font-size: 12px; margin-left: 4px;"></i></a>
+          <div class="mega-menu">
+            <div class="mega-menu-content">
+              <div class="mega-menu-col">
+                <h4>Oświetlenie LED</h4>
+                <ul>
+                  <li><a href="/shop.html?cat=Tasma%20LED">Taśmy LED COB</a></li>
+                  <li><a href="/shop.html?cat=Tasma%20LED">Taśmy LED SMD</a></li>
+                  <li><a href="/shop.html?cat=Tasma%20LED">Taśmy Neony</a></li>
+                  <li><a href="/shop.html?cat=Tasma%20LED">Zestawy LED</a></li>
+                </ul>
+              </div>
+              <div class="mega-menu-col">
+                <h4>Akcesoria i Zasilanie</h4>
+                <ul>
+                  <li><a href="/shop.html?cat=Sterowniki%20LED">Sterowniki LED</a></li>
+                  <li><a href="/shop.html?cat=Zasilacze">Zasilacze Hermetyczne</a></li>
+                  <li><a href="/shop.html?cat=Profile">Profile aluminiowe</a></li>
+                  <li><a href="/shop.html?cat=Akcesoria">Kable i złączki</a></li>
+                </ul>
+              </div>
+              <div class="mega-menu-col mega-menu-banner" style="background: url('/images/katalog_front.webp') center/cover; padding: 20px; border-radius: 8px; display: flex; flex-direction: column; justify-content: flex-end;">
+                <h4 style="color: #fff; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Nowy Katalog 2026</h4>
+                <a href="/images/Pobierz_katalog_Prescot.pdf" target="_blank" style="display: inline-block; background: var(--primary-color); color: #fff; padding: 8px 15px; border-radius: 4px; font-size: 12px; text-align: center; font-weight: 600;">Pobierz teraz</a>
+              </div>
+            </div>
+          </div>
+        </li>
+
         <li><a href="/blog.html">Blog</a></li>
         <li><a href="/about.html" class="active">O nas</a></li>
         <li><a href="/contact.html">Kontakt</a></li>
@@ -489,7 +588,37 @@
   <div class="mobile-menu" id="mobileMenu">
     <ul>
       <li><a href="/index.html">Home</a></li>
-      <li><a href="/shop.html">Sklep</a></li>
+      
+        <li class="has-mega-menu">
+          <a href="/shop.html">Sklep <i class="ph ph-caret-down" style="font-size: 12px; margin-left: 4px;"></i></a>
+          <div class="mega-menu">
+            <div class="mega-menu-content">
+              <div class="mega-menu-col">
+                <h4>Oświetlenie LED</h4>
+                <ul>
+                  <li><a href="/shop.html?cat=Tasma%20LED">Taśmy LED COB</a></li>
+                  <li><a href="/shop.html?cat=Tasma%20LED">Taśmy LED SMD</a></li>
+                  <li><a href="/shop.html?cat=Tasma%20LED">Taśmy Neony</a></li>
+                  <li><a href="/shop.html?cat=Tasma%20LED">Zestawy LED</a></li>
+                </ul>
+              </div>
+              <div class="mega-menu-col">
+                <h4>Akcesoria i Zasilanie</h4>
+                <ul>
+                  <li><a href="/shop.html?cat=Sterowniki%20LED">Sterowniki LED</a></li>
+                  <li><a href="/shop.html?cat=Zasilacze">Zasilacze Hermetyczne</a></li>
+                  <li><a href="/shop.html?cat=Profile">Profile aluminiowe</a></li>
+                  <li><a href="/shop.html?cat=Akcesoria">Kable i złączki</a></li>
+                </ul>
+              </div>
+              <div class="mega-menu-col mega-menu-banner" style="background: url('/images/katalog_front.webp') center/cover; padding: 20px; border-radius: 8px; display: flex; flex-direction: column; justify-content: flex-end;">
+                <h4 style="color: #fff; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Nowy Katalog 2026</h4>
+                <a href="/images/Pobierz_katalog_Prescot.pdf" target="_blank" style="display: inline-block; background: var(--primary-color); color: #fff; padding: 8px 15px; border-radius: 4px; font-size: 12px; text-align: center; font-weight: 600;">Pobierz teraz</a>
+              </div>
+            </div>
+          </div>
+        </li>
+
       <li><a href="/blog.html">Blog</a></li>
       <li><a href="/about.html">O nas</a></li>
       <li><a href="/contact.html">Kontakt</a></li>
