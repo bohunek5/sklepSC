@@ -265,9 +265,9 @@
       height: 100%;
       z-index: 1;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 10%;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 0 40px 20px 40px;
       transition: clip-path 1.4s cubic-bezier(0.76, 0, 0.24, 1);
     }
 
@@ -336,27 +336,28 @@
       z-index: 1;
     }
 
-    /* Centered Banner Box with Glassmorphism */
+    /* Wide Horizontal Banner Bar at Bottom */
     .slide-banner-box {
       position: relative;
       background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: 40px;
-      padding: 60px 80px;
-      text-align: center;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 24px;
+      padding: 28px 40px;
+      text-align: left;
       z-index: 10;
-      width: 540px;
-      max-width: 90%;
-      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.25);
+      width: 720px;
+      max-width: 92%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
-      justify-content: center;
-      transform: scale(0.92);
+      justify-content: space-between;
+      gap: 30px;
+      transform: translateY(20px);
       opacity: 0;
       transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0s, opacity 1s ease 0s;
-      border: 1px solid rgba(255, 255, 255, 0.12); /* base border */
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
     /* SVG Glowing track styling */
@@ -367,7 +368,7 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      border-radius: 40px;
+      border-radius: 24px;
     }
 
     .glass-border-svg rect {
@@ -375,8 +376,8 @@
       y: 0.5px;
       width: calc(100% - 1px);
       height: calc(100% - 1px);
-      rx: 40px;
-      ry: 40px;
+      rx: 24px;
+      ry: 24px;
     }
 
     .glass-border-svg .track {
@@ -540,27 +541,35 @@
 
     
     .slide.active .slide-banner-box {
-      transform: scale(1);
+      transform: translateY(0);
       opacity: 1;
     }
 
     /* Slide content elements delayed fade-in */
+    .slide-banner-box .banner-text {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 0;
+    }
+
     .slide-banner-box h1 {
       font-family: 'Outfit', sans-serif;
-      font-size: 46px;
+      font-size: 30px;
       font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 6px;
       color: var(--white);
-      letter-spacing: -0.5px;
+      letter-spacing: -0.3px;
       opacity: 0;
       transform: translateY(15px);
       transition: opacity 0.8s ease 0.4s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+      white-space: nowrap;
     }
 
     .slide-banner-box p {
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.8);
-      margin-bottom: 35px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 0;
       opacity: 0;
       transform: translateY(15px);
       transition: opacity 0.8s ease 0.7s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s;
@@ -577,7 +586,7 @@
       color: var(--white) !important;
       border: 2px solid var(--white) !important;
       border-radius: 99px !important;
-      padding: 15px 38px;
+      padding: 14px 32px;
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 2px;
@@ -585,6 +594,8 @@
       text-transform: uppercase;
       cursor: pointer;
       display: inline-block;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .slide-banner-box .mockup-btn:hover {
@@ -957,16 +968,33 @@
       .mockup-hero-slider {
         height: 100vh !important;
       }
+      .slide {
+        padding: 0 12px 80px 12px !important;
+      }
       .slide-banner-box {
-        padding: 30px 20px !important;
-        border-radius: 20px !important;
-        width: 90% !important;
+        padding: 20px 20px !important;
+        border-radius: 16px !important;
+        width: 100% !important;
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 12px !important;
+      }
+      .slide-banner-box .banner-text {
+        align-items: center;
       }
       .slide-banner-box h1 {
-        font-size: 24px !important;
+        font-size: 20px !important;
+        white-space: normal !important;
       }
       .slide-banner-box p {
-        font-size: 12px !important;
+        font-size: 10px !important;
+        margin-bottom: 4px !important;
+      }
+      .glass-border-svg,
+      .glass-border-svg rect {
+        border-radius: 16px !important;
+        rx: 16px !important;
+        ry: 16px !important;
       }
       .mockup-header {
       display: flex;
@@ -1791,8 +1819,10 @@
           <rect class="track" pathLength="100" />
           <rect class="car" pathLength="100" />
         </svg>
-        <h1>Taśmy LED CCT</h1>
-        <p>Regulowana temperatura bieli</p>
+        <div class="banner-text">
+          <h1>Taśmy LED CCT</h1>
+          <p>Regulowana temperatura bieli</p>
+        </div>
         <a href="shop.html" class="mockup-btn">Kup teraz</a>
       </div>
     </div>
@@ -1809,8 +1839,10 @@
           <rect class="car" pathLength="100" />
           <rect class="car-runner" pathLength="100" />
         </svg>
-        <h1>Inteligentne taśmy LED</h1>
-        <p>Zyskaj pełną kontrolę i programuj efekty świetlne</p>
+        <div class="banner-text">
+          <h1>Inteligentne taśmy LED</h1>
+          <p>Zyskaj pełną kontrolę i programuj efekty świetlne</p>
+        </div>
         <a href="shop.html" class="mockup-btn">Kup teraz</a>
       </div>
     </div>
@@ -1826,8 +1858,10 @@
           <rect class="track" pathLength="100" />
           <rect class="car" pathLength="100" />
         </svg>
-        <h1>Taśmy LED RGBW</h1>
-        <p>Polska produkcja i aż 5 lat gwarancji</p>
+        <div class="banner-text">
+          <h1>Taśmy LED RGBW</h1>
+          <p>Polska produkcja i aż 5 lat gwarancji</p>
+        </div>
         <a href="shop.html" class="mockup-btn">Kup teraz</a>
       </div>
     </div>
@@ -1843,8 +1877,10 @@
           <rect class="track" pathLength="100" />
           <rect class="car" pathLength="100" />
         </svg>
-        <h1>Sterowniki LED Mono</h1>
-        <p>Steruj jasnością i dostosuj otoczenie do swoich potrzeb</p>
+        <div class="banner-text">
+          <h1>Sterowniki LED Mono</h1>
+          <p>Steruj jasnością i dostosuj otoczenie do swoich potrzeb</p>
+        </div>
         <a href="shop.html" class="mockup-btn">Kup teraz</a>
       </div>
     </div>
@@ -1860,8 +1896,10 @@
           <rect class="track" pathLength="100" />
           <rect class="car" pathLength="100" />
         </svg>
-        <h1>Taśmy LED do pieczywa</h1>
-        <p>Wypieki świeże i apetyczne w ciepłym świetle</p>
+        <div class="banner-text">
+          <h1>Taśmy LED do pieczywa</h1>
+          <p>Wypieki świeże i apetyczne w ciepłym świetle</p>
+        </div>
         <a href="shop.html" class="mockup-btn">Kup teraz</a>
       </div>
     </div>
@@ -1877,8 +1915,10 @@
           <rect class="track" pathLength="100" />
           <rect class="car" pathLength="100" />
         </svg>
-        <h1>Taśmy LED COB</h1>
-        <p>Idealnie jednolite linie światła bez punktów</p>
+        <div class="banner-text">
+          <h1>Taśmy LED COB</h1>
+          <p>Idealnie jednolite linie światła bez punktów</p>
+        </div>
         <a href="shop.html" class="mockup-btn">Kup teraz</a>
       </div>
     </div>
@@ -1895,8 +1935,10 @@
           <rect class="car" pathLength="100" />
           <rect class="car-runner" pathLength="100" />
         </svg>
-        <h1>Cyfrowe taśmy CCT</h1>
-        <p>To Ty decydujesz o barwie i efektach</p>
+        <div class="banner-text">
+          <h1>Cyfrowe taśmy CCT</h1>
+          <p>To Ty decydujesz o barwie i efektach</p>
+        </div>
         <a href="shop.html" class="mockup-btn">Kup teraz</a>
       </div>
     </div>
