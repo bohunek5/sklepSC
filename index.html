@@ -16,6 +16,7 @@
   <!-- Theme CSS -->
   <link rel="stylesheet" href="/assets/xo-webcomponents.min.css">
   <link rel="stylesheet" href="/assets/main.min.css">
+  <link rel="stylesheet" href="/assets/mobile-app.css">
 
   <style>
     :root {
@@ -1171,6 +1172,8 @@
 </head>
 
 <body>
+  <div id="mobile-app-root" class="mobile-app-layout"></div>
+  <div class="desktop-layout">
 
   <header class="mockup-header" id="mainHeader">
     <button class="menu-toggle" id="menuToggle">☰</button>
@@ -1737,6 +1740,8 @@
 
     initSharedPopups();
   </script>
+  </div> <!-- end desktop-layout -->
+  <script type="module" src="/js/mobile-app.js"></script>
 </body>
 
 </html>

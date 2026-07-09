@@ -1,4 +1,4 @@
-export const products = [
+const defaultProducts = [
   {
     "id": 8291636215978,
     "title": "Product AR/3D",
@@ -198,3 +198,19 @@ export const products = [
     "video": "/videos/mono.mp4"
   }
 ];
+
+function getProducts() {
+  if (typeof window !== 'undefined' && localStorage) {
+    const localStr = localStorage.getItem('sklepSC_products');
+    if (localStr) {
+      try {
+        return JSON.parse(localStr);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }
+  return defaultProducts;
+}
+
+export const products = getProducts();
