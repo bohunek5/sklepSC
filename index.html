@@ -473,33 +473,46 @@
       }
     }
 
-    /* 6. Digital (Addressable Chasing Modules) - Cool White blocks drawing slowly and staying */
-    .slide[data-tech="digital"] .glass-border-svg .car {
+    
+    
+    /* 6 & 8. Digital & Digital CCT Stacking Effect */
+    .slide[data-tech="digital"] .glass-border-svg .car,
+    .slide[data-tech="digital_cct"] .glass-border-svg .car {
       stroke: #ffffff !important;
-      filter: drop-shadow(0 0 6px #e0f0ff) !important;
-      stroke-dasharray: 4 6;
+      filter: drop-shadow(0 0 8px #e0f0ff) !important;
+      stroke-dasharray: 100 100;
       stroke-dashoffset: 100;
     }
-    .slide.active[data-tech="digital"] .glass-border-svg .car {
-      animation: digitalBuild 12s ease-in-out forwards !important;
+    .slide.active[data-tech="digital"] .glass-border-svg .car,
+    .slide.active[data-tech="digital_cct"] .glass-border-svg .car {
+      animation: stackGrow 8s ease-out forwards !important;
     }
-    @keyframes digitalBuild {
-      0% {
-        stroke-dasharray: 4 6;
-        stroke-dashoffset: 200;
-      }
-      60% {
-        stroke-dasharray: 4 6;
-        stroke-dashoffset: 80;
-      }
-      80% {
-        stroke-dasharray: 8 2;
-        stroke-dashoffset: 40;
-      }
-      100% {
-        stroke-dasharray: 100 0;
-        stroke-dashoffset: 0;
-      }
+    
+    .slide[data-tech="digital"] .glass-border-svg .car-runner,
+    .slide[data-tech="digital_cct"] .glass-border-svg .car-runner {
+      fill: none;
+      stroke: #ffffff !important;
+      stroke-width: 2.5px;
+      stroke-linecap: round;
+      filter: drop-shadow(0 0 8px #e0f0ff) !important;
+      stroke-dasharray: 6 94;
+      stroke-dashoffset: 100;
+      opacity: 0;
+    }
+    .slide.active[data-tech="digital"] .glass-border-svg .car-runner,
+    .slide.active[data-tech="digital_cct"] .glass-border-svg .car-runner {
+      opacity: 1;
+      animation: stackRunner 0.7s linear infinite !important;
+    }
+
+    @keyframes stackGrow {
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
+    }
+
+    @keyframes stackRunner {
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
     }
 
     /* 7. Bread (Warm Yellow Cozy Frame) */
@@ -521,55 +534,7 @@
       }
     }
 
-    /* 8. Digital CCT (Addressable Chasing CCT Colors) - Cool White blocks accumulating and staying */
-    .slide[data-tech="digital_cct"] .glass-border-svg .car {
-      stroke: #ffffff !important;
-      filter: drop-shadow(0 0 6px #e0f0ff) !important;
-      stroke-dasharray: 0 100;
-      stroke-dashoffset: 100;
-    }
-    .slide.active[data-tech="digital_cct"] .glass-border-svg .car {
-      animation: digitalCctAccumulate 12s cubic-bezier(0.2, 0.8, 0.2, 1) forwards !important;
-    }
-    @keyframes digitalCctAccumulate {
-      0% {
-        stroke-dasharray: 0 100;
-        stroke-dashoffset: 100;
-      }
-      10% {
-        stroke-dasharray: 4 96;
-        stroke-dashoffset: 90;
-      }
-      20% {
-        stroke-dasharray: 4 6 4 86;
-        stroke-dashoffset: 80;
-      }
-      35% {
-        stroke-dasharray: 4 6 4 6 4 76;
-        stroke-dashoffset: 70;
-      }
-      50% {
-        stroke-dasharray: 4 6 4 6 4 6 4 66;
-        stroke-dashoffset: 55;
-      }
-      65% {
-        stroke-dasharray: 4 6 4 6 4 6 4 6 4 56;
-        stroke-dashoffset: 40;
-      }
-      80% {
-        stroke-dasharray: 4 6 4 6 4 6 4 6 4 6 4 46;
-        stroke-dashoffset: 25;
-      }
-      95% {
-        stroke-dasharray: 4 6 4 6 4 6 4 6 4 6 4 6 4 6 36;
-        stroke-dashoffset: 10;
-      }
-      100% {
-        stroke-dasharray: 100 0;
-        stroke-dashoffset: 0;
-      }
-    }
-
+    
     .slide.active .slide-banner-box {
       transform: scale(1);
       opacity: 1;
@@ -1637,6 +1602,7 @@
         <svg class="glass-border-svg">
           <rect class="track" pathLength="100" />
           <rect class="car" pathLength="100" />
+          <rect class="car-runner" pathLength="100" />
         </svg>
         <h1>Inteligentne taśmy LED</h1>
         <p>Zyskaj pełną kontrolę i programuj efekty świetlne</p>
@@ -1722,6 +1688,7 @@
         <svg class="glass-border-svg">
           <rect class="track" pathLength="100" />
           <rect class="car" pathLength="100" />
+          <rect class="car-runner" pathLength="100" />
         </svg>
         <h1>Cyfrowe taśmy CCT</h1>
         <p>To Ty decydujesz o barwie i efektach</p>
