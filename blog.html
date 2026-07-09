@@ -14,8 +14,8 @@
     rel="stylesheet">
 
   <!-- Theme CSS -->
-  <link rel="stylesheet" href="/assets/xo-webcomponents.min.css">
-  <link rel="stylesheet" href="/assets/main.min.css">
+  <link rel="stylesheet" href="assets/xo-webcomponents.min.css">
+  <link rel="stylesheet" href="assets/main.min.css">
 
   <style>
     :root {
@@ -787,10 +787,18 @@
       }
       
       .mockup-header-logo img {
-        height: 38px !important;
+        height: 28px !important;
         width: auto !important;
         object-fit: contain !important;
-        max-width: 150px !important;
+        max-width: 120px !important;
+      }
+      .mockup-action-icon {
+        width: 36px !important;
+        height: 36px !important;
+      }
+      .mockup-action-icon svg {
+        width: 16px !important;
+        height: 16px !important;
       }
     
     }
@@ -824,14 +832,14 @@
   <header class="mockup-header">
     
     <div class="mockup-header-logo">
-      <a href="/index.html"><img src="/images/logo.png" alt="Cooken Logo"></a>
+      <a href="index.html"><img src="images/logo.png" alt="Cooken Logo"></a>
     </div>
     <nav class="mockup-nav">
       <ul>
-        <li><a href="/index.html">Home</a></li>
+        <li><a href="index.html">Home</a></li>
         
         <li class="has-mega-menu">
-          <a href="/shop.html">Sklep <i class="ph ph-caret-down" style="font-size: 12px; margin-left: 4px;"></i></a>
+          <a href="shop.html">Sklep <i class="ph ph-caret-down" style="font-size: 12px; margin-left: 4px;"></i></a>
           
           
           <div class="magic-dropdown" id="magicShopMenu">
@@ -857,9 +865,9 @@
 
         </li>
 
-        <li><a href="/blog.html" class="active">Blog</a></li>
-        <li><a href="/about.html">O nas</a></li>
-        <li><a href="/contact.html">Kontakt</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="about.html">O nas</a></li>
+        <li><a href="contact.html">Kontakt</a></li>
       </ul>
     </nav>
     <div class="mockup-actions">
@@ -876,7 +884,7 @@
           <circle cx="12" cy="7" r="4" />
         </svg>
       </button>
-      <a href="/cart.html" class="mockup-action-icon" aria-label="Koszyk">
+      <a href="cart.html" class="mockup-action-icon" aria-label="Koszyk">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="8" cy="21" r="1" />
@@ -894,10 +902,10 @@
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
     <ul>
-      <li><a href="/index.html">Home</a></li>
+      <li><a href="index.html">Home</a></li>
       
         <li class="has-mega-menu">
-          <a href="/shop.html">Sklep <i class="ph ph-caret-down" style="font-size: 12px; margin-left: 4px;"></i></a>
+          <a href="shop.html">Sklep <i class="ph ph-caret-down" style="font-size: 12px; margin-left: 4px;"></i></a>
           
           
           <div class="magic-dropdown" id="magicShopMenu">
@@ -923,9 +931,9 @@
 
         </li>
 
-      <li><a href="/blog.html">Blog</a></li>
-      <li><a href="/about.html">O nas</a></li>
-      <li><a href="/contact.html">Kontakt</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="about.html">O nas</a></li>
+      <li><a href="contact.html">Kontakt</a></li>
     </ul>
   </div>
 
@@ -933,13 +941,13 @@
 
   
   <!-- Hero Section -->
-  <section class="page-hero" style="background: url('/images/contemporary-apartment-interior-with-stylish-decor-2026-03-10-02-45-38-utc.webp') center/cover no-repeat; padding: 120px 20px; text-align: center; position: relative;">
+  <section class="page-hero" style="background: url('images/contemporary-apartment-interior-with-stylish-decor-2026-03-10-02-45-38-utc.webp') center/cover no-repeat; padding: 120px 20px; text-align: center; position: relative;">
     <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(11, 26, 48, 0.6);"></div>
     <div style="position: relative; z-index: 1;">
       <h1 style="color: #fff; font-size: 64px; font-weight: 800; font-family: 'Outfit', sans-serif; margin-bottom: 10px; text-transform: uppercase; letter-spacing: -1px; text-shadow: 0 4px 12px rgba(0,0,0,0.3);">Blog & Inspiracje</h1>
       <p style="color: #eee; font-size: 16px;">Odkryj najnowsze trendy w oświetleniu LED</p>
     <div class="hero-breadcrumbs" style="font-size: 14px; color: #ccc; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin-top: 20px;">
-        <a href="/index.html" style="color: #fff; text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='#fff'">Home</a> 
+        <a href="index.html" style="color: #fff; text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='#fff'">Home</a> 
         <span style="margin: 0 10px; color: rgba(255,255,255,0.5);">/</span> 
         <span style="color: var(--accent-color);">Blog & Inspiracje</span>
       </div>
@@ -950,7 +958,7 @@
       <!-- Article 1 -->
       <article class="blog-card" style="cursor: pointer;" onclick="openBlogModal('blog-1')">
         <div class="blog-media">
-          <img src="/images/contemporary-apartment-interior-with-stylish-decor-2026-03-10-02-45-38-utc.webp" alt="Jak dobrać zasilacz LED do taśmy" class="blog-img">
+          <img src="images/contemporary-apartment-interior-with-stylish-decor-2026-03-10-02-45-38-utc.webp" alt="Jak dobrać zasilacz LED do taśmy" class="blog-img">
           <span class="blog-tag">Poradniki</span>
         </div>
         <div class="blog-content">
@@ -972,7 +980,7 @@
       <!-- Article 2 -->
       <article class="blog-card" style="cursor: pointer;" onclick="openBlogModal('blog-2')">
         <div class="blog-media">
-          <img src="/images/kuchnia.jpg" alt="Zasilacze LED - gdzie użyć którego" class="blog-img">
+          <img src="images/kuchnia.jpg" alt="Zasilacze LED - gdzie użyć którego" class="blog-img">
           <span class="blog-tag">Techniczne</span>
         </div>
         <div class="blog-content">
@@ -994,7 +1002,7 @@
       <!-- Article 3 -->
       <article class="blog-card" style="cursor: pointer;" onclick="openBlogModal('blog-3')">
         <div class="blog-media">
-          <img src="/images/szafy.jpg" alt="Do czego służą zasilacze LED" class="blog-img">
+          <img src="images/szafy.jpg" alt="Do czego służą zasilacze LED" class="blog-img">
           <span class="blog-tag">Podstawy</span>
         </div>
         <div class="blog-content">
@@ -1016,7 +1024,7 @@
       <!-- Article 4 -->
       <article class="blog-card" style="cursor: pointer;" onclick="openBlogModal('blog-4')">
         <div class="blog-media">
-          <img src="/images/stairs.jpg" alt="Stopnie IP - dlaczego są ważne" class="blog-img">
+          <img src="images/stairs.jpg" alt="Stopnie IP - dlaczego są ważne" class="blog-img">
           <span class="blog-tag">Bezpieczeństwo</span>
         </div>
         <div class="blog-content">
@@ -1042,21 +1050,21 @@
         <h3 class="widget-title">Najnowsze artykuły</h3>
         <ul class="recent-posts-list">
           <li class="recent-post-item">
-            <img src="/images/lb2.jpg" alt="Recent 1" class="recent-post-img">
+            <img src="images/lb2.jpg" alt="Recent 1" class="recent-post-img">
             <div>
               <h4 class="recent-post-title"><a href="#">Jak dobrać odpowiednie profile LED?</a></h4>
               <div class="recent-post-date">8 Lipca, 2026</div>
             </div>
           </li>
           <li class="recent-post-item">
-            <img src="/images/wizaj.png" alt="Recent 2" class="recent-post-img">
+            <img src="images/wizaj.png" alt="Recent 2" class="recent-post-img">
             <div>
               <h4 class="recent-post-title"><a href="#">CRI97: Dlaczego wierność barw ma znaczenie?</a></h4>
               <div class="recent-post-date">4 Lipca, 2026</div>
             </div>
           </li>
           <li class="recent-post-item">
-            <img src="/images/wow.jpg" alt="Recent 3" class="recent-post-img">
+            <img src="images/wow.jpg" alt="Recent 3" class="recent-post-img">
             <div>
               <h4 class="recent-post-title"><a href="#">Systemy szynoprzewodów LED</a></h4>
               <div class="recent-post-date">29 Czerwca, 2026</div>
@@ -1085,7 +1093,7 @@
     <div class="footer-grid">
       <div class="footer-col">
         <div class="footer-logo">
-          <img src="/images/logo.png" alt="Prescot Logo" style="height: 35px; max-width: 100%;">
+          <img src="images/logo.png" alt="Prescot Logo" style="height: 35px; max-width: 100%;">
         </div>
         <p style="margin-top: 15px;">Prescot LED to profesjonalny dostawca najwyższej jakości taśm LED, profili
           aluminiowych, nowoczesnych sterowników oraz niezawodnych zasilaczy hermetycznych.</p>
@@ -1217,23 +1225,23 @@
   <!-- Mobile Bottom Navigation -->
   <nav class="mobile-bottom-nav">
     <div class="mobile-nav-items">
-      <a href="/index.html" class="mobile-nav-item">
+      <a href="index.html" class="mobile-nav-item">
         <i class="ph ph-house"></i>
         <span>Home</span>
       </a>
-      <a href="/shop.html" class="mobile-nav-item">
+      <a href="shop.html" class="mobile-nav-item">
         <i class="ph ph-squares-four"></i>
         <span>Kategorie</span>
       </a>
-      <a href="/blog.html" class="mobile-nav-item">
+      <a href="blog.html" class="mobile-nav-item">
         <i class="ph ph-article"></i>
         <span>Blog</span>
       </a>
-      <a href="/about.html" class="mobile-nav-item">
+      <a href="about.html" class="mobile-nav-item">
         <i class="ph ph-info"></i>
         <span>O nas</span>
       </a>
-      <a href="/contact.html" class="mobile-nav-item">
+      <a href="contact.html" class="mobile-nav-item">
         <i class="ph ph-envelope-simple"></i>
         <span>Kontakt</span>
       </a>

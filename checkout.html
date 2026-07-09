@@ -14,8 +14,8 @@
     rel="stylesheet">
 
   <!-- Theme CSS -->
-  <link rel="stylesheet" href="/assets/xo-webcomponents.min.css">
-  <link rel="stylesheet" href="/assets/main.min.css">
+  <link rel="stylesheet" href="assets/xo-webcomponents.min.css">
+  <link rel="stylesheet" href="assets/main.min.css">
 
   <style>
     :root {
@@ -603,10 +603,18 @@
       }
       
       .mockup-header-logo img {
-        height: 38px !important;
+        height: 28px !important;
         width: auto !important;
         object-fit: contain !important;
-        max-width: 150px !important;
+        max-width: 120px !important;
+      }
+      .mockup-action-icon {
+        width: 36px !important;
+        height: 36px !important;
+      }
+      .mockup-action-icon svg {
+        width: 16px !important;
+        height: 16px !important;
       }
     
     }
@@ -641,11 +649,11 @@
     <!-- Left panel: Form details -->
     <section class="checkout-form-panel">
       <div class="checkout-logo">
-        <a href="/index.html"><img src="/images/logo.png" alt="Cooken Logo"></a>
+        <a href="index.html"><img src="images/logo.png" alt="Cooken Logo"></a>
       </div>
 
       <div class="checkout-breadcrumbs">
-        <a href="/cart.html">Koszyk</a>
+        <a href="cart.html">Koszyk</a>
         <span>&gt;</span>
         <span class="active">Dane do wysyłki</span>
         <span>&gt;</span>
@@ -778,7 +786,7 @@
         wraz z fakturą.</p>
       <div class="order-number" id="orderNumLabel">Numer zamówienia: #PRSC-000000</div>
       <div>
-        <a href="/index.html" class="return-btn">Wróć na stronę główną</a>
+        <a href="index.html" class="return-btn">Wróć na stronę główną</a>
       </div>
     </div>
   </div>
@@ -796,7 +804,7 @@
 
       if (cart.length === 0) {
         // If cart is empty, redirect back to shop
-        window.location.href = '/shop.html';
+        window.location.href = 'shop.html';
         return;
       }
 
@@ -890,23 +898,23 @@
   <!-- Mobile Bottom Navigation -->
   <nav class="mobile-bottom-nav">
     <div class="mobile-nav-items">
-      <a href="/index.html" class="mobile-nav-item">
+      <a href="index.html" class="mobile-nav-item">
         <i class="ph ph-house"></i>
         <span>Home</span>
       </a>
-      <a href="/shop.html" class="mobile-nav-item">
+      <a href="shop.html" class="mobile-nav-item">
         <i class="ph ph-squares-four"></i>
         <span>Kategorie</span>
       </a>
-      <a href="/blog.html" class="mobile-nav-item">
+      <a href="blog.html" class="mobile-nav-item">
         <i class="ph ph-article"></i>
         <span>Blog</span>
       </a>
-      <a href="/about.html" class="mobile-nav-item">
+      <a href="about.html" class="mobile-nav-item">
         <i class="ph ph-info"></i>
         <span>O nas</span>
       </a>
-      <a href="/contact.html" class="mobile-nav-item">
+      <a href="contact.html" class="mobile-nav-item">
         <i class="ph ph-envelope-simple"></i>
         <span>Kontakt</span>
       </a>

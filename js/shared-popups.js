@@ -544,7 +544,7 @@ export function initSharedPopups() {
   if (cartDrawerOverlay) cartDrawerOverlay.addEventListener('click', closeCart);
 
   // Link Header Cart Icon to open Cart Drawer
-  document.querySelectorAll('a[href="/cart.html"], .mockup-actions a, button.mockup-action-icon:last-child').forEach(btn => {
+  document.querySelectorAll('a[href="cart.html"], .mockup-actions a, button.mockup-action-icon:last-child').forEach(btn => {
     // Check if the icon contains cart icon or links to cart.html
     if (btn.href && btn.href.includes('cart.html') || btn.textContent.includes('🛒')) {
       btn.addEventListener('click', (e) => {
@@ -631,7 +631,7 @@ export function initSharedPopups() {
   if (cartDrawerCheckout) {
     cartDrawerCheckout.addEventListener('click', () => {
       closeCart();
-      window.location.href = '/checkout.html';
+      window.location.href = 'checkout.html';
     });
   }
 
@@ -874,7 +874,7 @@ export function initSharedPopups() {
     if (!mobMenu.querySelector('.close-mobile-menu')) {
       mobMenu.insertAdjacentHTML('afterbegin', `
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:40px; border-bottom:1px solid #eee; padding-bottom:15px; width:100%;">
-          <img src="/images/logo.png" style="height:22px;">
+          <img src="images/logo.png" style="height:22px;">
           <button class="close-mobile-menu" style="background:none; border:none; font-size:24px; cursor:pointer; color:#1a1a1a; outline:none;">&times;</button>
         </div>
       `);
@@ -1091,7 +1091,7 @@ export function initSharedPopups() {
 
       updateLocalStorage();
       window.dispatchEvent(new Event('storage'));
-      window.location.href = '/checkout.html';
+      window.location.href = 'checkout.html';
     });
   }
 }
