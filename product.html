@@ -612,7 +612,7 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       cursor: pointer;
-      color: #888;
+      color: #ccc;
       transition: var(--transition);
       position: relative;
     }
@@ -666,7 +666,7 @@
     }
 
     .footer-col p {
-      color: #888;
+      color: #ccc;
       font-size: 14px;
       line-height: 1.8;
     }
@@ -680,7 +680,7 @@
     }
 
     .footer-col ul li a {
-      color: #888;
+      color: #ccc;
       text-decoration: none;
       font-size: 14px;
       transition: var(--transition);
@@ -694,7 +694,7 @@
     .footer-logo img {
       height: 28px;
       margin-bottom: 25px;
-      filter: brightness(0) invert(1);
+      
     }
 
     .footer-bottom {
@@ -1094,6 +1094,66 @@
       box-shadow: inset 0 3px 5px rgba(0,0,0,0.2);
     }
     
+
+    /* Awesome Glassmorphism Icons */
+    .icon-glass-sm {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.03);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      color: var(--accent-color);
+      box-shadow: inset 0 2px 5px rgba(255,255,255,0.5), 0 2px 10px rgba(0,0,0,0.02);
+      transition: all 0.3s ease;
+      margin-right: 8px;
+    }
+    
+    .icon-glass-md {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.03);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      color: var(--accent-color);
+      box-shadow: inset 0 2px 5px rgba(255,255,255,0.6), 0 4px 15px rgba(0,0,0,0.03);
+      transition: all 0.3s ease;
+      font-size: 24px;
+    }
+    
+    .icon-glass-lg {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.02);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      color: var(--accent-color);
+      box-shadow: inset 0 2px 5px rgba(255,255,255,0.8), 0 8px 25px rgba(0,0,0,0.04);
+      transition: all 0.3s ease;
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    
+    .icon-glass-sm:hover, .icon-glass-md:hover, .icon-glass-lg:hover {
+      transform: translateY(-3px);
+      background: rgba(0, 0, 0, 0.05);
+      border-color: rgba(0, 0, 0, 0.1);
+      box-shadow: inset 0 2px 5px rgba(255,255,255,1), 0 10px 30px rgba(0,0,0,0.08);
+    }
 </style>
 </head>
 
@@ -1296,8 +1356,8 @@
           <!-- Icons Row -->
           <div class="product-icons-row" style="align-items: center;">
             <button class="add-to-cart-btn" style="padding: 8px 16px; font-size: 13px; width: auto; margin-right: 15px;">Parametry</button>
-            <div class="product-icon-item"><i class="ph ph-intersect"></i> Barwa światła</div>
-            <div class="product-icon-item"><i class="ph ph-question"></i> Zadaj pytanie</div>
+            <div class="product-icon-item"><span class="icon-glass-sm"><i class="ph ph-intersect"></i></span> Barwa światła</div>
+            <div class="product-icon-item"><span class="icon-glass-sm"><i class="ph ph-question"></i></span> Zadaj pytanie</div>
           </div>
     
           <div class="product-purchase-box">
@@ -1430,7 +1490,7 @@
           <span class="mockup-blog-tag" style="position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.9); color: var(--primary-color); padding: 5px 15px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">Poradniki</span>
         </div>
         <div class="mockup-blog-content" style="padding: 25px;">
-          <div class="mockup-blog-meta" style="font-size: 13px; color: #888; margin-bottom: 10px;">
+          <div class="mockup-blog-meta" style="font-size: 13px; color: #ccc; margin-bottom: 10px;">
             <span>8 Lipca, 2026</span> • <span>5 min czytania</span>
           </div>
           <h3 class="mockup-blog-title" style="font-size: 20px; margin-bottom: 15px; line-height: 1.4;">Jak dobrać zasilacz LED do taśmy?</h3>
@@ -1446,7 +1506,7 @@
           <span class="mockup-blog-tag" style="position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.9); color: var(--primary-color); padding: 5px 15px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">Techniczne</span>
         </div>
         <div class="mockup-blog-content" style="padding: 25px;">
-          <div class="mockup-blog-meta" style="font-size: 13px; color: #888; margin-bottom: 10px;">
+          <div class="mockup-blog-meta" style="font-size: 13px; color: #ccc; margin-bottom: 10px;">
             <span>6 Lipca, 2026</span> • <span>4 min czytania</span>
           </div>
           <h3 class="mockup-blog-title" style="font-size: 20px; margin-bottom: 15px; line-height: 1.4;">Zasilacze LED - gdzie użyć którego?</h3>
@@ -1462,7 +1522,7 @@
           <span class="mockup-blog-tag" style="position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.9); color: var(--primary-color); padding: 5px 15px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">Podstawy</span>
         </div>
         <div class="mockup-blog-content" style="padding: 25px;">
-          <div class="mockup-blog-meta" style="font-size: 13px; color: #888; margin-bottom: 10px;">
+          <div class="mockup-blog-meta" style="font-size: 13px; color: #ccc; margin-bottom: 10px;">
             <span>3 Lipca, 2026</span> • <span>3 min czytania</span>
           </div>
           <h3 class="mockup-blog-title" style="font-size: 20px; margin-bottom: 15px; line-height: 1.4;">Do czego służą zasilacze LED?</h3>
@@ -1493,7 +1553,7 @@
     <div class="footer-grid">
       <div class="footer-col">
         <div class="footer-logo">
-          <img src="/images/logo.png" alt="Cooken Logo White">
+          <img src="/images/logo.png" alt="Prescot Logo" style="height: 35px; max-width: 100%;">
         </div>
         <p style="margin-top: 15px;">Prescot LED to profesjonalny dostawca najwyższej jakości taśm LED, profili
           aluminiowych, nowoczesnych sterowników oraz niezawodnych zasilaczy hermetycznych.</p>
@@ -1530,7 +1590,7 @@
     </div>
     <div class="footer-bottom">
       <p>© 2026 Prescot LED. Wszelkie prawa zastrzeżone.</p>
-      <p>Stworzone przez Antigravity dla Bohunek</p>
+      <p>Powered by PRESCOT LED</p>
     </div>
   </footer>
 

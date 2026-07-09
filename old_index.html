@@ -890,7 +890,7 @@
     }
 
     .footer-col p {
-      color: #888;
+      color: #ccc;
       font-size: 14px;
       line-height: 1.8;
     }
@@ -905,7 +905,7 @@
     }
 
     .footer-col ul li a {
-      color: #888;
+      color: #ccc;
       text-decoration: none;
       font-size: 14px;
       transition: var(--transition);
@@ -919,7 +919,7 @@
     .footer-logo img {
       height: 28px;
       margin-bottom: 25px;
-      filter: brightness(0) invert(1);
+      
     }
 
     .footer-bottom {
@@ -1642,9 +1642,9 @@
     <div class="footer-grid">
       <div class="footer-col">
         <div class="footer-logo">
-          <img src="/images/logo.png" alt="Cooken Logo White">
+          <img src="/images/logo.png" alt="Prescot Logo" style="height: 35px; max-width: 100%;">
         </div>
-        <p style="margin-top: 15px;">Prescot LED to profesjonalny dostawca najwyższej jakości taśm LED, profili aluminiowych, nowoczesnych sterowników oraz niezawodnych zasilaczy hermetycznych.</p>
+        <p style="margin-top: 15px;">Prescot LED to profesjonalny dostawca najwyższej jakości taśm LED, profili aluminiowych, nowoczesnych sterowników oraz niezawodnych zasilaczy hermetycznych.</p><p style="margin-top: 15px; color: #ccc;"><strong>PRESCOT LED</strong><br>ul. Przykładowa 12<br>00-001 Warszawa<br>kontakt@prescot.com.pl</p>
       </div>
       <div class="footer-col">
         <h3>Link</h3>
@@ -1675,7 +1675,7 @@
     </div>
     <div class="footer-bottom">
       <p>© 2026 Prescot LED. Wszelkie prawa zastrzeżone.</p>
-      <p>Stworzone przez Antigravity dla Bohunek</p>
+      <p>Powered by PRESCOT LED</p>
     </div>
   </footer>
 
@@ -1808,7 +1808,7 @@
       // Pick first 8 products with valid images
       const trending = products.slice(0, 8);
       trending.forEach(p => {
-        const badge = p.compareAtPrice ? `<span class="mockup-product-badge" style="background-color: var(--accent-color);">Sale</span>` : `<span class="mockup-product-badge">New</span>`;
+        const badge = p.compareAtPrice ? `<span class="mockup-product-badge" style="background-color: var(--accent-color);">TOP</span>` : `<span class="mockup-product-badge" style="background-color: var(--primary-color);">TOP</span>`;
         
         const cardHTML = `
           <div class="mockup-product-card" data-id="${p.id}">

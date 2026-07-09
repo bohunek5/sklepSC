@@ -270,19 +270,22 @@
       padding: 16px;
       background: var(--primary-color);
       color: var(--white);
-      border: none;
+      border: 1px solid rgba(255,255,255,0.1);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 2px;
-      font-size: 12px;
+      font-size: 13px;
       cursor: pointer;
-      border-radius: 4px;
-      transition: var(--transition);
+      border-radius: 99px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     }
 
     .submit-btn:hover {
       background: var(--accent-color);
-      color: #000;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 90, 0, 0.2);
+      color: #fff;
     }
 
     /* Styled Map Mockup */
@@ -336,7 +339,7 @@
     }
 
     .footer-col p {
-      color: #888;
+      color: #ccc;
       font-size: 14px;
       line-height: 1.8;
     }
@@ -350,7 +353,7 @@
     }
 
     .footer-col ul li a {
-      color: #888;
+      color: #ccc;
       text-decoration: none;
       font-size: 14px;
       transition: var(--transition);
@@ -364,7 +367,7 @@
     .footer-logo img {
       height: 28px;
       margin-bottom: 25px;
-      filter: brightness(0) invert(1);
+      
     }
 
     .footer-bottom {
@@ -577,6 +580,66 @@
       box-shadow: inset 0 3px 5px rgba(0,0,0,0.2);
     }
     
+
+    /* Awesome Glassmorphism Icons */
+    .icon-glass-sm {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.03);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      color: var(--accent-color);
+      box-shadow: inset 0 2px 5px rgba(255,255,255,0.5), 0 2px 10px rgba(0,0,0,0.02);
+      transition: all 0.3s ease;
+      margin-right: 8px;
+    }
+    
+    .icon-glass-md {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.03);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      color: var(--accent-color);
+      box-shadow: inset 0 2px 5px rgba(255,255,255,0.6), 0 4px 15px rgba(0,0,0,0.03);
+      transition: all 0.3s ease;
+      font-size: 24px;
+    }
+    
+    .icon-glass-lg {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.02);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      color: var(--accent-color);
+      box-shadow: inset 0 2px 5px rgba(255,255,255,0.8), 0 8px 25px rgba(0,0,0,0.04);
+      transition: all 0.3s ease;
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    
+    .icon-glass-sm:hover, .icon-glass-md:hover, .icon-glass-lg:hover {
+      transform: translateY(-3px);
+      background: rgba(0, 0, 0, 0.05);
+      border-color: rgba(0, 0, 0, 0.1);
+      box-shadow: inset 0 2px 5px rgba(255,255,255,1), 0 10px 30px rgba(0,0,0,0.08);
+    }
 </style>
 </head>
 <body>
@@ -687,7 +750,7 @@
   <section class="page-hero" style="background: url('/images/stairs.jpg') center/cover no-repeat; padding: 120px 20px; text-align: center; position: relative;">
     <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(11, 26, 48, 0.6);"></div>
     <div style="position: relative; z-index: 1;">
-      <h1 style="color: #fff; font-size: 42px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px;">Kontakt</h1>
+      <h1 style="color: #fff; font-size: 64px; font-weight: 800; font-family: 'Outfit', sans-serif; margin-bottom: 10px; text-transform: uppercase; letter-spacing: -1px; text-shadow: 0 4px 12px rgba(0,0,0,0.3);">Kontakt</h1>
       <p style="color: #eee; font-size: 16px;">Jesteśmy do Twojej dyspozycji</p>
     <div class="hero-breadcrumbs" style="font-size: 14px; color: #ccc; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin-top: 20px;">
         <a href="/index.html" style="color: #fff; text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='#fff'">Home</a> 
@@ -703,7 +766,7 @@
         <p>Masz pytania dotyczące naszych mebli kuchennych lub akcesoriów? Chętnie odpowiemy na Twoje wiadomości. Nasz dział obsługi klienta jest dostępny od poniedziałku do piątku w godzinach 9:00 - 17:00.</p>
         
         <div class="info-item">
-          <div class="info-icon">📍</div>
+          <div class="icon-glass-md">📍</div>
           <div class="info-text">
             <h4>Adres showroomu</h4>
             <p>ul. Wilcza 42, 00-679 Warszawa</p>
@@ -711,7 +774,7 @@
         </div>
 
         <div class="info-item">
-          <div class="info-icon">📞</div>
+          <div class="icon-glass-md">📞</div>
           <div class="info-text">
             <h4>Telefon</h4>
             <p>+48 22 123 45 67</p>
@@ -719,7 +782,7 @@
         </div>
 
         <div class="info-item">
-          <div class="info-icon">✉️</div>
+          <div class="icon-glass-md">✉️</div>
           <div class="info-text">
             <h4>E-mail</h4>
             <p>contact@cooken-mockup.com</p>
@@ -760,9 +823,9 @@
     <div class="footer-grid">
       <div class="footer-col">
         <div class="footer-logo">
-          <img src="/images/logo.png" alt="Cooken Logo White">
+          <img src="/images/logo.png" alt="Prescot Logo" style="height: 35px; max-width: 100%;">
         </div>
-        <p style="margin-top: 15px;">Prescot LED to profesjonalny dostawca najwyższej jakości taśm LED, profili aluminiowych, nowoczesnych sterowników oraz niezawodnych zasilaczy hermetycznych.</p>
+        <p style="margin-top: 15px;">Prescot LED to profesjonalny dostawca najwyższej jakości taśm LED, profili aluminiowych, nowoczesnych sterowników oraz niezawodnych zasilaczy hermetycznych.</p><p style="margin-top: 15px; color: #ccc;"><strong>PRESCOT LED</strong><br>ul. Przykładowa 12<br>00-001 Warszawa<br>kontakt@prescot.com.pl</p>
       </div>
       <div class="footer-col">
         <h3>Link</h3>
@@ -793,7 +856,7 @@
     </div>
     <div class="footer-bottom">
       <p>© 2026 Prescot LED. Wszelkie prawa zastrzeżone.</p>
-      <p>Stworzone przez Antigravity dla Bohunek</p>
+      <p>Powered by PRESCOT LED</p>
     </div>
   </footer>
 
