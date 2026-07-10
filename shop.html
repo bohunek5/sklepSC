@@ -309,11 +309,18 @@
     }
 
     .sort-select {
-      padding: 8px 15px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      background: var(--white);
-      font-family: inherit;
+      padding: 10px 40px 10px 20px !important;
+      border: 1px solid #ddd !important;
+      border-radius: 30px !important;
+      font-size: 13px !important;
+      background: #ffffff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%230b1a30' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>") no-repeat right 15px center !important;
+      background-size: 16px !important;
+      cursor: pointer !important;
+      outline: none !important;
+      font-family: inherit !important;
+      -webkit-appearance: none !important;
+      -moz-appearance: none !important;
+      appearance: none !important;
     }
 
     .shop-grid {
@@ -399,7 +406,7 @@
 
     .mockup-product-info {
       padding: 15px 0 0;
-      text-align: left;
+      text-align: center;
     }
 
     .mockup-product-category {
@@ -1087,7 +1094,32 @@
         display: none !important; /* Hide desktop toolbar on mobile */
       }
       .shop-sidebar {
-        display: none !important; /* Hide desktop sidebar on mobile */
+        display: none;
+        width: 100% !important;
+        position: static !important;
+        padding: 20px !important;
+        box-shadow: none !important;
+        border: 1px solid #e5e7eb !important;
+        border-radius: 16px !important;
+        background: #ffffff !important;
+        margin-top: 15px !important;
+        margin-bottom: 20px !important;
+        box-sizing: border-box !important;
+      }
+      .shop-sidebar.active {
+        display: block !important;
+      }
+      
+      .mobile-cat-item.active, .mobile-sort-item.active {
+        background: var(--primary-color) !important;
+        color: #ffffff !important;
+        font-weight: 600 !important;
+      }
+      .mobile-cat-item:hover, .mobile-sort-item:hover {
+        background: #f3f4f6;
+      }
+      .mobile-cat-item.active:hover, .mobile-sort-item.active:hover {
+        background: var(--primary-color) !important;
       }
       .mockup-header {
         background: rgba(255, 255, 255, 0.85) !important; /* Light header on shop mobile */
@@ -1410,6 +1442,23 @@
           Sortuj <i class="ph ph-caret-down"></i>
         </button>
       </div>
+
+      <!-- Mobile Category Dropdown List -->
+      <div class="mobile-dropdown-panel" id="mobileCategoryDropdown" style="display: none; background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; margin-top: 10px; padding: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+        <ul class="mobile-dropdown-list" id="mobileCategoriesList" style="list-style: none; padding: 0; margin: 0;">
+          <!-- Category items will be generated here -->
+        </ul>
+      </div>
+
+      <!-- Mobile Sort Dropdown List -->
+      <div class="mobile-dropdown-panel" id="mobileSortDropdown" style="display: none; background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; margin-top: 10px; padding: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+        <ul class="mobile-dropdown-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+          <li class="mobile-sort-item active" data-sort="default" style="padding: 10px; cursor: pointer; border-radius: 8px; transition: background 0.3s; font-size: 14px;">Sortuj: Domyślnie</li>
+          <li class="mobile-sort-item" data-sort="price-asc" style="padding: 10px; cursor: pointer; border-radius: 8px; transition: background 0.3s; font-size: 14px;">Cena: rosnąco</li>
+          <li class="mobile-sort-item" data-sort="price-desc" style="padding: 10px; cursor: pointer; border-radius: 8px; transition: background 0.3s; font-size: 14px;">Cena: malejąco</li>
+          <li class="mobile-sort-item" data-sort="title-asc" style="padding: 10px; cursor: pointer; border-radius: 8px; transition: background 0.3s; font-size: 14px;">Nazwa: A-Z</li>
+        </ul>
+      </div>
     </div>
 
     <!-- Toolbar on top -->
@@ -1420,7 +1469,7 @@
         </button>
         <div id="resultsCount" style="font-size: 13px; color: #777;">Pokazano 0-0 z 0 wyników</div>
       </div>
-      <select class="sort-select" id="shopSortSelect" style="padding: 10px 20px; border: 1px solid #ddd; border-radius: 30px; font-size: 13px; background: #fff; cursor: pointer; outline: none; font-family: inherit;">
+      <select class="sort-select" id="shopSortSelect">
         <option value="default">Sortuj: Domyślnie</option>
         <option value="price-asc">Cena: rosnąco</option>
         <option value="price-desc">Cena: malejąco</option>
@@ -1602,6 +1651,41 @@
           renderFilteredProducts();
         });
       });
+
+      // Build mobile categories filter list
+      const mobileCategoriesList = document.getElementById('mobileCategoriesList');
+      if (mobileCategoriesList) {
+        mobileCategoriesList.innerHTML = `<li class="mobile-cat-item ${currentCategory === 'all' ? 'active' : ''}" data-cat="all" style="padding: 10px; cursor: pointer; border-radius: 8px; transition: background 0.3s; font-size: 14px; display: flex; justify-content: space-between; align-items: center; color: #555;">Wszystkie produkty <span>(${products.length})</span></li>`;
+        Object.keys(categoryCounts).sort().forEach(cat => {
+          const isActive = currentCategory === cat ? 'active' : '';
+          mobileCategoriesList.insertAdjacentHTML('beforeend', `
+            <li class="mobile-cat-item ${isActive}" data-cat="${cat}" style="padding: 10px; cursor: pointer; border-radius: 8px; transition: background 0.3s; font-size: 14px; display: flex; justify-content: space-between; align-items: center; color: #555;">${cat} <span>(${categoryCounts[cat]})</span></li>
+          `);
+        });
+
+        // Bind mobile category selectors
+        mobileCategoriesList.querySelectorAll('.mobile-cat-item').forEach(li => {
+          li.addEventListener('click', () => {
+            mobileCategoriesList.querySelectorAll('.mobile-cat-item').forEach(l => l.classList.remove('active'));
+            li.classList.add('active');
+            currentCategory = li.dataset.cat;
+            currentPage = 1;
+            
+            // Sync with desktop selector
+            if (categoriesList) {
+              categoriesList.querySelectorAll('li').forEach(l => {
+                if (l.dataset.cat === currentCategory) l.classList.add('active');
+                else l.classList.remove('active');
+              });
+            }
+
+            // Close mobile dropdown
+            const mobileCatDropdown = document.getElementById('mobileCategoryDropdown');
+            if (mobileCatDropdown) mobileCatDropdown.style.display = 'none';
+            renderFilteredProducts();
+          });
+        });
+      }
     }
 
     // Colors filter binding
@@ -1749,7 +1833,6 @@
               <h3 class="mockup-product-title"><a href="product.html?id=${p.id}">${p.title}</a></h3>
               <p class="mockup-product-price">
                 ${p.price.toFixed(2)} zł
-                ${p.compareAtPrice ? `<span style="text-decoration: line-through; color: #aaa; font-weight: 400; font-size: 13px; margin-left: 8px;">${p.compareAtPrice.toFixed(2)} zł</span>` : ''}
               </p>
             </div>
           </div>
@@ -1887,12 +1970,82 @@
     }
     if (mobileFiltersBtn) {
       mobileFiltersBtn.addEventListener('click', () => {
+        // Close other mobile dropdowns
+        const catDropdown = document.getElementById('mobileCategoryDropdown');
+        const sortDropdown = document.getElementById('mobileSortDropdown');
+        if (catDropdown) catDropdown.style.display = 'none';
+        if (sortDropdown) sortDropdown.style.display = 'none';
+        
         const sidebar = document.getElementById('shopSidebar');
-        if (sidebar.classList.contains('active')) {
-          sidebar.classList.remove('active');
-        } else {
-          sidebar.classList.add('active');
+        if (sidebar) {
+          if (sidebar.classList.contains('active')) {
+            sidebar.classList.remove('active');
+          } else {
+            sidebar.classList.add('active');
+          }
         }
+      });
+    }
+
+    // Mobile Category Button Toggle
+    const mobileCategoryBtn = document.getElementById('mobileCategoryBtn');
+    const mobileCategoryDropdown = document.getElementById('mobileCategoryDropdown');
+    if (mobileCategoryBtn && mobileCategoryDropdown) {
+      mobileCategoryBtn.addEventListener('click', () => {
+        // Close other mobile dropdowns
+        const sortDropdown = document.getElementById('mobileSortDropdown');
+        if (sortDropdown) sortDropdown.style.display = 'none';
+        const sidebar = document.getElementById('shopSidebar');
+        if (sidebar) sidebar.classList.remove('active');
+        
+        // Toggle category dropdown
+        if (mobileCategoryDropdown.style.display === 'none' || mobileCategoryDropdown.style.display === '') {
+          mobileCategoryDropdown.style.display = 'block';
+        } else {
+          mobileCategoryDropdown.style.display = 'none';
+        }
+      });
+    }
+
+    // Mobile Sort Button Toggle
+    const mobileSortBtn = document.getElementById('mobileSortBtn');
+    const mobileSortDropdown = document.getElementById('mobileSortDropdown');
+    if (mobileSortBtn && mobileSortDropdown) {
+      mobileSortBtn.addEventListener('click', () => {
+        // Close other mobile dropdowns
+        const catDropdown = document.getElementById('mobileCategoryDropdown');
+        if (catDropdown) catDropdown.style.display = 'none';
+        const sidebar = document.getElementById('shopSidebar');
+        if (sidebar) sidebar.classList.remove('active');
+        
+        // Toggle sort dropdown
+        if (mobileSortDropdown.style.display === 'none' || mobileSortDropdown.style.display === '') {
+          mobileSortDropdown.style.display = 'block';
+        } else {
+          mobileSortDropdown.style.display = 'none';
+        }
+      });
+    }
+
+    // Bind Mobile Sort Selection Click Event
+    if (mobileSortDropdown) {
+      mobileSortDropdown.querySelectorAll('.mobile-sort-item').forEach(item => {
+        item.addEventListener('click', () => {
+          mobileSortDropdown.querySelectorAll('.mobile-sort-item').forEach(l => l.classList.remove('active'));
+          item.classList.add('active');
+          currentSort = item.dataset.sort;
+          
+          // Update desktop select dropdown to sync state
+          const desktopSortSelect = document.getElementById('shopSortSelect');
+          if (desktopSortSelect) {
+            desktopSortSelect.value = currentSort;
+          }
+          
+          // Close sort dropdown and reload product grid
+          mobileSortDropdown.style.display = 'none';
+          currentPage = 1;
+          renderFilteredProducts();
+        });
       });
     }
 
