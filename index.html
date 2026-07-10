@@ -1074,7 +1074,7 @@
         height: 100vh !important;
       }
       .slide {
-        padding: 0 15px 150px 15px !important;
+        padding: 0 15px 180px 15px !important;
         display: flex;
         justify-content: center;
         align-items: flex-end;
@@ -3609,7 +3609,7 @@
             <div class="mockup-product-media" style="position: relative; overflow: hidden;">
               <img src="${p.images[0]}" alt="${p.title}" class="mockup-product-img">
               ${p.video ? `
-                <video class="mockup-product-video" src="${p.video}" loop muted playsinline autoplay style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
+                <video class="mockup-product-video" data-src="${p.video}" loop muted playsinline autoplay style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
               ` : ''}
               ${badge}
               <div class="product-actions-hover">

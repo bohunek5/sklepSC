@@ -1970,7 +1970,7 @@
         <!-- Standard Image -->
         <img src="" alt="" class="product-main-img" id="mainImg">
         <!-- Standard Video -->
-        <video id="mainVideo" loop muted playsinline style="display: none; width: 100%; height: 100%; object-fit: cover; background: #fff; position: absolute; top: 0; left: 0; transition: opacity 0.3s ease; opacity: 0;"></video>
+        <video id="mainVideo" loop muted playsinline autoplay style="display: none; width: 100%; height: 100%; object-fit: cover; background: #fff; position: absolute; top: 0; left: 0; transition: opacity 0.3s ease; opacity: 0;"></video>
 
         <!-- 3D Model Viewer -->
         <div id="modelViewerContainer"
@@ -2698,16 +2698,19 @@
       stopSixtyAutoPlay();
     }
 
+    if (product.video && mainVideo) {
+      mainVideo.addEventListener('playing', () => {
+        mainVideo.style.opacity = '1';
+      });
+    }
+
     triggerImage.addEventListener('click', () => {
       resetGalleryTabs();
       mainImg.style.display = 'block';
       triggerImage.classList.add('active');
       if (product.video && mainVideo) {
         mainVideo.style.display = 'block';
-        setTimeout(() => {
-          mainVideo.style.opacity = '1';
-          mainVideo.play().catch(err => console.log("Main video play failed:", err));
-        }, 50);
+        mainVideo.play().catch(err => console.log("Main video play failed:", err));
       }
     });
 
@@ -2717,10 +2720,7 @@
       setTimeout(() => {
         if (mainImg.style.display !== 'none') {
           mainVideo.style.display = 'block';
-          setTimeout(() => {
-            mainVideo.style.opacity = '1';
-            mainVideo.play().catch(err => console.log("Main video autoplay failed:", err));
-          }, 50);
+          mainVideo.play().catch(err => console.log("Main video autoplay failed:", err));
         }
       }, 1000);
     }
@@ -2917,7 +2917,7 @@
             <div class="mockup-product-media" style="position: relative; overflow: hidden;">
               <img src="${p.images[0]}" alt="${p.title}" class="mockup-product-img">
               ${p.video ? `
-                <video class="mockup-product-video" src="${p.video}" loop muted playsinline autoplay style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
+                <video class="mockup-product-video" data-src="${p.video}" loop muted playsinline autoplay style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
               ` : ''}
               <div class="product-actions-hover">
                 <button class="action-btn-circle qv-wishlist-btn" data-id="${p.id}" aria-label="Dodaj do listy życzeń">
@@ -3008,7 +3008,7 @@
               <div class="mockup-product-media" style="position: relative; overflow: hidden;">
                 <img src="${p.images[0]}" alt="${p.title}" class="mockup-product-img">
                 ${p.video ? `
-                  <video class="mockup-product-video" src="${p.video}" loop muted playsinline autoplay style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
+                  <video class="mockup-product-video" data-src="${p.video}" loop muted playsinline autoplay style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
                 ` : ''}
                 <div class="product-actions-hover">
                   <button class="action-btn-circle qv-wishlist-btn" data-id="${p.id}" aria-label="Dodaj do listy życzeń">

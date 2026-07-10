@@ -1758,23 +1758,34 @@ export function initSharedPopups() {
   function initGlobalCardVideos() {
     const cards = document.querySelectorAll('.mockup-product-card');
     
-    // Bind Hover for Desktop
     cards.forEach(card => {
       const video = card.querySelector('.mockup-product-video');
       if (!video) return;
 
+      // Listen to the 'playing' event to smoothly fade in the wideo
+      // This ensures we never show a gray blank block during loading or if playback fails!
+      video.addEventListener('playing', () => {
+        video.style.opacity = '1';
+      });
+
+      // Desktop Hover
       card.addEventListener('mouseenter', () => {
         if (card.videoTimeout) clearTimeout(card.videoTimeout);
-        video.play()
-          .then(() => { video.style.opacity = '1'; })
-          .catch(err => { console.log("Hover video play blocked:", err); });
+        const dataSrc = video.getAttribute('data-src');
+        if (dataSrc && video.getAttribute('src') !== dataSrc) {
+          video.setAttribute('src', dataSrc);
+          video.load();
+        }
+        video.play().catch(err => console.log("Hover video play blocked:", err));
       });
 
       card.addEventListener('mouseleave', () => {
         if (card.videoTimeout) clearTimeout(card.videoTimeout);
         video.style.opacity = '0';
         video.pause();
-        video.currentTime = 0;
+        // Unload video to save bandwidth/resources when not hovered
+        video.removeAttribute('src');
+        video.load();
       });
     });
 
@@ -1794,13 +1805,15 @@ export function initSharedPopups() {
         if (entry.isIntersecting) {
           if (card.videoTimeout) clearTimeout(card.videoTimeout);
           card.videoTimeout = setTimeout(() => {
-            video.play()
-              .then(() => { video.style.opacity = '1'; })
-              .catch(err => {
-                console.log("Viewport autoplay play blocked:", err);
-                video.style.opacity = '0';
-              });
-          }, 1000);
+            const dataSrc = video.getAttribute('data-src');
+            if (dataSrc && video.getAttribute('src') !== dataSrc) {
+              video.setAttribute('src', dataSrc);
+              video.load();
+            }
+            video.play().catch(err => {
+              console.log("Viewport autoplay play blocked:", err);
+            });
+          }, 600); // Trigger after 600ms of staying in viewport
         } else {
           if (card.videoTimeout) {
             clearTimeout(card.videoTimeout);
@@ -1808,7 +1821,8 @@ export function initSharedPopups() {
           }
           video.style.opacity = '0';
           video.pause();
-          video.currentTime = 0;
+          video.removeAttribute('src');
+          video.load();
         }
       });
     }, observerOptions);
