@@ -2021,7 +2021,6 @@
           <div class="product-icons-row" style="align-items: center;">
             <button class="product-action-pill" id="btnParametry">⚡ Parametry</button>
             <button class="product-action-pill" id="btnBarwa">🎨 Barwa światła</button>
-            <button class="product-action-pill" id="btnPytanie">💬 Zadaj pytanie</button>
           </div>
 
           <!-- Parametry Popup -->
@@ -2362,12 +2361,98 @@
     const product = products.find(p => p.id === pId) || products[0];
 
     // Load Product Data into DOM
+    function getProductSpecs(p) {
+      let specs = [];
+      let barwy = [];
+      
+      if (p.category === "Taśmy LED") {
+        specs = [
+          { name: "Napięcie", value: "24V DC" },
+          { name: "Moc", value: "10.6W/m" },
+          { name: "Diody", value: "180 LED/m" },
+          { name: "CRI (Ra)", value: "≥ 80" },
+          { name: "Gwarancja", value: "7 lat" }
+        ];
+        if (p.title.includes("4000K")) {
+          barwy = [{ label: "4000K", desc: "Neutralna", color: "#fff5e0" }];
+        } else if (p.title.includes("3000K")) {
+          barwy = [{ label: "3000K", desc: "Ciepła biel", color: "#ffe0a0" }];
+        } else {
+          barwy = [
+            { label: "3000K", desc: "Ciepła biel", color: "#ffe0a0" },
+            { label: "4000K", desc: "Neutralna", color: "#fff5e0" }
+          ];
+        }
+      } else if (p.category === "Sterowniki LED") {
+        specs = [
+          { name: "Napięcie", value: "12V / 24V DC" },
+          { name: "Zasięg", value: "do 30m" },
+          { name: "Częstotliwość", value: "2.4GHz RF" },
+          { name: "Prąd wyjściowy", value: "12A max" },
+          { name: "Gwarancja", value: "5 lat" }
+        ];
+        if (p.title.includes("RGBCCT")) {
+          barwy = [{ label: "RGB+CCT", desc: "16M kolorów + CCT", color: "linear-gradient(to right, red, orange, yellow, green, blue, violet, white)" }];
+        } else if (p.title.includes("RGBW")) {
+          barwy = [{ label: "RGB+W", desc: "16M kolorów + biel", color: "linear-gradient(to right, red, green, blue, white)" }];
+        } else if (p.title.includes("RGB")) {
+          barwy = [{ label: "RGB", desc: "16M kolorów", color: "linear-gradient(to right, red, green, blue)" }];
+        } else if (p.title.includes("CCT")) {
+          barwy = [{ label: "CCT", desc: "Ciepła-Zimna biel", color: "linear-gradient(to right, #ffe0a0, #dce8ff)" }];
+        } else {
+          barwy = [{ label: "Mono", desc: "Jednokolorowy", color: "#fff" }];
+        }
+      } else if (p.category === "Zasilacze LED") {
+        const power = p.title.match(/\d+W/) ? p.title.match(/\d+W/)[0] : "18W";
+        const voltage = p.title.includes("24V") ? "24V DC" : "12V DC";
+        specs = [
+          { name: "Napięcie wejściowe", value: "200-240V AC" },
+          { name: "Napięcie wyjściowe", value: voltage },
+          { name: "Moc maksymalna", value: power },
+          { name: "Klasa szczelności", value: "IP67 (wodoodporny)" },
+          { name: "Gwarancja", value: "7 lat" }
+        ];
+      } else {
+        specs = [
+          { name: "Gwarancja", value: "5 lat" }
+        ];
+      }
+      
+      return { specs, barwy };
+    }
+
+    // Load Product Data into DOM
     document.title = `Prescot LED - ${product.title}`;
     document.getElementById('pTitle').textContent = product.title;
     document.getElementById('pCategory').textContent = product.category;
     document.getElementById('pPrice').innerHTML = `${product.price.toFixed(2)} zł <span class="price-unit">/ ${product.category === "Taśmy LED" ? "metr" : "szt."}</span>`;
     document.getElementById('pDesc').textContent = product.description;
-    document.getElementById('descTab').innerHTML = `<p>${product.description}</p>`;
+
+    // Load description and bottom variants inside descTab
+    let bottomVariantsHTML = '';
+    if (product.variants && product.variants.length > 0 && product.variants[0].name) {
+      const variantsList = product.variants.map(v => `
+        <a href="product.html?id=${v.id}" class="variant-card ${v.id === pId ? 'active' : ''}">
+          <div class="variant-card-img">
+            <img src="${v.image}" alt="${v.name}">
+            ${v.video ? `<video src="${v.video}" loop muted playsinline autoplay class="variant-card-video"></video>` : ''}
+          </div>
+          <span class="variant-card-label">${v.name}</span>
+        </a>
+      `).join('');
+      bottomVariantsHTML = `
+        <div style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 30px;">
+          <h4 style="margin-bottom: 20px; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--primary-color);">Zobacz także inne modele</h4>
+          <div class="variants-grid">
+            ${variantsList}
+          </div>
+        </div>
+      `;
+    }
+    document.getElementById('descTab').innerHTML = `
+      <p style="font-size: 15px; line-height: 1.8; color: #555; margin-bottom: 30px;">${product.description}</p>
+      ${bottomVariantsHTML}
+    `;
 
     // Main Image & Gallery
     const mainImg = document.getElementById('mainImg');
@@ -2432,6 +2517,7 @@
       });
     } else {
       document.getElementById('sizeContainer').style.display = 'none';
+    }
 
     // Render Controller Variants
     const variantsContainer = document.getElementById('productVariantsContainer');
@@ -2453,25 +2539,48 @@
       `;
     }
 
-    }
-
     // === POPUP HANDLERS ===
     const btnParametry = document.getElementById('btnParametry');
     const btnBarwa = document.getElementById('btnBarwa');
-    const btnPytanie = document.getElementById('btnPytanie');
     const popupParametry = document.getElementById('popupParametry');
     const popupBarwa = document.getElementById('popupBarwa');
+
+    // Populate specs overlay dynamically
+    const specTable = document.querySelector('#popupParametry .spec-table');
+    if (specTable) {
+      const { specs } = getProductSpecs(product);
+      if (specs.length > 0) {
+        specTable.innerHTML = specs.map(s => `
+          <tr><td>${s.name}</td><td><strong>${s.value}</strong></td></tr>
+        `).join('');
+      }
+    }
+
+    // Populate barwa light temp overlay dynamically
+    const barwaGrid = document.querySelector('#popupBarwa .color-temp-grid');
+    if (barwaGrid) {
+      const { barwy } = getProductSpecs(product);
+      if (barwy.length > 0) {
+        barwaGrid.innerHTML = barwy.map(b => `
+          <div class="color-temp-option" style="background: ${b.color}; border: 1px solid #ddd; padding: 15px; border-radius: 8px; text-align: center;">
+            <div class="ct-circle" style="background: #fff; border: 1px solid #ccc; width: 30px; height: 30px; border-radius: 50%; margin: 0 auto 10px;"></div>
+            <span style="font-weight: 700; color: #1a1a1a; display: block; font-size: 14px;">${b.label}</span>
+            <small style="color: #666; font-size: 11px; display: block; margin-top: 4px;">${b.desc}</small>
+          </div>
+        `).join('');
+        barwaGrid.style.display = 'grid';
+        barwaGrid.style.gridTemplateColumns = `repeat(auto-fit, minmax(130px, 1fr))`;
+        barwaGrid.style.gap = '15px';
+      } else if (btnBarwa) {
+        btnBarwa.style.display = 'none';
+      }
+    }
 
     if (btnParametry && popupParametry) {
       btnParametry.addEventListener('click', () => { popupParametry.style.display = 'flex'; });
     }
     if (btnBarwa && popupBarwa) {
       btnBarwa.addEventListener('click', () => { popupBarwa.style.display = 'flex'; });
-    }
-    if (btnPytanie) {
-      btnPytanie.addEventListener('click', () => {
-        window.location.href = 'contact.html';
-      });
     }
     // Close popups on overlay click
     document.querySelectorAll('.product-popup-overlay').forEach(overlay => {

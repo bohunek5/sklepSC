@@ -293,6 +293,73 @@ function injectQuickViewModal() {
   const modalHTML = `
     <!-- Quick View Modal Markup -->
     <div id="quickViewModal" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 2010; opacity: 0; pointer-events: none; transition: opacity 0.4s; display: flex; align-items: center; justify-content: center; padding: 20px;">
+      <style>
+        .qv-variants-grid {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-top: 8px;
+        }
+        .qv-variant-card {
+          text-decoration: none;
+          color: inherit;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          transition: all 0.3s ease;
+          cursor: pointer;
+        }
+        .qv-variant-card-img {
+          width: 70px;
+          height: 70px;
+          border-radius: 6px;
+          overflow: hidden;
+          position: relative;
+          border: 2px solid #eee;
+          transition: all 0.3s ease;
+        }
+        .qv-variant-card.active .qv-variant-card-img {
+          border-color: var(--primary-color, #0f172a);
+        }
+        .qv-variant-card:hover .qv-variant-card-img {
+          border-color: var(--accent-color, #ff5a00);
+          box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .qv-variant-card-img img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        .qv-variant-card-video {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          pointer-events: none;
+        }
+        .qv-variant-card:hover .qv-variant-card-video {
+          opacity: 1;
+        }
+        .qv-variant-card-label {
+          margin-top: 4px;
+          font-size: 9px;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          color: #888;
+          transition: color 0.3s;
+        }
+        .qv-variant-card.active .qv-variant-card-label {
+          color: var(--primary-color, #0f172a);
+        }
+        .qv-variant-card:hover .qv-variant-card-label {
+          color: var(--accent-color, #ff5a00);
+        }
+      </style>
       <!-- Modal Overlay -->
       <div id="quickViewOverlay" style="position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,0.5); top: 0; left: 0;"></div>
       <!-- Modal Box -->
@@ -318,7 +385,25 @@ function injectQuickViewModal() {
             <div id="qvPrice" style="font-size: 22px; font-weight: 700; color: #1a1a1a; margin-bottom: 20px;"></div>
             <p id="qvDesc" style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 25px;"></p>
             
-            <!-- Variants -->
+            <!-- Model Variants -->
+            <div id="qvVariantsContainer" style="margin-bottom: 20px; display: none;">
+              <h4 style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 10px; color: rgba(0,0,0,0.5);">Dostępne modele</h4>
+              <div id="qvVariantsGrid" class="qv-variants-grid"></div>
+            </div>
+
+            <!-- Parameters -->
+            <div id="qvSpecsContainer" style="margin-bottom: 20px; display: none; border-top: 1px dashed #eee; padding-top: 15px;">
+              <h4 style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 10px; color: rgba(0,0,0,0.5);">⚡ Specyfikacja</h4>
+              <div id="qvSpecsList" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px 15px; font-size: 12px; color: #555;"></div>
+            </div>
+            
+            <!-- Color Temp (Barwy światła) -->
+            <div id="qvBarwyContainer" style="margin-bottom: 20px; display: none; border-top: 1px dashed #eee; padding-top: 15px;">
+              <h4 style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 10px; color: rgba(0,0,0,0.5);">🎨 Barwa światła</h4>
+              <div id="qvBarwyList" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
+            </div>
+
+            <!-- Colors -->
             <div id="qvColorContainer" style="margin-bottom: 20px;">
               <h4 style="font-size: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 10px;">Kolor</h4>
               <div id="qvColors" style="display: flex; gap: 8px;"></div>
@@ -336,7 +421,7 @@ function injectQuickViewModal() {
               <input type="text" id="qvQtyInput" value="1" readonly style="width: 40px; text-align: center; border: none; font-size: 14px; font-weight: 600; background: transparent; outline: none;">
               <button id="qvQtyPlus" style="width: 40px; height: 40px; border: none; background: none; font-size: 16px; cursor: pointer;">+</button>
             </div>
-            <button id="qvAddToCart" style="flex-grow: 1; height: 42px; background: #1a1a1a; color: #fff; border: none; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: 11px; cursor: pointer; transition: background 0.3s;">Dodaj do koszyka</button>
+            <button id="qvAddToCart" class="mockup-btn" style="flex-grow: 1; height: 42px; padding: 10px 24px !important; font-size: 11px !important; border-radius: 99px !important; margin: 0;">Dodaj do koszyka</button>
           </div>
         </div>
       </div>
@@ -796,6 +881,66 @@ export function initSharedPopups() {
   let isDraggingQv360 = false;
   let startQv360X = 0;
 
+  function getProductSpecs(p) {
+    let specs = [];
+    let barwy = [];
+    
+    if (p.category === "Taśmy LED") {
+      specs = [
+        { name: "Napięcie", value: "24V DC" },
+        { name: "Moc", value: "10.6W/m" },
+        { name: "Diody", value: "180 LED/m" },
+        { name: "CRI (Ra)", value: "≥ 80" },
+        { name: "Gwarancja", value: "7 lat" }
+      ];
+      if (p.title.includes("4000K")) {
+        barwy = [{ label: "4000K", desc: "Neutralna", color: "#fff5e0" }];
+      } else if (p.title.includes("3000K")) {
+        barwy = [{ label: "3000K", desc: "Ciepła biel", color: "#ffe0a0" }];
+      } else {
+        barwy = [
+          { label: "3000K", desc: "Ciepła biel", color: "#ffe0a0" },
+          { label: "4000K", desc: "Neutralna", color: "#fff5e0" }
+        ];
+      }
+    } else if (p.category === "Sterowniki LED") {
+      specs = [
+        { name: "Napięcie", value: "12V / 24V DC" },
+        { name: "Zasięg", value: "do 30m" },
+        { name: "Częstotliwość", value: "2.4GHz RF" },
+        { name: "Prąd wyjściowy", value: "12A max" },
+        { name: "Gwarancja", value: "5 lat" }
+      ];
+      if (p.title.includes("RGBCCT")) {
+        barwy = [{ label: "RGB+CCT", desc: "16M kolorów + CCT", color: "linear-gradient(to right, red, orange, yellow, green, blue, violet, white)" }];
+      } else if (p.title.includes("RGBW")) {
+        barwy = [{ label: "RGB+W", desc: "16M kolorów + biel", color: "linear-gradient(to right, red, green, blue, white)" }];
+      } else if (p.title.includes("RGB")) {
+        barwy = [{ label: "RGB", desc: "16M kolorów", color: "linear-gradient(to right, red, green, blue)" }];
+      } else if (p.title.includes("CCT")) {
+        barwy = [{ label: "CCT", desc: "Ciepła-Zimna biel", color: "linear-gradient(to right, #ffe0a0, #dce8ff)" }];
+      } else {
+        barwy = [{ label: "Mono", desc: "Jednokolorowy", color: "#fff" }];
+      }
+    } else if (p.category === "Zasilacze LED") {
+      const power = p.title.match(/\d+W/) ? p.title.match(/\d+W/)[0] : "18W";
+      const voltage = p.title.includes("24V") ? "24V DC" : "12V DC";
+      specs = [
+        { name: "Napięcie wejściowe", value: "200-240V AC" },
+        { name: "Napięcie wyjściowe", value: voltage },
+        { name: "Moc maksymalna", value: power },
+        { name: "Klasa szczelności", value: "IP67 (wodoodporny)" },
+        { name: "Gwarancja", value: "7 lat" }
+      ];
+    } else {
+      specs = [
+        { name: "Gwarancja", value: "5 lat" }
+      ];
+    }
+    
+    return { specs, barwy };
+  }
+
   function openQuickView(id, mode = 'normal') {
     selectedProduct = products.find(p => p.id === id);
     if (!selectedProduct) return;
@@ -862,6 +1007,72 @@ export function initSharedPopups() {
     document.getElementById('qvTitle').textContent = selectedProduct.title;
     document.getElementById('qvPrice').innerHTML = `${selectedProduct.price.toFixed(2)} zł <span style="font-size: 14px; font-weight: normal; color: #888; margin-left: 5px;">/ ${selectedProduct.category === "Taśmy LED" ? "metr" : "szt."}</span>`;
     document.getElementById('qvDesc').textContent = selectedProduct.description;
+
+    // Render Model Variants in Quick View
+    const qvVariantsContainer = document.getElementById('qvVariantsContainer');
+    const qvVariantsGrid = document.getElementById('qvVariantsGrid');
+    if (qvVariantsContainer && qvVariantsGrid) {
+      if (selectedProduct.variants && selectedProduct.variants.length > 0 && selectedProduct.variants[0].name) {
+        qvVariantsContainer.style.display = 'block';
+        qvVariantsGrid.innerHTML = selectedProduct.variants.map(v => {
+          const isActive = v.id === selectedProduct.id;
+          const activeClass = isActive ? 'active' : '';
+          return `
+            <div class="qv-variant-card ${activeClass}" data-id="${v.id}">
+              <div class="qv-variant-card-img">
+                <img src="${v.image}" alt="${v.name}">
+                ${v.video ? `<video src="${v.video}" loop muted playsinline autoplay class="qv-variant-card-video"></video>` : ''}
+              </div>
+              <span class="qv-variant-card-label">${v.name}</span>
+            </div>
+          `;
+        }).join('');
+
+        // Bind click events on variant cards inside Quick View to reload the popup
+        qvVariantsGrid.querySelectorAll('.qv-variant-card').forEach(card => {
+          card.addEventListener('click', () => {
+            const vid = parseInt(card.dataset.id);
+            openQuickView(vid, mode);
+          });
+        });
+      } else {
+        qvVariantsContainer.style.display = 'none';
+      }
+    }
+
+    // Render Specifications and Color Temp
+    const qvSpecsContainer = document.getElementById('qvSpecsContainer');
+    const qvSpecsList = document.getElementById('qvSpecsList');
+    const qvBarwyContainer = document.getElementById('qvBarwyContainer');
+    const qvBarwyList = document.getElementById('qvBarwyList');
+    
+    const { specs, barwy } = getProductSpecs(selectedProduct);
+    
+    if (qvSpecsContainer && qvSpecsList) {
+      if (specs.length > 0) {
+        qvSpecsContainer.style.display = 'block';
+        qvSpecsList.innerHTML = specs.map(s => `
+          <div><span style="color: #888;">${s.name}:</span> <strong style="color: #1a1a1a;">${s.value}</strong></div>
+        `).join('');
+      } else {
+        qvSpecsContainer.style.display = 'none';
+      }
+    }
+    
+    if (qvBarwyContainer && qvBarwyList) {
+      if (barwy.length > 0) {
+        qvBarwyContainer.style.display = 'block';
+        qvBarwyList.innerHTML = barwy.map(b => `
+          <div style="display: flex; align-items: center; gap: 6px; background: #f7f7f7; padding: 4px 10px; border-radius: 99px; font-size: 11px; border: 1px solid #eee;">
+            <div style="width: 12px; height: 12px; border-radius: 50%; background: ${b.color}; border: 1px solid #ccc;"></div>
+            <strong style="color: #1a1a1a;">${b.label}</strong>
+            <span style="color: #888; font-size: 10px;">(${b.desc})</span>
+          </div>
+        `).join('');
+      } else {
+        qvBarwyContainer.style.display = 'none';
+      }
+    }
 
     const colorsDiv = document.getElementById('qvColors');
     colorsDiv.innerHTML = '';
