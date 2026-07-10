@@ -599,8 +599,8 @@
     }
 
     .slide-banner-box .mockup-btn:hover {
-      background: transparent !important;
-      border-color: var(--primary-color) !important;
+      background: #ffffff !important;
+      border-color: #ffffff !important;
       color: var(--primary-color) !important;
     }
 
@@ -1097,6 +1097,12 @@
       .glass-border-svg {
         display: none !important;
       }
+      .mockup-search-container, .wishlist-trigger, .mockup-action-icon[aria-label="Konto użytkownika"] {
+        display: none !important;
+      }
+      .mockup-header-logo img {
+        filter: brightness(0) !important; /* Force logo to be visible black on white mobile header */
+      }
       .mockup-header {
         display: flex;
         justify-content: space-between;
@@ -1122,7 +1128,8 @@
         bottom: calc(65px + 15px + env(safe-area-inset-bottom)) !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
-        width: 250px !important;
+        width: calc(100% - 30px) !important;
+        max-width: 480px !important;
         height: 52px !important;
         background: rgba(255, 255, 255, 0.45) !important;
         backdrop-filter: blur(20px) saturate(180%) !important;
@@ -1133,7 +1140,7 @@
         display: flex !important;
         align-items: center !important;
         justify-content: space-between !important;
-        padding: 0 8px !important;
+        padding: 0 15px !important;
         z-index: 1500 !important;
         pointer-events: auto !important;
       }
@@ -1275,12 +1282,14 @@
         margin-bottom: 5px !important;
       }
       .banner-content div .mockup-btn {
-        width: 100% !important;
-        max-width: 320px !important;
-        text-align: center !important;
-        padding: 12px 20px !important;
+        width: auto !important;
+        max-width: max-content !important;
+        display: inline-flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 12px 30px !important;
         font-size: 11px !important;
-        border-radius: 4px !important;
+        border-radius: 99px !important;
       }
       .banner-image-container, .banner-row.reverse .banner-image-container {
         order: 2 !important;
@@ -1376,6 +1385,17 @@
       color: #666;
       line-height: 1.8;
       margin-bottom: 35px;
+    }
+    .banner-content div {
+      display: flex;
+      justify-content: flex-start;
+    }
+    .banner-content div .mockup-btn {
+      display: inline-flex !important;
+      width: auto !important;
+      max-width: max-content !important;
+      justify-content: center;
+      align-items: center;
     }
     
     .banner-image-container {
@@ -1966,12 +1986,12 @@
         top: calc(100% + 15px) !important; /* dymek z odstepem */
         left: 50%;
         transform: translateX(-50%) perspective(1000px) rotateX(-10deg) scale(0.95);
-        background: rgba(240, 240, 242, 0.96) !important; /* szary bloczek */
+        background: #ffffff !important; /* white block like filter widget */
         backdrop-filter: blur(20px) saturate(180%) !important;
         -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-        box-shadow: 0 25px 50px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.4) !important;
-        border-radius: 18px !important;
-        border: none !important; /* bez ramek */
+        box-shadow: 0 25px 50px rgba(0,0,0,0.08) !important;
+        border-radius: 24px !important; /* more rounded border */
+        border: 1px solid rgba(0, 0, 0, 0.08) !important; /* light border */
         width: 600px;
         opacity: 0;
         visibility: hidden;
@@ -1996,7 +2016,7 @@
         height: 0;
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;
-        border-bottom: 10px solid rgba(240, 240, 242, 0.96);
+        border-bottom: 10px solid #ffffff;
         pointer-events: none;
         z-index: 1001;
       }
@@ -3102,10 +3122,10 @@
     window.addEventListener('scroll', () => {
       if (window.scrollY > 50) {
         header.classList.add('scrolled');
-        if (headerLogo) headerLogo.src = '/images/logo-dark.png';
+        if (headerLogo) headerLogo.src = 'images/logo-dark.png';
       } else {
         header.classList.remove('scrolled');
-        if (headerLogo) headerLogo.src = '/images/logo-white.png';
+        if (headerLogo) headerLogo.src = 'images/logo-white.png';
       }
     });
 

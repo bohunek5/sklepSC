@@ -16,19 +16,17 @@ function showToast(message, type = 'success') {
 
   const toast = document.createElement('div');
   toast.style.cssText = `
-    background: rgba(11, 26, 48, 0.96);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-    padding: 16px 24px;
-    border-radius: 12px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-    display: flex;
+    background: rgba(255, 255, 255, 0.45) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    color: var(--primary-color) !important;
+    padding: 12px 20px;
+    border-radius: 99px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06) !important;
+    display: inline-flex;
     align-items: center;
-    gap: 15px;
-    min-width: 320px;
-    max-width: 450px;
+    gap: 10px;
     pointer-events: auto;
     cursor: pointer;
     transform: translateX(120%);
@@ -36,24 +34,27 @@ function showToast(message, type = 'success') {
     position: relative;
     overflow: hidden;
     font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
   `;
 
-  let icon = '<i class="ph ph-check-circle" style="color: #4caf50; font-size: 22px;"></i>';
+  let icon = '<i class="ph ph-check-circle" style="color: #2e7d32; font-size: 20px;"></i>';
   if (type === 'cart') {
-    icon = '<i class="ph ph-shopping-cart-simple" style="color: #ffaa00; font-size: 22px;"></i>';
+    icon = '<i class="ph ph-shopping-cart-simple" style="color: var(--primary-color); font-size: 20px;"></i>';
   } else if (type === 'wishlist') {
-    icon = '<i class="ph ph-heart" style="color: #ff5a00; font-size: 22px;"></i>';
+    icon = '<i class="ph ph-heart" style="color: #c62828; font-size: 20px;"></i>';
   } else if (type === 'info') {
-    icon = '<i class="ph ph-info" style="color: #00bcd4; font-size: 22px;"></i>';
+    icon = '<i class="ph ph-info" style="color: #00838f; font-size: 20px;"></i>';
   }
 
   toast.innerHTML = `
     ${icon}
-    <div style="flex-grow: 1;">
-      <div style="font-size: 13px; font-weight: 500; line-height: 1.4;">${message}</div>
+    <div style="flex-grow: 1; display: flex; align-items: center;">
+      <div style="font-size: 13px; font-weight: 600; line-height: 1; color: var(--primary-color);">${message}</div>
     </div>
-    <button style="background: none; border: none; color: rgba(255,255,255,0.5); font-size: 18px; cursor: pointer; padding: 0; outline: none; margin-left: 10px;">&times;</button>
-    <div style="position: absolute; bottom: 0; left: 0; height: 3px; background: #ffaa00; width: 100%; transition: width 3s linear;"></div>
+    <button style="background: none; border: none; color: var(--primary-color); font-size: 18px; cursor: pointer; padding: 0; outline: none; margin-left: 10px; opacity: 0.6;">&times;</button>
+    <div style="position: absolute; bottom: 0; left: 0; height: 3px; background: var(--primary-color); width: 100%; transition: width 3s linear;"></div>
   `;
 
   container.appendChild(toast);
@@ -628,7 +629,7 @@ export function initSharedPopups() {
         updateWishlistStorage();
         
         closeWishlist();
-        showToast('Dodano produkt z listy życzeń do koszyka!', 'cart');
+        showToast('Dodano do koszyka: 1 szt.', 'cart');
         triggerCartIconAnimation();
       });
     });
@@ -1038,7 +1039,7 @@ export function initSharedPopups() {
 
       updateLocalStorage();
       closeQuickViewModal();
-      showToast('Dodano produkt do koszyka! Kliknij, aby zobaczyć koszyk.', 'cart');
+      showToast(`Dodano do koszyka: ${qvQty} szt.`, 'cart');
       triggerCartIconAnimation();
       window.dispatchEvent(new Event('storage'));
     });
@@ -1073,7 +1074,7 @@ export function initSharedPopups() {
       }
 
       updateLocalStorage();
-      showToast('Dodano produkt do koszyka! Kliknij, aby zobaczyć koszyk.', 'cart');
+      showToast('Dodano do koszyka: 1 szt.', 'cart');
       triggerCartIconAnimation();
       window.dispatchEvent(new Event('storage'));
       return;
@@ -1355,7 +1356,7 @@ export function initSharedPopups() {
       }
 
       updateLocalStorage();
-      showToast('Dodano produkt do koszyka! Kliknij, aby zobaczyć koszyk.', 'cart');
+      showToast(`Dodano do koszyka: ${qty} szt.`, 'cart');
       triggerCartIconAnimation();
       window.dispatchEvent(new Event('storage'));
     });
