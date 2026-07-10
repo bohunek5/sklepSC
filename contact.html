@@ -1093,7 +1093,7 @@
     // Handle Form Submit
     function handleSubmit(e) {
       e.preventDefault();
-      alert('Wiadomość została wysłana pomyślnie! Odpowiemy w ciągu 24h.');
+      window.showToast('Wiadomość została wysłana pomyślnie! Odpowiemy w ciągu 24h.', 'success');
       e.target.reset();
     }
   </script>

@@ -4,6 +4,139 @@ import { products } from './products-data.js';
 let wishlist = JSON.parse(localStorage.getItem('cooken_wishlist')) || [];
 let cart = JSON.parse(localStorage.getItem('cooken_cart')) || [];
 
+// --- TOAST NOTIFICATION ENGINE ---
+function showToast(message, type = 'success') {
+  let container = document.getElementById('toastContainer');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toastContainer';
+    container.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none;';
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement('div');
+  toast.style.cssText = `
+    background: rgba(11, 26, 48, 0.96);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 320px;
+    max-width: 450px;
+    pointer-events: auto;
+    cursor: pointer;
+    transform: translateX(120%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Outfit', sans-serif;
+  `;
+
+  let icon = '<i class="ph ph-check-circle" style="color: #4caf50; font-size: 22px;"></i>';
+  if (type === 'cart') {
+    icon = '<i class="ph ph-shopping-cart-simple" style="color: #ffaa00; font-size: 22px;"></i>';
+  } else if (type === 'wishlist') {
+    icon = '<i class="ph ph-heart" style="color: #ff5a00; font-size: 22px;"></i>';
+  } else if (type === 'info') {
+    icon = '<i class="ph ph-info" style="color: #00bcd4; font-size: 22px;"></i>';
+  }
+
+  toast.innerHTML = `
+    ${icon}
+    <div style="flex-grow: 1;">
+      <div style="font-size: 13px; font-weight: 500; line-height: 1.4;">${message}</div>
+    </div>
+    <button style="background: none; border: none; color: rgba(255,255,255,0.5); font-size: 18px; cursor: pointer; padding: 0; outline: none; margin-left: 10px;">&times;</button>
+    <div style="position: absolute; bottom: 0; left: 0; height: 3px; background: #ffaa00; width: 100%; transition: width 3s linear;"></div>
+  `;
+
+  container.appendChild(toast);
+
+  // Trigger animation
+  requestAnimationFrame(() => {
+    toast.style.transform = 'translateX(0)';
+  });
+
+  // Shrink progress bar
+  setTimeout(() => {
+    const progressBar = toast.querySelector('div:last-child');
+    if (progressBar) progressBar.style.width = '0%';
+  }, 50);
+
+  // Close actions
+  const closeBtn = toast.querySelector('button');
+  const closeToast = () => {
+    toast.style.transform = 'translateX(120%)';
+    toast.style.opacity = '0';
+    setTimeout(() => {
+      toast.remove();
+    }, 400);
+  };
+
+  closeBtn.onclick = (e) => {
+    e.stopPropagation();
+    closeToast();
+  };
+
+  toast.onclick = () => {
+    closeToast();
+    if (type === 'cart') {
+      window.openCartDrawer();
+    }
+  };
+
+  // Auto remove
+  setTimeout(closeToast, 3000);
+}
+window.showToast = showToast;
+
+function triggerCartIconAnimation() {
+  const cartBtns = document.querySelectorAll('a[href*="cart.html"], .mockup-actions a, button.mockup-action-icon');
+  cartBtns.forEach(btn => {
+    const target = btn.querySelector('svg, i') || btn;
+    target.classList.add('cart-bounce');
+    setTimeout(() => target.classList.remove('cart-bounce'), 600);
+  });
+}
+
+// Append custom styles
+const customStyles = document.createElement('style');
+customStyles.innerHTML = `
+  .qv-fullscreen-active {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 2060 !important;
+    background: #0b1a30 !important;
+  }
+  .qv-fullscreen-active #qvImage,
+  .qv-fullscreen-active #qv360Img {
+    padding: 40px !important;
+  }
+  #qvFullscreenBtn:hover {
+    background: rgba(0,0,0,0.85) !important;
+    transform: scale(1.1);
+  }
+  @keyframes cartBounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3) rotate(-10deg); }
+  }
+  .cart-bounce {
+    animation: cartBounce 0.6s ease !important;
+    display: inline-block !important;
+  }
+`;
+document.head.appendChild(customStyles);
+
+
 
 // --- INJECT WISHLIST DRAWER HTML ---
 function injectWishlistDrawer() {
@@ -156,15 +289,20 @@ function injectQuickViewModal() {
       <!-- Modal Overlay -->
       <div id="quickViewOverlay" style="position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,0.5); top: 0; left: 0;"></div>
       <!-- Modal Box -->
-      <div id="quickViewBox" style="position: relative; width: 900px; max-width: 100%; background: #fff; border-radius: 4px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); z-index: 2; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; height: 550px; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform: scale(0.9);">
+      <div id="quickViewBox" style="position: relative; width: 1050px; max-width: 95%; background: #fff; border-radius: 12px; box-shadow: 0 30px 70px rgba(0,0,0,0.18); z-index: 2; overflow: hidden; display: grid; grid-template-columns: 1.15fr 0.85fr; height: 600px; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform: scale(0.9);">
         <button id="closeQuickView" style="position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 28px; cursor: pointer; z-index: 10; color: #1a1a1a;">&times;</button>
         <div id="qvMediaContainer" style="background: #f7f7f7; display: flex; align-items: center; justify-content: center; height: 100%; position: relative; width: 100%; overflow: hidden;">
-          <img id="qvImage" src="" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+          <img id="qvImage" src="" alt="" style="width: 100%; height: 100%; object-fit: contain; padding: 20px; box-sizing: border-box;">
           <div id="qvModelContainer" style="display: none; width: 100%; height: 100%;"></div>
           <div id="qv360Container" style="display: none; width: 100%; height: 100%; align-items: center; justify-content: center; position: relative; cursor: grab; user-select: none;">
-            <img id="qv360Img" src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+            <img id="qv360Img" src="" style="width: 100%; height: 100%; object-fit: contain; padding: 20px; box-sizing: border-box; pointer-events: none;">
             <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.65); color: #fff; padding: 6px 16px; border-radius: 99px; font-size: 11px; pointer-events: none; white-space: nowrap; font-family: 'Inter', sans-serif;">Przeciągnij, aby obrócić 360°</div>
           </div>
+          <!-- Fullscreen button -->
+          <button id="qvFullscreenBtn" style="position: absolute; bottom: 20px; right: 20px; background: rgba(0,0,0,0.6); color: #fff; border: none; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; z-index: 10;" aria-label="Pełny ekran">
+            <svg class="fullscreen-icon-expand" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+            <svg class="fullscreen-icon-collapse" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M4 14h6v6m10-6h-6v6M4 10h6V4m10 6h-6V4"/></svg>
+          </button>
         </div>
         <div style="padding: 40px; display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto;">
           <div>
@@ -490,7 +628,8 @@ export function initSharedPopups() {
         updateWishlistStorage();
         
         closeWishlist();
-        window.openCartDrawer();
+        showToast('Dodano produkt z listy życzeń do koszyka!', 'cart');
+        triggerCartIconAnimation();
       });
     });
   }
@@ -522,9 +661,9 @@ export function initSharedPopups() {
           image: p.images[0]
         });
         updateWishlistStorage();
-        alert('Dodano do listy życzeń!');
+        showToast('Dodano produkt do listy życzeń!', 'wishlist');
       } else {
-        alert('Produkt jest już na liście życzeń.');
+        showToast('Produkt jest już na Twojej liście życzeń.', 'info');
       }
     });
   });
@@ -815,12 +954,44 @@ export function initSharedPopups() {
   window.addEventListener('mouseup', stopDraggingQv360);
   window.addEventListener('touchend', stopDraggingQv360);
 
+  const qvFullscreenBtn = document.getElementById('qvFullscreenBtn');
+  const qvMediaContainer = document.getElementById('qvMediaContainer');
+  if (qvFullscreenBtn && qvMediaContainer) {
+    qvFullscreenBtn.addEventListener('click', () => {
+      const isFullscreen = qvMediaContainer.classList.toggle('qv-fullscreen-active');
+      const expandIcon = qvFullscreenBtn.querySelector('.fullscreen-icon-expand');
+      const collapseIcon = qvFullscreenBtn.querySelector('.fullscreen-icon-collapse');
+      if (expandIcon && collapseIcon) {
+        if (isFullscreen) {
+          expandIcon.style.display = 'none';
+          collapseIcon.style.display = 'block';
+        } else {
+          expandIcon.style.display = 'block';
+          collapseIcon.style.display = 'none';
+        }
+      }
+    });
+  }
+
   function closeQuickViewModal() {
     quickViewModal.style.opacity = '0';
     quickViewModal.style.pointerEvents = 'none';
     quickViewBox.style.transform = 'scale(0.9)';
     const qvModelContainer = document.getElementById('qvModelContainer');
     if (qvModelContainer) qvModelContainer.innerHTML = ''; // Stop 3D audio or rendering when closed
+    
+    // Exit fullscreen if active
+    if (qvMediaContainer && qvMediaContainer.classList.contains('qv-fullscreen-active')) {
+      qvMediaContainer.classList.remove('qv-fullscreen-active');
+      if (qvFullscreenBtn) {
+        const expandIcon = qvFullscreenBtn.querySelector('.fullscreen-icon-expand');
+        const collapseIcon = qvFullscreenBtn.querySelector('.fullscreen-icon-collapse');
+        if (expandIcon && collapseIcon) {
+          expandIcon.style.display = 'block';
+          collapseIcon.style.display = 'none';
+        }
+      }
+    }
   }
 
   if (closeQuickView) closeQuickView.addEventListener('click', closeQuickViewModal);
@@ -867,7 +1038,8 @@ export function initSharedPopups() {
 
       updateLocalStorage();
       closeQuickViewModal();
-      openCart();
+      showToast('Dodano produkt do koszyka! Kliknij, aby zobaczyć koszyk.', 'cart');
+      triggerCartIconAnimation();
       window.dispatchEvent(new Event('storage'));
     });
   }
@@ -901,7 +1073,8 @@ export function initSharedPopups() {
       }
 
       updateLocalStorage();
-      openCart();
+      showToast('Dodano produkt do koszyka! Kliknij, aby zobaczyć koszyk.', 'cart');
+      triggerCartIconAnimation();
       window.dispatchEvent(new Event('storage'));
       return;
     }
@@ -1094,11 +1267,10 @@ export function initSharedPopups() {
             title: document.title,
             url: window.location.href
           }).catch(console.error);
-        } else {
-          navigator.clipboard.writeText(window.location.href).then(() => {
-            alert('Link skopiowany do schowka!');
-          });
-        }
+      } else {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          showToast('Link do produktu został skopiowany do schowka!', 'success');
+        });
       }
     });
   });
@@ -1140,7 +1312,7 @@ export function initSharedPopups() {
         document.getElementById('newsMsg').style.display = 'block';
         setTimeout(closeNews, 3000);
       } else {
-        alert('Wpisz poprawny e-mail!');
+        showToast('Wpisz poprawny adres e-mail!', 'info');
       }
     });
   }
@@ -1182,7 +1354,8 @@ export function initSharedPopups() {
       }
 
       updateLocalStorage();
-      openCart();
+      showToast('Dodano produkt do koszyka! Kliknij, aby zobaczyć koszyk.', 'cart');
+      triggerCartIconAnimation();
       window.dispatchEvent(new Event('storage'));
     });
   }
