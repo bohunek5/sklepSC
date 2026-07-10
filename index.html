@@ -1039,12 +1039,30 @@
       color: var(--white) !important;
     }
 
+    .advantages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      text-align: center;
+    }
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
     @media (max-width: 1024px) {
       .mockup-grid {
         grid-template-columns: repeat(2, 1fr);
       }
       .mockup-categories {
         grid-template-columns: 1fr;
+      }
+      .categories-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
       }
       .footer-grid {
         grid-template-columns: 1fr 1fr;
@@ -1125,6 +1143,7 @@
       }
       .hero-controls-bar {
         position: fixed !important;
+        top: auto !important;
         bottom: calc(65px + 15px + env(safe-area-inset-bottom)) !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
@@ -1202,6 +1221,15 @@
       }
       .mockup-advantages {
         padding: 40px 4% 60px !important;
+      }
+      .advantages-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+        padding: 20px 15px !important;
+      }
+      .categories-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
       }
 
       .slide-content h1 {
@@ -2469,7 +2497,7 @@
 
   <!-- Categories Showcase Section (Stacked vertically 100% width) -->
   <section class="mockup-categories" style="padding: 60px 4%; background: #fafafa;">
-    <div class="categories-grid" style="display: flex; flex-direction: column; gap: 20px; max-width: 1200px; margin: 0 auto; width: 100%;">
+    <div class="categories-grid">
       <!-- Category 1: Taśmy LED -->
       <a href="shop.html?category=Ta%C5%9Bmy%20LED" class="category-card" style="position: relative; overflow: hidden; border-radius: 16px; height: 280px; text-decoration: none; display: flex; align-items: flex-end; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); width: 100%;">
         <div class="category-bg" style="position: absolute; top:0; left:0; width:100%; height:100%; background-image: url('images/products/tasma_4000k.webp'); background-size: cover; background-position: center; transition: transform 0.6s ease;"></div>
@@ -3048,7 +3076,7 @@
   
   <!-- Advantages Section -->
   <section class="mockup-advantages" style="padding: 40px 8% 80px; background: #ffffff; border: none;">
-    <div style="max-width: 900px; margin: 0 auto; background: #fafafa; border-radius: 16px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; text-align: center;">
+    <div class="advantages-grid">
       <!-- Advantage 1 -->
       <div class="advantage-item" style="padding: 20px; transition: transform 0.3s ease;">
         <div style="width: 70px; height: 70px; background: rgba(255, 90, 0, 0.05); color: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; transition: all 0.3s;">
