@@ -189,15 +189,17 @@
 
     .summary-img-wrapper {
       position: relative;
+      flex-shrink: 0;
     }
 
     .summary-product-img {
       width: 64px;
-      height: 80px;
+      height: 64px;
       object-fit: cover;
-      border-radius: 4px;
+      border-radius: 6px;
       background: #fff;
       border: 1px solid #e1e1e1;
+      aspect-ratio: 1 / 1;
     }
 
     .summary-product-qty {
@@ -206,7 +208,7 @@
       right: -8px;
       width: 20px;
       height: 20px;
-      background: #777;
+      background: var(--primary-color);
       color: #fff;
       font-size: 11px;
       font-weight: 600;
@@ -214,28 +216,38 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
     }
 
     .summary-product-details {
       flex-grow: 1;
+      min-width: 0;
     }
 
     .summary-product-title {
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--primary-color);
       margin-bottom: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .summary-product-meta {
       font-size: 12px;
       color: #777;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .summary-product-price {
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--primary-color);
+      flex-shrink: 0;
+      white-space: nowrap;
     }
 
     /* Subtotal card */

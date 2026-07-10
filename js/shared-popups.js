@@ -646,7 +646,7 @@ export function initSharedPopups() {
   }
 
   // --- CONNECT ADD TO WISHLIST BUTTONS ON PRODUCTS ---
-  document.querySelectorAll('.add-to-wishlist-btn, .mockup-product-card .action-btn-circle:first-child').forEach(btn => {
+  document.querySelectorAll('.add-to-wishlist-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
@@ -860,7 +860,7 @@ export function initSharedPopups() {
 
     document.getElementById('qvCategory').textContent = selectedProduct.category;
     document.getElementById('qvTitle').textContent = selectedProduct.title;
-    document.getElementById('qvPrice').textContent = `${selectedProduct.price.toFixed(2)} zł`;
+    document.getElementById('qvPrice').innerHTML = `${selectedProduct.price.toFixed(2)} zł <span style="font-size: 14px; font-weight: normal; color: #888; margin-left: 5px;">/ ${selectedProduct.category === "Taśmy LED" ? "metr" : "szt."}</span>`;
     document.getElementById('qvDesc').textContent = selectedProduct.description;
 
     const colorsDiv = document.getElementById('qvColors');
@@ -1053,6 +1053,33 @@ export function initSharedPopups() {
 
   // --- CONNECT INTERACTIVE BUTTONS WITH REAL IDs (EVENT DELEGATION) ---
   document.addEventListener('click', (e) => {
+    // 0. Add to wishlist
+    const wishlistBtn = e.target.closest('.qv-wishlist-btn') || e.target.closest('.add-to-wishlist-btn');
+    if (wishlistBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      const pId = parseInt(wishlistBtn.dataset.id || wishlistBtn.closest('.mockup-product-card')?.dataset.id || (new URLSearchParams(window.location.search).get('id') || 1));
+      const p = products.find(prod => prod.id === pId);
+      if (!p) return;
+
+      wishlist = JSON.parse(localStorage.getItem('cooken_wishlist')) || [];
+      const existing = wishlist.find(item => item.id === p.id);
+      
+      if (!existing) {
+        wishlist.push({
+          id: p.id,
+          title: p.title,
+          price: p.price,
+          image: p.images[0]
+        });
+        updateWishlistStorage();
+        showToast('Dodano produkt do listy życzeń!', 'wishlist');
+      } else {
+        showToast('Produkt jest już na Twojej liście życzeń.', 'info');
+      }
+      return;
+    }
+
     // 1. Quick add to cart
     const addCartBtn = e.target.closest('.qv-add-cart-btn');
     if (addCartBtn) {
@@ -1193,8 +1220,8 @@ export function initSharedPopups() {
                 <video class="mockup-product-video" src="${p.video}" loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
               ` : ''}
               <div class="product-actions-hover">
-                <button class="action-btn-circle qv-add-cart-btn" data-id="${p.id}" aria-label="Dodaj do koszyka">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                <button class="action-btn-circle qv-wishlist-btn" data-id="${p.id}" aria-label="Dodaj do listy życzeń">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                 </button>
                 <button class="action-btn-circle qv-eye-btn" data-id="${p.id}" aria-label="Szybki podgląd">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
@@ -1208,6 +1235,9 @@ export function initSharedPopups() {
               <p class="mockup-product-price">
                 ${p.price.toFixed(2)} zł <span class="price-unit">/ ${p.category === 'Taśmy LED' ? 'metr' : 'szt.'}</span>
               </p>
+              <button class="mockup-btn qv-add-cart-btn" data-id="${p.id}" style="width: 100%; margin-top: 12px; padding: 10px 20px !important; font-size: 11px !important;">
+                Dodaj do koszyka
+              </button>
             </div>
           </div>
         `;
