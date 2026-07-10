@@ -1118,9 +1118,6 @@
       .mockup-search-container, .wishlist-trigger, .mockup-action-icon[aria-label="Konto użytkownika"] {
         display: none !important;
       }
-      .mockup-header-logo img {
-        filter: brightness(0) !important; /* Force logo to be visible black on white mobile header */
-      }
       .mockup-header {
         display: flex;
         justify-content: space-between;
@@ -1142,26 +1139,55 @@
         display: block;
       }
       .hero-controls-bar {
-        position: fixed !important;
+        position: absolute !important;
         top: auto !important;
-        bottom: calc(65px + 15px + env(safe-area-inset-bottom)) !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        width: calc(100% - 30px) !important;
-        max-width: 480px !important;
-        height: 52px !important;
-        background: rgba(255, 255, 255, 0.45) !important;
-        backdrop-filter: blur(20px) saturate(180%) !important;
-        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-        border-radius: 99px !important;
-        border: 1px solid rgba(255, 255, 255, 0.45) !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12) !important;
+        bottom: 30px !important;
+        left: 0 !important;
+        transform: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        background: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-radius: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
         display: flex !important;
         align-items: center !important;
         justify-content: space-between !important;
-        padding: 0 15px !important;
-        z-index: 1500 !important;
+        padding: 0 20px !important;
+        z-index: 100 !important;
+        pointer-events: none !important;
+      }
+      .hero-controls-bar .slider-arrow,
+      .hero-controls-bar .scroll-down-arrow {
         pointer-events: auto !important;
+      }
+      .hero-controls-bar .slider-arrow {
+        position: static !important;
+        width: 44px !important;
+        height: 44px !important;
+        background: rgba(255, 255, 255, 0.15) !important;
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+      }
+      .hero-controls-bar .scroll-down-arrow {
+        position: static !important;
+        transform: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-decoration: none !important;
+        z-index: 100 !important;
+        order: 2 !important;
       }
       .slider-arrows {
         display: contents !important;
@@ -2159,7 +2185,7 @@
 
     /* Search bar scrolled states - turns dark navy when header is scrolled */
     .mockup-header.scrolled .mockup-search-container {
-      background: rgba(11, 26, 48, 0.05) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
       border-color: #0b1a30 !important;
     }
     .mockup-header.scrolled .mockup-search-container input {
@@ -2174,6 +2200,19 @@
     }
 
     /* --- GLOBAL STYLING ALIGNMENTS (BUTTONS, PRICES, CARDS) --- */
+    /* Search Input Thicker Font and Autofill Reset */
+    .mockup-search-container input {
+      font-weight: 700 !important;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 1000px #f3f3f3 inset !important;
+      -webkit-text-fill-color: #0b1a30 !important;
+      transition: background-color 5000s ease-in-out 0s !important;
+    }
+
     .mockup-product-card {
       background: var(--white) !important;
       position: relative !important;
@@ -2255,7 +2294,7 @@
       font-size: 15px !important;
       font-weight: 700 !important;
       color: var(--primary-color) !important;
-      background: rgba(11, 26, 48, 0.05) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
       padding: 6px 14px !important;
       border-radius: 20px !important;
       display: inline-flex !important;

@@ -396,7 +396,7 @@
         display: none !important;
       }
       .mockup-header-logo img {
-        filter: brightness(0) !important; /* Force logo to be visible black on white mobile header */
+         /* Force logo to be visible black on white mobile header */
       }
       .mockup-header {
         padding: 15px 5%;
@@ -936,7 +936,7 @@
 
     /* Search bar scrolled states - turns dark navy when header is scrolled */
     .mockup-header.scrolled .mockup-search-container {
-      background: rgba(11, 26, 48, 0.05) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
       border-color: #0b1a30 !important;
     }
     .mockup-header.scrolled .mockup-search-container input {
@@ -951,6 +951,19 @@
     }
 
     /* --- GLOBAL STYLING ALIGNMENTS (BUTTONS, PRICES, CARDS) --- */
+    /* Search Input Thicker Font and Autofill Reset */
+    .mockup-search-container input {
+      font-weight: 700 !important;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 1000px #f3f3f3 inset !important;
+      -webkit-text-fill-color: #0b1a30 !important;
+      transition: background-color 5000s ease-in-out 0s !important;
+    }
+
     .mockup-product-card {
       background: var(--white) !important;
       position: relative !important;
@@ -1032,7 +1045,7 @@
       font-size: 15px !important;
       font-weight: 700 !important;
       color: var(--primary-color) !important;
-      background: rgba(11, 26, 48, 0.05) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
       padding: 6px 14px !important;
       border-radius: 20px !important;
       display: inline-flex !important;

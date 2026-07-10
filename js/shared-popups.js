@@ -379,7 +379,7 @@ function injectNewsletterPopup() {
 function injectSearchOverlay() {
   const searchHTML = `
     <!-- Top Search Drawer Overlay -->
-    <div id="searchDrawer" style="position: fixed; top: -250px; left: 0; width: 100vw; background: #fff; box-shadow: 0 15px 40px rgba(0,0,0,0.1); z-index: 2050; transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1); padding: 35px 8%; display: flex; flex-direction: column; gap: 20px;">
+    <div id="searchDrawer" style="position: fixed; top: -650px; left: 0; width: 100vw; background: #fff; box-shadow: 0 15px 40px rgba(0,0,0,0.1); z-index: 2050; transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1); padding: 35px 8%; display: flex; flex-direction: column; gap: 20px;">
       <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
         <div style="position: relative; flex-grow: 1; margin-right: 30px;">
           <input type="text" id="pcSearchInput" placeholder="Czego dzisiaj szukasz? (np. misa, fartuch, kubek...)" style="width: 100%; border: none; border-bottom: 2px solid #1a1a1a; padding: 15px 0; font-size: 20px; font-family: 'Outfit', sans-serif; outline: none; font-weight: 500; background: transparent;">
@@ -1132,7 +1132,7 @@ export function initSharedPopups() {
   }
 
   function closeSearch() {
-    searchDrawer.style.top = '-250px';
+    searchDrawer.style.top = '-650px';
     searchDrawerOverlay.style.opacity = '0';
     searchDrawerOverlay.style.pointerEvents = 'none';
     pcSearchInput.value = '';
@@ -1169,16 +1169,49 @@ export function initSharedPopups() {
         return;
       }
 
-      pcSearchSuggestions.innerHTML = filtered.map(p => `
-        <a href="product.html?id=${p.id}" class="suggest-card">
-          <img src="${p.images[0]}" style="width: 50px; height: 65px; object-fit: cover; border-radius: 2px; background: #f7f7f7;">
-          <div style="flex-grow: 1; min-width: 0; text-align: left;">
-            <div style="font-size: 9px; text-transform: uppercase; color: #999; letter-spacing: 1px; margin-bottom: 2px;">${p.category}</div>
-            <h4 style="font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #1a1a1a; margin-bottom: 4px; font-family: 'Inter', sans-serif;">${p.title}</h4>
-            <div style="font-size: 12px; font-weight: 700; color: #ff4d4d;">${p.price.toFixed(2)} zł</div>
+      pcSearchSuggestions.innerHTML = filtered.map(p => {
+        let thirdBtn = '';
+        if (p.has3D) {
+          thirdBtn = `
+            <button class="action-btn-circle qv-3d-btn" data-id="${p.id}" aria-label="Podgląd 3D">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </button>
+          `;
+        } else if (p.has360) {
+          thirdBtn = `
+            <button class="action-btn-circle qv-360-btn" data-id="${p.id}" aria-label="Podgląd 360">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+            </button>
+          `;
+        }
+
+        return `
+          <div class="mockup-product-card" data-id="${p.id}">
+            <div class="mockup-product-media" style="position: relative; overflow: hidden; width: 100%; aspect-ratio: 1/1;">
+              <img src="${p.images[0]}" alt="${p.title}" class="mockup-product-img">
+              ${p.video ? `
+                <video class="mockup-product-video" src="${p.video}" loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
+              ` : ''}
+              <div class="product-actions-hover">
+                <button class="action-btn-circle qv-add-cart-btn" data-id="${p.id}" aria-label="Dodaj do koszyka">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                </button>
+                <button class="action-btn-circle qv-eye-btn" data-id="${p.id}" aria-label="Szybki podgląd">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+                ${thirdBtn}
+              </div>
+            </div>
+            <div class="mockup-product-info">
+              <p class="mockup-product-category">${p.category}</p>
+              <h3 class="mockup-product-title"><a href="product.html?id=${p.id}">${p.title}</a></h3>
+              <p class="mockup-product-price">
+                ${p.price.toFixed(2)} zł <span class="price-unit">/ ${p.category === 'Taśmy LED' ? 'metr' : 'szt.'}</span>
+              </p>
+            </div>
           </div>
-        </a>
-      `).join('');
+        `;
+      }).join('');
     });
   }
 
