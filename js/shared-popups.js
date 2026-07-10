@@ -616,6 +616,14 @@ export function initSharedPopups() {
       box-shadow: 0 8px 25px rgba(0,0,0,0.05);
       transform: translateY(-2px);
     }
+    @media (max-width: 768px) {
+      #cartDrawer > div:last-child {
+        padding-bottom: 85px !important;
+      }
+      #wishlistDrawer > div:last-child {
+        padding-bottom: 85px !important;
+      }
+    }
   `;
   document.head.appendChild(styleEl);
 
@@ -1490,7 +1498,7 @@ export function initSharedPopups() {
             <div class="mockup-product-media" style="position: relative; overflow: hidden; width: 100%; aspect-ratio: 1/1;">
               <img src="${p.images[0]}" alt="${p.title}" class="mockup-product-img">
               ${p.video ? `
-                <video class="mockup-product-video" src="${p.video}" loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
+                <video class="mockup-product-video" src="${p.video}" loop muted playsinline autoplay style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
               ` : ''}
               <div class="product-actions-hover">
                 <button class="action-btn-circle qv-wishlist-btn" data-id="${p.id}" aria-label="Dodaj do listy życzeń">
@@ -1746,9 +1754,31 @@ export function initSharedPopups() {
     });
   }
 
-  // --- MOBILE AUTO-PLAY FOR PREVIEW VIDEOS (INTERSECTION OBSERVER) ---
-  function initMobileVideoAutoplay() {
+  // --- GLOBAL CARD HOVER & MOBILE VIEWPORT AUTOPLAY FOR VIDEOS ---
+  function initGlobalCardVideos() {
     const cards = document.querySelectorAll('.mockup-product-card');
+    
+    // Bind Hover for Desktop
+    cards.forEach(card => {
+      const video = card.querySelector('.mockup-product-video');
+      if (!video) return;
+
+      card.addEventListener('mouseenter', () => {
+        if (card.videoTimeout) clearTimeout(card.videoTimeout);
+        video.play()
+          .then(() => { video.style.opacity = '1'; })
+          .catch(err => { console.log("Hover video play blocked:", err); });
+      });
+
+      card.addEventListener('mouseleave', () => {
+        if (card.videoTimeout) clearTimeout(card.videoTimeout);
+        video.style.opacity = '0';
+        video.pause();
+        video.currentTime = 0;
+      });
+    });
+
+    // Bind IntersectionObserver for Mobile
     const observerOptions = {
       root: null,
       rootMargin: '0px',
@@ -1764,8 +1794,12 @@ export function initSharedPopups() {
         if (entry.isIntersecting) {
           if (card.videoTimeout) clearTimeout(card.videoTimeout);
           card.videoTimeout = setTimeout(() => {
-            video.style.opacity = '1';
-            video.play().catch(err => console.log("Video autoplay interrupted:", err));
+            video.play()
+              .then(() => { video.style.opacity = '1'; })
+              .catch(err => {
+                console.log("Viewport autoplay play blocked:", err);
+                video.style.opacity = '0';
+              });
           }, 1000);
         } else {
           if (card.videoTimeout) {
@@ -1782,5 +1816,5 @@ export function initSharedPopups() {
     cards.forEach(card => observer.observe(card));
   }
 
-  initMobileVideoAutoplay();
+  initGlobalCardVideos();
 }

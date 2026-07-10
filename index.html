@@ -1074,7 +1074,7 @@
         height: 100vh !important;
       }
       .slide {
-        padding: 0 15px 230px 15px !important;
+        padding: 0 15px 150px 15px !important;
         display: flex;
         justify-content: center;
         align-items: flex-end;
@@ -1141,7 +1141,7 @@
       .hero-controls-bar {
         position: absolute !important;
         top: auto !important;
-        bottom: 90px !important;
+        bottom: 80px !important;
         left: 0 !important;
         transform: none !important;
         width: 100% !important;
@@ -3609,7 +3609,7 @@
             <div class="mockup-product-media" style="position: relative; overflow: hidden;">
               <img src="${p.images[0]}" alt="${p.title}" class="mockup-product-img">
               ${p.video ? `
-                <video class="mockup-product-video" src="${p.video}" loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
+                <video class="mockup-product-video" src="${p.video}" loop muted playsinline autoplay style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
               ` : ''}
               ${badge}
               <div class="product-actions-hover">
@@ -3635,22 +3635,6 @@
           </div>
         `;
         trendingGrid.insertAdjacentHTML('beforeend', cardHTML);
-      });
-
-      // Bind hover events for video play/pause
-      document.querySelectorAll('.mockup-product-card').forEach(card => {
-        const video = card.querySelector('.mockup-product-video');
-        if (video) {
-          card.addEventListener('mouseenter', () => {
-            video.style.opacity = '1';
-            video.play().catch(err => console.log("Video play interrupted:", err));
-          });
-          card.addEventListener('mouseleave', () => {
-            video.style.opacity = '0';
-            video.pause();
-            video.currentTime = 0;
-          });
-        }
       });
     }
 
