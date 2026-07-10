@@ -817,7 +817,7 @@
         position: absolute;
         top: calc(100% + 15px) !important; /* dymek z odstepem */
         left: 50% !important;
-        transform: translateX(-50%) perspective(1000px) rotateX(-10deg) scale(0.95) !important;
+        transform: translateX(-50%) translateY(15px) !important;
         background: #ffffff !important; /* white block like filter widget */
         backdrop-filter: blur(20px) saturate(180%) !important;
         -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
@@ -975,7 +975,149 @@
     .mockup-header.scrolled .mockup-search-container button svg {
       stroke: #0b1a30 !important;
     }
-</style>
+
+    /* --- GLOBAL STYLING ALIGNMENTS (BUTTONS, PRICES, CARDS) --- */
+    .mockup-product-card {
+      background: var(--white) !important;
+      position: relative !important;
+      cursor: pointer !important;
+      border-radius: 12px !important;
+      overflow: hidden !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
+      transition: all 0.3s ease !important;
+      border: 1px solid rgba(0, 0, 0, 0.02) !important;
+      padding: 15px !important;
+      text-align: center !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 10px !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    .mockup-product-card:hover {
+      transform: translateY(-6px) !important;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.09) !important;
+      border-color: transparent !important;
+    }
+    .mockup-product-media {
+      position: relative !important;
+      width: 100% !important;
+      aspect-ratio: 1 / 1 !important;
+      height: auto !important;
+      overflow: hidden !important;
+      background-color: var(--light-bg) !important;
+      border-radius: 8px !important;
+      padding: 0 !important;
+      margin-bottom: 5px !important;
+    }
+    .mockup-product-img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      transition: all 0.3s ease !important;
+    }
+    .mockup-product-card:hover .mockup-product-img {
+      transform: scale(1.05) !important;
+    }
+    .mockup-product-info {
+      padding: 10px 0 0 !important;
+      text-align: center !important;
+      width: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+    }
+    .mockup-product-category {
+      font-size: 11px !important;
+      color: #999 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 1px !important;
+      margin-bottom: 5px !important;
+    }
+    .mockup-product-title {
+      font-size: 16px !important;
+      margin-bottom: 8px !important;
+      font-weight: 500 !important;
+      transition: all 0.3s ease !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      width: 100% !important;
+    }
+    .mockup-product-title a {
+      text-decoration: none !important;
+      color: var(--primary-color) !important;
+    }
+    .mockup-product-card:hover .mockup-product-title a {
+      color: var(--accent-color) !important;
+    }
+    
+    /* Price badge style */
+    .mockup-product-price {
+      font-size: 15px !important;
+      font-weight: 700 !important;
+      color: var(--primary-color) !important;
+      background: rgba(11, 26, 48, 0.05) !important;
+      padding: 6px 14px !important;
+      border-radius: 20px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 4px !important;
+      margin: 8px auto 14px auto !important;
+      width: max-content !important;
+    }
+    .mockup-product-price span.price-unit {
+      font-size: 12px !important;
+      font-weight: 500 !important;
+      color: #777 !important;
+      margin-left: 2px !important;
+    }
+    
+    /* Global CTA/Cart/Order Buttons overrides */
+    .mockup-btn, 
+    .add-to-cart-btn, 
+    .checkout-btn, 
+    .submit-order-btn {
+      background: var(--primary-color) !important;
+      color: var(--white) !important;
+      border: 2px solid var(--primary-color) !important;
+      border-radius: 99px !important;
+      padding: 14px 36px !important;
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      letter-spacing: 1px !important;
+      text-transform: uppercase !important;
+      cursor: pointer !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      transition: all 0.3s ease !important;
+      box-shadow: 0 4px 15px rgba(11,26,48,0.15) !important;
+      text-decoration: none !important;
+    }
+    
+    .mockup-btn:hover, 
+    .add-to-cart-btn:hover, 
+    .checkout-btn:hover, 
+    .submit-order-btn:hover,
+    .mockup-btn:active, 
+    .add-to-cart-btn:active, 
+    .checkout-btn:active, 
+    .submit-order-btn:active {
+      background: #ffffff !important;
+      color: var(--primary-color) !important;
+      border-color: var(--primary-color) !important;
+      box-shadow: 0 6px 20px rgba(11,26,48,0.1) !important;
+    }
+    
+    .mockup-btn:hover .btn-txt-default,
+    .mockup-btn:hover .btn-txt-hover {
+      color: var(--primary-color) !important;
+    }
+
+    /* --- END GLOBAL STYLING ALIGNMENTS */</style>
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
@@ -1289,7 +1431,7 @@
     <div class="footer-grid">
       <div class="footer-col">
         <div class="footer-logo">
-          <img src="images/logo.png" alt="Prescot Logo" style="height: 35px; max-width: 100%;">
+          <img src="images/logo-white.png" alt="Prescot Logo" style="height: 35px; max-width: 100%;">
         </div>
         <p style="margin-top: 15px;">Prescot LED to profesjonalny dostawca najwyższej jakości taśm LED, profili
           aluminiowych, nowoczesnych sterowników oraz niezawodnych zasilaczy hermetycznych.</p>

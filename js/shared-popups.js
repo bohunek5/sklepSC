@@ -40,18 +40,24 @@ function showToast(message, type = 'success') {
   `;
 
   let icon = '<i class="ph ph-check-circle" style="color: #2e7d32; font-size: 20px;"></i>';
-  if (type === 'cart') {
-    icon = '<i class="ph ph-shopping-cart-simple" style="color: var(--primary-color); font-size: 20px;"></i>';
+  let isCart = type === 'cart';
+  if (isCart) {
+    icon = '';
   } else if (type === 'wishlist') {
     icon = '<i class="ph ph-heart" style="color: #c62828; font-size: 20px;"></i>';
   } else if (type === 'info') {
     icon = '<i class="ph ph-info" style="color: #00838f; font-size: 20px;"></i>';
   }
 
+  let messageContent = message;
+  if (isCart) {
+    messageContent = `${message} <i class="ph ph-shopping-cart" style="font-size: 16px; margin-left: 8px; vertical-align: middle;"></i>`;
+  }
+
   toast.innerHTML = `
     ${icon}
     <div style="flex-grow: 1; display: flex; align-items: center;">
-      <div style="font-size: 13px; font-weight: 600; line-height: 1; color: var(--primary-color);">${message}</div>
+      <div style="font-size: 13px; font-weight: 600; line-height: 1; color: var(--primary-color);">${messageContent}</div>
     </div>
     <button style="background: none; border: none; color: var(--primary-color); font-size: 18px; cursor: pointer; padding: 0; outline: none; margin-left: 10px; opacity: 0.6;">&times;</button>
     <div style="position: absolute; bottom: 0; left: 0; height: 3px; background: var(--primary-color); width: 100%; transition: width 3s linear;"></div>
