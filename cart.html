@@ -797,71 +797,152 @@
       cursor: pointer !important;
     }
 
-    /* Premium floating bubble mega menu on PC */
+        /* Premium floating bubble mega menu on PC */
     @media (min-width: 769px) {
       .mockup-nav .magic-dropdown {
         position: absolute;
         top: calc(100% + 15px) !important; /* dymek z odstepem */
-        left: 50%;
-        transform: translateX(-50%) perspective(1000px) rotateX(-10deg) scale(0.95);
+        left: 50% !important;
+        transform: translateX(-50%) perspective(1000px) rotateX(-10deg) scale(0.95) !important;
         background: #ffffff !important; /* white block like filter widget */
         backdrop-filter: blur(20px) saturate(180%) !important;
         -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
         box-shadow: 0 25px 50px rgba(0,0,0,0.08) !important;
         border-radius: 24px !important; /* more rounded border */
         border: 1px solid rgba(0, 0, 0, 0.08) !important; /* light border */
-        width: 600px;
+        width: 900px !important;
         opacity: 0;
         visibility: hidden;
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        z-index: 1000;
-        padding: 25px;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        z-index: 1000 !important;
+        padding: 40px !important;
         overflow: visible !important;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 30px;
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 30px !important;
         pointer-events: none;
       }
       
       /* Pointer Arrow at the top of the bubble */
       .mockup-nav .magic-dropdown::before {
-        content: '';
-        position: absolute;
-        bottom: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0;
-        height: 0;
-        border-left: 10px solid transparent;
-        border-right: 10px solid transparent;
-        border-bottom: 10px solid #ffffff;
-        pointer-events: none;
-        z-index: 1001;
+        content: '' !important;
+        position: absolute !important;
+        bottom: 100% !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 0 !important;
+        height: 0 !important;
+        border-left: 10px solid transparent !important;
+        border-right: 10px solid transparent !important;
+        border-bottom: 10px solid #ffffff !important;
+        pointer-events: none !important;
+        z-index: 1001 !important;
       }
       
       /* Invisible hover bridge */
       .mockup-nav .magic-dropdown::after {
-        content: '';
-        position: absolute;
-        bottom: 100%;
-        left: 0;
-        width: 100%;
-        height: 20px;
-        background: transparent;
+        content: '' !important;
+        position: absolute !important;
+        bottom: 100% !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 20px !important;
+        background: transparent !important;
+      }
+      
+      .mockup-nav .magic-dropdown-section {
+        border-right: none !important;
+        border-left: none !important;
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+        grid-column: auto !important;
+        grid-row: auto !important;
+      }
+      
+      .mockup-nav .magic-dropdown-section:not(:last-child) {
+        border-right: 1px solid #eee !important;
+        padding-right: 20px !important;
       }
       
       .mockup-nav .magic-dropdown-title {
-        color: #0b1a30 !important; /* ciemny napis */
-        border-bottom: 1px solid rgba(0,0,0,0.06) !important;
+        font-family: 'Outfit', sans-serif !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1.5px !important;
+        color: var(--primary-color) !important;
+        margin-bottom: 20px !important;
+        padding-bottom: 10px !important;
+        border-bottom: 1px solid #eee !important;
+        transform: none !important;
+      }
+      
+      .mockup-nav .magic-dropdown ul {
+        list-style: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      
+      .mockup-nav .magic-dropdown ul li {
+        margin-bottom: 12px !important;
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
       }
       
       .mockup-nav .magic-dropdown ul li a {
-        color: #0b1a30 !important; /* ciemne napisy */
+        font-size: 14px !important;
+        color: #666 !important;
+        text-decoration: none !important;
+        font-weight: normal !important;
+        transition: color 0.2s ease !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0 !important;
       }
       
       .mockup-nav .magic-dropdown ul li a:hover {
-        background: rgba(11, 26, 48, 0.05) !important;
         color: var(--accent-color) !important;
+        font-weight: 600 !important;
+        background: transparent !important;
+      }
+      
+      /* Color dots in mega menu */
+      .mega-color-dots {
+        display: flex !important;
+        gap: 10px !important;
+        flex-wrap: wrap !important;
+        margin-top: 15px !important;
+      }
+      .mega-color-dot {
+        width: 24px !important;
+        height: 24px !important;
+        border-radius: 50% !important;
+        border: 1px solid #ddd !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+      }
+      .mega-color-dot:hover {
+        transform: scale(1.15) !important;
+        outline: 1.5px solid var(--primary-color) !important;
+        outline-offset: 2px !important;
+      }
+      
+      /* Search Input inside mega menu */
+      .mega-search-input {
+        width: 100% !important;
+        padding: 12px 15px !important;
+        border: 1px solid #ddd !important;
+        border-radius: 8px !important;
+        font-size: 14px !important;
+        outline: none !important;
+        transition: border-color 0.2s ease !important;
+        margin-top: 15px !important;
+        font-family: inherit !important;
+      }
+      .mega-search-input:focus {
+        border-color: var(--primary-color) !important;
       }
     }
 
@@ -898,23 +979,45 @@
           <a href="shop.html">Sklep <i class="ph ph-caret-down" style="font-size: 12px; margin-left: 4px;"></i></a>
           
           
-          <div class="magic-dropdown" id="magicShopMenu">
+                    <div class="magic-dropdown" id="magicShopMenu">
+            <!-- Column 1: SZUKAJ -->
             <div class="magic-dropdown-section">
-              <div class="magic-dropdown-title">Oświetlenie LED</div>
+              <div class="magic-dropdown-title">Szukaj</div>
+              <input type="text" class="mega-search-input" placeholder="Szukaj produktu..." onkeydown="if(event.key === 'Enter') window.location.href='shop.html?search=' + encodeURIComponent(this.value)">
+            </div>
+            
+            <!-- Column 2: KATEGORIE -->
+            <div class="magic-dropdown-section">
+              <div class="magic-dropdown-title">Kategorie</div>
               <ul>
-                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-lightning"></i> Taśmy LED COB</a></li>
-                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-aperture"></i> Taśmy LED SMD</a></li>
-                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-magic-wand"></i> Taśmy Neony</a></li>
-                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-package"></i> Zestawy LED</a></li>
+                <li><a href="shop.html?category=Ta%C5%9Bmy%20LED">Taśmy LED</a></li>
+                <li><a href="shop.html?category=Sterowniki%20LED">Sterowniki LED</a></li>
+                <li><a href="shop.html?category=Zasilacze%20LED">Zasilacze LED</a></li>
+                <li><a href="shop.html?category=3D%20%26%20AR">3D & AR</a></li>
               </ul>
             </div>
+            
+            <!-- Column 3: KOLOR -->
             <div class="magic-dropdown-section">
-              <div class="magic-dropdown-title">Akcesoria i Zasilanie</div>
+              <div class="magic-dropdown-title">Kolor</div>
+              <div class="mega-color-dots">
+                <div class="mega-color-dot" onclick="window.location.href='shop.html?color=all'" style="background: linear-gradient(45deg, #f00, #0f0, #00f);" title="Wszystkie"></div>
+                <div class="mega-color-dot" onclick="window.location.href='shop.html?color=%23000000'" style="background: #000;" title="Czarny"></div>
+                <div class="mega-color-dot" onclick="window.location.href='shop.html?color=%23ffffff'" style="background: #fff; border: 1px solid #ddd;" title="Biały"></div>
+                <div class="mega-color-dot" onclick="window.location.href='shop.html?color=%23556b2f'" style="background: #556b2f;" title="Oliwkowy"></div>
+                <div class="mega-color-dot" onclick="window.location.href='shop.html?color=%23ff8c00'" style="background: #ff8c00;" title="Pomarańczowy"></div>
+                <div class="mega-color-dot" onclick="window.location.href='shop.html?color=%231e90ff'" style="background: #1e90ff;" title="Niebieski"></div>
+              </div>
+            </div>
+            
+            <!-- Column 4: CENA -->
+            <div class="magic-dropdown-section">
+              <div class="magic-dropdown-title">Cena</div>
               <ul>
-                <li><a href="shop.html?cat=Sterowniki%20LED"><i class="ph ph-faders"></i> Sterowniki LED</a></li>
-                <li><a href="shop.html?cat=Zasilacze"><i class="ph ph-plug"></i> Zasilacze Hermetyczne</a></li>
-                <li><a href="shop.html?cat=Profile"><i class="ph ph-minus"></i> Profile aluminiowe</a></li>
-                <li><a href="shop.html?cat=Akcesoria"><i class="ph ph-plugs-connected"></i> Kable i złączki</a></li>
+                <li><a href="shop.html?price=all">Wszystkie ceny</a></li>
+                <li><a href="shop.html?price=0-50">$0.00 - $50.00</a></li>
+                <li><a href="shop.html?price=50-100">$50.00 - $100.00</a></li>
+                <li><a href="shop.html?price=100+">$100.00+</a></li>
               </ul>
             </div>
           </div>
