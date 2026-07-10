@@ -71,7 +71,7 @@ const defaultProducts = [
         "id": 1004,
         "name": "RGBW",
         "image": "images/products/controller_rgbw.webp",
-        "video": "/videos/rgb_salon.mp4"
+        "video": "/videos/SALON%20RGBW%20CZAD.mp4"
       },
       {
         "id": 1005,
@@ -117,7 +117,7 @@ const defaultProducts = [
         "id": 1004,
         "name": "RGBW",
         "image": "images/products/controller_rgbw.webp",
-        "video": "/videos/rgb_salon.mp4"
+        "video": "/videos/SALON%20RGBW%20CZAD.mp4"
       },
       {
         "id": 1005,
@@ -163,7 +163,7 @@ const defaultProducts = [
         "id": 1004,
         "name": "RGBW",
         "image": "images/products/controller_rgbw.webp",
-        "video": "/videos/rgb_salon.mp4"
+        "video": "/videos/SALON%20RGBW%20CZAD.mp4"
       },
       {
         "id": 1005,
@@ -185,7 +185,7 @@ const defaultProducts = [
     ],
     "colors": [],
     "sizes": [],
-    "video": "/videos/rgb_salon.mp4",
+    "video": "/videos/SALON%20RGBW%20CZAD.mp4",
     "variants": [
       {
         "id": 1001,
@@ -209,7 +209,7 @@ const defaultProducts = [
         "id": 1004,
         "name": "RGBW",
         "image": "images/products/controller_rgbw.webp",
-        "video": "/videos/rgb_salon.mp4"
+        "video": "/videos/SALON%20RGBW%20CZAD.mp4"
       },
       {
         "id": 1005,
@@ -255,7 +255,7 @@ const defaultProducts = [
         "id": 1004,
         "name": "RGBW",
         "image": "images/products/controller_rgbw.webp",
-        "video": "/videos/rgb_salon.mp4"
+        "video": "/videos/SALON%20RGBW%20CZAD.mp4"
       },
       {
         "id": 1005,
@@ -362,6 +362,14 @@ const defaultProducts = [
 
 function getProducts() {
   if (typeof window !== 'undefined' && localStorage) {
+    // Clear stale local storage cache with versioning
+    const cacheVersion = "v6";
+    const storedVersion = localStorage.getItem('sklepSC_products_version');
+    if (storedVersion !== cacheVersion) {
+      localStorage.removeItem('sklepSC_products');
+      localStorage.setItem('sklepSC_products_version', cacheVersion);
+    }
+
     const localStr = localStorage.getItem('sklepSC_products');
     if (localStr) {
       try {
