@@ -998,10 +998,216 @@
     .product-icon-item i {
         font-size: 18px;
     }
-    
 
-    
-    
+    /* === PRODUCT ACTION PILLS === */
+    .product-action-pill {
+      padding: 9px 18px;
+      border-radius: 99px;
+      border: 1px solid rgba(0,0,0,0.12);
+      background: #fff;
+      color: var(--primary-color);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .product-action-pill:hover {
+      background: var(--primary-color);
+      color: #fff;
+      border-color: var(--primary-color);
+    }
+
+    /* === POPUP OVERLAY === */
+    .product-popup-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeInOverlay 0.3s ease;
+    }
+    @keyframes fadeInOverlay { from { opacity: 0; } to { opacity: 1; } }
+    .product-popup-box {
+      background: #fff;
+      border-radius: 20px;
+      padding: 35px 40px;
+      max-width: 520px;
+      width: 90%;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+      animation: popIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes popIn { from { transform: scale(0.9) translateY(20px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+    .popup-close {
+      position: absolute;
+      top: 15px; right: 18px;
+      background: none; border: none;
+      font-size: 20px; cursor: pointer;
+      color: #999;
+      transition: color 0.2s;
+    }
+    .popup-close:hover { color: #000; }
+    .product-popup-box h3 {
+      margin-bottom: 20px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    /* === SPEC TABLE === */
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .spec-table td {
+      padding: 10px 0;
+      font-size: 14px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .spec-table td:first-child {
+      color: #888;
+      width: 45%;
+    }
+    .spec-table td:last-child {
+      text-align: right;
+    }
+
+    /* === COLOR TEMP GRID === */
+    .color-temp-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .color-temp-option {
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .color-temp-option:hover {
+      transform: translateY(-3px);
+    }
+    .ct-circle {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      margin: 0 auto 8px;
+      background: var(--ct-color);
+      border: 2px solid rgba(0,0,0,0.08);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    .ct-rgb {
+      background: var(--ct-color) !important;
+    }
+    .color-temp-option:hover .ct-circle {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      transform: scale(1.08);
+    }
+    .color-temp-option span {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    .color-temp-option small {
+      font-size: 11px;
+      color: #999;
+    }
+
+    /* === VARIANT CARDS (original + 20% bigger) === */
+    .variants-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .variant-card {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    .variant-card-img {
+      width: 96px; height: 96px;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      border: 2px solid #eee;
+      transition: all 0.3s ease;
+    }
+    .variant-card.active .variant-card-img {
+      border-color: var(--primary-color);
+    }
+    .variant-card:hover .variant-card-img {
+      border-color: var(--accent-color);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    }
+    .variant-card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .variant-card-video {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .variant-card:hover .variant-card-video {
+      opacity: 1;
+    }
+    .variant-card-label {
+      margin-top: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #888;
+      transition: color 0.3s;
+    }
+    .variant-card.active .variant-card-label {
+      color: var(--primary-color);
+    }
+    .variant-card:hover .variant-card-label {
+      color: var(--accent-color);
+    }
+
+    /* === BUTTON TEXT-SLIDE HOVER === */
+    .btn-slide-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      height: 1.2em;
+      position: relative;
+      width: 100%;
+    }
+    .btn-slide-wrap .btn-txt-default,
+    .btn-slide-wrap .btn-txt-hover {
+      display: block;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+    .btn-slide-wrap .btn-txt-default {
+      transform: translateY(0);
+    }
+    .btn-slide-wrap .btn-txt-hover {
+      position: absolute;
+      left: 0; width: 100%; text-align: center;
+      transform: translateY(100%);
+    }
+    .add-to-cart-btn:hover .btn-slide-wrap .btn-txt-default,
+    .buy-it-now-btn:hover .btn-slide-wrap .btn-txt-default {
+      transform: translateY(-100%);
+    }
+    .add-to-cart-btn:hover .btn-slide-wrap .btn-txt-hover,
+    .buy-it-now-btn:hover .btn-slide-wrap .btn-txt-hover {
+      transform: translateY(0);
+    }
     
     
     /* MAGIC DROPDOWN - DESKTOP */
@@ -1021,18 +1227,19 @@
       position: absolute;
       top: 100%;
       left: 50%;
-      transform: translateX(-50%) translateY(6px);
-      background: rgba(255, 255, 255, 0.65);
-      backdrop-filter: blur(40px) saturate(180%);
-      -webkit-backdrop-filter: blur(40px) saturate(180%);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.08), 0 0 0 0.5px rgba(0,0,0,0.06);
-      border-radius: 16px;
-      width: 480px;
+      transform: translateX(-50%) translateY(8px);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(24px) saturate(150%);
+      -webkit-backdrop-filter: blur(24px) saturate(150%);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.12);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      width: 420px;
       opacity: 0;
       visibility: hidden;
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       z-index: 1000;
-      padding: 20px 24px;
+      padding: 24px 28px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0;
@@ -1048,7 +1255,7 @@
 
     /* Vertical divider between columns */
     .magic-dropdown-section:first-child {
-      border-right: 1px solid rgba(0, 0, 0, 0.06);
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
       padding-right: 20px;
     }
     .magic-dropdown-section:last-child {
@@ -1059,9 +1266,9 @@
       font-size: 10px;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      color: rgba(0, 0, 0, 0.32);
+      color: rgba(255, 255, 255, 0.35);
       font-weight: 600;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       padding-bottom: 0;
       border-bottom: none;
       transform: translateY(8px);
@@ -1087,7 +1294,7 @@
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .magic-dropdown ul li + li {
-      border-top: 1px solid rgba(0,0,0,0.04);
+      border-top: 1px solid rgba(255,255,255,0.06);
     }
     /* Staggered entrance */
     .has-mega-menu:hover .magic-dropdown ul li:nth-child(1) { transition-delay: 0.1s; transform: translateY(0); opacity: 1; }
@@ -1097,37 +1304,28 @@
     .has-mega-menu:hover .magic-dropdown ul li:nth-child(5) { transition-delay: 0.26s; transform: translateY(0); opacity: 1; }
 
     .magic-dropdown ul li a {
-      color: var(--primary-color) !important;
+      color: rgba(255, 255, 255, 0.8) !important;
       font-size: 13px !important;
       font-weight: 500 !important;
       text-decoration: none !important;
       transition: all 0.25s ease !important;
       display: flex !important;
       align-items: center !important;
-      padding: 10px 6px !important;
+      padding: 10px 4px !important;
       background: none !important;
       border-radius: 0 !important;
-      letter-spacing: 0.2px;
+      letter-spacing: 0.3px;
     }
     
     .magic-dropdown ul li a i {
-      margin-right: 10px;
-      font-size: 15px;
-      color: var(--accent-color);
-      opacity: 0.7;
-      transition: all 0.25s ease;
-      flex-shrink: 0;
+      display: none;
     }
 
     .magic-dropdown ul li a:hover {
-      color: var(--accent-color) !important;
-      padding-left: 12px !important;
+      color: #fff !important;
+      padding-left: 10px !important;
       background: none !important;
-    }
-    
-    .magic-dropdown ul li a:hover i {
-      opacity: 1;
-      transform: scale(1.1);
+      text-shadow: 0 0 12px rgba(255,255,255,0.3);
     }
 
 /* MOBILE BOTTOM NAV CSS */
@@ -1456,9 +1654,73 @@
 
           <!-- Icons Row -->
           <div class="product-icons-row" style="align-items: center;">
-            <button class="add-to-cart-btn" style="padding: 8px 16px; font-size: 13px; width: auto; margin-right: 15px;">Parametry</button>
-            <div class="product-icon-item"><span class="icon-glass-sm"><i class="ph ph-intersect"></i></span> Barwa światła</div>
-            <div class="product-icon-item"><span class="icon-glass-sm"><i class="ph ph-question"></i></span> Zadaj pytanie</div>
+            <button class="product-action-pill" id="btnParametry">⚡ Parametry</button>
+            <button class="product-action-pill" id="btnBarwa">🎨 Barwa światła</button>
+            <button class="product-action-pill" id="btnPytanie">💬 Zadaj pytanie</button>
+          </div>
+
+          <!-- Parametry Popup -->
+          <div class="product-popup-overlay" id="popupParametry" style="display:none;">
+            <div class="product-popup-box">
+              <button class="popup-close" onclick="document.getElementById('popupParametry').style.display='none'">✕</button>
+              <h3>⚡ Parametry techniczne</h3>
+              <table class="spec-table">
+                <tr><td>Napięcie</td><td><strong>12V / 24V DC</strong></td></tr>
+                <tr><td>Moc</td><td><strong>14.4W/m</strong></td></tr>
+                <tr><td>Diody</td><td><strong>60 LED/m (SMD 5050)</strong></td></tr>
+                <tr><td>Strumień świetlny</td><td><strong>1200 lm/m</strong></td></tr>
+                <tr><td>CRI (Ra)</td><td><strong>≥ 90</strong></td></tr>
+                <tr><td>Kąt świecenia</td><td><strong>120°</strong></td></tr>
+                <tr><td>Klasa szczelności</td><td><strong>IP20 / IP65 / IP67</strong></td></tr>
+                <tr><td>Żywotność</td><td><strong>50 000h</strong></td></tr>
+                <tr><td>Gwarancja</td><td><strong>5 lat</strong></td></tr>
+              </table>
+            </div>
+          </div>
+
+          <!-- Barwa światła Popup -->
+          <div class="product-popup-overlay" id="popupBarwa" style="display:none;">
+            <div class="product-popup-box">
+              <button class="popup-close" onclick="document.getElementById('popupBarwa').style.display='none'">✕</button>
+              <h3>🎨 Barwa światła</h3>
+              <div class="color-temp-grid">
+                <div class="color-temp-option" style="--ct-color: #ffcc66;">
+                  <div class="ct-circle"></div>
+                  <span>2700K</span>
+                  <small>Ciepła biel</small>
+                </div>
+                <div class="color-temp-option" style="--ct-color: #ffe0a0;">
+                  <div class="ct-circle"></div>
+                  <span>3000K</span>
+                  <small>Ciepła biel</small>
+                </div>
+                <div class="color-temp-option" style="--ct-color: #fff5e0;">
+                  <div class="ct-circle"></div>
+                  <span>4000K</span>
+                  <small>Neutralna</small>
+                </div>
+                <div class="color-temp-option" style="--ct-color: #f0f4ff;">
+                  <div class="ct-circle"></div>
+                  <span>5000K</span>
+                  <small>Dzienna biel</small>
+                </div>
+                <div class="color-temp-option" style="--ct-color: #dce8ff;">
+                  <div class="ct-circle"></div>
+                  <span>6500K</span>
+                  <small>Zimna biel</small>
+                </div>
+                <div class="color-temp-option" style="--ct-color: linear-gradient(135deg, #ff0040, #00ff80, #0080ff);">
+                  <div class="ct-circle ct-rgb"></div>
+                  <span>RGB</span>
+                  <small>16M kolorów</small>
+                </div>
+                <div class="color-temp-option" style="--ct-color: linear-gradient(135deg, #ff3366, #33ff66, #3366ff, #ffe0a0, #dce8ff);">
+                  <div class="ct-circle ct-rgb"></div>
+                  <span>RGBCCT</span>
+                  <small>RGB + Biel</small>
+                </div>
+              </div>
+            </div>
           </div>
     
           <div class="product-purchase-box">
@@ -1468,15 +1730,19 @@
             <input type="text" class="quantity-input" value="1" id="qtyInput" readonly>
             <button class="quantity-btn" id="qtyPlus">+</button>
           </div>
-          <button class="add-to-cart-btn" id="addToCart">Dodaj do koszyka</button>
+          <button class="add-to-cart-btn" id="addToCart">
+            <span class="btn-slide-wrap">
+              <span class="btn-txt-default">Dodaj do koszyka</span>
+              <span class="btn-txt-hover">🛒 Dodaj teraz!</span>
+            </span>
+          </button>
         </div>
 
         <button class="buy-it-now-btn" id="buyItNow">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-          Kup teraz (Szybka płatność)
+          <span class="btn-slide-wrap">
+            <span class="btn-txt-default">Kup teraz (Szybka płatność)</span>
+            <span class="btn-txt-hover">⚡ Przejdź do kasy</span>
+          </span>
         </button>
 
         <div id="productVariantsContainer" style="margin-top: 20px;"></div>
@@ -1781,24 +2047,48 @@
     const variantsContainer = document.getElementById('productVariantsContainer');
     if (product.variants && product.variants.length > 0 && product.variants[0].name) {
       const variantsHTML = product.variants.map(v => `
-        <a href="/product.html?id=${v.id}" style="text-decoration: none; color: inherit;">
-          <div class="variant-tile" style="display: inline-block; width: 80px; height: 80px; margin-right: 10px; margin-bottom: 10px; border: 2px solid ${v.id === pId ? 'var(--primary-color)' : '#eee'}; border-radius: 8px; overflow: hidden; position: relative; cursor: pointer; transition: 0.3s;"
-               onmouseenter="this.querySelector('video').style.opacity=1"
-               onmouseleave="this.querySelector('video').style.opacity=0">
-            <img src="${v.image}" style="width: 100%; height: 100%; object-fit: cover;">
-            ${v.video ? `<video src="${v.video}" loop muted playsinline autoplay style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:0.3s; pointer-events:none;"></video>` : ''}
+        <a href="product.html?id=${v.id}" class="variant-card ${v.id === pId ? 'active' : ''}">
+          <div class="variant-card-img">
+            <img src="${v.image}" alt="${v.name}">
+            ${v.video ? `<video src="${v.video}" loop muted playsinline autoplay class="variant-card-video"></video>` : ''}
           </div>
+          <span class="variant-card-label">${v.name}</span>
         </a>
       `).join('');
       variantsContainer.innerHTML = `
-        <h4 style="margin-bottom: 10px; font-size: 14px; font-weight: 600;">Dostępne modele:</h4>
-        <div style="display: flex; flex-wrap: wrap;">
+        <h4 style="margin-bottom: 15px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: rgba(0,0,0,0.5);">Dostępne modele</h4>
+        <div class="variants-grid">
           ${variantsHTML}
         </div>
       `;
     }
 
     }
+
+    // === POPUP HANDLERS ===
+    const btnParametry = document.getElementById('btnParametry');
+    const btnBarwa = document.getElementById('btnBarwa');
+    const btnPytanie = document.getElementById('btnPytanie');
+    const popupParametry = document.getElementById('popupParametry');
+    const popupBarwa = document.getElementById('popupBarwa');
+
+    if (btnParametry && popupParametry) {
+      btnParametry.addEventListener('click', () => { popupParametry.style.display = 'flex'; });
+    }
+    if (btnBarwa && popupBarwa) {
+      btnBarwa.addEventListener('click', () => { popupBarwa.style.display = 'flex'; });
+    }
+    if (btnPytanie) {
+      btnPytanie.addEventListener('click', () => {
+        window.location.href = 'contact.html';
+      });
+    }
+    // Close popups on overlay click
+    document.querySelectorAll('.product-popup-overlay').forEach(overlay => {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) overlay.style.display = 'none';
+      });
+    });
 
     // Quantity selectors
     const qtyInput = document.getElementById('qtyInput');
