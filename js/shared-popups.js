@@ -359,6 +359,32 @@ function injectQuickViewModal() {
         .qv-variant-card:hover .qv-variant-card-label {
           color: var(--accent-color, #ff5a00);
         }
+        @media (max-width: 768px) {
+          #quickViewBox {
+            grid-template-columns: 1fr !important;
+            height: auto !important;
+            max-height: 90vh !important;
+            overflow-y: auto !important;
+          }
+          #qvMediaContainer {
+            height: 280px !important;
+          }
+          #quickViewBox > div:last-child {
+            padding: 20px !important;
+          }
+          #closeQuickView {
+            top: 10px !important;
+            right: 15px !important;
+            background: rgba(255,255,255,0.8) !important;
+            border-radius: 50% !important;
+            width: 36px !important;
+            height: 36px !important;
+            line-height: 36px !important;
+            text-align: center !important;
+            padding: 0 !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+          }
+        }
       </style>
       <!-- Modal Overlay -->
       <div id="quickViewOverlay" style="position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,0.5); top: 0; left: 0;"></div>
@@ -367,6 +393,7 @@ function injectQuickViewModal() {
         <button id="closeQuickView" style="position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 28px; cursor: pointer; z-index: 10; color: #1a1a1a;">&times;</button>
         <div id="qvMediaContainer" style="background: #f7f7f7; display: flex; align-items: center; justify-content: center; height: 100%; position: relative; width: 100%; overflow: hidden;">
           <img id="qvImage" src="" alt="" style="width: 100%; height: 100%; object-fit: contain; padding: 20px; box-sizing: border-box;">
+          <video id="qvVideo" loop muted playsinline style="display: none; width: 100%; height: 100%; object-fit: cover; background: #f7f7f7; position: absolute; top: 0; left: 0; transition: opacity 0.3s ease; opacity: 0;"></video>
           <div id="qvModelContainer" style="display: none; width: 100%; height: 100%;"></div>
           <div id="qv360Container" style="display: none; width: 100%; height: 100%; align-items: center; justify-content: center; position: relative; cursor: grab; user-select: none;">
             <img id="qv360Img" src="" style="width: 100%; height: 100%; object-fit: contain; padding: 20px; box-sizing: border-box; pointer-events: none;">
@@ -1003,6 +1030,29 @@ export function initSharedPopups() {
       }
     }
 
+    // Reset and set up video autoplay
+    const qvVideo = document.getElementById('qvVideo');
+    if (qvVideo) {
+      qvVideo.style.display = 'none';
+      qvVideo.style.opacity = '0';
+      qvVideo.pause();
+    }
+    if (openQuickView.videoTimeout) {
+      clearTimeout(openQuickView.videoTimeout);
+    }
+    if (qvVideo && selectedProduct.video) {
+      qvVideo.src = selectedProduct.video;
+      openQuickView.videoTimeout = setTimeout(() => {
+        if (qvImage.style.display !== 'none') {
+          qvVideo.style.display = 'block';
+          setTimeout(() => {
+            qvVideo.style.opacity = '1';
+            qvVideo.play().catch(err => console.log("Quick view video autoplay failed:", err));
+          }, 50);
+        }
+      }, 1000);
+    }
+
     document.getElementById('qvCategory').textContent = selectedProduct.category;
     document.getElementById('qvTitle').textContent = selectedProduct.title;
     document.getElementById('qvPrice').innerHTML = `${selectedProduct.price.toFixed(2)} zł <span style="font-size: 14px; font-weight: normal; color: #888; margin-left: 5px;">/ ${selectedProduct.category === "Taśmy LED" ? "metr" : "szt."}</span>`;
@@ -1195,6 +1245,18 @@ export function initSharedPopups() {
     quickViewModal.style.opacity = '0';
     quickViewModal.style.pointerEvents = 'none';
     quickViewBox.style.transform = 'scale(0.9)';
+    
+    // Stop video autoplay and pause
+    const qvVideo = document.getElementById('qvVideo');
+    if (qvVideo) {
+      qvVideo.pause();
+      qvVideo.style.display = 'none';
+      qvVideo.style.opacity = '0';
+    }
+    if (openQuickView.videoTimeout) {
+      clearTimeout(openQuickView.videoTimeout);
+    }
+
     const qvModelContainer = document.getElementById('qvModelContainer');
     if (qvModelContainer) qvModelContainer.innerHTML = ''; // Stop 3D audio or rendering when closed
     
@@ -1683,4 +1745,42 @@ export function initSharedPopups() {
       window.location.href = 'checkout.html';
     });
   }
+
+  // --- MOBILE AUTO-PLAY FOR PREVIEW VIDEOS (INTERSECTION OBSERVER) ---
+  function initMobileVideoAutoplay() {
+    const cards = document.querySelectorAll('.mockup-product-card');
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.6
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const card = entry.target;
+        const video = card.querySelector('.mockup-product-video');
+        if (!video) return;
+
+        if (entry.isIntersecting) {
+          if (card.videoTimeout) clearTimeout(card.videoTimeout);
+          card.videoTimeout = setTimeout(() => {
+            video.style.opacity = '1';
+            video.play().catch(err => console.log("Video autoplay interrupted:", err));
+          }, 1000);
+        } else {
+          if (card.videoTimeout) {
+            clearTimeout(card.videoTimeout);
+            card.videoTimeout = null;
+          }
+          video.style.opacity = '0';
+          video.pause();
+          video.currentTime = 0;
+        }
+      });
+    }, observerOptions);
+
+    cards.forEach(card => observer.observe(card));
+  }
+
+  initMobileVideoAutoplay();
 }
