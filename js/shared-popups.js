@@ -158,8 +158,13 @@ function injectQuickViewModal() {
       <!-- Modal Box -->
       <div id="quickViewBox" style="position: relative; width: 900px; max-width: 100%; background: #fff; border-radius: 4px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); z-index: 2; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; height: 550px; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); transform: scale(0.9);">
         <button id="closeQuickView" style="position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 28px; cursor: pointer; z-index: 10; color: #1a1a1a;">&times;</button>
-        <div style="background: #f7f7f7; display: flex; align-items: center; justify-content: center; height: 100%;">
+        <div id="qvMediaContainer" style="background: #f7f7f7; display: flex; align-items: center; justify-content: center; height: 100%; position: relative; width: 100%; overflow: hidden;">
           <img id="qvImage" src="" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+          <div id="qvModelContainer" style="display: none; width: 100%; height: 100%;"></div>
+          <div id="qv360Container" style="display: none; width: 100%; height: 100%; align-items: center; justify-content: center; position: relative; cursor: grab; user-select: none;">
+            <img id="qv360Img" src="" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;">
+            <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.65); color: #fff; padding: 6px 16px; border-radius: 99px; font-size: 11px; pointer-events: none; white-space: nowrap; font-family: 'Inter', sans-serif;">Przeciągnij, aby obrócić 360°</div>
+          </div>
         </div>
         <div style="padding: 40px; display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto;">
           <div>
@@ -641,11 +646,72 @@ export function initSharedPopups() {
   let selectedSize = null;
   let qvQty = 1;
 
-  function openQuickView(id) {
+  let activeQv360Index = 1;
+  let isDraggingQv360 = false;
+  let startQv360X = 0;
+
+  function openQuickView(id, mode = 'normal') {
     selectedProduct = products.find(p => p.id === id);
     if (!selectedProduct) return;
 
-    document.getElementById('qvImage').src = selectedProduct.images[0];
+    // Reset media displays
+    const qvImage = document.getElementById('qvImage');
+    const qvModelContainer = document.getElementById('qvModelContainer');
+    const qv360Container = document.getElementById('qv360Container');
+
+    if (qvImage) qvImage.style.display = 'none';
+    if (qvModelContainer) {
+      qvModelContainer.style.display = 'none';
+      qvModelContainer.innerHTML = '';
+    }
+    if (qv360Container) qv360Container.style.display = 'none';
+
+    if (mode === '3d' && selectedProduct.has3D) {
+      if (qvModelContainer) {
+        qvModelContainer.style.display = 'block';
+        qvModelContainer.innerHTML = `
+          <model-viewer 
+            src="${selectedProduct.modelSrc}" 
+            poster="${selectedProduct.posterSrc}" 
+            camera-controls 
+            ar 
+            ar-modes="webxr scene-viewer quick-look" 
+            style="width: 100%; height: 100%;" 
+            alt="${selectedProduct.title}">
+          </model-viewer>
+        `;
+      }
+      // Lazy load model-viewer if not loaded yet
+      if (!window.customElements || !window.customElements.get('model-viewer')) {
+        const script = document.createElement('script');
+        script.type = 'module';
+        script.src = 'https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js';
+        document.head.appendChild(script);
+      }
+    } else if (mode === '360' && selectedProduct.has360) {
+      const qv360Img = document.getElementById('qv360Img');
+      if (qv360Container && qv360Img) {
+        qv360Container.style.display = 'flex';
+        activeQv360Index = 1;
+        qv360Img.src = selectedProduct.images360Pattern.replace('{index}', 1);
+
+        // Bind drag rotation on the container
+        qv360Container.onmousedown = (e) => {
+          isDraggingQv360 = true;
+          startQv360X = e.clientX;
+        };
+        qv360Container.ontouchstart = (e) => {
+          isDraggingQv360 = true;
+          startQv360X = e.touches[0].clientX;
+        };
+      }
+    } else {
+      if (qvImage) {
+        qvImage.style.display = 'block';
+        qvImage.src = selectedProduct.images[0];
+      }
+    }
+
     document.getElementById('qvCategory').textContent = selectedProduct.category;
     document.getElementById('qvTitle').textContent = selectedProduct.title;
     document.getElementById('qvPrice').textContent = `${selectedProduct.price.toFixed(2)} zł`;
@@ -703,10 +769,58 @@ export function initSharedPopups() {
     quickViewBox.style.transform = 'scale(1)';
   }
 
+  // Global mousemove/touchmove bindings for 360 viewer drag
+  window.addEventListener('mousemove', (e) => {
+    if (!isDraggingQv360 || !selectedProduct) return;
+    const diffX = e.clientX - startQv360X;
+    if (Math.abs(diffX) > 10) {
+      const count = selectedProduct.images360Count || 39;
+      if (diffX > 0) {
+        activeQv360Index--;
+        if (activeQv360Index < 1) activeQv360Index = count;
+      } else {
+        activeQv360Index++;
+        if (activeQv360Index > count) activeQv360Index = 1;
+      }
+      const qv360Img = document.getElementById('qv360Img');
+      if (qv360Img) {
+        qv360Img.src = selectedProduct.images360Pattern.replace('{index}', activeQv360Index);
+      }
+      startQv360X = e.clientX;
+    }
+  });
+
+  window.addEventListener('touchmove', (e) => {
+    if (!isDraggingQv360 || !selectedProduct) return;
+    const clientX = e.touches[0].clientX;
+    const diffX = clientX - startQv360X;
+    if (Math.abs(diffX) > 10) {
+      const count = selectedProduct.images360Count || 39;
+      if (diffX > 0) {
+        activeQv360Index--;
+        if (activeQv360Index < 1) activeQv360Index = count;
+      } else {
+        activeQv360Index++;
+        if (activeQv360Index > count) activeQv360Index = 1;
+      }
+      const qv360Img = document.getElementById('qv360Img');
+      if (qv360Img) {
+        qv360Img.src = selectedProduct.images360Pattern.replace('{index}', activeQv360Index);
+      }
+      startQv360X = clientX;
+    }
+  });
+
+  const stopDraggingQv360 = () => { isDraggingQv360 = false; };
+  window.addEventListener('mouseup', stopDraggingQv360);
+  window.addEventListener('touchend', stopDraggingQv360);
+
   function closeQuickViewModal() {
     quickViewModal.style.opacity = '0';
     quickViewModal.style.pointerEvents = 'none';
     quickViewBox.style.transform = 'scale(0.9)';
+    const qvModelContainer = document.getElementById('qvModelContainer');
+    if (qvModelContainer) qvModelContainer.innerHTML = ''; // Stop 3D audio or rendering when closed
   }
 
   if (closeQuickView) closeQuickView.addEventListener('click', closeQuickViewModal);
@@ -758,21 +872,14 @@ export function initSharedPopups() {
     });
   }
 
-  // --- CONNECT INTERACTIVE BUTTONS WITH REAL IDs ---
-  document.querySelectorAll('.qv-eye-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+  // --- CONNECT INTERACTIVE BUTTONS WITH REAL IDs (EVENT DELEGATION) ---
+  document.addEventListener('click', (e) => {
+    // 1. Quick add to cart
+    const addCartBtn = e.target.closest('.qv-add-cart-btn');
+    if (addCartBtn) {
       e.preventDefault();
       e.stopPropagation();
-      const pId = parseInt(btn.dataset.id);
-      openQuickView(pId);
-    });
-  });
-
-  document.querySelectorAll('.qv-add-cart-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const pId = parseInt(btn.dataset.id);
+      const pId = parseInt(addCartBtn.dataset.id);
       const p = products.find(prod => prod.id === pId);
       if (!p) return;
 
@@ -796,17 +903,44 @@ export function initSharedPopups() {
       updateLocalStorage();
       openCart();
       window.dispatchEvent(new Event('storage'));
-    });
-  });
+      return;
+    }
 
-  document.querySelectorAll('.mockup-product-card').forEach(card => {
-    card.addEventListener('click', (e) => {
-      if (e.target.closest('.action-btn-circle') || e.target.closest('a')) return;
+    // 2. Quick view (eye icon)
+    const eyeBtn = e.target.closest('.qv-eye-btn');
+    if (eyeBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      openQuickView(parseInt(eyeBtn.dataset.id), 'normal');
+      return;
+    }
+
+    // 3. 3D view
+    const tdBtn = e.target.closest('.qv-3d-btn');
+    if (tdBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      openQuickView(parseInt(tdBtn.dataset.id), '3d');
+      return;
+    }
+
+    // 4. 360 view
+    const sxtyBtn = e.target.closest('.qv-360-btn');
+    if (sxtyBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      openQuickView(parseInt(sxtyBtn.dataset.id), '360');
+      return;
+    }
+
+    // 5. Product card click (navigate to details)
+    const card = e.target.closest('.mockup-product-card');
+    if (card && !e.target.closest('.action-btn-circle') && !e.target.closest('a')) {
       const pId = card.dataset.id;
       if (pId) {
-        window.location.href = `/product.html?id=${pId}`;
+        window.location.href = `product.html?id=${pId}`;
       }
-    });
+    }
   });
 
   // --- PC SEARCH OVERLAY LOGIC ---
@@ -856,7 +990,7 @@ export function initSharedPopups() {
       }
 
       pcSearchSuggestions.innerHTML = filtered.map(p => `
-        <a href="/product.html?id=${p.id}" class="suggest-card">
+        <a href="product.html?id=${p.id}" class="suggest-card">
           <img src="${p.images[0]}" style="width: 50px; height: 65px; object-fit: cover; border-radius: 2px; background: #f7f7f7;">
           <div style="flex-grow: 1; min-width: 0; text-align: left;">
             <div style="font-size: 9px; text-transform: uppercase; color: #999; letter-spacing: 1px; margin-bottom: 2px;">${p.category}</div>

@@ -773,6 +773,11 @@
       border-color: rgba(0, 0, 0, 0.1);
       box-shadow: inset 0 2px 5px rgba(255,255,255,1), 0 10px 30px rgba(0,0,0,0.08);
     }
+
+    /* Enforce cursor: pointer on all interactive elements */
+    a, button, .mockup-product-card, .category-card, .slider-arrow, .color-swatch-dot, .size-swatch, .thumbnail, [onclick], .mockup-btn {
+      cursor: pointer !important;
+    }
 </style>
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
@@ -795,19 +800,19 @@
             <div class="magic-dropdown-section">
               <div class="magic-dropdown-title">Oświetlenie LED</div>
               <ul>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-lightning"></i> Taśmy LED COB</a></li>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-aperture"></i> Taśmy LED SMD</a></li>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-magic-wand"></i> Taśmy Neony</a></li>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-package"></i> Zestawy LED</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-lightning"></i> Taśmy LED COB</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-aperture"></i> Taśmy LED SMD</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-magic-wand"></i> Taśmy Neony</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-package"></i> Zestawy LED</a></li>
               </ul>
             </div>
             <div class="magic-dropdown-section">
               <div class="magic-dropdown-title">Akcesoria i Zasilanie</div>
               <ul>
-                <li><a href="/shop.html?cat=Sterowniki%20LED"><i class="ph ph-faders"></i> Sterowniki LED</a></li>
-                <li><a href="/shop.html?cat=Zasilacze"><i class="ph ph-plug"></i> Zasilacze Hermetyczne</a></li>
-                <li><a href="/shop.html?cat=Profile"><i class="ph ph-minus"></i> Profile aluminiowe</a></li>
-                <li><a href="/shop.html?cat=Akcesoria"><i class="ph ph-plugs-connected"></i> Kable i złączki</a></li>
+                <li><a href="shop.html?cat=Sterowniki%20LED"><i class="ph ph-faders"></i> Sterowniki LED</a></li>
+                <li><a href="shop.html?cat=Zasilacze"><i class="ph ph-plug"></i> Zasilacze Hermetyczne</a></li>
+                <li><a href="shop.html?cat=Profile"><i class="ph ph-minus"></i> Profile aluminiowe</a></li>
+                <li><a href="shop.html?cat=Akcesoria"><i class="ph ph-plugs-connected"></i> Kable i złączki</a></li>
               </ul>
             </div>
           </div>
@@ -852,19 +857,19 @@
             <div class="magic-dropdown-section">
               <div class="magic-dropdown-title">Oświetlenie LED</div>
               <ul>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-lightning"></i> Taśmy LED COB</a></li>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-aperture"></i> Taśmy LED SMD</a></li>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-magic-wand"></i> Taśmy Neony</a></li>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-package"></i> Zestawy LED</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-lightning"></i> Taśmy LED COB</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-aperture"></i> Taśmy LED SMD</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-magic-wand"></i> Taśmy Neony</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-package"></i> Zestawy LED</a></li>
               </ul>
             </div>
             <div class="magic-dropdown-section">
               <div class="magic-dropdown-title">Akcesoria i Zasilanie</div>
               <ul>
-                <li><a href="/shop.html?cat=Sterowniki%20LED"><i class="ph ph-faders"></i> Sterowniki LED</a></li>
-                <li><a href="/shop.html?cat=Zasilacze"><i class="ph ph-plug"></i> Zasilacze Hermetyczne</a></li>
-                <li><a href="/shop.html?cat=Profile"><i class="ph ph-minus"></i> Profile aluminiowe</a></li>
-                <li><a href="/shop.html?cat=Akcesoria"><i class="ph ph-plugs-connected"></i> Kable i złączki</a></li>
+                <li><a href="shop.html?cat=Sterowniki%20LED"><i class="ph ph-faders"></i> Sterowniki LED</a></li>
+                <li><a href="shop.html?cat=Zasilacze"><i class="ph ph-plug"></i> Zasilacze Hermetyczne</a></li>
+                <li><a href="shop.html?cat=Profile"><i class="ph ph-minus"></i> Profile aluminiowe</a></li>
+                <li><a href="shop.html?cat=Akcesoria"><i class="ph ph-plugs-connected"></i> Kable i złączki</a></li>
               </ul>
             </div>
           </div>
@@ -1019,7 +1024,7 @@
       if (headerSearchInput) {
         const q = headerSearchInput.value.trim();
         if (q) {
-          window.location.href = `/shop.html?search=${encodeURIComponent(q)}`;
+          window.location.href = `shop.html?search=${encodeURIComponent(q)}`;
         }
       }
     }

@@ -840,7 +840,8 @@
     .mockup-product-media {
       position: relative;
       width: 100%;
-      height: 400px;
+      aspect-ratio: 1 / 1;
+      height: auto !important;
       overflow: hidden;
       background-color: var(--light-bg);
     }
@@ -1046,78 +1047,122 @@
         height: 100vh !important;
       }
       .slide {
-        padding: 0 12px 80px 12px !important;
+        padding: 0 15px 180px 15px !important;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
       }
       .slide-banner-box {
-        padding: 20px 20px !important;
+        padding: 16px 20px !important;
         border-radius: 16px !important;
-        width: 100% !important;
+        width: calc(100% - 30px) !important;
+        max-width: 480px !important;
         flex-direction: column !important;
         text-align: center !important;
         gap: 12px !important;
+        background: rgba(11, 26, 48, 0.75) !important;
+        backdrop-filter: blur(25px) !important;
+        -webkit-backdrop-filter: blur(25px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important;
       }
       .slide-banner-box .banner-text {
         align-items: center;
       }
       .slide-banner-box h1 {
-        font-size: 20px !important;
+        font-size: 22px !important;
+        color: #ffffff !important;
         white-space: normal !important;
+        font-weight: 700 !important;
       }
       .slide-banner-box p {
-        font-size: 10px !important;
+        font-size: 12px !important;
+        color: rgba(255, 255, 255, 0.7) !important;
         margin-bottom: 4px !important;
       }
-      .glass-border-svg,
-      .glass-border-svg rect {
-        border-radius: 16px !important;
-        rx: 16px !important;
-        ry: 16px !important;
+      .slide-banner-box .mockup-btn {
+        border-color: #ffffff !important;
+        color: #ffffff !important;
+        background: transparent !important;
+      }
+      .glass-border-svg {
+        display: none !important;
       }
       .mockup-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 8%;
-      background: transparent;
-      border-bottom: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      transition: background 0.3s ease;
-    }
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 8%;
+        background: transparent;
+        border-bottom: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        transition: background 0.3s ease;
+      }
       .mockup-nav {
         display: none;
       }
       .menu-toggle {
         display: block;
       }
+      .slider-arrows {
+        display: flex !important;
+        justify-content: center !important;
+        gap: 20px !important;
+        position: absolute !important;
+        bottom: 125px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: auto !important;
+        z-index: 100;
+      }
       .slider-arrow {
-        width: 40px;
-        height: 40px;
-        font-size: 16px;
-      }
-      .slider-arrow#prevSlide {
-        left: 12px;
-      }
-      .slider-arrow#nextSlide {
-        right: 12px;
+        position: static !important;
+        width: 36px !important;
+        height: 36px !important;
+        background: rgba(255, 255, 255, 0.15) !important;
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
       }
       .slider-arrow svg {
-        width: 16px;
-        height: 16px;
+        width: 14px !important;
+        height: 14px !important;
+        stroke: #ffffff !important;
       }
       .scroll-down-arrow {
-        bottom: 80px !important;
+        bottom: 75px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-decoration: none !important;
+        z-index: 100;
+      }
+      .scroll-down-arrow span {
+        display: none !important;
       }
       .scroll-down-circle {
-        width: 40px;
-        height: 40px;
+        width: 32px !important;
+        height: 32px !important;
+        background: rgba(255, 255, 255, 0.15) !important;
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
       }
       .scroll-down-circle svg {
-        width: 18px;
-        height: 18px;
+        width: 14px !important;
+        height: 14px !important;
+        stroke: #ffffff !important;
       }
       .mockup-advantages {
         padding: 40px 4% 60px !important;
@@ -1260,6 +1305,66 @@
     
     .banner-image-container:hover img {
       transform: scale(1.05);
+    }
+
+    /* Enforce cursor: pointer on all interactive elements */
+    a, button, .mockup-product-card, .category-card, .slider-arrow, .color-swatch-dot, .size-swatch, .thumbnail, [onclick], .mockup-btn {
+      cursor: pointer !important;
+    }
+
+    /* Unified Button text-sliding hover effect */
+    .btn-slide-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      height: 1.2em;
+      position: relative;
+      width: 100%;
+    }
+    .btn-slide-wrap .btn-txt-default,
+    .btn-slide-wrap .btn-txt-hover {
+      display: block;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+    .btn-slide-wrap .btn-txt-default {
+      transform: translateY(0);
+    }
+    .btn-slide-wrap .btn-txt-hover {
+      position: absolute;
+      left: 0; width: 100%; text-align: center;
+      transform: translateY(100%);
+    }
+    .mockup-btn:hover .btn-slide-wrap .btn-txt-default,
+    .add-to-cart-btn:hover .btn-slide-wrap .btn-txt-default,
+    .buy-it-now-btn:hover .btn-slide-wrap .btn-txt-default {
+      transform: translateY(-100%) !important;
+    }
+    .mockup-btn:hover .btn-slide-wrap .btn-txt-hover,
+    .add-to-cart-btn:hover .btn-slide-wrap .btn-txt-hover,
+    .buy-it-now-btn:hover .btn-slide-wrap .btn-txt-hover {
+      transform: translateY(0) !important;
+    }
+
+    @media (min-width: 992px) {
+      .banner-row {
+        height: 520px !important;
+        min-height: 520px !important;
+      }
+      .banner-content {
+        height: 100% !important;
+        padding: 40px 8% !important;
+        justify-content: center !important;
+      }
+      .banner-image-container {
+        height: 100% !important;
+      }
+      .banner-image-container img {
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: cover !important;
+      }
     }
     
     @media (max-width: 991px) {
@@ -1789,19 +1894,19 @@
             <div class="magic-dropdown-section">
               <div class="magic-dropdown-title">Oświetlenie LED</div>
               <ul>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-lightning"></i> Taśmy LED COB</a></li>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-aperture"></i> Taśmy LED SMD</a></li>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-magic-wand"></i> Taśmy Neony</a></li>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-package"></i> Zestawy LED</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-lightning"></i> Taśmy LED COB</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-aperture"></i> Taśmy LED SMD</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-magic-wand"></i> Taśmy Neony</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-package"></i> Zestawy LED</a></li>
               </ul>
             </div>
             <div class="magic-dropdown-section">
               <div class="magic-dropdown-title">Akcesoria i Zasilanie</div>
               <ul>
-                <li><a href="/shop.html?cat=Sterowniki%20LED"><i class="ph ph-faders"></i> Sterowniki LED</a></li>
-                <li><a href="/shop.html?cat=Zasilacze"><i class="ph ph-plug"></i> Zasilacze Hermetyczne</a></li>
-                <li><a href="/shop.html?cat=Profile"><i class="ph ph-minus"></i> Profile aluminiowe</a></li>
-                <li><a href="/shop.html?cat=Akcesoria"><i class="ph ph-plugs-connected"></i> Kable i złączki</a></li>
+                <li><a href="shop.html?cat=Sterowniki%20LED"><i class="ph ph-faders"></i> Sterowniki LED</a></li>
+                <li><a href="shop.html?cat=Zasilacze"><i class="ph ph-plug"></i> Zasilacze Hermetyczne</a></li>
+                <li><a href="shop.html?cat=Profile"><i class="ph ph-minus"></i> Profile aluminiowe</a></li>
+                <li><a href="shop.html?cat=Akcesoria"><i class="ph ph-plugs-connected"></i> Kable i złączki</a></li>
               </ul>
             </div>
           </div>
@@ -1849,19 +1954,19 @@
             <div class="magic-dropdown-section">
               <div class="magic-dropdown-title">Oświetlenie LED</div>
               <ul>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-lightning"></i> Taśmy LED COB</a></li>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-aperture"></i> Taśmy LED SMD</a></li>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-magic-wand"></i> Taśmy Neony</a></li>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-package"></i> Zestawy LED</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-lightning"></i> Taśmy LED COB</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-aperture"></i> Taśmy LED SMD</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-magic-wand"></i> Taśmy Neony</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-package"></i> Zestawy LED</a></li>
               </ul>
             </div>
             <div class="magic-dropdown-section">
               <div class="magic-dropdown-title">Akcesoria i Zasilanie</div>
               <ul>
-                <li><a href="/shop.html?cat=Sterowniki%20LED"><i class="ph ph-faders"></i> Sterowniki LED</a></li>
-                <li><a href="/shop.html?cat=Zasilacze"><i class="ph ph-plug"></i> Zasilacze Hermetyczne</a></li>
-                <li><a href="/shop.html?cat=Profile"><i class="ph ph-minus"></i> Profile aluminiowe</a></li>
-                <li><a href="/shop.html?cat=Akcesoria"><i class="ph ph-plugs-connected"></i> Kable i złączki</a></li>
+                <li><a href="shop.html?cat=Sterowniki%20LED"><i class="ph ph-faders"></i> Sterowniki LED</a></li>
+                <li><a href="shop.html?cat=Zasilacze"><i class="ph ph-plug"></i> Zasilacze Hermetyczne</a></li>
+                <li><a href="shop.html?cat=Profile"><i class="ph ph-minus"></i> Profile aluminiowe</a></li>
+                <li><a href="shop.html?cat=Akcesoria"><i class="ph ph-plugs-connected"></i> Kable i złączki</a></li>
               </ul>
             </div>
           </div>
@@ -1885,7 +1990,7 @@
     <!-- Slide 1: CCT -->
     <div class="slide active" data-tech="cct">
       <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-        <video class="slide-video desktop-bg" src="videos/cct_salon.mp4" muted playsinline preload="auto" poster="/images/elegant-interior-design-with-neutral-colors-2026-03-25-07-06-00-utc.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
+        <video class="slide-video desktop-bg" src="videos/cct_salon.mp4" muted playsinline preload="auto" poster="images/elegant-interior-design-with-neutral-colors-2026-03-25-07-06-00-utc.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
         
       </div>
       <div class="slide-banner-box" style="z-index: 2;">
@@ -1897,14 +2002,14 @@
           <h1>Taśmy LED CCT</h1>
           <p>Regulowana temperatura bieli</p>
         </div>
-        <a href="shop.html" class="mockup-btn">Kup teraz</a>
+        <a href="shop.html" class="mockup-btn"><div class="btn-slide-wrap"><span class="btn-txt-default">Kup teraz</span><span class="btn-txt-hover">Kup teraz</span></div></a>
       </div>
     </div>
     
     <!-- Slide 2: Digital -->
     <div class="slide" data-tech="digital">
       <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-        <video class="slide-video desktop-bg" src="videos/cyfrowe_tasmy.mp4" muted playsinline preload="auto" poster="/images/hero_digital.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
+        <video class="slide-video desktop-bg" src="videos/cyfrowe_tasmy.mp4" muted playsinline preload="auto" poster="images/hero_digital.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
         
       </div>
       <div class="slide-banner-box" style="z-index: 2;">
@@ -1917,14 +2022,14 @@
           <h1>Inteligentne taśmy LED</h1>
           <p>Zyskaj pełną kontrolę i programuj efekty świetlne</p>
         </div>
-        <a href="shop.html" class="mockup-btn">Kup teraz</a>
+        <a href="shop.html" class="mockup-btn"><div class="btn-slide-wrap"><span class="btn-txt-default">Kup teraz</span><span class="btn-txt-hover">Kup teraz</span></div></a>
       </div>
     </div>
     
     <!-- Slide 3: RGBW -->
     <div class="slide" data-tech="rgb">
       <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-        <video class="slide-video desktop-bg" src="videos/rgb_salon.mp4" muted playsinline preload="auto" poster="/images/AdobeStock_288132271.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
+        <video class="slide-video desktop-bg" src="videos/rgb_salon.mp4" muted playsinline preload="auto" poster="images/AdobeStock_288132271.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
         
       </div>
       <div class="slide-banner-box" style="z-index: 2;">
@@ -1936,14 +2041,14 @@
           <h1>Taśmy LED RGBW</h1>
           <p>Polska produkcja i aż 5 lat gwarancji</p>
         </div>
-        <a href="shop.html" class="mockup-btn">Kup teraz</a>
+        <a href="shop.html" class="mockup-btn"><div class="btn-slide-wrap"><span class="btn-txt-default">Kup teraz</span><span class="btn-txt-hover">Kup teraz</span></div></a>
       </div>
     </div>
     
     <!-- Slide 4: Mono -->
     <div class="slide" data-tech="mono">
       <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-        <video class="slide-video desktop-bg" src="videos/sterownik_mono.mp4" muted playsinline preload="auto" poster="/images/banner_controllers.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
+        <video class="slide-video desktop-bg" src="videos/sterownik_mono.mp4" muted playsinline preload="auto" poster="images/banner_controllers.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
         
       </div>
       <div class="slide-banner-box" style="z-index: 2;">
@@ -1955,14 +2060,14 @@
           <h1>Sterowniki LED Mono</h1>
           <p>Steruj jasnością i dostosuj otoczenie do swoich potrzeb</p>
         </div>
-        <a href="shop.html" class="mockup-btn">Kup teraz</a>
+        <a href="shop.html" class="mockup-btn"><div class="btn-slide-wrap"><span class="btn-txt-default">Kup teraz</span><span class="btn-txt-hover">Kup teraz</span></div></a>
       </div>
     </div>
     
     <!-- Slide 5: Bread -->
     <div class="slide" data-tech="bread">
       <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-        <video class="slide-video desktop-bg" src="videos/envato_video_gen_Oct_31_2025_17_15_42.mp4" muted playsinline preload="auto" poster="/images/kuchnia.jpg" style="width: 100%; height: 100%; object-fit: cover;"></video>
+        <video class="slide-video desktop-bg" src="videos/envato_video_gen_Oct_31_2025_17_15_42.mp4" muted playsinline preload="auto" poster="images/kuchnia.jpg" style="width: 100%; height: 100%; object-fit: cover;"></video>
         
       </div>
       <div class="slide-banner-box" style="z-index: 2;">
@@ -1974,14 +2079,14 @@
           <h1>Taśmy LED do pieczywa</h1>
           <p>Wypieki świeże i apetyczne w ciepłym świetle</p>
         </div>
-        <a href="shop.html" class="mockup-btn">Kup teraz</a>
+        <a href="shop.html" class="mockup-btn"><div class="btn-slide-wrap"><span class="btn-txt-default">Kup teraz</span><span class="btn-txt-hover">Kup teraz</span></div></a>
       </div>
     </div>
     
     <!-- Slide 6: COB -->
     <div class="slide" data-tech="cob">
       <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-        <video class="slide-video desktop-bg" src="videos/ok 3.mp4" muted playsinline preload="auto" poster="/images/hero_cob.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
+        <video class="slide-video desktop-bg" src="videos/ok 3.mp4" muted playsinline preload="auto" poster="images/hero_cob.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
         
       </div>
       <div class="slide-banner-box" style="z-index: 2;">
@@ -1993,14 +2098,14 @@
           <h1>Taśmy LED COB</h1>
           <p>Idealnie jednolite linie światła bez punktów</p>
         </div>
-        <a href="shop.html" class="mockup-btn">Kup teraz</a>
+        <a href="shop.html" class="mockup-btn"><div class="btn-slide-wrap"><span class="btn-txt-default">Kup teraz</span><span class="btn-txt-hover">Kup teraz</span></div></a>
       </div>
     </div>
     
     <!-- Slide 7: Digital CCT -->
     <div class="slide" data-tech="digital_cct">
       <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-        <video class="slide-video desktop-bg" src="videos/DIGITAL CCT EFEKT.mp4" muted playsinline preload="auto" poster="/images/elegant-interior-design-with-neutral-colors-2026-03-25-07-06-00-utc.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
+        <video class="slide-video desktop-bg" src="videos/DIGITAL CCT EFEKT.mp4" muted playsinline preload="auto" poster="images/elegant-interior-design-with-neutral-colors-2026-03-25-07-06-00-utc.webp" style="width: 100%; height: 100%; object-fit: cover;"></video>
         
       </div>
       <div class="slide-banner-box" style="z-index: 2;">
@@ -2013,7 +2118,7 @@
           <h1>Cyfrowe taśmy CCT</h1>
           <p>To Ty decydujesz o barwie i efektach</p>
         </div>
-        <a href="shop.html" class="mockup-btn">Kup teraz</a>
+        <a href="shop.html" class="mockup-btn"><div class="btn-slide-wrap"><span class="btn-txt-default">Kup teraz</span><span class="btn-txt-hover">Kup teraz</span></div></a>
       </div>
     </div>
     
@@ -2036,41 +2141,97 @@
 
   <!-- Banners Section (Home 3 style) -->
   <section class="mockup-banners" id="kategorie-banners">
-    <!-- Banner 1: Profile Aluminiowe -->
+    <!-- Banner 1: Taśmy LED 7 lat gwarancji -->
+    <div class="banner-row">
+      <div class="banner-content">
+        <h3>Taśmy LED 7 Lat Gwarancji Premium</h3>
+        <p>Najwyższej jakości profesjonalne taśmy LED COB i SMD objęte pełną, 7-letnią gwarancją producenta. Gwarancja braku spadków jasności i idealnie jednolitej linii światła.</p>
+        <div>
+          <a href="shop.html?cat=Tasma%20LED" class="mockup-btn" style="background: var(--primary-color); color: var(--white); text-decoration: none; padding: 15px 38px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;"><div class="btn-slide-wrap"><span class="btn-txt-default">ZOBACZ TAŚMY 7 LAT</span><span class="btn-txt-hover">ZOBACZ TAŚMY 7 LAT</span></div></a>
+        </div>
+      </div>
+      <div class="banner-image-container" onclick="window.location.href='shop.html?cat=Tasma%20LED'">
+        <img src="images/hero_cob.webp" alt="Taśmy LED 7 Lat Gwarancji Premium">
+      </div>
+    </div>
+
+    <!-- Banner 2: Taśmy LED Premium 5 lat gwarancji (REVERSE) -->
+    <div class="banner-row reverse">
+      <div class="banner-image-container" onclick="window.location.href='shop.html?cat=Tasma%20LED'" style="grid-column: 1; grid-row: 1;">
+        <img src="images/hero_rgbcct.webp" alt="Taśmy LED Premium 5 Lat Gwarancji">
+      </div>
+      <div class="banner-content" style="grid-column: 2; grid-row: 1;">
+        <h3>Taśmy LED Premium 5 Lat Gwarancji</h3>
+        <p>Niezawodne taśmy LED klasy Premium z 5-letnią gwarancją. Idealny stosunek ceny do jakości, doskonałe parametry świetlne i długa żywotność.</p>
+        <div>
+          <a href="shop.html?cat=Tasma%20LED" class="mockup-btn" style="background: var(--primary-color); color: var(--white); text-decoration: none; padding: 15px 38px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;"><div class="btn-slide-wrap"><span class="btn-txt-default">ZOBACZ TAŚMY 5 LAT</span><span class="btn-txt-hover">ZOBACZ TAŚMY 5 LAT</span></div></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Banner 3: Akcesoria do LED -->
+    <div class="banner-row">
+      <div class="banner-content">
+        <h3>Akcesoria do LED</h3>
+        <p>Pełna gama profesjonalnych akcesoriów instalacyjnych: kable, złączki szybkiego montażu, uchwyty, puszki instalacyjne oraz taśmy montażowe.</p>
+        <div>
+          <a href="shop.html" class="mockup-btn" style="background: var(--primary-color); color: var(--white); text-decoration: none; padding: 15px 38px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;"><div class="btn-slide-wrap"><span class="btn-txt-default">ZOBACZ AKCESORIA</span><span class="btn-txt-hover">ZOBACZ AKCESORIA</span></div></a>
+        </div>
+      </div>
+      <div class="banner-image-container" onclick="window.location.href='shop.html'">
+        <img src="images/product4.jpg" alt="Akcesoria do LED">
+      </div>
+    </div>
+
+    <!-- Banner 4: Świetlówki LED (REVERSE) -->
+    <div class="banner-row reverse">
+      <div class="banner-image-container" onclick="window.location.href='shop.html'" style="grid-column: 1; grid-row: 1;">
+        <img src="images/light_rail.jpg" alt="Świetlówki LED">
+      </div>
+      <div class="banner-content" style="grid-column: 2; grid-row: 1;">
+        <h3>Świetlówki LED</h3>
+        <p>Energooszczędne świetlówki LED T8 i T5 będące bezpośrednimi zamiennikami tradycyjnych świetlówek gazowych. Stabilny strumień świetlny, brak efektu migotania i łatwa modernizacja istniejących opraw.</p>
+        <div>
+          <a href="shop.html" class="mockup-btn" style="background: var(--primary-color); color: var(--white); text-decoration: none; padding: 15px 38px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;"><div class="btn-slide-wrap"><span class="btn-txt-default">ZOBACZ ŚWIETLÓWKI</span><span class="btn-txt-hover">ZOBACZ ŚWIETLÓWKI</span></div></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Banner 5: Profile Aluminiowe -->
     <div class="banner-row">
       <div class="banner-content">
         <h3>Profile Aluminiowe LED</h3>
         <p>Ekskluzywna seria profili LED. Doskonałe odprowadzanie ciepła, estetyczne wykończenie i łatwy montaż w każdym rodzaju podłoża. Stworzone do profesjonalnych instalacji architektonicznych.</p>
         <div>
-          <a href="shop.html" class="mockup-btn" style="background: var(--primary-color); color: var(--white); text-decoration: none; padding: 15px 38px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">ZOBACZ PROFILE</a>
+          <a href="shop.html?cat=Profile" class="mockup-btn" style="background: var(--primary-color); color: var(--white); text-decoration: none; padding: 15px 38px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;"><div class="btn-slide-wrap"><span class="btn-txt-default">ZOBACZ PROFILE</span><span class="btn-txt-hover">ZOBACZ PROFILE</span></div></a>
         </div>
       </div>
-      <div class="banner-image-container" onclick="window.location.href='shop.html'">
+      <div class="banner-image-container" onclick="window.location.href='shop.html?cat=Profile'">
         <img src="images/oprawa.jpg" alt="Profile Aluminiowe LED">
       </div>
     </div>
 
-    <!-- Banner 2: Zasilacze Hermetyczne IP67 (REVERSE) -->
+    <!-- Banner 6: Zasilacze Hermetyczne IP67 (REVERSE) -->
     <div class="banner-row reverse">
-      <div class="banner-image-container" onclick="window.location.href='shop.html'" style="grid-column: 1; grid-row: 1;">
+      <div class="banner-image-container" onclick="window.location.href='shop.html?cat=Zasilacze'" style="grid-column: 1; grid-row: 1;">
         <img src="images/cri97.jpg" alt="Zasilacze Hermetyczne IP67">
       </div>
       <div class="banner-content" style="grid-column: 2; grid-row: 1;">
         <h3>Zasilacze Hermetyczne IP67</h3>
         <p>Wodoodporne zasilacze LED stworzone do stabilnej pracy pod pełnym obciążeniem 100% mocy w trudnych warunkach zewnętrznych i przemysłowych. Wybierz jakość, zapomnij o awariach.</p>
         <div>
-          <a href="shop.html" class="mockup-btn" style="background: var(--primary-color); color: var(--white); text-decoration: none; padding: 15px 38px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">SPRAWDŹ ZASILACZE</a>
+          <a href="shop.html?cat=Zasilacze" class="mockup-btn" style="background: var(--primary-color); color: var(--white); text-decoration: none; padding: 15px 38px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;"><div class="btn-slide-wrap"><span class="btn-txt-default">SPRAWDŹ ZASILACZE</span><span class="btn-txt-hover">SPRAWDŹ ZASILACZE</span></div></a>
         </div>
       </div>
     </div>
 
-    <!-- Banner 3: Ekskluzywne Oświetlenie -->
+    <!-- Banner 7: Ekskluzywne Oświetlenie -->
     <div class="banner-row">
       <div class="banner-content">
         <h3>Ekskluzywne Oświetlenie</h3>
         <p>Nowoczesne linie świetlne zintegrowane z architekturą wnętrz. Perfekcyjna spójność światła i formy, która nada Twojej przestrzeni niepowtarzalny, luksusowy charakter.</p>
         <div>
-          <a href="shop.html" class="mockup-btn" style="background: var(--primary-color); color: var(--white); text-decoration: none; padding: 15px 38px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">ZAINSPIRUJ SIĘ</a>
+          <a href="shop.html" class="mockup-btn" style="background: var(--primary-color); color: var(--white); text-decoration: none; padding: 15px 38px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;"><div class="btn-slide-wrap"><span class="btn-txt-default">ZAINSPIRUJ SIĘ</span><span class="btn-txt-hover">ZAINSPIRUJ SIĘ</span></div></a>
         </div>
       </div>
       <div class="banner-image-container" onclick="window.location.href='shop.html'">
@@ -2078,30 +2239,30 @@
       </div>
     </div>
 
-    <!-- Banner 4: Sterowniki LED Prescot (REVERSE) -->
+    <!-- Banner 8: Sterowniki LED Prescot (REVERSE) -->
     <div class="banner-row reverse">
-      <div class="banner-image-container" onclick="window.location.href='shop.html'" style="grid-column: 1; grid-row: 1;">
+      <div class="banner-image-container" onclick="window.location.href='shop.html?cat=Sterowniki%20LED'" style="grid-column: 1; grid-row: 1;">
         <img src="images/banner_controllers.webp" alt="Sterowniki LED Prescot">
       </div>
       <div class="banner-content" style="grid-column: 2; grid-row: 1;">
         <h3>Sterowniki LED Prescot</h3>
         <p>Poznaj zaawansowaną serię sterowników LED 2.4GHz RF. Bezprzewodowa kontrola nad jasnością, barwą bieli oraz kolorami RGB/RGB+CCT z zasięgiem do 30m. Technologia auto-retransmisji i synchronizacji zapewnia nieprzerwane i stabilne działanie bez dodatkowego okablowania.</p>
         <div>
-          <a href="shop.html" class="mockup-btn" style="background: var(--primary-color); color: var(--white); text-decoration: none; padding: 15px 38px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">ZOBACZ STEROWNIKI</a>
+          <a href="shop.html?cat=Sterowniki%20LED" class="mockup-btn" style="background: var(--primary-color); color: var(--white); text-decoration: none; padding: 15px 38px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;"><div class="btn-slide-wrap"><span class="btn-txt-default">ZOBACZ STEROWNIKI</span><span class="btn-txt-hover">ZOBACZ STEROWNIKI</span></div></a>
         </div>
       </div>
     </div>
 
-    <!-- Banner 5: Zasilacze LED Scharfer -->
+    <!-- Banner 9: Zasilacze LED Scharfer -->
     <div class="banner-row">
       <div class="banner-content">
         <h3>Zasilacze LED Scharfer IP67</h3>
         <p>Hermetyczne zasilacze impulsowe klasy premium o stopniu ochrony IP67. Zaprojektowane z technologią Powermax Technology Inside pozwalającą na ciągłą pracę przy 100% obciążenia znamionowego. Każdy model objęty jest wyjątkową, 7-letnią gwarancją producenta.</p>
         <div>
-          <a href="shop.html" class="mockup-btn" style="background: var(--primary-color); color: var(--white); text-decoration: none; padding: 15px 38px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">SPRAWDŹ ZASILACZE SCHARFER</a>
+          <a href="shop.html?cat=Zasilacze" class="mockup-btn" style="background: var(--primary-color); color: var(--white); text-decoration: none; padding: 15px 38px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;"><div class="btn-slide-wrap"><span class="btn-txt-default">SPRAWDŹ ZASILACZE SCHARFER</span><span class="btn-txt-hover">SPRAWDŹ ZASILACZE SCHARFER</span></div></a>
         </div>
       </div>
-      <div class="banner-image-container" onclick="window.location.href='shop.html'">
+      <div class="banner-image-container" onclick="window.location.href='shop.html?cat=Zasilacze'">
         <img src="images/banner_scharfer.webp" alt="Zasilacze LED Scharfer IP67">
       </div>
     </div>
@@ -2111,11 +2272,11 @@
 
   
 
-  <!-- Categories Showcase Section -->
+  <!-- Categories Showcase Section (Stacked vertically 100% width) -->
   <section class="mockup-categories" style="padding: 60px 4%; background: #fafafa;">
-    <div class="categories-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+    <div class="categories-grid" style="display: flex; flex-direction: column; gap: 20px; max-width: 1200px; margin: 0 auto; width: 100%;">
       <!-- Category 1: Taśmy LED -->
-      <a href="/shop.html?category=Ta%C5%9Bmy%20LED" class="category-card" style="position: relative; overflow: hidden; border-radius: 16px; height: 280px; text-decoration: none; display: flex; align-items: flex-end; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+      <a href="shop.html?category=Ta%C5%9Bmy%20LED" class="category-card" style="position: relative; overflow: hidden; border-radius: 16px; height: 280px; text-decoration: none; display: flex; align-items: flex-end; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); width: 100%;">
         <div class="category-bg" style="position: absolute; top:0; left:0; width:100%; height:100%; background-image: url('images/products/tasma_4000k.webp'); background-size: cover; background-position: center; transition: transform 0.6s ease;"></div>
         <div class="category-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%);"></div>
         <div class="category-info" style="position: relative; z-index: 2;">
@@ -2125,7 +2286,7 @@
       </a>
       
       <!-- Category 2: Sterowniki LED -->
-      <a href="/shop.html?category=Sterowniki%20LED" class="category-card" style="position: relative; overflow: hidden; border-radius: 16px; height: 280px; text-decoration: none; display: flex; align-items: flex-end; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+      <a href="shop.html?category=Sterowniki%20LED" class="category-card" style="position: relative; overflow: hidden; border-radius: 16px; height: 280px; text-decoration: none; display: flex; align-items: flex-end; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); width: 100%;">
         <div class="category-bg" style="position: absolute; top:0; left:0; width:100%; height:100%; background-image: url('images/products/controller_rgb.webp'); background-size: cover; background-position: center; transition: transform 0.6s ease;"></div>
         <div class="category-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%);"></div>
         <div class="category-info" style="position: relative; z-index: 2;">
@@ -2135,7 +2296,7 @@
       </a>
       
       <!-- Category 3: Zasilacze LED -->
-      <a href="/shop.html?category=Zasilacze%20LED" class="category-card" style="position: relative; overflow: hidden; border-radius: 16px; height: 280px; text-decoration: none; display: flex; align-items: flex-end; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+      <a href="shop.html?category=Zasilacze%20LED" class="category-card" style="position: relative; overflow: hidden; border-radius: 16px; height: 280px; text-decoration: none; display: flex; align-items: flex-end; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); width: 100%;">
         <div class="category-bg" style="position: absolute; top:0; left:0; width:100%; height:100%; background-image: url('images/products/scharfer_100w.webp'); background-size: cover; background-position: center; transition: transform 0.6s ease;"></div>
         <div class="category-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%);"></div>
         <div class="category-info" style="position: relative; z-index: 2;">
@@ -2145,7 +2306,7 @@
       </a>
       
       <!-- Category 4: Wizualizacje 3D & 360 -->
-      <a href="shop.html" class="category-card" style="position: relative; overflow: hidden; border-radius: 16px; height: 280px; text-decoration: none; display: flex; align-items: flex-end; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+      <a href="shop.html" class="category-card" style="position: relative; overflow: hidden; border-radius: 16px; height: 280px; text-decoration: none; display: flex; align-items: flex-end; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); width: 100%;">
         <div class="category-bg" style="position: absolute; top:0; left:0; width:100%; height:100%; background-image: url('images/products/product_8291636215978.jpg'); background-size: cover; background-position: center; transition: transform 0.6s ease;"></div>
         <div class="category-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%);"></div>
         <div class="category-info" style="position: relative; z-index: 2;">
@@ -2649,7 +2810,7 @@
           </div>
           <h3 class="mockup-blog-title" style="font-size: 20px; margin-bottom: 15px; line-height: 1.4;">Jak dobrać zasilacz LED do taśmy?</h3>
           <p class="mockup-blog-excerpt" style="color: #666; line-height: 1.6; margin-bottom: 20px;">Zasilacz LED dobiera się do konkretnej taśmy, a nie „na oko”. Zobacz, jak obliczyć moc, sprawdzić napięcie i bezpiecznie zasilić taśmę.</p>
-          <a href="/blog.html#blog-1" class="mockup-blog-link" style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; font-size: 13px; text-decoration: none;">Czytaj więcej</a>
+          <a href="blog.html#blog-1" class="mockup-blog-link" style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; font-size: 13px; text-decoration: none;">Czytaj więcej</a>
         </div>
       </article>
 
@@ -2665,7 +2826,7 @@
           </div>
           <h3 class="mockup-blog-title" style="font-size: 20px; margin-bottom: 15px; line-height: 1.4;">Zasilacze LED - gdzie użyć którego?</h3>
           <p class="mockup-blog-excerpt" style="color: #666; line-height: 1.6; margin-bottom: 20px;">Desktop, slim, siatkowy czy hermetyczny IP67? Zobacz praktyczne porównanie typów zasilaczy w zależności od miejsca montażu.</p>
-          <a href="/blog.html#blog-2" class="mockup-blog-link" style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; font-size: 13px; text-decoration: none;">Czytaj więcej</a>
+          <a href="blog.html#blog-2" class="mockup-blog-link" style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; font-size: 13px; text-decoration: none;">Czytaj więcej</a>
         </div>
       </article>
 
@@ -2681,7 +2842,7 @@
           </div>
           <h3 class="mockup-blog-title" style="font-size: 20px; margin-bottom: 15px; line-height: 1.4;">Do czego służą zasilacze LED?</h3>
           <p class="mockup-blog-excerpt" style="color: #666; line-height: 1.6; margin-bottom: 20px;">Dlaczego nie wolno podłączać taśmy bezpośrednio do gniazdka 230V? Dowiedz się, jaką rolę pełni zasilacz w bezpiecznej instalacji.</p>
-          <a href="/blog.html#blog-3" class="mockup-blog-link" style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; font-size: 13px; text-decoration: none;">Czytaj więcej</a>
+          <a href="blog.html#blog-3" class="mockup-blog-link" style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; font-size: 13px; text-decoration: none;">Czytaj więcej</a>
         </div>
       </article>
 
@@ -2947,6 +3108,21 @@
       trending.forEach(p => {
         const badge = p.compareAtPrice ? `<span class="mockup-product-badge" style="background-color: var(--accent-color);">TOP</span>` : `<span class="mockup-product-badge" style="background-color: var(--primary-color);">TOP</span>`;
         
+        let thirdBtn = '';
+        if (p.has3D) {
+          thirdBtn = `
+            <button class="action-btn-circle qv-3d-btn" data-id="${p.id}" aria-label="Podgląd 3D">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </button>
+          `;
+        } else if (p.has360) {
+          thirdBtn = `
+            <button class="action-btn-circle qv-360-btn" data-id="${p.id}" aria-label="Podgląd 360">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+            </button>
+          `;
+        }
+
         const cardHTML = `
           <div class="mockup-product-card" data-id="${p.id}">
             <div class="mockup-product-media" style="position: relative; overflow: hidden;">
@@ -2962,11 +3138,12 @@
                 <button class="action-btn-circle qv-eye-btn" data-id="${p.id}" aria-label="Szybki podgląd">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                 </button>
+                ${thirdBtn}
               </div>
             </div>
             <div class="mockup-product-info">
               <p class="mockup-product-category">${p.category}</p>
-              <h3 class="mockup-product-title"><a href="/product.html?id=${p.id}">${p.title}</a></h3>
+              <h3 class="mockup-product-title"><a href="product.html?id=${p.id}">${p.title}</a></h3>
               <p class="mockup-product-price">
                 ${p.compareAtPrice ? `<del>${p.compareAtPrice.toFixed(2)} zł</del>` : ''}
                 ${p.price.toFixed(2)} zł
@@ -3002,7 +3179,7 @@
       if (headerSearchInput) {
         const q = headerSearchInput.value.trim();
         if (q) {
-          window.location.href = `/shop.html?search=${encodeURIComponent(q)}`;
+          window.location.href = `shop.html?search=${encodeURIComponent(q)}`;
         }
       }
     }

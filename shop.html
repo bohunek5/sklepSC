@@ -341,7 +341,8 @@
     .mockup-product-media {
       position: relative;
       width: 100%;
-      height: 360px;
+      aspect-ratio: 1 / 1;
+      height: auto !important;
       overflow: hidden;
       background-color: var(--light-bg);
     }
@@ -1163,6 +1164,10 @@
       color: #8892b0;
     }
 
+    /* Enforce cursor: pointer on all interactive elements */
+    a, button, .mockup-product-card, .category-card, .slider-arrow, .color-swatch-dot, .size-swatch, .thumbnail, [onclick], .mockup-btn {
+      cursor: pointer !important;
+    }
 </style>
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
@@ -1185,19 +1190,19 @@
             <div class="magic-dropdown-section">
               <div class="magic-dropdown-title">Oświetlenie LED</div>
               <ul>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-lightning"></i> Taśmy LED COB</a></li>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-aperture"></i> Taśmy LED SMD</a></li>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-magic-wand"></i> Taśmy Neony</a></li>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-package"></i> Zestawy LED</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-lightning"></i> Taśmy LED COB</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-aperture"></i> Taśmy LED SMD</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-magic-wand"></i> Taśmy Neony</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-package"></i> Zestawy LED</a></li>
               </ul>
             </div>
             <div class="magic-dropdown-section">
               <div class="magic-dropdown-title">Akcesoria i Zasilanie</div>
               <ul>
-                <li><a href="/shop.html?cat=Sterowniki%20LED"><i class="ph ph-faders"></i> Sterowniki LED</a></li>
-                <li><a href="/shop.html?cat=Zasilacze"><i class="ph ph-plug"></i> Zasilacze Hermetyczne</a></li>
-                <li><a href="/shop.html?cat=Profile"><i class="ph ph-minus"></i> Profile aluminiowe</a></li>
-                <li><a href="/shop.html?cat=Akcesoria"><i class="ph ph-plugs-connected"></i> Kable i złączki</a></li>
+                <li><a href="shop.html?cat=Sterowniki%20LED"><i class="ph ph-faders"></i> Sterowniki LED</a></li>
+                <li><a href="shop.html?cat=Zasilacze"><i class="ph ph-plug"></i> Zasilacze Hermetyczne</a></li>
+                <li><a href="shop.html?cat=Profile"><i class="ph ph-minus"></i> Profile aluminiowe</a></li>
+                <li><a href="shop.html?cat=Akcesoria"><i class="ph ph-plugs-connected"></i> Kable i złączki</a></li>
               </ul>
             </div>
           </div>
@@ -1245,19 +1250,19 @@
             <div class="magic-dropdown-section">
               <div class="magic-dropdown-title">Oświetlenie LED</div>
               <ul>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-lightning"></i> Taśmy LED COB</a></li>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-aperture"></i> Taśmy LED SMD</a></li>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-magic-wand"></i> Taśmy Neony</a></li>
-                <li><a href="/shop.html?cat=Tasma%20LED"><i class="ph ph-package"></i> Zestawy LED</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-lightning"></i> Taśmy LED COB</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-aperture"></i> Taśmy LED SMD</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-magic-wand"></i> Taśmy Neony</a></li>
+                <li><a href="shop.html?cat=Tasma%20LED"><i class="ph ph-package"></i> Zestawy LED</a></li>
               </ul>
             </div>
             <div class="magic-dropdown-section">
               <div class="magic-dropdown-title">Akcesoria i Zasilanie</div>
               <ul>
-                <li><a href="/shop.html?cat=Sterowniki%20LED"><i class="ph ph-faders"></i> Sterowniki LED</a></li>
-                <li><a href="/shop.html?cat=Zasilacze"><i class="ph ph-plug"></i> Zasilacze Hermetyczne</a></li>
-                <li><a href="/shop.html?cat=Profile"><i class="ph ph-minus"></i> Profile aluminiowe</a></li>
-                <li><a href="/shop.html?cat=Akcesoria"><i class="ph ph-plugs-connected"></i> Kable i złączki</a></li>
+                <li><a href="shop.html?cat=Sterowniki%20LED"><i class="ph ph-faders"></i> Sterowniki LED</a></li>
+                <li><a href="shop.html?cat=Zasilacze"><i class="ph ph-plug"></i> Zasilacze Hermetyczne</a></li>
+                <li><a href="shop.html?cat=Profile"><i class="ph ph-minus"></i> Profile aluminiowe</a></li>
+                <li><a href="shop.html?cat=Akcesoria"><i class="ph ph-plugs-connected"></i> Kable i złączki</a></li>
               </ul>
             </div>
           </div>
@@ -1610,6 +1615,21 @@
       }
 
       itemsToShow.forEach(p => {
+        let thirdBtn = '';
+        if (p.has3D) {
+          thirdBtn = `
+            <button class="action-btn-circle qv-3d-btn" data-id="${p.id}" aria-label="Podgląd 3D">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </button>
+          `;
+        } else if (p.has360) {
+          thirdBtn = `
+            <button class="action-btn-circle qv-360-btn" data-id="${p.id}" aria-label="Podgląd 360">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+            </button>
+          `;
+        }
+
         const cardHTML = `
           <div class="mockup-product-card" data-id="${p.id}">
             <div class="mockup-product-media" style="position: relative; overflow: hidden;">
@@ -1624,11 +1644,12 @@
                 <button class="action-btn-circle qv-eye-btn" data-id="${p.id}" aria-label="Szybki podgląd">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                 </button>
+                ${thirdBtn}
               </div>
             </div>
             <div class="mockup-product-info">
               <p class="mockup-product-category">${p.category}</p>
-              <h3 class="mockup-product-title"><a href="/product.html?id=${p.id}">${p.title}</a></h3>
+              <h3 class="mockup-product-title"><a href="product.html?id=${p.id}">${p.title}</a></h3>
               <p class="mockup-product-price">
                 ${p.price.toFixed(2)} zł
                 ${p.compareAtPrice ? `<span style="text-decoration: line-through; color: #aaa; font-weight: 400; font-size: 13px; margin-left: 8px;">${p.compareAtPrice.toFixed(2)} zł</span>` : ''}
