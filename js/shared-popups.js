@@ -1267,10 +1267,11 @@ export function initSharedPopups() {
             title: document.title,
             url: window.location.href
           }).catch(console.error);
-      } else {
-        navigator.clipboard.writeText(window.location.href).then(() => {
-          showToast('Link do produktu został skopiowany do schowka!', 'success');
-        });
+        } else {
+          navigator.clipboard.writeText(window.location.href).then(() => {
+            showToast('Link do produktu został skopiowany do schowka!', 'success');
+          });
+        }
       }
     });
   });

@@ -143,7 +143,7 @@ function loadProductsData() {
       <td><span class="status completed">Aktywny</span></td>
       <td>
         <button class="action-btn btn-edit" onclick="editProduct(${prod.id})" title="Edytuj"><i class="ph ph-pencil-simple"></i> Edytuj</button>
-        <button class="action-btn btn-delete" onclick="deleteProduct(${prod.id})" title="Usuń" style="color: var(--danger);"><i class="ph ph-trash"></i> Kosz</button>
+        <button class="action-btn btn-delete" onclick="deleteProduct(${prod.id})" title="Usuń"><i class="ph ph-trash"></i> Kosz</button>
       </td>
     `;
     tbody.appendChild(tr);

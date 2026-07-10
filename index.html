@@ -612,6 +612,15 @@
     }
 
     /* Slider Controls */
+    .hero-controls-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 20;
+    }
     /* Slider Arrows — far edges, vertically centered */
     .slider-arrows {
       position: absolute;
@@ -1060,11 +1069,11 @@
         flex-direction: column !important;
         text-align: center !important;
         gap: 12px !important;
-        background: rgba(11, 26, 48, 0.75) !important;
-        backdrop-filter: blur(25px) !important;
-        -webkit-backdrop-filter: blur(25px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.15) !important;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important;
+        background: rgba(255, 255, 255, 0.12) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15) !important;
       }
       .slide-banner-box .banner-text {
         align-items: center;
@@ -1108,60 +1117,80 @@
       .menu-toggle {
         display: block;
       }
-      .slider-arrows {
-        display: flex !important;
-        justify-content: center !important;
-        gap: 20px !important;
-        position: absolute !important;
-        bottom: 125px !important;
+      .hero-controls-bar {
+        position: fixed !important;
+        bottom: calc(65px + 15px + env(safe-area-inset-bottom)) !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
-        width: auto !important;
-        z-index: 100;
+        width: 250px !important;
+        height: 52px !important;
+        background: rgba(255, 255, 255, 0.45) !important;
+        backdrop-filter: blur(20px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+        border-radius: 99px !important;
+        border: 1px solid rgba(255, 255, 255, 0.45) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 0 8px !important;
+        z-index: 1500 !important;
+        pointer-events: auto !important;
+      }
+      .slider-arrows {
+        display: contents !important;
       }
       .slider-arrow {
         position: static !important;
-        width: 36px !important;
-        height: 36px !important;
-        background: rgba(255, 255, 255, 0.15) !important;
-        backdrop-filter: blur(10px) !important;
-        -webkit-backdrop-filter: blur(10px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        width: 38px !important;
+        height: 38px !important;
+        background: rgba(255, 255, 255, 0.3) !important;
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
         border-radius: 50% !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
         cursor: pointer !important;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important;
+      }
+      #prevSlide {
+        order: 1 !important;
+      }
+      #nextSlide {
+        order: 3 !important;
       }
       .slider-arrow svg {
-        width: 14px !important;
-        height: 14px !important;
+        width: 16px !important;
+        height: 16px !important;
         stroke: #ffffff !important;
       }
       .scroll-down-arrow {
-        bottom: 75px !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
+        position: static !important;
+        transform: none !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
         text-decoration: none !important;
         z-index: 100;
+        order: 2 !important;
       }
       .scroll-down-arrow span {
         display: none !important;
       }
       .scroll-down-circle {
-        width: 32px !important;
-        height: 32px !important;
-        background: rgba(255, 255, 255, 0.15) !important;
-        backdrop-filter: blur(10px) !important;
-        -webkit-backdrop-filter: blur(10px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        width: 38px !important;
+        height: 38px !important;
+        background: rgba(255, 255, 255, 0.3) !important;
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05) !important;
       }
       .scroll-down-circle svg {
-        width: 14px !important;
-        height: 14px !important;
+        width: 16px !important;
+        height: 16px !important;
         stroke: #ffffff !important;
       }
       .mockup-advantages {
@@ -1209,6 +1238,65 @@
       }
       #newsBox > div:last-child {
         padding: 30px 20px !important;
+      }
+      /* Home Page Categories Layout for Mobile (Name -> Image -> Button in flow) */
+      .banner-row, .banner-row.reverse {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto !important;
+        min-height: auto !important;
+        height: auto !important;
+        background: #ffffff !important;
+        padding: 30px 5% !important;
+        border-bottom: 1px solid rgba(0,0,0,0.06) !important;
+        gap: 0 !important;
+      }
+      .banner-content {
+        display: contents !important; /* Expose children to the grid layout */
+      }
+      .banner-content h3 {
+        order: 1 !important;
+        font-size: 20px !important;
+        font-weight: 700 !important;
+        text-align: center !important;
+        margin-top: 0 !important;
+        margin-bottom: 15px !important;
+        color: var(--primary-color) !important;
+      }
+      .banner-content p {
+        display: none !important; /* Hide long description paragraphs on mobile */
+      }
+      .banner-content div {
+        order: 3 !important;
+        display: flex !important;
+        justify-content: center !important;
+        width: 100% !important;
+        margin-top: 15px !important;
+        margin-bottom: 5px !important;
+      }
+      .banner-content div .mockup-btn {
+        width: 100% !important;
+        max-width: 320px !important;
+        text-align: center !important;
+        padding: 12px 20px !important;
+        font-size: 11px !important;
+        border-radius: 4px !important;
+      }
+      .banner-image-container, .banner-row.reverse .banner-image-container {
+        order: 2 !important;
+        grid-column: auto !important;
+        grid-row: auto !important;
+        width: 100% !important;
+        height: 220px !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.04) !important;
+        margin-bottom: 5px !important;
+      }
+      .banner-image-container img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
       }
     }
 
@@ -2206,21 +2294,23 @@
       </div>
     </div>
     
-    <div class="slider-arrows">
-      <button class="slider-arrow" id="prevSlide">
-        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
-      </button>
-      <button class="slider-arrow" id="nextSlide">
-        <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"></polyline></svg>
-      </button>
-    </div>
-  
-    <a href="#kategorie-banners" class="scroll-down-arrow">
-      <span>Odkryj</span>
-      <div class="scroll-down-circle">
-        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    <div class="hero-controls-bar">
+      <div class="slider-arrows">
+        <button class="slider-arrow" id="prevSlide">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button class="slider-arrow" id="nextSlide">
+          <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"></polyline></svg>
+        </button>
       </div>
-    </a>
+    
+      <a href="#kategorie-banners" class="scroll-down-arrow">
+        <span>Odkryj</span>
+        <div class="scroll-down-circle">
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+      </a>
+    </div>
   </section>
 
   <!-- Banners Section (Home 3 style) -->
