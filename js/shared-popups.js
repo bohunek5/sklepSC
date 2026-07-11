@@ -623,6 +623,51 @@ export function initSharedPopups() {
       #wishlistDrawer > div:last-child {
         padding-bottom: 85px !important;
       }
+      .mockup-search-container {
+        display: flex !important;
+        flex: 1 !important;
+        max-width: 140px !important;
+        min-width: 90px !important;
+        padding: 5px 10px !important;
+        margin-right: 8px !important;
+        border-radius: 99px !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+      }
+      .mockup-search-container input {
+        width: 100% !important;
+        font-size: 11px !important;
+        padding: 0 !important;
+        font-family: inherit !important;
+      }
+      .mockup-search-container input::placeholder {
+        font-family: inherit !important;
+        font-size: 10px !important;
+        color: rgba(255, 255, 255, 0.6) !important;
+      }
+      .mockup-search-container input:focus {
+        width: 100% !important;
+      }
+      .mockup-search-container button {
+        padding: 0 !important;
+      }
+      .mockup-search-container button svg {
+        width: 13px !important;
+        height: 13px !important;
+      }
+      .mockup-header.scrolled .mockup-search-container {
+        background: rgba(26, 26, 26, 0.04) !important;
+        border-color: rgba(26, 26, 26, 0.15) !important;
+      }
+      .mockup-header.scrolled .mockup-search-container input {
+        color: #1a1a1a !important;
+      }
+      .mockup-header.scrolled .mockup-search-container input::placeholder {
+        color: rgba(26, 26, 26, 0.5) !important;
+      }
+      .mockup-header.scrolled .mockup-search-container button svg {
+        stroke: #1a1a1a !important;
+      }
     }
   `;
   document.head.appendChild(styleEl);
@@ -1787,6 +1832,17 @@ export function initSharedPopups() {
         video.removeAttribute('src');
         video.load();
       });
+
+      // Touchstart (Mobile user gesture helper to bypass strict iOS autoplay blocks)
+      card.addEventListener('touchstart', () => {
+        if (card.videoTimeout) clearTimeout(card.videoTimeout);
+        const dataSrc = video.getAttribute('data-src');
+        if (dataSrc && video.getAttribute('src') !== dataSrc) {
+          video.setAttribute('src', dataSrc);
+          video.load();
+        }
+        video.play().catch(err => console.log("Touch video play blocked:", err));
+      }, { passive: true });
     });
 
     // Bind IntersectionObserver for Mobile

@@ -47,37 +47,37 @@ const defaultProducts = [
     ],
     "colors": [],
     "sizes": [],
-    "video": "/videos/mono.mp4",
+    "video": "videos/mono.mp4",
     "variants": [
       {
         "id": 1001,
         "name": "Mono",
         "image": "images/products/controller_mono.webp",
-        "video": "/videos/mono.mp4"
+        "video": "videos/mono.mp4"
       },
       {
         "id": 1002,
         "name": "CCT",
         "image": "images/products/controller_cct.webp",
-        "video": "/videos/cct_hotel.mp4"
+        "video": "videos/cct_hotel.mp4"
       },
       {
         "id": 1003,
         "name": "RGB",
         "image": "images/products/controller_rgb.webp",
-        "video": "/videos/rgb_pilot.mp4"
+        "video": "videos/rgb_pilot.mp4"
       },
       {
         "id": 1004,
         "name": "RGBW",
         "image": "images/products/controller_rgbw.webp",
-        "video": "/videos/SALON%20RGBW%20CZAD.mp4"
+        "video": "videos/SALON%20RGBW%20CZAD.mp4"
       },
       {
         "id": 1005,
         "name": "RGBCCT",
         "image": "images/products/controller_rgbcct.webp",
-        "video": "/videos/rgb_cct.mp4"
+        "video": "videos/rgb_cct.mp4"
       }
     ]
   },
@@ -93,37 +93,37 @@ const defaultProducts = [
     ],
     "colors": [],
     "sizes": [],
-    "video": "/videos/cct_hotel.mp4",
+    "video": "videos/cct_hotel.mp4",
     "variants": [
       {
         "id": 1001,
         "name": "Mono",
         "image": "images/products/controller_mono.webp",
-        "video": "/videos/mono.mp4"
+        "video": "videos/mono.mp4"
       },
       {
         "id": 1002,
         "name": "CCT",
         "image": "images/products/controller_cct.webp",
-        "video": "/videos/cct_hotel.mp4"
+        "video": "videos/cct_hotel.mp4"
       },
       {
         "id": 1003,
         "name": "RGB",
         "image": "images/products/controller_rgb.webp",
-        "video": "/videos/rgb_pilot.mp4"
+        "video": "videos/rgb_pilot.mp4"
       },
       {
         "id": 1004,
         "name": "RGBW",
         "image": "images/products/controller_rgbw.webp",
-        "video": "/videos/SALON%20RGBW%20CZAD.mp4"
+        "video": "videos/SALON%20RGBW%20CZAD.mp4"
       },
       {
         "id": 1005,
         "name": "RGBCCT",
         "image": "images/products/controller_rgbcct.webp",
-        "video": "/videos/rgb_cct.mp4"
+        "video": "videos/rgb_cct.mp4"
       }
     ]
   },
@@ -139,37 +139,37 @@ const defaultProducts = [
     ],
     "colors": [],
     "sizes": [],
-    "video": "/videos/rgb_pilot.mp4",
+    "video": "videos/rgb_pilot.mp4",
     "variants": [
       {
         "id": 1001,
         "name": "Mono",
         "image": "images/products/controller_mono.webp",
-        "video": "/videos/mono.mp4"
+        "video": "videos/mono.mp4"
       },
       {
         "id": 1002,
         "name": "CCT",
         "image": "images/products/controller_cct.webp",
-        "video": "/videos/cct_hotel.mp4"
+        "video": "videos/cct_hotel.mp4"
       },
       {
         "id": 1003,
         "name": "RGB",
         "image": "images/products/controller_rgb.webp",
-        "video": "/videos/rgb_pilot.mp4"
+        "video": "videos/rgb_pilot.mp4"
       },
       {
         "id": 1004,
         "name": "RGBW",
         "image": "images/products/controller_rgbw.webp",
-        "video": "/videos/SALON%20RGBW%20CZAD.mp4"
+        "video": "videos/SALON%20RGBW%20CZAD.mp4"
       },
       {
         "id": 1005,
         "name": "RGBCCT",
         "image": "images/products/controller_rgbcct.webp",
-        "video": "/videos/rgb_cct.mp4"
+        "video": "videos/rgb_cct.mp4"
       }
     ]
   },
@@ -185,37 +185,37 @@ const defaultProducts = [
     ],
     "colors": [],
     "sizes": [],
-    "video": "/videos/SALON%20RGBW%20CZAD.mp4",
+    "video": "videos/SALON%20RGBW%20CZAD.mp4",
     "variants": [
       {
         "id": 1001,
         "name": "Mono",
         "image": "images/products/controller_mono.webp",
-        "video": "/videos/mono.mp4"
+        "video": "videos/mono.mp4"
       },
       {
         "id": 1002,
         "name": "CCT",
         "image": "images/products/controller_cct.webp",
-        "video": "/videos/cct_hotel.mp4"
+        "video": "videos/cct_hotel.mp4"
       },
       {
         "id": 1003,
         "name": "RGB",
         "image": "images/products/controller_rgb.webp",
-        "video": "/videos/rgb_pilot.mp4"
+        "video": "videos/rgb_pilot.mp4"
       },
       {
         "id": 1004,
         "name": "RGBW",
         "image": "images/products/controller_rgbw.webp",
-        "video": "/videos/SALON%20RGBW%20CZAD.mp4"
+        "video": "videos/SALON%20RGBW%20CZAD.mp4"
       },
       {
         "id": 1005,
         "name": "RGBCCT",
         "image": "images/products/controller_rgbcct.webp",
-        "video": "/videos/rgb_cct.mp4"
+        "video": "videos/rgb_cct.mp4"
       }
     ]
   },
@@ -231,37 +231,37 @@ const defaultProducts = [
     ],
     "colors": [],
     "sizes": [],
-    "video": "/videos/rgb_cct.mp4",
+    "video": "videos/rgb_cct.mp4",
     "variants": [
       {
         "id": 1001,
         "name": "Mono",
         "image": "images/products/controller_mono.webp",
-        "video": "/videos/mono.mp4"
+        "video": "videos/mono.mp4"
       },
       {
         "id": 1002,
         "name": "CCT",
         "image": "images/products/controller_cct.webp",
-        "video": "/videos/cct_hotel.mp4"
+        "video": "videos/cct_hotel.mp4"
       },
       {
         "id": 1003,
         "name": "RGB",
         "image": "images/products/controller_rgb.webp",
-        "video": "/videos/rgb_pilot.mp4"
+        "video": "videos/rgb_pilot.mp4"
       },
       {
         "id": 1004,
         "name": "RGBW",
         "image": "images/products/controller_rgbw.webp",
-        "video": "/videos/SALON%20RGBW%20CZAD.mp4"
+        "video": "videos/SALON%20RGBW%20CZAD.mp4"
       },
       {
         "id": 1005,
         "name": "RGBCCT",
         "image": "images/products/controller_rgbcct.webp",
-        "video": "/videos/rgb_cct.mp4"
+        "video": "videos/rgb_cct.mp4"
       }
     ]
   },
@@ -342,7 +342,7 @@ const defaultProducts = [
     ],
     "colors": [],
     "sizes": [],
-    "video": "/videos/mono.mp4"
+    "video": "videos/mono.mp4"
   },
   {
     "id": 3002,
@@ -356,7 +356,7 @@ const defaultProducts = [
     ],
     "colors": [],
     "sizes": [],
-    "video": "/videos/mono.mp4"
+    "video": "videos/mono.mp4"
   }
 ];
 
