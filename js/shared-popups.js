@@ -529,11 +529,46 @@ export function initSharedPopups() {
   injectNewsletterPopup();
   injectSearchOverlay();
   injectMobileMenuOverlay();
+  injectMobileCategoriesDrawer();
 
   // Inject Global Style overrides (Shadows, Mobile sliding drawer, etc.)
   const styleEl = document.createElement('style');
   styleEl.textContent = `
-    /* Hover menu delay & spacing on PC */
+    /* Global Search Bar Styling overrides */
+    .mockup-search-container input {
+      width: 240px !important;
+      transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .mockup-search-container input:focus {
+      width: 350px !important;
+    }
+
+    @media (max-width: 1024px) {
+      .wishlist-trigger, .mockup-action-icon[aria-label="Konto użytkownika"] {
+        display: none !important;
+      }
+      .mockup-search-container {
+        display: flex !important;
+        padding: 6px 12px !important;
+        margin-right: 8px !important;
+        margin-left: auto !important;
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+      }
+      .mockup-search-container input {
+        width: 80px !important;
+      }
+      .mockup-search-container input:focus {
+        width: 120px !important;
+      }
+      .mockup-header-logo {
+        margin-left: -15px !important;
+      }
+      .mockup-header {
+        padding: 15px 4% !important;
+      }
+    }
+
+    /* Hover menu delay & spacing on PC with invisible gap bridges */
     .magic-dropdown, .dropdown-menu {
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
       transition-delay: 0.35s !important;
@@ -541,6 +576,110 @@ export function initSharedPopups() {
     .has-mega-menu:hover .magic-dropdown,
     .has-dropdown:hover .dropdown-menu {
       transition-delay: 0s !important;
+    }
+    .magic-dropdown::before, .dropdown-menu::before {
+      content: "";
+      position: absolute;
+      top: -20px;
+      left: 0;
+      width: 100%;
+      height: 20px;
+      display: block;
+      z-index: -1;
+    }
+    
+    /* Press/indent animation for slider and scroll-down arrows */
+    .slider-arrow:active,
+    .scroll-down-arrow:active .scroll-down-circle,
+    .scroll-down-arrow:active {
+      transform: scale(0.92) translateY(2px) !important;
+      transition: transform 0.1s ease !important;
+    }
+
+    /* Mobile categories drawer styles */
+    .mobile-cat-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .mobile-cat-row:active {
+      transform: scale(0.97) translateY(1px);
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .mobile-cat-content {
+      flex-grow: 1;
+      padding-right: 15px;
+      display: flex;
+      flex-direction: column;
+      min-height: 48px;
+      justify-content: center;
+    }
+    .mobile-cat-guarantee {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-color);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .mobile-cat-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      margin: 0;
+    }
+    .mobile-cat-desc {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0;
+      line-height: 1.4;
+      display: none;
+      opacity: 0;
+    }
+    .mobile-cat-row.show-description .mobile-cat-title {
+      display: none;
+      opacity: 0;
+    }
+    .mobile-cat-row.show-description .mobile-cat-desc {
+      display: block;
+      opacity: 1;
+    }
+    .mobile-cat-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+    .mobile-cat-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .mobile-cat-btn:active {
+      transform: scale(0.9);
+      background: rgba(255, 255, 255, 0.2);
     }
     
     /* Product card title 2-line clamp */
@@ -1853,9 +1992,6 @@ export function initSharedPopups() {
         if (card.videoTimeout) clearTimeout(card.videoTimeout);
         video.style.opacity = '0';
         video.pause();
-        // Unload video to save bandwidth/resources when not hovered
-        video.removeAttribute('src');
-        video.load();
       });
 
       // Touchstart (Mobile user gesture helper to bypass strict iOS autoplay blocks)
@@ -1896,7 +2032,7 @@ export function initSharedPopups() {
               video.play().catch(err => {
                 console.log("Viewport autoplay play blocked:", err);
               });
-            }, 600); // Trigger after 600ms of staying in viewport
+            }, 300); // Trigger after 300ms of staying in viewport
           } else {
             if (card.videoTimeout) {
               clearTimeout(card.videoTimeout);
@@ -1904,8 +2040,6 @@ export function initSharedPopups() {
             }
             video.style.opacity = '0';
             video.pause();
-            video.removeAttribute('src');
-            video.load();
           }
         });
       }, observerOptions);
@@ -1916,3 +2050,159 @@ export function initSharedPopups() {
 
   initGlobalCardVideos();
 }
+
+// --- INJECT MOBILE CATEGORIES DRAWER ---
+function injectMobileCategoriesDrawer() {
+  const drawerHTML = `
+    <!-- Mobile Categories Drawer -->
+    <div id="mobileCategoriesDrawer" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(20, 20, 20, 0.96); z-index: 10000; display: none; flex-direction: column; backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); color: #fff; transition: opacity 0.4s ease; opacity: 0;">
+      <!-- Drawer Header -->
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(20,20,20,0.5);">
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin: 0; color: #fff;">Kategorie produktów</h3>
+        <button onclick="closeMobileCategories()" style="background: none; border: none; color: #fff; font-size: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">&times;</button>
+      </div>
+      
+      <!-- Drawer List -->
+      <div style="flex-grow: 1; overflow-y: auto; padding: 20px 24px 120px 24px; display: flex; flex-direction: column; gap: 15px;">
+        
+        <!-- Row 1 -->
+        <div class="mobile-cat-row" onclick="toggleMobileCatRow(this)">
+          <div class="mobile-cat-content">
+            <span class="mobile-cat-guarantee">7 lat gwarancji</span>
+            <h4 class="mobile-cat-title">Taśmy LED Premium</h4>
+            <p class="mobile-cat-desc">Profesjonalne taśmy LED SMD z selekcjonowanymi diodami o najwyższej wydajności świetlnej.</p>
+          </div>
+          <button class="mobile-cat-btn" onclick="event.stopPropagation(); window.location.href='shop.html?cat=Tasma%20LED&guar=7'">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="mobile-cat-row" onclick="toggleMobileCatRow(this)">
+          <div class="mobile-cat-content">
+            <span class="mobile-cat-guarantee">5 lat gwarancji</span>
+            <h4 class="mobile-cat-title">Taśmy LED Standard</h4>
+            <p class="mobile-cat-desc">Wysokiej jakości paski LED do zastosowań domowych i komercyjnych. Złoty środek między ceną a trwałością.</p>
+          </div>
+          <button class="mobile-cat-btn" onclick="event.stopPropagation(); window.location.href='shop.html?cat=Tasma%20LED&guar=5'">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+
+        <!-- Row 3 -->
+        <div class="mobile-cat-row" onclick="toggleMobileCatRow(this)">
+          <div class="mobile-cat-content">
+            <span class="mobile-cat-guarantee">3 lata gwarancji</span>
+            <h4 class="mobile-cat-title">Taśmy LED COB</h4>
+            <p class="mobile-cat-desc">Innowacyjne taśmy COB z jednolitą linią światła bez widocznych punktów świetlnych. Szeroki kąt świecenia.</p>
+          </div>
+          <button class="mobile-cat-btn" onclick="event.stopPropagation(); window.location.href='shop.html?cat=Tasma%20LED%20COB'">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+
+        <!-- Row 4 -->
+        <div class="mobile-cat-row" onclick="toggleMobileCatRow(this)">
+          <div class="mobile-cat-content">
+            <span class="mobile-cat-guarantee">3 lata gwarancji</span>
+            <h4 class="mobile-cat-title">Taśmy LED COB Digital</h4>
+            <p class="mobile-cat-desc">Cyfrowe adresowalne taśmy LED COB umożliwiające płynne efekty przejścia światła i kontrolę sekcji.</p>
+          </div>
+          <button class="mobile-cat-btn" onclick="event.stopPropagation(); window.location.href='shop.html?cat=Tasma%20LED%20COB%20Digital'">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+
+        <!-- Row 5 -->
+        <div class="mobile-cat-row" onclick="toggleMobileCatRow(this)">
+          <div class="mobile-cat-content">
+            <span class="mobile-cat-guarantee">7 lat gwarancji</span>
+            <h4 class="mobile-cat-title">Zasilacze LED</h4>
+            <p class="mobile-cat-desc">Ultra-stabilne, hermetyczne zasilacze o wysokiej sprawności energetycznej i pełnej ochronie.</p>
+          </div>
+          <button class="mobile-cat-btn" onclick="event.stopPropagation(); window.location.href='shop.html?cat=Zasilacze'">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+
+        <!-- Row 6 -->
+        <div class="mobile-cat-row" onclick="toggleMobileCatRow(this)">
+          <div class="mobile-cat-content">
+            <span class="mobile-cat-guarantee">3 lata gwarancji</span>
+            <h4 class="mobile-cat-title">Zasilacze z autodetekcją 12/24V</h4>
+            <p class="mobile-cat-desc">Inteligentne zasilacze automatycznie wykrywające wymagane napięcie podłączonego paska LED.</p>
+          </div>
+          <button class="mobile-cat-btn" onclick="event.stopPropagation(); window.location.href='shop.html?cat=Zasilacze%20Autodetekcja'">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+
+        <!-- Row 7 -->
+        <div class="mobile-cat-row" onclick="toggleMobileCatRow(this)">
+          <div class="mobile-cat-content">
+            <span class="mobile-cat-guarantee">2 lata gwarancji</span>
+            <h4 class="mobile-cat-title">Sterowniki LED</h4>
+            <p class="mobile-cat-desc">Zaawansowane radiowe i Wi-Fi sterowniki oświetlenia strefowego, obsługujące systemy CCT i RGB.</p>
+          </div>
+          <button class="mobile-cat-btn" onclick="event.stopPropagation(); window.location.href='shop.html?cat=Sterowniki'">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+
+        <!-- Row 8 -->
+        <div class="mobile-cat-row" onclick="toggleMobileCatRow(this)">
+          <div class="mobile-cat-content">
+            <span class="mobile-cat-guarantee">2 lata gwarancji</span>
+            <h4 class="mobile-cat-title">Koszulki silikonowe PRO</h4>
+            <p class="mobile-cat-desc">Profesjonalna ochrona silikonowa dla taśm LED, zapewniająca klasę szczelności IP67.</p>
+          </div>
+          <button class="mobile-cat-btn" onclick="event.stopPropagation(); window.location.href='shop.html?cat=Koszulki'">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+
+        <!-- Row 9 -->
+        <div class="mobile-cat-row" onclick="toggleMobileCatRow(this)">
+          <div class="mobile-cat-content">
+            <span class="mobile-cat-guarantee">2 lata gwarancji</span>
+            <h4 class="mobile-cat-title">Akcesoria do LED</h4>
+            <p class="mobile-cat-desc">Przewody instalacyjne, złączki z zatrzaskiem, uchwyty montażowe oraz pozostałe materiały.</p>
+          </div>
+          <button class="mobile-cat-btn" onclick="event.stopPropagation(); window.location.href='shop.html?cat=Akcesoria'">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  `;
+  if (!document.getElementById('mobileCategoriesDrawer')) {
+    document.body.insertAdjacentHTML('beforeend', drawerHTML);
+  }
+}
+
+// Bind drawer functions to global window scope
+window.openMobileCategories = function() {
+  const drawer = document.getElementById('mobileCategoriesDrawer');
+  if (drawer) {
+    drawer.style.display = 'flex';
+    setTimeout(() => {
+      drawer.style.opacity = '1';
+    }, 10);
+  }
+};
+
+window.closeMobileCategories = function() {
+  const drawer = document.getElementById('mobileCategoriesDrawer');
+  if (drawer) {
+    drawer.style.opacity = '0';
+    setTimeout(() => {
+      drawer.style.display = 'none';
+    }, 400);
+  }
+};
+
+window.toggleMobileCatRow = function(row) {
+  row.classList.toggle('show-description');
+};
+
