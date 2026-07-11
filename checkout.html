@@ -196,9 +196,9 @@
       width: 64px;
       height: 64px;
       object-fit: cover;
-      border-radius: 6px;
+      border-radius: 12px !important;
       background: #fff;
-      border: 1px solid #e1e1e1;
+      border: 1px solid rgba(0,0,0,0.08);
       aspect-ratio: 1 / 1;
     }
 
@@ -206,17 +206,20 @@
       position: absolute;
       top: -8px;
       right: -8px;
-      width: 20px;
-      height: 20px;
-      background: var(--primary-color);
-      color: #fff;
+      min-width: 22px;
+      height: 22px;
+      padding: 0 6px;
+      background: var(--accent-color) !important;
+      color: #000 !important;
       font-size: 11px;
-      font-weight: 600;
-      border-radius: 50%;
+      font-weight: 800;
+      border-radius: 11px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 10px rgba(255, 90, 0, 0.3);
+      border: 1.5px solid #fff;
+      z-index: 2;
     }
 
     .summary-product-details {
@@ -966,7 +969,7 @@
     <!-- Left panel: Form details -->
     <section class="checkout-form-panel">
       <div class="checkout-logo">
-        <a href="index.html"><img src="images/logo.png" alt="Cooken Logo"></a>
+        <a href="index.html"><img src="images/logo.png" alt="Prescot Logo"></a>
       </div>
 
       <div class="checkout-breadcrumbs">
@@ -1010,6 +1013,72 @@
           </div>
           <div class="form-group">
             <input type="tel" id="phone" class="form-control" placeholder="Telefon (opcjonalnie)">
+          </div>
+        </div>
+
+        <div style="margin-bottom: 40px;">
+          <h3 class="section-title">Metoda dostawy</h3>
+
+          <div class="delivery-box" style="border: 1px solid #ccc; border-radius: 8px; overflow: hidden; margin-bottom: 30px;">
+            <!-- Option 1: InPost Paczkomaty -->
+            <div class="delivery-option-header active" onclick="selectDeliveryOption('inpost_paczkomat')" style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #ccc; background: #f7f7f7; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.3s;" id="header_inpost_paczkomat">
+              <label style="display: flex; align-items: center; cursor: pointer; margin: 0; width: 100%;">
+                <input type="radio" name="shippingMethod" id="shipInpostPaczkomat" value="inpost_paczkomat" checked style="margin-right: 12px; accent-color: var(--primary-color);">
+                <div>
+                  <strong style="color: #1a1a1a;">Paczkomaty InPost 24/7</strong>
+                  <span style="display: block; font-size: 12px; color: #666; margin-top: 2px;">Dostawa do wybranego Paczkomatu (1-2 dni)</span>
+                </div>
+              </label>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/InPost_logo.svg" alt="InPost" style="height: 24px; max-width: 80px; object-fit: contain;">
+            </div>
+
+            <!-- Option 2: DPD Paczkomaty / Punkty -->
+            <div class="delivery-option-header" onclick="selectDeliveryOption('dpd_paczkomat')" style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #ccc; background: #fff; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.3s;" id="header_dpd_paczkomat">
+              <label style="display: flex; align-items: center; cursor: pointer; margin: 0; width: 100%;">
+                <input type="radio" name="shippingMethod" id="shipDpdPaczkomat" value="dpd_paczkomat" style="margin-right: 12px; accent-color: var(--primary-color);">
+                <div>
+                  <strong style="color: #1a1a1a;">DPD Pickup (Paczkomaty i Punkty)</strong>
+                  <span style="display: block; font-size: 12px; color: #666; margin-top: 2px;">Odbiór w automatach paczkowych i punktach DPD (1-2 dni)</span>
+                </div>
+              </label>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/DPD_logo.svg" alt="DPD" style="height: 20px; max-width: 80px; object-fit: contain;">
+            </div>
+
+            <!-- Option 3: Kurier DPD -->
+            <div class="delivery-option-header" onclick="selectDeliveryOption('dpd_kurier')" style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #ccc; background: #fff; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.3s;" id="header_dpd_kurier">
+              <label style="display: flex; align-items: center; cursor: pointer; margin: 0; width: 100%;">
+                <input type="radio" name="shippingMethod" id="shipDpdKurier" value="dpd_kurier" style="margin-right: 12px; accent-color: var(--primary-color);">
+                <div>
+                  <strong style="color: #1a1a1a;">Kurier DPD</strong>
+                  <span style="display: block; font-size: 12px; color: #666; margin-top: 2px;">Bezpośrednia dostawa pod wskazany adres (1-2 dni)</span>
+                </div>
+              </label>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/DPD_logo.svg" alt="DPD Kurier" style="height: 20px; max-width: 80px; object-fit: contain;">
+            </div>
+
+            <!-- Option 4: Kurier InPost -->
+            <div class="delivery-option-header" onclick="selectDeliveryOption('inpost_kurier')" style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #ccc; background: #fff; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.3s;" id="header_inpost_kurier">
+              <label style="display: flex; align-items: center; cursor: pointer; margin: 0; width: 100%;">
+                <input type="radio" name="shippingMethod" id="shipInpostKurier" value="inpost_kurier" style="margin-right: 12px; accent-color: var(--primary-color);">
+                <div>
+                  <strong style="color: #1a1a1a;">Kurier InPost</strong>
+                  <span style="display: block; font-size: 12px; color: #666; margin-top: 2px;">Dostawa kurierska InPost na Twój adres (1-2 dni)</span>
+                </div>
+              </label>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/c/c2/InPost_logo.svg" alt="InPost Kurier" style="height: 24px; max-width: 80px; object-fit: contain;">
+            </div>
+
+            <!-- Option 5: SUUS Logistics Dłużyca -->
+            <div class="delivery-option-header" onclick="selectDeliveryOption('suus_dluzyca')" style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: none; background: #fff; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.3s;" id="header_suus_dluzyca">
+              <label style="display: flex; align-items: center; cursor: pointer; margin: 0; width: 100%;">
+                <input type="radio" name="shippingMethod" id="shipSuusDluzyca" value="suus_dluzyca" style="margin-right: 12px; accent-color: var(--primary-color);">
+                <div>
+                  <strong style="color: #1a1a1a;">Röhlig SUUS Logistics (Dłużyca)</strong>
+                  <span style="display: block; font-size: 12px; color: #666; margin-top: 2px;">Specjalistyczny transport paczek dłużycowych (profile aluminiowe itp.)</span>
+                </div>
+              </label>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Rohlig_SUUS_Logistics_logo.svg" alt="Rohlig SUUS" style="height: 22px; max-width: 90px; object-fit: contain;">
+            </div>
           </div>
         </div>
 
@@ -1174,6 +1243,32 @@
         document.getElementById('contentPaypal').classList.add('active');
         document.getElementById('contentPaypal').previousElementSibling.classList.add('active');
       }
+    }
+
+    // selectDeliveryOption helper function
+    function selectDeliveryOption(value) {
+      // Uncheck all shippingMethod radios and check the selected one
+      const radios = document.getElementsByName('shippingMethod');
+      radios.forEach(radio => {
+        if (radio.value === value) {
+          radio.checked = true;
+        }
+      });
+      
+      // Update header classes
+      const options = ['inpost_paczkomat', 'dpd_paczkomat', 'dpd_kurier', 'inpost_kurier', 'suus_dluzyca'];
+      options.forEach(opt => {
+        const header = document.getElementById('header_' + opt);
+        if (header) {
+          if (opt === value) {
+            header.style.background = '#f7f7f7';
+            header.classList.add('active');
+          } else {
+            header.style.background = '#fff';
+            header.classList.remove('active');
+          }
+        }
+      });
     }
 
     // Order checkout logic

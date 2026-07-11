@@ -910,21 +910,24 @@ export function initSharedPopups() {
       total += pTotal;
 
       const itemHTML = `
-        <div style="display: flex; gap: 15px; border-bottom: 1px solid #eee; padding-bottom: 15px; position: relative;">
-          <img src="${item.image}" style="width: 70px; height: 90px; object-fit: cover; background: #f7f7f7;">
+        <div style="display: flex; gap: 15px; border-bottom: 1px solid #eee; padding-bottom: 15px; position: relative; align-items: center;">
+          <div style="position: relative; flex-shrink: 0;">
+            <img src="${item.image}" style="width: 64px; height: 64px; object-fit: cover; border-radius: 12px; border: 1px solid rgba(0,0,0,0.08); background: #fff;">
+            <span class="summary-product-qty" style="position: absolute; top: -8px; right: -8px; min-width: 22px; height: 22px; padding: 0 6px; background: var(--accent-color) !important; color: #000 !important; font-size: 11px; font-weight: 800; border-radius: 11px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(255, 90, 0, 0.3); border: 1.5px solid #fff; z-index: 2;">${item.qty}</span>
+          </div>
           <div style="flex-grow: 1;">
-            <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 4px; color: #1a1a1a;">${item.title}</h4>
-            <p style="font-size: 12px; color: #777; margin-bottom: 8px;">Kolor: ${item.color ? `<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${item.color}; vertical-align:middle; margin-left:3px;"></span>` : 'Domyślny'} / Rozmiar: ${item.size || 'Domyślny'}</p>
+            <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 4px; color: #1a1a1a; padding-right: 20px;">${item.title}</h4>
+            <p style="font-size: 11px; color: #777; margin-bottom: 8px;">Kolor: ${item.color ? `<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${item.color}; vertical-align:middle; margin-left:3px;"></span>` : 'Domyślny'} / Rozmiar: ${item.size || 'Domyślny'}</p>
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="display: flex; border: 1px solid #ddd; align-items: center;">
-                <button class="cart-drawer-qty-btn" data-index="${index}" data-action="minus" style="width: 25px; height: 25px; border: none; background: none; font-size: 14px; cursor: pointer;">-</button>
-                <span style="padding: 0 10px; font-size: 13px; font-weight: 600;">${item.qty}</span>
-                <button class="cart-drawer-qty-btn" data-index="${index}" data-action="plus" style="width: 25px; height: 25px; border: none; background: none; font-size: 14px; cursor: pointer;">+</button>
+              <div style="display: flex; border: 1px solid #e5e5e5; border-radius: 6px; align-items: center; background: #fafafa; overflow: hidden;">
+                <button class="cart-drawer-qty-btn" data-index="${index}" data-action="minus" style="width: 28px; height: 28px; border: none; background: none; font-size: 14px; cursor: pointer; color: #555; display: flex; align-items: center; justify-content: center; transition: background 0.2s;" onmouseover="this.style.background='#eee'" onmouseout="this.style.background='none'">-</button>
+                <span style="padding: 0 8px; font-size: 12px; font-weight: 700; color: #333;">${item.qty}</span>
+                <button class="cart-drawer-qty-btn" data-index="${index}" data-action="plus" style="width: 28px; height: 28px; border: none; background: none; font-size: 14px; cursor: pointer; color: #555; display: flex; align-items: center; justify-content: center; transition: background 0.2s;" onmouseover="this.style.background='#eee'" onmouseout="this.style.background='none'">+</button>
               </div>
-              <span style="font-size: 14px; font-weight: 600; color: #1a1a1a;">${pTotal.toFixed(2)} zł</span>
+              <span style="font-size: 14px; font-weight: 700; color: #1a1a1a;">${pTotal.toFixed(2)} zł</span>
             </div>
           </div>
-          <button class="cart-drawer-remove" data-index="${index}" style="position: absolute; top: 0; right: 0; background: none; border: none; font-size: 18px; color: #999; cursor: pointer;">&times;</button>
+          <button class="cart-drawer-remove" data-index="${index}" style="position: absolute; top: 0; right: 0; background: none; border: none; font-size: 20px; color: #bbb; cursor: pointer; transition: color 0.2s;" onmouseover="this.style.color='#ff5a00'" onmouseout="this.style.color='#bbb'">&times;</button>
         </div>
       `;
       cartDrawerItems.insertAdjacentHTML('beforeend', itemHTML);
