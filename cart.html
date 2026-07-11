@@ -769,7 +769,47 @@
         width: 16px !important;
         height: 16px !important;
       }
-    
+      .mockup-footer {
+        margin-bottom: 80px; /* Space for bottom nav */
+        padding: 50px 20px 30px !important;
+      }
+      .footer-grid {
+        gap: 20px !important;
+        margin-bottom: 40px !important;
+      }
+      .footer-col h3 {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        padding-bottom: 10px;
+        margin-bottom: 10px !important;
+        font-size: 15px !important;
+      }
+      .footer-col h3::after {
+        content: '+';
+        font-size: 16px;
+        font-weight: 300;
+        color: rgba(255,255,255,0.5);
+        transition: transform 0.3s ease;
+      }
+      .footer-col.active h3::after {
+        content: '−';
+        transform: rotate(180deg);
+      }
+      .footer-col ul {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .footer-col.active ul {
+        max-height: 250px;
+        margin-top: 10px !important;
+        margin-bottom: 20px !important;
+      }
     }
 
 
@@ -1275,9 +1315,9 @@
       <div class="footer-col">
         <h3>Newsletter</h3>
         <p style="margin-bottom: 20px;">Zapisz się, aby otrzymywać informacje o nowych kolekcjach i ofertach specjalnych.</p>
-        <div style="display: flex; gap: 10px;">
-          <input type="email" placeholder="Twój e-mail" style="padding: 12px 15px; border: 1px solid #333; background: #222; color: #fff; width: 100%; border-radius: 4px; font-size: 13px;">
-          <button style="padding: 12px 25px; background: var(--accent-color); border: none; color: #000; font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; border-radius: 4px;">OK</button>
+        <div class="newsletter-glass-box" style="display: flex; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 4px; width: 100%;">
+          <input type="email" placeholder="Twój e-mail" style="border: none; background: transparent; color: #fff; padding: 8px 12px; width: 100%; font-size: 13px; font-family: \'Inter\', sans-serif; outline: none;" aria-label="E-mail">
+          <button style="background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; font-weight: 600; font-size: 11px; padding: 8px 20px; border-radius: 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255, 255, 255, 0.25)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.15)'">OK</button>
         </div>
       </div>
     </div>
@@ -1289,6 +1329,16 @@
 
   <!-- App Logic -->
   <script type="module">
+    // Mobile Collapsible Footer Columns
+    document.querySelectorAll('.footer-col h3').forEach(h3 => {
+      h3.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          const col = h3.parentElement;
+          col.classList.toggle('active');
+        }
+      });
+    });
+
     import { initSharedPopups } from './js/shared-popups.js';
 
     // Header Search bar logic
