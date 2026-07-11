@@ -2132,12 +2132,12 @@ export function initSharedPopups() {
 function injectMobileCategoriesDrawer() {
   const drawerHTML = `
     <!-- Mobile Categories Drawer -->
-    <div id="mobileCategoriesDrawer" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(11, 26, 48, 0.98); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); z-index: 10000; display: none; flex-direction: column; color: #fff; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease; transform: translateY(100%); opacity: 0;">
+    <div id="mobileCategoriesDrawer" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); z-index: 10000; display: none; flex-direction: column; color: #1a1a2e; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease; transform: translateY(100%); opacity: 0;">
       
       <!-- Drawer Header -->
-      <div style="display: flex; justify-content: space-between; align-items: center; padding: 25px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin: 0; background: linear-gradient(90deg, #fff, #a0aec0); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Kategorie</h3>
-        <button onclick="closeMobileCategories()" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2);"><i class="ph ph-x"></i></button>
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 25px; border-bottom: 1px solid rgba(0,0,0,0.08);">
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin: 0; color: #1a1a2e;">Kategorie</h3>
+        <button onclick="closeMobileCategories()" style="background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.1); color: #1a1a2e; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.05);"><i class="ph ph-x"></i></button>
       </div>
       
       <!-- Drawer Grid -->
@@ -2145,8 +2145,8 @@ function injectMobileCategoriesDrawer() {
         
         <style>
           .glass-cat-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(0, 0, 0, 0.08);
             border-radius: 16px;
             padding: 25px 15px;
             display: flex;
@@ -2157,35 +2157,35 @@ function injectMobileCategoriesDrawer() {
             gap: 12px;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             text-decoration: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
           }
           .glass-cat-card:active {
             transform: scale(0.96);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.8);
+            border-color: rgba(0, 0, 0, 0.15);
           }
           .glass-cat-icon {
             font-size: 32px;
             color: var(--accent-color, #ff6b00);
-            filter: drop-shadow(0 0 10px rgba(255, 107, 0, 0.4));
+            filter: drop-shadow(0 0 10px rgba(255, 107, 0, 0.2));
           }
           .glass-cat-title {
             font-family: 'Outfit', sans-serif;
             font-size: 14px;
             font-weight: 700;
-            color: #fff;
+            color: #1a1a2e;
             margin: 0;
             letter-spacing: 0.5px;
             line-height: 1.3;
           }
           .glass-cat-badge {
             font-size: 9px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.05);
             padding: 3px 8px;
             border-radius: 20px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: rgba(255,255,255,0.7);
+            color: #555;
             margin-bottom: 2px;
           }
         </style>
@@ -2193,29 +2193,29 @@ function injectMobileCategoriesDrawer() {
         <!-- Taśmy LED -->
         <a href="shop.html?category=Ta%C5%9Bmy%20LED" class="glass-cat-card">
           <i class="ph ph-lightbulb glass-cat-icon"></i>
-          <span class="glass-cat-badge">Do 7 lat gwarancji</span>
+          <span class="glass-cat-badge">Premium</span>
           <h4 class="glass-cat-title">Taśmy LED</h4>
         </a>
 
-        <!-- Sterowniki LED -->
-        <a href="shop.html?category=Sterowniki%20LED" class="glass-cat-card">
+        <!-- Sterowniki -->
+        <a href="shop.html?category=Sterowniki" class="glass-cat-card">
           <i class="ph ph-faders glass-cat-icon"></i>
           <span class="glass-cat-badge">Smart Home</span>
-          <h4 class="glass-cat-title">Sterowniki LED</h4>
+          <h4 class="glass-cat-title">Sterowniki</h4>
         </a>
 
-        <!-- Zasilacze LED -->
-        <a href="shop.html?category=Zasilacze%20LED" class="glass-cat-card">
+        <!-- Zasilacze -->
+        <a href="shop.html?category=Zasilacze" class="glass-cat-card">
           <i class="ph ph-lightning glass-cat-icon"></i>
-          <span class="glass-cat-badge">Hermetyczne</span>
-          <h4 class="glass-cat-title">Zasilacze LED</h4>
+          <span class="glass-cat-badge">Zasilanie</span>
+          <h4 class="glass-cat-title">Zasilacze</h4>
         </a>
 
-        <!-- 3D & AR -->
-        <a href="shop.html?category=3D%20%26%20AR" class="glass-cat-card">
-          <i class="ph ph-cube glass-cat-icon"></i>
-          <span class="glass-cat-badge">Zobacz w AR</span>
-          <h4 class="glass-cat-title">3D & AR</h4>
+        <!-- Akcesoria -->
+        <a href="shop.html?category=Akcesoria" class="glass-cat-card">
+          <i class="ph ph-plug glass-cat-icon"></i>
+          <span class="glass-cat-badge">Montaż</span>
+          <h4 class="glass-cat-title">Akcesoria</h4>
         </a>
       </div>
     </div>
