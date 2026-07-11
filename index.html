@@ -1074,7 +1074,7 @@
         height: 100vh !important;
       }
       .slide {
-        padding: 0 15px 230px 15px !important;
+        padding: 0 15px 245px 15px !important;
         display: flex;
         justify-content: center;
         align-items: flex-end;
@@ -1141,7 +1141,7 @@
       .hero-controls-bar {
         position: absolute !important;
         top: auto !important;
-        bottom: 140px !important;
+        bottom: 155px !important;
         left: 0 !important;
         transform: none !important;
         width: 100% !important;
@@ -2807,7 +2807,7 @@
     }
   
     /* Fixed Button Styles */
-    .add-to-cart-btn, .buy-it-now-btn, .m-btn-primary, .mockup-btn {
+    .add-to-cart-btn, .buy-it-now-btn, .m-btn-primary {
       background: transparent !important;
       color: var(--primary-color) !important;
       border: 2px solid var(--primary-color) !important;
@@ -2816,13 +2816,96 @@
       position: relative;
       overflow: visible !important;
     }
-    .add-to-cart-btn::before, .buy-it-now-btn::before, .m-btn-primary::before, .mockup-btn::before {
+    .add-to-cart-btn::before, .buy-it-now-btn::before, .m-btn-primary::before {
       display: none !important;
     }
-    .add-to-cart-btn:hover, .buy-it-now-btn:hover, .m-btn-primary:hover, .mockup-btn:hover {
+    .add-to-cart-btn:hover, .buy-it-now-btn:hover, .m-btn-primary:hover {
       background: transparent !important;
       border-color: var(--primary-color) !important;
       color: var(--primary-color) !important;
+    }
+
+    /* Premium category buttons below hero */
+    .banner-content div .mockup-btn {
+      background: var(--primary-color) !important;
+      color: var(--white) !important;
+      border: 2px solid var(--primary-color) !important;
+      border-radius: 99px !important;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      box-shadow: 0 8px 25px rgba(255, 90, 0, 0.2) !important;
+      text-transform: uppercase !important;
+      letter-spacing: 2px !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      padding: 15px 38px !important;
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      text-decoration: none !important;
+    }
+    .banner-content div .mockup-btn:hover {
+      transform: translateY(-3px) !important;
+      background: #ffffff !important;
+      color: var(--primary-color) !important;
+      box-shadow: 0 12px 35px rgba(255, 90, 0, 0.35) !important;
+      border-color: var(--primary-color) !important;
+    }
+
+    /* Mobile optimized product card and grid styles */
+    @media (max-width: 768px) {
+      .trending-grid, .mockup-products-grid, #trendingGrid, .recently-viewed-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        padding: 0 5px !important;
+      }
+      .mockup-product-card {
+        padding: 10px !important;
+        border-radius: 8px !important;
+        gap: 6px !important;
+      }
+      .mockup-product-category {
+        font-size: 9px !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        color: var(--primary-color) !important;
+        margin-bottom: 4px !important;
+        font-weight: 700 !important;
+        width: 100% !important;
+        text-align: left !important;
+      }
+      .mockup-product-title {
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        line-height: 1.2 !important;
+        margin-bottom: 2px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        width: 100% !important;
+        text-align: left !important;
+      }
+      .mockup-product-title a {
+        color: #333333 !important;
+        text-decoration: none !important;
+      }
+      .mockup-product-price {
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        color: #111111 !important;
+        width: 100% !important;
+        text-align: left !important;
+      }
+      .mockup-product-price .price-unit {
+        font-size: 9px !important;
+        color: #888888 !important;
+      }
+      .mockup-product-card .qv-add-cart-btn {
+        padding: 8px 12px !important;
+        font-size: 10px !important;
+        margin-top: 6px !important;
+      }
     }
     
 
@@ -3606,6 +3689,7 @@
 
         const cardHTML = `
           <div class="mockup-product-card" data-id="${p.id}">
+            <p class="mockup-product-category">${p.category}</p>
             <div class="mockup-product-media" style="position: relative; overflow: hidden;">
               <img src="${p.images[0]}" alt="${p.title}" class="mockup-product-img">
               ${p.video ? `
@@ -3623,7 +3707,6 @@
               </div>
             </div>
             <div class="mockup-product-info">
-              <p class="mockup-product-category">${p.category}</p>
               <h3 class="mockup-product-title"><a href="product.html?id=${p.id}">${p.title}</a></h3>
               <p class="mockup-product-price">
                 ${p.price.toFixed(2)} zł <span class="price-unit">/ ${p.category === "Taśmy LED" ? "metr" : "szt."}</span>

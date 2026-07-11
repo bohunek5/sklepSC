@@ -1540,6 +1540,7 @@ export function initSharedPopups() {
 
         return `
           <div class="mockup-product-card" data-id="${p.id}">
+            <p class="mockup-product-category">${p.category}</p>
             <div class="mockup-product-media" style="position: relative; overflow: hidden; width: 100%; aspect-ratio: 1/1;">
               <img src="${p.images[0]}" alt="${p.title}" class="mockup-product-img">
               ${p.video ? `
@@ -1556,7 +1557,6 @@ export function initSharedPopups() {
               </div>
             </div>
             <div class="mockup-product-info">
-              <p class="mockup-product-category">${p.category}</p>
               <h3 class="mockup-product-title"><a href="product.html?id=${p.id}">${p.title}</a></h3>
               <p class="mockup-product-price">
                 ${p.price.toFixed(2)} zł <span class="price-unit">/ ${p.category === 'Taśmy LED' ? 'metr' : 'szt.'}</span>
