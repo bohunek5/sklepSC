@@ -2374,8 +2374,14 @@
 </head>
 <body>
   <!-- Welcome Intro Overlay -->
-  <div id="welcomeIntroOverlay" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.85); z-index: 99999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);">
-    <div id="welcomeIntroBox" style="text-align: center; max-width: 700px; padding: 40px; color: #fff; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); transform: scale(0.95); opacity: 0; width: 100%; position: relative; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+  <div id="welcomeIntroOverlay" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); z-index: 99999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden;">
+    
+    <!-- Electric Circuit Effects -->
+    <div style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), rgba(255,120,0,0.2), transparent); transform: skewX(-20deg); animation: electricPass 3s ease-in-out forwards;"></div>
+    <div style="position: absolute; top: 30%; left: -100%; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), rgba(255,120,0,0.8), transparent); animation: electricLine 2.5s ease-in-out forwards 0.2s;"></div>
+    <div style="position: absolute; bottom: 20%; right: -100%; width: 100%; height: 2px; background: linear-gradient(270deg, transparent, rgba(255,120,0,0.8), #fff, transparent); animation: electricLineRight 2.5s ease-in-out forwards 0.5s;"></div>
+
+    <div id="welcomeIntroBox" style="text-align: center; max-width: 700px; padding: 40px; color: #fff; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); transform: scale(0.95); opacity: 0; width: 100%; position: relative; display: flex; flex-direction: column; align-items: center; gap: 20px; z-index: 2;">
       <!-- Skip button at the top -->
       <button onclick="skipWelcomeIntro()" style="position: absolute; top: -30px; right: 20px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #fff; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; padding: 8px 20px; border-radius: 8px; cursor: pointer; backdrop-filter: blur(10px); transition: all 0.3s; z-index: 10;" onmouseover="this.style.background='rgba(255,255,255,0.18)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">Pomiń</button>
       
@@ -2386,8 +2392,8 @@
       <p id="welcomeIntroSub" style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 400; color: rgba(255,255,255,0.7); margin: 0; letter-spacing: 0.5px; min-height: 30px; line-height: 1.5;"></p>
       
       <!-- Logo Container (fades in below) -->
-      <div id="welcomeIntroLogoSlot" style="opacity: 0; transform: translateY(20px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); margin: 10px 0;">
-        <img src="images/logo-white.png" alt="Prescot Logo" style="height: 60px; display: block; filter: drop-shadow(0 0 20px rgba(255, 120, 0, 0.6)); animation: logoPulse 2s infinite ease-in-out;">
+      <div id="welcomeIntroLogoSlot" style="opacity: 0; transition: opacity 1.5s ease; margin: 10px 0;">
+        <img src="images/logo-white.png" alt="Prescot Logo" style="height: 60px; display: block; filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.4));">
       </div>
       
       <!-- Bottom Welcome text -->
@@ -2396,19 +2402,17 @@
   </div>
 
   <style>
-    @keyframes logoPulse {
-      0% {
-        filter: drop-shadow(0 0 8px rgba(255, 120, 0, 0.4));
-        transform: scale(1);
-      }
-      50% {
-        filter: drop-shadow(0 0 25px rgba(255, 120, 0, 0.9));
-        transform: scale(1.05);
-      }
-      100% {
-        filter: drop-shadow(0 0 8px rgba(255, 120, 0, 0.4));
-        transform: scale(1);
-      }
+    @keyframes electricPass {
+      0% { left: -100%; }
+      100% { left: 200%; }
+    }
+    @keyframes electricLine {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    @keyframes electricLineRight {
+      0% { right: -100%; }
+      100% { right: 100%; }
     }
   </style>
 
@@ -3387,6 +3391,17 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
       transform: translateY(-2px);
     }
+    
+    @media (max-width: 768px) {
+      .product-actions-hover .action-btn-circle {
+        width: 30px !important;
+        height: 30px !important;
+      }
+      .product-actions-hover .action-btn-circle svg {
+        width: 14px !important;
+        height: 14px !important;
+      }
+    }
 </style>
 
   
@@ -3854,7 +3869,8 @@
 
     // Welcome Animation Logic
     function playWelcomeIntro() {
-      if (sessionStorage.getItem('prescot_intro_played') === 'true') {
+      // Show always on refresh if scroll is at top
+      if (window.scrollY > 50) {
         const overlay = document.getElementById('welcomeIntroOverlay');
         if (overlay) overlay.remove();
         return;
@@ -3872,11 +3888,10 @@
       window.skipWelcomeIntro = () => {
         overlay.style.opacity = '0';
         overlay.style.pointerEvents = 'none';
-        sessionStorage.setItem('prescot_intro_played', 'true');
         setTimeout(() => overlay.remove(), 1000);
       };
       
-      // Set the texts immediately (no typewriter lag!)
+      // Set the texts immediately
       header.textContent = "WITAJ W";
       sub.textContent = "Polski producent oświetlenia LED";
       
@@ -3886,15 +3901,14 @@
         
         // Show logo container and footer welcome text
         logoSlot.style.opacity = '1';
-        logoSlot.style.transform = 'translateY(0)';
         
         footer.style.opacity = '1';
         footer.style.transform = 'translateY(0)';
         
-        // Fade out and close after 1.8 seconds
+        // Fade out and close after 3 seconds
         setTimeout(() => {
           window.skipWelcomeIntro();
-        }, 1800);
+        }, 3200);
       }, 300);
     }
 

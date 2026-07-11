@@ -561,7 +561,7 @@ export function initSharedPopups() {
         width: 120px !important;
       }
       .mockup-header-logo {
-        margin-left: -15px !important;
+        margin-left: 15px !important;
       }
       .mockup-header {
         padding: 15px 4% !important;
@@ -601,20 +601,21 @@ export function initSharedPopups() {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 20px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 20px 20px;
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(10, 25, 47, 0.15);
       border-radius: 12px;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
       cursor: pointer;
       position: relative;
       overflow: hidden;
       transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
     }
     .mobile-cat-row:active {
       transform: scale(0.97) translateY(1px);
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.7);
     }
     .mobile-cat-content {
       flex-grow: 1;
@@ -633,14 +634,14 @@ export function initSharedPopups() {
       margin-bottom: 4px;
     }
     .mobile-cat-title {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 600;
-      color: #fff;
+      color: var(--primary-color);
       margin: 0;
     }
     .mobile-cat-desc {
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.7);
+      font-size: 13px;
+      color: rgba(10, 25, 47, 0.8);
       margin: 0;
       line-height: 1.4;
       display: none;
@@ -655,22 +656,24 @@ export function initSharedPopups() {
       opacity: 1;
     }
     .mobile-cat-btn {
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #fff;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(10, 25, 47, 0.2);
+      color: var(--primary-color);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       flex-shrink: 0;
       transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      backdrop-filter: blur(10px);
     }
     .mobile-cat-btn svg {
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
       fill: none;
       stroke: currentColor;
       stroke-width: 2.5;
@@ -1052,7 +1055,7 @@ export function initSharedPopups() {
         <div style="display: flex; gap: 15px; border-bottom: 1px solid #eee; padding-bottom: 15px; position: relative; align-items: center;">
           <div style="position: relative; flex-shrink: 0;">
             <img src="${item.image}" style="width: 64px; height: 64px; object-fit: cover; border-radius: 12px; border: 1px solid rgba(0,0,0,0.08); background: #fff;">
-            <span class="summary-product-qty" style="position: absolute; top: -8px; right: -8px; min-width: 22px; height: 22px; padding: 0 6px; background: var(--accent-color) !important; color: #000 !important; font-size: 11px; font-weight: 800; border-radius: 11px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(255, 90, 0, 0.3); border: 1.5px solid #fff; z-index: 2;">${item.qty}</span>
+            <span class="summary-product-qty" style="position: absolute; top: -6px; right: -6px; min-width: 22px; height: 22px; padding: 0 6px; background: #fff !important; color: #001f3f !important; font-size: 11px; font-weight: 800; border-radius: 11px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); border: 2px solid #001f3f; z-index: 10;">${item.qty}</span>
           </div>
           <div style="flex-grow: 1;">
             <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 4px; color: #1a1a1a; padding-right: 20px;">${item.title}</h4>
@@ -2055,11 +2058,11 @@ export function initSharedPopups() {
 function injectMobileCategoriesDrawer() {
   const drawerHTML = `
     <!-- Mobile Categories Drawer -->
-    <div id="mobileCategoriesDrawer" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(20, 20, 20, 0.96); z-index: 10000; display: none; flex-direction: column; backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); color: #fff; transition: opacity 0.4s ease; opacity: 0;">
+    <div id="mobileCategoriesDrawer" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, 0.95); z-index: 10000; display: none; flex-direction: column; backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); color: #0a192f; transition: opacity 0.4s ease; opacity: 0;">
       <!-- Drawer Header -->
-      <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); background: rgba(20,20,20,0.5);">
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin: 0; color: #fff;">Kategorie produktów</h3>
-        <button onclick="closeMobileCategories()" style="background: none; border: none; color: #fff; font-size: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); transition: background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">&times;</button>
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid rgba(10,25,47,0.1); background: rgba(255,255,255,0.8);">
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin: 0; color: #0a192f;">Kategorie produktów</h3>
+        <button onclick="closeMobileCategories()" style="background: none; border: none; color: #0a192f; font-size: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(10,25,47,0.05); transition: background 0.2s;" onmouseover="this.style.background='rgba(10,25,47,0.1)'" onmouseout="this.style.background='rgba(10,25,47,0.05)'">&times;</button>
       </div>
       
       <!-- Drawer List -->
