@@ -941,11 +941,19 @@
         padding: 5px 5px 5px 15px;
         margin-bottom: 15px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        transition: border-color 0.3s;
+      }
+      .mobile-search-pill:focus-within {
+        border-color: #001f3f !important;
       }
       .mobile-search-pill .search-icon {
         color: #888;
         font-size: 18px;
         margin-right: 10px;
+        transition: color 0.3s;
+      }
+      .mobile-search-pill:focus-within .search-icon {
+        color: #001f3f !important;
       }
       .mobile-search-pill input {
         flex: 1;
@@ -953,8 +961,11 @@
         border: none;
         color: var(--text-color);
         padding: 10px 0;
-        font-size: 16px;
+        font-size: 14px !important; /* Forces iOS zoom */
         outline: none;
+      }
+      .mobile-search-pill input:focus {
+        color: #001f3f !important;
       }
       .mobile-search-pill input::placeholder { color: #888; }
       .mobile-search-pill .clear-btn {
@@ -1055,12 +1066,18 @@
         z-index: 20;
       }
       .action-btn-circle {
-        background: rgba(255,255,255,0.9);
-        color: var(--primary-color);
+        background: rgba(255,255,255,0.9) !important;
+        color: #001f3f !important;
         backdrop-filter: blur(8px);
-        width: 44px; height: 44px;
-        border: 1px solid rgba(0,0,0,0.08);
+        width: 22px !important; 
+        height: 22px !important;
+        border: 1px solid #001f3f !important;
         box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      }
+      .action-btn-circle svg {
+        width: 11px !important;
+        height: 11px !important;
+        stroke: #001f3f !important;
       }
       .action-btn-circle:hover {
         background: var(--accent-color);
@@ -1138,11 +1155,33 @@
         color: var(--primary-color) !important;
       }
       
-      /* Hide search/wishlist/account on mobile header to match Envato */
-      .mockup-search-container, .wishlist-trigger, .mockup-action-icon[aria-label="Konto użytkownika"] {
+      /* Show search on mobile, hide wishlist/account to match Envato */
+      .wishlist-trigger, .mockup-action-icon[aria-label="Konto użytkownika"] {
         display: none !important;
       }
-      
+      .mockup-search-container {
+        display: flex !important;
+        padding: 6px 12px !important;
+        margin-right: 8px !important;
+        margin-left: auto !important;
+        border: 1px solid #001f3f !important;
+      }
+      .mockup-search-container input {
+        width: 80px !important;
+        font-size: 14px !important; /* Triggers iOS zoom */
+        color: #001f3f !important;
+      }
+      .mockup-search-container input::placeholder {
+        color: #001f3f !important;
+        opacity: 0.7 !important;
+      }
+      .mockup-search-container input:focus {
+        width: 120px !important;
+        color: #001f3f !important;
+      }
+      .mockup-search-container:focus-within {
+        border-color: #001f3f !important;
+      }
       .page-hero {
         padding: 80px 15px !important;
       }
@@ -1836,10 +1875,10 @@
     <div style="position: relative; z-index: 1;">
       <h1 style="color: #fff; font-size: 64px; font-weight: 800; font-family: 'Outfit', sans-serif; margin-bottom: 10px; text-transform: uppercase; letter-spacing: -1px; text-shadow: 0 4px 12px rgba(0,0,0,0.3);">Nasz Sklep</h1>
       <p style="color: #eee; font-size: 16px;">Sprawdź pełną ofertę Prescot LED</p>
-    <div class="hero-breadcrumbs" style="font-size: 13px; color: rgba(255,255,255,0.7); font-weight: 500; letter-spacing: 0.5px; margin-top: 25px; display: flex; align-items: center; justify-content: center; gap: 8px;">
-      <a href="index.html" style="color: #fff; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='#fff'">Strona główna</a> 
-      <span style="color: rgba(255,255,255,0.4); font-size: 11px;">/</span> 
-      <span style="color: var(--accent-color);">Sklep</span>
+    <div class="hero-breadcrumbs" style="font-size: 12px; color: rgba(255,255,255,0.6); font-weight: 500; letter-spacing: 0.5px; margin-top: 25px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: rgba(0,0,0,0.2); padding: 8px 16px; border-radius: 20px; backdrop-filter: blur(5px);">
+      <a href="index.html" style="color: #fff; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='#fff'">Główna</a> 
+      <span style="color: rgba(255,255,255,0.4); font-size: 10px;">•</span> 
+      <span style="color: #fff; font-weight: 700;">Sklep</span>
     </div>
       <!-- Pulsating Down Arrow -->
       <div class="scroll-to-main" onclick="document.querySelector('main').scrollIntoView({ behavior: 'smooth' })" style="margin-top: 30px; cursor: pointer; display: inline-block; animation: pulseArrow 1.5s infinite; transition: opacity 0.3s; z-index: 2; position: relative;">
@@ -2252,21 +2291,6 @@
       }
 
       itemsToShow.forEach(p => {
-        let thirdBtn = '';
-        if (p.has3D) {
-          thirdBtn = `
-            <button class="action-btn-circle qv-3d-btn" data-id="${p.id}" aria-label="Podgląd 3D">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-            </button>
-          `;
-        } else if (p.has360) {
-          thirdBtn = `
-            <button class="action-btn-circle qv-360-btn" data-id="${p.id}" aria-label="Podgląd 360">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-            </button>
-          `;
-        }
-
         const cardHTML = `
           <div class="mockup-product-card" data-id="${p.id}">
             <p class="mockup-product-category">${p.category}</p>
@@ -2282,7 +2306,6 @@
                 <button class="action-btn-circle qv-eye-btn" data-id="${p.id}" aria-label="Szybki podgląd">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                 </button>
-                ${thirdBtn}
               </div>
             </div>
             <div class="mockup-product-info">
@@ -2524,5 +2547,21 @@
     </div>
   </nav>
 
+  <script>
+    // iOS Safari Zoom-Out Hack on Blur
+    document.querySelectorAll('input').forEach(input => {
+      input.addEventListener('blur', () => {
+        if (window.innerWidth <= 768) {
+          const meta = document.querySelector('meta[name="viewport"]');
+          if (meta) {
+            meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+            setTimeout(() => {
+              meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=5.0';
+            }, 300);
+          }
+        }
+      });
+    });
+  </script>
 </body>
 </html>

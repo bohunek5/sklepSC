@@ -720,8 +720,32 @@
     }
 
     @media (max-width: 768px) {
-      .mockup-search-container, .wishlist-trigger, .mockup-action-icon[aria-label="Konto użytkownika"] {
+      /* Show search on mobile, hide wishlist/account to match Envato */
+      .wishlist-trigger, .mockup-action-icon[aria-label="Konto użytkownika"] {
         display: none !important;
+      }
+      .mockup-search-container {
+        display: flex !important;
+        padding: 6px 12px !important;
+        margin-right: 8px !important;
+        margin-left: auto !important;
+        border: 1px solid #001f3f !important;
+      }
+      .mockup-search-container input {
+        width: 80px !important;
+        font-size: 14px !important; /* Triggers iOS zoom */
+        color: #001f3f !important;
+      }
+      .mockup-search-container input::placeholder {
+        color: #001f3f !important;
+        opacity: 0.7 !important;
+      }
+      .mockup-search-container input:focus {
+        width: 120px !important;
+        color: #001f3f !important;
+      }
+      .mockup-search-container:focus-within {
+        border-color: #001f3f !important;
       }
       .mockup-header-logo img {
          /* Force logo to be visible black on white mobile header */
@@ -3916,6 +3940,22 @@
     </div>
   </nav>
 
+  <script>
+    // iOS Safari Zoom-Out Hack on Blur
+    document.querySelectorAll('input').forEach(input => {
+      input.addEventListener('blur', () => {
+        if (window.innerWidth <= 768) {
+          const meta = document.querySelector('meta[name="viewport"]');
+          if (meta) {
+            meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+            setTimeout(() => {
+              meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=5.0';
+            }, 300);
+          }
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

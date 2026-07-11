@@ -596,62 +596,60 @@ export function initSharedPopups() {
       transition: transform 0.1s ease !important;
     }
 
-    /* Mobile categories drawer styles */
+    /* Mobile categories drawer styles (Premium Redesign) */
     .mobile-cat-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 20px;
-      background: rgba(255, 255, 255, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      border-radius: 16px;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      padding: 22px 24px;
+      background: #ffffff;
+      border: 2px solid #001f3f;
+      border-radius: 20px;
       cursor: pointer;
       position: relative;
       overflow: hidden;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.06), inset 0 0 0 1px rgba(255,255,255,0.5);
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      box-shadow: 0 8px 24px rgba(0, 31, 63, 0.08);
+      margin-bottom: 4px;
     }
     .mobile-cat-row:active {
       transform: scale(0.96) translateY(2px);
-      background: rgba(255, 255, 255, 0.6);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.04), inset 0 0 0 1px rgba(255,255,255,0.8);
+      box-shadow: 0 4px 12px rgba(0, 31, 63, 0.05);
+      background: #f8fafc;
     }
     .mobile-cat-content {
       flex-grow: 1;
-      padding-right: 15px;
+      padding-right: 20px;
       display: flex;
       flex-direction: column;
-      min-height: 48px;
+      min-height: 54px;
       justify-content: center;
     }
     .mobile-cat-guarantee {
-      font-size: 10px;
+      font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
       color: var(--accent-color);
       font-weight: 800;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
     .mobile-cat-title {
-      font-size: 16px;
-      font-weight: 600;
+      font-size: 20px;
+      font-weight: 700;
       color: #001f3f;
       margin: 0;
-      letter-spacing: -0.2px;
+      letter-spacing: -0.3px;
     }
     .mobile-cat-desc {
-      font-size: 13px;
-      color: #333;
+      font-size: 14px;
+      color: #475569;
       margin: 0;
-      line-height: 1.45;
+      line-height: 1.5;
       display: none;
       opacity: 0;
     }
     .mobile-cat-row.show-description .mobile-cat-title {
       display: none;
-      opacity: 0;
     }
     .mobile-cat-row.show-description .mobile-cat-desc {
       display: block;
@@ -659,15 +657,15 @@ export function initSharedPopups() {
       animation: fadeDescIn 0.3s ease forwards;
     }
     @keyframes fadeDescIn {
-      from { opacity: 0; transform: translateY(4px); }
+      from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
     .mobile-cat-btn {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(255, 255, 255, 1);
+      background: rgba(0, 31, 63, 0.04);
+      border: 1px solid rgba(0, 31, 63, 0.1);
       color: #001f3f;
       display: flex;
       align-items: center;
@@ -675,12 +673,15 @@ export function initSharedPopups() {
       cursor: pointer;
       flex-shrink: 0;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .mobile-cat-row:hover .mobile-cat-btn, .mobile-cat-row:active .mobile-cat-btn {
+      background: rgba(0, 31, 63, 0.08);
     }
     .mobile-cat-btn svg {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       fill: none;
       stroke: currentColor;
       stroke-width: 2.5;
@@ -1059,13 +1060,13 @@ export function initSharedPopups() {
       total += pTotal;
 
       const itemHTML = `
-        <div style="display: flex; gap: 15px; border-bottom: 1px solid #eee; padding-bottom: 15px; position: relative; align-items: center;">
-          <div style="position: relative; flex-shrink: 0;">
+        <div style="display: flex; gap: 15px; border-bottom: 1px solid #eee; padding-bottom: 15px; position: relative; align-items: center; padding-right: 25px;">
+          <div style="position: relative; flex-shrink: 0; padding-top: 5px;">
             <img src="${item.image}" style="width: 64px; height: 64px; object-fit: cover; border-radius: 12px; border: 1px solid rgba(0,0,0,0.08); background: #fff;">
-            <span class="summary-product-qty" style="position: absolute; top: -6px; right: -6px; min-width: 22px; height: 22px; padding: 0 6px; background: #fff !important; color: #001f3f !important; font-size: 11px; font-weight: 800; border-radius: 11px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); border: 2px solid #001f3f; z-index: 10;">${item.qty}</span>
+            <span class="summary-product-qty" style="position: absolute; top: 0px; right: -8px; min-width: 20px; height: 20px; padding: 0 5px; background: #fff !important; color: #001f3f !important; font-size: 10px; font-weight: 800; border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.15); border: 2px solid #001f3f; z-index: 10;">${item.qty}</span>
           </div>
           <div style="flex-grow: 1;">
-            <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 4px; color: #1a1a1a; padding-right: 20px;">${item.title}</h4>
+            <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 4px; color: #1a1a1a; padding-right: 10px;">${item.title}</h4>
             <p style="font-size: 11px; color: #777; margin-bottom: 8px;">Kolor: ${item.color ? `<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${item.color}; vertical-align:middle; margin-left:3px;"></span>` : 'Domyślny'} / Rozmiar: ${item.size || 'Domyślny'}</p>
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <div style="display: flex; border: 1px solid #e5e5e5; border-radius: 6px; align-items: center; background: #fafafa; overflow: hidden;">
@@ -1076,7 +1077,7 @@ export function initSharedPopups() {
               <span style="font-size: 14px; font-weight: 700; color: #1a1a1a;">${pTotal.toFixed(2)} zł</span>
             </div>
           </div>
-          <button class="cart-drawer-remove" data-index="${index}" style="position: absolute; top: 0; right: 0; background: none; border: none; font-size: 20px; color: #bbb; cursor: pointer; transition: color 0.2s;" onmouseover="this.style.color='#ff5a00'" onmouseout="this.style.color='#bbb'">&times;</button>
+          <button class="cart-drawer-remove" data-index="${index}" style="position: absolute; top: 0px; right: -5px; width: 24px; height: 24px; background: rgba(0,0,0,0.05); border-radius: 50%; border: none; font-size: 16px; line-height: 1; color: #777; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; z-index: 5;" onmouseover="this.style.background='rgba(255,90,0,0.1)'; this.style.color='#ff5a00'" onmouseout="this.style.background='rgba(0,0,0,0.05)'; this.style.color='#777'">&times;</button>
         </div>
       `;
       cartDrawerItems.insertAdjacentHTML('beforeend', itemHTML);
@@ -2065,124 +2066,120 @@ export function initSharedPopups() {
 function injectMobileCategoriesDrawer() {
   const drawerHTML = `
     <!-- Mobile Categories Drawer -->
-    <div id="mobileCategoriesDrawer" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, 0.95); z-index: 10000; display: none; flex-direction: column; backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); color: #0a192f; transition: opacity 0.4s ease; opacity: 0;">
+    <div id="mobileCategoriesDrawer" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(11, 26, 48, 0.98); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); z-index: 10000; display: none; flex-direction: column; color: #fff; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease; transform: translateY(100%); opacity: 0;">
+      
       <!-- Drawer Header -->
-      <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid rgba(10,25,47,0.1); background: rgba(255,255,255,0.8);">
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin: 0; color: #0a192f;">Kategorie produktów</h3>
-        <button onclick="closeMobileCategories()" style="background: none; border: none; color: #0a192f; font-size: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(10,25,47,0.05); transition: background 0.2s;" onmouseover="this.style.background='rgba(10,25,47,0.1)'" onmouseout="this.style.background='rgba(10,25,47,0.05)'">&times;</button>
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 25px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <h3 style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin: 0; background: linear-gradient(90deg, #fff, #a0aec0); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Kategorie</h3>
+        <button onclick="closeMobileCategories()" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2);"><i class="ph ph-x"></i></button>
       </div>
       
-      <!-- Drawer List -->
-      <div style="flex-grow: 1; overflow-y: auto; padding: 20px 24px 120px 24px; display: flex; flex-direction: column; gap: 15px;">
+      <!-- Drawer Grid -->
+      <div style="flex-grow: 1; overflow-y: auto; padding: 25px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; align-content: flex-start; padding-bottom: 100px;">
         
-        <!-- Row 1 -->
-        <div class="mobile-cat-row" onclick="toggleMobileCatRow(this)">
-          <div class="mobile-cat-content">
-            <span class="mobile-cat-guarantee">7 lat gwarancji</span>
-            <h4 class="mobile-cat-title">Taśmy LED Premium</h4>
-            <p class="mobile-cat-desc">Profesjonalne taśmy LED SMD z selekcjonowanymi diodami o najwyższej wydajności świetlnej.</p>
-          </div>
-          <button class="mobile-cat-btn" onclick="event.stopPropagation(); window.location.href='shop.html?cat=Tasma%20LED&guar=7'">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
-        </div>
+        <style>
+          .glass-cat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 25px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 12px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+          }
+          .glass-cat-card:active {
+            transform: scale(0.96);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+          }
+          .glass-cat-icon {
+            font-size: 32px;
+            color: var(--accent-color, #ff6b00);
+            filter: drop-shadow(0 0 10px rgba(255, 107, 0, 0.4));
+          }
+          .glass-cat-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            margin: 0;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+          }
+          .glass-cat-badge {
+            font-size: 9px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3px 8px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 2px;
+          }
+        </style>
 
-        <!-- Row 2 -->
-        <div class="mobile-cat-row" onclick="toggleMobileCatRow(this)">
-          <div class="mobile-cat-content">
-            <span class="mobile-cat-guarantee">5 lat gwarancji</span>
-            <h4 class="mobile-cat-title">Taśmy LED Standard</h4>
-            <p class="mobile-cat-desc">Wysokiej jakości paski LED do zastosowań domowych i komercyjnych. Złoty środek między ceną a trwałością.</p>
-          </div>
-          <button class="mobile-cat-btn" onclick="event.stopPropagation(); window.location.href='shop.html?cat=Tasma%20LED&guar=5'">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
-        </div>
+        <!-- Taśmy LED -->
+        <a href="shop.html?cat=Tasma%20LED" class="glass-cat-card">
+          <i class="ph ph-lightbulb glass-cat-icon"></i>
+          <span class="glass-cat-badge">Do 7 lat gwarancji</span>
+          <h4 class="glass-cat-title">Taśmy LED</h4>
+        </a>
 
-        <!-- Row 3 -->
-        <div class="mobile-cat-row" onclick="toggleMobileCatRow(this)">
-          <div class="mobile-cat-content">
-            <span class="mobile-cat-guarantee">3 lata gwarancji</span>
-            <h4 class="mobile-cat-title">Taśmy LED COB</h4>
-            <p class="mobile-cat-desc">Innowacyjne taśmy COB z jednolitą linią światła bez widocznych punktów świetlnych. Szeroki kąt świecenia.</p>
-          </div>
-          <button class="mobile-cat-btn" onclick="event.stopPropagation(); window.location.href='shop.html?cat=Tasma%20LED%20COB'">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
-        </div>
+        <!-- Taśmy COB -->
+        <a href="shop.html?cat=Tasma%20LED%20COB" class="glass-cat-card">
+          <i class="ph ph-activity glass-cat-icon"></i>
+          <span class="glass-cat-badge">Brak punktów</span>
+          <h4 class="glass-cat-title">Taśmy COB</h4>
+        </a>
 
-        <!-- Row 4 -->
-        <div class="mobile-cat-row" onclick="toggleMobileCatRow(this)">
-          <div class="mobile-cat-content">
-            <span class="mobile-cat-guarantee">3 lata gwarancji</span>
-            <h4 class="mobile-cat-title">Taśmy LED COB Digital</h4>
-            <p class="mobile-cat-desc">Cyfrowe adresowalne taśmy LED COB umożliwiające płynne efekty przejścia światła i kontrolę sekcji.</p>
-          </div>
-          <button class="mobile-cat-btn" onclick="event.stopPropagation(); window.location.href='shop.html?cat=Tasma%20LED%20COB%20Digital'">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
-        </div>
+        <!-- RGB/CCT -->
+        <a href="shop.html?cat=Tasma%20LED%20RGB" class="glass-cat-card">
+          <i class="ph ph-palette glass-cat-icon"></i>
+          <span class="glass-cat-badge">Multikolor</span>
+          <h4 class="glass-cat-title">RGB & CCT</h4>
+        </a>
 
-        <!-- Row 5 -->
-        <div class="mobile-cat-row" onclick="toggleMobileCatRow(this)">
-          <div class="mobile-cat-content">
-            <span class="mobile-cat-guarantee">7 lat gwarancji</span>
-            <h4 class="mobile-cat-title">Zasilacze LED</h4>
-            <p class="mobile-cat-desc">Ultra-stabilne, hermetyczne zasilacze o wysokiej sprawności energetycznej i pełnej ochronie.</p>
-          </div>
-          <button class="mobile-cat-btn" onclick="event.stopPropagation(); window.location.href='shop.html?cat=Zasilacze'">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
-        </div>
+        <!-- Zasilacze -->
+        <a href="shop.html?cat=Zasilacze" class="glass-cat-card">
+          <i class="ph ph-lightning glass-cat-icon"></i>
+          <span class="glass-cat-badge">Hermetyczne</span>
+          <h4 class="glass-cat-title">Zasilacze</h4>
+        </a>
 
-        <!-- Row 6 -->
-        <div class="mobile-cat-row" onclick="toggleMobileCatRow(this)">
-          <div class="mobile-cat-content">
-            <span class="mobile-cat-guarantee">3 lata gwarancji</span>
-            <h4 class="mobile-cat-title">Zasilacze z autodetekcją 12/24V</h4>
-            <p class="mobile-cat-desc">Inteligentne zasilacze automatycznie wykrywające wymagane napięcie podłączonego paska LED.</p>
-          </div>
-          <button class="mobile-cat-btn" onclick="event.stopPropagation(); window.location.href='shop.html?cat=Zasilacze%20Autodetekcja'">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
-        </div>
+        <!-- Sterowniki -->
+        <a href="shop.html?cat=Sterowniki" class="glass-cat-card">
+          <i class="ph ph-faders glass-cat-icon"></i>
+          <span class="glass-cat-badge">Smart Home</span>
+          <h4 class="glass-cat-title">Sterowniki</h4>
+        </a>
 
-        <!-- Row 7 -->
-        <div class="mobile-cat-row" onclick="toggleMobileCatRow(this)">
-          <div class="mobile-cat-content">
-            <span class="mobile-cat-guarantee">2 lata gwarancji</span>
-            <h4 class="mobile-cat-title">Sterowniki LED</h4>
-            <p class="mobile-cat-desc">Zaawansowane radiowe i Wi-Fi sterowniki oświetlenia strefowego, obsługujące systemy CCT i RGB.</p>
-          </div>
-          <button class="mobile-cat-btn" onclick="event.stopPropagation(); window.location.href='shop.html?cat=Sterowniki'">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
-        </div>
+        <!-- Akcesoria -->
+        <a href="shop.html?cat=Akcesoria" class="glass-cat-card">
+          <i class="ph ph-puzzle-piece glass-cat-icon"></i>
+          <span class="glass-cat-badge">Montażowe</span>
+          <h4 class="glass-cat-title">Akcesoria</h4>
+        </a>
 
-        <!-- Row 8 -->
-        <div class="mobile-cat-row" onclick="toggleMobileCatRow(this)">
-          <div class="mobile-cat-content">
-            <span class="mobile-cat-guarantee">2 lata gwarancji</span>
-            <h4 class="mobile-cat-title">Koszulki silikonowe PRO</h4>
-            <p class="mobile-cat-desc">Profesjonalna ochrona silikonowa dla taśm LED, zapewniająca klasę szczelności IP67.</p>
-          </div>
-          <button class="mobile-cat-btn" onclick="event.stopPropagation(); window.location.href='shop.html?cat=Koszulki'">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
-        </div>
+        <!-- Neony -->
+        <a href="shop.html?cat=Neon" class="glass-cat-card">
+          <i class="ph ph-scribble-loop glass-cat-icon"></i>
+          <span class="glass-cat-badge">Elastyczne</span>
+          <h4 class="glass-cat-title">Neony LED</h4>
+        </a>
 
-        <!-- Row 9 -->
-        <div class="mobile-cat-row" onclick="toggleMobileCatRow(this)">
-          <div class="mobile-cat-content">
-            <span class="mobile-cat-guarantee">2 lata gwarancji</span>
-            <h4 class="mobile-cat-title">Akcesoria do LED</h4>
-            <p class="mobile-cat-desc">Przewody instalacyjne, złączki z zatrzaskiem, uchwyty montażowe oraz pozostałe materiały.</p>
-          </div>
-          <button class="mobile-cat-btn" onclick="event.stopPropagation(); window.location.href='shop.html?cat=Akcesoria'">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
-        </div>
-
+        <!-- Profile -->
+        <a href="shop.html?cat=Profile" class="glass-cat-card">
+          <i class="ph ph-square-split-horizontal glass-cat-icon"></i>
+          <span class="glass-cat-badge">Aluminiowe</span>
+          <h4 class="glass-cat-title">Profile LED</h4>
+        </a>
+        
       </div>
     </div>
   `;
@@ -2198,6 +2195,7 @@ window.openMobileCategories = function() {
     drawer.style.display = 'flex';
     setTimeout(() => {
       drawer.style.opacity = '1';
+      drawer.style.transform = 'translateY(0)';
     }, 10);
   }
 };
@@ -2206,6 +2204,7 @@ window.closeMobileCategories = function() {
   const drawer = document.getElementById('mobileCategoriesDrawer');
   if (drawer) {
     drawer.style.opacity = '0';
+    drawer.style.transform = 'translateY(100%)';
     setTimeout(() => {
       drawer.style.display = 'none';
     }, 400);
