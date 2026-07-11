@@ -103,6 +103,29 @@ function showToast(message, type = 'success') {
 }
 window.showToast = showToast;
 
+function updateCartBadge() {
+  const cartBtns = document.querySelectorAll('a[href*="cart.html"], .mockup-actions a[aria-label="Koszyk"]');
+  let currentCart = JSON.parse(localStorage.getItem('cooken_cart')) || [];
+  const totalItems = currentCart.reduce((sum, item) => sum + (item.qty || 1), 0);
+  
+  cartBtns.forEach(btn => {
+    btn.style.position = 'relative'; // ensure badge anchors correctly
+    let badge = btn.querySelector('.cart-badge');
+    if (!badge) {
+      badge = document.createElement('span');
+      badge.className = 'cart-badge';
+      btn.appendChild(badge);
+    }
+    
+    if (totalItems > 0) {
+      badge.textContent = totalItems > 99 ? '99+' : totalItems;
+      badge.classList.add('visible');
+    } else {
+      badge.classList.remove('visible');
+    }
+  });
+}
+
 function triggerCartIconAnimation() {
   const cartBtns = document.querySelectorAll('a[href*="cart.html"], .mockup-actions a, button.mockup-action-icon');
   cartBtns.forEach(btn => {
@@ -110,7 +133,21 @@ function triggerCartIconAnimation() {
     target.classList.add('cart-bounce');
     setTimeout(() => target.classList.remove('cart-bounce'), 600);
   });
+  updateCartBadge();
 }
+
+// Initial badge update
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(updateCartBadge, 100);
+});
+
+// Update badge on storage changes from other tabs
+window.addEventListener('storage', (e) => {
+  if (e.key === 'cooken_cart') {
+    updateCartBadge();
+  }
+});
+
 
 // Append custom styles
 const customStyles = document.createElement('style');
@@ -139,6 +176,34 @@ customStyles.innerHTML = `
   .cart-bounce {
     animation: cartBounce 0.6s ease !important;
     display: inline-block !important;
+  }
+  .cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--accent-color, #ff5a00);
+    font-size: 11px;
+    font-weight: 800;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+  }
+  .cart-badge.visible {
+    opacity: 1;
+    transform: scale(1);
   }
 `;
 document.head.appendChild(customStyles);
@@ -1117,6 +1182,7 @@ export function initSharedPopups() {
 
   function updateLocalStorage() {
     localStorage.setItem('cooken_cart', JSON.stringify(cart));
+    updateCartBadge();
   }
 
   if (cartDrawerCheckout) {
@@ -2125,61 +2191,32 @@ function injectMobileCategoriesDrawer() {
         </style>
 
         <!-- Taśmy LED -->
-        <a href="shop.html?cat=Tasma%20LED" class="glass-cat-card">
+        <a href="shop.html?category=Ta%C5%9Bmy%20LED" class="glass-cat-card">
           <i class="ph ph-lightbulb glass-cat-icon"></i>
           <span class="glass-cat-badge">Do 7 lat gwarancji</span>
           <h4 class="glass-cat-title">Taśmy LED</h4>
         </a>
 
-        <!-- Taśmy COB -->
-        <a href="shop.html?cat=Tasma%20LED%20COB" class="glass-cat-card">
-          <i class="ph ph-activity glass-cat-icon"></i>
-          <span class="glass-cat-badge">Brak punktów</span>
-          <h4 class="glass-cat-title">Taśmy COB</h4>
-        </a>
-
-        <!-- RGB/CCT -->
-        <a href="shop.html?cat=Tasma%20LED%20RGB" class="glass-cat-card">
-          <i class="ph ph-palette glass-cat-icon"></i>
-          <span class="glass-cat-badge">Multikolor</span>
-          <h4 class="glass-cat-title">RGB & CCT</h4>
-        </a>
-
-        <!-- Zasilacze -->
-        <a href="shop.html?cat=Zasilacze" class="glass-cat-card">
-          <i class="ph ph-lightning glass-cat-icon"></i>
-          <span class="glass-cat-badge">Hermetyczne</span>
-          <h4 class="glass-cat-title">Zasilacze</h4>
-        </a>
-
-        <!-- Sterowniki -->
-        <a href="shop.html?cat=Sterowniki" class="glass-cat-card">
+        <!-- Sterowniki LED -->
+        <a href="shop.html?category=Sterowniki%20LED" class="glass-cat-card">
           <i class="ph ph-faders glass-cat-icon"></i>
           <span class="glass-cat-badge">Smart Home</span>
-          <h4 class="glass-cat-title">Sterowniki</h4>
+          <h4 class="glass-cat-title">Sterowniki LED</h4>
         </a>
 
-        <!-- Akcesoria -->
-        <a href="shop.html?cat=Akcesoria" class="glass-cat-card">
-          <i class="ph ph-puzzle-piece glass-cat-icon"></i>
-          <span class="glass-cat-badge">Montażowe</span>
-          <h4 class="glass-cat-title">Akcesoria</h4>
+        <!-- Zasilacze LED -->
+        <a href="shop.html?category=Zasilacze%20LED" class="glass-cat-card">
+          <i class="ph ph-lightning glass-cat-icon"></i>
+          <span class="glass-cat-badge">Hermetyczne</span>
+          <h4 class="glass-cat-title">Zasilacze LED</h4>
         </a>
 
-        <!-- Neony -->
-        <a href="shop.html?cat=Neon" class="glass-cat-card">
-          <i class="ph ph-scribble-loop glass-cat-icon"></i>
-          <span class="glass-cat-badge">Elastyczne</span>
-          <h4 class="glass-cat-title">Neony LED</h4>
+        <!-- 3D & AR -->
+        <a href="shop.html?category=3D%20%26%20AR" class="glass-cat-card">
+          <i class="ph ph-cube glass-cat-icon"></i>
+          <span class="glass-cat-badge">Zobacz w AR</span>
+          <h4 class="glass-cat-title">3D & AR</h4>
         </a>
-
-        <!-- Profile -->
-        <a href="shop.html?cat=Profile" class="glass-cat-card">
-          <i class="ph ph-square-split-horizontal glass-cat-icon"></i>
-          <span class="glass-cat-badge">Aluminiowe</span>
-          <h4 class="glass-cat-title">Profile LED</h4>
-        </a>
-        
       </div>
     </div>
   `;
