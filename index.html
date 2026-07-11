@@ -3394,12 +3394,23 @@
     
     @media (max-width: 768px) {
       .product-actions-hover .action-btn-circle {
-        width: 30px !important;
-        height: 30px !important;
+        width: 26px !important;
+        height: 26px !important;
+        margin: 0 2px !important;
+      }
+      .product-actions-hover {
+        gap: 4px !important;
       }
       .product-actions-hover .action-btn-circle svg {
-        width: 14px !important;
-        height: 14px !important;
+        width: 13px !important;
+        height: 13px !important;
+      }
+      .mockup-search-container input {
+        font-size: 16px !important; /* Prevents iOS zoom */
+      }
+      .mockup-search-container input:focus {
+        border-color: #001f3f !important;
+        color: #001f3f !important;
       }
     }
 </style>

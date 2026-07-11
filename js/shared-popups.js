@@ -601,21 +601,22 @@ export function initSharedPopups() {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 20px 20px;
-      background: rgba(255, 255, 255, 0.5);
-      border: 1px solid rgba(10, 25, 47, 0.15);
-      border-radius: 12px;
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
+      padding: 16px 20px;
+      background: rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 16px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       cursor: pointer;
       position: relative;
       overflow: hidden;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06), inset 0 0 0 1px rgba(255,255,255,0.5);
     }
     .mobile-cat-row:active {
-      transform: scale(0.97) translateY(1px);
-      background: rgba(255, 255, 255, 0.7);
+      transform: scale(0.96) translateY(2px);
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04), inset 0 0 0 1px rgba(255,255,255,0.8);
     }
     .mobile-cat-content {
       flex-grow: 1;
@@ -628,22 +629,23 @@ export function initSharedPopups() {
     .mobile-cat-guarantee {
       font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
       color: var(--accent-color);
-      font-weight: 700;
-      margin-bottom: 4px;
+      font-weight: 800;
+      margin-bottom: 6px;
     }
     .mobile-cat-title {
       font-size: 16px;
       font-weight: 600;
-      color: var(--primary-color);
+      color: #001f3f;
       margin: 0;
+      letter-spacing: -0.2px;
     }
     .mobile-cat-desc {
       font-size: 13px;
-      color: rgba(10, 25, 47, 0.8);
+      color: #333;
       margin: 0;
-      line-height: 1.4;
+      line-height: 1.45;
       display: none;
       opacity: 0;
     }
@@ -654,26 +656,31 @@ export function initSharedPopups() {
     .mobile-cat-row.show-description .mobile-cat-desc {
       display: block;
       opacity: 1;
+      animation: fadeDescIn 0.3s ease forwards;
+    }
+    @keyframes fadeDescIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .mobile-cat-btn {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(10, 25, 47, 0.2);
-      color: var(--primary-color);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 1);
+      color: #001f3f;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       flex-shrink: 0;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       backdrop-filter: blur(10px);
     }
     .mobile-cat-btn svg {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       fill: none;
       stroke: currentColor;
       stroke-width: 2.5;
