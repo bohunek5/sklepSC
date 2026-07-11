@@ -1527,6 +1527,80 @@
       border-color: var(--primary-color) !important;
       box-shadow: 0 6px 20px rgba(11,26,48,0.1) !important;
     }
+
+    /* Product card add to cart buttons: semi-rounded and smaller */
+    .mockup-product-card .mockup-btn, 
+    .mockup-product-card .qv-add-cart-btn {
+      border-radius: 8px !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      padding: 10px 18px !important;
+      letter-spacing: 0.5px !important;
+    }
+
+    /* Prevent product title wrapping */
+    .mockup-product-title {
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      width: 100% !important;
+    }
+
+    /* Mobile optimized product card and grid styles */
+    @media (max-width: 768px) {
+      .trending-grid, .mockup-products-grid, #trendingGrid, .recently-viewed-grid, #shopGrid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        padding: 0 5px !important;
+      }
+      .mockup-product-card {
+        padding: 10px !important;
+        border-radius: 8px !important;
+        gap: 6px !important;
+      }
+      .mockup-product-category {
+        font-size: 9px !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        color: var(--primary-color) !important;
+        margin-bottom: 4px !important;
+        font-weight: 700 !important;
+        width: 100% !important;
+        text-align: left !important;
+      }
+      .mockup-product-title {
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        line-height: 1.2 !important;
+        margin-bottom: 2px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        width: 100% !important;
+        text-align: left !important;
+      }
+      .mockup-product-title a {
+        color: #333333 !important;
+        text-decoration: none !important;
+      }
+      .mockup-product-price {
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        color: #111111 !important;
+        width: 100% !important;
+        text-align: left !important;
+      }
+      .mockup-product-price .price-unit {
+        font-size: 9px !important;
+        color: #888888 !important;
+      }
+      .mockup-product-card .qv-add-cart-btn {
+        padding: 8px 12px !important;
+        font-size: 10px !important;
+        margin-top: 6px !important;
+      }
+    }
     
     .mockup-btn:hover .btn-txt-default,
     .mockup-btn:hover .btn-txt-hover {

@@ -913,6 +913,80 @@
       border-color: var(--primary-color) !important;
       color: var(--primary-color) !important;
     }
+
+    /* Product card add to cart buttons: semi-rounded and smaller */
+    .mockup-product-card .mockup-btn, 
+    .mockup-product-card .qv-add-cart-btn {
+      border-radius: 8px !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      padding: 10px 18px !important;
+      letter-spacing: 0.5px !important;
+    }
+
+    /* Prevent product title wrapping */
+    .mockup-product-title {
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      width: 100% !important;
+    }
+
+    /* Mobile optimized product card and grid styles */
+    @media (max-width: 768px) {
+      .trending-grid, .mockup-products-grid, #trendingGrid, .recently-viewed-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        padding: 0 5px !important;
+      }
+      .mockup-product-card {
+        padding: 10px !important;
+        border-radius: 8px !important;
+        gap: 6px !important;
+      }
+      .mockup-product-category {
+        font-size: 9px !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        color: var(--primary-color) !important;
+        margin-bottom: 4px !important;
+        font-weight: 700 !important;
+        width: 100% !important;
+        text-align: left !important;
+      }
+      .mockup-product-title {
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        line-height: 1.2 !important;
+        margin-bottom: 2px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        width: 100% !important;
+        text-align: left !important;
+      }
+      .mockup-product-title a {
+        color: #333333 !important;
+        text-decoration: none !important;
+      }
+      .mockup-product-price {
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        color: #111111 !important;
+        width: 100% !important;
+        text-align: left !important;
+      }
+      .mockup-product-price .price-unit {
+        font-size: 9px !important;
+        color: #888888 !important;
+      }
+      .mockup-product-card .qv-add-cart-btn {
+        padding: 8px 12px !important;
+        font-size: 10px !important;
+        margin-top: 6px !important;
+      }
+    }
     
 
     /* Cooken Clean Product Layout Override */
@@ -2487,13 +2561,54 @@
     mainImg.alt = product.title;
 
     const qvThumbnails = document.getElementById('qvThumbnails');
-    product.images.forEach((imgSrc, i) => {
-      const activeClass = i === 0 ? 'active' : '';
+    
+    // First image thumbnail
+    const firstThumb = document.createElement('img');
+    firstThumb.className = 'thumbnail active';
+    firstThumb.src = product.images[0];
+    firstThumb.alt = `${product.title} - 1`;
+    firstThumb.addEventListener('click', () => {
+      resetGalleryTabs();
+      mainImg.style.display = 'block';
+      mainImg.src = product.images[0];
+      document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+      firstThumb.classList.add('active');
+    });
+    qvThumbnails.appendChild(firstThumb);
+
+    // If product has a video, insert video thumbnail as the second thumbnail!
+    if (product.video) {
+      const videoThumb = document.createElement('div');
+      videoThumb.className = 'thumbnail video-thumbnail-card';
+      videoThumb.style.position = 'relative';
+      videoThumb.style.cursor = 'pointer';
+      videoThumb.innerHTML = `
+        <img src="${product.images[0]}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6; border-radius: inherit;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--primary-color); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">▶</div>
+      `;
+      videoThumb.addEventListener('click', () => {
+        resetGalleryTabs();
+        if (mainVideo) {
+          mainVideo.style.display = 'block';
+          mainVideo.style.opacity = '1';
+          mainVideo.src = product.video;
+          mainVideo.play().catch(err => console.log("Video thumb play failed:", err));
+        }
+        document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+        videoThumb.classList.add('active');
+      });
+      qvThumbnails.appendChild(videoThumb);
+    }
+
+    // Remaining image thumbnails (starting from index 1)
+    product.images.slice(1).forEach((imgSrc, i) => {
       const thumb = document.createElement('img');
-      thumb.className = `thumbnail ${activeClass}`;
+      thumb.className = 'thumbnail';
       thumb.src = imgSrc;
-      thumb.alt = `${product.title} - ${i + 1}`;
+      thumb.alt = `${product.title} - ${i + 2}`;
       thumb.addEventListener('click', () => {
+        resetGalleryTabs();
+        mainImg.style.display = 'block';
         mainImg.src = imgSrc;
         document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
         thumb.classList.add('active');
@@ -2706,23 +2821,22 @@
 
     triggerImage.addEventListener('click', () => {
       resetGalleryTabs();
-      mainImg.style.display = 'block';
-      triggerImage.classList.add('active');
-      if (product.video && mainVideo) {
-        mainVideo.style.display = 'block';
-        mainVideo.play().catch(err => console.log("Main video play failed:", err));
+      const activeThumb = document.querySelector('.thumbnail.active');
+      if (activeThumb && activeThumb.classList.contains('video-thumbnail-card')) {
+        if (mainVideo) {
+          mainVideo.style.display = 'block';
+          mainVideo.style.opacity = '1';
+          mainVideo.src = product.video;
+          mainVideo.play().catch(err => console.log("Main video play failed:", err));
+        }
+      } else {
+        mainImg.style.display = 'block';
       }
+      triggerImage.classList.add('active');
     });
 
-    // Autoplay video after 1 second if present
     if (product.video && mainVideo) {
       mainVideo.src = product.video;
-      setTimeout(() => {
-        if (mainImg.style.display !== 'none') {
-          mainVideo.style.display = 'block';
-          mainVideo.play().catch(err => console.log("Main video autoplay failed:", err));
-        }
-      }, 1000);
     }
 
     trigger3D.addEventListener('click', () => {
