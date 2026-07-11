@@ -533,6 +533,28 @@ export function initSharedPopups() {
   // Inject Global Style overrides (Shadows, Mobile sliding drawer, etc.)
   const styleEl = document.createElement('style');
   styleEl.textContent = `
+    /* Hover menu delay & spacing on PC */
+    .magic-dropdown, .dropdown-menu {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      transition-delay: 0.35s !important;
+    }
+    .has-mega-menu:hover .magic-dropdown,
+    .has-dropdown:hover .dropdown-menu {
+      transition-delay: 0s !important;
+    }
+    
+    /* Product card title 2-line clamp */
+    .mockup-product-title {
+      display: -webkit-box !important;
+      -webkit-line-clamp: 2 !important;
+      -webkit-box-orient: vertical !important;
+      white-space: normal !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      min-height: 2.6em !important;
+      line-height: 1.3em !important;
+    }
+
     /* Premium soft shadows under product cards and category blocks */
     .mockup-product-card {
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
@@ -1845,45 +1867,48 @@ export function initSharedPopups() {
       }, { passive: true });
     });
 
-    // Bind IntersectionObserver for Mobile
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.6
-    };
+    // Bind IntersectionObserver ONLY for Mobile / Touch Devices
+    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    if (isTouchDevice) {
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.6
+      };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const card = entry.target;
-        const video = card.querySelector('.mockup-product-video');
-        if (!video) return;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const card = entry.target;
+          const video = card.querySelector('.mockup-product-video');
+          if (!video) return;
 
-        if (entry.isIntersecting) {
-          if (card.videoTimeout) clearTimeout(card.videoTimeout);
-          card.videoTimeout = setTimeout(() => {
-            const dataSrc = video.getAttribute('data-src');
-            if (dataSrc && video.getAttribute('src') !== dataSrc) {
-              video.setAttribute('src', dataSrc);
-              video.load();
+          if (entry.isIntersecting) {
+            if (card.videoTimeout) clearTimeout(card.videoTimeout);
+            card.videoTimeout = setTimeout(() => {
+              const dataSrc = video.getAttribute('data-src');
+              if (dataSrc && video.getAttribute('src') !== dataSrc) {
+                video.setAttribute('src', dataSrc);
+                video.load();
+              }
+              video.play().catch(err => {
+                console.log("Viewport autoplay play blocked:", err);
+              });
+            }, 600); // Trigger after 600ms of staying in viewport
+          } else {
+            if (card.videoTimeout) {
+              clearTimeout(card.videoTimeout);
+              card.videoTimeout = null;
             }
-            video.play().catch(err => {
-              console.log("Viewport autoplay play blocked:", err);
-            });
-          }, 600); // Trigger after 600ms of staying in viewport
-        } else {
-          if (card.videoTimeout) {
-            clearTimeout(card.videoTimeout);
-            card.videoTimeout = null;
+            video.style.opacity = '0';
+            video.pause();
+            video.removeAttribute('src');
+            video.load();
           }
-          video.style.opacity = '0';
-          video.pause();
-          video.removeAttribute('src');
-          video.load();
-        }
-      });
-    }, observerOptions);
+        });
+      }, observerOptions);
 
-    cards.forEach(card => observer.observe(card));
+      cards.forEach(card => observer.observe(card));
+    }
   }
 
   initGlobalCardVideos();
