@@ -1252,6 +1252,126 @@
     }
     /* --- END LATEST FIXES --- */
 
+
+    /* --- MOBILE UI FIXES --- */
+    /* 1. Unify search bar: show header search on mobile */
+    @media (max-width: 1024px) {
+      /* Override the previous display: none */
+      .mockup-search-container {
+        display: flex !important;
+        width: auto !important;
+        margin: 0 10px !important;
+        flex: 1 !important;
+      }
+      .mockup-search-container input {
+        font-size: 13px !important;
+        padding: 8px 12px !important;
+        width: 100% !important;
+      }
+      .mockup-search-container button {
+        right: 4px !important;
+        width: 28px !important;
+        height: 28px !important;
+      }
+      /* Adjust header items to fit search */
+      .mockup-header-logo img {
+        height: 22px !important; /* Slightly smaller logo to fit search */
+      }
+      .mockup-actions {
+        gap: 8px !important;
+        flex: 1 !important;
+        justify-content: flex-end !important;
+      }
+      /* Hide some icons if needed to make space for search, or just make them smaller */
+      .mockup-action-icon {
+        width: 34px !important;
+        height: 34px !important;
+      }
+      .mockup-action-icon svg {
+        width: 16px !important;
+        height: 16px !important;
+      }
+      /* Smaller text on categories for mobile */
+      .mockup-category-card h3, .glass-cat-title {
+        font-size: 12px !important;
+      }
+      .mockup-category-card p, .glass-cat-subtitle {
+        font-size: 10px !important;
+      }
+    }
+
+    /* 2. Buy Now / Add to Cart smaller font */
+    .add-to-cart-btn, .buy-it-now-btn, .mockup-btn {
+      font-size: 12px !important;
+      padding: 8px 16px !important;
+    }
+
+    /* 3. Category Images Clearer (less dark overlay) */
+    .mockup-category-card::after {
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 60%) !important;
+    }
+    .mockup-category-card img {
+      opacity: 1 !important;
+      filter: brightness(0.9) !important;
+    }
+    .mockup-category-card:hover img {
+      filter: brightness(1.1) !important;
+    }
+    
+    /* FAQ Section Styles */
+    .faq-section {
+      padding: 80px 5%;
+      background: #fdfdfd;
+    }
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      transition: all 0.3s ease;
+    }
+    .faq-item:hover {
+      border-color: var(--primary-color);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+    }
+    .faq-question {
+      padding: 20px 25px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+      color: var(--primary-color);
+      font-size: 16px;
+    }
+    .faq-answer {
+      padding: 0 25px;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      color: #666;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .faq-item.active .faq-answer {
+      padding: 0 25px 25px;
+      max-height: 500px;
+    }
+    .faq-icon {
+      transition: transform 0.3s ease;
+    }
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+    }
+    /* --- END MOBILE UI FIXES --- */
+
 </style>
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
