@@ -158,7 +158,7 @@
       justify-content: center;
       width: 50px;
       height: 50px;
-      border-radius: 50%;
+      
       background: rgba(255, 255, 255, 0.12);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -638,7 +638,7 @@
       transform: translateY(-50%);
       width: 56px;
       height: 56px;
-      border-radius: 50%;
+      
       border: 1px solid rgba(255, 255, 255, 0.25);
       background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(20px);
@@ -713,7 +713,7 @@
     .scroll-down-circle {
       width: 54px;
       height: 54px;
-      border-radius: 50%;
+      
       background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -903,7 +903,7 @@
       height: 45px;
       background: var(--white);
       color: var(--primary-color);
-      border-radius: 50%;
+      
       display: flex;
       align-items: center;
       justify-content: center;
@@ -932,13 +932,15 @@
     }
 
     .mockup-product-title {
-      font-size: 16px;
+      font-size: 14px;
       margin-bottom: 8px;
       font-weight: 500;
       transition: var(--transition);
-      white-space: nowrap;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
       overflow: hidden;
-      text-overflow: ellipsis;
+      white-space: normal;
     }
 
     .mockup-product-title a {
@@ -1611,7 +1613,7 @@
       font-weight: 800;
       width: 18px;
       height: 18px;
-      border-radius: 50%;
+      
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1942,12 +1944,11 @@
     .mobile-nav-item i {
       font-size: 22px;
       margin-bottom: 4px;
-      width: 40px;
-      height: 40px;
+      
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 50%;
+      
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       position: relative;
       z-index: 3;
@@ -2324,13 +2325,15 @@
       margin-bottom: 5px !important;
     }
     .mockup-product-title {
-      font-size: 16px !important;
+      font-size: 14px !important;
       margin-bottom: 8px !important;
       font-weight: 500 !important;
       transition: all 0.3s ease !important;
-      white-space: nowrap !important;
+      display: -webkit-box !important;
+      -webkit-line-clamp: 2 !important;
+      -webkit-box-orient: vertical !important;
       overflow: hidden !important;
-      text-overflow: ellipsis !important;
+      white-space: normal !important;
       width: 100% !important;
     }
     .mockup-product-title a {
@@ -2992,9 +2995,11 @@
         font-weight: 600 !important;
         line-height: 1.2 !important;
         margin-bottom: 2px !important;
-        white-space: nowrap !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
         overflow: hidden !important;
-        text-overflow: ellipsis !important;
+        white-space: normal !important;
         width: 100% !important;
         text-align: left !important;
       }
@@ -3599,7 +3604,7 @@
     <div class="advantages-grid">
       <!-- Advantage 1 -->
       <div class="advantage-item" style="padding: 20px; transition: transform 0.3s ease;">
-        <div style="width: 70px; height: 70px; background: rgba(255, 90, 0, 0.05); color: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; transition: all 0.3s;">
+        <div style="width: 70px; height: 70px; background: rgba(255, 90, 0, 0.05); color: var(--accent-color);  display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; transition: all 0.3s;">
           <i data-lucide="shield-check" style="width: 32px; height: 32px;"></i>
         </div>
         <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: var(--primary-color); margin-bottom: 12px;">7 Lat Gwarancji</h3>
@@ -3607,7 +3612,7 @@
       </div>
       <!-- Advantage 2 -->
       <div class="advantage-item" style="padding: 20px; transition: transform 0.3s ease;">
-        <div style="width: 70px; height: 70px; background: rgba(255, 90, 0, 0.05); color: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; transition: all 0.3s;">
+        <div style="width: 70px; height: 70px; background: rgba(255, 90, 0, 0.05); color: var(--accent-color);  display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; transition: all 0.3s;">
           <i data-lucide="truck" style="width: 32px; height: 32px;"></i>
         </div>
         <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: var(--primary-color); margin-bottom: 12px;">Szybka Wysyłka 24h</h3>
@@ -3615,7 +3620,7 @@
       </div>
       <!-- Advantage 3 -->
       <div class="advantage-item" style="padding: 20px; transition: transform 0.3s ease;">
-        <div style="width: 70px; height: 70px; background: rgba(255, 90, 0, 0.05); color: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; transition: all 0.3s;">
+        <div style="width: 70px; height: 70px; background: rgba(255, 90, 0, 0.05); color: var(--accent-color);  display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; transition: all 0.3s;">
           <i data-lucide="phone-call" style="width: 32px; height: 32px;"></i>
         </div>
         <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: var(--primary-color); margin-bottom: 12px;">Wsparcie Ekspertów</h3>
@@ -3866,6 +3871,21 @@
       // Pick first 8 products with valid images
       const trending = products.slice(0, 8);
       trending.forEach(p => {
+        let thirdBtn = '';
+        if (p.has3D) {
+          thirdBtn = `
+            <button class="action-btn-circle qv-3d-btn" data-id="${p.id}" aria-label="Podgląd 3D">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </button>
+          `;
+        } else if (p.has360) {
+          thirdBtn = `
+            <button class="action-btn-circle qv-360-btn" data-id="${p.id}" aria-label="Podgląd 360">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+            </button>
+          `;
+        }
+
         const badge = p.compareAtPrice ? `<span class="mockup-product-badge" style="background-color: var(--accent-color);">TOP</span>` : `<span class="mockup-product-badge" style="background-color: var(--primary-color);">TOP</span>`;
         
         const cardHTML = `
@@ -3884,6 +3904,7 @@
                 <button class="action-btn-circle qv-eye-btn" data-id="${p.id}" aria-label="Szybki podgląd">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                 </button>
+                ${thirdBtn}
               </div>
             </div>
             <div class="mockup-product-info">
@@ -3891,7 +3912,7 @@
               <p class="mockup-product-price">
                 ${p.price.toFixed(2)} zł <span class="price-unit">/ ${p.category === "Taśmy LED" ? "metr" : "szt."}</span>
               </p>
-              <button class="mockup-btn qv-add-cart-btn" data-id="${p.id}" style="width: 100%; margin-top: 12px; padding: 10px 20px !important; font-size: 11px !important;">
+              <button class="mockup-btn qv-add-cart-btn" data-id="${p.id}" style="width: 100%; margin-top: 10px; padding: 0 10px !important; font-size: 11px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; justify-content: center; align-items: center; height: 36px;">
                 Dodaj do koszyka
               </button>
             </div>
