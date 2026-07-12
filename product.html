@@ -2586,17 +2586,30 @@
     /* --- END GLOBAL STYLING ALIGNMENTS */</style>
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
+  
   <style>
-    /* Make buttons more rectangular */
+    /* Make buttons fully rounded as requested */
     .mockup-btn, 
     .add-to-cart-btn, 
     .checkout-btn, 
     .submit-order-btn,
     .qv-add-cart-btn,
     .glass-banner-btn {
-      border-radius: 2px !important;
+      border-radius: 30px !important;
+    }
+    
+    /* Make slider arrows and scroll down circle perfectly round */
+    .scroll-down-circle,
+    .slider-arrow {
+      border-radius: 50% !important;
+    }
+    
+    /* Enable native smooth scrolling */
+    html {
+      scroll-behavior: smooth !important;
     }
   </style>
+
 </head>
 
 <body>
