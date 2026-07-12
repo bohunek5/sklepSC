@@ -2621,7 +2621,41 @@
       }
     }
 
-</style>
+
+    /* Different frame animations for each slide */
+    .slide[data-tech="digital"] .glass-border-svg .car { stroke: #ff5e00; animation: drawBorder 4s linear infinite; }
+    .slide[data-tech="silicone"] .glass-border-svg .car { stroke: #00e5ff; animation: drawBorderReverse 5s ease-in-out infinite; }
+    .slide[data-tech="accessories"] .glass-border-svg .car { stroke: #ff0055; stroke-dasharray: 10 90; animation: drawBorder 3s linear infinite, glowPulse 2s alternate infinite; }
+    .slide[data-tech="cri97"] .glass-border-svg .car { stroke: #ffaa00; animation: drawBorderPingPong 6s ease-in-out infinite; }
+    .slide[data-tech="rgb"] .glass-border-svg .car { stroke: #ff00ff; stroke-dasharray: 5 45; animation: drawBorder 8s linear infinite; }
+    .slide[data-tech="mono"] .glass-border-svg .car { stroke: #00ff00; animation: drawBorderFast 2s linear infinite; }
+    .slide[data-tech="cob"] .glass-border-svg .car { stroke: #ffff00; animation: drawBorderFade 4s linear infinite; }
+    .slide[data-tech="digital_cct"] .glass-border-svg .car { stroke: #ffffff; stroke-dasharray: 20 80; animation: drawBorderReverse 4s linear infinite; }
+
+    @keyframes drawBorderReverse {
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes glowPulse {
+      0% { filter: drop-shadow(0 0 2px #ff0055); }
+      100% { filter: drop-shadow(0 0 10px #ff0055); }
+    }
+    @keyframes drawBorderPingPong {
+      0% { stroke-dashoffset: 0; }
+      50% { stroke-dashoffset: -100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes drawBorderFast {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -100; }
+    }
+    @keyframes drawBorderFade {
+      0% { stroke-dashoffset: 0; opacity: 1; }
+      50% { opacity: 0.2; }
+      100% { stroke-dashoffset: -100; opacity: 1; }
+    }
+
+  </style>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
   
@@ -2646,6 +2680,40 @@
     html {
       scroll-behavior: smooth !important;
     }
+  
+    /* Different frame animations for each slide */
+    .slide[data-tech="digital"] .glass-border-svg .car { stroke: #ff5e00; animation: drawBorder 4s linear infinite; }
+    .slide[data-tech="silicone"] .glass-border-svg .car { stroke: #00e5ff; animation: drawBorderReverse 5s ease-in-out infinite; }
+    .slide[data-tech="accessories"] .glass-border-svg .car { stroke: #ff0055; stroke-dasharray: 10 90; animation: drawBorder 3s linear infinite, glowPulse 2s alternate infinite; }
+    .slide[data-tech="cri97"] .glass-border-svg .car { stroke: #ffaa00; animation: drawBorderPingPong 6s ease-in-out infinite; }
+    .slide[data-tech="rgb"] .glass-border-svg .car { stroke: #ff00ff; stroke-dasharray: 5 45; animation: drawBorder 8s linear infinite; }
+    .slide[data-tech="mono"] .glass-border-svg .car { stroke: #00ff00; animation: drawBorderFast 2s linear infinite; }
+    .slide[data-tech="cob"] .glass-border-svg .car { stroke: #ffff00; animation: drawBorderFade 4s linear infinite; }
+    .slide[data-tech="digital_cct"] .glass-border-svg .car { stroke: #ffffff; stroke-dasharray: 20 80; animation: drawBorderReverse 4s linear infinite; }
+
+    @keyframes drawBorderReverse {
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes glowPulse {
+      0% { filter: drop-shadow(0 0 2px #ff0055); }
+      100% { filter: drop-shadow(0 0 10px #ff0055); }
+    }
+    @keyframes drawBorderPingPong {
+      0% { stroke-dashoffset: 0; }
+      50% { stroke-dashoffset: -100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes drawBorderFast {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -100; }
+    }
+    @keyframes drawBorderFade {
+      0% { stroke-dashoffset: 0; opacity: 1; }
+      50% { opacity: 0.2; }
+      100% { stroke-dashoffset: -100; opacity: 1; }
+    }
+
   </style>
 
 
@@ -2663,6 +2731,40 @@
     .category-banner-card h3 {
       margin-bottom: 5px !important;
     }
+  
+    /* Different frame animations for each slide */
+    .slide[data-tech="digital"] .glass-border-svg .car { stroke: #ff5e00; animation: drawBorder 4s linear infinite; }
+    .slide[data-tech="silicone"] .glass-border-svg .car { stroke: #00e5ff; animation: drawBorderReverse 5s ease-in-out infinite; }
+    .slide[data-tech="accessories"] .glass-border-svg .car { stroke: #ff0055; stroke-dasharray: 10 90; animation: drawBorder 3s linear infinite, glowPulse 2s alternate infinite; }
+    .slide[data-tech="cri97"] .glass-border-svg .car { stroke: #ffaa00; animation: drawBorderPingPong 6s ease-in-out infinite; }
+    .slide[data-tech="rgb"] .glass-border-svg .car { stroke: #ff00ff; stroke-dasharray: 5 45; animation: drawBorder 8s linear infinite; }
+    .slide[data-tech="mono"] .glass-border-svg .car { stroke: #00ff00; animation: drawBorderFast 2s linear infinite; }
+    .slide[data-tech="cob"] .glass-border-svg .car { stroke: #ffff00; animation: drawBorderFade 4s linear infinite; }
+    .slide[data-tech="digital_cct"] .glass-border-svg .car { stroke: #ffffff; stroke-dasharray: 20 80; animation: drawBorderReverse 4s linear infinite; }
+
+    @keyframes drawBorderReverse {
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes glowPulse {
+      0% { filter: drop-shadow(0 0 2px #ff0055); }
+      100% { filter: drop-shadow(0 0 10px #ff0055); }
+    }
+    @keyframes drawBorderPingPong {
+      0% { stroke-dashoffset: 0; }
+      50% { stroke-dashoffset: -100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes drawBorderFast {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -100; }
+    }
+    @keyframes drawBorderFade {
+      0% { stroke-dashoffset: 0; opacity: 1; }
+      50% { opacity: 0.2; }
+      100% { stroke-dashoffset: -100; opacity: 1; }
+    }
+
   </style>
 
   
@@ -2686,6 +2788,40 @@
         background: transparent !important;
       }
     }
+  
+    /* Different frame animations for each slide */
+    .slide[data-tech="digital"] .glass-border-svg .car { stroke: #ff5e00; animation: drawBorder 4s linear infinite; }
+    .slide[data-tech="silicone"] .glass-border-svg .car { stroke: #00e5ff; animation: drawBorderReverse 5s ease-in-out infinite; }
+    .slide[data-tech="accessories"] .glass-border-svg .car { stroke: #ff0055; stroke-dasharray: 10 90; animation: drawBorder 3s linear infinite, glowPulse 2s alternate infinite; }
+    .slide[data-tech="cri97"] .glass-border-svg .car { stroke: #ffaa00; animation: drawBorderPingPong 6s ease-in-out infinite; }
+    .slide[data-tech="rgb"] .glass-border-svg .car { stroke: #ff00ff; stroke-dasharray: 5 45; animation: drawBorder 8s linear infinite; }
+    .slide[data-tech="mono"] .glass-border-svg .car { stroke: #00ff00; animation: drawBorderFast 2s linear infinite; }
+    .slide[data-tech="cob"] .glass-border-svg .car { stroke: #ffff00; animation: drawBorderFade 4s linear infinite; }
+    .slide[data-tech="digital_cct"] .glass-border-svg .car { stroke: #ffffff; stroke-dasharray: 20 80; animation: drawBorderReverse 4s linear infinite; }
+
+    @keyframes drawBorderReverse {
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes glowPulse {
+      0% { filter: drop-shadow(0 0 2px #ff0055); }
+      100% { filter: drop-shadow(0 0 10px #ff0055); }
+    }
+    @keyframes drawBorderPingPong {
+      0% { stroke-dashoffset: 0; }
+      50% { stroke-dashoffset: -100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes drawBorderFast {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -100; }
+    }
+    @keyframes drawBorderFade {
+      0% { stroke-dashoffset: 0; opacity: 1; }
+      50% { opacity: 0.2; }
+      100% { stroke-dashoffset: -100; opacity: 1; }
+    }
+
   </style>
 
 
@@ -2724,6 +2860,40 @@
     .magic-dropdown ul {
       gap: 4px;
     }
+  
+    /* Different frame animations for each slide */
+    .slide[data-tech="digital"] .glass-border-svg .car { stroke: #ff5e00; animation: drawBorder 4s linear infinite; }
+    .slide[data-tech="silicone"] .glass-border-svg .car { stroke: #00e5ff; animation: drawBorderReverse 5s ease-in-out infinite; }
+    .slide[data-tech="accessories"] .glass-border-svg .car { stroke: #ff0055; stroke-dasharray: 10 90; animation: drawBorder 3s linear infinite, glowPulse 2s alternate infinite; }
+    .slide[data-tech="cri97"] .glass-border-svg .car { stroke: #ffaa00; animation: drawBorderPingPong 6s ease-in-out infinite; }
+    .slide[data-tech="rgb"] .glass-border-svg .car { stroke: #ff00ff; stroke-dasharray: 5 45; animation: drawBorder 8s linear infinite; }
+    .slide[data-tech="mono"] .glass-border-svg .car { stroke: #00ff00; animation: drawBorderFast 2s linear infinite; }
+    .slide[data-tech="cob"] .glass-border-svg .car { stroke: #ffff00; animation: drawBorderFade 4s linear infinite; }
+    .slide[data-tech="digital_cct"] .glass-border-svg .car { stroke: #ffffff; stroke-dasharray: 20 80; animation: drawBorderReverse 4s linear infinite; }
+
+    @keyframes drawBorderReverse {
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes glowPulse {
+      0% { filter: drop-shadow(0 0 2px #ff0055); }
+      100% { filter: drop-shadow(0 0 10px #ff0055); }
+    }
+    @keyframes drawBorderPingPong {
+      0% { stroke-dashoffset: 0; }
+      50% { stroke-dashoffset: -100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes drawBorderFast {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -100; }
+    }
+    @keyframes drawBorderFade {
+      0% { stroke-dashoffset: 0; opacity: 1; }
+      50% { opacity: 0.2; }
+      100% { stroke-dashoffset: -100; opacity: 1; }
+    }
+
   </style>
 
 
@@ -2770,6 +2940,40 @@
         font-size: 14px !important;
       }
     }
+  
+    /* Different frame animations for each slide */
+    .slide[data-tech="digital"] .glass-border-svg .car { stroke: #ff5e00; animation: drawBorder 4s linear infinite; }
+    .slide[data-tech="silicone"] .glass-border-svg .car { stroke: #00e5ff; animation: drawBorderReverse 5s ease-in-out infinite; }
+    .slide[data-tech="accessories"] .glass-border-svg .car { stroke: #ff0055; stroke-dasharray: 10 90; animation: drawBorder 3s linear infinite, glowPulse 2s alternate infinite; }
+    .slide[data-tech="cri97"] .glass-border-svg .car { stroke: #ffaa00; animation: drawBorderPingPong 6s ease-in-out infinite; }
+    .slide[data-tech="rgb"] .glass-border-svg .car { stroke: #ff00ff; stroke-dasharray: 5 45; animation: drawBorder 8s linear infinite; }
+    .slide[data-tech="mono"] .glass-border-svg .car { stroke: #00ff00; animation: drawBorderFast 2s linear infinite; }
+    .slide[data-tech="cob"] .glass-border-svg .car { stroke: #ffff00; animation: drawBorderFade 4s linear infinite; }
+    .slide[data-tech="digital_cct"] .glass-border-svg .car { stroke: #ffffff; stroke-dasharray: 20 80; animation: drawBorderReverse 4s linear infinite; }
+
+    @keyframes drawBorderReverse {
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes glowPulse {
+      0% { filter: drop-shadow(0 0 2px #ff0055); }
+      100% { filter: drop-shadow(0 0 10px #ff0055); }
+    }
+    @keyframes drawBorderPingPong {
+      0% { stroke-dashoffset: 0; }
+      50% { stroke-dashoffset: -100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes drawBorderFast {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -100; }
+    }
+    @keyframes drawBorderFade {
+      0% { stroke-dashoffset: 0; opacity: 1; }
+      50% { opacity: 0.2; }
+      100% { stroke-dashoffset: -100; opacity: 1; }
+    }
+
   </style>
 
 
@@ -2796,6 +3000,40 @@
       border-color: rgba(0,0,0,0.12) !important;
       color: #ff5e00 !important; /* Orange text on hover */
     }
+  
+    /* Different frame animations for each slide */
+    .slide[data-tech="digital"] .glass-border-svg .car { stroke: #ff5e00; animation: drawBorder 4s linear infinite; }
+    .slide[data-tech="silicone"] .glass-border-svg .car { stroke: #00e5ff; animation: drawBorderReverse 5s ease-in-out infinite; }
+    .slide[data-tech="accessories"] .glass-border-svg .car { stroke: #ff0055; stroke-dasharray: 10 90; animation: drawBorder 3s linear infinite, glowPulse 2s alternate infinite; }
+    .slide[data-tech="cri97"] .glass-border-svg .car { stroke: #ffaa00; animation: drawBorderPingPong 6s ease-in-out infinite; }
+    .slide[data-tech="rgb"] .glass-border-svg .car { stroke: #ff00ff; stroke-dasharray: 5 45; animation: drawBorder 8s linear infinite; }
+    .slide[data-tech="mono"] .glass-border-svg .car { stroke: #00ff00; animation: drawBorderFast 2s linear infinite; }
+    .slide[data-tech="cob"] .glass-border-svg .car { stroke: #ffff00; animation: drawBorderFade 4s linear infinite; }
+    .slide[data-tech="digital_cct"] .glass-border-svg .car { stroke: #ffffff; stroke-dasharray: 20 80; animation: drawBorderReverse 4s linear infinite; }
+
+    @keyframes drawBorderReverse {
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes glowPulse {
+      0% { filter: drop-shadow(0 0 2px #ff0055); }
+      100% { filter: drop-shadow(0 0 10px #ff0055); }
+    }
+    @keyframes drawBorderPingPong {
+      0% { stroke-dashoffset: 0; }
+      50% { stroke-dashoffset: -100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes drawBorderFast {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -100; }
+    }
+    @keyframes drawBorderFade {
+      0% { stroke-dashoffset: 0; opacity: 1; }
+      50% { opacity: 0.2; }
+      100% { stroke-dashoffset: -100; opacity: 1; }
+    }
+
   </style>
 
 
@@ -2804,6 +3042,40 @@
       0% { transform: scale(1); }
       100% { transform: scale(1.15); }
     }
+  
+    /* Different frame animations for each slide */
+    .slide[data-tech="digital"] .glass-border-svg .car { stroke: #ff5e00; animation: drawBorder 4s linear infinite; }
+    .slide[data-tech="silicone"] .glass-border-svg .car { stroke: #00e5ff; animation: drawBorderReverse 5s ease-in-out infinite; }
+    .slide[data-tech="accessories"] .glass-border-svg .car { stroke: #ff0055; stroke-dasharray: 10 90; animation: drawBorder 3s linear infinite, glowPulse 2s alternate infinite; }
+    .slide[data-tech="cri97"] .glass-border-svg .car { stroke: #ffaa00; animation: drawBorderPingPong 6s ease-in-out infinite; }
+    .slide[data-tech="rgb"] .glass-border-svg .car { stroke: #ff00ff; stroke-dasharray: 5 45; animation: drawBorder 8s linear infinite; }
+    .slide[data-tech="mono"] .glass-border-svg .car { stroke: #00ff00; animation: drawBorderFast 2s linear infinite; }
+    .slide[data-tech="cob"] .glass-border-svg .car { stroke: #ffff00; animation: drawBorderFade 4s linear infinite; }
+    .slide[data-tech="digital_cct"] .glass-border-svg .car { stroke: #ffffff; stroke-dasharray: 20 80; animation: drawBorderReverse 4s linear infinite; }
+
+    @keyframes drawBorderReverse {
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes glowPulse {
+      0% { filter: drop-shadow(0 0 2px #ff0055); }
+      100% { filter: drop-shadow(0 0 10px #ff0055); }
+    }
+    @keyframes drawBorderPingPong {
+      0% { stroke-dashoffset: 0; }
+      50% { stroke-dashoffset: -100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes drawBorderFast {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -100; }
+    }
+    @keyframes drawBorderFade {
+      0% { stroke-dashoffset: 0; opacity: 1; }
+      50% { opacity: 0.2; }
+      100% { stroke-dashoffset: -100; opacity: 1; }
+    }
+
   </style>
 
 </head>
@@ -2823,6 +3095,40 @@
       90% { opacity: 1; }
       100% { right: 100%; opacity: 0; }
     }
+  
+    /* Different frame animations for each slide */
+    .slide[data-tech="digital"] .glass-border-svg .car { stroke: #ff5e00; animation: drawBorder 4s linear infinite; }
+    .slide[data-tech="silicone"] .glass-border-svg .car { stroke: #00e5ff; animation: drawBorderReverse 5s ease-in-out infinite; }
+    .slide[data-tech="accessories"] .glass-border-svg .car { stroke: #ff0055; stroke-dasharray: 10 90; animation: drawBorder 3s linear infinite, glowPulse 2s alternate infinite; }
+    .slide[data-tech="cri97"] .glass-border-svg .car { stroke: #ffaa00; animation: drawBorderPingPong 6s ease-in-out infinite; }
+    .slide[data-tech="rgb"] .glass-border-svg .car { stroke: #ff00ff; stroke-dasharray: 5 45; animation: drawBorder 8s linear infinite; }
+    .slide[data-tech="mono"] .glass-border-svg .car { stroke: #00ff00; animation: drawBorderFast 2s linear infinite; }
+    .slide[data-tech="cob"] .glass-border-svg .car { stroke: #ffff00; animation: drawBorderFade 4s linear infinite; }
+    .slide[data-tech="digital_cct"] .glass-border-svg .car { stroke: #ffffff; stroke-dasharray: 20 80; animation: drawBorderReverse 4s linear infinite; }
+
+    @keyframes drawBorderReverse {
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes glowPulse {
+      0% { filter: drop-shadow(0 0 2px #ff0055); }
+      100% { filter: drop-shadow(0 0 10px #ff0055); }
+    }
+    @keyframes drawBorderPingPong {
+      0% { stroke-dashoffset: 0; }
+      50% { stroke-dashoffset: -100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes drawBorderFast {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -100; }
+    }
+    @keyframes drawBorderFade {
+      0% { stroke-dashoffset: 0; opacity: 1; }
+      50% { opacity: 0.2; }
+      100% { stroke-dashoffset: -100; opacity: 1; }
+    }
+
   </style>
 
     
@@ -3015,7 +3321,9 @@
     <!-- Slide NEW 1: Silicone Profiles -->
     <div class="slide" data-tech="silicone">
       <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-        <div class="slide-video desktop-bg" style="width: 100%; height: 100%; background: url('images/silicone_led_pro.jpg') center/cover no-repeat; animation: kenBurns 15s infinite alternate ease-in-out;"></div>
+        <video class="slide-video desktop-bg" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;">
+          <source src="videos/envato_video_gen_Oct_31_2025_17_15_42.mp4" type="video/mp4">
+        </video>
       </div>
       <div class="slide-banner-box" style="z-index: 2;">
         <svg class="glass-border-svg">
@@ -3033,7 +3341,9 @@
     <!-- Slide NEW 2: Accessories -->
     <div class="slide" data-tech="accessories">
       <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-        <div class="slide-video desktop-bg" style="width: 100%; height: 100%; background: url('images/led_accessories.jpg') center/cover no-repeat; animation: kenBurns 15s infinite alternate ease-in-out;"></div>
+        <video class="slide-video desktop-bg" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;">
+          <source src="videos/BIURKO GAMER.mp4" type="video/mp4">
+        </video>
       </div>
       <div class="slide-banner-box" style="z-index: 2;">
         <svg class="glass-border-svg">
@@ -3051,7 +3361,9 @@
     <!-- Slide NEW 3: CRI 97 -->
     <div class="slide" data-tech="cri97">
       <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-        <div class="slide-video desktop-bg" style="width: 100%; height: 100%; background: url('images/cri97_led_garden.jpg') center/cover no-repeat; animation: kenBurns 15s infinite alternate ease-in-out;"></div>
+        <video class="slide-video desktop-bg" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover;">
+          <source src="videos/ok wieksza jasnosc.mp4" type="video/mp4">
+        </video>
       </div>
       <div class="slide-banner-box" style="z-index: 2;">
         <svg class="glass-border-svg">
@@ -3105,23 +3417,6 @@
     </div>
     
     <!-- Slide 5: Bread -->
-    <div class="slide" data-tech="bread">
-      <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-        <video class="slide-video desktop-bg" src="videos/envato_video_gen_Oct_31_2025_17_15_42.mp4" muted playsinline preload="auto" poster="images/kuchnia.jpg" style="width: 100%; height: 100%; object-fit: cover;"></video>
-        
-      </div>
-      <div class="slide-banner-box" style="z-index: 2;">
-        <svg class="glass-border-svg">
-          <rect class="track" pathLength="100" />
-          <rect class="car" pathLength="100" />
-        </svg>
-        <div class="banner-text">
-          <h1>Taśmy LED do pieczywa</h1>
-          <p>Wypieki świeże i apetyczne w ciepłym świetle</p>
-        </div>
-        <a href="shop.html" class="mockup-btn"><div class="btn-slide-wrap"><span class="btn-txt-default">Kup teraz</span><span class="btn-txt-hover">Kup teraz</span></div></a>
-      </div>
-    </div>
     
     <!-- Slide 6: COB -->
     <div class="slide" data-tech="cob">
@@ -3384,6 +3679,40 @@
         font-size: 24px !important;
       }
     }
+  
+    /* Different frame animations for each slide */
+    .slide[data-tech="digital"] .glass-border-svg .car { stroke: #ff5e00; animation: drawBorder 4s linear infinite; }
+    .slide[data-tech="silicone"] .glass-border-svg .car { stroke: #00e5ff; animation: drawBorderReverse 5s ease-in-out infinite; }
+    .slide[data-tech="accessories"] .glass-border-svg .car { stroke: #ff0055; stroke-dasharray: 10 90; animation: drawBorder 3s linear infinite, glowPulse 2s alternate infinite; }
+    .slide[data-tech="cri97"] .glass-border-svg .car { stroke: #ffaa00; animation: drawBorderPingPong 6s ease-in-out infinite; }
+    .slide[data-tech="rgb"] .glass-border-svg .car { stroke: #ff00ff; stroke-dasharray: 5 45; animation: drawBorder 8s linear infinite; }
+    .slide[data-tech="mono"] .glass-border-svg .car { stroke: #00ff00; animation: drawBorderFast 2s linear infinite; }
+    .slide[data-tech="cob"] .glass-border-svg .car { stroke: #ffff00; animation: drawBorderFade 4s linear infinite; }
+    .slide[data-tech="digital_cct"] .glass-border-svg .car { stroke: #ffffff; stroke-dasharray: 20 80; animation: drawBorderReverse 4s linear infinite; }
+
+    @keyframes drawBorderReverse {
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes glowPulse {
+      0% { filter: drop-shadow(0 0 2px #ff0055); }
+      100% { filter: drop-shadow(0 0 10px #ff0055); }
+    }
+    @keyframes drawBorderPingPong {
+      0% { stroke-dashoffset: 0; }
+      50% { stroke-dashoffset: -100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes drawBorderFast {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -100; }
+    }
+    @keyframes drawBorderFade {
+      0% { stroke-dashoffset: 0; opacity: 1; }
+      50% { opacity: 0.2; }
+      100% { stroke-dashoffset: -100; opacity: 1; }
+    }
+
   </style>
 
   <style>
@@ -3999,7 +4328,41 @@
         color: #001f3f !important;
       }
     }
-</style>
+
+    /* Different frame animations for each slide */
+    .slide[data-tech="digital"] .glass-border-svg .car { stroke: #ff5e00; animation: drawBorder 4s linear infinite; }
+    .slide[data-tech="silicone"] .glass-border-svg .car { stroke: #00e5ff; animation: drawBorderReverse 5s ease-in-out infinite; }
+    .slide[data-tech="accessories"] .glass-border-svg .car { stroke: #ff0055; stroke-dasharray: 10 90; animation: drawBorder 3s linear infinite, glowPulse 2s alternate infinite; }
+    .slide[data-tech="cri97"] .glass-border-svg .car { stroke: #ffaa00; animation: drawBorderPingPong 6s ease-in-out infinite; }
+    .slide[data-tech="rgb"] .glass-border-svg .car { stroke: #ff00ff; stroke-dasharray: 5 45; animation: drawBorder 8s linear infinite; }
+    .slide[data-tech="mono"] .glass-border-svg .car { stroke: #00ff00; animation: drawBorderFast 2s linear infinite; }
+    .slide[data-tech="cob"] .glass-border-svg .car { stroke: #ffff00; animation: drawBorderFade 4s linear infinite; }
+    .slide[data-tech="digital_cct"] .glass-border-svg .car { stroke: #ffffff; stroke-dasharray: 20 80; animation: drawBorderReverse 4s linear infinite; }
+
+    @keyframes drawBorderReverse {
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes glowPulse {
+      0% { filter: drop-shadow(0 0 2px #ff0055); }
+      100% { filter: drop-shadow(0 0 10px #ff0055); }
+    }
+    @keyframes drawBorderPingPong {
+      0% { stroke-dashoffset: 0; }
+      50% { stroke-dashoffset: -100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes drawBorderFast {
+      0% { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -100; }
+    }
+    @keyframes drawBorderFade {
+      0% { stroke-dashoffset: 0; opacity: 1; }
+      50% { opacity: 0.2; }
+      100% { stroke-dashoffset: -100; opacity: 1; }
+    }
+
+  </style>
 
   
   
