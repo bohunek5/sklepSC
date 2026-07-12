@@ -510,7 +510,7 @@ function injectQuickViewModal() {
           <div style="display: flex; gap: 15px; margin-top: 20px;">
             <div style="display: flex; border: 1px solid #ddd; align-items: center; background: #fff;">
               <button id="qvQtyMinus" style="width: 40px; height: 40px; border: none; background: none; font-size: 16px; cursor: pointer;">-</button>
-              <input type="text" id="qvQtyInput" value="1" readonly style="width: 40px; text-align: center; border: none; font-size: 14px; font-weight: 600; background: transparent; outline: none;">
+              <input type="text" id="qvQtyInput" value="1" readonly style="width: 50px; text-align: center; border: none; font-size: 16px; font-weight: 600; background: transparent; outline: none; padding: 0;">
               <button id="qvQtyPlus" style="width: 40px; height: 40px; border: none; background: none; font-size: 16px; cursor: pointer;">+</button>
             </div>
             <button id="qvAddToCart" class="mockup-btn" style="flex-grow: 1; height: 42px; padding: 10px 24px !important; font-size: 11px !important; border-radius: 99px !important; margin: 0;">Dodaj do koszyka</button>
@@ -1136,7 +1136,7 @@ export function initSharedPopups() {
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <div style="display: flex; border: 1px solid #e5e5e5; border-radius: 6px; align-items: center; background: #fafafa; overflow: hidden;">
                 <button class="cart-drawer-qty-btn" data-index="${index}" data-action="minus" style="width: 28px; height: 28px; border: none; background: none; font-size: 14px; cursor: pointer; color: #555; display: flex; align-items: center; justify-content: center; transition: background 0.2s;" onmouseover="this.style.background='#eee'" onmouseout="this.style.background='none'">-</button>
-                <span style="padding: 0 8px; font-size: 12px; font-weight: 700; color: #333;">${item.qty}</span>
+                <span style="padding: 0 12px; font-size: 14px; font-weight: 700; color: #333; min-width: 30px; text-align: center;">${item.qty}</span>
                 <button class="cart-drawer-qty-btn" data-index="${index}" data-action="plus" style="width: 28px; height: 28px; border: none; background: none; font-size: 14px; cursor: pointer; color: #555; display: flex; align-items: center; justify-content: center; transition: background 0.2s;" onmouseover="this.style.background='#eee'" onmouseout="this.style.background='none'">+</button>
               </div>
               <span style="font-size: 14px; font-weight: 700; color: #1a1a1a;">${pTotal.toFixed(2)} zł</span>
