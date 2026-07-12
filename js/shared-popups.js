@@ -2193,8 +2193,22 @@ function injectMobileCategoriesDrawer() {
         <!-- Taśmy LED -->
         <a href="shop.html?category=Ta%C5%9Bmy%20LED" class="glass-cat-card">
           <i class="ph ph-lightbulb glass-cat-icon"></i>
-          <span class="glass-cat-badge">Premium</span>
+          <span class="glass-cat-badge">Wszystkie</span>
           <h4 class="glass-cat-title">Taśmy LED</h4>
+        </a>
+
+        <!-- Taśmy LED 7 lat -->
+        <a href="shop.html?category=Ta%C5%9Bmy%20LED%207%20lat%20gwarancji" class="glass-cat-card">
+          <i class="ph ph-star glass-cat-icon"></i>
+          <span class="glass-cat-badge">Premium</span>
+          <h4 class="glass-cat-title">Taśmy LED 7 lat gwarancji</h4>
+        </a>
+
+        <!-- Taśmy LED 5 lat -->
+        <a href="shop.html?category=Ta%C5%9Bmy%20LED%205%20lat%20gwarancji" class="glass-cat-card">
+          <i class="ph ph-shield-check glass-cat-icon"></i>
+          <span class="glass-cat-badge">Standard</span>
+          <h4 class="glass-cat-title">Taśmy LED 5 lat gwarancji</h4>
         </a>
 
         <!-- Sterowniki -->
