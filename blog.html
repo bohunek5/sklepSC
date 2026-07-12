@@ -1430,7 +1430,7 @@
     .submit-order-btn,
     .qv-add-cart-btn,
     .glass-banner-btn {
-      border-radius: 30px !important;
+      border-radius: 8px !important;
     }
     
     /* Make slider arrows and scroll down circle perfectly round */
@@ -1449,14 +1449,14 @@
 
 <body>
 
-  <header class="mockup-header">
+  <header class="mockup-header" id="mainHeader">
     
     <div class="mockup-header-logo">
-      <a href="index.html"><img src="images/logo.png" alt="Cooken Logo"></a>
+      <a href="index.html"><img src="images/logo-white.png" alt="Prescot Logo" id="headerLogo"></a>
     </div>
     <nav class="mockup-nav">
       <ul>
-        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html" class="active">Home</a></li>
         
         <li class="has-mega-menu">
           <a href="shop.html">Sklep <i class="ph ph-caret-down" style="font-size: 12px; margin-left: 4px;"></i></a>
@@ -1467,10 +1467,12 @@
             <div class="magic-dropdown-section">
               <div class="magic-dropdown-title">Kategorie</div>
               <ul>
-                <li><a href="shop.html?category=Ta%C5%9Bmy%20LED">Taśmy LED</a></li>
-                <li><a href="shop.html?category=Sterowniki%20LED">Sterowniki LED</a></li>
-                <li><a href="shop.html?category=Zasilacze%20LED">Zasilacze LED</a></li>
-                <li><a href="shop.html?category=3D%20%26%20AR">3D & AR</a></li>
+                <li><a href="shop.html?category=Ta%C5%9Bmy%20LED">Taśmy LED (Wszystkie)</a></li>
+                <li><a href="shop.html?category=Ta%C5%9Bmy%20LED%207%20lat%20gwarancji">Taśmy LED 7 lat gwarancji</a></li>
+                <li><a href="shop.html?category=Ta%C5%9Bmy%20LED%205%20lat%20gwarancji">Taśmy LED 5 lat gwarancji</a></li>
+                <li><a href="shop.html?category=Sterowniki">Sterowniki</a></li>
+                <li><a href="shop.html?category=Zasilacze">Zasilacze</a></li>
+                <li><a href="shop.html?category=Akcesoria">Akcesoria</a></li>
               </ul>
             </div>
             
@@ -1501,7 +1503,7 @@
 
         </li>
 
-        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="blog.html">Blog</a></li>
         <li><a href="about.html">O nas</a></li>
         <li><a href="contact.html">Kontakt</a></li>
       </ul>
@@ -1514,19 +1516,14 @@
         </button>
       </div>
       <button class="mockup-action-icon" aria-label="Konto użytkownika">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-          <circle cx="12" cy="7" r="4" />
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </button>
-      <a href="cart.html" class="mockup-action-icon" aria-label="Koszyk">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="8" cy="21" r="1" />
-          <circle cx="19" cy="21" r="1" />
-          <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
-        </svg>
+            <a href="#" class="mockup-action-icon wishlist-trigger" aria-label="Lista Życzeń">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+      </a>
+      <a href="cart.html" class="mockup-action-icon" aria-label="Koszyk" style="position: relative;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+        <span class="cart-badge">2</span>
       </a>
     
       <button class="menu-toggle" id="menuToggle">
@@ -1802,6 +1799,19 @@
     });
 
     // Header Search bar logic
+    
+    const header = document.getElementById('mainHeader');
+    const headerLogo = document.getElementById('headerLogo');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        if (header) header.classList.add('scrolled');
+        if (headerLogo) headerLogo.src = 'images/logo-dark.png';
+      } else {
+        if (header) header.classList.remove('scrolled');
+        if (headerLogo) headerLogo.src = 'images/logo-white.png';
+      }
+    });
+
     const headerSearchInput = document.getElementById('headerSearchInput');
     const headerSearchBtn = document.getElementById('headerSearchBtn');
 
@@ -1915,6 +1925,16 @@
     </div>
   </nav>
 
+<style>
+    @media (max-width: 768px) {
+      .add-to-cart-btn, .buy-it-now-btn, .mockup-btn {
+        background: var(--primary-color) !important;
+        color: var(--white) !important;
+        border: none !important;
+        font-weight: 600 !important;
+      }
+    }
+    </style>
 </body>
 
 </html>
