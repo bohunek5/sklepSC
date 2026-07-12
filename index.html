@@ -1999,7 +1999,7 @@
       }
       .mockup-action-icon {
         width: 36px !important;
-        height: 36px !important;
+        height: 32px !important;
       }
       .mockup-action-icon svg {
         width: 16px !important;
@@ -2591,6 +2591,36 @@
       transform: rotate(180deg);
     }
     /* --- END MOBILE UI FIXES --- */
+
+
+    /* Mobile Search Bar Shape - Index */
+    @media (max-width: 1024px) {
+      .mockup-search-container {
+        height: 32px !important;
+        border-radius: 16px !important;
+        background: rgba(255,255,255,0.15) !important;
+        border: 1px solid rgba(255,255,255,0.2) !important;
+        padding: 0 10px !important;
+      }
+      .mockup-header.scrolled .mockup-search-container {
+        background: rgba(0,0,0,0.05) !important;
+        border: 1px solid rgba(0,0,0,0.05) !important;
+      }
+      .mockup-search-container input {
+        height: 100% !important;
+        padding: 0 8px !important;
+      }
+      .mockup-search-container button {
+        height: 26px !important;
+        width: 26px !important;
+        right: 5px !important;
+        background: var(--primary-color) !important;
+        border-radius: 50% !important;
+      }
+      .mockup-search-container button svg {
+        stroke: #ffffff !important;
+      }
+    }
 
 </style>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -3641,7 +3671,7 @@
       }
       .mockup-action-icon {
         width: 36px !important;
-        height: 36px !important;
+        height: 32px !important;
       }
       .mockup-action-icon svg {
         width: 16px !important;
@@ -4273,19 +4303,19 @@
         <i class="ph ph-house"></i>
         <span>Home</span>
       </a>
-      <a href="javascript:void(0);" onclick="openMobileCategories();" class="mobile-nav-item">
+      <a href="javascript:void(0);" onclick="openMobileCategories();" class="mobile-nav-item ">
         <i class="ph ph-squares-four"></i>
         <span>Kategorie</span>
       </a>
-      <a href="blog.html" class="mobile-nav-item">
+      <a href="blog.html" class="mobile-nav-item ">
         <i class="ph ph-article"></i>
         <span>Blog</span>
       </a>
-      <a href="about.html" class="mobile-nav-item">
+      <a href="about.html" class="mobile-nav-item ">
         <i class="ph ph-info"></i>
         <span>O nas</span>
       </a>
-      <a href="contact.html" class="mobile-nav-item">
+      <a href="contact.html" class="mobile-nav-item ">
         <i class="ph ph-envelope-simple"></i>
         <span>Kontakt</span>
       </a>

@@ -1443,7 +1443,7 @@
       }
       .mockup-action-icon {
         width: 36px !important;
-        height: 36px !important;
+        height: 32px !important;
       }
       .mockup-action-icon svg {
         width: 16px !important;
@@ -2033,6 +2033,42 @@
       transform: rotate(180deg);
     }
     /* --- END MOBILE UI FIXES --- */
+
+
+    /* Search Bar Subpage Colors & Mobile Shape */
+    .mockup-search-container input {
+      color: #0b1a30 !important;
+    }
+    .mockup-search-container input::placeholder {
+      color: rgba(11, 26, 48, 0.6) !important;
+    }
+    .mockup-search-container button svg {
+      stroke: #0b1a30 !important;
+    }
+
+    @media (max-width: 1024px) {
+      .mockup-search-container {
+        height: 32px !important;
+        border-radius: 16px !important;
+        background: rgba(0,0,0,0.05) !important;
+        border: 1px solid rgba(0,0,0,0.05) !important;
+        padding: 0 10px !important;
+      }
+      .mockup-search-container input {
+        height: 100% !important;
+        padding: 0 8px !important;
+      }
+      .mockup-search-container button {
+        height: 26px !important;
+        width: 26px !important;
+        right: 5px !important;
+        background: #0b1a30 !important;
+        border-radius: 50% !important;
+      }
+      .mockup-search-container button svg {
+        stroke: #ffffff !important; /* white icon inside the dark button */
+      }
+    }
 
 </style>
 </head>
@@ -2943,24 +2979,24 @@
   <!-- Mobile Bottom Navigation -->
   <nav class="mobile-bottom-nav">
     <div class="mobile-nav-items">
-      <a href="index.html" class="mobile-nav-item">
-        <i class="ph-fill ph-house"></i>
+      <a href="index.html" class="mobile-nav-item active">
+        <i class="ph ph-house"></i>
         <span>Home</span>
       </a>
-      <a href="javascript:void(0);" onclick="openMobileCategories();" class="mobile-nav-item">
-        <i class="ph-fill ph-squares-four"></i>
+      <a href="javascript:void(0);" onclick="openMobileCategories();" class="mobile-nav-item ">
+        <i class="ph ph-squares-four"></i>
         <span>Kategorie</span>
       </a>
-      <a href="blog.html" class="mobile-nav-item">
-        <i class="ph-fill ph-article"></i>
+      <a href="blog.html" class="mobile-nav-item ">
+        <i class="ph ph-article"></i>
         <span>Blog</span>
       </a>
-      <a href="about.html" class="mobile-nav-item">
-        <i class="ph-fill ph-info"></i>
+      <a href="about.html" class="mobile-nav-item ">
+        <i class="ph ph-info"></i>
         <span>O nas</span>
       </a>
-      <a href="contact.html" class="mobile-nav-item">
-        <i class="ph-fill ph-envelope-simple"></i>
+      <a href="contact.html" class="mobile-nav-item ">
+        <i class="ph ph-envelope-simple"></i>
         <span>Kontakt</span>
       </a>
     </div>
