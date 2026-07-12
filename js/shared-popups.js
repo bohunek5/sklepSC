@@ -104,9 +104,11 @@ function showToast(message, type = 'success') {
 window.showToast = showToast;
 
 function updateCartBadge() {
-  const cartBtns = document.querySelectorAll('a[href*="cart.html"], .mockup-actions a[aria-label="Koszyk"]');
-  let currentCart = JSON.parse(localStorage.getItem('cooken_cart')) || [];
+  const currentCart = JSON.parse(localStorage.getItem('cooken_cart')) || [];
   const totalItems = currentCart.reduce((sum, item) => sum + (item.qty || 1), 0);
+  
+  // Find all cart buttons/links EXCEPT the ones in checkout breadcrumbs
+  const cartBtns = document.querySelectorAll('a[href*="cart.html"]:not(.checkout-breadcrumbs a), .mockup-actions a[aria-label="Koszyk"], .cart-toggle');
   
   cartBtns.forEach(btn => {
     btn.style.position = 'relative'; // ensure badge anchors correctly
