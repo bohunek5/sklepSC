@@ -36,7 +36,7 @@
       background-color: var(--white);
       line-height: 1.6;
       overflow-x: hidden;
-      padding-top: 80px;
+      padding-top: 0;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -45,21 +45,36 @@
     }
 
     /* Common Header */
+    /* Common Header with Glassmorphism */
     .mockup-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 20px 8%;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      background: transparent;
+      border-bottom: none;
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       z-index: 1000;
-      transition: var(--transition);
+      transition: background 0.3s ease;
+    }
+
+    .mockup-header.scrolled {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      padding: 15px 8%;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .mockup-header.scrolled .mockup-nav a {
+      color: var(--primary-color);
+    }
+
+    .mockup-header.scrolled .mockup-action-icon {
+      color: var(--primary-color);
     }
 
     .mockup-header-logo img {
@@ -1298,25 +1313,10 @@
       transform: rotate(180deg);
     }
     /* --- END MOBILE UI FIXES --- */
-
-
-    /* Search Bar Subpage Colors & Mobile Shape */
-    .mockup-search-container input {
-      color: #0b1a30 !important;
-    }
-    .mockup-search-container input::placeholder {
-      color: rgba(11, 26, 48, 0.6) !important;
-    }
-    .mockup-search-container button svg {
-      stroke: #0b1a30 !important;
-    }
-
     @media (max-width: 1024px) {
       .mockup-search-container {
         height: 32px !important;
         border-radius: 16px !important;
-        background: rgba(0,0,0,0.05) !important;
-        border: 1px solid rgba(0,0,0,0.05) !important;
         padding: 0 10px !important;
       }
       .mockup-search-container input {
@@ -1327,13 +1327,11 @@
         height: 26px !important;
         width: 26px !important;
         right: 5px !important;
-        background: #0b1a30 !important;
-        border-radius: 50% !important;
-      }
-      .mockup-search-container button svg {
-        stroke: #ffffff !important; /* white icon inside the dark button */
       }
     }
+
+
+    
 
 </style>
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -1498,7 +1496,7 @@
 
   
   <!-- Hero Section -->
-  <section class="page-hero" style="background: url('images/stairs.jpg') center/cover no-repeat; padding: 120px 20px; text-align: center; position: relative;">
+  <section class="page-hero" style="background: url('images/stairs.jpg') center/cover no-repeat; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; text-align: center; position: relative;">
     <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(11, 26, 48, 0.6);"></div>
     <div style="position: relative; z-index: 1;">
       <h1 style="color: #fff; font-size: 64px; font-weight: 800; font-family: 'Outfit', sans-serif; margin-bottom: 10px; text-transform: uppercase; letter-spacing: -1px; text-shadow: 0 4px 12px rgba(0,0,0,0.3);">Kontakt</h1>
@@ -1509,7 +1507,7 @@
         <span style="color: var(--accent-color);">Kontakt</span>
       </div>
       <!-- Pulsating Down Arrow -->
-      <div class="scroll-to-main" onclick="document.querySelector('main').scrollIntoView({ behavior: 'smooth' })" style="margin-top: 30px; cursor: pointer; display: inline-block; animation: pulseArrow 1.5s infinite; transition: opacity 0.3s; z-index: 2; position: relative;">
+      <div class="scroll-to-main" onclick="document.querySelector('main').scrollIntoView({ behavior: 'smooth' })" style="margin-top: auto; margin-bottom: 40px; cursor: pointer; display: inline-block; animation: pulseArrow 1.5s infinite; transition: opacity 0.3s; z-index: 2; position: relative;">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <line x1="12" y1="5" x2="12" y2="19"></line>
           <polyline points="19 12 12 19 5 12"></polyline>
