@@ -2179,6 +2179,40 @@
     }
   </style>
 
+
+  <style>
+    /* FIX DROPDOWN TEXT COLOR - WHITE ON WHITE ISSUE */
+    .magic-dropdown {
+      background: rgba(255, 255, 255, 0.95) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      -webkit-backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+    }
+    .mockup-nav .magic-dropdown ul li a, 
+    .mockup-header.scrolled .magic-dropdown ul li a,
+    .magic-dropdown ul li a {
+      color: #1a1a1a !important; /* Dark text for visibility */
+      background: rgba(0,0,0,0.03) !important;
+      border: 1px solid rgba(0,0,0,0.05) !important;
+    }
+    .mockup-nav .magic-dropdown ul li a:hover, 
+    .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    .magic-dropdown ul li a:hover {
+      background: rgba(0,0,0,0.06) !important;
+      border-color: rgba(0,0,0,0.12) !important;
+      color: #ff5e00 !important; /* Orange text on hover */
+    }
+  </style>
+
+
+  <style>
+    @keyframes kenBurns {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.15); }
+    }
+  </style>
+
 </head>
 <body>
   
@@ -2272,6 +2306,61 @@
         <h1>Inteligentne taśmy LED</h1>
         <p>Zyskaj pełną kontrolę i programuj efekty świetlne</p>
         <a href="shop.html" class="mockup-btn">Kup teraz</a>
+      </div>
+    </div>
+    
+    
+    <!-- Slide NEW 1: Silicone Profiles -->
+    <div class="slide" data-tech="silicone">
+      <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
+        <div class="slide-video desktop-bg" style="width: 100%; height: 100%; background: url('images/silicone_led_pro.jpg') center/cover no-repeat; animation: kenBurns 15s infinite alternate ease-in-out;"></div>
+      </div>
+      <div class="slide-banner-box" style="z-index: 2;">
+        <svg class="glass-border-svg">
+          <rect class="track" pathLength="100" />
+          <rect class="car" pathLength="100" />
+        </svg>
+        <div class="banner-text">
+          <h1>Koszulki Silikonowe Pro</h1>
+          <p>Idealne linie świetlne dla profesjonalistów</p>
+        </div>
+        <a href="shop.html" class="mockup-btn"><div class="btn-slide-wrap"><span class="btn-txt-default">Odkryj</span><span class="btn-txt-hover">Odkryj</span></div></a>
+      </div>
+    </div>
+    
+    <!-- Slide NEW 2: Accessories -->
+    <div class="slide" data-tech="accessories">
+      <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
+        <div class="slide-video desktop-bg" style="width: 100%; height: 100%; background: url('images/led_accessories.jpg') center/cover no-repeat; animation: kenBurns 15s infinite alternate ease-in-out;"></div>
+      </div>
+      <div class="slide-banner-box" style="z-index: 2;">
+        <svg class="glass-border-svg">
+          <rect class="track" pathLength="100" />
+          <rect class="car" pathLength="100" />
+        </svg>
+        <div class="banner-text">
+          <h1>Akcesoria do LED</h1>
+          <p>Innowacyjne konstrukcje i systemy montażu</p>
+        </div>
+        <a href="shop.html" class="mockup-btn"><div class="btn-slide-wrap"><span class="btn-txt-default">Odkryj</span><span class="btn-txt-hover">Odkryj</span></div></a>
+      </div>
+    </div>
+    
+    <!-- Slide NEW 3: CRI 97 -->
+    <div class="slide" data-tech="cri97">
+      <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
+        <div class="slide-video desktop-bg" style="width: 100%; height: 100%; background: url('images/cri97_led_garden.jpg') center/cover no-repeat; animation: kenBurns 15s infinite alternate ease-in-out;"></div>
+      </div>
+      <div class="slide-banner-box" style="z-index: 2;">
+        <svg class="glass-border-svg">
+          <rect class="track" pathLength="100" />
+          <rect class="car" pathLength="100" />
+        </svg>
+        <div class="banner-text">
+          <h1>Taśmy CRI 97</h1>
+          <p>Perfekcyjne oddanie naturalnych barw</p>
+        </div>
+        <a href="shop.html" class="mockup-btn"><div class="btn-slide-wrap"><span class="btn-txt-default">Odkryj</span><span class="btn-txt-hover">Odkryj</span></div></a>
       </div>
     </div>
     
@@ -2417,7 +2506,7 @@
       <!-- Category 1: Taśmy LED -->
       <a href="shop.html?category=Ta%C5%9Bmy%20LED" class="category-card" style="position: relative; overflow: hidden; border-radius: 16px; height: 280px; text-decoration: none; display: flex; align-items: flex-end; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
         <div class="category-bg" style="position: absolute; top:0; left:0; width:100%; height:100%; background-image: url('/images/products/tasma_4000k.webp'); background-size: cover; background-position: center; transition: transform 0.6s ease;"></div>
-        <div class="category-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%);"></div>
+        <div class="category-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 50.1%, rgba(0,0,0,0) 100%);"></div>
         <div class="category-info" style="position: relative; z-index: 2;">
           <h3 style="color: #fff; font-size: 18px; font-weight: 700; margin: 0 0 5px 0;">Taśmy LED</h3>
           <span style="color: rgba(255,255,255,0.7); font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">ZOBACZ PRODUKTY →</span>
@@ -2427,7 +2516,7 @@
       <!-- Category 2: Sterowniki LED -->
       <a href="shop.html?category=Sterowniki%20LED" class="category-card" style="position: relative; overflow: hidden; border-radius: 16px; height: 280px; text-decoration: none; display: flex; align-items: flex-end; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
         <div class="category-bg" style="position: absolute; top:0; left:0; width:100%; height:100%; background-image: url('/images/products/controller_rgb.webp'); background-size: cover; background-position: center; transition: transform 0.6s ease;"></div>
-        <div class="category-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%);"></div>
+        <div class="category-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 50.1%, rgba(0,0,0,0) 100%);"></div>
         <div class="category-info" style="position: relative; z-index: 2;">
           <h3 style="color: #fff; font-size: 18px; font-weight: 700; margin: 0 0 5px 0;">Sterowniki LED</h3>
           <span style="color: rgba(255,255,255,0.7); font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">ZOBACZ PRODUKTY →</span>
@@ -2437,7 +2526,7 @@
       <!-- Category 3: Zasilacze LED -->
       <a href="shop.html?category=Zasilacze%20LED" class="category-card" style="position: relative; overflow: hidden; border-radius: 16px; height: 280px; text-decoration: none; display: flex; align-items: flex-end; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
         <div class="category-bg" style="position: absolute; top:0; left:0; width:100%; height:100%; background-image: url('/images/products/scharfer_100w.webp'); background-size: cover; background-position: center; transition: transform 0.6s ease;"></div>
-        <div class="category-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%);"></div>
+        <div class="category-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 50.1%, rgba(0,0,0,0) 100%);"></div>
         <div class="category-info" style="position: relative; z-index: 2;">
           <h3 style="color: #fff; font-size: 18px; font-weight: 700; margin: 0 0 5px 0;">Zasilacze LED</h3>
           <span style="color: rgba(255,255,255,0.7); font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">ZOBACZ PRODUKTY →</span>
@@ -2447,7 +2536,7 @@
       <!-- Category 4: Wizualizacje 3D & 360 -->
       <a href="shop.html" class="category-card" style="position: relative; overflow: hidden; border-radius: 16px; height: 280px; text-decoration: none; display: flex; align-items: flex-end; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
         <div class="category-bg" style="position: absolute; top:0; left:0; width:100%; height:100%; background-image: url('/images/products/product_8291636215978.jpg'); background-size: cover; background-position: center; transition: transform 0.6s ease;"></div>
-        <div class="category-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%);"></div>
+        <div class="category-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 50.1%, rgba(0,0,0,0) 100%);"></div>
         <div class="category-info" style="position: relative; z-index: 2;">
           <h3 style="color: #fff; font-size: 18px; font-weight: 700; margin: 0 0 5px 0;">Wizualizacje 3D & 360</h3>
           <span style="color: rgba(255,255,255,0.7); font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">SPRAWDŹ DETALE →</span>

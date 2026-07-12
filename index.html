@@ -2772,6 +2772,40 @@
     }
   </style>
 
+
+  <style>
+    /* FIX DROPDOWN TEXT COLOR - WHITE ON WHITE ISSUE */
+    .magic-dropdown {
+      background: rgba(255, 255, 255, 0.95) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      -webkit-backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+    }
+    .mockup-nav .magic-dropdown ul li a, 
+    .mockup-header.scrolled .magic-dropdown ul li a,
+    .magic-dropdown ul li a {
+      color: #1a1a1a !important; /* Dark text for visibility */
+      background: rgba(0,0,0,0.03) !important;
+      border: 1px solid rgba(0,0,0,0.05) !important;
+    }
+    .mockup-nav .magic-dropdown ul li a:hover, 
+    .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    .magic-dropdown ul li a:hover {
+      background: rgba(0,0,0,0.06) !important;
+      border-color: rgba(0,0,0,0.12) !important;
+      color: #ff5e00 !important; /* Orange text on hover */
+    }
+  </style>
+
+
+  <style>
+    @keyframes kenBurns {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.15); }
+    }
+  </style>
+
 </head>
 <body>
   <!-- Main Hero removed welcome overlay -->
@@ -2977,6 +3011,61 @@
       </div>
     </div>
     
+    
+    <!-- Slide NEW 1: Silicone Profiles -->
+    <div class="slide" data-tech="silicone">
+      <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
+        <div class="slide-video desktop-bg" style="width: 100%; height: 100%; background: url('images/silicone_led_pro.jpg') center/cover no-repeat; animation: kenBurns 15s infinite alternate ease-in-out;"></div>
+      </div>
+      <div class="slide-banner-box" style="z-index: 2;">
+        <svg class="glass-border-svg">
+          <rect class="track" pathLength="100" />
+          <rect class="car" pathLength="100" />
+        </svg>
+        <div class="banner-text">
+          <h1>Koszulki Silikonowe Pro</h1>
+          <p>Idealne linie świetlne dla profesjonalistów</p>
+        </div>
+        <a href="shop.html" class="mockup-btn"><div class="btn-slide-wrap"><span class="btn-txt-default">Odkryj</span><span class="btn-txt-hover">Odkryj</span></div></a>
+      </div>
+    </div>
+    
+    <!-- Slide NEW 2: Accessories -->
+    <div class="slide" data-tech="accessories">
+      <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
+        <div class="slide-video desktop-bg" style="width: 100%; height: 100%; background: url('images/led_accessories.jpg') center/cover no-repeat; animation: kenBurns 15s infinite alternate ease-in-out;"></div>
+      </div>
+      <div class="slide-banner-box" style="z-index: 2;">
+        <svg class="glass-border-svg">
+          <rect class="track" pathLength="100" />
+          <rect class="car" pathLength="100" />
+        </svg>
+        <div class="banner-text">
+          <h1>Akcesoria do LED</h1>
+          <p>Innowacyjne konstrukcje i systemy montażu</p>
+        </div>
+        <a href="shop.html" class="mockup-btn"><div class="btn-slide-wrap"><span class="btn-txt-default">Odkryj</span><span class="btn-txt-hover">Odkryj</span></div></a>
+      </div>
+    </div>
+    
+    <!-- Slide NEW 3: CRI 97 -->
+    <div class="slide" data-tech="cri97">
+      <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
+        <div class="slide-video desktop-bg" style="width: 100%; height: 100%; background: url('images/cri97_led_garden.jpg') center/cover no-repeat; animation: kenBurns 15s infinite alternate ease-in-out;"></div>
+      </div>
+      <div class="slide-banner-box" style="z-index: 2;">
+        <svg class="glass-border-svg">
+          <rect class="track" pathLength="100" />
+          <rect class="car" pathLength="100" />
+        </svg>
+        <div class="banner-text">
+          <h1>Taśmy CRI 97</h1>
+          <p>Perfekcyjne oddanie naturalnych barw</p>
+        </div>
+        <a href="shop.html" class="mockup-btn"><div class="btn-slide-wrap"><span class="btn-txt-default">Odkryj</span><span class="btn-txt-hover">Odkryj</span></div></a>
+      </div>
+    </div>
+    
     <!-- Slide 3: RGBW -->
     <div class="slide" data-tech="rgb">
       <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
@@ -3103,7 +3192,7 @@
       <!-- Category 1: Taśmy LED -->
       <div class="category-banner-card" onclick="window.location.href='shop.html?cat=Tasma%20LED'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 420px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 40px;">
         <div class="category-banner-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/hero_cob.webp') center/cover no-repeat; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></div>
-        <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(11,26,48,1) 0%, rgba(11,26,48,0.85) 60%, rgba(11,26,48,0.3) 100%); z-index: 1; pointer-events: none;"></div>
+        <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 50.1%, rgba(0,0,0,0) 100%); z-index: 1; pointer-events: none;"></div>
                 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
           <span class="glass-banner-btn">ZOBACZ PRODUKTY</span>
           <div style="text-align: right; max-width: 70%; display: flex; flex-direction: column; align-items: flex-end;">
@@ -3117,7 +3206,7 @@
       <!-- Category 2: Sterowanie i Zasilanie -->
       <div class="category-banner-card" onclick="window.location.href='shop.html?cat=Zasilacze'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 420px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 40px;">
         <div class="category-banner-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/banner_controllers.webp') center/cover no-repeat; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></div>
-        <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(11,26,48,1) 0%, rgba(11,26,48,0.85) 60%, rgba(11,26,48,0.3) 100%); z-index: 1; pointer-events: none;"></div>
+        <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 50.1%, rgba(0,0,0,0) 100%); z-index: 1; pointer-events: none;"></div>
                 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
           <span class="glass-banner-btn">ZOBACZ ZASILACZE</span>
           <div style="text-align: right; max-width: 70%; display: flex; flex-direction: column; align-items: flex-end;">
@@ -3133,7 +3222,7 @@
       <!-- Subcategory 1: COB -->
       <div class="category-banner-card sub-card" onclick="window.location.href='shop.html?cat=Tasma%20LED%20COB'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
         <div class="category-banner-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/hero_cob.webp') center/cover no-repeat; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></div>
-        <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(11,26,48,1) 0%, rgba(11,26,48,0.85) 70%, rgba(11,26,48,0.3) 100%); z-index: 1; pointer-events: none;"></div>
+        <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 50.1%, rgba(0,0,0,0) 100%); z-index: 1; pointer-events: none;"></div>
                 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
           <span class="glass-banner-btn">Odkryj</span>
           <div style="text-align: right; max-width: 70%; display: flex; flex-direction: column; align-items: flex-end;">
@@ -3147,7 +3236,7 @@
       <!-- Subcategory 2: RGB -->
       <div class="category-banner-card sub-card" onclick="window.location.href='shop.html?cat=Tasma%20LED%20RGB'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
         <div class="category-banner-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/hero_rgb.webp') center/cover no-repeat; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></div>
-        <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(11,26,48,1) 0%, rgba(11,26,48,0.8) 100%); z-index: 1; pointer-events: none;"></div>
+        <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 50.1%, rgba(0,0,0,0) 100%); 100%); z-index: 1; pointer-events: none;"></div>
                 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
           <span class="glass-banner-btn">Zobacz</span>
           <div style="text-align: right; max-width: 70%; display: flex; flex-direction: column; align-items: flex-end;">
@@ -3161,7 +3250,7 @@
       <!-- Subcategory 3: CCT -->
       <div class="category-banner-card sub-card" onclick="window.location.href='shop.html?cat=Tasma%20LED%20CCT'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
         <div class="category-banner-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/hero_cct.webp') center/cover no-repeat; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></div>
-        <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(11,26,48,1) 0%, rgba(11,26,48,0.8) 100%); z-index: 1; pointer-events: none;"></div>
+        <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 50.1%, rgba(0,0,0,0) 100%); 100%); z-index: 1; pointer-events: none;"></div>
                 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
           <span class="glass-banner-btn">Wybierz</span>
           <div style="text-align: right; max-width: 70%; display: flex; flex-direction: column; align-items: flex-end;">
@@ -3189,7 +3278,7 @@
       <!-- Subcategory 5: Sterowniki -->
       <div class="category-banner-card sub-card" onclick="window.location.href='shop.html?cat=Sterowniki'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
         <div class="category-banner-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/banner_controllers.webp') center/cover no-repeat; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></div>
-        <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(11,26,48,1) 0%, rgba(11,26,48,0.85) 70%, rgba(11,26,48,0.3) 100%); z-index: 1; pointer-events: none;"></div>
+        <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 50.1%, rgba(0,0,0,0) 100%); z-index: 1; pointer-events: none;"></div>
                 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
           <span class="glass-banner-btn">Steruj</span>
           <div style="text-align: right; max-width: 70%; display: flex; flex-direction: column; align-items: flex-end;">

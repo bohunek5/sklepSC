@@ -1450,6 +1450,40 @@
     }
   </style>
 
+
+  <style>
+    /* FIX DROPDOWN TEXT COLOR - WHITE ON WHITE ISSUE */
+    .magic-dropdown {
+      background: rgba(255, 255, 255, 0.95) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      -webkit-backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+    }
+    .mockup-nav .magic-dropdown ul li a, 
+    .mockup-header.scrolled .magic-dropdown ul li a,
+    .magic-dropdown ul li a {
+      color: #1a1a1a !important; /* Dark text for visibility */
+      background: rgba(0,0,0,0.03) !important;
+      border: 1px solid rgba(0,0,0,0.05) !important;
+    }
+    .mockup-nav .magic-dropdown ul li a:hover, 
+    .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    .magic-dropdown ul li a:hover {
+      background: rgba(0,0,0,0.06) !important;
+      border-color: rgba(0,0,0,0.12) !important;
+      color: #ff5e00 !important; /* Orange text on hover */
+    }
+  </style>
+
+
+  <style>
+    @keyframes kenBurns {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.15); }
+    }
+  </style>
+
 </head>
 <body>
   
