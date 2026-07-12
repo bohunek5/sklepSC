@@ -1273,6 +1273,28 @@
     }
   </style>
 
+
+  <style>
+    @media (max-width: 768px) {
+      .add-to-cart-btn, .buy-it-now-btn, .mockup-btn {
+        background: var(--accent-color) !important;
+        color: var(--white) !important;
+        border: none !important;
+        font-weight: 600 !important;
+        padding: 6px 12px !important;
+        font-size: 11px !important;
+        width: auto !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        display: inline-block !important;
+        white-space: nowrap !important;
+      }
+      .mockup-search-container button {
+        background: transparent !important;
+      }
+    }
+  </style>
+
 </head>
 
 <body>
@@ -1651,14 +1673,20 @@
   initSharedPopups();
 </script>
 <style>
+    
     @media (max-width: 768px) {
       .add-to-cart-btn, .buy-it-now-btn, .mockup-btn {
-        background: var(--primary-color) !important;
+        background: var(--accent-color) !important;
         color: var(--white) !important;
         border: none !important;
         font-weight: 600 !important;
+        padding: 6px 12px !important;
+        font-size: 11px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
       }
     }
+    
     </style>
 </body>
 
