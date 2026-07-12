@@ -62,7 +62,7 @@
     }
 
     .mockup-header.scrolled {
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.90);
       backdrop-filter: blur(15px);
       -webkit-backdrop-filter: blur(15px);
       padding: 15px 8%;
@@ -99,7 +99,7 @@
       padding: 10px 20px;
       border-radius: 99px;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      display: inline-block;
+      display: block;
       background: rgba(0, 0, 0, 0.04);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -828,7 +828,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.90);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-top: 1px solid rgba(0,0,0,0.05);
@@ -2202,20 +2202,22 @@
   </style>
 
 
+  
+
+
   <style>
     @media (max-width: 768px) {
+      /* Fix sizes for buttons without changing colors */
       .add-to-cart-btn, .buy-it-now-btn, .mockup-btn {
-        background: var(--accent-color) !important;
-        color: var(--white) !important;
-        border: none !important;
-        font-weight: 600 !important;
-        padding: 6px 12px !important;
-        font-size: 11px !important;
+        padding: 8px 16px !important;
+        font-size: 12px !important;
         width: auto !important;
         max-width: 100% !important;
         box-sizing: border-box !important;
-        display: inline-block !important;
-        white-space: nowrap !important;
+        white-space: normal !important;
+        text-align: center !important;
+        line-height: 1.2 !important;
+        border-radius: 8px !important;
       }
       .mockup-search-container button {
         background: transparent !important;
@@ -2378,7 +2380,7 @@
       <span style="color: #fff; font-weight: 700;">Sklep</span>
     </div>
       <!-- Pulsating Down Arrow -->
-      <div class="scroll-to-main" onclick="document.querySelector('main').scrollIntoView({ behavior: 'smooth' })" style="margin-top: auto; margin-bottom: 40px; cursor: pointer; display: inline-block; animation: pulseArrow 1.5s infinite; transition: opacity 0.3s; z-index: 2; position: relative;">
+      <div class="scroll-to-main" onclick="document.querySelector('main').scrollIntoView({ behavior: 'smooth' })" style="margin-top: auto; margin-bottom: 40px; cursor: pointer; display: block; animation: pulseArrow 1.5s infinite; transition: opacity 0.3s; z-index: 2; position: relative;">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <line x1="12" y1="5" x2="12" y2="19"></line>
           <polyline points="19 12 12 19 5 12"></polyline>

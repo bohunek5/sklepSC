@@ -50,7 +50,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px 8%;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.90);
       backdrop-filter: blur(15px);
       -webkit-backdrop-filter: blur(15px);
       border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -84,7 +84,7 @@
       padding: 10px 20px;
       border-radius: 99px;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      display: inline-block;
+      display: block;
       background: rgba(0, 0, 0, 0.04);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -697,7 +697,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.90);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-top: 1px solid rgba(0,0,0,0.05);
@@ -1436,20 +1436,22 @@
   </style>
 
 
+  
+
+
   <style>
     @media (max-width: 768px) {
+      /* Fix sizes for buttons without changing colors */
       .add-to-cart-btn, .buy-it-now-btn, .mockup-btn {
-        background: var(--accent-color) !important;
-        color: var(--white) !important;
-        border: none !important;
-        font-weight: 600 !important;
-        padding: 6px 12px !important;
-        font-size: 11px !important;
+        padding: 8px 16px !important;
+        font-size: 12px !important;
         width: auto !important;
         max-width: 100% !important;
         box-sizing: border-box !important;
-        display: inline-block !important;
-        white-space: nowrap !important;
+        white-space: normal !important;
+        text-align: center !important;
+        line-height: 1.2 !important;
+        border-radius: 8px !important;
       }
       .mockup-search-container button {
         background: transparent !important;

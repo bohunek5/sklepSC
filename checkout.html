@@ -362,12 +362,12 @@
       background: var(--light-bg);
       padding: 12px 20px;
       border-radius: 4px;
-      display: inline-block;
+      display: block;
       margin-bottom: 40px;
     }
 
     .return-btn {
-      display: inline-block;
+      display: block;
       padding: 16px 40px;
       background: var(--primary-color);
       color: var(--white);
@@ -535,7 +535,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.90);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-top: 1px solid rgba(0,0,0,0.05);
@@ -1274,20 +1274,22 @@
   </style>
 
 
+  
+
+
   <style>
     @media (max-width: 768px) {
+      /* Fix sizes for buttons without changing colors */
       .add-to-cart-btn, .buy-it-now-btn, .mockup-btn {
-        background: var(--accent-color) !important;
-        color: var(--white) !important;
-        border: none !important;
-        font-weight: 600 !important;
-        padding: 6px 12px !important;
-        font-size: 11px !important;
+        padding: 8px 16px !important;
+        font-size: 12px !important;
         width: auto !important;
         max-width: 100% !important;
         box-sizing: border-box !important;
-        display: inline-block !important;
-        white-space: nowrap !important;
+        white-space: normal !important;
+        text-align: center !important;
+        line-height: 1.2 !important;
+        border-radius: 8px !important;
       }
       .mockup-search-container button {
         background: transparent !important;
