@@ -1261,6 +1261,73 @@
       }
     }
 
+
+    /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a,
+    body .mockup-header.scrolled .magic-dropdown ul li a,
+    body .mockup-nav .magic-dropdown ul li a,
+    body .magic-dropdown ul li a {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: var(--primary-color) !important;
+      padding: 12px 15px !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+    
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a:hover,
+    body .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    body .mockup-nav .magic-dropdown ul li a:hover,
+    body .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--primary-color) !important;
+      transform: translateX(5px) !important;
+      border: none !important;
+    }
+
+    body .magic-dropdown {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      top: 100% !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    body .has-mega-menu:hover .magic-dropdown {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure the active tile is strictly enforced (White tile, navy text) */
+    body .mockup-header:not(.scrolled) .mockup-nav a.active,
+    body .mockup-header.scrolled .mockup-nav a.active {
+      background: #ffffff !important;
+      border: 2px solid #ffffff !important;
+      color: var(--primary-color) !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    /* Ensure regular links are properly colored */
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
+      color: var(--white) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    
+    body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+      color: var(--primary-color) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
+
 </style>
 <style>
     /* Larger action buttons */
@@ -1555,6 +1622,73 @@
     
     }
 
+
+    /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a,
+    body .mockup-header.scrolled .magic-dropdown ul li a,
+    body .mockup-nav .magic-dropdown ul li a,
+    body .magic-dropdown ul li a {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: var(--primary-color) !important;
+      padding: 12px 15px !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+    
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a:hover,
+    body .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    body .mockup-nav .magic-dropdown ul li a:hover,
+    body .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--primary-color) !important;
+      transform: translateX(5px) !important;
+      border: none !important;
+    }
+
+    body .magic-dropdown {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      top: 100% !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    body .has-mega-menu:hover .magic-dropdown {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure the active tile is strictly enforced (White tile, navy text) */
+    body .mockup-header:not(.scrolled) .mockup-nav a.active,
+    body .mockup-header.scrolled .mockup-nav a.active {
+      background: #ffffff !important;
+      border: 2px solid #ffffff !important;
+      color: var(--primary-color) !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    /* Ensure regular links are properly colored */
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
+      color: var(--white) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    
+    body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+      color: var(--primary-color) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
+
 </style>
   
   <style>
@@ -1578,7 +1712,74 @@
     html {
       scroll-behavior: smooth !important;
     }
-  </style>
+  
+    /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a,
+    body .mockup-header.scrolled .magic-dropdown ul li a,
+    body .mockup-nav .magic-dropdown ul li a,
+    body .magic-dropdown ul li a {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: var(--primary-color) !important;
+      padding: 12px 15px !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+    
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a:hover,
+    body .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    body .mockup-nav .magic-dropdown ul li a:hover,
+    body .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--primary-color) !important;
+      transform: translateX(5px) !important;
+      border: none !important;
+    }
+
+    body .magic-dropdown {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      top: 100% !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    body .has-mega-menu:hover .magic-dropdown {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure the active tile is strictly enforced (White tile, navy text) */
+    body .mockup-header:not(.scrolled) .mockup-nav a.active,
+    body .mockup-header.scrolled .mockup-nav a.active {
+      background: #ffffff !important;
+      border: 2px solid #ffffff !important;
+      color: var(--primary-color) !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    /* Ensure regular links are properly colored */
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
+      color: var(--white) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    
+    body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+      color: var(--primary-color) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
+
+</style>
 
 
   
@@ -1602,7 +1803,74 @@
         background: transparent !important;
       }
     }
-  </style>
+  
+    /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a,
+    body .mockup-header.scrolled .magic-dropdown ul li a,
+    body .mockup-nav .magic-dropdown ul li a,
+    body .magic-dropdown ul li a {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: var(--primary-color) !important;
+      padding: 12px 15px !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+    
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a:hover,
+    body .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    body .mockup-nav .magic-dropdown ul li a:hover,
+    body .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--primary-color) !important;
+      transform: translateX(5px) !important;
+      border: none !important;
+    }
+
+    body .magic-dropdown {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      top: 100% !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    body .has-mega-menu:hover .magic-dropdown {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure the active tile is strictly enforced (White tile, navy text) */
+    body .mockup-header:not(.scrolled) .mockup-nav a.active,
+    body .mockup-header.scrolled .mockup-nav a.active {
+      background: #ffffff !important;
+      border: 2px solid #ffffff !important;
+      color: var(--primary-color) !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    /* Ensure regular links are properly colored */
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
+      color: var(--white) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    
+    body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+      color: var(--primary-color) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
+
+</style>
 
 
   <style>
@@ -1640,7 +1908,74 @@
     .magic-dropdown ul {
       gap: 4px;
     }
-  </style>
+  
+    /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a,
+    body .mockup-header.scrolled .magic-dropdown ul li a,
+    body .mockup-nav .magic-dropdown ul li a,
+    body .magic-dropdown ul li a {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: var(--primary-color) !important;
+      padding: 12px 15px !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+    
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a:hover,
+    body .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    body .mockup-nav .magic-dropdown ul li a:hover,
+    body .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--primary-color) !important;
+      transform: translateX(5px) !important;
+      border: none !important;
+    }
+
+    body .magic-dropdown {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      top: 100% !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    body .has-mega-menu:hover .magic-dropdown {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure the active tile is strictly enforced (White tile, navy text) */
+    body .mockup-header:not(.scrolled) .mockup-nav a.active,
+    body .mockup-header.scrolled .mockup-nav a.active {
+      background: #ffffff !important;
+      border: 2px solid #ffffff !important;
+      color: var(--primary-color) !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    /* Ensure regular links are properly colored */
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
+      color: var(--white) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    
+    body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+      color: var(--primary-color) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
+
+</style>
 
 
   <style>
@@ -1686,7 +2021,74 @@
         font-size: 14px !important;
       }
     }
-  </style>
+  
+    /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a,
+    body .mockup-header.scrolled .magic-dropdown ul li a,
+    body .mockup-nav .magic-dropdown ul li a,
+    body .magic-dropdown ul li a {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: var(--primary-color) !important;
+      padding: 12px 15px !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+    
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a:hover,
+    body .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    body .mockup-nav .magic-dropdown ul li a:hover,
+    body .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--primary-color) !important;
+      transform: translateX(5px) !important;
+      border: none !important;
+    }
+
+    body .magic-dropdown {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      top: 100% !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    body .has-mega-menu:hover .magic-dropdown {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure the active tile is strictly enforced (White tile, navy text) */
+    body .mockup-header:not(.scrolled) .mockup-nav a.active,
+    body .mockup-header.scrolled .mockup-nav a.active {
+      background: #ffffff !important;
+      border: 2px solid #ffffff !important;
+      color: var(--primary-color) !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    /* Ensure regular links are properly colored */
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
+      color: var(--white) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    
+    body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+      color: var(--primary-color) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
+
+</style>
 
 
   <style>
@@ -1712,7 +2114,74 @@
       border-color: rgba(0,0,0,0.12) !important;
       color: #ff5e00 !important; /* Orange text on hover */
     }
-  </style>
+  
+    /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a,
+    body .mockup-header.scrolled .magic-dropdown ul li a,
+    body .mockup-nav .magic-dropdown ul li a,
+    body .magic-dropdown ul li a {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: var(--primary-color) !important;
+      padding: 12px 15px !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+    
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a:hover,
+    body .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    body .mockup-nav .magic-dropdown ul li a:hover,
+    body .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--primary-color) !important;
+      transform: translateX(5px) !important;
+      border: none !important;
+    }
+
+    body .magic-dropdown {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      top: 100% !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    body .has-mega-menu:hover .magic-dropdown {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure the active tile is strictly enforced (White tile, navy text) */
+    body .mockup-header:not(.scrolled) .mockup-nav a.active,
+    body .mockup-header.scrolled .mockup-nav a.active {
+      background: #ffffff !important;
+      border: 2px solid #ffffff !important;
+      color: var(--primary-color) !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    /* Ensure regular links are properly colored */
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
+      color: var(--white) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    
+    body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+      color: var(--primary-color) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
+
+</style>
 
 
   <style>
@@ -1720,7 +2189,74 @@
       0% { transform: scale(1); }
       100% { transform: scale(1.15); }
     }
-  </style>
+  
+    /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a,
+    body .mockup-header.scrolled .magic-dropdown ul li a,
+    body .mockup-nav .magic-dropdown ul li a,
+    body .magic-dropdown ul li a {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: var(--primary-color) !important;
+      padding: 12px 15px !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+    
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a:hover,
+    body .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    body .mockup-nav .magic-dropdown ul li a:hover,
+    body .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--primary-color) !important;
+      transform: translateX(5px) !important;
+      border: none !important;
+    }
+
+    body .magic-dropdown {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      top: 100% !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    body .has-mega-menu:hover .magic-dropdown {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure the active tile is strictly enforced (White tile, navy text) */
+    body .mockup-header:not(.scrolled) .mockup-nav a.active,
+    body .mockup-header.scrolled .mockup-nav a.active {
+      background: #ffffff !important;
+      border: 2px solid #ffffff !important;
+      color: var(--primary-color) !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    /* Ensure regular links are properly colored */
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
+      color: var(--white) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    
+    body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+      color: var(--primary-color) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
+
+</style>
 
 </head>
 <body>
@@ -2163,6 +2699,73 @@
 
 
     
+
+
+    /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a,
+    body .mockup-header.scrolled .magic-dropdown ul li a,
+    body .mockup-nav .magic-dropdown ul li a,
+    body .magic-dropdown ul li a {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: var(--primary-color) !important;
+      padding: 12px 15px !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+    
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a:hover,
+    body .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    body .mockup-nav .magic-dropdown ul li a:hover,
+    body .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--primary-color) !important;
+      transform: translateX(5px) !important;
+      border: none !important;
+    }
+
+    body .magic-dropdown {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      top: 100% !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    body .has-mega-menu:hover .magic-dropdown {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure the active tile is strictly enforced (White tile, navy text) */
+    body .mockup-header:not(.scrolled) .mockup-nav a.active,
+    body .mockup-header.scrolled .mockup-nav a.active {
+      background: #ffffff !important;
+      border: 2px solid #ffffff !important;
+      color: var(--primary-color) !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    /* Ensure regular links are properly colored */
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
+      color: var(--white) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    
+    body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+      color: var(--primary-color) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
 
 </style>
 </body>
