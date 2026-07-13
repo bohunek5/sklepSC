@@ -1,20 +1,18 @@
 <!DOCTYPE html>
+
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prescot LED - Kontakt</title>
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Theme CSS -->
-  <link rel="stylesheet" href="assets/xo-webcomponents.min.css">
-  <link rel="stylesheet" href="assets/main.min.css">
-  
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Prescot LED - Kontakt</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Theme CSS -->
+<link href="assets/xo-webcomponents.min.css" rel="stylesheet"/>
+<link href="assets/main.min.css" rel="stylesheet"/>
+<style>
     :root {
       --primary-color: #0b1a30;
       --accent-color: #ff5a00;
@@ -116,12 +114,11 @@
     }
 
     .mockup-nav a.active {
-      background: var(--primary-color) !important;
-      border-color: var(--primary-color) !important;
-      color: var(--white) !important;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      background: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      color: var(--primary-color) !important;
+      font-weight: 700 !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
     }
 
     /* Scrolled states */
@@ -140,10 +137,19 @@
     }
 
     .mockup-header.scrolled .mockup-nav a.active {
-      background: var(--primary-color) !important;
-      border-color: var(--primary-color) !important;
-      color: var(--white) !important;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      background: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      color: var(--primary-color) !important;
+      font-weight: 700 !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    .mockup-header.scrolled {
+      background: rgba(255, 255, 255, 0.90);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      padding: 15px 8%;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     
@@ -1456,15 +1462,6 @@
       visibility: visible !important;
     }
     
-    /* Ensure the active tile is strictly enforced (White tile, navy text) */
-    body .mockup-header:not(.scrolled) .mockup-nav a.active,
-    body .mockup-header.scrolled .mockup-nav a.active {
-      background: #ffffff !important;
-      border: 2px solid #ffffff !important;
-      color: var(--primary-color) !important;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
-    }
-    
     /* Ensure regular links are properly colored */
     body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
       color: var(--white) !important;
@@ -1480,10 +1477,8 @@
     /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
 
 </style>
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
-
-  
-  <style>
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<style>
     /* Make buttons fully rounded as requested */
     .mockup-btn, 
     .add-to-cart-btn, 
@@ -1548,15 +1543,6 @@
       visibility: visible !important;
     }
     
-    /* Ensure the active tile is strictly enforced (White tile, navy text) */
-    body .mockup-header:not(.scrolled) .mockup-nav a.active,
-    body .mockup-header.scrolled .mockup-nav a.active {
-      background: #ffffff !important;
-      border: 2px solid #ffffff !important;
-      color: var(--primary-color) !important;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
-    }
-    
     /* Ensure regular links are properly colored */
     body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
       color: var(--white) !important;
@@ -1572,12 +1558,7 @@
     /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
 
 </style>
-
-
-  
-
-
-  <style>
+<style>
     @media (max-width: 768px) {
       /* Fix sizes for buttons without changing colors */
       .add-to-cart-btn, .buy-it-now-btn, .mockup-btn {
@@ -1639,15 +1620,6 @@
       visibility: visible !important;
     }
     
-    /* Ensure the active tile is strictly enforced (White tile, navy text) */
-    body .mockup-header:not(.scrolled) .mockup-nav a.active,
-    body .mockup-header.scrolled .mockup-nav a.active {
-      background: #ffffff !important;
-      border: 2px solid #ffffff !important;
-      color: var(--primary-color) !important;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
-    }
-    
     /* Ensure regular links are properly colored */
     body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
       color: var(--white) !important;
@@ -1663,9 +1635,7 @@
     /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
 
 </style>
-
-
-  <style>
+<style>
     /* Dropdown item "ramki" style */
     .magic-dropdown ul li a {
       border-radius: 8px !important;
@@ -1744,15 +1714,6 @@
       visibility: visible !important;
     }
     
-    /* Ensure the active tile is strictly enforced (White tile, navy text) */
-    body .mockup-header:not(.scrolled) .mockup-nav a.active,
-    body .mockup-header.scrolled .mockup-nav a.active {
-      background: #ffffff !important;
-      border: 2px solid #ffffff !important;
-      color: var(--primary-color) !important;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
-    }
-    
     /* Ensure regular links are properly colored */
     body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
       color: var(--white) !important;
@@ -1768,9 +1729,7 @@
     /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
 
 </style>
-
-
-  <style>
+<style>
     @media (min-width: 1025px) {
       /* Make top icons slightly larger */
       .mockup-action-icon {
@@ -1857,15 +1816,6 @@
       visibility: visible !important;
     }
     
-    /* Ensure the active tile is strictly enforced (White tile, navy text) */
-    body .mockup-header:not(.scrolled) .mockup-nav a.active,
-    body .mockup-header.scrolled .mockup-nav a.active {
-      background: #ffffff !important;
-      border: 2px solid #ffffff !important;
-      color: var(--primary-color) !important;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
-    }
-    
     /* Ensure regular links are properly colored */
     body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
       color: var(--white) !important;
@@ -1881,9 +1831,7 @@
     /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
 
 </style>
-
-
-  <style>
+<style>
     /* FIX DROPDOWN TEXT COLOR - WHITE ON WHITE ISSUE */
     .magic-dropdown {
       background: rgba(255, 255, 255, 0.95) !important;
@@ -1950,15 +1898,6 @@
       visibility: visible !important;
     }
     
-    /* Ensure the active tile is strictly enforced (White tile, navy text) */
-    body .mockup-header:not(.scrolled) .mockup-nav a.active,
-    body .mockup-header.scrolled .mockup-nav a.active {
-      background: #ffffff !important;
-      border: 2px solid #ffffff !important;
-      color: var(--primary-color) !important;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
-    }
-    
     /* Ensure regular links are properly colored */
     body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
       color: var(--white) !important;
@@ -1974,9 +1913,7 @@
     /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
 
 </style>
-
-
-  <style>
+<style>
     @keyframes kenBurns {
       0% { transform: scale(1); }
       100% { transform: scale(1.15); }
@@ -2025,15 +1962,6 @@
       visibility: visible !important;
     }
     
-    /* Ensure the active tile is strictly enforced (White tile, navy text) */
-    body .mockup-header:not(.scrolled) .mockup-nav a.active,
-    body .mockup-header.scrolled .mockup-nav a.active {
-      background: #ffffff !important;
-      border: 2px solid #ffffff !important;
-      color: var(--primary-color) !important;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
-    }
-    
     /* Ensure regular links are properly colored */
     body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
       color: var(--white) !important;
@@ -2049,285 +1977,203 @@
     /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
 
 </style>
-
 </head>
 <body>
-  
-  <header class="mockup-header" id="mainHeader">
-    
-    <div class="mockup-header-logo">
-      <a href="index.html"><img src="images/logo-white.png" alt="Prescot Logo" id="headerLogo"></a>
-    </div>
-    <nav class="mockup-nav">
-      <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        
-        <li class="has-mega-menu">
-          <a href="shop.html">Sklep <i class="ph ph-caret-down" style="font-size: 12px; margin-left: 4px;"></i></a>
-          
-          
-                    <div class="magic-dropdown" id="magicShopMenu">
-            <!-- Column 2: KATEGORIE -->
-            <div class="magic-dropdown-section">
-              <div class="magic-dropdown-title">Kategorie</div>
-              <ul>
-                <li><a href="shop.html?category=Ta%C5%9Bmy%20LED">Taśmy LED (Wszystkie)</a></li>
-                <li><a href="shop.html?category=Ta%C5%9Bmy%20LED%207%20lat%20gwarancji">Taśmy LED 7 lat gwarancji</a></li>
-                <li><a href="shop.html?category=Ta%C5%9Bmy%20LED%205%20lat%20gwarancji">Taśmy LED 5 lat gwarancji</a></li>
-                <li><a href="shop.html?category=Sterowniki">Sterowniki</a></li>
-                <li><a href="shop.html?category=Zasilacze">Zasilacze</a></li>
-                <li><a href="shop.html?category=Akcesoria">Akcesoria</a></li>
-              </ul>
-            </div>
-            
-            <!-- Column 3: KOLOR -->
-            <div class="magic-dropdown-section">
-              <div class="magic-dropdown-title">Kolor</div>
-              <div class="mega-color-dots">
-                <div class="mega-color-dot" onclick="window.location.href='shop.html?color=all'" style="background: linear-gradient(45deg, #f00, #0f0, #00f);" title="Wszystkie"></div>
-                <div class="mega-color-dot" onclick="window.location.href='shop.html?color=%23000000'" style="background: #000;" title="Czarny"></div>
-                <div class="mega-color-dot" onclick="window.location.href='shop.html?color=%23ffffff'" style="background: #fff; border: 1px solid #ddd;" title="Biały"></div>
-                <div class="mega-color-dot" onclick="window.location.href='shop.html?color=%23556b2f'" style="background: #556b2f;" title="Oliwkowy"></div>
-                <div class="mega-color-dot" onclick="window.location.href='shop.html?color=%23ff8c00'" style="background: #ff8c00;" title="Pomarańczowy"></div>
-                <div class="mega-color-dot" onclick="window.location.href='shop.html?color=%231e90ff'" style="background: #1e90ff;" title="Niebieski"></div>
-              </div>
-            </div>
-            
-            <!-- Column 4: CENA -->
-            <div class="magic-dropdown-section">
-              <div class="magic-dropdown-title">Cena</div>
-              <ul>
-                <li><a href="shop.html?price=all">Wszystkie ceny</a></li>
-                <li><a href="shop.html?price=0-50">$0.00 - $50.00</a></li>
-                <li><a href="shop.html?price=50-100">$50.00 - $100.00</a></li>
-                <li><a href="shop.html?price=100+">$100.00+</a></li>
-              </ul>
-            </div>
-          </div>
+<header class="mockup-header" id="mainHeader">
+<div class="mockup-header-logo">
+<a href="index.html"><img alt="Prescot Logo" id="headerLogo" src="images/logo-white.png"/></a>
+</div>
+<nav class="mockup-nav">
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="shop.html">Sklep</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="about.html">O nas</a></li>
+<li><a class="active" href="contact.html">Kontakt</a></li>
+</ul>
+</nav>
+<div class="mockup-actions">
+<div class="mockup-search-container">
+<input id="headerSearchInput" placeholder="Czego szukasz..." type="text"/>
+<button aria-label="Szukaj" id="headerSearchBtn">
+<svg fill="none" height="18" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
+</button>
+</div>
+<button aria-label="Konto użytkownika" class="mockup-action-icon">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+</button>
+<a aria-label="Lista Życzeń" class="mockup-action-icon wishlist-trigger" href="#">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</a>
+<a aria-label="Koszyk" class="mockup-action-icon" href="cart.html" style="position: relative;">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
+<span class="cart-badge">2</span>
+</a>
+<button class="menu-toggle" id="menuToggle">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg>
+</button>
+</div>
+</header>
+<!-- Mobile Menu -->
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="shop.html">Sklep</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="about.html">O nas</a></li>
+<li><a class="active" href="contact.html">Kontakt</a></li>
+</ul>
+<div class="mobile-socials">
+<a href="#"><i class="ph ph-instagram-logo"></i></a>
+<a href="#"><i class="ph ph-facebook-logo"></i></a>
+<a href="#"><i class="ph ph-pinterest-logo"></i></a>
+</div>
+</div>
+<!-- Column 3: KOLOR -->
+<div class="magic-dropdown-section">
+<div class="magic-dropdown-title">Kolor</div>
+<div class="mega-color-dots">
+<div class="mega-color-dot" onclick="window.location.href='shop.html?color=all'" style="background: linear-gradient(45deg, #f00, #0f0, #00f);" title="Wszystkie"></div>
+<div class="mega-color-dot" onclick="window.location.href='shop.html?color=%23000000'" style="background: #000;" title="Czarny"></div>
+<div class="mega-color-dot" onclick="window.location.href='shop.html?color=%23ffffff'" style="background: #fff; border: 1px solid #ddd;" title="Biały"></div>
+<div class="mega-color-dot" onclick="window.location.href='shop.html?color=%23556b2f'" style="background: #556b2f;" title="Oliwkowy"></div>
+<div class="mega-color-dot" onclick="window.location.href='shop.html?color=%23ff8c00'" style="background: #ff8c00;" title="Pomarańczowy"></div>
+<div class="mega-color-dot" onclick="window.location.href='shop.html?color=%231e90ff'" style="background: #1e90ff;" title="Niebieski"></div>
+</div>
+</div>
+<!-- Column 4: CENA -->
+<div class="magic-dropdown-section">
+<div class="magic-dropdown-title">Cena</div>
+<ul>
+<li><a href="shop.html?price=all">Wszystkie ceny</a></li>
+<li><a href="shop.html?price=0-50">$0.00 - $50.00</a></li>
+<li><a href="shop.html?price=50-100">$50.00 - $100.00</a></li>
+<li><a href="shop.html?price=100+">$100.00+</a></li>
+</ul>
+</div>
 
-        </li>
 
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="about.html">O nas</a></li>
-        <li><a href="contact.html">Kontakt</a></li>
-      </ul>
-    </nav>
-    <div class="mockup-actions">
-      <div class="mockup-search-container">
-        <input type="text" placeholder="Czego szukasz..." id="headerSearchInput">
-        <button id="headerSearchBtn" aria-label="Szukaj">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        </button>
-      </div>
-      <button class="mockup-action-icon" aria-label="Konto użytkownika">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      </button>
-            <a href="#" class="mockup-action-icon wishlist-trigger" aria-label="Lista Życzeń">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-      </a>
-      <a href="cart.html" class="mockup-action-icon" aria-label="Koszyk" style="position: relative;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-        <span class="cart-badge">2</span>
-      </a>
-    
-      <button class="menu-toggle" id="menuToggle">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-      </button>
-    </div>
-  </header>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="about.html">O nas</a></li>
+<li><a href="contact.html">Kontakt</a></li>
 
-  <!-- Mobile Menu -->
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      
-        <li class="has-mega-menu">
-          <a href="shop.html">Sklep <i class="ph ph-caret-down" style="font-size: 12px; margin-left: 4px;"></i></a>
-          
-          
-                    <div class="magic-dropdown" id="magicShopMenu">
-            <!-- Column 2: KATEGORIE -->
-            <div class="magic-dropdown-section">
-              <div class="magic-dropdown-title">Kategorie</div>
-              <ul>
-                <li><a href="shop.html?category=Ta%C5%9Bmy%20LED">Taśmy LED</a></li>
-                <li><a href="shop.html?category=Sterowniki%20LED">Sterowniki LED</a></li>
-                <li><a href="shop.html?category=Zasilacze%20LED">Zasilacze LED</a></li>
-                <li><a href="shop.html?category=3D%20%26%20AR">3D & AR</a></li>
-              </ul>
-            </div>
-              <ul>
-                <li><a href="shop.html?category=Ta%C5%9Bmy%20LED">Taśmy LED</a></li>
-                <li><a href="shop.html?category=Sterowniki%20LED">Sterowniki LED</a></li>
-                <li><a href="shop.html?category=Zasilacze%20LED">Zasilacze LED</a></li>
-                <li><a href="shop.html?category=3D%20%26%20AR">3D & AR</a></li>
-              </ul>
-            </div>
-              <ul>
-                <li><a href="shop.html?category=Ta%C5%9Bmy%20LED">Taśmy LED</a></li>
-                <li><a href="shop.html?category=Sterowniki%20LED">Sterowniki LED</a></li>
-                <li><a href="shop.html?category=Zasilacze%20LED">Zasilacze LED</a></li>
-                <li><a href="shop.html?category=3D%20%26%20AR">3D & AR</a></li>
-              </ul>
-            </div>
-            
-            <!-- Column 3: KOLOR -->
-            <div class="magic-dropdown-section">
-              <div class="magic-dropdown-title">Kolor</div>
-              <div class="mega-color-dots">
-                <div class="mega-color-dot" onclick="window.location.href='shop.html?color=all'" style="background: linear-gradient(45deg, #f00, #0f0, #00f);" title="Wszystkie"></div>
-                <div class="mega-color-dot" onclick="window.location.href='shop.html?color=%23000000'" style="background: #000;" title="Czarny"></div>
-                <div class="mega-color-dot" onclick="window.location.href='shop.html?color=%23ffffff'" style="background: #fff; border: 1px solid #ddd;" title="Biały"></div>
-                <div class="mega-color-dot" onclick="window.location.href='shop.html?color=%23556b2f'" style="background: #556b2f;" title="Oliwkowy"></div>
-                <div class="mega-color-dot" onclick="window.location.href='shop.html?color=%23ff8c00'" style="background: #ff8c00;" title="Pomarańczowy"></div>
-                <div class="mega-color-dot" onclick="window.location.href='shop.html?color=%231e90ff'" style="background: #1e90ff;" title="Niebieski"></div>
-              </div>
-            </div>
-            
-            <!-- Column 4: CENA -->
-            <div class="magic-dropdown-section">
-              <div class="magic-dropdown-title">Cena</div>
-              <ul>
-                <li><a href="shop.html?price=all">Wszystkie ceny</a></li>
-                <li><a href="shop.html?price=0-50">$0.00 - $50.00</a></li>
-                <li><a href="shop.html?price=50-100">$50.00 - $100.00</a></li>
-                <li><a href="shop.html?price=100+">$100.00+</a></li>
-              </ul>
-            </div>
-          </div>
 
-        </li>
-
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="about.html">O nas</a></li>
-      <li><a href="contact.html">Kontakt</a></li>
-    </ul>
-  </div>
-
-  
-  <!-- Hero Section -->
-  <section class="page-hero" style="background: url('images/stairs.jpg') center/cover no-repeat; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; text-align: center; position: relative;">
-    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(11, 26, 48, 0.6);"></div>
-    <div style="position: relative; z-index: 1;">
-      <h1 style="color: #fff; font-size: 64px; font-weight: 800; font-family: 'Outfit', sans-serif; margin-bottom: 10px; text-transform: uppercase; letter-spacing: -1px; text-shadow: 0 4px 12px rgba(0,0,0,0.3);">Kontakt</h1>
-      <p style="color: #eee; font-size: 16px;">Jesteśmy do Twojej dyspozycji</p>
-    <div class="hero-breadcrumbs" style="font-size: 14px; color: #ccc; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin-top: 20px;">
-        <a href="index.html" style="color: #fff; text-decoration: none; transition: 0.3s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='#fff'">Home</a> 
-        <span style="margin: 0 10px; color: rgba(255,255,255,0.5);">/</span> 
-        <span style="color: var(--accent-color);">Kontakt</span>
-      </div>
-      <!-- Pulsating Down Arrow -->
-      <div class="scroll-to-main" onclick="document.querySelector('main').scrollIntoView({ behavior: 'smooth' })" style="margin-top: auto; margin-bottom: 40px; cursor: pointer; display: block; animation: pulseArrow 1.5s infinite; transition: opacity 0.3s; z-index: 2; position: relative;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="12" y1="5" x2="12" y2="19"></line>
-          <polyline points="19 12 12 19 5 12"></polyline>
-        </svg>
-      </div>
-    </div>
-  </section>
+<!-- Hero Section -->
+<section class="page-hero" style="background: url('images/stairs.jpg') center/cover no-repeat; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; text-align: center; position: relative;">
+<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(11, 26, 48, 0.6);"></div>
+<div style="position: relative; z-index: 1;">
+<h1 style="color: #fff; font-size: 64px; font-weight: 800; font-family: 'Outfit', sans-serif; margin-bottom: 10px; text-transform: uppercase; letter-spacing: -1px; text-shadow: 0 4px 12px rgba(0,0,0,0.3);">Kontakt</h1>
+<p style="color: #eee; font-size: 16px;">Jesteśmy do Twojej dyspozycji</p>
+<div class="hero-breadcrumbs" style="font-size: 14px; color: #ccc; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin-top: 20px;">
+<a href="index.html" onmouseout="this.style.color='#fff'" onmouseover="this.style.color='var(--accent-color)'" style="color: #fff; text-decoration: none; transition: 0.3s;">Home</a>
+<span style="margin: 0 10px; color: rgba(255,255,255,0.5);">/</span>
+<span style="color: var(--accent-color);">Kontakt</span>
+</div>
+<!-- Pulsating Down Arrow -->
+<div class="scroll-to-main" onclick="document.querySelector('main').scrollIntoView({ behavior: 'smooth' })" style="margin-top: auto; margin-bottom: 40px; cursor: pointer; display: block; animation: pulseArrow 1.5s infinite; transition: opacity 0.3s; z-index: 2; position: relative;">
+<svg fill="none" height="28" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg">
+<line x1="12" x2="12" y1="5" y2="19"></line>
+<polyline points="19 12 12 19 5 12"></polyline>
+</svg>
+</div>
+</div>
+</section>
 <main>
-    <div class="contact-container">
-      <section class="contact-info">
-        <h2>Skontaktuj się z nami</h2>
-        <p>Masz pytania dotyczące naszych mebli kuchennych lub akcesoriów? Chętnie odpowiemy na Twoje wiadomości. Nasz dział obsługi klienta jest dostępny od poniedziałku do piątku w godzinach 9:00 - 17:00.</p>
-        
-        <div class="info-item">
-          <div class="icon-glass-md">📍</div>
-          <div class="info-text">
-            <h4>Adres showroomu</h4>
-            <p>ul. Wilcza 42, 00-679 Warszawa</p>
-          </div>
-        </div>
-
-        <div class="info-item">
-          <div class="icon-glass-md">📞</div>
-          <div class="info-text">
-            <h4>Telefon</h4>
-            <p>+48 22 123 45 67</p>
-          </div>
-        </div>
-
-        <div class="info-item">
-          <div class="icon-glass-md">✉️</div>
-          <div class="info-text">
-            <h4>E-mail</h4>
-            <p>contact@cooken-mockup.com</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="contact-form-wrapper">
-        <h3>Napisz do nas</h3>
-        <form onsubmit="handleSubmit(event)">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Imię i nazwisko" required>
-          </div>
-          <div class="form-group">
-            <input type="email" class="form-control" placeholder="E-mail" required>
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Temat">
-          </div>
-          <div class="form-group">
-            <textarea class="form-control" placeholder="Twoja wiadomość..." required></textarea>
-          </div>
-          <button type="submit" class="submit-btn">Wyślij wiadomość</button>
-        </form>
-      </section>
-    </div>
-
-    <div style="padding: 0 8% 80px; max-width: 1400px; margin: 0 auto;">
-      <div class="map-mockup">
-        <h3 style="margin-bottom: 10px;">Główna Siedziba</h3>
-        <p style="color: #666; max-width: 400px; margin-bottom: 20px;">Warszawa. Zapraszamy do kontaktu oraz wizyty w naszej centrali.</p>
-        <div style="width: 100px; height: 2px; background: var(--accent-color);"></div>
-      </div>
-    </div>
-  </main>
-
-  <footer class="mockup-footer">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <div class="footer-logo">
-          <img src="images/logo-white.png" alt="Prescot Logo" style="height: 26px; opacity: 0.9; margin-bottom: 5px; max-width: 100%;">
-        </div>
-        <p style="margin-top: 15px;">Prescot LED to profesjonalny dostawca najwyższej jakości taśm LED, profili aluminiowych, nowoczesnych sterowników oraz niezawodnych zasilaczy hermetycznych.</p><p style="margin-top: 15px; color: #ccc;"><strong>PRESCOT LED</strong><br>ul. Przykładowa 12<br>00-001 Warszawa<br>kontakt@prescot.com.pl</p>
-      </div>
-      <div class="footer-col">
-        <h3>Link</h3>
-        <ul>
-          <li><a href="#">Kolekcje</a></li>
-          <li><a href="#">Wszystkie Produkty</a></li>
-          <li><a href="#">Nowości</a></li>
-          <li><a href="#">Wyprzedaż</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h3>Wsparcie</h3>
-        <ul>
-          <li><a href="#">Polityka Prywatności</a></li>
-          <li><a href="#">Regulamin</a></li>
-          <li><a href="#">Wysyłka i Zwroty</a></li>
-          <li><a href="#">FAQ</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h3>Newsletter</h3>
-        <p style="margin-bottom: 20px;">Zapisz się, aby otrzymywać informacje o nowych kolekcjach i ofertach specjalnych.</p>
-        <div class="newsletter-glass-box" style="display: flex; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 4px; width: 100%;">
-          <input type="email" placeholder="Twój e-mail" style="border: none; background: transparent; color: #fff; padding: 8px 12px; width: 100%; font-size: 13px; font-family: \'Inter\', sans-serif; outline: none;" aria-label="E-mail">
-          <button style="background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; font-weight: 600; font-size: 11px; padding: 8px 20px; border-radius: 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255, 255, 255, 0.25)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.15)'">OK</button>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2026 Prescot LED. Wszelkie prawa zastrzeżone.</p>
-      <p>Powered by PRESCOT LED</p>
-    </div>
-  </footer>
-
-  <script>
+<div class="contact-container">
+<section class="contact-info">
+<h2>Skontaktuj się z nami</h2>
+<p>Masz pytania dotyczące naszych mebli kuchennych lub akcesoriów? Chętnie odpowiemy na Twoje wiadomości. Nasz dział obsługi klienta jest dostępny od poniedziałku do piątku w godzinach 9:00 - 17:00.</p>
+<div class="info-item">
+<div class="icon-glass-md">📍</div>
+<div class="info-text">
+<h4>Adres showroomu</h4>
+<p>ul. Wilcza 42, 00-679 Warszawa</p>
+</div>
+</div>
+<div class="info-item">
+<div class="icon-glass-md">📞</div>
+<div class="info-text">
+<h4>Telefon</h4>
+<p>+48 22 123 45 67</p>
+</div>
+</div>
+<div class="info-item">
+<div class="icon-glass-md">✉️</div>
+<div class="info-text">
+<h4>E-mail</h4>
+<p>contact@cooken-mockup.com</p>
+</div>
+</div>
+</section>
+<section class="contact-form-wrapper">
+<h3>Napisz do nas</h3>
+<form onsubmit="handleSubmit(event)">
+<div class="form-group">
+<input class="form-control" placeholder="Imię i nazwisko" required="" type="text"/>
+</div>
+<div class="form-group">
+<input class="form-control" placeholder="E-mail" required="" type="email"/>
+</div>
+<div class="form-group">
+<input class="form-control" placeholder="Temat" type="text"/>
+</div>
+<div class="form-group">
+<textarea class="form-control" placeholder="Twoja wiadomość..." required=""></textarea>
+</div>
+<button class="submit-btn" type="submit">Wyślij wiadomość</button>
+</form>
+</section>
+</div>
+<div style="padding: 0 8% 80px; max-width: 1400px; margin: 0 auto;">
+<div class="map-mockup">
+<h3 style="margin-bottom: 10px;">Główna Siedziba</h3>
+<p style="color: #666; max-width: 400px; margin-bottom: 20px;">Warszawa. Zapraszamy do kontaktu oraz wizyty w naszej centrali.</p>
+<div style="width: 100px; height: 2px; background: var(--accent-color);"></div>
+</div>
+</div>
+</main>
+<footer class="mockup-footer">
+<div class="footer-grid">
+<div class="footer-col">
+<div class="footer-logo">
+<img alt="Prescot Logo" src="images/logo-white.png" style="height: 26px; opacity: 0.9; margin-bottom: 5px; max-width: 100%;"/>
+</div>
+<p style="margin-top: 15px;">Prescot LED to profesjonalny dostawca najwyższej jakości taśm LED, profili aluminiowych, nowoczesnych sterowników oraz niezawodnych zasilaczy hermetycznych.</p><p style="margin-top: 15px; color: #ccc;"><strong>PRESCOT LED</strong><br/>ul. Przykładowa 12<br/>00-001 Warszawa<br/>kontakt@prescot.com.pl</p>
+</div>
+<div class="footer-col">
+<h3>Link</h3>
+<ul>
+<li><a href="#">Kolekcje</a></li>
+<li><a href="#">Wszystkie Produkty</a></li>
+<li><a href="#">Nowości</a></li>
+<li><a href="#">Wyprzedaż</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h3>Wsparcie</h3>
+<ul>
+<li><a href="#">Polityka Prywatności</a></li>
+<li><a href="#">Regulamin</a></li>
+<li><a href="#">Wysyłka i Zwroty</a></li>
+<li><a href="#">FAQ</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h3>Newsletter</h3>
+<p style="margin-bottom: 20px;">Zapisz się, aby otrzymywać informacje o nowych kolekcjach i ofertach specjalnych.</p>
+<div class="newsletter-glass-box" style="display: flex; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 4px; width: 100%;">
+<input aria-label="E-mail" placeholder="Twój e-mail" style="border: none; background: transparent; color: #fff; padding: 8px 12px; width: 100%; font-size: 13px; font-family: \'Inter\', sans-serif; outline: none;" type="email"/>
+<button onmouseout="this.style.background='rgba(255, 255, 255, 0.15)'" onmouseover="this.style.background='rgba(255, 255, 255, 0.25)'" style="background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; font-weight: 600; font-size: 11px; padding: 8px 20px; border-radius: 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease;">OK</button>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 Prescot LED. Wszelkie prawa zastrzeżone.</p>
+<p>Powered by PRESCOT LED</p>
+</div>
+</footer>
+<script>
     // Mobile Collapsible Footer Columns
     document.querySelectorAll('.footer-col h3').forEach(h3 => {
       h3.addEventListener('click', () => {
@@ -2353,9 +2199,8 @@
       e.target.reset();
     }
   </script>
-
-  <!-- Load Shared Interactive Popups Script -->
-  <script type="module">
+<!-- Load Shared Interactive Popups Script -->
+<script type="module">
     import { initSharedPopups } from './js/shared-popups.js';
     // Header Search bar logic
     
@@ -2396,34 +2241,31 @@
 
     initSharedPopups();
   </script>
-
-
-  <!-- Mobile Bottom Navigation -->
-  <nav class="mobile-bottom-nav">
-    <div class="mobile-nav-items">
-      <a href="index.html" class="mobile-nav-item ">
-        <i class="ph ph-house"></i>
-        <span>Home</span>
-      </a>
-      <a href="javascript:void(0);" onclick="openMobileCategories();" class="mobile-nav-item ">
-        <i class="ph ph-squares-four"></i>
-        <span>Kategorie</span>
-      </a>
-      <a href="blog.html" class="mobile-nav-item ">
-        <i class="ph ph-article"></i>
-        <span>Blog</span>
-      </a>
-      <a href="about.html" class="mobile-nav-item ">
-        <i class="ph ph-info"></i>
-        <span>O nas</span>
-      </a>
-      <a href="contact.html" class="mobile-nav-item active">
-        <i class="ph ph-envelope-simple"></i>
-        <span>Kontakt</span>
-      </a>
-    </div>
-  </nav>
-
+<!-- Mobile Bottom Navigation -->
+<nav class="mobile-bottom-nav">
+<div class="mobile-nav-items">
+<a class="mobile-nav-item" href="index.html">
+<i class="ph ph-house"></i>
+<span>Home</span>
+</a>
+<a class="mobile-nav-item" href="javascript:void(0);" onclick="openMobileCategories();">
+<i class="ph ph-squares-four"></i>
+<span>Kategorie</span>
+</a>
+<a class="mobile-nav-item" href="blog.html">
+<i class="ph ph-article"></i>
+<span>Blog</span>
+</a>
+<a class="mobile-nav-item" href="about.html">
+<i class="ph ph-info"></i>
+<span>O nas</span>
+</a>
+<a class="mobile-nav-item active" href="contact.html">
+<i class="ph ph-envelope-simple"></i>
+<span>Kontakt</span>
+</a>
+</div>
+</nav>
 <style>
     
     @media (max-width: 768px) {
@@ -2490,15 +2332,6 @@
     body .has-mega-menu:hover .magic-dropdown {
       opacity: 1 !important;
       visibility: visible !important;
-    }
-    
-    /* Ensure the active tile is strictly enforced (White tile, navy text) */
-    body .mockup-header:not(.scrolled) .mockup-nav a.active,
-    body .mockup-header.scrolled .mockup-nav a.active {
-      background: #ffffff !important;
-      border: 2px solid #ffffff !important;
-      color: var(--primary-color) !important;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
     }
     
     /* Ensure regular links are properly colored */
