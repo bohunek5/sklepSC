@@ -51,10 +51,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px 8%;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      background: transparent;
       border-bottom: none;
       position: fixed;
       top: 0;
@@ -94,7 +91,7 @@
 
     .mockup-nav a {
       text-decoration: none;
-      color: var(--primary-color);
+      color: var(--white);
       font-weight: 600;
       font-size: 12px;
       text-transform: uppercase;
@@ -103,25 +100,78 @@
       border-radius: 99px;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       display: block;
-      background: rgba(0, 0, 0, 0.04);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     }
 
     .mockup-nav a:hover {
+      background: rgba(255, 255, 255, 0.22);
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+      transform: translateY(-1px);
+      color: #fff !important;
+    }
+
+    .mockup-nav a.active {
+      background: var(--primary-color) !important;
+      border-color: var(--primary-color) !important;
+      color: var(--white) !important;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Scrolled states */
+    .mockup-header.scrolled .mockup-nav a {
+      color: var(--primary-color) !important;
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: none;
+    }
+
+    .mockup-header.scrolled .mockup-nav a:hover {
       background: rgba(0, 0, 0, 0.08);
-      border-color: rgba(0, 0, 0, 0.1);
+      border-color: rgba(0, 0, 0, 0.12);
       color: #000 !important;
       transform: translateY(-1px);
     }
 
-    .mockup-nav a.active {
-      background: rgba(0, 0, 0, 0.9);
-      border-color: rgba(0, 0, 0, 0.9);
-      color: #fff !important;
+    .mockup-header.scrolled .mockup-nav a.active {
+      background: var(--primary-color) !important;
+      border-color: var(--primary-color) !important;
+      color: var(--white) !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
+    
+    /* Magic Dropdown Universal Fix */
+    body .magic-dropdown {
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      background: var(--white);
+    }
+    body .has-mega-menu:hover .magic-dropdown {
+      opacity: 1;
+      visibility: visible;
+    }
+    .magic-dropdown ul li a {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: var(--primary-color) !important;
+      padding: 12px 15px !important;
+      border-radius: 8px !important;
+    }
+    .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--primary-color) !important;
+      transform: translateX(5px) !important;
+    }
+    
     .mockup-actions {
       display: flex;
       align-items: center;
@@ -2378,7 +2428,7 @@
   <header class="mockup-header" id="mainHeader">
     
     <div class="mockup-header-logo">
-      <a href="index.html"><img src="images/logo-dark.png" alt="Prescot Logo" id="headerLogo"></a>
+      <a href="index.html"><img src="images/logo-white.png" alt="Prescot Logo" id="headerLogo"></a>
     </div>
     <nav class="mockup-nav">
       <ul>
@@ -3031,7 +3081,7 @@
         if (headerLogo) headerLogo.src = 'images/logo-dark.png';
       } else {
         if (header) header.classList.remove('scrolled');
-        if (headerLogo) headerLogo.src = 'images/logo-dark.png';
+        if (headerLogo) headerLogo.src = 'images/logo-white.png';
       }
     });
 
@@ -3262,88 +3312,10 @@
     
 
 
-    /* --- OVERRIDE MENU STYLES START --- */
-    body .mockup-nav > ul > li > a {
-      background: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
-      backdrop-filter: none !important;
-      -webkit-backdrop-filter: none !important;
-      position: relative;
-      border-radius: 0 !important;
-      padding: 10px 15px !important;
-    }
-    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a {
-      color: var(--white) !important;
-    }
-    body .mockup-header.scrolled .mockup-nav > ul > li > a {
-      color: var(--primary-color) !important;
-    }
     
-    body .mockup-nav > ul > li > a::after {
-      content: '';
-      position: absolute;
-      bottom: 5px;
-      left: 15px;
-      right: 15px;
-      height: 2px;
-      background-color: currentColor;
-      transform: scaleX(0);
-      transform-origin: center;
-      transition: transform 0.3s ease;
-    }
-    body .mockup-nav > ul > li > a:hover::after, body .mockup-nav > ul > li > a.active::after {
-      transform: scaleX(1);
-    }
-    body .mockup-nav > ul > li > a:hover {
-      transform: translateY(-1px);
-    }
+
+
     
-    /* Magic Dropdown Links */
-    body .magic-dropdown {
-      background: rgba(255, 255, 255, 0.95) !important;
-      backdrop-filter: blur(24px) saturate(150%) !important;
-      -webkit-backdrop-filter: blur(24px) saturate(150%) !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
-    }
-    
-    body .mockup-header:not(.scrolled) .magic-dropdown ul li a,
-    body .mockup-header.scrolled .magic-dropdown ul li a,
-    body .magic-dropdown ul li a {
-      color: #333 !important;
-      font-size: 14px !important;
-      font-weight: 500 !important;
-      text-decoration: none !important;
-      transition: all 0.25s ease !important;
-      display: flex !important;
-      align-items: center !important;
-      padding: 8px 16px !important;
-      margin-bottom: 0 !important;
-      background: transparent !important;
-      border: none !important;
-      border-radius: 0 !important;
-      box-shadow: none !important;
-    }
-    
-    body .magic-dropdown ul li a i {
-      display: none !important;
-    }
-    
-    @media (min-width: 993px) {
-      body .mockup-nav .magic-dropdown ul li a {
-        font-size: 14px !important;
-        color: #555 !important;
-        padding: 8px 16px !important;
-      }
-      
-      body .mockup-nav .magic-dropdown ul li a:hover {
-        color: var(--accent-color) !important;
-        font-weight: 600 !important;
-        transform: translateX(4px);
-      }
-    }
-    /* --- OVERRIDE MENU STYLES END --- */
 
 </style>
 </body>
