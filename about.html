@@ -51,7 +51,10 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px 8%;
-      background: transparent;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
       border-bottom: none;
       position: fixed;
       top: 0;
@@ -1490,7 +1493,7 @@
   <header class="mockup-header" id="mainHeader">
     
     <div class="mockup-header-logo">
-      <a href="index.html"><img src="images/logo-white.png" alt="Prescot Logo" id="headerLogo"></a>
+      <a href="index.html"><img src="images/logo-dark.png" alt="Prescot Logo" id="headerLogo"></a>
     </div>
     <nav class="mockup-nav">
       <ul>
@@ -1571,6 +1574,7 @@
   </header>
 
   <!-- Mobile Menu -->
+  <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
     <ul>
       <li><a href="index.html">Home</a></li>
@@ -1583,6 +1587,20 @@
             <!-- Column 2: KATEGORIE -->
             <div class="magic-dropdown-section">
               <div class="magic-dropdown-title">Kategorie</div>
+              <ul>
+                <li><a href="shop.html?category=Ta%C5%9Bmy%20LED">Taśmy LED</a></li>
+                <li><a href="shop.html?category=Sterowniki%20LED">Sterowniki LED</a></li>
+                <li><a href="shop.html?category=Zasilacze%20LED">Zasilacze LED</a></li>
+                <li><a href="shop.html?category=3D%20%26%20AR">3D & AR</a></li>
+              </ul>
+            </div>
+              <ul>
+                <li><a href="shop.html?category=Ta%C5%9Bmy%20LED">Taśmy LED</a></li>
+                <li><a href="shop.html?category=Sterowniki%20LED">Sterowniki LED</a></li>
+                <li><a href="shop.html?category=Zasilacze%20LED">Zasilacze LED</a></li>
+                <li><a href="shop.html?category=3D%20%26%20AR">3D & AR</a></li>
+              </ul>
+            </div>
               <ul>
                 <li><a href="shop.html?category=Ta%C5%9Bmy%20LED">Taśmy LED</a></li>
                 <li><a href="shop.html?category=Sterowniki%20LED">Sterowniki LED</a></li>
@@ -1750,7 +1768,7 @@
         if (headerLogo) headerLogo.src = 'images/logo-dark.png';
       } else {
         if (header) header.classList.remove('scrolled');
-        if (headerLogo) headerLogo.src = 'images/logo-white.png';
+        if (headerLogo) headerLogo.src = 'images/logo-dark.png';
       }
     });
 
