@@ -5335,7 +5335,21 @@
     // Header Scroll Effect
     const header = document.getElementById('mainHeader');
     const headerLogo = document.getElementById('headerLogo');
+    // Determine if page has a dark hero section
+    const hasHero = document.querySelector('.page-hero, .mockup-hero-slider, .hero, .hero-section');
+    
+    // Set initial state
+    if (!hasHero && header) {
+      header.classList.add('scrolled');
+      if (headerLogo) headerLogo.src = 'images/logo-dark.png';
+      // Force it to stay scrolled
+      header.classList.add('force-scrolled');
+    }
+    
     window.addEventListener('scroll', () => {
+      if (!header) return;
+      if (header.classList.contains('force-scrolled')) return; // Don't change if forced
+      
       if (window.scrollY > 50) {
         header.classList.add('scrolled');
         if (headerLogo) headerLogo.src = 'images/logo-dark.png';
