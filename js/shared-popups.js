@@ -216,7 +216,7 @@ document.head.appendChild(customStyles);
 function injectWishlistDrawer() {
   const drawerHTML = `
     <!-- Wishlist Drawer Markup -->
-    <div id="wishlistDrawer" style="position: fixed; top: 0; right: -450px; width: 450px; height: 100vh; background: #fff; box-shadow: -10px 0 30px rgba(0,0,0,0.1); z-index: 2000; transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; max-width: 100%;">
+    <div id="wishlistDrawer" style="position: fixed; top: 0; right: -450px; width: 450px; height: 100vh; background: #fff; box-shadow: -10px 0 30px rgba(0,0,0,0.1); z-index: 100001; transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; max-width: 100%;">
       <div style="padding: 25px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
         <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Twoja Lista Życzeń</h3>
         <button id="closeWishlistDrawer" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
@@ -226,7 +226,7 @@ function injectWishlistDrawer() {
       </div>
     </div>
     <!-- Wishlist Drawer Overlay -->
-    <div id="wishlistDrawerOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); z-index: 1999; opacity: 0; pointer-events: none; transition: opacity 0.4s;"></div>
+    <div id="wishlistDrawerOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); z-index: 100000; opacity: 0; pointer-events: none; transition: opacity 0.4s;"></div>
   `;
   if (!document.getElementById('wishlistDrawer')) {
     document.body.insertAdjacentHTML('beforeend', drawerHTML);
@@ -316,7 +316,7 @@ function injectProductModals() {
 function injectCartDrawer() {
   const drawerHTML = `
     <!-- Cart Drawer Markup -->
-    <div id="cartDrawer" style="position: fixed; top: 0; right: -450px; width: 450px; height: 100vh; background: #fff; box-shadow: -10px 0 30px rgba(0,0,0,0.1); z-index: 2000; transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; max-width: 100%; font-family: 'Outfit', sans-serif;">
+    <div id="cartDrawer" style="position: fixed; top: 0; right: -450px; width: 450px; height: 100vh; background: #fff; box-shadow: -10px 0 30px rgba(0,0,0,0.1); z-index: 100001; transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; max-width: 100%; font-family: 'Outfit', sans-serif;">
       
       <!-- Drawer Header -->
       <div style="padding: 25px 25px 15px 25px; display: flex; flex-direction: column; border-bottom: 1px solid #eee;">
@@ -432,17 +432,30 @@ function injectCartDrawer() {
             .cart-viewcart-btn-new:hover .btn-slide-wrap .btn-txt-hover {
               transform: translateY(0);
             }
+
+            @media (max-width: 480px) {
+              .cart-checkout-btn-new, .cart-viewcart-btn-new {
+                padding: 12px 6px !important;
+                font-size: 11px !important;
+                letter-spacing: 0px !important;
+              }
+              .cart-checkout-btn-new .btn-slide-wrap,
+              .cart-viewcart-btn-new .btn-slide-wrap {
+                height: 16px;
+                line-height: 16px;
+              }
+            }
           </style>
           <button id="cartDrawerCheckout" class="cart-checkout-btn-new">
             <div class="btn-slide-wrap">
               <span class="btn-txt-default">Przejdź do kasy</span>
-              <span class="btn-txt-hover">Przejdź do kasy</span>
+              <span class="btn-txt-hover">Płatność i dostawa</span>
             </div>
           </button>
           <button id="cartDrawerGoToCart" class="cart-viewcart-btn-new">
             <div class="btn-slide-wrap">
               <span class="btn-txt-default">Zobacz koszyk</span>
-              <span class="btn-txt-hover">Zobacz koszyk</span>
+              <span class="btn-txt-hover">Koszyk</span>
             </div>
           </button>
         </div>
@@ -450,7 +463,7 @@ function injectCartDrawer() {
     </div>
     
     <!-- Cart Drawer Overlay -->
-    <div id="cartDrawerOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); z-index: 1999; opacity: 0; pointer-events: none; transition: opacity 0.4s;"></div>
+    <div id="cartDrawerOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); z-index: 100000; opacity: 0; pointer-events: none; transition: opacity 0.4s;"></div>
   `;
   if (!document.getElementById('cartDrawer')) {
     document.body.insertAdjacentHTML('beforeend', drawerHTML);
