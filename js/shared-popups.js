@@ -373,10 +373,10 @@ function injectCartDrawer() {
         </div>
         <p style="font-size: 11px; color: #777; margin: 0 0 20px 0;">Podatki i koszt dostawy obliczane przy kasie</p>
         
-        <div style="display: flex; gap: 12px; flex-direction: column;">
+        <div style="display: flex; gap: 12px; flex-direction: row;">
           <style>
             .cart-checkout-btn-new {
-              width: 100%; padding: 14px; background: #000; color: #fff; border: 1px solid #000; font-weight: 700; text-transform: uppercase; font-size: 13px; cursor: pointer; border-radius: 4px; transition: all 0.3s ease; letter-spacing: 1px;
+              flex: 1; padding: 14px; background: #000; color: #fff; border: 1px solid #000; font-weight: 700; text-transform: uppercase; font-size: 13px; cursor: pointer; border-radius: 4px; transition: all 0.3s ease; letter-spacing: 1px;
               overflow: hidden; position: relative; display: block; box-sizing: border-box; text-align: center;
             }
             .cart-checkout-btn-new:hover {
@@ -385,7 +385,7 @@ function injectCartDrawer() {
               color: var(--primary-color, #ffd700) !important;
             }
             .cart-viewcart-btn-new {
-              width: 100%; padding: 14px; background: #fff; color: #000; border: 1px solid #000; font-weight: 700; text-transform: uppercase; font-size: 13px; cursor: pointer; border-radius: 4px; transition: all 0.3s ease; letter-spacing: 1px;
+              flex: 1; padding: 14px; background: #fff; color: #000; border: 1px solid #000; font-weight: 700; text-transform: uppercase; font-size: 13px; cursor: pointer; border-radius: 4px; transition: all 0.3s ease; letter-spacing: 1px;
               overflow: hidden; position: relative; display: block; box-sizing: border-box; text-align: center;
             }
             .cart-viewcart-btn-new:hover {

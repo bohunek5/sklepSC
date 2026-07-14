@@ -42,8 +42,9 @@
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
       min-height: 100vh;
-      max-width: 950px;
+      max-width: 1250px;
       margin: 0 auto;
+      width: 100%;
     }
 
     /* Left panel: Info & Forms */
@@ -55,7 +56,7 @@
     /* Right panel: Order Summary */
     .checkout-summary-panel {
       background-color: var(--light-bg);
-      padding: 60px 20px 60px 40px;
+      padding: 176px 20px 60px 40px;
     }
 
     .checkout-logo img {
@@ -1823,6 +1824,42 @@
       background: rgba(0, 0, 0, 0.04) !important;
       border: 1px solid rgba(0, 0, 0, 0.06) !important;
     }
+    /* Delivery Type Tabs Styles */
+    .delivery-type-tabs {
+      display: flex;
+      background: #f4f4f4;
+      border-radius: 99px;
+      padding: 4px;
+      border: 1px solid #eee;
+      margin-bottom: 25px;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    .delivery-tab {
+      flex: 1;
+      border: none;
+      background: none;
+      border-radius: 99px;
+      padding: 12px;
+      font-weight: 600;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      color: #555;
+      font-family: inherit;
+    }
+    .delivery-tab.active {
+      background: #fff;
+      color: #000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .delivery-tab:hover:not(.active) {
+      color: #000;
+    }
     /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
 
 </style>
@@ -1848,12 +1885,34 @@
 <input class="form-control" id="email" placeholder="Adres e-mail" required="" type="email"/>
 </div>
 </div>
-<div style="margin-bottom: 40px;">
-<h3 class="section-title">Adres dostawy</h3>
+<div style="margin-bottom: 30px;">
+<h3 class="section-title">Metoda dostawy</h3>
+<!-- Tab switcher -->
+<div class="delivery-type-tabs">
+  <button type="button" class="delivery-tab active" id="tab_ship" onclick="setDeliveryType('ship')">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+    Wysyłka kurierem
+  </button>
+  <button type="button" class="delivery-tab" id="tab_pickup" onclick="setDeliveryType('pickup')">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+    Paczkomat / Punkt / Salon
+  </button>
+</div>
+</div>
+
+<div style="margin-bottom: 30px;">
+<h3 class="section-title">Dane odbiorcy</h3>
 <div class="form-row">
 <input class="form-control" id="firstName" placeholder="Imię" required="" type="text"/>
 <input class="form-control" id="lastName" placeholder="Nazwisko" required="" type="text"/>
 </div>
+<div class="form-group">
+<input class="form-control" id="phone" placeholder="Telefon (wymagany do powiadomień SMS i kodu odbioru)" required="" type="tel"/>
+</div>
+</div>
+
+<div id="shippingAddressSection" style="margin-bottom: 30px;">
+<h3 class="section-title">Adres dostawy</h3>
 <div class="form-group">
 <input class="form-control" id="address" placeholder="Ulica i numer domu" required="" type="text"/>
 </div>
@@ -1871,39 +1930,17 @@
 <option value="GB">Wielka Brytania</option>
 </select>
 </div>
-<div class="form-group">
-<input class="form-control" id="phone" placeholder="Telefon (opcjonalnie)" type="tel"/>
 </div>
-</div>
+
 <div style="margin-bottom: 40px;">
-<h3 class="section-title">Metoda dostawy</h3>
-<div class="delivery-box" style="border: 1px solid #ccc; border-radius: 8px; overflow: hidden; margin-bottom: 30px;">
-<!-- Option 1: InPost Paczkomaty -->
-<div class="delivery-option-header active" id="header_inpost_paczkomat" onclick="selectDeliveryOption('inpost_paczkomat')" style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #ccc; background: #f7f7f7; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.3s;">
-<label style="display: flex; align-items: center; cursor: pointer; margin: 0; width: 100%;">
-<input checked="" id="shipInpostPaczkomat" name="shippingMethod" style="margin-right: 12px; accent-color: var(--primary-color);" type="radio" value="inpost_paczkomat"/>
-<div>
-<strong style="color: #1a1a1a;">Paczkomaty InPost 24/7</strong>
-<span style="display: block; font-size: 12px; color: #666; margin-top: 2px;">Dostawa do wybranego Paczkomatu (1-2 dni)</span>
-</div>
-</label>
-<img alt="InPost" src="images/inpost_logo.svg" style="height: 38px; object-fit: contain; display: block;"/>
-</div>
-<!-- Option 2: DPD Paczkomaty / Punkty -->
-<div class="delivery-option-header" id="header_dpd_paczkomat" onclick="selectDeliveryOption('dpd_paczkomat')" style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #ccc; background: #fff; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.3s;">
-<label style="display: flex; align-items: center; cursor: pointer; margin: 0; width: 100%;">
-<input id="shipDpdPaczkomat" name="shippingMethod" style="margin-right: 12px; accent-color: var(--primary-color);" type="radio" value="dpd_paczkomat"/>
-<div>
-<strong style="color: #1a1a1a;">DPD Pickup (Paczkomaty i Punkty)</strong>
-<span style="display: block; font-size: 12px; color: #666; margin-top: 2px;">Odbiór w automatach paczkowych i punktach DPD (1-2 dni)</span>
-</div>
-</label>
-<img alt="DPD" src="images/dpd_logo.svg" style="height: 30px; max-width: 100px; object-fit: contain; display: block;"/>
-</div>
+<h3 class="section-title" id="deliveryMethodsTitle">Metoda wysyłki</h3>
+
+<!-- Courier Methods Box -->
+<div id="courierMethodsBox" class="delivery-box" style="border: 1px solid #ccc; border-radius: 8px; overflow: hidden; margin-bottom: 0;">
 <!-- Option 3: Kurier DPD -->
-<div class="delivery-option-header" id="header_dpd_kurier" onclick="selectDeliveryOption('dpd_kurier')" style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #ccc; background: #fff; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.3s;">
+<div class="delivery-option-header active" id="header_dpd_kurier" onclick="selectDeliveryOption('dpd_kurier')" style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #ccc; background: #f7f7f7; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.3s;">
 <label style="display: flex; align-items: center; cursor: pointer; margin: 0; width: 100%;">
-<input id="shipDpdKurier" name="shippingMethod" style="margin-right: 12px; accent-color: var(--primary-color);" type="radio" value="dpd_kurier"/>
+<input checked="" id="shipDpdKurier" name="shippingMethod" style="margin-right: 12px; accent-color: var(--primary-color);" type="radio" value="dpd_kurier"/>
 <div>
 <strong style="color: #1a1a1a;">Kurier DPD</strong>
 <span style="display: block; font-size: 12px; color: #666; margin-top: 2px;">Bezpośrednia dostawa pod wskazany adres (1-2 dni)</span>
@@ -1933,6 +1970,56 @@
 </label>
 <span style="font-weight: 800; color: #d22b2b; font-size: 20px; letter-spacing: 0.5px; padding-right: 5px; display: block;">SUUS</span>
 </div>
+</div>
+
+<!-- Pickup Methods Box -->
+<div id="pickupMethodsBox" class="delivery-box" style="border: 1px solid #ccc; border-radius: 8px; overflow: hidden; display: none; margin-bottom: 0;">
+<!-- Option 1: InPost Paczkomaty -->
+<div class="delivery-option-header" id="header_inpost_paczkomat" onclick="selectDeliveryOption('inpost_paczkomat')" style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #ccc; background: #fff; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.3s;">
+<label style="display: flex; align-items: center; cursor: pointer; margin: 0; width: 100%;">
+<input id="shipInpostPaczkomat" name="shippingMethod" style="margin-right: 12px; accent-color: var(--primary-color);" type="radio" value="inpost_paczkomat"/>
+<div>
+<strong style="color: #1a1a1a;">Paczkomaty InPost 24/7</strong>
+<span style="display: block; font-size: 12px; color: #666; margin-top: 2px;">Dostawa do wybranego Paczkomatu (1-2 dni)</span>
+</div>
+</label>
+<img alt="InPost" src="images/inpost_logo.svg" style="height: 38px; object-fit: contain; display: block;"/>
+</div>
+<!-- Option 2: DPD Paczkomaty / Punkty -->
+<div class="delivery-option-header" id="header_dpd_paczkomat" onclick="selectDeliveryOption('dpd_paczkomat')" style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #ccc; background: #fff; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.3s;">
+<label style="display: flex; align-items: center; cursor: pointer; margin: 0; width: 100%;">
+<input id="shipDpdPaczkomat" name="shippingMethod" style="margin-right: 12px; accent-color: var(--primary-color);" type="radio" value="dpd_paczkomat"/>
+<div>
+<strong style="color: #1a1a1a;">DPD Pickup (Paczkomaty i Punkty)</strong>
+<span style="display: block; font-size: 12px; color: #666; margin-top: 2px;">Odbiór w automatach paczkowych i punktach DPD (1-2 dni)</span>
+</div>
+</label>
+<img alt="DPD" src="images/dpd_logo.svg" style="height: 30px; max-width: 100px; object-fit: contain; display: block;"/>
+</div>
+<!-- Option 6: Odbiór osobisty w salonie -->
+<div class="delivery-option-header" id="header_odbior_osobisty" onclick="selectDeliveryOption('odbior_osobisty')" style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: none; background: #fff; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.3s;">
+<label style="display: flex; align-items: center; cursor: pointer; margin: 0; width: 100%;">
+<input id="shipOdbiorOsobisty" name="shippingMethod" style="margin-right: 12px; accent-color: var(--primary-color);" type="radio" value="odbior_osobisty"/>
+<div>
+<strong style="color: #1a1a1a;">Odbiór osobisty na miejscu (salon)</strong>
+<span style="display: block; font-size: 12px; color: #666; margin-top: 2px;">Odbierz zamówienie bezpośrednio w naszym salonie (Darmowy)</span>
+</div>
+</label>
+<span style="font-weight: 800; color: #1a1a1a; font-size: 13px; letter-spacing: 0.5px; padding-right: 5px; display: block; text-transform: uppercase;">SALON</span>
+</div>
+</div>
+
+<!-- Point Selector Widget -->
+<div id="pointSelectorBox" style="display: none; margin-top: 20px; background: #fafafa; border: 1px dashed #ccc; border-radius: 8px; padding: 18px; box-sizing: border-box;">
+<h4 style="margin: 0 0 10px 0; font-size: 13px; font-weight: 700; color: #333; text-transform: uppercase; letter-spacing: 0.5px;">Wybrany punkt odbioru</h4>
+<div style="display: flex; gap: 10px; align-items: center;">
+<input type="text" id="selectedPointField" placeholder="Nie wybrano punktu..." readonly style="flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 13px; background: #fff; font-family: inherit; font-weight: 600; color: #1a1a1a;">
+<input type="hidden" id="selectedPointVal" name="selectedPointVal" value="">
+<button type="button" onclick="openLockerModal()" style="padding: 12px 18px; background: #000; color: #fff; border: 1px solid #000; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.3s; font-family: inherit;">Wybierz z mapy / listy</button>
+</div>
+<p id="salonPickupDisclaimer" style="display: none; margin: 10px 0 0 0; font-size: 12px; color: #666; line-height: 1.4;">
+Odbiór osobisty w: <strong>Prescot LED Showroom, ul. LEDowa 12, Warszawa</strong>. Zapraszamy po skompletowaniu zamówienia.
+</p>
 </div>
 </div>
 <div style="margin-bottom: 40px;">
@@ -2087,6 +2174,62 @@
       }
     }
 
+    let currentDeliveryType = 'ship'; // 'ship' or 'pickup'
+
+    function setDeliveryType(type) {
+      currentDeliveryType = type;
+      
+      const tabShip = document.getElementById('tab_ship');
+      const tabPickup = document.getElementById('tab_pickup');
+      const addressSection = document.getElementById('shippingAddressSection');
+      const courierBox = document.getElementById('courierMethodsBox');
+      const pickupBox = document.getElementById('pickupMethodsBox');
+      const title = document.getElementById('deliveryMethodsTitle');
+      
+      const addressInputs = ['address', 'zipcode', 'city', 'country'];
+      
+      if (type === 'ship') {
+        // Toggle Active Tabs
+        tabShip.classList.add('active');
+        tabPickup.classList.remove('active');
+        
+        // Show shipping address form
+        addressSection.style.display = 'block';
+        addressInputs.forEach(id => {
+          document.getElementById(id).setAttribute('required', 'true');
+        });
+        
+        // Toggle Delivery Options list
+        courierBox.style.display = 'block';
+        pickupBox.style.display = 'none';
+        title.textContent = 'Metoda wysyłki';
+        
+        // Hide locker point selector
+        document.getElementById('pointSelectorBox').style.display = 'none';
+        
+        // Select first courier option (DPD Kurier)
+        selectDeliveryOption('dpd_kurier');
+      } else {
+        // Toggle Active Tabs
+        tabPickup.classList.add('active');
+        tabShip.classList.remove('active');
+        
+        // Hide shipping address form
+        addressSection.style.display = 'none';
+        addressInputs.forEach(id => {
+          document.getElementById(id).removeAttribute('required');
+        });
+        
+        // Toggle Delivery Options list
+        courierBox.style.display = 'none';
+        pickupBox.style.display = 'block';
+        title.textContent = 'Punkt odbioru';
+        
+        // Select first pickup option (InPost Paczkomat)
+        selectDeliveryOption('inpost_paczkomat');
+      }
+    }
+
     // selectDeliveryOption helper function
     function selectDeliveryOption(value) {
       // Uncheck all shippingMethod radios and check the selected one
@@ -2098,7 +2241,7 @@
       });
       
       // Update header classes
-      const options = ['inpost_paczkomat', 'dpd_paczkomat', 'dpd_kurier', 'inpost_kurier', 'suus_dluzyca'];
+      const options = ['inpost_paczkomat', 'dpd_paczkomat', 'dpd_kurier', 'inpost_kurier', 'suus_dluzyca', 'odbior_osobisty'];
       options.forEach(opt => {
         const header = document.getElementById('header_' + opt);
         if (header) {
@@ -2111,6 +2254,187 @@
           }
         }
       });
+
+      // Point Selector visibility logic
+      const pointBox = document.getElementById('pointSelectorBox');
+      const pointField = document.getElementById('selectedPointField');
+      const pointVal = document.getElementById('selectedPointVal');
+      const disclaimer = document.getElementById('salonPickupDisclaimer');
+      
+      if (pointBox) {
+        if (value === 'inpost_paczkomat' || value === 'dpd_paczkomat') {
+          pointBox.style.display = 'block';
+          disclaimer.style.display = 'none';
+          
+          const carrierType = value === 'inpost_paczkomat' ? 'InPost' : 'DPD';
+          pointField.placeholder = `Wybierz punkt ${carrierType}...`;
+          if (!pointVal.value || (value === 'inpost_paczkomat' && !pointVal.value.startsWith('WAW')) || (value === 'dpd_paczkomat' && !pointVal.value.startsWith('DPD'))) {
+            pointField.value = '';
+            pointVal.value = '';
+          }
+        } else if (value === 'odbior_osobisty') {
+          pointBox.style.display = 'block';
+          disclaimer.style.display = 'block';
+          pointField.value = 'Prescot LED Showroom, ul. LEDowa 12, Warszawa';
+          pointVal.value = 'SALON_PRESCOT';
+        } else {
+          pointBox.style.display = 'none';
+        }
+      }
+    }
+
+    // Mock Lockers Data
+    const mockLockers = {
+      inpost: [
+        { id: 'WAW101', name: 'Paczkomat WAW101', address: 'Al. Jerozolimskie 54, Warszawa', coords: { x: '25%', y: '30%' } },
+        { id: 'WAW102', name: 'Paczkomat WAW102', address: 'ul. Marszałkowska 104, Warszawa', coords: { x: '45%', y: '25%' } },
+        { id: 'WAW103', name: 'Paczkomat WAW103', address: 'ul. Nowy Świat 22, Warszawa', coords: { x: '60%', y: '45%' } },
+        { id: 'WAW104', name: 'Paczkomat WAW104', address: 'ul. Świętokrzyska 14, Warszawa', coords: { x: '35%', y: '60%' } },
+        { id: 'GDY201', name: 'Paczkomat GDY201', address: 'ul. Świętojańska 45, Gdynia', coords: { x: '50%', y: '50%' } },
+        { id: 'KRA301', name: 'Paczkomat KRA301', address: 'ul. Floriańska 12, Kraków', coords: { x: '55%', y: '55%' } },
+        { id: 'POZ401', name: 'Paczkomat POZ401', address: 'Półwiejska 8, Poznań', coords: { x: '40%', y: '40%' } }
+      ],
+      dpd: [
+        { id: 'DPD-WAW1', name: 'Automat DPD WAW1', address: 'ul. Chmielna 25, Warszawa', coords: { x: '30%', y: '35%' } },
+        { id: 'DPD-WAW2', name: 'Punkt DPD WAW2', address: 'ul. Krucza 49, Warszawa', coords: { x: '50%', y: '40%' } },
+        { id: 'DPD-KRA1', name: 'Automat DPD KRA1', address: 'Grodzka 15, Kraków', coords: { x: '45%', y: '45%' } },
+        { id: 'DPD-GDY1', name: 'Automat DPD GDY1', address: '10 Lutego 24, Gdynia', coords: { x: '35%', y: '50%' } }
+      ]
+    };
+
+    let activeLockerCarrier = 'inpost';
+
+    function openLockerModal() {
+      const method = document.querySelector('input[name="shippingMethod"]:checked').value;
+      activeLockerCarrier = method === 'inpost_paczkomat' ? 'inpost' : 'dpd';
+      
+      const modal = document.getElementById('lockerModal');
+      const title = document.getElementById('lockerModalTitle');
+      
+      title.textContent = activeLockerCarrier === 'inpost' ? 'Wybierz Paczkomat InPost' : 'Wybierz Punkt / Automat DPD';
+      document.getElementById('lockerSearchInput').value = '';
+      
+      modal.style.display = 'flex';
+      renderLockerItems(mockLockers[activeLockerCarrier]);
+    }
+
+    function closeLockerModal() {
+      document.getElementById('lockerModal').style.display = 'none';
+    }
+
+    function renderLockerItems(items) {
+      const list = document.getElementById('lockerList');
+      const pinsContainer = document.getElementById('mapPinsContainer');
+      list.innerHTML = '';
+      pinsContainer.innerHTML = '';
+      
+      if (items.length === 0) {
+        list.innerHTML = '<div style="padding: 20px; text-align: center; color: #999; font-size: 13px;">Brak punktów spełniających kryteria</div>';
+        return;
+      }
+      
+      items.forEach(item => {
+        const div = document.createElement('div');
+        div.style.padding = '12px 15px';
+        div.style.borderBottom = '1px solid #f0f0f0';
+        div.style.cursor = 'pointer';
+        div.style.transition = 'background 0.2s';
+        div.innerHTML = `
+          <strong style="display: block; font-size: 13px; color: #1a1a1a;">${item.id}</strong>
+          <span style="display: block; font-size: 12px; color: #555; margin-top: 2px;">${item.address}</span>
+        `;
+        div.onclick = () => selectLocker(item);
+        div.onmouseenter = () => highlightPin(item.id, true);
+        div.onmouseleave = () => highlightPin(item.id, false);
+        list.appendChild(div);
+        
+        const pin = document.createElement('div');
+        pin.id = `pin_${item.id}`;
+        pin.style.position = 'absolute';
+        pin.style.left = item.coords.x;
+        pin.style.top = item.coords.y;
+        pin.style.width = '24px';
+        pin.style.height = '24px';
+        pin.style.background = activeLockerCarrier === 'inpost' ? '#ffcc00' : '#d22b2b';
+        pin.style.borderRadius = '50% 50% 50% 0';
+        pin.style.transform = 'translate(-50%, -100%) rotate(-45deg)';
+        pin.style.cursor = 'pointer';
+        pin.style.boxShadow = '0 2px 5px rgba(0,0,0,0.3)';
+        pin.style.border = '2px solid #fff';
+        pin.style.display = 'flex';
+        pin.style.alignItems = 'center';
+        pin.style.justifyContent = 'center';
+        pin.onclick = () => selectLocker(item);
+        
+        const dot = document.createElement('div');
+        dot.style.width = '8px';
+        dot.style.height = '8px';
+        dot.style.background = '#fff';
+        dot.style.borderRadius = '50%';
+        pin.appendChild(dot);
+        
+        const tooltip = document.createElement('div');
+        tooltip.id = `tooltip_${item.id}`;
+        tooltip.style.position = 'absolute';
+        tooltip.style.bottom = '130%';
+        tooltip.style.left = '50%';
+        tooltip.style.transform = 'translateX(-50%) rotate(45deg)';
+        tooltip.style.background = '#1a1a1a';
+        tooltip.style.color = '#fff';
+        tooltip.style.padding = '5px 8px';
+        tooltip.style.borderRadius = '4px';
+        tooltip.style.fontSize = '10px';
+        tooltip.style.whiteSpace = 'nowrap';
+        tooltip.style.display = 'none';
+        tooltip.style.pointerEvents = 'none';
+        tooltip.textContent = item.id;
+        pin.appendChild(tooltip);
+        
+        pin.onmouseenter = () => {
+          tooltip.style.display = 'block';
+          pin.style.transform = 'translate(-50%, -100%) rotate(-45deg) scale(1.15)';
+        };
+        pin.onmouseleave = () => {
+          tooltip.style.display = 'none';
+          pin.style.transform = 'translate(-50%, -100%) rotate(-45deg)';
+        };
+        
+        pinsContainer.appendChild(pin);
+      });
+    }
+
+    function filterLockers() {
+      const query = document.getElementById('lockerSearchInput').value.toLowerCase().trim();
+      const carrierItems = mockLockers[activeLockerCarrier];
+      const filtered = carrierItems.filter(item => 
+        item.id.toLowerCase().includes(query) || 
+        item.address.toLowerCase().includes(query)
+      );
+      renderLockerItems(filtered);
+    }
+
+    function highlightPin(id, active) {
+      const pin = document.getElementById(`pin_${id}`);
+      const tooltip = document.getElementById(`tooltip_${id}`);
+      if (pin && tooltip) {
+        if (active) {
+          tooltip.style.display = 'block';
+          pin.style.transform = 'translate(-50%, -100%) rotate(-45deg) scale(1.15)';
+        } else {
+          tooltip.style.display = 'none';
+          pin.style.transform = 'translate(-50%, -100%) rotate(-45deg)';
+        }
+      }
+    }
+
+    function selectLocker(locker) {
+      const field = document.getElementById('selectedPointField');
+      const val = document.getElementById('selectedPointVal');
+      
+      field.value = `${locker.id} - ${locker.address}`;
+      val.value = locker.id;
+      
+      closeLockerModal();
     }
 
     // Order checkout logic
@@ -2133,6 +2457,18 @@
         }
       }
 
+      // Validate locker if pickup is active
+      if (currentDeliveryType === 'pickup') {
+        const method = document.querySelector('input[name="shippingMethod"]:checked').value;
+        if (method === 'inpost_paczkomat' || method === 'dpd_paczkomat') {
+          const point = document.getElementById('selectedPointVal').value;
+          if (!point) {
+            alert('Proszę wybrać paczkomat lub punkt odbioru z mapy!');
+            return;
+          }
+        }
+      }
+
       // Generate random order number
       const randomOrderNum = Math.floor(100000 + Math.random() * 900000);
       document.getElementById('orderNumLabel').textContent = `Numer zamówienia: #PRSC-${randomOrderNum}`;
@@ -2148,6 +2484,49 @@
     // Run summary loader
     loadCheckoutSummary();
   </script>
+<!-- Locker Selection Modal -->
+<div id="lockerModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; align-items: center; justify-content: center; font-family: 'Outfit', sans-serif;">
+  <div style="background: #fff; width: 90%; max-width: 750px; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; height: 80vh; box-shadow: 0 20px 50px rgba(0,0,0,0.2);">
+    <!-- Modal Header -->
+    <div style="padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; background: #fbfbfb;">
+      <h3 id="lockerModalTitle" style="margin: 0; font-size: 18px; font-weight: 700; color: #1a1a1a;">Wybierz Paczkomat InPost</h3>
+      <button type="button" onclick="closeLockerModal()" style="background: none; border: none; font-size: 28px; cursor: pointer; color: #666; line-height: 1; padding: 0;">&times;</button>
+    </div>
+    <!-- Modal Body -->
+    <div style="display: flex; flex: 1; overflow: hidden; flex-direction: row;">
+      <!-- Sidebar: Search & List -->
+      <div style="width: 320px; border-right: 1px solid #eee; display: flex; flex-direction: column; background: #fff; flex-shrink: 0;">
+        <div style="padding: 15px; border-bottom: 1px solid #eee;">
+          <input type="text" id="lockerSearchInput" placeholder="Wpisz miasto lub kod..." oninput="filterLockers()" style="width: 100%; padding: 10px 15px; border: 1px solid #ccc; border-radius: 6px; font-size: 13px; font-family: inherit; box-sizing: border-box;">
+        </div>
+        <div id="lockerList" style="flex: 1; overflow-y: auto; padding: 10px;">
+          <!-- Items will be injected dynamically -->
+        </div>
+      </div>
+      <!-- Map Area (Mock) -->
+      <div style="flex: 1; background: #e5e7eb; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden;">
+        <!-- Mock Map Visual -->
+        <div style="width: 100%; height: 100%; background: #eef2f3; position: relative; overflow: hidden;">
+          <svg style="width: 100%; height: 100%; opacity: 0.8;" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100%" height="100%" fill="#eef1f3"/>
+            <path d="M 0 150 Q 200 180 450 150 T 900 150" fill="none" stroke="#7bb6d6" stroke-width="30"/>
+            <line x1="80" y1="0" x2="80" y2="600" stroke="#fff" stroke-width="25"/>
+            <line x1="300" y1="0" x2="300" y2="600" stroke="#fff" stroke-width="15"/>
+            <line x1="0" y1="100" x2="900" y2="100" stroke="#fff" stroke-width="20"/>
+            <line x1="0" y1="400" x2="900" y2="400" stroke="#fff" stroke-width="20"/>
+          </svg>
+          <div id="mapPinsContainer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+            <!-- Pins will be injected dynamically -->
+          </div>
+        </div>
+        <div style="position: absolute; bottom: 15px; left: 15px; right: 15px; background: rgba(255,255,255,0.95); backdrop-filter: blur(5px); padding: 10px 15px; border-radius: 8px; font-size: 12px; color: #333; border: 1px solid #ddd; text-align: center; font-weight: 500; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+          Kliknij punkt na mapie lub wybierz z listy po lewej.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Mobile Bottom Navigation -->
 <nav class="mobile-bottom-nav">
 <div class="mobile-nav-items">
