@@ -1329,7 +1329,7 @@
 
     /* 3. Category Images Clearer (less dark overlay) */
     .mockup-category-card::after {
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 60%) !important;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, transparent 60%) !important;
     }
     .mockup-category-card img {
       opacity: 1 !important;
@@ -2048,6 +2048,172 @@
     }
     /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
 
+</style>
+
+
+
+
+
+<style id="scroll-optimization-and-header-sync">
+    /* Pause animations in inactive slides to fix lag */
+    .slide:not(.active) * {
+      animation-play-state: paused !important;
+    }
+    /* Hardware acceleration to fix scroll lag globally */
+    .mockup-header, .category-banner-card, .category-banner-bg, .mockup-category-card {
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
+    }
+
+    /* Force scrolled header background and style */
+    .mockup-header.scrolled {
+      background: #ffffff !important;
+      backdrop-filter: blur(15px) !important;
+      -webkit-backdrop-filter: blur(15px) !important;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    }
+
+    /* Enforce 100% identical search bar and action icons styles across all pages */
+    .mockup-search-container {
+      display: flex !important;
+      align-items: center !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      backdrop-filter: blur(14px) !important;
+      -webkit-backdrop-filter: blur(14px) !important;
+      padding: 9px 18px !important;
+      margin-right: 15px !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+      border-radius: 99px !important;
+      box-shadow: 0 0 12px rgba(255,255,255,0.04), inset 0 1px 0 rgba(255,255,255,0.08) !important;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .mockup-search-container:focus-within {
+      background: rgba(255, 255, 255, 0.12) !important;
+      border-color: rgba(255, 255, 255, 0.55) !important;
+      box-shadow: 0 0 20px rgba(255,255,255,0.08), 0 4px 20px rgba(0,0,0,0.1) !important;
+    }
+    .mockup-search-container input {
+      border: none !important;
+      background: transparent !important;
+      outline: none !important;
+      font-size: 13px !important;
+      font-family: 'Courier New', Courier, monospace !important;
+      width: 240px !important;
+      color: #ffffff !important;
+      letter-spacing: 0.5px !important;
+      transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .mockup-search-container input::placeholder {
+      font-family: 'Courier New', Courier, monospace !important;
+      color: rgba(255, 255, 255, 0.7) !important;
+      text-shadow: 0 0 8px rgba(255,255,255,0.15) !important;
+    }
+    .mockup-search-container input:focus {
+      width: 350px !important;
+    }
+    .mockup-search-container button {
+      background: none !important;
+      border: none !important;
+      cursor: pointer !important;
+      color: rgba(255,255,255,0.7) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    .mockup-search-container button svg {
+      stroke: #ffffff !important;
+    }
+    .mockup-action-icon {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 50px !important;
+      height: 50px !important;
+      background: rgba(255, 255, 255, 0.12) !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      color: var(--white) !important;
+      border-radius: 50% !important;
+      cursor: pointer !important;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      text-decoration: none !important;
+    }
+    .mockup-action-icon svg {
+      width: 22px !important;
+      height: 22px !important;
+      transition: transform 0.3s !important;
+    }
+    .mockup-action-icon:hover {
+      background: rgba(255, 255, 255, 0.25) !important;
+      border-color: rgba(255, 255, 255, 0.4) !important;
+      transform: translateY(-2px) !important;
+      color: #fff !important;
+    }
+    .mockup-action-icon:hover svg {
+      transform: scale(1.1) !important;
+    }
+
+    /* SCROLLED STATES FOR SEARCH AND ACTIONS */
+    .mockup-header.scrolled .mockup-search-container {
+      background: rgba(0, 0, 0, 0.04) !important;
+      border-color: #0b1a30 !important;
+    }
+    .mockup-header.scrolled .mockup-search-container input {
+      color: #0b1a30 !important;
+    }
+    .mockup-header.scrolled .mockup-search-container input::placeholder {
+      color: rgba(11, 26, 48, 0.6) !important;
+    }
+    .mockup-header.scrolled .mockup-search-container button svg {
+      stroke: #0b1a30 !important;
+    }
+    .mockup-header.scrolled .mockup-action-icon {
+      background: rgba(10, 25, 47, 0.06) !important;
+      border-color: rgba(10, 25, 47, 0.12) !important;
+      color: var(--primary-color) !important;
+    }
+    .mockup-header.scrolled .mockup-action-icon:hover {
+      background: rgba(10, 25, 47, 0.12) !important;
+      border-color: rgba(10, 25, 47, 0.22) !important;
+      color: var(--primary-color) !important;
+      transform: translateY(-2px) !important;
+    }
+
+    /* Navigation links in scrolled and non-scrolled states */
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a {
+      color: var(--white) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:hover {
+      background: rgba(255, 255, 255, 0.22) !important;
+      border-color: rgba(255, 255, 255, 0.25) !important;
+      color: #ffffff !important;
+    }
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a.active {
+      background: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      color: #0b1a30 !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+    }
+    
+    body .mockup-header.scrolled .mockup-nav > ul > li > a {
+      color: #0b1a30 !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    body .mockup-header.scrolled .mockup-nav > ul > li > a:hover {
+      background: rgba(0, 0, 0, 0.08) !important;
+      border-color: rgba(0, 0, 0, 0.12) !important;
+      color: #000000 !important;
+    }
+    body .mockup-header.scrolled .mockup-nav > ul > li > a.active {
+      background: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      color: #0b1a30 !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+    }
 </style>
 
 </head>
