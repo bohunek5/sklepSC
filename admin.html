@@ -1161,7 +1161,7 @@
 
     /* 3. Category Images Clearer (less dark overlay) */
     .mockup-category-card::after {
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 60%) !important;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, transparent 50%) !important;
     }
     .mockup-category-card img {
       opacity: 1 !important;
@@ -2503,7 +2503,8 @@
 </div>
 </section>
 </main>
-<script src="js/admin.js" type="module"></script>
+<script src="js/products-data.js"></script>
+<script src="js/admin.js"></script>
 <!-- Mobile Bottom Navigation -->
 <nav class="mobile-bottom-nav">
 <div class="mobile-nav-items">
@@ -2529,8 +2530,9 @@
 </a>
 </div>
 </nav>
-<script type="module">
-  import { initSharedPopups } from './js/shared-popups.js';
+<script src="js/products-data.js"></script>
+  <script src="js/shared-popups.js"></script>
+  <script>
   initSharedPopups();
 </script>
 <style>

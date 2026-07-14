@@ -1,4 +1,4 @@
-import { products } from './products-data.js';
+
 
 let deletedProducts = JSON.parse(localStorage.getItem('sklepSC_deletedProducts')) || [];
 

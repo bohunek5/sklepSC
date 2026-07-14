@@ -382,4 +382,4 @@ function getProducts() {
   return defaultProducts;
 }
 
-export const products = getProducts();
+var products = getProducts();

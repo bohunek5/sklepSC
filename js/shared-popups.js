@@ -1,4 +1,4 @@
-import { products } from './products-data.js';
+
 
 // --- CART STATE ---
 let wishlist = JSON.parse(localStorage.getItem('cooken_wishlist')) || [];
@@ -588,7 +588,7 @@ function injectMobileMenuOverlay() {
 }
 
 // --- INIT POPUPS AND DRAWER ACTIONS ---
-export function initSharedPopups() {
+function initSharedPopups() {
   injectWishlistDrawer();
   injectProductModals();
   injectCartDrawer();
@@ -2268,3 +2268,5 @@ window.toggleMobileCatRow = function(row) {
   row.classList.toggle('show-description');
 };
 
+
+window.initSharedPopups = initSharedPopups;

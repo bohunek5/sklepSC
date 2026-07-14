@@ -3298,9 +3298,9 @@
   </script>
 
   <!-- Load Shared Interactive Popups Script and Dynamic Render Logic -->
-  <script type="module">
-    import { products } from './js/products-data.js';
-    import { initSharedPopups } from './js/shared-popups.js';
+  <script src="js/products-data.js"></script>
+  <script src="js/shared-popups.js"></script>
+  <script>
 
     // State Variables
     let currentCategory = 'all';
@@ -3328,9 +3328,20 @@
       currentSearch = urlSearch.toLowerCase().trim();
       if (shopSearchInput) shopSearchInput.value = urlSearch;
     }
-    const urlCategory = urlParams.get('category');
+    const urlCategory = urlParams.get('category') || urlParams.get('cat');
     if (urlCategory) {
-      currentCategory = urlCategory;
+      const decoded = decodeURIComponent(urlCategory).toLowerCase().trim();
+      if (decoded.includes('tasm') || decoded.includes('taśm')) {
+        currentCategory = 'Taśmy LED';
+      } else if (decoded.includes('zasilacz')) {
+        currentCategory = 'Zasilacze LED';
+      } else if (decoded.includes('sterownik')) {
+        currentCategory = 'Sterowniki LED';
+      } else if (decoded.includes('akcesor')) {
+        currentCategory = 'Akcesoria';
+      } else {
+        currentCategory = urlCategory;
+      }
     }
     const urlColor = urlParams.get('color');
     if (urlColor) {
@@ -3437,11 +3448,13 @@
     });
 
     // Search input binding
-    shopSearchInput.addEventListener('input', (e) => {
-      currentSearch = e.target.value.toLowerCase().trim();
-      currentPage = 1;
-      renderFilteredProducts();
-    });
+    if (shopSearchInput) {
+      shopSearchInput.addEventListener('input', (e) => {
+        currentSearch = e.target.value.toLowerCase().trim();
+        currentPage = 1;
+        renderFilteredProducts();
+      });
+    }
 
     // Sort select binding
     shopSortSelect.addEventListener('change', (e) => {
@@ -3452,7 +3465,7 @@
 
     // Focus search input on header search icon click
     const searchHeaderIcon = document.getElementById('searchHeaderIcon');
-    if (searchHeaderIcon) {
+    if (searchHeaderIcon && shopSearchInput) {
       searchHeaderIcon.addEventListener('click', () => {
         shopSearchInput.focus();
         shopSearchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
