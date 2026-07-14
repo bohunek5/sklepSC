@@ -376,17 +376,20 @@ function injectCartDrawer() {
         <div style="display: flex; gap: 12px; flex-direction: column;">
           <style>
             .cart-checkout-btn-new {
-              width: 100%; padding: 14px; background: #000; color: #fff; border: 1px solid #000; font-weight: 700; text-transform: uppercase; font-size: 13px; cursor: pointer; border-radius: 4px; transition: all 0.3s; letter-spacing: 1px;
+              width: 100%; padding: 14px; background: #000; color: #fff; border: 1px solid #000; font-weight: 700; text-transform: uppercase; font-size: 13px; cursor: pointer; border-radius: 4px; transition: all 0.3s ease; letter-spacing: 1px;
             }
             .cart-checkout-btn-new:hover {
-              background: #333;
-              border-color: #333;
+              background: transparent !important;
+              border-color: var(--primary-color, #ffd700) !important;
+              color: var(--primary-color, #ffd700) !important;
             }
             .cart-viewcart-btn-new {
-              width: 100%; padding: 14px; background: #fff; color: #000; border: 1px solid #000; font-weight: 700; text-transform: uppercase; font-size: 13px; cursor: pointer; border-radius: 4px; transition: all 0.3s; letter-spacing: 1px;
+              width: 100%; padding: 14px; background: #fff; color: #000; border: 1px solid #000; font-weight: 700; text-transform: uppercase; font-size: 13px; cursor: pointer; border-radius: 4px; transition: all 0.3s ease; letter-spacing: 1px;
             }
             .cart-viewcart-btn-new:hover {
-              background: #fafafa;
+              background: #000 !important;
+              color: #fff !important;
+              border-color: #000 !important;
             }
           </style>
           <button id="cartDrawerCheckout" class="cart-checkout-btn-new">Przejdź do kasy</button>
