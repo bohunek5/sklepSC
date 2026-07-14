@@ -392,8 +392,18 @@ function injectCartDrawer() {
               border-color: #000 !important;
             }
           </style>
-          <button id="cartDrawerCheckout" class="cart-checkout-btn-new">Przejdź do kasy</button>
-          <button id="cartDrawerGoToCart" class="cart-viewcart-btn-new">Zobacz koszyk</button>
+          <button id="cartDrawerCheckout" class="cart-checkout-btn-new">
+            <div class="btn-slide-wrap">
+              <span class="btn-txt-default">Przejdź do kasy</span>
+              <span class="btn-txt-hover">Przejdź do kasy</span>
+            </div>
+          </button>
+          <button id="cartDrawerGoToCart" class="cart-viewcart-btn-new">
+            <div class="btn-slide-wrap">
+              <span class="btn-txt-default">Zobacz koszyk</span>
+              <span class="btn-txt-hover">Zobacz koszyk</span>
+            </div>
+          </button>
         </div>
       </div>
     </div>
