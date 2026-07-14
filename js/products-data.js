@@ -357,13 +357,52 @@ const defaultProducts = [
     "colors": [],
     "sizes": [],
     "video": "videos/mono.mp4"
+  },
+  {
+    "id": 4001,
+    "title": "Profil aluminiowy LED Lumines typ Y",
+    "category": "Akcesoria",
+    "price": 29,
+    "compareAtPrice": 39,
+    "description": "Profil nawierzchniowy aluminiowy typ Y anodowany o długości 2m. Idealny do montażu taśm LED o szerokości do 12mm. Zapewnia doskonałe odprowadzanie ciepła i estetyczny wygląd.",
+    "images": [
+      "images/products/product_8291635331242.jpg"
+    ],
+    "colors": ["Silver", "Black", "White"],
+    "sizes": ["1m", "2m"]
+  },
+  {
+    "id": 4002,
+    "title": "Złączka bezlutowa do taśm LED COB 8mm",
+    "category": "Akcesoria",
+    "price": 8,
+    "compareAtPrice": 12,
+    "description": "Szybkozłączka zaciskowa bezlutowa przeznaczona do łączenia taśm LED COB o szerokości laminatu 8mm. Gwarantuje pewny i szybki montaż bez użycia lutownicy.",
+    "images": [
+      "images/products/product_8291635364010.jpg"
+    ],
+    "colors": [],
+    "sizes": []
+  },
+  {
+    "id": 4003,
+    "title": "Przewód montażowy LED 2x0.50mm²",
+    "category": "Akcesoria",
+    "price": 15,
+    "compareAtPrice": 20,
+    "description": "Profesjonalny giętki przewód instalacyjny (czerwono-czarny) o przekroju 2x0.50mm² do łączenia oświetlenia LED i zasilaczy. Krążek 10m.",
+    "images": [
+      "images/products/product_8291635396778.jpg"
+    ],
+    "colors": [],
+    "sizes": ["10m", "25m"]
   }
 ];
 
 function getProducts() {
   if (typeof window !== 'undefined' && localStorage) {
     // Clear stale local storage cache with versioning
-    const cacheVersion = "v6";
+    const cacheVersion = "v10";
     const storedVersion = localStorage.getItem('sklepSC_products_version');
     if (storedVersion !== cacheVersion) {
       localStorage.removeItem('sklepSC_products');
