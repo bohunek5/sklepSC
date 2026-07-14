@@ -4,7 +4,7 @@ import { resolve } from 'path';
 export default defineConfig({
   base: process.env.GITHUB_ACTIONS ? '/sklepSC/' : '/',
   server: {
-    port: 3002
+    port: 3000
   },
   build: {
     rollupOptions: {
