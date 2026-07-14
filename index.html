@@ -3996,8 +3996,8 @@
 <rect class="car" pathlength="100"></rect>
 </svg>
 <div class="banner-text">
-<h1>Akcesoria do LED</h1>
-<p>Innowacyjne konstrukcje i systemy montażu</p>
+<h1>Taśmy LED COB 48V</h1>
+<p>Niekończące się linie światła</p>
 </div>
 <a class="mockup-btn" href="shop.html"><div class="btn-slide-wrap"><span class="btn-txt-default">Odkryj</span><span class="btn-txt-hover">Odkryj</span></div></a>
 </div>
@@ -4011,7 +4011,7 @@
 <svg viewbox="0 0 24 24"><polyline points="9 6 15 12 9 18"></polyline></svg>
 </button>
 </div>
-<a class="scroll-down-arrow" href="#kategorie-banners">
+<a class="scroll-down-arrow" href="#kategorie-banners" onclick="document.getElementById('kategorie-banners').scrollIntoView({ behavior: 'smooth' }); event.preventDefault();">
 <span>Odkryj</span>
 <div class="scroll-down-circle">
 <svg viewbox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
@@ -5011,6 +5011,25 @@
       color: var(--primary-color) !important;
       background: rgba(0, 0, 0, 0.04) !important;
       border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    /* Slide 6 (Accessories) Shimmering Warm White Frame Override */
+    .slide[data-tech="accessories"] .glass-border-svg .car {
+      stroke: #ffebb3 !important;
+      stroke-dasharray: 10 90 !important;
+      animation: drawBorder 3s linear infinite, shimmerWarmWhite 2s alternate infinite !important;
+    }
+    .slide[data-tech="accessories"] .glass-border-svg .track {
+      stroke: rgba(255, 235, 179, 0.2) !important;
+    }
+    @keyframes shimmerWarmWhite {
+      0% {
+        filter: drop-shadow(0 0 2px rgba(255, 235, 179, 0.4)) !important;
+        opacity: 0.8 !important;
+      }
+      100% {
+        filter: drop-shadow(0 0 12px rgba(255, 235, 179, 1)) !important;
+        opacity: 1 !important;
+      }
     }
     /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
 

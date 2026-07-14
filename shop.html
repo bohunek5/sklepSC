@@ -2112,6 +2112,47 @@
       min-width: 600px !important; /* Made it smaller since we removed a column */
       grid-template-columns: repeat(3, 1fr) !important; /* Was 4, now 3 */
     }
+    /* Desktop Sidebar Left Column Layout & Shrunk Grid */
+    @media (min-width: 1025px) {
+      /* Default shop-grid on PC: 5 columns (makes cards smaller) */
+      .shop-grid {
+        grid-template-columns: repeat(5, 1fr) !important;
+        gap: 20px !important;
+        transition: all 0.3s ease;
+      }
+      
+      /* Side-by-side layout when sidebar is active */
+      .shop-container.has-sidebar {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 30px !important;
+        align-items: flex-start !important;
+      }
+      
+      /* Sidebar styling as a left column */
+      .shop-container.has-sidebar .shop-sidebar.active {
+        width: 250px !important;
+        flex-shrink: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 25px !important;
+        background: #fbfbfb;
+        padding: 25px 20px;
+        border-radius: 12px;
+        border: 1px solid #eee;
+        margin-bottom: 0 !important;
+        box-shadow: none !important;
+      }
+      
+      /* Grid shrinks to 4 columns when sidebar is open */
+      .shop-container.has-sidebar .shop-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+      }
+      
+      .shop-container.has-sidebar .shop-content {
+        flex: 1 !important;
+      }
+    }
     /* --- END LATEST FIXES --- */
 
 
@@ -3289,10 +3330,14 @@
     // Mobile Sidebar Filters Toggle
     const filterToggle = document.getElementById('filterToggle');
     const shopSidebar = document.getElementById('shopSidebar');
+    const shopContainer = document.querySelector('.shop-container');
 
     if (filterToggle) {
       filterToggle.addEventListener('click', () => {
         shopSidebar.classList.toggle('active');
+        if (shopContainer) {
+          shopContainer.classList.toggle('has-sidebar');
+        }
       });
     }
   </script>
