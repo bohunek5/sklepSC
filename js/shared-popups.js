@@ -377,6 +377,7 @@ function injectCartDrawer() {
           <style>
             .cart-checkout-btn-new {
               width: 100%; padding: 14px; background: #000; color: #fff; border: 1px solid #000; font-weight: 700; text-transform: uppercase; font-size: 13px; cursor: pointer; border-radius: 4px; transition: all 0.3s ease; letter-spacing: 1px;
+              overflow: hidden; position: relative; display: block; box-sizing: border-box; text-align: center;
             }
             .cart-checkout-btn-new:hover {
               background: transparent !important;
@@ -385,11 +386,51 @@ function injectCartDrawer() {
             }
             .cart-viewcart-btn-new {
               width: 100%; padding: 14px; background: #fff; color: #000; border: 1px solid #000; font-weight: 700; text-transform: uppercase; font-size: 13px; cursor: pointer; border-radius: 4px; transition: all 0.3s ease; letter-spacing: 1px;
+              overflow: hidden; position: relative; display: block; box-sizing: border-box; text-align: center;
             }
             .cart-viewcart-btn-new:hover {
               background: #000 !important;
               color: #fff !important;
               border-color: #000 !important;
+            }
+            
+            /* Sliding text animation styles */
+            .cart-checkout-btn-new .btn-slide-wrap,
+            .cart-viewcart-btn-new .btn-slide-wrap {
+              display: block;
+              height: 18px;
+              line-height: 18px;
+              overflow: hidden;
+              position: relative;
+              width: 100%;
+            }
+            .cart-checkout-btn-new .btn-slide-wrap .btn-txt-default,
+            .cart-checkout-btn-new .btn-slide-wrap .btn-txt-hover,
+            .cart-viewcart-btn-new .btn-slide-wrap .btn-txt-default,
+            .cart-viewcart-btn-new .btn-slide-wrap .btn-txt-hover {
+              display: block;
+              height: 100%;
+              width: 100%;
+              transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .cart-checkout-btn-new .btn-slide-wrap .btn-txt-default,
+            .cart-viewcart-btn-new .btn-slide-wrap .btn-txt-default {
+              transform: translateY(0);
+            }
+            .cart-checkout-btn-new .btn-slide-wrap .btn-txt-hover,
+            .cart-viewcart-btn-new .btn-slide-wrap .btn-txt-hover {
+              position: absolute;
+              left: 0;
+              top: 0;
+              transform: translateY(100%);
+            }
+            .cart-checkout-btn-new:hover .btn-slide-wrap .btn-txt-default,
+            .cart-viewcart-btn-new:hover .btn-slide-wrap .btn-txt-default {
+              transform: translateY(-100%);
+            }
+            .cart-checkout-btn-new:hover .btn-slide-wrap .btn-txt-hover,
+            .cart-viewcart-btn-new:hover .btn-slide-wrap .btn-txt-hover {
+              transform: translateY(0);
             }
           </style>
           <button id="cartDrawerCheckout" class="cart-checkout-btn-new">
