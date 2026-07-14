@@ -3630,14 +3630,26 @@
 
     // Header Search bar logic for shop.html
     
+        // Header Scroll Effect
     const header = document.getElementById('mainHeader');
     const headerLogo = document.getElementById('headerLogo');
+    const hasHero = document.querySelector('.page-hero, .mockup-hero-slider, .hero, .hero-section');
+    
+    if (!hasHero && header) {
+      header.classList.add('scrolled');
+      if (headerLogo) headerLogo.src = 'images/logo-dark.png';
+      header.classList.add('force-scrolled');
+    }
+    
     window.addEventListener('scroll', () => {
+      if (!header) return;
+      if (header.classList.contains('force-scrolled')) return;
+      
       if (window.scrollY > 50) {
-        if (header) header.classList.add('scrolled');
+        header.classList.add('scrolled');
         if (headerLogo) headerLogo.src = 'images/logo-dark.png';
       } else {
-        if (header) header.classList.remove('scrolled');
+        header.classList.remove('scrolled');
         if (headerLogo) headerLogo.src = 'images/logo-white.png';
       }
     });
