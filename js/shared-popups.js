@@ -316,37 +316,85 @@ function injectProductModals() {
 function injectCartDrawer() {
   const drawerHTML = `
     <!-- Cart Drawer Markup -->
-    <div id="cartDrawer" style="position: fixed; top: 0; right: -450px; width: 450px; height: 100vh; background: #fff; box-shadow: -10px 0 30px rgba(0,0,0,0.1); z-index: 2000; transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; max-width: 100%;">
-      <div style="padding: 25px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Twój Koszyk</h3>
-        <button id="closeCartDrawer" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+    <div id="cartDrawer" style="position: fixed; top: 0; right: -450px; width: 450px; height: 100vh; background: #fff; box-shadow: -10px 0 30px rgba(0,0,0,0.1); z-index: 2000; transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; max-width: 100%; font-family: 'Outfit', sans-serif;">
+      
+      <!-- Drawer Header -->
+      <div style="padding: 25px 25px 15px 25px; display: flex; flex-direction: column; border-bottom: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <h3 style="font-size: 20px; font-weight: 700; color: #1a1a1a; margin: 0; font-family: 'Outfit', sans-serif;">Twój Koszyk</h3>
+          <button id="closeCartDrawer" style="background: none; border: none; font-size: 28px; cursor: pointer; color: #333; line-height: 1; padding: 0;">&times;</button>
+        </div>
+        
+        <!-- Free Shipping Banner & Progress Bar -->
+        <div id="freeShippingBanner" style="font-size: 13px; color: #555;">
+          Kup za jeszcze <strong>300,00 zł</strong>, aby otrzymać <strong>DARMOWĄ DOSTAWĘ</strong>
+        </div>
+        <div style="position: relative; width: 100%; height: 6px; background: #eee; border-radius: 99px; margin-top: 12px; margin-bottom: 10px;">
+          <div id="freeShippingProgress" style="position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: #1a1a1a; border-radius: 99px; transition: width 0.4s ease;"></div>
+          <div id="freeShippingStar" style="position: absolute; top: -7px; left: 0%; width: 20px; height: 20px; border-radius: 50%; background: #1a1a1a; border: 2px solid #fff; display: flex; align-items: center; justify-content: center; transform: translateX(-10px); transition: left 0.4s ease; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="#fff" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+        </div>
       </div>
-      <div id="cartDrawerItems" style="flex-grow: 1; padding: 25px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px;">
+      
+      <!-- Cart Drawer Items -->
+      <div id="cartDrawerItems" style="flex-grow: 1; padding: 20px 25px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px;">
         <!-- Items loaded dynamically -->
       </div>
-      <div style="padding: 25px; border-top: 1px solid #eee; background: #f9f9f9;">
-        <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 16px; margin-bottom: 20px;">
-          <span>Razem:</span>
-          <span id="cartDrawerTotal">0,00 zł</span>
+      
+      <!-- Recommendations Section -->
+      <div id="cartRecommendations" style="padding: 20px 25px; border-top: 1px solid #eee; border-bottom: 1px solid #eee; background: #fafafa;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <h4 style="font-size: 13px; font-weight: 700; color: #1a1a1a; margin: 0; text-transform: uppercase; letter-spacing: 0.5px;">Może Ci się spodobać</h4>
+          <div style="display: flex; gap: 8px;">
+            <button id="prevRecBtn" style="width: 26px; height: 26px; border-radius: 50%; border: 1px solid #ddd; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;"><i class="ph ph-caret-left" style="font-size: 12px; font-weight: bold;"></i></button>
+            <button id="nextRecBtn" style="width: 26px; height: 26px; border-radius: 50%; border: 1px solid #ddd; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;"><i class="ph ph-caret-right" style="font-size: 12px; font-weight: bold;"></i></button>
+          </div>
         </div>
-                <style>
-          .cart-checkout-btn {
-            width: 100%; padding: 16px; background: #1a1a1a; color: #fff; border: none; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; font-size: 12px; cursor: pointer; border-radius: 4px; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-          }
-          .cart-checkout-btn:hover {
-            background: #ffaa00;
-            color: #000;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(255, 170, 0, 0.3);
-          }
-          .cart-checkout-btn:active {
-            transform: scale(0.98);
-            box-shadow: none;
-          }
-        </style>
-        <button id="cartDrawerCheckout" class="cart-checkout-btn">Przejdź do kasy</button>
+        <div id="recItemsList" style="min-height: 50px;">
+          <!-- Loaded dynamically -->
+        </div>
+      </div>
+      
+      <!-- Order Note -->
+      <div style="padding: 15px 25px; border-bottom: 1px solid #eee;">
+        <div id="toggleNoteBtn" style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #555; cursor: pointer; user-select: none;">
+          <i class="ph ph-note-pencil" style="font-size: 16px;"></i>
+          <span>Dodaj uwagi do zamówienia</span>
+        </div>
+        <textarea id="orderNoteInput" placeholder="Wpisz swoje uwagi..." style="width: 100%; height: 60px; margin-top: 10px; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 12px; resize: none; display: none; font-family: inherit; box-sizing: border-box;"></textarea>
+      </div>
+      
+      <!-- Drawer Footer -->
+      <div style="padding: 25px; border-top: 1px solid #eee; background: #fff;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+          <span style="font-size: 16px; font-weight: 700; color: #1a1a1a;">Razem:</span>
+          <span id="cartDrawerTotal" style="font-size: 20px; font-weight: 700; color: #1a1a1a;">0,00 zł</span>
+        </div>
+        <p style="font-size: 11px; color: #777; margin: 0 0 20px 0;">Podatki i koszt dostawy obliczane przy kasie</p>
+        
+        <div style="display: flex; gap: 12px; flex-direction: column;">
+          <style>
+            .cart-checkout-btn-new {
+              width: 100%; padding: 14px; background: #000; color: #fff; border: 1px solid #000; font-weight: 700; text-transform: uppercase; font-size: 13px; cursor: pointer; border-radius: 4px; transition: all 0.3s; letter-spacing: 1px;
+            }
+            .cart-checkout-btn-new:hover {
+              background: #333;
+              border-color: #333;
+            }
+            .cart-viewcart-btn-new {
+              width: 100%; padding: 14px; background: #fff; color: #000; border: 1px solid #000; font-weight: 700; text-transform: uppercase; font-size: 13px; cursor: pointer; border-radius: 4px; transition: all 0.3s; letter-spacing: 1px;
+            }
+            .cart-viewcart-btn-new:hover {
+              background: #fafafa;
+            }
+          </style>
+          <button id="cartDrawerCheckout" class="cart-checkout-btn-new">Przejdź do kasy</button>
+          <button id="cartDrawerGoToCart" class="cart-viewcart-btn-new">Zobacz koszyk</button>
+        </div>
       </div>
     </div>
+    
     <!-- Cart Drawer Overlay -->
     <div id="cartDrawerOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); z-index: 1999; opacity: 0; pointer-events: none; transition: opacity 0.4s;"></div>
   `;
@@ -1079,7 +1127,6 @@ function initSharedPopups() {
     });
   });
 
-  // --- CART DRAWER LOGIC ---
   function openCart() {
     renderCart();
     cartDrawer.style.right = '0px';
@@ -1097,6 +1144,51 @@ function initSharedPopups() {
 
   if (closeCartDrawer) closeCartDrawer.addEventListener('click', closeCart);
   if (cartDrawerOverlay) cartDrawerOverlay.addEventListener('click', closeCart);
+
+  // Notes toggle
+  const toggleNoteBtn = document.getElementById('toggleNoteBtn');
+  const orderNoteInput = document.getElementById('orderNoteInput');
+  if (toggleNoteBtn && orderNoteInput) {
+    toggleNoteBtn.addEventListener('click', () => {
+      if (orderNoteInput.style.display === 'none' || orderNoteInput.style.display === '') {
+        orderNoteInput.style.display = 'block';
+      } else {
+        orderNoteInput.style.display = 'none';
+      }
+    });
+  }
+
+  // Recommendations navigation
+  let currentRecIndex = 0;
+  const prevRecBtn = document.getElementById('prevRecBtn');
+  const nextRecBtn = document.getElementById('nextRecBtn');
+  if (prevRecBtn && nextRecBtn) {
+    prevRecBtn.addEventListener('click', () => {
+      currentRecIndex--;
+      renderRecommendations();
+    });
+    nextRecBtn.addEventListener('click', () => {
+      currentRecIndex++;
+      renderRecommendations();
+    });
+  }
+
+  // Go to cart
+  const goToCartBtn = document.getElementById('cartDrawerGoToCart');
+  if (goToCartBtn) {
+    goToCartBtn.addEventListener('click', () => {
+      closeCart();
+      window.location.href = 'cart.html';
+    });
+  }
+
+  // Checkout
+  if (cartDrawerCheckout) {
+    cartDrawerCheckout.addEventListener('click', () => {
+      closeCart();
+      window.location.href = 'checkout.html';
+    });
+  }
 
   // Link Header Cart Icon to open Cart Drawer
   document.querySelectorAll('a[href="cart.html"], .mockup-actions a, button.mockup-action-icon:last-child').forEach(btn => {
@@ -1116,43 +1208,131 @@ function initSharedPopups() {
     let total = 0;
     cart = JSON.parse(localStorage.getItem('cooken_cart')) || [];
 
+    // Calculate Total
+    cart.forEach(item => {
+      total += item.price * item.qty;
+    });
+
+    // Render Free Shipping Progress
+    const freeShippingLimit = 300;
+    const banner = document.getElementById('freeShippingBanner');
+    const progressBar = document.getElementById('freeShippingProgress');
+    const progressStar = document.getElementById('freeShippingStar');
+    
+    if (banner && progressBar && progressStar) {
+      if (total === 0) {
+        banner.innerHTML = 'Kup za jeszcze <strong>300,00 zł</strong>, aby otrzymać <strong>DARMOWĄ DOSTAWĘ</strong>';
+        progressBar.style.width = '0%';
+        progressStar.style.left = '0%';
+      } else if (total >= freeShippingLimit) {
+        banner.innerHTML = 'Gratulacje! Otrzymujesz <strong>DARMOWĄ DOSTAWĘ</strong>';
+        progressBar.style.width = '100%';
+        progressStar.style.left = '100%';
+      } else {
+        const needed = freeShippingLimit - total;
+        banner.innerHTML = `Kup za jeszcze <strong>${needed.toFixed(2)} zł</strong>, aby otrzymać <strong>DARMOWĄ DOSTAWĘ</strong>`;
+        const percentage = Math.min((total / freeShippingLimit) * 100, 100);
+        progressBar.style.width = `${percentage}%`;
+        progressStar.style.left = `${percentage}%`;
+      }
+    }
+
+    // Render Cart Items
     if (cart.length === 0) {
       cartDrawerItems.innerHTML = `<div style="text-align: center; color: #999; margin-top: 50px;">Twój koszyk jest pusty</div>`;
       cartDrawerTotal.textContent = '0,00 zł';
-      return;
-    }
-
-    cart.forEach((item, index) => {
-      const pTotal = item.price * item.qty;
-      total += pTotal;
-
-      const itemHTML = `
-        <div style="display: flex; gap: 15px; border-bottom: 1px solid #eee; padding-bottom: 15px; position: relative; align-items: center; padding-right: 25px;">
-          <div style="position: relative; flex-shrink: 0; padding-top: 5px;">
-            <img src="${item.image}" style="width: 64px; height: 64px; object-fit: cover; border-radius: 12px; border: 1px solid rgba(0,0,0,0.08); background: #fff;">
-            <span class="summary-product-qty" style="position: absolute; top: 0px; right: -8px; min-width: 20px; height: 20px; padding: 0 5px; background: #fff !important; color: #001f3f !important; font-size: 10px; font-weight: 800; border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(0,0,0,0.15); border: 2px solid #001f3f; z-index: 10;">${item.qty}</span>
-          </div>
-          <div style="flex-grow: 1;">
-            <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 4px; color: #1a1a1a; padding-right: 10px;">${item.title}</h4>
-            <p style="font-size: 11px; color: #777; margin-bottom: 8px;">Kolor: ${item.color ? `<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${item.color}; vertical-align:middle; margin-left:3px;"></span>` : 'Domyślny'} / Rozmiar: ${item.size || 'Domyślny'}</p>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="display: flex; border: 1px solid #e5e5e5; border-radius: 6px; align-items: center; background: #fafafa; overflow: hidden;">
-                <button class="cart-drawer-qty-btn" data-index="${index}" data-action="minus" style="width: 28px; height: 28px; border: none; background: none; font-size: 14px; cursor: pointer; color: #555; display: flex; align-items: center; justify-content: center; transition: background 0.2s;" onmouseover="this.style.background='#eee'" onmouseout="this.style.background='none'">-</button>
-                <span style="padding: 0 12px; font-size: 14px; font-weight: 700; color: #333; min-width: 30px; text-align: center;">${item.qty}</span>
-                <button class="cart-drawer-qty-btn" data-index="${index}" data-action="plus" style="width: 28px; height: 28px; border: none; background: none; font-size: 14px; cursor: pointer; color: #555; display: flex; align-items: center; justify-content: center; transition: background 0.2s;" onmouseover="this.style.background='#eee'" onmouseout="this.style.background='none'">+</button>
+    } else {
+      cart.forEach((item, index) => {
+        const pTotal = item.price * item.qty;
+        const itemHTML = `
+          <div style="display: flex; gap: 15px; border-bottom: 1px solid #eee; padding-bottom: 15px; align-items: center; position: relative;">
+            <div style="width: 80px; height: 80px; flex-shrink: 0; background: #f9f9f9; border: 1px solid #eee; border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+              <img src="${item.image}" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 4px;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <h4 style="font-size: 14px; font-weight: 600; color: #1a1a1a; margin: 0; line-height: 1.3; max-width: 220px;">${item.title}</h4>
+                <span style="font-size: 14px; font-weight: 600; color: #1a1a1a;">${pTotal.toFixed(2)} zł</span>
               </div>
-              <span style="font-size: 14px; font-weight: 700; color: #1a1a1a;">${pTotal.toFixed(2)} zł</span>
+              <p style="font-size: 11px; color: #888; margin: 0 0 8px 0;">Kolor: ${item.color ? `<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${item.color}; vertical-align:middle; margin-left:3px;"></span>` : 'Domyślny'} / Rozmiar: ${item.size || 'Domyślny'}</p>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; border: 1px solid #e0e0e0; border-radius: 99px; height: 32px; overflow: hidden; background: #fff; width: 90px; justify-content: space-between; padding: 0 5px;">
+                  <button class="cart-drawer-qty-btn" data-index="${index}" data-action="minus" style="border: none; background: none; font-size: 16px; cursor: pointer; color: #333; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-family: inherit; line-height: 1;">&minus;</button>
+                  <span style="font-size: 13px; font-weight: 600; color: #1a1a1a;">${item.qty}</span>
+                  <button class="cart-drawer-qty-btn" data-index="${index}" data-action="plus" style="border: none; background: none; font-size: 16px; cursor: pointer; color: #333; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-family: inherit; line-height: 1;">&plus;</button>
+                </div>
+                <button class="cart-drawer-remove" data-index="${index}" style="background: none; border: none; font-size: 12px; color: #888; text-decoration: underline; cursor: pointer; font-family: inherit; font-weight: 500;">Usuń</button>
+              </div>
             </div>
           </div>
-          <button class="cart-drawer-remove" data-index="${index}" style="position: absolute; top: 0px; right: -5px; width: 24px; height: 24px; background: rgba(0,0,0,0.05); border-radius: 50%; border: none; font-size: 16px; line-height: 1; color: #777; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; z-index: 5;" onmouseover="this.style.background='rgba(255,90,0,0.1)'; this.style.color='#ff5a00'" onmouseout="this.style.background='rgba(0,0,0,0.05)'; this.style.color='#777'">&times;</button>
+        `;
+        cartDrawerItems.insertAdjacentHTML('beforeend', itemHTML);
+      });
+      cartDrawerTotal.textContent = `${total.toFixed(2)} zł`;
+    }
+
+    renderRecommendations();
+    bindCartEvents();
+  }
+
+  function renderRecommendations() {
+    const recContainer = document.getElementById('cartRecommendations');
+    const recList = document.getElementById('recItemsList');
+    if (!recContainer || !recList) return;
+
+    const inCartIds = cart.map(item => item.id);
+    const recs = products.filter(p => !inCartIds.includes(p.id));
+
+    if (recs.length === 0) {
+      recContainer.style.display = 'none';
+      return;
+    }
+    recContainer.style.display = 'block';
+
+    const index = Math.abs(currentRecIndex) % recs.length;
+    const rec = recs[index];
+
+    recList.innerHTML = `
+      <div style="display: flex; align-items: center; gap: 15px; background: #fff; padding: 10px; border-radius: 8px; border: 1px solid #eee;">
+        <div style="width: 50px; height: 50px; flex-shrink: 0; background: #fff; border: 1px solid #eee; border-radius: 6px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+          <img src="${rec.images[0]}" style="width: 100%; height: 100%; object-fit: contain;">
         </div>
-      `;
-      cartDrawerItems.insertAdjacentHTML('beforeend', itemHTML);
-    });
+        <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px;">
+          <h5 style="font-size: 13px; font-weight: 600; color: #1a1a1a; margin: 0; line-height: 1.2;">${rec.title}</h5>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="font-size: 13px; font-weight: 700; color: #000;">${rec.price.toFixed(2)} zł</span>
+            ${rec.compareAtPrice ? `<span style="font-size: 11px; text-decoration: line-through; color: #999;">${rec.compareAtPrice.toFixed(2)} zł</span>` : ''}
+          </div>
+        </div>
+        <button class="add-rec-to-cart-btn" data-id="${rec.id}" style="background: none; border: none; font-size: 12px; color: #333; font-weight: 700; cursor: pointer; text-decoration: underline; padding: 10px; font-family: inherit;">+ Dodaj</button>
+      </div>
+    `;
 
-    cartDrawerTotal.textContent = `${total.toFixed(2)} zł`;
+    const addBtn = recList.querySelector('.add-rec-to-cart-btn');
+    if (addBtn) {
+      addBtn.addEventListener('click', (e) => {
+        const prodId = parseInt(e.currentTarget.dataset.id);
+        const p = products.find(prod => prod.id === prodId);
+        if (p) {
+          cart.push({
+            id: p.id,
+            title: p.title,
+            price: p.price,
+            image: p.images[0],
+            qty: 1,
+            color: p.colors && p.colors[0],
+            size: p.sizes && p.sizes[0]
+          });
+          updateLocalStorage();
+          renderCart();
+          window.dispatchEvent(new Event('storage'));
+          showToast('Dodano produkt do koszyka!');
+        }
+      });
+    }
+  }
 
-    // Add listeners to new items buttons
+  function bindCartEvents() {
     document.querySelectorAll('.cart-drawer-qty-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const index = parseInt(e.currentTarget.dataset.index);
