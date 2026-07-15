@@ -35,7 +35,7 @@
       color: var(--text-color);
       background-color: var(--white);
       line-height: 1.6;
-      overflow-x: hidden;
+      overflow-x: clip;
       padding-top: 0;
     }
 
@@ -1696,7 +1696,7 @@
         display: block;
       }
       .mockup-footer {
-        margin-bottom: 40px; /* Space for bottom nav */
+        margin-bottom: 90px !important; /* Space for bottom nav */
       }
       /* Keep top logo and icons visible, but we might hide the hamburger if everything is in bottom nav. Let's keep hamburger for complex menus if needed, but the user said "na dole menu kategorie". */
       .menu-toggle {
@@ -5208,11 +5208,16 @@
     }
     
     /* Sticky Right Sidebar on Desktop */
+    /* Sticky Right Sidebar on Desktop */
     @media (min-width: 992px) {
+      body .product-container {
+        align-items: start !important;
+      }
       body .product-meta {
         position: sticky !important;
         top: 110px !important;
         align-self: start !important;
+        height: fit-content !important;
       }
     }
 
