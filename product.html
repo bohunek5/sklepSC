@@ -36,7 +36,7 @@
       background-color: var(--white);
       line-height: 1.6;
       overflow-x: hidden;
-      padding-top: 80px;
+      padding-top: 0;
     }
 
     h1,
@@ -309,6 +309,9 @@
       align-items: center;
       gap: 6px;
     }
+    #triggerImage {
+      display: none !important;
+    }
 
     /* Purchase controls */
     .product-purchase-box {
@@ -390,41 +393,7 @@
       color: var(--white) !important;
     }
 
-    .buy-it-now-btn {
-      width: 100%;
-      height: 52px;
-      border-radius: 8px;
-      border: 2px solid var(--accent-color);
-      background: var(--accent-color);
-      color: var(--white) !important;
-      font-weight: 700;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-      transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    
-
-    .buy-it-now-btn:hover::before {
-      top: 0;
-    }
-
-    .buy-it-now-btn:not(:hover)::before {
-      animation: slideOutBottom 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .buy-it-now-btn:hover {
-      color: var(--white) !important;
-    }
+    /* buy-it-now-btn styled below */
 
     @keyframes slideOutBottom {
       0% {
@@ -1057,7 +1026,8 @@
     
 
     /* Fixed Button Styles */
-    .add-to-cart-btn, .buy-it-now-btn, .m-btn-primary, .mockup-btn {
+    /* Fixed Button Styles */
+    .add-to-cart-btn, .m-btn-primary, .mockup-btn {
       background: var(--primary-color) !important;
       color: var(--white) !important;
       border: 2px solid var(--primary-color) !important;
@@ -1066,13 +1036,41 @@
       position: relative;
       overflow: visible !important;
     }
-    .add-to-cart-btn::before, .buy-it-now-btn::before, .m-btn-primary::before, .mockup-btn::before {
+    .add-to-cart-btn::before, .m-btn-primary::before, .mockup-btn::before {
       display: none !important;
     }
-    .add-to-cart-btn:hover, .buy-it-now-btn:hover, .m-btn-primary:hover, .mockup-btn:hover {
+    .add-to-cart-btn:hover, .m-btn-primary:hover, .mockup-btn:hover {
       background: transparent !important;
       border-color: var(--primary-color) !important;
       color: var(--primary-color) !important;
+    }
+
+    .buy-it-now-btn {
+      background: transparent !important;
+      color: var(--primary-color) !important;
+      border: 2px solid var(--primary-color) !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+      position: relative;
+      overflow: visible !important;
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      height: 52px;
+    }
+    .buy-it-now-btn::before {
+      display: none !important;
+    }
+    .buy-it-now-btn:hover {
+      background: var(--primary-color) !important;
+      color: var(--white) !important;
     }
 
     /* Product card add to cart buttons: semi-rounded and smaller */
@@ -3676,6 +3674,13 @@
 <a href="#"><i class="ph ph-pinterest-logo"></i></a>
 </div>
 </div>
+<section class="page-hero" style="background: url('images/okladka-produkty.webp') center/cover no-repeat; height: 35vh; min-height: 280px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 90px 20px 20px; text-align: center; position: relative; box-sizing: border-box;">
+  <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(11, 26, 48, 0.455);"></div>
+  <div style="position: relative; z-index: 1;">
+    <h1 id="heroProductTitle" style="color: #fff; font-size: 48px; font-weight: 800; font-family: 'Outfit', sans-serif; margin-bottom: 10px; text-transform: uppercase; letter-spacing: -1px; text-shadow: 0 4px 12px rgba(0,0,0,0.3);">Produkt</h1>
+    <p id="heroProductCategory" style="color: #eee; font-size: 16px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--accent-color);">Prescot LED</p>
+  </div>
+</section>
 <main class="product-container">
 <!-- Tiny Breadcrumbs Bar -->
 <div class="product-breadcrumbs" style="grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; font-size: 11px; color: #888; margin-bottom: -15px; font-family: 'Inter', sans-serif; flex-wrap: wrap; background: #fafafa; padding: 10px 15px; border-radius: 8px; border: 1px solid #f0f0f0;">
@@ -3689,11 +3694,6 @@
 <a href="shop.html" id="breadcrumbCategory" style="color: #666; text-decoration: none; font-weight: 500;">Kategoria</a>
 <span style="opacity: 0.5;">/</span>
 <span id="breadcrumbTitle" style="color: var(--primary-color); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px;">Nazwa produktu</span>
-<!-- Mini product badge at right -->
-<div style="display: inline-flex; align-items: center; gap: 6px; background: #ffffff; padding: 4px 10px; border-radius: 6px; border: 1px solid #e5e7eb; margin-left: auto; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
-<img alt="" id="breadcrumbMiniImg" src="" style="width: 18px; height: 18px; object-fit: cover; border-radius: 4px;"/>
-<span id="breadcrumbMiniTitle" style="font-weight: 700; color: #111; font-size: 10px; max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Produkt</span>
-</div>
 </div>
 <section class="product-gallery">
 <div class="gallery-main-wrapper" style="position: relative;">
@@ -4032,6 +4032,8 @@
 </div>
 </footer>
 <!-- App Data & Logic -->
+<script src="js/products-data.js"></script>
+<script src="js/shared-popups.js"></script>
 <script type="module">
     // Mobile Collapsible Footer Columns
     document.querySelectorAll('.footer-col h3').forEach(h3 => {
@@ -4118,6 +4120,11 @@
     document.getElementById('pCategory').textContent = product.category;
     document.getElementById('pPrice').innerHTML = `${product.price.toFixed(2)} zł <span class="price-unit">/ ${product.category === "Taśmy LED" ? "metr" : "szt."}</span>`;
     document.getElementById('pDesc').textContent = product.description;
+
+    const heroTitle = document.getElementById('heroProductTitle');
+    const heroCat = document.getElementById('heroProductCategory');
+    if (heroTitle) heroTitle.textContent = product.title;
+    if (heroCat) heroCat.textContent = product.category;
 
     // Populate Breadcrumbs dynamically
     const bCat = document.getElementById('breadcrumbCategory');
@@ -4982,6 +4989,50 @@
       background: rgba(0, 0, 0, 0.04) !important;
       border: 1px solid rgba(0, 0, 0, 0.06) !important;
     }
+    
+    /* Purchase CTA Buttons styling overrides */
+    body .product-purchase-box #addToCart {
+      background: var(--primary-color) !important;
+      color: var(--white) !important;
+      border: 2px solid var(--primary-color) !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+    }
+    body .product-purchase-box #addToCart .btn-slide-wrap {
+      color: var(--white) !important;
+    }
+    body .product-purchase-box #addToCart:hover {
+      background: transparent !important;
+      border-color: var(--primary-color) !important;
+    }
+    body .product-purchase-box #addToCart:hover .btn-slide-wrap {
+      color: var(--primary-color) !important;
+    }
+
+    body #buyItNow {
+      background: transparent !important;
+      color: var(--primary-color) !important;
+      border: 2px solid var(--primary-color) !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
+      height: 52px !important;
+      margin-top: 10px !important;
+    }
+    body #buyItNow .btn-slide-wrap {
+      color: var(--primary-color) !important;
+    }
+    body #buyItNow:hover {
+      background: var(--primary-color) !important;
+      border-color: var(--primary-color) !important;
+    }
+    body #buyItNow:hover .btn-slide-wrap {
+      color: var(--white) !important;
+    }
+    
     /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
 
 </style>
