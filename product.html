@@ -3744,17 +3744,13 @@
 <h4 class="option-title">Rozmiar</h4>
 <div class="option-swatches" id="pSizes"></div>
 </div>
-<!-- Purchase & Dynamic Checkout Blocks -->
 <!-- Stock Alert -->
 <div class="stock-alert">
-<i class="ph-fill ph-fire"></i> DOŁĄCZ DO GRONA ZADOWOLONYCH KLIENTÓW
-          </div>
-<div class="stock-bar"><div class="stock-bar-fill"></div></div>
-<!-- Icons Row -->
-<div class="product-icons-row" style="align-items: center;">
-<button class="product-action-pill" id="btnParametry">⚡ Parametry</button>
-<button class="product-action-pill" id="btnBarwa">🎨 Barwa światła</button>
+  <i class="ph-fill ph-fire"></i> Śpiesz się! Zostało tylko kilka sztuk w magazynie!
 </div>
+<div class="stock-bar"><div class="stock-bar-fill" style="width: 15%;"></div></div>
+<!-- Actions & Features Row (Shopify Style) -->
+<div class="product-actions-bar" id="productActionsBar"></div>
 <!-- Parametry Popup -->
 <div class="product-popup-overlay" id="popupParametry" style="display:none;">
 <div class="product-popup-box">
@@ -3817,6 +3813,28 @@
 </div>
 </div>
 </div>
+<!-- Zapytaj o produkt Popup -->
+<div class="product-popup-overlay" id="popupZapytaj" style="display:none; z-index: 9999;">
+  <div class="product-popup-box" style="max-width: 500px; padding: 30px;">
+    <button class="popup-close" onclick="document.getElementById('popupZapytaj').style.display='none'">✕</button>
+    <h3 style="margin-bottom: 20px; font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--primary-color);">Zapytaj o produkt</h3>
+    <form id="askQuestionForm" onsubmit="event.preventDefault(); alert('Dziękujemy! Twoja wiadomość została wysłana. Odpowiemy w ciągu 24 godzin.'); document.getElementById('popupZapytaj').style.display='none';">
+      <div style="margin-bottom: 15px;">
+        <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #333;">Twoje Imię</label>
+        <input type="text" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; font-family: inherit;" placeholder="np. Jan Kowalski">
+      </div>
+      <div style="margin-bottom: 15px;">
+        <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #333;">Twój Adres E-mail</label>
+        <input type="email" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; font-family: inherit;" placeholder="np. jan@example.com">
+      </div>
+      <div style="margin-bottom: 20px;">
+        <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #333;">Treść pytania</label>
+        <textarea id="askQuestionTextarea" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; height: 120px; font-family: inherit; resize: vertical;" placeholder="Wpisz treść swojego zapytania..."></textarea>
+      </div>
+      <button type="submit" class="buy-it-now-btn" style="background: var(--primary-color) !important; color: #fff !important; width: 100%; border: none !important; cursor: pointer; height: 48px; border-radius: 8px; font-weight: 700; text-transform: uppercase; font-size: 13px; display: flex; align-items: center; justify-content: center;">Wyślij zapytanie</button>
+    </form>
+  </div>
+</div>
 <div class="product-purchase-box">
 <div class="purchase-actions-row">
 <div class="quantity-selector">
@@ -3838,18 +3856,38 @@
 </span>
 </button>
 <div id="productVariantsContainer" style="margin-top: 20px;"></div>
-<!-- Two simple rows detailing fast delivery and easy returns -->
-<div class="delivery-returns-info" style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #eee; font-size: 14px; color: #555; line-height: 1.6;">
-<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-<span style="color: var(--accent-color); font-size: 16px;"><i class="ph ph-truck"></i></span>
-<span style="font-weight: 500; color: var(--primary-color);">Szybka wysyłka w 24h na terenie całego
-              kraju</span>
-</div>
-<div style="display: flex; align-items: center; gap: 10px;">
-<span style="color: var(--accent-color); font-size: 16px;"><i class="ph ph-arrow-counter-clockwise"></i></span>
-<span style="font-weight: 500; color: var(--primary-color);">Bezproblemowy zwrot do 30 dni bez podania
-              przyczyny</span>
-</div>
+<!-- Info Banners Container (Shopify Style) -->
+<div class="info-banners-container">
+  <!-- Card 1: Salon Pickup -->
+  <div class="info-banner-card">
+    <div class="info-banner-icon">
+      <i class="ph ph-storefront"></i>
+    </div>
+    <div class="info-banner-content">
+      <div class="info-banner-title">Odbiór osobisty w Salonie</div>
+      <p class="info-banner-text">Bezpłatny odbiór w naszym salonie w Warszawie. Dostępne od ręki (24h).</p>
+    </div>
+  </div>
+  <!-- Card 2: Fast Shipping -->
+  <div class="info-banner-card">
+    <div class="info-banner-icon">
+      <i class="ph ph-truck"></i>
+    </div>
+    <div class="info-banner-content">
+      <div class="info-banner-title">Szybka dostawa w 24h</div>
+      <p class="info-banner-text">Zamów teraz – wyślemy dziś. Przewidywana dostawa na kolejny dzień roboczy (Darmowa od 500 zł).</p>
+    </div>
+  </div>
+  <!-- Card 3: Easy Returns -->
+  <div class="info-banner-card">
+    <div class="info-banner-icon">
+      <i class="ph ph-shield-check"></i>
+    </div>
+    <div class="info-banner-content">
+      <div class="info-banner-title">Bezpieczne zakupy i łatwy zwrot</div>
+      <p class="info-banner-text">Aż 30 dni na zwrot bez podania przyczyny. Szybka i bezproblemowa procedura zwrotu.</p>
+    </div>
+  </div>
 </div>
 </div>
 <div class="product-tabs">
@@ -4120,6 +4158,142 @@
     document.getElementById('pCategory').textContent = product.category;
     document.getElementById('pPrice').innerHTML = `${product.price.toFixed(2)} zł <span class="price-unit">/ ${product.category === "Taśmy LED" ? "metr" : "szt."}</span>`;
     document.getElementById('pDesc').textContent = product.description;
+
+    // Render Actions Bar dynamically (Shopify Style)
+    const actionsBar = document.getElementById('productActionsBar');
+    if (actionsBar) {
+      actionsBar.innerHTML = '';
+      const items = [];
+
+      // 1. Parametry technical specifications (always show)
+      items.push(`
+        <button class="product-action-item" onclick="document.getElementById('popupParametry').style.display='flex'">
+          <i class="ph ph-file-text"></i>
+          <span>Parametry techniczne</span>
+        </button>
+      `);
+
+      // 2. Barwy światła light color guide (only for Taśmy LED or Sterowniki LED)
+      if (product.category === "Taśmy LED" || product.category === "Sterowniki LED") {
+        items.push(`
+          <button class="product-action-item" onclick="document.getElementById('popupBarwa').style.display='flex'">
+            <i class="ph ph-palette"></i>
+            <span>Barwy światła</span>
+          </button>
+        `);
+      }
+
+      // 3. Model 3D / AR
+      if (product.has3D) {
+        items.push(`
+          <button class="product-action-item" id="actionBar3DBtn">
+            <i class="ph ph-cube"></i>
+            <span>Model 3D (AR)</span>
+          </button>
+        `);
+      }
+
+      // 4. Widok 360
+      if (product.has360) {
+        items.push(`
+          <button class="product-action-item" id="actionBar360Btn">
+            <i class="ph ph-arrows-clockwise"></i>
+            <span>Widok 360°</span>
+          </button>
+        `);
+      }
+
+      // 5. Wideo
+      if (product.video) {
+        items.push(`
+          <button class="product-action-item" id="actionBarVideoBtn">
+            <i class="ph ph-play-circle"></i>
+            <span>Prezentacja wideo</span>
+          </button>
+        `);
+      }
+
+      // 6. Zapytaj o produkt
+      items.push(`
+        <button class="product-action-item" id="actionBarAskBtn">
+          <i class="ph ph-question"></i>
+          <span>Zapytaj o produkt</span>
+        </button>
+      `);
+
+      // 7. Udostępnij
+      items.push(`
+        <button class="product-action-item" id="actionBarShareBtn">
+          <i class="ph ph-share-network"></i>
+          <span>Udostępnij</span>
+        </button>
+      `);
+
+      // Join items with dividers
+      actionsBar.innerHTML = items.join('<div class="product-action-divider"></div>');
+
+      // Bind events directly
+      const btn3D = document.getElementById('actionBar3DBtn');
+      if (btn3D) {
+        btn3D.addEventListener('click', () => {
+          const trigger = document.getElementById('trigger3D');
+          if (trigger) trigger.click();
+        });
+      }
+
+      const btn360 = document.getElementById('actionBar360Btn');
+      if (btn360) {
+        btn360.addEventListener('click', () => {
+          const trigger = document.getElementById('trigger360');
+          if (trigger) trigger.click();
+        });
+      }
+
+      const btnVideo = document.getElementById('actionBarVideoBtn');
+      if (btnVideo) {
+        btnVideo.addEventListener('click', () => {
+          const mainVid = document.getElementById('mainVideo');
+          resetGalleryTabs();
+          if (mainVid) {
+            mainVid.style.display = 'block';
+            mainVid.style.opacity = '1';
+            mainVid.src = product.video;
+            mainVid.play().catch(err => console.log("Video play failed:", err));
+          }
+          const vThumb = document.querySelector('.thumbnail.video-thumbnail-card');
+          if (vThumb) {
+            document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+            vThumb.classList.add('active');
+          }
+        });
+      }
+
+      const btnAsk = document.getElementById('actionBarAskBtn');
+      if (btnAsk) {
+        btnAsk.addEventListener('click', () => {
+          const text = document.getElementById('askQuestionTextarea');
+          if (text) {
+            text.value = `Dzień dobry, mam pytanie dotyczące produktu: ${product.title}. Chciałbym dowiedzieć się więcej o...`;
+          }
+          document.getElementById('popupZapytaj').style.display = 'flex';
+        });
+      }
+
+      const btnShare = document.getElementById('actionBarShareBtn');
+      if (btnShare) {
+        btnShare.addEventListener('click', () => {
+          navigator.clipboard.writeText(window.location.href)
+            .then(() => {
+              const toast = document.getElementById('shareToast');
+              if (toast) {
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2000);
+              }
+            })
+            .catch(err => console.error("Could not copy text: ", err));
+        });
+      }
+    }
 
     const heroTitle = document.getElementById('heroProductTitle');
     const heroCat = document.getElementById('heroProductCategory');
@@ -5033,8 +5207,177 @@
       color: var(--white) !important;
     }
     
+    /* Sticky Right Sidebar on Desktop */
+    @media (min-width: 992px) {
+      body .product-meta {
+        position: sticky !important;
+        top: 110px !important;
+        align-self: start !important;
+      }
+    }
+
+    /* Actions & Features Bar (Shopify Style) */
+    .product-actions-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 12px 0;
+      border-top: 1px solid #eaeaea;
+      border-bottom: 1px solid #eaeaea;
+      margin: 25px 0 15px 0;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .product-action-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary-color) !important;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      background: none;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-family: inherit;
+    }
+    .product-action-item:hover {
+      color: var(--accent-color) !important;
+      background: rgba(0, 0, 0, 0.04);
+    }
+    .product-action-item i {
+      font-size: 16px;
+      color: #555;
+      transition: color 0.2s ease;
+    }
+    .product-action-item:hover i {
+      color: var(--accent-color);
+    }
+    .product-action-divider {
+      width: 1px;
+      height: 14px;
+      background-color: #eaeaea;
+    }
+
+    /* Stock Alert & Progress Bar Styles */
+    body .stock-alert {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      color: #b91c1c !important;
+      margin: 15px 0 8px 0 !important;
+      letter-spacing: 0.5px !important;
+      font-family: inherit;
+    }
+    body .stock-alert i {
+      color: #ef4444 !important;
+      font-size: 16px !important;
+      animation: pulseFire 1.5s infinite alternate !important;
+    }
+    @keyframes pulseFire {
+      0% { transform: scale(1); filter: drop-shadow(0 0 1px rgba(239, 68, 68, 0.4)); }
+      100% { transform: scale(1.15); filter: drop-shadow(0 0 5px rgba(239, 68, 68, 0.8)); }
+    }
+    body .stock-bar {
+      height: 6px !important;
+      background: #f1f5f9 !important;
+      border-radius: 3px !important;
+      margin-bottom: 25px !important;
+      overflow: hidden !important;
+      position: relative !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+    body .stock-bar-fill {
+      height: 100% !important;
+      background: linear-gradient(90deg, #ef4444, #f97316) !important;
+      border-radius: inherit !important;
+    }
+
+    /* Minimalist Return & Delivery Info Banners */
+    .info-banners-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 30px;
+      padding-top: 25px;
+      border-top: 1px solid #eee;
+    }
+    .info-banner-card {
+      display: flex;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 8px;
+      background: #f8fafc;
+      border: 1px solid #f1f5f9;
+      transition: all 0.3s ease;
+    }
+    .info-banner-card:hover {
+      background: #f1f5f9;
+      border-color: #e2e8f0;
+      transform: translateY(-1px);
+    }
+    .info-banner-icon {
+      font-size: 20px;
+      color: var(--primary-color);
+      display: flex;
+      align-items: flex-start;
+      margin-top: 1px;
+    }
+    .info-banner-content {
+      flex: 1;
+    }
+    .info-banner-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 3px;
+      font-family: 'Outfit', sans-serif;
+    }
+    .info-banner-text {
+      font-size: 11.5px;
+      line-height: 1.4;
+      color: #64748b;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Share Toast Notification */
+    .share-toast {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--primary-color);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 10000;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Inter', sans-serif;
+    }
+    .share-toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+    
     /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
 
 </style>
+<!-- Toast Notification -->
+<div class="share-toast" id="shareToast">
+  <i class="ph ph-check-circle" style="font-size: 18px; color: #00e5ff;"></i>
+  <span>Skopiowano link do produktu!</span>
+</div>
 </body>
 </html>
