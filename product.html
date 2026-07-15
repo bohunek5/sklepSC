@@ -3674,7 +3674,7 @@
 <a href="#"><i class="ph ph-pinterest-logo"></i></a>
 </div>
 </div>
-<section class="page-hero" style="background: url('images/okladka-produkty.webp') center/cover no-repeat; height: 35vh; min-height: 280px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 90px 20px 20px; text-align: center; position: relative; box-sizing: border-box;">
+<section class="page-hero" style="background: url('images/okladka-produkty.webp') center 28% / cover no-repeat; height: 35vh; min-height: 280px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 90px 20px 20px; text-align: center; position: relative; box-sizing: border-box;">
   <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(11, 26, 48, 0.455);"></div>
   <div style="position: relative; z-index: 1;">
     <h1 id="heroProductTitle" style="color: #fff; font-size: 48px; font-weight: 800; font-family: 'Outfit', sans-serif; margin-bottom: 10px; text-transform: uppercase; letter-spacing: -1px; text-shadow: 0 4px 12px rgba(0,0,0,0.3);">Produkt</h1>
@@ -3726,6 +3726,25 @@
 </div>
 </div>
 <div class="product-thumbnails" id="qvThumbnails"></div>
+<!-- Product Tabs (Opis, Wysyłka, Opinie) pod galerię -->
+<div class="product-tabs" style="margin-top: 45px; border-top: 1px solid #eee; padding-top: 30px; width: 100%;">
+<div class="tab-headers">
+<span class="tab-header active" id="descTabHeader">Opis</span>
+<span class="tab-header" id="shippingTabHeader">Wysyłka</span>
+<span class="tab-header" id="reviewsTabHeader">Opinie (14)</span>
+</div>
+<div class="tab-pane active" id="descTab"></div>
+<div class="tab-pane" id="shippingTab">
+<p>Oferujemy szybką wysyłkę na terenie całej Europy. Zamówienia złożone do godziny 12:00 wysyłamy tego samego
+            dnia. Darmowa dostawa dla zakupów od 500 zł.</p>
+</div>
+<div class="tab-pane" id="reviewsTab">
+<p><strong>Karol B.</strong> ★★★★★<br/>Świetna jakość, produkt wygląda niesamowicie profesjonalnie. Bardzo
+            polecam!</p>
+<p style="margin-top: 15px;"><strong>Anna K.</strong> ★★★★★<br/>Najpiękniejsza rzecz jaką kupiłam do kuchni.
+            Bardzo polecam.</p>
+</div>
+</div>
 </section>
 <section class="product-meta">
 <div class="product-brand" id="pCategory">COOKEN LINE</div>
@@ -3888,55 +3907,22 @@
       <p class="info-banner-text">Aż 30 dni na zwrot bez podania przyczyny. Szybka i bezproblemowa procedura zwrotu.</p>
     </div>
   </div>
-</div>
-</div>
-<div class="product-tabs">
-<div class="tab-headers">
-<span class="tab-header active" id="descTabHeader">Opis</span>
-<span class="tab-header" id="shippingTabHeader">Wysyłka</span>
-<span class="tab-header" id="reviewsTabHeader">Opinie (14)</span>
-</div>
-<div class="tab-pane active" id="descTab"></div>
-<div class="tab-pane" id="shippingTab">
-<p>Oferujemy szybką wysyłkę na terenie całej Europy. Zamówienia złożone do godziny 12:00 wysyłamy tego samego
-            dnia. Darmowa dostawa dla zakupów od 500 zł.</p>
-</div>
-<div class="tab-pane" id="reviewsTab">
-<p><strong>Karol B.</strong> ★★★★★<br/>Świetna jakość, produkt wygląda niesamowicie profesjonalnie. Bardzo
-            polecam!</p>
-<p style="margin-top: 15px;"><strong>Anna K.</strong> ★★★★★<br/>Najpiękniejsza rzecz jaką kupiłam do kuchni.
-            Bardzo polecam.</p>
+  <!-- Badge dla taśm Delux Pro -->
+  <div id="deluxBadgeContainer" style="display: none; margin-top: 25px; padding-top: 20px; border-top: 1px solid #eee;">
+    <img src="images/5_i_7.webp" alt="Taśma LED Delux Pro 7 lat gwarancji" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #f1f5f9;">
+  </div>
 </div>
 </div>
 </section>
 </main>
-<!-- Szczegółowy opis produktu HTML -->
-<section class="product-detailed-description" style="max-width: 1200px; margin: 60px auto; padding: 0 5%;">
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; margin-bottom: 60px;">
-<div>
-<h2 style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 700; color: var(--primary-color); margin-bottom: 20px; line-height: 1.2;">
-          Zaawansowane Systemy Oświetleniowe LED
-        </h2>
-<p style="font-size: 16px; color: #555; line-height: 1.8; margin-bottom: 20px;">
-          Nasze produkty są tworzone z myślą o profesjonalistach poszukujących niezawodnych i precyzyjnych rozwiązań.
-          Używamy najwyższej klasy komponentów, gwarantując stałą jasność diod oraz stabilność zasilania. Idealne do
-          nowoczesnych projektów hoteli, biur, salonów oraz luksusowych przestrzeni mieszkalnych.
-        </p>
-<p style="font-size: 16px; color: #555; line-height: 1.8;">
-          Systemy zasilaczy Scharfer z unikalną 7-letnią gwarancją i zaawansowanymi sterownikami radiowymi RF Prescot
-          gwarantują bezproblemowe użytkowanie i pełną integrację ze standardami inteligentnego domu.
-        </p>
-</div>
-<div>
-<img alt="Profesjonalne komponenty LED" src="images/products/controller_rgbw.webp" style="width: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); object-fit: cover; max-height: 350px;"/>
-</div>
-</div>
-<!-- 4-column features showcase grid - ALWAYS in one line -->
+
+<!-- 4-column features showcase grid (Shopify style) -->
+<section style="max-width: 1200px; margin: 40px auto; padding: 0 5%; border-top: 1px solid #eee; padding-top: 40px;">
 <div class="product-features-grid">
 <div style="text-align: center; padding: 20px;">
 <div style="font-size: 36px; margin-bottom: 15px; color: var(--accent-color);"><i class="ph ph-shield-check"></i></div>
-<h3 style="font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; color: var(--primary-color); margin-bottom: 8px;">7 Lat Gwarancji</h3>
-<p style="font-size: 13px; color: #666; line-height: 1.6;">Pełna gwarancja producenta na wszystkie zasilacze Scharfer.</p>
+<h3 style="font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; color: var(--primary-color); margin-bottom: 8px;">Do 7 Lat Gwarancji</h3>
+<p style="font-size: 13px; color: #666; line-height: 1.6;">Na serię taśm LED Delux oraz zasilacze Scharfer.</p>
 </div>
 <div style="text-align: center; padding: 20px;">
 <div style="font-size: 36px; margin-bottom: 15px; color: var(--accent-color);"><i class="ph ph-truck"></i></div>
@@ -3950,7 +3936,7 @@
 </div>
 <div style="text-align: center; padding: 20px;">
 <div style="font-size: 36px; margin-bottom: 15px; color: var(--accent-color);"><i class="ph ph-lock-key"></i></div>
-<h3 style="font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; color: var(--primary-color); margin-bottom: 8px;">Bezbezpieczne Zakupy</h3>
+<h3 style="font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; color: var(--primary-color); margin-bottom: 8px;">Bezpieczne Zakupy</h3>
 <p style="font-size: 13px; color: #666; line-height: 1.6;">Szyfrowane płatności i bezproblemowe zwroty do 30 dni.</p>
 </div>
 </div>
@@ -4292,6 +4278,20 @@
             })
             .catch(err => console.error("Could not copy text: ", err));
         });
+      }
+    }
+
+    // Show/hide Delux/Premium banner badge image
+    const deluxContainer = document.getElementById('deluxBadgeContainer');
+    if (deluxContainer) {
+      const isDelux = product.title.toLowerCase().includes('delux') || 
+                      product.description.toLowerCase().includes('delux') ||
+                      product.title.toLowerCase().includes('premium') || 
+                      product.description.toLowerCase().includes('premium');
+      if (isDelux) {
+        deluxContainer.style.display = 'block';
+      } else {
+        deluxContainer.style.display = 'none';
       }
     }
 
@@ -5371,6 +5371,25 @@
       transform: translateX(-50%) translateY(0);
     }
     
+    /* Recommended Grid layout & cards */
+    #recommendedGrid {
+      display: grid !important;
+      grid-template-columns: repeat(4, 1fr) !important;
+      gap: 24px !important;
+    }
+    @media (max-width: 991px) {
+      #recommendedGrid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px !important;
+      }
+    }
+    @media (max-width: 480px) {
+      #recommendedGrid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+      }
+    }
+
     /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
 
 </style>
