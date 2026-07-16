@@ -38,6 +38,7 @@
       color: var(--text-color);
       background-color: var(--white);
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
     /* Checkout Page Structure */
@@ -59,7 +60,21 @@
     /* Right panel: Order Summary */
     .checkout-summary-panel {
       background-color: var(--light-bg);
-      padding: 176px 20px 60px 40px;
+      padding: 60px 20px 60px 40px;
+      position: relative;
+    }
+
+    @media (min-width: 1025px) {
+      .checkout-summary-panel::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 100%;
+        width: 100vw;
+        height: 100%;
+        background-color: var(--light-bg);
+        z-index: -1;
+      }
     }
 
     .checkout-logo img {
@@ -1879,16 +1894,6 @@
 <div class="checkout-wrapper">
 <!-- Left panel: Form details -->
 <section class="checkout-form-panel">
-<div class="checkout-logo">
-<a href="index.html"><img alt="Prescot Logo" src="images/logo.png"/></a>
-</div>
-<div class="checkout-breadcrumbs">
-<a href="cart.html">Koszyk</a>
-<span>&gt;</span>
-<span class="active">Dane do wysyłki</span>
-<span>&gt;</span>
-<span>Płatność</span>
-</div>
 <form id="checkoutForm" onsubmit="event.preventDefault(); submitOrder();">
 <div style="margin-bottom: 40px;">
 <h3 class="section-title">Informacje kontaktowe</h3>
@@ -2085,6 +2090,16 @@ Odbiór osobisty w: <strong>Prescot LED Showroom, ul. LEDowa 12, Warszawa</stron
 </section>
 <!-- Right panel: Summary -->
 <section class="checkout-summary-panel">
+<div class="checkout-logo">
+<a href="index.html"><img alt="Prescot Logo" src="images/logo.png"/></a>
+</div>
+<div class="checkout-breadcrumbs">
+<a href="cart.html">Koszyk</a>
+<span>&gt;</span>
+<span class="active">Dane do wysyłki</span>
+<span>&gt;</span>
+<span>Płatność</span>
+</div>
 <div class="checkout-summary-sticky-container">
 <div class="summary-product-list" id="checkoutItemsList">
 <!-- Loaded dynamically -->
