@@ -5021,6 +5021,35 @@
     // Run estimator immediately and update every second
     updateDeliveryEstimator();
     setInterval(updateDeliveryEstimator, 1000);
+
+    // Relocation logic for sticky sidebar travel height on desktop vs mobile
+    function relocateSidebars() {
+      const isDesktop = window.innerWidth > 768;
+      const banners = document.querySelector('.info-banners-container');
+      const badge = document.getElementById('deluxBadgeContainer');
+      const gallery = document.querySelector('.product-gallery');
+      const meta = document.querySelector('.product-meta');
+      
+      if (isDesktop) {
+        if (banners && gallery && banners.parentElement !== gallery) {
+          gallery.appendChild(banners);
+        }
+        if (badge && gallery && badge.parentElement !== gallery) {
+          gallery.appendChild(badge);
+        }
+      } else {
+        if (banners && meta && banners.parentElement !== meta) {
+          meta.appendChild(banners);
+        }
+        if (badge && meta && badge.parentElement !== meta) {
+          meta.appendChild(badge);
+        }
+      }
+    }
+    
+    // Run immediately and on resize
+    relocateSidebars();
+    window.addEventListener('resize', relocateSidebars);
   </script>
 <!-- Sticky Add to Cart -->
 <div class="sticky-cart-bar" id="stickyCartBar">
@@ -5207,7 +5236,7 @@
     /* Sticky Right Sidebar on Desktop */
     /* Sticky Right Sidebar on Desktop */
     @media (min-width: 769px) {
-      body {
+      html, body {
         overflow-x: visible !important;
       }
       body .product-container {

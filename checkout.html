@@ -1624,6 +1624,14 @@
       .mockup-footer ul li a, .mockup-footer p {
         font-size: 14px !important;
       }
+      html, body {
+        overflow-x: visible !important;
+      }
+      .checkout-summary-sticky-container {
+        position: sticky !important;
+        top: 110px !important;
+        align-self: start !important;
+      }
     }
   
     /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
@@ -2077,6 +2085,7 @@ Odbiór osobisty w: <strong>Prescot LED Showroom, ul. LEDowa 12, Warszawa</stron
 </section>
 <!-- Right panel: Summary -->
 <section class="checkout-summary-panel">
+<div class="checkout-summary-sticky-container">
 <div class="summary-product-list" id="checkoutItemsList">
 <!-- Loaded dynamically -->
 </div>
@@ -2093,6 +2102,7 @@ Odbiór osobisty w: <strong>Prescot LED Showroom, ul. LEDowa 12, Warszawa</stron
 <div class="summary-row total">
 <span>Razem (Suma końcowa)</span>
 <span id="summaryTotal">0,00 zł</span>
+</div>
 </div>
 </section>
 </div>
