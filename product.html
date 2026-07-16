@@ -3868,7 +3868,7 @@
 <button class="buy-it-now-btn" id="buyItNow">
 <span class="btn-slide-wrap">
 <span class="btn-txt-default">Kup teraz (Szybka płatność)</span>
-<span class="btn-txt-hover"><i class="ph ph-lightning" style="margin-right: 6px;"></i> Przejdź do kasy</span>
+<span class="btn-txt-hover"><i class="ph ph-shopping-cart-simple" style="margin-right: 6px;"></i> Przejdź do kasy</span>
 </span>
 </button>
 <div id="productVariantsContainer" style="margin-top: 20px;"></div>
@@ -3938,6 +3938,16 @@
 </div>
 </div>
 </section>
+<!-- Sekcja Polecane Produkty -->
+<section class="recommended-products-section" style="max-width: 1800px; margin: 80px auto; padding: 0 5%;">
+<h2 style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 700; color: var(--primary-color); text-align: center; margin-bottom: 10px;">
+      Polecane produkty</h2>
+<p style="text-align: center; color: #666; margin-bottom: 50px; font-size: 16px;">Mogą Ci się również spodobać te
+      rozwiązania</p>
+<div id="recommendedGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+<!-- Loaded dynamically via JS -->
+</div>
+</section>
 <!-- Sekcja Blogowa pod produktem -->
 <section class="product-blog-section" style="background: var(--light-bg); padding: 80px 5%; border-top: 1px solid #eee; border-bottom: 1px solid #eee;">
 <div style="max-width: 1800px; margin: 0 auto;">
@@ -3992,16 +4002,6 @@
 </div>
 </article>
 </div>
-</div>
-</section>
-<!-- Sekcja Polecane Produkty -->
-<section class="recommended-products-section" style="max-width: 1800px; margin: 80px auto; padding: 0 5%;">
-<h2 style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 700; color: var(--primary-color); text-align: center; margin-bottom: 10px;">
-      Polecane produkty</h2>
-<p style="text-align: center; color: #666; margin-bottom: 50px; font-size: 16px;">Mogą Ci się również spodobać te
-      rozwiązania</p>
-<div id="recommendedGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
-<!-- Loaded dynamically via JS -->
 </div>
 </section>
 
@@ -5021,35 +5021,6 @@
     // Run estimator immediately and update every second
     updateDeliveryEstimator();
     setInterval(updateDeliveryEstimator, 1000);
-
-    // Relocation logic for sticky sidebar travel height on desktop vs mobile
-    function relocateSidebars() {
-      const isDesktop = window.innerWidth > 768;
-      const banners = document.querySelector('.info-banners-container');
-      const badge = document.getElementById('deluxBadgeContainer');
-      const gallery = document.querySelector('.product-gallery');
-      const meta = document.querySelector('.product-meta');
-      
-      if (isDesktop) {
-        if (banners && gallery && banners.parentElement !== gallery) {
-          gallery.appendChild(banners);
-        }
-        if (badge && gallery && badge.parentElement !== gallery) {
-          gallery.appendChild(badge);
-        }
-      } else {
-        if (banners && meta && banners.parentElement !== meta) {
-          meta.appendChild(banners);
-        }
-        if (badge && meta && badge.parentElement !== meta) {
-          meta.appendChild(badge);
-        }
-      }
-    }
-    
-    // Run immediately and on resize
-    relocateSidebars();
-    window.addEventListener('resize', relocateSidebars);
   </script>
 <!-- Sticky Add to Cart -->
 <div class="sticky-cart-bar" id="stickyCartBar">

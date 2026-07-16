@@ -454,8 +454,8 @@ function injectCartDrawer() {
           </button>
           <button id="cartDrawerGoToCart" class="cart-viewcart-btn-new">
             <div class="btn-slide-wrap">
-              <span class="btn-txt-default">Zobacz koszyk</span>
-              <span class="btn-txt-hover">Koszyk</span>
+              <span class="btn-txt-default">Powrót</span>
+              <span class="btn-txt-hover">Zamknij</span>
             </div>
           </button>
         </div>
@@ -1245,7 +1245,6 @@ function initSharedPopups() {
   if (goToCartBtn) {
     goToCartBtn.addEventListener('click', () => {
       closeCart();
-      window.location.href = 'cart.html';
     });
   }
 
@@ -1313,12 +1312,14 @@ function initSharedPopups() {
         const pTotal = item.price * item.qty;
         const itemHTML = `
           <div style="display: flex; gap: 15px; border-bottom: 1px solid #eee; padding-bottom: 15px; align-items: center; position: relative;">
-            <div style="width: 80px; height: 80px; flex-shrink: 0; background: #f9f9f9; border: 1px solid #eee; border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+            <a href="product.html?id=${item.id}" target="_blank" style="width: 80px; height: 80px; flex-shrink: 0; background: #f9f9f9; border: 1px solid #eee; border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: pointer; text-decoration: none;">
               <img src="${item.image}" style="width: 100%; height: 100%; object-fit: contain;">
-            </div>
+            </a>
             <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 4px;">
               <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <h4 style="font-size: 14px; font-weight: 600; color: #1a1a1a; margin: 0; line-height: 1.3; max-width: 220px;">${item.title}</h4>
+                <h4 style="font-size: 14px; font-weight: 600; margin: 0; line-height: 1.3; max-width: 220px;">
+                  <a href="product.html?id=${item.id}" target="_blank" style="color: #1a1a1a; text-decoration: none; cursor: pointer;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${item.title}</a>
+                </h4>
                 <span style="font-size: 14px; font-weight: 600; color: #1a1a1a;">${pTotal.toFixed(2)} zł</span>
               </div>
               <p style="font-size: 11px; color: #888; margin: 0 0 8px 0;">Kolor: ${item.color ? `<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${item.color}; vertical-align:middle; margin-left:3px;"></span>` : 'Domyślny'} / Rozmiar: ${item.size || 'Domyślny'}</p>

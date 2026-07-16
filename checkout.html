@@ -2142,12 +2142,14 @@ Odbiór osobisty w: <strong>Prescot LED Showroom, ul. LEDowa 12, Warszawa</stron
 
         const itemHTML = `
           <div class="summary-product-item">
-            <div class="summary-img-wrapper">
+            <a href="product.html?id=${item.id}" target="_blank" class="summary-img-wrapper" style="display: block; cursor: pointer; text-decoration: none;">
               <img src="${item.image}" alt="${item.title}" class="summary-product-img">
               <span class="summary-product-qty">${item.qty}</span>
-            </div>
+            </a>
             <div class="summary-product-details">
-              <h4 class="summary-product-title">${item.title}</h4>
+              <h4 class="summary-product-title">
+                <a href="product.html?id=${item.id}" target="_blank" style="color: inherit; text-decoration: none; cursor: pointer;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${item.title}</a>
+              </h4>
               <div class="summary-product-meta">Kolor: ${item.color ? `<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${item.color}; vertical-align:middle;"></span>` : 'Domyślny'} / Rozmiar: ${item.size || 'Domyślny'}</div>
             </div>
             <div class="summary-product-price">${pTotal.toFixed(2)} zł</div>
