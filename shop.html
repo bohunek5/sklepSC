@@ -2122,7 +2122,7 @@
       }
       
       /* Side-by-side layout when sidebar is active */
-      .shop-container.has-sidebar {
+      .shop-main-layout.has-sidebar {
         display: flex !important;
         flex-direction: row !important;
         gap: 30px !important;
@@ -2130,7 +2130,7 @@
       }
       
       /* Sidebar styling as a left column */
-      .shop-container.has-sidebar .shop-sidebar.active {
+      .shop-main-layout.has-sidebar .shop-sidebar.active {
         width: 250px !important;
         flex-shrink: 0 !important;
         display: flex !important;
@@ -2145,11 +2145,11 @@
       }
       
       /* Grid shrinks to 4 columns when sidebar is open */
-      .shop-container.has-sidebar .shop-grid {
+      .shop-main-layout.has-sidebar .shop-grid {
         grid-template-columns: repeat(4, 1fr) !important;
       }
       
-      .shop-container.has-sidebar .shop-content {
+      .shop-main-layout.has-sidebar .shop-content {
         flex: 1 !important;
       }
     }
@@ -3222,49 +3222,51 @@
       </select>
     </div>
 
-    <!-- Hidden collapsible filters panel -->
-    <aside class="shop-sidebar" id="shopSidebar">
-      <!-- Search widget removed -->
+    <div class="shop-main-layout">
+      <!-- Hidden collapsible filters panel -->
+      <aside class="shop-sidebar" id="shopSidebar">
+        <!-- Search widget removed -->
 
-      <div class="filter-widget">
-        <h3 class="filter-title">Kategorie</h3>
-        <ul class="filter-list" id="categoriesList">
-          <!-- Loaded dynamically -->
-        </ul>
-      </div>
-      
-      <div class="filter-widget">
-        <h3 class="filter-title">Kolor</h3>
-        <div class="filter-color-dots" id="colorsList">
-          <div class="color-dot active" data-color="all" style="background: linear-gradient(45deg, #f00, #0f0, #00f); border: 1px solid #ddd;" title="Wszystkie"></div>
-          <div class="color-dot" data-color="#000000" style="background: #000;" title="Czarny"></div>
-          <div class="color-dot" data-color="#ffffff" style="background: #fff; border: 1px solid #ddd;" title="Biały"></div>
-          <div class="color-dot" data-color="#556b2f" style="background: #556b2f;" title="Oliwkowy"></div>
-          <div class="color-dot" data-color="#ff8c00" style="background: #ff8c00;" title="Pomarańczowy"></div>
-          <div class="color-dot" data-color="#1e90ff" style="background: #1e90ff;" title="Niebieski"></div>
+        <div class="filter-widget">
+          <h3 class="filter-title">Kategorie</h3>
+          <ul class="filter-list" id="categoriesList">
+            <!-- Loaded dynamically -->
+          </ul>
         </div>
-      </div>
+        
+        <div class="filter-widget">
+          <h3 class="filter-title">Kolor</h3>
+          <div class="filter-color-dots" id="colorsList">
+            <div class="color-dot active" data-color="all" style="background: linear-gradient(45deg, #f00, #0f0, #00f); border: 1px solid #ddd;" title="Wszystkie"></div>
+            <div class="color-dot" data-color="#000000" style="background: #000;" title="Czarny"></div>
+            <div class="color-dot" data-color="#ffffff" style="background: #fff; border: 1px solid #ddd;" title="Biały"></div>
+            <div class="color-dot" data-color="#556b2f" style="background: #556b2f;" title="Oliwkowy"></div>
+            <div class="color-dot" data-color="#ff8c00" style="background: #ff8c00;" title="Pomarańczowy"></div>
+            <div class="color-dot" data-color="#1e90ff" style="background: #1e90ff;" title="Niebieski"></div>
+          </div>
+        </div>
 
-      <div class="filter-widget">
-        <h3 class="filter-title">Cena</h3>
-        <ul class="filter-list" id="priceRangesList">
-          <li class="active" data-range="all">Wszystkie ceny</li>
-          <li data-range="0-50">$0.00 - $50.00</li>
-          <li data-range="50-100">$50.00 - $100.00</li>
-          <li data-range="100+">$100.00+</li>
-        </ul>
-      </div>
-    </aside>
+        <div class="filter-widget">
+          <h3 class="filter-title">Cena</h3>
+          <ul class="filter-list" id="priceRangesList">
+            <li class="active" data-range="all">Wszystkie ceny</li>
+            <li data-range="0-50">$0.00 - $50.00</li>
+            <li data-range="50-100">$50.00 - $100.00</li>
+            <li data-range="100+">$100.00+</li>
+          </ul>
+        </div>
+      </aside>
 
-    <section class="shop-content">
-      <div class="shop-grid" id="shopGrid">
-        <!-- Products render dynamically -->
-      </div>
+      <section class="shop-content">
+        <div class="shop-grid" id="shopGrid">
+          <!-- Products render dynamically -->
+        </div>
 
-      <div class="pagination-container" id="shopPagination">
-        <!-- Pagination controls render dynamically -->
-      </div>
-    </section>
+        <div class="pagination-container" id="shopPagination">
+          <!-- Pagination controls render dynamically -->
+        </div>
+      </section>
+    </div>
   </main>
   <!-- Sekcja Informacyjna o Systemach LED -->
   <section class="led-systems-info-section" style="max-width: 1200px; margin: 80px auto 40px; padding: 0 5%; text-align: center;">
@@ -3347,13 +3349,13 @@
     // Mobile Sidebar Filters Toggle
     const filterToggle = document.getElementById('filterToggle');
     const shopSidebar = document.getElementById('shopSidebar');
-    const shopContainer = document.querySelector('.shop-container');
+    const shopMainLayout = document.querySelector('.shop-main-layout');
 
     if (filterToggle) {
       filterToggle.addEventListener('click', () => {
         shopSidebar.classList.toggle('active');
-        if (shopContainer) {
-          shopContainer.classList.toggle('has-sidebar');
+        if (shopMainLayout) {
+          shopMainLayout.classList.toggle('has-sidebar');
         }
       });
     }
