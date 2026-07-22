@@ -807,6 +807,45 @@ img {
 .catalog-error strong { color: var(--danger); font-size: 19px; }
 .catalog-error a { color: var(--orange-dark); font-weight: 800; }
 
+.funnel-status {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center;
+  gap: 9px 13px;
+  margin-top: 22px;
+  padding: 14px 17px;
+  color: #556377;
+  border: 1px solid #d7e5dc;
+  border-left: 4px solid var(--success);
+  border-radius: 11px;
+  background: #f4faf7;
+}
+
+.funnel-status > span {
+  color: #667386;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.funnel-status > strong {
+  display: grid;
+  min-width: 42px;
+  min-height: 34px;
+  padding: 4px 10px;
+  place-items: center;
+  color: #fff;
+  border-radius: 99px;
+  background: var(--success);
+  font-family: "Outfit", sans-serif;
+  font-size: 17px;
+}
+
+.funnel-status > small { font-size: 11px; }
+.funnel-status.is-empty { border-color: #f1c1bc; border-left-color: var(--danger); background: #fff6f5; }
+.funnel-status.is-empty > strong { background: var(--danger); }
+
 .config-step {
   min-width: 0;
   margin: 0;
@@ -910,6 +949,26 @@ img {
 
 .choice-card:has(input:checked) .choice-icon { color: #fff; background: var(--orange); }
 
+label.is-unavailable {
+  opacity: .42;
+  cursor: not-allowed !important;
+  filter: grayscale(.75);
+  pointer-events: none;
+}
+
+.choice-card > .option-availability {
+  position: absolute;
+  right: 14px;
+  bottom: 12px;
+  margin: 0;
+  color: #718093;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+
+.choice-card.is-unavailable > .option-availability { color: var(--danger); }
+
 .choice-card-wide {
   display: grid;
   grid-template-columns: 45px minmax(0, 1fr) auto;
@@ -971,6 +1030,13 @@ img {
 .technology-options input:checked + span b,
 .technology-options input:checked + span small { color: #fff; }
 .technology-options input:focus-visible + span { outline: 3px solid rgba(255,90,0,.5); outline-offset: 3px; }
+.technology-options .option-availability {
+  margin-top: 6px;
+  color: var(--success);
+  font-size: 7px;
+  font-weight: 800;
+}
+.technology-options .is-unavailable .option-availability { color: var(--danger); }
 
 .light-swatch {
   width: 46px;
@@ -1029,6 +1095,8 @@ img {
 .segmented-control span { display: inline-flex; align-items: center; min-height: 44px; padding: 9px 15px; color: #566477; border: 1px solid #d7dee6; border-radius: 99px; background: #fff; font-size: 11px; font-weight: 800; }
 .segmented-control input:checked + span { color: #fff; border-color: var(--navy); background: var(--navy); }
 .segmented-control input:focus-visible + span { outline: 3px solid rgba(255,90,0,.5); outline-offset: 3px; }
+.segmented-control .option-availability { margin-left: 7px; color: var(--success); font-size: 8px; }
+.segmented-control .is-unavailable .option-availability { color: var(--danger); }
 
 .validation-message { min-height: 21px; margin: 19px 0 3px; color: var(--danger); font-size: 11px; font-weight: 700; }
 .step-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: auto; padding-top: 20px; }
@@ -1072,6 +1140,24 @@ img {
 /* Result: product first, system second */
 .results-section { padding-top: 50px; }
 .results-heading { align-items: center; }
+
+.funnel-result-summary {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 18px;
+  padding: 16px 19px;
+  color: #536176;
+  border: 1px solid #d7e5dc;
+  border-radius: 12px;
+  background: #f4faf7;
+  font-size: 12px;
+}
+
+.funnel-result-summary i { color: var(--orange); font-size: 20px; font-style: normal; }
+.funnel-result-summary strong { color: var(--success); font-family: "Outfit", sans-serif; font-size: 17px; }
+.funnel-result-summary small { margin-left: auto; color: #68778a; }
+.funnel-alternatives { margin: 24px 0 42px; }
 
 .result-context {
   display: flex;
@@ -1465,6 +1551,9 @@ img {
   .step-actions { position: sticky; bottom: 0; z-index: 5; margin-inline: -17px; padding: 13px 17px calc(2px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: rgba(255,255,255,.97); backdrop-filter: blur(10px); }
   .step-actions button { flex: 1; }
   .selected-tape-card { grid-template-columns: 1fr; border-radius: 16px; }
+  .funnel-result-summary { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; }
+  .funnel-result-summary strong { font-size: 15px; }
+  .funnel-result-summary small { grid-column: 1/-1; margin-left: 0; }
   .selected-tape-media { min-height: 330px; padding: 38px; }
   .selected-tape-content { padding: 25px 18px; }
   .selected-tape-content h3 { font-size: 29px; }

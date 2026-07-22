@@ -4,7 +4,7 @@
 
 - Wersja: 1.2
 - Data aktualizacji: 23 lipca 2026
-- Status: działa lokalny konfigurator LED V2; trwa przygotowanie reguł produkcyjnych
+- Status: działa lokalny konfigurator LED V3 z progresywnym zawężaniem; trwa przygotowanie reguł produkcyjnych
 - Projekt: `sklepSC`
 - Zakres: wiarygodność i formalności, backend checkoutu, wydajność, wyszukiwarka i filtry, konfigurator systemu LED, kompletne zestawy i kompatybilność
 
@@ -647,6 +647,8 @@ Zbudować kontrolowaną bazę zgodności, z której skorzystają karta produktu,
 Pierwsza wersja działa pod `configurator.html` i jest dostępna z menu wszystkich publicznych stron sklepu. Korzysta bezpośrednio z lokalnego importu 1323 produktów, prowadzi przez sześć kroków, dobiera taśmę, zasilacz z zapasem 20% oraz zgodny sterownik, a potwierdzone elementy dodaje do obecnego koszyka. Wynik zachowuje identyfikator konfiguracji i wersję reguł.
 
 Aktualizacja V2 z 23 lipca 2026 ujednolica konfigurator ze stroną główną i sklepem: używa fotograficznego hero, właściwych wersji logo, granatowo-pomarańczowej identyfikacji, takich samych kapsuł nawigacji oraz jasnych kart produktowych. Użytkownik może wskazać technologię COB albo SMD. Głównym wynikiem jest jedna konkretna taśma z katalogu wraz ze zdjęciem, SKU, EAN, parametrami, wymaganą ilością, ceną i uzasadnieniem wyboru. Zasilacz, sterownik i profil są przedstawione jako elementy zależne od tej taśmy.
+
+Aktualizacja V3 z 23 lipca 2026 zmienia dobór w kontrolowany lejek. Po każdym kroku interfejs przelicza pulę dostępnych taśm, pokazuje jej liczebność i blokuje odpowiedzi prowadzące do zera produktów. Do wyniku można przejść wyłącznie z niepustą pulą. Końcowa lista zawiera maksymalnie trzy zgodne, dostępne SKU: jeden produkt rekomendowany i do dwóch alternatyw. Długie instalacje mogą otrzymać kilka zasilaczy lub sterowników zamiast fałszywego założenia, że cały układ obsłuży jedna sztuka.
 
 Ta wersja jest świadomie ograniczona: profil jest wskazywany na podstawie szerokości taśmy, ale konkretny model wymaga potwierdzenia. Stan magazynowy i cena pochodzą z lokalnego importu, nie z backendu. Reguła zapasu 20% wynika z obecnego materiału Prescot i przed publikacją musi zostać zatwierdzona przez technika oraz przeniesiona do wersjonowanych reguł backendowych. Konfigurator nie zastępuje projektu instalacji elektrycznej.
 

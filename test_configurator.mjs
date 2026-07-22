@@ -12,6 +12,11 @@ const browserPath = browserCandidates.find(existsSync);
 if (!browserPath) throw new Error('Nie znaleziono Chrome ani Edge do testu konfiguratora.');
 
 const mobile = process.argv.includes('--mobile');
+const viewportArgument = process.argv.find((argument) => argument.startsWith('--viewport='));
+const viewportMatch = viewportArgument?.slice('--viewport='.length).match(/^(\d+)x(\d+)$/i);
+const viewportWidth = viewportMatch ? Number(viewportMatch[1]) : mobile ? 390 : 1440;
+const viewportHeight = viewportMatch ? Number(viewportMatch[2]) : mobile ? 844 : 1000;
+const emulateMobile = viewportWidth <= 600;
 const screenshotArgument = process.argv.find((argument) => argument.startsWith('--screenshot='));
 const screenshotPath = screenshotArgument?.slice('--screenshot='.length);
 const heroScreenshotArgument = process.argv.find((argument) => argument.startsWith('--hero-screenshot='));
@@ -25,7 +30,7 @@ const scenarios = {
   smd: { application: 'kitchen', intensity: 'functional', technology: 'smd', expectedTechnology: 'SMD', light: 'neutral', length: 5, segments: 1, environment: 'dry', control: 'switch', voltage: 'auto', ready: true, minProducts: 2 },
   outdoor: { application: 'outdoor', intensity: 'functional', technology: 'auto', light: 'neutral', length: 10, segments: 2, environment: 'outdoor', control: 'switch', voltage: 'auto', ready: true, minProducts: 2 },
   'rgb-smart': { application: 'living', intensity: 'decorative', technology: 'auto', light: 'rgb', length: 5, segments: 1, environment: 'dry', control: 'smart', voltage: 'auto', ready: true, minProducts: 3 },
-  long: { application: 'commercial', intensity: 'strong', technology: 'auto', light: 'neutral', length: 100, segments: 1, environment: 'dry', control: 'switch', voltage: '24', ready: false, minProducts: 1 }
+  long: { application: 'commercial', intensity: 'strong', technology: 'auto', light: 'neutral', length: 100, segments: 1, environment: 'dry', control: 'switch', voltage: '24', ready: true, minProducts: 2 }
 };
 const scenario = scenarios[scenarioName];
 if (!scenario) throw new Error(`Nieznany scenariusz: ${scenarioName}`);
@@ -38,7 +43,7 @@ const browser = spawn(browserPath, [
   '--no-default-browser-check',
   `--remote-debugging-port=${port}`,
   `--user-data-dir=${profilePath}`,
-  mobile ? '--window-size=390,844' : '--window-size=1440,1000',
+  `--window-size=${viewportWidth},${viewportHeight}`,
   'http://localhost:3000/configurator.html'
 ], { stdio: 'ignore' });
 
@@ -128,10 +133,10 @@ try {
   await client.send('Log.enable');
   await client.send('Page.enable');
   await client.send('Emulation.setDeviceMetricsOverride', {
-    width: mobile ? 390 : 1440,
-    height: mobile ? 844 : 1000,
+    width: viewportWidth,
+    height: viewportHeight,
     deviceScaleFactor: 1,
-    mobile
+    mobile: emulateMobile
   });
   await client.send('Page.reload', { ignoreCache: true });
   await waitFor(client, `document.readyState === 'complete' && document.querySelector('#catalogLoading')?.hidden === true`);
@@ -152,6 +157,16 @@ try {
   if (initial.catalogFailed) throw new Error('Katalog zgłosił błąd w interfejsie.');
   if (initial.horizontalOverflow) throw new Error(`Strona ma poziomy overflow przed rozpoczęciem konfiguracji: ${JSON.stringify(initial.overflowElements)}`);
 
+  const initialFunnel = await evaluate(client, `({
+    count: Number(document.querySelector('#funnelCount')?.textContent),
+    enabledOptions: [...document.querySelectorAll('.config-step[data-step="0"] input[type="radio"]:not(:disabled)')].length,
+    invalidEnabledOptions: [...document.querySelectorAll('.config-step[data-step="0"] input[type="radio"]:not(:disabled)')]
+      .filter((input) => input.closest('label')?.querySelector('.option-availability')?.textContent.includes('Brak zgodnych')).length
+  })`);
+  if (!initialFunnel.count || !initialFunnel.enabledOptions || initialFunnel.invalidEnabledOptions) {
+    throw new Error(`Lejek nie wystartował z poprawną pulą produktów: ${JSON.stringify(initialFunnel)}`);
+  }
+
   if (heroScreenshotPath) {
     const screenshot = await client.send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: false });
     writeFileSync(heroScreenshotPath, Buffer.from(screenshot.data, 'base64'));
@@ -169,13 +184,29 @@ try {
 
   async function selectAndNext(name, value, expectedStep) {
     const status = await evaluate(client, `(() => {
-      document.querySelector('input[name="${name}"][value="${value}"]').click();
+      const option = document.querySelector('input[name="${name}"][value="${value}"]');
+      const unavailable = option.disabled || option.closest('label')?.classList.contains('is-unavailable');
+      if (!unavailable) option.click();
       const disabled = document.querySelector('#nextButton').disabled;
       if (!disabled) document.querySelector('#nextButton').click();
-      return { disabled, validation: document.querySelector('#validationMessage').textContent };
+      return { disabled, unavailable, funnelCount: Number(document.querySelector('#funnelCount').textContent), validation: document.querySelector('#validationMessage').textContent };
     })()`);
+    if (status.unavailable) throw new Error(`Scenariusz próbuje wybrać wygaszoną opcję ${name}=${value}.`);
+    if (!status.funnelCount) throw new Error(`Opcja ${name}=${value} doprowadziła lejek do zera.`);
     if (status.disabled) throw new Error(`Przycisk Dalej pozostał nieaktywny dla pola ${name}.`);
     await waitFor(client, `document.querySelector('.config-step[data-step="${expectedStep}"]').hidden === false`, 3000);
+    const nextStepAudit = await evaluate(client, `(() => {
+      const step = document.querySelector('.config-step[data-step="${expectedStep}"]');
+      const enabled = [...step.querySelectorAll('input[type="radio"]:not(:disabled)')];
+      return {
+        enabled: enabled.length,
+        invalidEnabled: enabled.filter((input) => input.closest('label')?.querySelector('.option-availability')?.textContent.includes('Brak zgodnych')).length,
+        funnelCount: Number(document.querySelector('#funnelCount').textContent)
+      };
+    })()`);
+    if (!nextStepAudit.funnelCount || nextStepAudit.invalidEnabled || (expectedStep !== 3 && !nextStepAudit.enabled)) {
+      throw new Error(`Krok ${expectedStep + 1} ma nieprawidłowe zawężenie: ${JSON.stringify(nextStepAudit)}`);
+    }
   }
 
   await selectAndNext('application', scenario.application, 1);
@@ -193,6 +224,16 @@ try {
   })()`);
   if (dimensionsStatus.disabled) throw new Error('Przycisk Dalej pozostał nieaktywny dla wymiarów.');
   await waitFor(client, `document.querySelector('.config-step[data-step="4"]').hidden === false`, 3000);
+  if (scenario.application === 'outdoor') {
+    const outdoorProtection = await evaluate(client, `({
+      dryDisabled: document.querySelector('input[name="environment"][value="dry"]').disabled,
+      dampDisabled: document.querySelector('input[name="environment"][value="damp"]').disabled,
+      outdoorDisabled: document.querySelector('input[name="environment"][value="outdoor"]').disabled
+    })`);
+    if (!outdoorProtection.dryDisabled || !outdoorProtection.dampDisabled || outdoorProtection.outdoorDisabled) {
+      throw new Error(`Lejek dopuścił niewłaściwe IP dla zastosowania zewnętrznego: ${JSON.stringify(outdoorProtection)}`);
+    }
+  }
   await selectAndNext('environment', scenario.environment, 5);
   const finalStatus = await evaluate(client, `(() => {
     document.querySelector('input[name="control"][value="${scenario.control}"]').click();
@@ -214,12 +255,14 @@ try {
     noResults: Boolean(document.querySelector('.no-results')),
     warningCount: document.querySelectorAll('.status-pill.warning').length,
     longRunWarning: Boolean(document.querySelector('.result-warning')),
+    finalTapeOptions: 1 + document.querySelectorAll('.alternative-card').length,
     horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth
   })`);
   if (result.noResults) throw new Error('Scenariusz podstawowy nie zwrócił produktu.');
   if (!result.selectedTape || !result.selectedTapeSku?.includes('SKU:')) throw new Error(`Scenariusz ${scenarioName} nie pokazał konkretnej taśmy z kodem SKU.`);
   if (scenario.expectedTechnology && result.selectedTechnology !== scenario.expectedTechnology) throw new Error(`Scenariusz ${scenarioName} dobrał technologię ${result.selectedTechnology} zamiast ${scenario.expectedTechnology}.`);
   if (result.productRows < scenario.minProducts) throw new Error(`Scenariusz ${scenarioName} dobrał za mało produktów.`);
+  if (result.finalTapeOptions < 1 || result.finalTapeOptions > 3) throw new Error(`Lejek zakończył się liczbą opcji spoza zakresu 1–3: ${result.finalTapeOptions}.`);
   if (result.addDisabled === scenario.ready) throw new Error(`Scenariusz ${scenarioName} ma nieprawidłowy stan przycisku koszyka.`);
   if (!scenario.ready && result.warningCount === 0) throw new Error(`Scenariusz ${scenarioName} nie wyjaśnia brakującego elementu.`);
   if (result.horizontalOverflow) throw new Error('Wynik konfiguratora ma poziomy overflow.');
