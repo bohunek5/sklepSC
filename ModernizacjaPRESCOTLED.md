@@ -2,9 +2,9 @@
 
 ## Status dokumentu
 
-- Wersja: 1.0
-- Data opracowania: 22 lipca 2026
-- Status: plan zatwierdzający zakres; bez rozpoczęcia wdrożenia
+- Wersja: 1.2
+- Data aktualizacji: 23 lipca 2026
+- Status: działa lokalny konfigurator LED V2; trwa przygotowanie reguł produkcyjnych
 - Projekt: `sklepSC`
 - Zakres: wiarygodność i formalności, backend checkoutu, wydajność, wyszukiwarka i filtry, konfigurator systemu LED, kompletne zestawy i kompatybilność
 
@@ -642,6 +642,14 @@ Zbudować kontrolowaną bazę zgodności, z której skorzystają karta produktu,
 
 ## Faza 7 — konfigurator „Dobierz system LED”
 
+### Stan wdrożenia lokalnego — 22 lipca 2026
+
+Pierwsza wersja działa pod `configurator.html` i jest dostępna z menu wszystkich publicznych stron sklepu. Korzysta bezpośrednio z lokalnego importu 1323 produktów, prowadzi przez sześć kroków, dobiera taśmę, zasilacz z zapasem 20% oraz zgodny sterownik, a potwierdzone elementy dodaje do obecnego koszyka. Wynik zachowuje identyfikator konfiguracji i wersję reguł.
+
+Aktualizacja V2 z 23 lipca 2026 ujednolica konfigurator ze stroną główną i sklepem: używa fotograficznego hero, właściwych wersji logo, granatowo-pomarańczowej identyfikacji, takich samych kapsuł nawigacji oraz jasnych kart produktowych. Użytkownik może wskazać technologię COB albo SMD. Głównym wynikiem jest jedna konkretna taśma z katalogu wraz ze zdjęciem, SKU, EAN, parametrami, wymaganą ilością, ceną i uzasadnieniem wyboru. Zasilacz, sterownik i profil są przedstawione jako elementy zależne od tej taśmy.
+
+Ta wersja jest świadomie ograniczona: profil jest wskazywany na podstawie szerokości taśmy, ale konkretny model wymaga potwierdzenia. Stan magazynowy i cena pochodzą z lokalnego importu, nie z backendu. Reguła zapasu 20% wynika z obecnego materiału Prescot i przed publikacją musi zostać zatwierdzona przez technika oraz przeniesiona do wersjonowanych reguł backendowych. Konfigurator nie zastępuje projektu instalacji elektrycznej.
+
 ### Cel
 
 Przeprowadzić klienta od zastosowania do kompletnego, technicznie zweryfikowanego koszyka.
@@ -884,4 +892,3 @@ Wymagania prawne muszą zostać odniesione do konkretnego modelu działalności 
 | 2026-07-22 | Rozdzielić dane importowane i ręczne nadpisania | kolejne importy XML nie mogą kasować treści ani kompatybilności | do potwierdzenia |
 | 2026-07-22 | Nie budować konfiguratora przed modelem kompatybilności | wynik musi być technicznie uzasadniony | do potwierdzenia |
 | 2026-07-22 | Backend jest źródłem ceny, stanu, dostawy i statusu płatności | przeglądarka nie może zatwierdzać danych transakcyjnych | do potwierdzenia |
-

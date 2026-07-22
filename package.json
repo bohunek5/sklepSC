@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && node -e \"fs.cpSync('js', 'dist/js', {recursive: true})\"",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:configurator": "node test_configurator.mjs"
   },
   "devDependencies": {
     "vite": "^8.1.1"

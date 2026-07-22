@@ -32,6 +32,51 @@ canvas {
   outline-offset: 3px;
 }
 
+/* Wyróżnione wejście do konfiguratora na każdej stronie sklepu. */
+body .mockup-header .mockup-nav a.configurator-nav-link:not(.active) {
+  color: #fff !important;
+  border-color: rgba(255, 111, 32, 0.56) !important;
+  background: rgba(255, 90, 0, 0.3) !important;
+}
+
+body .mockup-header.scrolled .mockup-nav a.configurator-nav-link:not(.active) {
+  color: #c84600 !important;
+  border-color: rgba(255, 90, 0, 0.28) !important;
+  background: rgba(255, 90, 0, 0.1) !important;
+}
+
+body .mobile-menu a.configurator-nav-link:not(.active) {
+  color: #c84600 !important;
+  background: rgba(255, 90, 0, 0.1) !important;
+}
+
+.mobile-nav-item.configurator-mobile-link {
+  color: #c84600 !important;
+}
+
+.mobile-nav-item.configurator-mobile-link i {
+  color: #ff5a00 !important;
+}
+
+@media (min-width: 769px) and (max-width: 1320px) {
+  .mockup-header {
+    padding-inline: 3% !important;
+  }
+
+  .mockup-nav ul {
+    gap: 5px !important;
+  }
+
+  .mockup-nav a {
+    padding: 9px 10px !important;
+    font-size: 10px !important;
+  }
+
+  .mockup-search-container {
+    width: clamp(130px, 16vw, 190px) !important;
+  }
+}
+
 .pagination-container {
   display: flex;
   flex-wrap: wrap;
@@ -167,13 +212,30 @@ canvas {
   }
 
   .mobile-bottom-nav {
+    right: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
     height: calc(var(--prescot-bottom-nav-height) + env(safe-area-inset-bottom)) !important;
+    overflow: hidden !important;
     padding-bottom: env(safe-area-inset-bottom) !important;
   }
 
+  .mobile-nav-items {
+    display: grid !important;
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    padding-inline: 2px !important;
+  }
+
   .mobile-nav-item {
-    min-width: 44px !important;
+    width: 100% !important;
+    min-width: 0 !important;
     min-height: 56px !important;
+  }
+
+  .mobile-nav-item span {
+    font-size: clamp(8px, 2.25vw, 10px) !important;
+    letter-spacing: 0.2px !important;
   }
 
   .page-hero {

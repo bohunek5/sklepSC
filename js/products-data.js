@@ -1,4 +1,4 @@
-const defaultPro[
+const defaultProducts = [
   {
     "id": 6282,
     "title": "Sterownik LED Mono 1x30A + pilot RF 12-24V Prescot",
