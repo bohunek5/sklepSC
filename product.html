@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Cooken - Produkt</title>
+<title>Prescot LED - Produkt</title>
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -1082,7 +1082,9 @@
 
     /* Prevent product title wrapping */
     .mockup-product-title {
-      white-space: nowrap !important;
+      white-space: normal !important;
+      word-break: normal !important;
+      overflow-wrap: break-word !important;
       overflow: hidden !important;
       text-overflow: ellipsis !important;
       width: 100% !important;
@@ -1145,7 +1147,7 @@
     }
     
 
-    /* Cooken Clean Product Layout Override */
+    /* Prescot LED product layout override */
     .product-container {
         padding: 40px 5% !important;
         background: #ffffff;
@@ -3619,11 +3621,315 @@
     }
 </style>
 
+<link rel="stylesheet" href="css/prescot-responsive.css">
+<style>
+/* --- STICKY RIGHT BLOCK (BUY BOX / PRODUCT META) --- */
+@media (min-width: 1025px) {
+  .product-container {
+    display: grid !important;
+    grid-template-columns: 1.15fr 0.85fr !important;
+    gap: 50px !important;
+    align-items: start !important; /* Essential for sticky sidebar */
+  }
+
+  .product-gallery {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    min-width: 0 !important;
+  }
+
+  .product-meta {
+    position: sticky !important;
+    top: 110px !important;
+    align-self: start !important;
+    z-index: 10 !important;
+    overflow: visible !important;
+    margin-bottom: 40px !important;
+  }
+
+  /* Custom smooth scrollbar for sticky product meta */
+  .product-meta::-webkit-scrollbar {
+    width: 5px;
+  }
+  .product-meta::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .product-meta::-webkit-scrollbar-thumb {
+    background: rgba(11, 26, 48, 0.15);
+    border-radius: 10px;
+  }
+  .product-meta::-webkit-scrollbar-thumb:hover {
+    background: rgba(11, 26, 48, 0.3);
+  }
+}
+</style>
+
+<style id="html-description-styles">
+  .product-html-description {
+    font-size: 15px;
+    line-height: 1.85;
+    color: #334155;
+    padding: 10px 0;
+  }
+  .product-html-description p {
+    margin-bottom: 18px;
+    line-height: 1.85;
+  }
+  .product-html-description strong, .product-html-description b {
+    color: #0b1a30;
+    font-weight: 700;
+  }
+  .product-html-description ul, .product-html-description ol {
+    margin: 16px 0 22px 24px;
+    padding-left: 8px;
+  }
+  .product-html-description li {
+    margin-bottom: 10px;
+    line-height: 1.7;
+  }
+  .product-html-description h1, 
+  .product-html-description h2, 
+  .product-html-description h3, 
+  .product-html-description h4 {
+    font-family: 'Outfit', sans-serif;
+    color: #0b1a30;
+    margin: 28px 0 14px 0;
+    font-weight: 700;
+  }
+  .product-html-description table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+  }
+  .product-html-description table td, .product-html-description table th {
+    padding: 12px 16px;
+    border: 1px solid #e2e8f0;
+    font-size: 14px;
+  }
+  .product-html-description table tr:nth-child(even) {
+    background-color: #f8fafc;
+  }
+</style>
+
+
+<style id="clean-typography-no-truncation">
+  /* Clean, natural multi-line product titles without truncation or clipped words */
+  .mockup-product-title,
+  .mockup-product-title a,
+  .product-title,
+  #pTitle {
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    text-overflow: clip !important;
+    overflow: visible !important;
+    line-height: 1.4 !important;
+  }
+
+  .mockup-product-title {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    min-height: 42px !important;
+    margin: 8px 0 12px 0 !important;
+  }
+
+  .product-title, #pTitle {
+    font-size: clamp(22px, 3vw, 32px) !important;
+    font-weight: 800 !important;
+    color: #0b1a30 !important;
+    letter-spacing: -0.4px !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* Rich HTML Description Formatting */
+  .product-html-description {
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    font-size: 15px !important;
+    line-height: 1.85 !important;
+    color: #334155 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .product-html-description p {
+    margin-bottom: 20px !important;
+    line-height: 1.85 !important;
+  }
+
+  .product-html-description strong, 
+  .product-html-description b {
+    color: #0b1a30 !important;
+    font-weight: 700 !important;
+  }
+
+  .product-html-description ul, 
+  .product-html-description ol {
+    margin: 18px 0 24px 24px !important;
+    padding-left: 10px !important;
+  }
+
+  .product-html-description li {
+    margin-bottom: 10px !important;
+    line-height: 1.75 !important;
+  }
+
+  .product-html-description table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 24px 0 !important;
+    display: block !important;
+    overflow-x: auto !important;
+  }
+
+  .product-html-description table td, 
+  .product-html-description table th {
+    padding: 12px 16px !important;
+    border: 1px solid #e2e8f0 !important;
+    font-size: 14px !important;
+  }
+
+  .product-html-description table tr:nth-child(even) {
+    background-color: #f8fafc !important;
+  }
+</style>
+
+
+<style id="scrolled-nav-visibility-override">
+  /* Guaranteed 100% Contrast for Scrolled Header Navigation */
+  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active),
+  body .mockup-header.scrolled .mockup-nav ul li a:not(.active) {
+    color: #0b1a30 !important;
+    background: rgba(11, 26, 48, 0.06) !important;
+    border: 1px solid rgba(11, 26, 48, 0.12) !important;
+    font-weight: 600 !important;
+  }
+
+  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active):hover,
+  body .mockup-header.scrolled .mockup-nav ul li a:not(.active):hover {
+    background: rgba(11, 26, 48, 0.14) !important;
+    color: #0b1a30 !important;
+    border-color: rgba(11, 26, 48, 0.25) !important;
+  }
+
+  body .mockup-header.scrolled .mockup-nav > ul > li > a.active,
+  body .mockup-header.scrolled .mockup-nav ul li a.active {
+    background: #0b1a30 !important;
+    color: #ffffff !important;
+    border-color: #0b1a30 !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 14px rgba(11, 26, 48, 0.2) !important;
+  }
+</style>
+
+
+<style id="ultimate-header-footer-fix">
+  /* Force 100% Crisp Visibility for All Header Navigation Links regardless of scroll state */
+  body .mockup-header .mockup-nav ul li a:not(.active),
+  body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active),
+  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+    color: #0b1a30 !important;
+    background: rgba(11, 26, 48, 0.06) !important;
+    border: 1px solid rgba(11, 26, 48, 0.12) !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    padding: 8px 18px !important;
+    border-radius: 99px !important;
+    transition: all 0.2s ease !important;
+  }
+
+  body .mockup-header .mockup-nav ul li a:not(.active):hover,
+  body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active):hover,
+  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active):hover {
+    background: rgba(11, 26, 48, 0.14) !important;
+    color: #0b1a30 !important;
+    border-color: rgba(11, 26, 48, 0.25) !important;
+  }
+
+  body .mockup-header .mockup-nav ul li a.active,
+  body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a.active,
+  body .mockup-header.scrolled .mockup-nav > ul > li > a.active {
+    background: #0b1a30 !important;
+    color: #ffffff !important;
+    border: 1px solid #0b1a30 !important;
+    font-weight: 700 !important;
+    padding: 8px 18px !important;
+    border-radius: 99px !important;
+    box-shadow: 0 4px 14px rgba(11, 26, 48, 0.2) !important;
+  }
+
+  /* Footer White + Orange Logo Styling */
+  footer .footer-logo img,
+  .mockup-footer .footer-logo img {
+    height: 32px !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+</style>
+
+
+<style id="product-title-4-lines-override">
+  /* Force Up to 4 Full Lines for Product Titles (No Word Truncation) */
+  .mockup-product-title,
+  .mockup-product-title a,
+  div.mockup-product-title,
+  h3.mockup-product-title {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4 !important;
+    -webkit-box-orient: vertical !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    overflow: visible !important;
+    max-height: none !important;
+    min-height: 72px !important;
+    line-height: 1.35 !important;
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    color: #0b1a30 !important;
+    margin-bottom: 8px !important;
+    text-overflow: clip !important;
+  }
+
+  .mockup-product-title a:hover {
+    color: var(--accent-color, #ff5a00) !important;
+  }
+</style>
+
+
+<style id="buy-now-tight-margin-override">
+  /* Eliminate Excessive Gap Below Kup Teraz Button */
+  #buyItNow,
+  .buy-it-now-btn {
+    margin-bottom: 8px !important;
+  }
+
+  #productVariantsContainer:empty {
+    display: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .info-banners-container {
+    margin-top: 10px !important;
+    padding-top: 12px !important;
+    border-top: 1px solid #e2e8f0 !important;
+    gap: 8px !important;
+  }
+
+  .info-banner-card {
+    padding: 10px 14px !important;
+  }
+</style>
+
 </head>
 <body>
-<header class="mockup-header" id="mainHeader">
+<header class="mockup-header scrolled force-scrolled" id="mainHeader">
 <div class="mockup-header-logo">
-<a href="index.html"><img alt="Prescot Logo" id="headerLogo" src="images/logo-white.png"/></a>
+<a href="index.html"><img alt="Prescot Logo" id="headerLogo" src="images/logo-dark.png"/></a>
 </div>
 <nav class="mockup-nav">
 <ul>
@@ -3680,17 +3986,8 @@
 </section>
 <main class="product-container">
 <!-- Tiny Breadcrumbs Bar -->
-<div class="product-breadcrumbs" style="grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; font-size: 11px; color: #888; margin-bottom: -15px; font-family: 'Inter', sans-serif; flex-wrap: wrap; background: #fafafa; padding: 10px 15px; border-radius: 8px; border: 1px solid #f0f0f0;">
-<a href="index.html" style="color: #666; text-decoration: none; display: flex; align-items: center; gap: 4px; font-weight: 500;">
-<svg fill="none" height="12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-        Główna
-      </a>
-<span style="opacity: 0.5;">/</span>
-<a href="shop.html" style="color: #666; text-decoration: none; font-weight: 500;">Sklep</a>
-<span style="opacity: 0.5;">/</span>
-<a href="shop.html" id="breadcrumbCategory" style="color: #666; text-decoration: none; font-weight: 500;">Kategoria</a>
-<span style="opacity: 0.5;">/</span>
-<span id="breadcrumbTitle" style="color: var(--primary-color); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px;">Nazwa produktu</span>
+<div class="product-breadcrumbs" id="dynamicBreadcrumbs" style="grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; font-size: 12px; color: #64748b; margin-bottom: -10px; font-family: 'Inter', sans-serif; flex-wrap: wrap; background: #f8fafc; padding: 12px 18px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
+  <!-- Breadcrumbs generated dynamically in JS -->
 </div>
 <section class="product-gallery">
 <div class="gallery-main-wrapper" style="position: relative;">
@@ -3744,7 +4041,7 @@
 </div>
 </section>
 <section class="product-meta">
-<div class="product-brand" id="pCategory">COOKEN LINE</div>
+<div class="product-brand" id="pCategory">PRESCOT LED</div>
 <h1 class="product-title" id="pTitle"></h1>
 <div class="product-rating">
         ★★★★★ <span>(14 recenzji)</span>
@@ -3871,7 +4168,7 @@
 <span class="btn-txt-hover"><i class="ph ph-shopping-cart-simple" style="margin-right: 6px;"></i> Przejdź do kasy</span>
 </span>
 </button>
-<div id="productVariantsContainer" style="margin-top: 20px;"></div>
+<div id="productVariantsContainer"></div>
 <!-- Info Banners Container (Shopify Style) -->
 <div class="info-banners-container">
   <!-- Card 1: Salon Pickup -->
@@ -4010,7 +4307,7 @@
 <div class="footer-grid">
 <div class="footer-col">
 <div class="footer-logo">
-<img alt="Prescot Logo" src="images/logo-white.png" style="height: 26px; opacity: 0.9; margin-bottom: 5px; max-width: 100%;"/>
+          <img src="images/logo-white.png" alt="Prescot Logo" style="height: 32px; opacity: 1; margin-bottom: 5px; max-width: 100%;">
 </div>
 <p style="margin-top: 15px;">Prescot LED to profesjonalny dostawca najwyższej jakości taśm LED, profili aluminiowych, nowoczesnych sterowników oraz niezawodnych zasilaczy hermetycznych.</p><p style="margin-top: 15px; color: #ccc;"><strong>PRESCOT LED</strong><br/>ul. Przykładowa 12<br/>00-001 Warszawa<br/>kontakt@prescot.com.pl</p>
 </div>
@@ -4140,7 +4437,7 @@
     document.getElementById('pTitle').textContent = product.title;
     document.getElementById('pCategory').textContent = product.category;
     document.getElementById('pPrice').innerHTML = `${product.price.toFixed(2)} zł <span class="price-unit">/ ${product.category === "Taśmy LED" ? "metr" : "szt."}</span>`;
-    document.getElementById('pDesc').textContent = product.description;
+    const pDescEl = document.getElementById('pDesc'); if (pDescEl) pDescEl.style.display = 'none';
 
     // Render Actions Bar dynamically (Shopify Style)
     const actionsBar = document.getElementById('productActionsBar');
@@ -4297,29 +4594,36 @@
     if (heroTitle) heroTitle.textContent = product.title;
     if (heroCat) heroCat.textContent = product.category;
 
-    // Populate Breadcrumbs dynamically
-    const bCat = document.getElementById('breadcrumbCategory');
-    if (bCat) {
-      bCat.textContent = product.category;
-      bCat.href = `shop.html?cat=${encodeURIComponent(product.category)}`;
-    }
-    const bTitle = document.getElementById('breadcrumbTitle');
-    if (bTitle) {
-      bTitle.textContent = product.title;
-    }
-    const bMiniImg = document.getElementById('breadcrumbMiniImg');
-    if (bMiniImg) {
-      bMiniImg.src = product.image;
-    }
-    const bMiniTitle = document.getElementById('breadcrumbMiniTitle');
-    if (bMiniTitle) {
-      bMiniTitle.textContent = product.title;
+        // Populate Breadcrumbs dynamically with exact closed network navigation
+    const bcContainer = document.getElementById('dynamicBreadcrumbs');
+    if (bcContainer) {
+      let parts = [];
+      parts.push(`
+        <a href="index.html" style="color: #64748b; text-decoration: none; display: flex; align-items: center; gap: 5px; font-weight: 500;">
+          <svg fill="none" height="13" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewBox="0 0 24 24" width="13" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          Główna
+        </a>
+      `);
+      parts.push(`<span style="color: #cbd5e1;">/</span>`);
+      parts.push(`<a href="shop.html" style="color: #64748b; text-decoration: none; font-weight: 500;">Sklep</a>`);
+
+      // Category in shop
+      const catName = product.category || "Taśmy LED";
+      parts.push(`<span style="color: #cbd5e1;">/</span>`);
+      parts.push(`<a href="shop.html?category=${encodeURIComponent(catName)}" style="color: #64748b; text-decoration: none; font-weight: 600;">${catName}</a>`);
+
+      // Product Title
+      parts.push(`<span style="color: #cbd5e1;">/</span>`);
+      parts.push(`<span style="color: #0b1a30; font-weight: 700;">${product.title}</span>`);
+
+      bcContainer.innerHTML = parts.join(' ');
     }
 
-    // Load description and bottom variants inside descTab
-    document.getElementById('descTab').innerHTML = `
-      <p style="font-size: 15px; line-height: 1.8; color: #555; margin-bottom: 30px;">${product.description}</p>
-    `;
+    // Load description with full HTML formatting inside bottom descTab
+    const descTabEl = document.getElementById('descTab');
+    if (descTabEl) {
+      descTabEl.innerHTML = `<div class="product-html-description">${product.description}</div>`;
+    }
 
     // Main Image & Gallery
     const mainImg = document.getElementById('mainImg');

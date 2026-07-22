@@ -491,7 +491,7 @@
       font-weight: 500;
       transition: var(--transition);
       display: -webkit-box;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;
       overflow: hidden;
       white-space: normal;
@@ -512,29 +512,70 @@
       color: var(--primary-color);
     }
 
-    /* Pagination */
-    .pagination-container {
+    /* Ultra-sleek Compact Centered Pagination */
+    .pagination-wrapper {
       display: flex;
       justify-content: center;
-      gap: 10px;
-      margin-top: 50px;
+      align-items: center;
+      width: 100%;
+      margin: 45px 0 25px 0;
+    }
+
+    .pagination-container {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 99px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      max-width: 95%;
     }
 
     .pagination-btn {
-      padding: 10px 18px;
-      border: 1px solid #ddd;
-      background: var(--white);
+      min-width: 36px;
+      height: 36px;
+      padding: 0 10px;
+      border-radius: 50px;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      color: #1e293b;
+      font-size: 13px;
+      font-weight: 600;
       cursor: pointer;
-      font-weight: 500;
-      font-size: 14px;
-      transition: var(--transition);
-      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
     }
 
-    .pagination-btn:hover, .pagination-btn.active {
-      background: var(--primary-color);
-      color: var(--white);
-      border-color: var(--primary-color);
+    .pagination-btn:hover {
+      background: var(--primary-color, #0b1a30);
+      color: #ffffff;
+      border-color: var(--primary-color, #0b1a30);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(11, 26, 48, 0.2);
+    }
+
+    .pagination-btn.active {
+      background: var(--primary-color, #0b1a30);
+      color: #ffffff;
+      border-color: var(--primary-color, #0b1a30);
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(11, 26, 48, 0.25);
+    }
+
+    .pagination-ellipsis {
+      padding: 0 6px;
+      color: #94a3b8;
+      font-weight: 700;
+      font-size: 14px;
     }
 
     /* Injected styles for shared modal */
@@ -1983,7 +2024,9 @@
 
     /* Prevent product title wrapping */
     .mockup-product-title {
-      white-space: nowrap !important;
+      white-space: normal !important;
+      word-break: normal !important;
+      overflow-wrap: break-word !important;
       overflow: hidden !important;
       text-overflow: ellipsis !important;
       width: 100% !important;
@@ -3098,12 +3141,516 @@
     }
 </style>
 
+<link rel="stylesheet" href="css/prescot-responsive.css">
+
+<style id="clean-typography-no-truncation">
+  /* Clean, natural multi-line product titles without truncation or clipped words */
+  .mockup-product-title,
+  .mockup-product-title a,
+  .product-title,
+  #pTitle {
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    text-overflow: clip !important;
+    overflow: visible !important;
+    line-height: 1.4 !important;
+  }
+
+  .mockup-product-title {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    min-height: 42px !important;
+    margin: 8px 0 12px 0 !important;
+  }
+
+  .product-title, #pTitle {
+    font-size: clamp(22px, 3vw, 32px) !important;
+    font-weight: 800 !important;
+    color: #0b1a30 !important;
+    letter-spacing: -0.4px !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* Rich HTML Description Formatting */
+  .product-html-description {
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    font-size: 15px !important;
+    line-height: 1.85 !important;
+    color: #334155 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .product-html-description p {
+    margin-bottom: 20px !important;
+    line-height: 1.85 !important;
+  }
+
+  .product-html-description strong, 
+  .product-html-description b {
+    color: #0b1a30 !important;
+    font-weight: 700 !important;
+  }
+
+  .product-html-description ul, 
+  .product-html-description ol {
+    margin: 18px 0 24px 24px !important;
+    padding-left: 10px !important;
+  }
+
+  .product-html-description li {
+    margin-bottom: 10px !important;
+    line-height: 1.75 !important;
+  }
+
+  .product-html-description table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 24px 0 !important;
+    display: block !important;
+    overflow-x: auto !important;
+  }
+
+  .product-html-description table td, 
+  .product-html-description table th {
+    padding: 12px 16px !important;
+    border: 1px solid #e2e8f0 !important;
+    font-size: 14px !important;
+  }
+
+  .product-html-description table tr:nth-child(even) {
+    background-color: #f8fafc !important;
+  }
+</style>
+
+
+<style id="scrolled-header-styles">
+  /* Scrolled Header Styling */
+  .mockup-header.scrolled {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  .mockup-header.scrolled .mockup-nav > ul > li > a {
+    color: #0b1a30 !important;
+    background: rgba(0, 0, 0, 0.04) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .mockup-header.scrolled .mockup-nav > ul > li > a:hover {
+    background: rgba(0, 0, 0, 0.08) !important;
+    border-color: rgba(0, 0, 0, 0.15) !important;
+    color: #000000 !important;
+  }
+
+  .mockup-header.scrolled .mockup-nav > ul > li > a.active {
+    background: #0b1a30 !important;
+    color: #ffffff !important;
+    border-color: #0b1a30 !important;
+  }
+
+  .mockup-header.scrolled .mockup-action-icon {
+    background: rgba(11, 26, 48, 0.05) !important;
+    border: 1px solid rgba(11, 26, 48, 0.12) !important;
+    color: #0b1a30 !important;
+  }
+
+  .mockup-header.scrolled .mockup-action-icon:hover {
+    background: rgba(11, 26, 48, 0.12) !important;
+    border-color: rgba(11, 26, 48, 0.25) !important;
+    color: #0b1a30 !important;
+  }
+
+  .mockup-header.scrolled .mockup-search-container {
+    background: rgba(0, 0, 0, 0.04) !important;
+    border: 1.5px solid rgba(11, 26, 48, 0.25) !important;
+  }
+
+  .mockup-header.scrolled .mockup-search-container input {
+    color: #0b1a30 !important;
+  }
+
+  .mockup-header.scrolled .mockup-search-container input::placeholder {
+    color: rgba(11, 26, 48, 0.6) !important;
+  }
+
+  .mockup-header.scrolled .mockup-search-container button svg {
+    stroke: #0b1a30 !important;
+  }
+</style>
+
+
+
+
+
+
+
+<style id="prescot-horizontal-ribbon-styles">
+  /* Sticky Glassmorphic Filter Ribbon */
+  .prescot-glass-hub {
+    position: sticky !important;
+    top: 92px !important;
+    z-index: 995 !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(24px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+    border: 1px solid rgba(11, 26, 48, 0.12) !important;
+    box-shadow: 0 10px 30px rgba(11, 26, 48, 0.07) !important;
+    border-radius: 18px !important;
+    padding: 12px 20px !important;
+    margin-bottom: 25px !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  /* Ribbon Header Row */
+  .hub-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  /* Status Tag: "Aktualnie jesteś: ..." */
+  .hub-status-breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #475569;
+  }
+
+  .status-highlight-badge {
+    background: #0b1a30;
+    color: #ffffff;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 99px;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 8px rgba(11, 26, 48, 0.15);
+  }
+
+  .hub-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 18px;
+    background: rgba(11, 26, 48, 0.06);
+    color: #0b1a30;
+    border: 1px solid rgba(11, 26, 48, 0.12);
+    border-radius: 99px;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    user-select: none;
+  }
+
+  .hub-toggle-btn:hover {
+    background: #0b1a30;
+    color: #ffffff;
+    border-color: #0b1a30;
+  }
+
+  .hub-active-badge {
+    background: var(--accent-color, #ff5a00);
+    color: #ffffff;
+    font-size: 10.5px;
+    font-weight: 800;
+    padding: 1px 7px;
+    border-radius: 99px;
+  }
+
+  /* Compact Horizontal Expandable Content (Along Screen Width!) */
+  .hub-expandable-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.3s ease,
+                transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                margin 0.3s ease;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 1px solid transparent;
+  }
+
+  .prescot-glass-hub.is-open .hub-expandable-content {
+    max-height: 240px; /* Extremely compact height along width! */
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top-color: rgba(11, 26, 48, 0.08);
+  }
+
+  /* Horizontal Filter Strips (Width-Based Scrollable Rows) */
+  .horizontal-ribbon-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 4px 2px;
+    margin-bottom: 10px;
+    scrollbar-width: none;
+  }
+  .horizontal-ribbon-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ribbon-label {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #64748b;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    padding-right: 6px;
+  }
+
+  .filter-chip {
+    padding: 6px 15px;
+    border-radius: 99px;
+    border: 1px solid rgba(11, 26, 48, 0.12);
+    background: #ffffff;
+    color: #334155;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    user-select: none;
+  }
+
+  .filter-chip:hover {
+    background: rgba(11, 26, 48, 0.06);
+    color: #0b1a30;
+    border-color: #0b1a30;
+  }
+
+  .filter-chip.active {
+    background: #0b1a30 !important;
+    color: #ffffff !important;
+    border-color: #0b1a30 !important;
+    font-weight: 700 !important;
+    box-shadow: 0 3px 10px rgba(11, 26, 48, 0.18) !important;
+  }
+</style>
+
+
+
+
+
+
+
+<style id="ultimate-header-visibility-fix">
+  /* Force fixed header with solid glass background on shop page */
+  body .mockup-header {
+    background: rgba(255, 255, 255, 0.96) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border-bottom: 1px solid rgba(11, 26, 48, 0.1) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 9999 !important;
+  }
+
+  /* Navigation Links - 100% High Contrast Visibility */
+  body .mockup-header .mockup-nav ul li a,
+  body .mockup-nav ul li a {
+    color: #0b1a30 !important;
+    background: rgba(11, 26, 48, 0.05) !important;
+    border: 1px solid rgba(11, 26, 48, 0.1) !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    padding: 9px 20px !important;
+    border-radius: 99px !important;
+    transition: all 0.25s ease !important;
+  }
+
+  body .mockup-header .mockup-nav ul li a:hover,
+  body .mockup-nav ul li a:hover {
+    background: rgba(11, 26, 48, 0.12) !important;
+    border-color: rgba(11, 26, 48, 0.2) !important;
+    color: #0b1a30 !important;
+    transform: translateY(-1px) !important;
+  }
+
+  body .mockup-header .mockup-nav ul li a.active,
+  body .mockup-nav ul li a.active {
+    background: #0b1a30 !important;
+    color: #ffffff !important;
+    border-color: #0b1a30 !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 15px rgba(11, 26, 48, 0.2) !important;
+  }
+
+  /* Action Icons (Account, Wishlist, Cart) */
+  body .mockup-header .mockup-action-icon,
+  body .mockup-action-icon {
+    background: rgba(11, 26, 48, 0.06) !important;
+    border: 1px solid rgba(11, 26, 48, 0.12) !important;
+    color: #0b1a30 !important;
+    border-radius: 50% !important;
+  }
+
+  body .mockup-header .mockup-action-icon:hover,
+  body .mockup-action-icon:hover {
+    background: #0b1a30 !important;
+    color: #ffffff !important;
+    border-color: #0b1a30 !important;
+    transform: translateY(-2px) !important;
+  }
+
+  /* Search Container */
+  body .mockup-header .mockup-search-container,
+  body .mockup-search-container {
+    background: rgba(11, 26, 48, 0.04) !important;
+    border: 1.5px solid rgba(11, 26, 48, 0.18) !important;
+    border-radius: 99px !important;
+  }
+
+  body .mockup-header .mockup-search-container input,
+  body .mockup-search-container input {
+    color: #0b1a30 !important;
+  }
+
+  body .mockup-header .mockup-search-container input::placeholder,
+  body .mockup-search-container input::placeholder {
+    color: rgba(11, 26, 48, 0.55) !important;
+  }
+
+  body .mockup-header .mockup-search-container button svg,
+  body .mockup-search-container button svg {
+    stroke: #0b1a30 !important;
+  }
+</style>
+
+
+<style id="scrolled-nav-visibility-override">
+  /* Guaranteed 100% Contrast for Scrolled Header Navigation */
+  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active),
+  body .mockup-header.scrolled .mockup-nav ul li a:not(.active) {
+    color: #0b1a30 !important;
+    background: rgba(11, 26, 48, 0.06) !important;
+    border: 1px solid rgba(11, 26, 48, 0.12) !important;
+    font-weight: 600 !important;
+  }
+
+  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active):hover,
+  body .mockup-header.scrolled .mockup-nav ul li a:not(.active):hover {
+    background: rgba(11, 26, 48, 0.14) !important;
+    color: #0b1a30 !important;
+    border-color: rgba(11, 26, 48, 0.25) !important;
+  }
+
+  body .mockup-header.scrolled .mockup-nav > ul > li > a.active,
+  body .mockup-header.scrolled .mockup-nav ul li a.active {
+    background: #0b1a30 !important;
+    color: #ffffff !important;
+    border-color: #0b1a30 !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 14px rgba(11, 26, 48, 0.2) !important;
+  }
+</style>
+
+
+<style id="ultimate-header-footer-fix">
+  /* Force 100% Crisp Visibility for All Header Navigation Links regardless of scroll state */
+  body .mockup-header .mockup-nav ul li a:not(.active),
+  body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active),
+  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+    color: #0b1a30 !important;
+    background: rgba(11, 26, 48, 0.06) !important;
+    border: 1px solid rgba(11, 26, 48, 0.12) !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    padding: 8px 18px !important;
+    border-radius: 99px !important;
+    transition: all 0.2s ease !important;
+  }
+
+  body .mockup-header .mockup-nav ul li a:not(.active):hover,
+  body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active):hover,
+  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active):hover {
+    background: rgba(11, 26, 48, 0.14) !important;
+    color: #0b1a30 !important;
+    border-color: rgba(11, 26, 48, 0.25) !important;
+  }
+
+  body .mockup-header .mockup-nav ul li a.active,
+  body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a.active,
+  body .mockup-header.scrolled .mockup-nav > ul > li > a.active {
+    background: #0b1a30 !important;
+    color: #ffffff !important;
+    border: 1px solid #0b1a30 !important;
+    font-weight: 700 !important;
+    padding: 8px 18px !important;
+    border-radius: 99px !important;
+    box-shadow: 0 4px 14px rgba(11, 26, 48, 0.2) !important;
+  }
+
+  /* Footer White + Orange Logo Styling */
+  footer .footer-logo img,
+  .mockup-footer .footer-logo img {
+    height: 32px !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+</style>
+
+
+<style id="product-title-4-lines-override">
+  /* Force Up to 4 Full Lines for Product Titles (No Word Truncation) */
+  .mockup-product-title,
+  .mockup-product-title a,
+  div.mockup-product-title,
+  h3.mockup-product-title {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4 !important;
+    -webkit-box-orient: vertical !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    overflow: visible !important;
+    max-height: none !important;
+    min-height: 72px !important;
+    line-height: 1.35 !important;
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    color: #0b1a30 !important;
+    margin-bottom: 8px !important;
+    text-overflow: clip !important;
+  }
+
+  .mockup-product-title a:hover {
+    color: var(--accent-color, #ff5a00) !important;
+  }
+</style>
+
 </head>
 <body>
   
   <header class="mockup-header" id="mainHeader">
 <div class="mockup-header-logo">
-<a href="index.html"><img alt="Prescot Logo" id="headerLogo" src="images/logo-white.png"/></a>
+<a href="index.html"><img alt="Prescot Logo" id="headerLogo" src="images/logo-dark.png"/></a>
 </div>
 <nav class="mockup-nav">
 <ul>
@@ -3171,99 +3718,102 @@
     </div>
   </section>
 <main class="shop-container">
-    
-    <!-- Mobile specific toolbar imitating Envato screenshot -->
-    <div class="mobile-shop-toolbar-v2">
+
+    <!-- Sticky Horizontal Filter Ribbon -->
+    <div class="prescot-glass-hub" id="prescotGlassHub">
       
-      
-      <div class="mobile-filter-row">
-        <button class="mobile-filter-pill" id="mobileFiltersBtn">
-          <i class="ph ph-sliders"></i> Filtry <i class="ph ph-caret-down"></i>
-        </button>
-        <button class="mobile-filter-pill" id="mobileCategoryBtn">
-          Kategoria <i class="ph ph-caret-down"></i>
-        </button>
-        <button class="mobile-filter-pill" id="mobileSortBtn">
-          Sortuj <i class="ph ph-caret-down"></i>
-        </button>
+      <!-- Ribbon Header Row -->
+      <div class="hub-header-bar">
+        <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+          
+          <!-- Only: "Aktualnie jesteś: [Status]" -->
+          <div class="hub-status-breadcrumb">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0b1a30" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            Aktualnie jesteś:
+            <span class="status-highlight-badge" id="statusHighlightBadge">
+              Wszystkie produkty (1323)
+            </span>
+          </div>
+
+          <button class="hub-toggle-btn" id="hubToggleBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            <span>Parametry filtrów</span>
+            <span class="hub-active-badge" id="activeFilterBadge" style="display: none;">0</span>
+          </button>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase;">Sortowanie:</span>
+          <div class="horizontal-ribbon-row" id="sortChips" style="margin-bottom: 0;">
+            <button class="filter-chip active" data-sort="default">Domyślnie</button>
+            <button class="filter-chip" data-sort="price-asc">Cena: ⬆</button>
+            <button class="filter-chip" data-sort="price-desc">Cena: ⬇</button>
+            <button class="filter-chip" data-sort="title-asc">Nazwa: A-Z</button>
+          </div>
+        </div>
       </div>
 
-      <!-- Mobile Category Dropdown List -->
-      <div class="mobile-dropdown-panel" id="mobileCategoryDropdown" style="display: none; background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; margin-top: 10px; padding: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-        <ul class="mobile-dropdown-list" id="mobileCategoriesList" style="list-style: none; padding: 0; margin: 0;">
-          <!-- Category items will be generated here -->
-        </ul>
-      </div>
+      <!-- Compact Expandable Horizontal Filter Rows (Width-wise, low height!) -->
+      <div class="hub-expandable-content" id="hubExpandableContent">
+        
+        <!-- Row 1: Categories Horizontal Row -->
+        <div class="horizontal-ribbon-row" id="topCategoryPills">
+          <!-- Rendered dynamically in JS -->
+        </div>
 
-      <!-- Mobile Sort Dropdown List -->
-      <div class="mobile-dropdown-panel" id="mobileSortDropdown" style="display: none; background: #fff; border: 1px solid #e5e7eb; border-radius: 16px; margin-top: 10px; padding: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-        <ul class="mobile-dropdown-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
-          <li class="mobile-sort-item active" data-sort="default" style="padding: 10px; cursor: pointer; border-radius: 8px; transition: background 0.3s; font-size: 14px;">Sortuj: Domyślnie</li>
-          <li class="mobile-sort-item" data-sort="price-asc" style="padding: 10px; cursor: pointer; border-radius: 8px; transition: background 0.3s; font-size: 14px;">Cena: rosnąco</li>
-          <li class="mobile-sort-item" data-sort="price-desc" style="padding: 10px; cursor: pointer; border-radius: 8px; transition: background 0.3s; font-size: 14px;">Cena: malejąco</li>
-          <li class="mobile-sort-item" data-sort="title-asc" style="padding: 10px; cursor: pointer; border-radius: 8px; transition: background 0.3s; font-size: 14px;">Nazwa: A-Z</li>
-        </ul>
-      </div>
-    </div>
+        <!-- Row 2: Technical Parameters Horizontal Rows -->
+        <div class="horizontal-ribbon-row" id="voltageChips">
+          <span class="ribbon-label">Napięcie:</span>
+          <button class="filter-chip active" data-val="all">Wszystkie</button>
+          <button class="filter-chip" data-val="12V">12V DC</button>
+          <button class="filter-chip" data-val="24V">24V DC</button>
+          <button class="filter-chip" data-val="230V">230V AC</button>
+        </div>
 
-    <!-- Toolbar on top -->
-    <div class="shop-toolbar" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 25px; width: 100%;">
-      <div style="display: flex; gap: 15px; align-items: center;">
-        <button class="filter-toggle-btn" id="filterToggle" style="padding: 10px 24px; border: 1px solid #ddd; background: #fff; font-weight: 600; cursor: pointer; font-size: 13px; display: flex; align-items: center; gap: 8px; border-radius: 30px; transition: var(--transition); text-transform: uppercase; letter-spacing: 1px; font-family: inherit;">
-          <span>⚙️</span> Filtruj
-        </button>
-        <div id="resultsCount" style="font-size: 13px; color: #777;">Pokazano 0-0 z 0 wyników</div>
+        <div class="horizontal-ribbon-row" id="colorTempChips">
+          <span class="ribbon-label">Barwa:</span>
+          <button class="filter-chip active" data-val="all">Wszystkie</button>
+          <button class="filter-chip" data-val="ciepła">Ciepła (3000K)</button>
+          <button class="filter-chip" data-val="neutralna">Neutralna (4000K)</button>
+          <button class="filter-chip" data-val="zimna">Zimna (6500K)</button>
+          <button class="filter-chip" data-val="rgb">RGB / CCT</button>
+        </div>
+
+        <div class="horizontal-ribbon-row" id="ipPriceChips">
+          <span class="ribbon-label">Klasa IP / Cena:</span>
+          <span id="ipChips" style="display: inline-flex; gap: 6px;">
+            <button class="filter-chip active" data-val="all">Wszystkie IP</button>
+            <button class="filter-chip" data-val="IP20">IP20 (Wewn.)</button>
+            <button class="filter-chip" data-val="IP65+">IP65+ (Wodoodporne)</button>
+          </span>
+          <span style="color: #cbd5e1; margin: 0 4px;">|</span>
+          <span id="priceRangeChips" style="display: inline-flex; gap: 6px;">
+            <button class="filter-chip active" data-val="all">Wszystkie ceny</button>
+            <button class="filter-chip" data-val="0-50">0 - 50 zł</button>
+            <button class="filter-chip" data-val="50-100">50 - 100 zł</button>
+            <button class="filter-chip" data-val="100-250">100 - 250 zł</button>
+            <button class="filter-chip" data-val="250+">250+ zł</button>
+          </span>
+
+          <button id="resetFiltersBtn" style="margin-left: auto; background: none; border: 1px solid #fee2e2; color: #ef4444; padding: 5px 14px; border-radius: 99px; font-size: 11.5px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 4px; white-space: nowrap;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+            Reset
+          </button>
+        </div>
+
       </div>
-      <select class="sort-select" id="shopSortSelect">
-        <option value="default">Sortuj: Domyślnie</option>
-        <option value="price-asc">Cena: rosnąco</option>
-        <option value="price-desc">Cena: malejąco</option>
-        <option value="title-asc">Nazwa: A-Z</option>
-      </select>
     </div>
 
     <div class="shop-main-layout">
-      <!-- Hidden collapsible filters panel -->
-      <aside class="shop-sidebar" id="shopSidebar">
-        <!-- Search widget removed -->
-
-        <div class="filter-widget">
-          <h3 class="filter-title">Kategorie</h3>
-          <ul class="filter-list" id="categoriesList">
-            <!-- Loaded dynamically -->
-          </ul>
-        </div>
-        
-        <div class="filter-widget">
-          <h3 class="filter-title">Kolor</h3>
-          <div class="filter-color-dots" id="colorsList">
-            <div class="color-dot active" data-color="all" style="background: linear-gradient(45deg, #f00, #0f0, #00f); border: 1px solid #ddd;" title="Wszystkie"></div>
-            <div class="color-dot" data-color="#000000" style="background: #000;" title="Czarny"></div>
-            <div class="color-dot" data-color="#ffffff" style="background: #fff; border: 1px solid #ddd;" title="Biały"></div>
-            <div class="color-dot" data-color="#556b2f" style="background: #556b2f;" title="Oliwkowy"></div>
-            <div class="color-dot" data-color="#ff8c00" style="background: #ff8c00;" title="Pomarańczowy"></div>
-            <div class="color-dot" data-color="#1e90ff" style="background: #1e90ff;" title="Niebieski"></div>
-          </div>
-        </div>
-
-        <div class="filter-widget">
-          <h3 class="filter-title">Cena</h3>
-          <ul class="filter-list" id="priceRangesList">
-            <li class="active" data-range="all">Wszystkie ceny</li>
-            <li data-range="0-50">$0.00 - $50.00</li>
-            <li data-range="50-100">$50.00 - $100.00</li>
-            <li data-range="100+">$100.00+</li>
-          </ul>
-        </div>
-      </aside>
-
-      <section class="shop-content">
-        <div class="shop-grid" id="shopGrid">
+      <section class="shop-content" style="width: 100%;">
+<div class="shop-grid" id="shopGrid">
           <!-- Products render dynamically -->
         </div>
 
-        <div class="pagination-container" id="shopPagination">
-          <!-- Pagination controls render dynamically -->
+        <div class="pagination-wrapper">
+          <div class="pagination-container" id="shopPagination" role="navigation" aria-label="Stronicowanie produktów">
+            <!-- Pagination controls render dynamically -->
+          </div>
         </div>
       </section>
     </div>
@@ -3290,7 +3840,7 @@
     <div class="footer-grid">
       <div class="footer-col">
         <div class="footer-logo">
-          <img src="images/logo-white.png" alt="Prescot Logo" style="height: 26px; opacity: 0.9; margin-bottom: 5px; max-width: 100%;">
+          <img src="images/logo-white.png" alt="Prescot Logo" style="height: 32px; opacity: 1; margin-bottom: 5px; max-width: 100%;">
         </div>
         <p style="margin-top: 15px;">Prescot LED to profesjonalny dostawca najwyższej jakości taśm LED, profili aluminiowych, nowoczesnych sterowników oraz niezawodnych zasilaczy hermetycznych.</p><p style="margin-top: 15px; color: #ccc;"><strong>PRESCOT LED</strong><br>ul. Przykładowa 12<br>00-001 Warszawa<br>kontakt@prescot.com.pl</p>
       </div>
@@ -3327,696 +3877,520 @@
     </div>
   </footer>
 
-  <script>
-    // Mobile Collapsible Footer Columns
-    document.querySelectorAll('.footer-col h3').forEach(h3 => {
-      h3.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
-          const col = h3.parentElement;
-          col.classList.toggle('active');
-        }
-      });
-    });
-
-    // Mobile Navigation Toggle
-    const menuToggle = document.getElementById('menuToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-    
-    menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('active');
-    });
-
-    // Mobile Sidebar Filters Toggle
-    const filterToggle = document.getElementById('filterToggle');
-    const shopSidebar = document.getElementById('shopSidebar');
-    const shopMainLayout = document.querySelector('.shop-main-layout');
-
-    if (filterToggle) {
-      filterToggle.addEventListener('click', () => {
-        shopSidebar.classList.toggle('active');
-        if (shopMainLayout) {
-          shopMainLayout.classList.toggle('has-sidebar');
-        }
-      });
-    }
-  </script>
-
-  <!-- Load Shared Interactive Popups Script and Dynamic Render Logic -->
+  <!-- Shared Data & Scripts -->
   <script src="js/products-data.js"></script>
   <script src="js/shared-popups.js"></script>
   <script>
-
-    // State Variables
-    let currentCategory = 'all';
-    let currentColor = 'all';
-    let currentPriceRange = 'all';
-    let currentSearch = '';
-    let currentSort = 'default';
-    let currentPage = 1;
-    const itemsPerPage = 9;
-
-    // Filter lists
-    const categoriesList = document.getElementById('categoriesList');
-    const colorsList = document.getElementById('colorsList');
-    const priceRangesList = document.getElementById('priceRangesList');
-    const shopGrid = document.getElementById('shopGrid');
-    const shopPagination = document.getElementById('shopPagination');
-    const resultsCount = document.getElementById('resultsCount');
-    const shopSearchInput = document.getElementById('shopSearchInput');
-    const shopSortSelect = document.getElementById('shopSortSelect');
-
-    // Parse search, category, color, and price from URL params if present
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlSearch = urlParams.get('search');
-    if (urlSearch) {
-      currentSearch = urlSearch.toLowerCase().trim();
-      if (shopSearchInput) shopSearchInput.value = urlSearch;
-    }
-    const urlCategory = urlParams.get('category') || urlParams.get('cat');
-    if (urlCategory) {
-      const decoded = decodeURIComponent(urlCategory).toLowerCase().trim();
-      if (decoded.includes('tasm') || decoded.includes('taśm')) {
-        currentCategory = 'Taśmy LED';
-      } else if (decoded.includes('zasilacz')) {
-        currentCategory = 'Zasilacze LED';
-      } else if (decoded.includes('sterownik')) {
-        currentCategory = 'Sterowniki LED';
-      } else if (decoded.includes('akcesor')) {
-        currentCategory = 'Akcesoria';
-      } else {
-        currentCategory = urlCategory;
-      }
-    }
-    const urlColor = urlParams.get('color');
-    if (urlColor) {
-      currentColor = urlColor;
-    }
-    const urlPrice = urlParams.get('price');
-    if (urlPrice) {
-      currentPriceRange = urlPrice;
-    }
-
-    // Initialize Categories filter
-    function buildCategoriesFilter() {
-      // Get unique categories and count them
-      const categoryCounts = {};
-      products.forEach(p => {
-        categoryCounts[p.category] = (categoryCounts[p.category] || 0) + 1;
-      });
-
-      const allActive = currentCategory === 'all' ? 'class="active"' : '';
-      categoriesList.innerHTML = `<li ${allActive} data-cat="all">Wszystkie produkty <span>(${products.length})</span></li>`;
+    document.addEventListener('DOMContentLoaded', () => {
       
-      Object.keys(categoryCounts).sort().forEach(cat => {
-        const catActive = currentCategory === cat ? 'class="active"' : '';
-        categoriesList.insertAdjacentHTML('beforeend', `
-          <li ${catActive} data-cat="${cat}">${cat} <span>(${categoryCounts[cat]})</span></li>
-        `);
-      });
+      // Header Search Bar Handler for shop.html
+      const headerSearchInput = document.getElementById('headerSearchInput');
+      const headerSearchBtn = document.getElementById('headerSearchBtn');
 
-      // Bind category selectors
-      categoriesList.querySelectorAll('li').forEach(li => {
-        li.addEventListener('click', (e) => {
-          categoriesList.querySelectorAll('li').forEach(l => l.classList.remove('active'));
-          li.classList.add('active');
-          currentCategory = li.dataset.cat;
+      function executeHeaderSearch() {
+        if (!headerSearchInput) return;
+        const val = headerSearchInput.value.toLowerCase().trim();
+        currentSearch = val;
+        currentPage = 1;
+        
+        // Update URL search query cleanly without page reload
+        const newUrl = new URL(window.location.href);
+        if (val) {
+          newUrl.searchParams.set('search', val);
+        } else {
+          newUrl.searchParams.delete('search');
+        }
+        window.history.pushState({}, '', newUrl);
+
+        renderFilteredProducts();
+      }
+
+      if (headerSearchBtn) {
+        headerSearchBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          executeHeaderSearch();
+        });
+      }
+
+      if (headerSearchInput) {
+        headerSearchInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            executeHeaderSearch();
+          }
+        });
+        headerSearchInput.addEventListener('input', (e) => {
+          currentSearch = e.target.value.toLowerCase().trim();
           currentPage = 1;
           renderFilteredProducts();
         });
+      }
+
+
+      // 1. Mobile Footer & Navigation Toggles
+      document.querySelectorAll('.footer-col h3').forEach(h3 => {
+        h3.addEventListener('click', () => {
+          if (window.innerWidth <= 768) {
+            h3.parentElement.classList.toggle('active');
+          }
+        });
       });
 
-      // Build mobile categories filter list
-      const mobileCategoriesList = document.getElementById('mobileCategoriesList');
-      if (mobileCategoriesList) {
-        mobileCategoriesList.innerHTML = `<li class="mobile-cat-item ${currentCategory === 'all' ? 'active' : ''}" data-cat="all" style="padding: 10px; cursor: pointer; border-radius: 8px; transition: background 0.3s; font-size: 14px; display: flex; justify-content: space-between; align-items: center; color: #555;">Wszystkie produkty <span>(${products.length})</span></li>`;
-        Object.keys(categoryCounts).sort().forEach(cat => {
-          const isActive = currentCategory === cat ? 'active' : '';
-          mobileCategoriesList.insertAdjacentHTML('beforeend', `
-            <li class="mobile-cat-item ${isActive}" data-cat="${cat}" style="padding: 10px; cursor: pointer; border-radius: 8px; transition: background 0.3s; font-size: 14px; display: flex; justify-content: space-between; align-items: center; color: #555;">${cat} <span>(${categoryCounts[cat]})</span></li>
-          `);
+      const menuToggle = document.getElementById('menuToggle');
+      const mobileMenu = document.getElementById('mobileMenu');
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+          mobileMenu.classList.toggle('active');
+        });
+      }
+
+      // 2. Prescot Glass Hub Card Toggle
+      const prescotGlassHub = document.getElementById('prescotGlassHub');
+      const hubToggleBtn = document.getElementById('hubToggleBtn');
+      const activeFilterBadge = document.getElementById('activeFilterBadge');
+
+      if (prescotGlassHub && hubToggleBtn) {
+        hubToggleBtn.addEventListener('click', () => {
+          prescotGlassHub.classList.toggle('is-open');
+        });
+      }
+
+      // 3. State Variables
+      let currentCategory = 'all';
+      let currentColor = 'all';
+      let currentPriceRange = 'all';
+      let currentVoltage = 'all';
+      let currentColorTemp = 'all';
+      let currentLumens = 'all';
+      let currentIP = 'all';
+      let currentSearch = '';
+      let currentSort = 'default';
+      let currentPage = 1;
+      const itemsPerPage = 24;
+
+      // DOM Elements
+      const shopGrid = document.getElementById('shopGrid');
+      const shopPagination = document.getElementById('shopPagination');
+      const resetFiltersBtn = document.getElementById('resetFiltersBtn');
+      const topCategoryPills = document.getElementById('topCategoryPills');
+      const statusHighlightBadge = document.getElementById('statusHighlightBadge');
+
+      // Helper function to bind Chip Container
+      function bindChipContainer(containerId, onSelectCallback) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const chips = container.querySelectorAll('.filter-chip');
+        chips.forEach(chip => {
+          chip.addEventListener('click', () => {
+            chips.forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            const val = chip.dataset.val || chip.dataset.sort;
+            onSelectCallback(val);
+          });
+        });
+      }
+
+      // Bind All Ribbon Chip Groups
+      bindChipContainer('sortChips', (val) => {
+        currentSort = val;
+        currentPage = 1;
+        renderFilteredProducts();
+      });
+
+      bindChipContainer('voltageChips', (val) => {
+        currentVoltage = val;
+        currentPage = 1;
+        renderFilteredProducts();
+      });
+
+      bindChipContainer('colorTempChips', (val) => {
+        currentColorTemp = val;
+        currentPage = 1;
+        renderFilteredProducts();
+      });
+
+      bindChipContainer('lumensChips', (val) => {
+        currentLumens = val;
+        currentPage = 1;
+        renderFilteredProducts();
+      });
+
+      bindChipContainer('ipChips', (val) => {
+        currentIP = val;
+        currentPage = 1;
+        renderFilteredProducts();
+      });
+
+      bindChipContainer('priceRangeChips', (val) => {
+        currentPriceRange = val;
+        currentPage = 1;
+        renderFilteredProducts();
+      });
+
+      // 4. Parse URL params
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlSearch = urlParams.get('search') || urlParams.get('q');
+      if (urlSearch) {
+        currentSearch = urlSearch.toLowerCase().trim();
+      }
+      const urlCategory = urlParams.get('category') || urlParams.get('cat');
+      if (urlCategory) {
+        const decodedCat = decodeURIComponent(urlCategory).trim();
+        if (typeof products !== 'undefined' && Array.isArray(products)) {
+          const match = products.find(p => p.category === decodedCat || p.category.toLowerCase().includes(decodedCat.toLowerCase()) || decodedCat.toLowerCase().includes(p.category.toLowerCase()));
+          if (match) {
+            currentCategory = match.category;
+          } else {
+            currentCategory = decodedCat;
+          }
+        }
+      }
+
+      // 5. Build Top Category Scroll Pills Bar
+      function buildTopCategoryPills() {
+        if (!topCategoryPills || typeof products === 'undefined') return;
+        const catCounts = {};
+        products.forEach(p => {
+          if (p.category) {
+            catCounts[p.category] = (catCounts[p.category] || 0) + 1;
+          }
         });
 
-        // Bind mobile category selectors
-        mobileCategoriesList.querySelectorAll('.mobile-cat-item').forEach(li => {
-          li.addEventListener('click', () => {
-            mobileCategoriesList.querySelectorAll('.mobile-cat-item').forEach(l => l.classList.remove('active'));
-            li.classList.add('active');
-            currentCategory = li.dataset.cat;
+        let html = `<button class="filter-chip ${currentCategory === 'all' ? 'active' : ''}" data-cat="all">Wszystkie produkty (${products.length})</button>`;
+        Object.keys(catCounts).sort().forEach(cat => {
+          const isActive = currentCategory === cat ? 'active' : '';
+          html += `<button class="filter-chip ${isActive}" data-cat="${cat}">${cat} (${catCounts[cat]})</button>`;
+        });
+        topCategoryPills.innerHTML = html;
+
+        topCategoryPills.querySelectorAll('.filter-chip').forEach(btn => {
+          btn.addEventListener('click', () => {
+            topCategoryPills.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentCategory = btn.dataset.cat;
             currentPage = 1;
-            
-            // Sync with desktop selector
-            if (categoriesList) {
-              categoriesList.querySelectorAll('li').forEach(l => {
-                if (l.dataset.cat === currentCategory) l.classList.add('active');
-                else l.classList.remove('active');
-              });
+            renderFilteredProducts();
+          });
+        });
+      }
+      buildTopCategoryPills();
+
+      // 6. Reset Filters Button
+      if (resetFiltersBtn) {
+        resetFiltersBtn.addEventListener('click', () => {
+          currentCategory = 'all';
+          currentColor = 'all';
+          currentPriceRange = 'all';
+          currentVoltage = 'all';
+          currentColorTemp = 'all';
+          currentLumens = 'all';
+          currentIP = 'all';
+          currentSearch = '';
+          currentSort = 'default';
+          currentPage = 1;
+
+          // Reset Active Chips
+          const resetContainerChips = (containerId) => {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.querySelectorAll('.filter-chip').forEach(c => {
+              const val = c.dataset.val || c.dataset.sort;
+              if (val === 'all' || val === 'default') c.classList.add('active');
+              else c.classList.remove('active');
+            });
+          };
+
+          resetContainerChips('sortChips');
+          resetContainerChips('voltageChips');
+          resetContainerChips('colorTempChips');
+          resetContainerChips('lumensChips');
+          resetContainerChips('ipChips');
+          resetContainerChips('priceRangeChips');
+
+          buildTopCategoryPills();
+          renderFilteredProducts();
+        });
+      }
+
+      // 7. Update Active Filter Count Badge & Status Highlight Text
+      function updateActiveFilterBadge(totalFilteredCount) {
+        let activeCount = 0;
+        if (currentCategory !== 'all') activeCount++;
+        if (currentVoltage !== 'all') activeCount++;
+        if (currentColorTemp !== 'all') activeCount++;
+        if (currentLumens !== 'all') activeCount++;
+        if (currentIP !== 'all') activeCount++;
+        if (currentPriceRange !== 'all') activeCount++;
+        if (currentSearch !== '') activeCount++;
+
+        if (activeFilterBadge) {
+          if (activeCount > 0) {
+            activeFilterBadge.textContent = activeCount;
+            activeFilterBadge.style.display = 'inline-block';
+          } else {
+            activeFilterBadge.style.display = 'none';
+          }
+        }
+
+        if (statusHighlightBadge) {
+          let statusText = 'Wszystkie produkty';
+          if (currentCategory !== 'all') {
+            statusText = currentCategory;
+          } else if (currentVoltage !== 'all') {
+            statusText = `Napięcie ${currentVoltage}`;
+          } else if (currentColorTemp !== 'all') {
+            statusText = `Barwa ${currentColorTemp}`;
+          } else if (currentPriceRange !== 'all') {
+            statusText = `Cena ${currentPriceRange} zł`;
+          }
+          statusHighlightBadge.textContent = `${statusText} (${totalFilteredCount})`;
+        }
+      }
+
+      // 8. Primary Filter and Render Function
+      function renderFilteredProducts() {
+        if (typeof products === 'undefined' || !Array.isArray(products)) {
+          console.error("Products array is undefined!");
+          if (shopGrid) shopGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 100px 0; color: #ef4444;">Błąd ładowania bazy produktów. Odśwież stronę.</div>`;
+          return;
+        }
+
+        let filtered = [...products];
+
+        // Search Filter
+        if (currentSearch) {
+          filtered = filtered.filter(p => p.title.toLowerCase().includes(currentSearch) || (p.description && p.description.toLowerCase().includes(currentSearch)));
+        }
+
+        // Category Filter
+        if (currentCategory !== 'all') {
+          const targetLower = currentCategory.toLowerCase();
+          filtered = filtered.filter(p => p.category === currentCategory || p.category.toLowerCase().includes(targetLower) || targetLower.includes(p.category.toLowerCase()));
+        }
+
+        // Price Filter (PLN)
+        if (currentPriceRange !== 'all') {
+          if (currentPriceRange === '0-50') {
+            filtered = filtered.filter(p => p.price <= 50);
+          } else if (currentPriceRange === '50-100') {
+            filtered = filtered.filter(p => p.price > 50 && p.price <= 100);
+          } else if (currentPriceRange === '100-250') {
+            filtered = filtered.filter(p => p.price > 100 && p.price <= 250);
+          } else if (currentPriceRange === '250+') {
+            filtered = filtered.filter(p => p.price > 250);
+          }
+        }
+
+        // Voltage Filter
+        if (currentVoltage !== 'all') {
+          filtered = filtered.filter(p => {
+            const attrV = (p.attributes && p.attributes["Napięcie wejściowe"]) || "";
+            const title = p.title || "";
+            return attrV.includes(currentVoltage) || title.includes(currentVoltage);
+          });
+        }
+
+        // Color Temp Filter
+        if (currentColorTemp !== 'all') {
+          filtered = filtered.filter(p => {
+            const attrB = (p.attributes && p.attributes["Barwa światła"]) || "";
+            const title = (p.title || "").toLowerCase();
+            const desc = (p.description || "").toLowerCase();
+            if (currentColorTemp === 'ciepła') return attrB.toLowerCase().includes('ciepła') || title.includes('3000k') || title.includes('ciepła') || desc.includes('ciepła');
+            if (currentColorTemp === 'neutralna') return attrB.toLowerCase().includes('neutralna') || title.includes('4000k') || title.includes('neutralna') || desc.includes('neutralna');
+            if (currentColorTemp === 'zimna') return attrB.toLowerCase().includes('zimna') || title.includes('6500k') || title.includes('zimna') || desc.includes('zimna');
+            if (currentColorTemp === 'rgb') return attrB.toLowerCase().includes('rgb') || attrB.toLowerCase().includes('cct') || title.includes('rgb') || title.includes('cct');
+            return true;
+          });
+        }
+
+        // Lumens Filter
+        if (currentLumens !== 'all') {
+          filtered = filtered.filter(p => {
+            const attrJ = (p.attributes && p.attributes["Jasność"]) || (p.attributes && p.attributes["Strumień świetlny"]) || "";
+            const title = p.title || "";
+            const match = (attrJ + " " + title).match(/(\d+)\s*lm/i);
+            if (match) {
+              const lm = parseInt(match[1], 10);
+              if (currentLumens === 'low') return lm < 600;
+              if (currentLumens === 'mid') return lm >= 600 && lm <= 1000;
+              if (currentLumens === 'high') return lm > 1000;
+            }
+            return true;
+          });
+        }
+
+        // IP Rating Filter
+        if (currentIP !== 'all') {
+          filtered = filtered.filter(p => {
+            const attrIP = (p.attributes && p.attributes["Klasa szczelności"]) || "";
+            const title = p.title || "";
+            if (currentIP === 'IP20') return attrIP.includes('IP20') || title.includes('IP20');
+            if (currentIP === 'IP65+') return attrIP.includes('IP63') || attrIP.includes('IP65') || attrIP.includes('IP67') || title.includes('IP65') || title.includes('IP67');
+            return true;
+          });
+        }
+
+        // Sorting
+        if (currentSort === 'price-asc') {
+          filtered.sort((a, b) => a.price - b.price);
+        } else if (currentSort === 'price-desc') {
+          filtered.sort((a, b) => b.price - a.price);
+        } else if (currentSort === 'title-asc') {
+          filtered.sort((a, b) => a.title.localeCompare(b.title));
+        }
+
+        updateActiveFilterBadge(filtered.length);
+
+        // Pagination Calculations
+        const totalItems = filtered.length;
+        const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
+
+        if (currentPage > totalPages) currentPage = totalPages;
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+
+        const itemsToShow = filtered.slice(startIndex, endIndex);
+
+        // Render Grid
+        if (shopGrid) {
+          shopGrid.innerHTML = '';
+          if (itemsToShow.length === 0) {
+            shopGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 100px 0; color: #777; font-size: 16px;">Brak produktów spełniających wybrane kryteria.</div>`;
+            if (shopPagination) shopPagination.innerHTML = '';
+            return;
+          }
+
+          itemsToShow.forEach(p => {
+            let thirdBtn = '';
+            if (p.has3D) {
+              thirdBtn = `
+                <button class="action-btn-circle qv-3d-btn" data-id="${p.id}" aria-label="Podgląd 3D">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                </button>
+              `;
+            } else if (p.has360) {
+              thirdBtn = `
+                <button class="action-btn-circle qv-360-btn" data-id="${p.id}" aria-label="Podgląd 360">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                </button>
+              `;
             }
 
-            // Close mobile dropdown
-            const mobileCatDropdown = document.getElementById('mobileCategoryDropdown');
-            if (mobileCatDropdown) mobileCatDropdown.style.display = 'none';
-            renderFilteredProducts();
+            const cardHTML = `
+              <div class="mockup-product-card" data-id="${p.id}">
+                <p class="mockup-product-category">${p.category}</p>
+                <div class="mockup-product-media" style="position: relative; overflow: hidden;">
+                  <img src="${p.images[0]}" alt="${p.title}" class="mockup-product-img" loading="lazy">
+                  ${p.video ? `
+                    <video class="mockup-product-video" data-src="${p.video}" loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
+                  ` : ''}
+                  <div class="product-actions-hover">
+                    <button class="action-btn-circle qv-wishlist-btn" data-id="${p.id}" aria-label="Dodaj do listy życzeń">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    </button>
+                    <button class="action-btn-circle qv-eye-btn" data-id="${p.id}" aria-label="Szybki podgląd">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </button>
+                    ${thirdBtn}
+                  </div>
+                </div>
+                <div class="mockup-product-info">
+                  <h3 class="mockup-product-title"><a href="product.html?id=${p.id}">${p.title}</a></h3>
+                  <p class="mockup-product-price">
+                    ${p.price.toFixed(2)} zł <span class="price-unit">/ ${p.category && p.category.includes("Taśmy") ? "metr" : "szt."}</span>
+                  </p>
+                  <button class="mockup-btn qv-add-cart-btn" data-id="${p.id}" style="width: 100%; margin-top: 10px; padding: 0 10px !important; font-size: 11px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; justify-content: center; align-items: center; height: 36px;">
+                    Dodaj do koszyka
+                  </button>
+                </div>
+              </div>
+            `;
+            shopGrid.insertAdjacentHTML('beforeend', cardHTML);
           });
-        });
+        }
+
+        // Render Pagination Controls
+        if (shopPagination) {
+          shopPagination.innerHTML = '';
+          if (totalPages > 1) {
+            if (currentPage > 1) {
+              const prevBtn = document.createElement('button');
+              prevBtn.className = 'pagination-btn';
+              prevBtn.textContent = '◀';
+              prevBtn.addEventListener('click', () => {
+                currentPage--;
+                renderFilteredProducts();
+                window.scrollTo({ top: 350, behavior: 'smooth' });
+              });
+              shopPagination.appendChild(prevBtn);
+            }
+
+            const appendPageButton = (pageNumber) => {
+              const pageBtn = document.createElement('button');
+              pageBtn.className = `pagination-btn ${pageNumber === currentPage ? 'active' : ''}`;
+              pageBtn.textContent = pageNumber;
+              pageBtn.setAttribute('aria-label', `Strona ${pageNumber}`);
+              if (pageNumber === currentPage) pageBtn.setAttribute('aria-current', 'page');
+              pageBtn.addEventListener('click', () => {
+                currentPage = pageNumber;
+                renderFilteredProducts();
+                window.scrollTo({ top: 350, behavior: 'smooth' });
+              });
+              shopPagination.appendChild(pageBtn);
+            };
+
+            const pageWindow = window.innerWidth <= 768 ? 1 : 2;
+            const visiblePages = totalPages <= 7
+              ? Array.from({ length: totalPages }, (_, index) => index + 1)
+              : [...new Set([
+                  1,
+                  totalPages,
+                  ...Array.from(
+                    { length: pageWindow * 2 + 1 },
+                    (_, index) => currentPage - pageWindow + index
+                  )
+                ])]
+                  .filter(pageNumber => pageNumber >= 1 && pageNumber <= totalPages)
+                  .sort((a, b) => a - b);
+
+            let previousPage = 0;
+            visiblePages.forEach(pageNumber => {
+              if (previousPage && pageNumber - previousPage > 1) {
+                const ellipsis = document.createElement('span');
+                ellipsis.className = 'pagination-ellipsis';
+                ellipsis.textContent = '…';
+                ellipsis.setAttribute('aria-hidden', 'true');
+                shopPagination.appendChild(ellipsis);
+              }
+              appendPageButton(pageNumber);
+              previousPage = pageNumber;
+            });
+
+            if (currentPage < totalPages) {
+              const nextBtn = document.createElement('button');
+              nextBtn.className = 'pagination-btn';
+              nextBtn.textContent = '▶';
+              nextBtn.addEventListener('click', () => {
+                currentPage++;
+                renderFilteredProducts();
+                window.scrollTo({ top: 350, behavior: 'smooth' });
+              });
+              shopPagination.appendChild(nextBtn);
+            }
+          }
+        }
+
+        // Re-bind hover actions for popups
+        if (typeof initSharedPopups === 'function') {
+          initSharedPopups();
+        }
       }
-    }
 
-    // Colors filter binding
-    colorsList.querySelectorAll('.color-dot').forEach(dot => {
-      if (dot.dataset.color === currentColor) {
-        colorsList.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
-        dot.classList.add('active');
-      }
-      dot.addEventListener('click', (e) => {
-        colorsList.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
-        dot.classList.add('active');
-        currentColor = dot.dataset.color;
-        currentPage = 1;
-        renderFilteredProducts();
-      });
-    });
-
-    // Price range binding
-    priceRangesList.querySelectorAll('li').forEach(li => {
-      if (li.dataset.range === currentPriceRange) {
-        priceRangesList.querySelectorAll('li').forEach(l => l.classList.remove('active'));
-        li.classList.add('active');
-      }
-      li.addEventListener('click', (e) => {
-        priceRangesList.querySelectorAll('li').forEach(l => l.classList.remove('active'));
-        li.classList.add('active');
-        currentPriceRange = li.dataset.range;
-        currentPage = 1;
-        renderFilteredProducts();
-      });
-    });
-
-    // Search input binding
-    if (shopSearchInput) {
-      shopSearchInput.addEventListener('input', (e) => {
-        currentSearch = e.target.value.toLowerCase().trim();
-        currentPage = 1;
-        renderFilteredProducts();
-      });
-    }
-
-    // Sort select binding
-    shopSortSelect.addEventListener('change', (e) => {
-      currentSort = e.target.value;
-      currentPage = 1;
+      // Initial Call
       renderFilteredProducts();
     });
-
-    // Focus search input on header search icon click
-    const searchHeaderIcon = document.getElementById('searchHeaderIcon');
-    if (searchHeaderIcon && shopSearchInput) {
-      searchHeaderIcon.addEventListener('click', () => {
-        shopSearchInput.focus();
-        shopSearchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      });
-    }
-
-    // Primary filter and render function
-    function renderFilteredProducts() {
-      let filtered = [...products];
-
-      // 1. Search Filter
-      if (currentSearch) {
-        filtered = filtered.filter(p => p.title.toLowerCase().includes(currentSearch) || p.description.toLowerCase().includes(currentSearch));
-      }
-
-      // 2. Category Filter
-      if (currentCategory !== 'all') {
-        filtered = filtered.filter(p => p.category === currentCategory);
-      }
-
-      // 3. Color Filter
-      if (currentColor !== 'all') {
-        filtered = filtered.filter(p => p.colors && p.colors.includes(currentColor));
-      }
-
-      // 4. Price Filter
-      if (currentPriceRange !== 'all') {
-        if (currentPriceRange === '0-50') {
-          filtered = filtered.filter(p => p.price <= 50);
-        } else if (currentPriceRange === '50-100') {
-          filtered = filtered.filter(p => p.price > 50 && p.price <= 100);
-        } else if (currentPriceRange === '100+') {
-          filtered = filtered.filter(p => p.price > 100);
-        }
-      }
-
-      // 5. Sorting
-      if (currentSort === 'price-asc') {
-        filtered.sort((a, b) => a.price - b.price);
-      } else if (currentSort === 'price-desc') {
-        filtered.sort((a, b) => b.price - a.price);
-      } else if (currentSort === 'title-asc') {
-        filtered.sort((a, b) => a.title.localeCompare(b.title));
-      }
-
-      // 6. Pagination Calculations
-      const totalItems = filtered.length;
-      const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
-      
-      if (currentPage > totalPages) currentPage = totalPages;
-      const startIndex = (currentPage - 1) * itemsPerPage;
-      const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
-
-      const itemsToShow = filtered.slice(startIndex, endIndex);
-
-      // Render Toolbar Result Count
-      resultsCount.textContent = totalItems > 0 
-        ? `Pokazano ${startIndex + 1}-${endIndex} z ${totalItems} wyników`
-        : 'Pokazano 0 wyników';
-
-      // Render Grid
-      shopGrid.innerHTML = '';
-      if (itemsToShow.length === 0) {
-        shopGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 100px 0; color: #999;">Brak produktów spełniających wybrane kryteria.</div>`;
-        shopPagination.innerHTML = '';
-        return;
-      }
-
-      itemsToShow.forEach(p => {
-        let thirdBtn = '';
-        if (p.has3D) {
-          thirdBtn = `
-            <button class="action-btn-circle qv-3d-btn" data-id="${p.id}" aria-label="Podgląd 3D">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-            </button>
-          `;
-        } else if (p.has360) {
-          thirdBtn = `
-            <button class="action-btn-circle qv-360-btn" data-id="${p.id}" aria-label="Podgląd 360">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-            </button>
-          `;
-        }
-
-        const cardHTML = `
-          <div class="mockup-product-card" data-id="${p.id}">
-            <p class="mockup-product-category">${p.category}</p>
-            <div class="mockup-product-media" style="position: relative; overflow: hidden;">
-              <img src="${p.images[0]}" alt="${p.title}" class="mockup-product-img">
-              ${p.video ? `
-                <video class="mockup-product-video" data-src="${p.video}" loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
-              ` : ''}
-              <div class="product-actions-hover">
-                <button class="action-btn-circle qv-wishlist-btn" data-id="${p.id}" aria-label="Dodaj do listy życzeń">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                </button>
-                <button class="action-btn-circle qv-eye-btn" data-id="${p.id}" aria-label="Szybki podgląd">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                </button>
-                ${thirdBtn}
-              </div>
-            </div>
-            <div class="mockup-product-info">
-              <h3 class="mockup-product-title"><a href="product.html?id=${p.id}">${p.title}</a></h3>
-              <p class="mockup-product-price">
-                ${p.price.toFixed(2)} zł <span class="price-unit">/ ${p.category === "Taśmy LED" ? "metr" : "szt."}</span>
-              </p>
-              <button class="mockup-btn qv-add-cart-btn" data-id="${p.id}" style="width: 100%; margin-top: 10px; padding: 0 10px !important; font-size: 11px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; justify-content: center; align-items: center; height: 36px;">
-                Dodaj do koszyka
-              </button>
-            </div>
-          </div>
-        `;
-        shopGrid.insertAdjacentHTML('beforeend', cardHTML);
-      });
-
-      // Render Pagination Buttons
-      shopPagination.innerHTML = '';
-      if (totalPages > 1) {
-        if (currentPage > 1) {
-          const prevBtn = document.createElement('button');
-          prevBtn.className = 'pagination-btn';
-          prevBtn.textContent = '◀';
-          prevBtn.addEventListener('click', () => {
-            currentPage--;
-            renderFilteredProducts();
-            window.scrollTo({ top: 350, behavior: 'smooth' });
-          });
-          shopPagination.appendChild(prevBtn);
-        }
-
-        for (let i = 1; i <= totalPages; i++) {
-          const pageBtn = document.createElement('button');
-          pageBtn.className = `pagination-btn ${i === currentPage ? 'active' : ''}`;
-          pageBtn.textContent = i;
-          pageBtn.addEventListener('click', () => {
-            currentPage = i;
-            renderFilteredProducts();
-            window.scrollTo({ top: 350, behavior: 'smooth' });
-          });
-          shopPagination.appendChild(pageBtn);
-        }
-
-        if (currentPage < totalPages) {
-          const nextBtn = document.createElement('button');
-          nextBtn.className = 'pagination-btn';
-          nextBtn.textContent = '▶';
-          nextBtn.addEventListener('click', () => {
-            currentPage++;
-            renderFilteredProducts();
-            window.scrollTo({ top: 350, behavior: 'smooth' });
-          });
-          shopPagination.appendChild(nextBtn);
-        }
-      }
-
-      // Re-bind hover actions (quick view, cart) for dynamically created elements
-      initSharedPopups();
-
-      // Handled globally by initGlobalCardVideos inside shared-popups.js
-    }
-
-    // Header Search bar logic for shop.html
-    
-        // Header Scroll Effect
-    const header = document.getElementById('mainHeader');
-    const headerLogo = document.getElementById('headerLogo');
-    const hasHero = document.querySelector('.page-hero, .mockup-hero-slider, .hero, .hero-section');
-    
-    if (!hasHero && header) {
-      header.classList.add('scrolled');
-      if (headerLogo) headerLogo.src = 'images/logo-dark.png';
-      header.classList.add('force-scrolled');
-    }
-    
-    window.addEventListener('scroll', () => {
-      if (!header) return;
-      if (header.classList.contains('force-scrolled')) return;
-      
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-        if (headerLogo) headerLogo.src = 'images/logo-dark.png';
-      } else {
-        header.classList.remove('scrolled');
-        if (headerLogo) headerLogo.src = 'images/logo-white.png';
-      }
-    });
-
-    const headerSearchInput = document.getElementById('headerSearchInput');
-    const headerSearchBtn = document.getElementById('headerSearchBtn');
-    
-    function performHeaderSearch() {
-      if (headerSearchInput) {
-        const q = headerSearchInput.value.trim();
-        currentSearch = q.toLowerCase();
-        if (shopSearchInput) {
-          shopSearchInput.value = q;
-        }
-        currentPage = 1;
-        renderFilteredProducts();
-      }
-    }
-    
-    if (headerSearchInput) {
-      headerSearchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          performHeaderSearch();
-        }
-      });
-    }
-    if (headerSearchBtn) {
-      headerSearchBtn.addEventListener('click', performHeaderSearch);
-    }
-
-    // Run Initial Setup
-    
-    // Mobile specific logic
-    const mobileSearchInput = document.getElementById('mobileSearchInput');
-    const mobileSearchClear = document.getElementById('mobileSearchClear');
-    const mobileSearchAction = document.getElementById('mobileSearchAction');
-    const mobileFiltersBtn = document.getElementById('mobileFiltersBtn');
-    
-    if (mobileSearchInput) {
-      mobileSearchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          currentSearch = mobileSearchInput.value.trim().toLowerCase();
-          currentPage = 1;
-          renderFilteredProducts();
-        }
-      });
-      mobileSearchInput.addEventListener('input', () => {
-         if(mobileSearchInput.value) {
-            mobileSearchClear.style.display = 'block';
-         } else {
-            mobileSearchClear.style.display = 'none';
-         }
-      });
-    }
-    if (mobileSearchClear) {
-      mobileSearchClear.style.display = 'none';
-      mobileSearchClear.addEventListener('click', () => {
-        mobileSearchInput.value = '';
-        mobileSearchClear.style.display = 'none';
-        currentSearch = '';
-        currentPage = 1;
-        renderFilteredProducts();
-      });
-    }
-    if (mobileSearchAction) {
-      mobileSearchAction.addEventListener('click', () => {
-        currentSearch = mobileSearchInput.value.trim().toLowerCase();
-        currentPage = 1;
-        renderFilteredProducts();
-      });
-    }
-    if (mobileFiltersBtn) {
-      mobileFiltersBtn.addEventListener('click', () => {
-        // Close other mobile dropdowns
-        const catDropdown = document.getElementById('mobileCategoryDropdown');
-        const sortDropdown = document.getElementById('mobileSortDropdown');
-        if (catDropdown) catDropdown.style.display = 'none';
-        if (sortDropdown) sortDropdown.style.display = 'none';
-        
-        const sidebar = document.getElementById('shopSidebar');
-        if (sidebar) {
-          if (sidebar.classList.contains('active')) {
-            sidebar.classList.remove('active');
-          } else {
-            sidebar.classList.add('active');
-          }
-        }
-      });
-    }
-
-    // Mobile Category Button Toggle
-    const mobileCategoryBtn = document.getElementById('mobileCategoryBtn');
-    const mobileCategoryDropdown = document.getElementById('mobileCategoryDropdown');
-    if (mobileCategoryBtn && mobileCategoryDropdown) {
-      mobileCategoryBtn.addEventListener('click', () => {
-        // Close other mobile dropdowns
-        const sortDropdown = document.getElementById('mobileSortDropdown');
-        if (sortDropdown) sortDropdown.style.display = 'none';
-        const sidebar = document.getElementById('shopSidebar');
-        if (sidebar) sidebar.classList.remove('active');
-        
-        // Toggle category dropdown
-        if (mobileCategoryDropdown.style.display === 'none' || mobileCategoryDropdown.style.display === '') {
-          mobileCategoryDropdown.style.display = 'block';
-        } else {
-          mobileCategoryDropdown.style.display = 'none';
-        }
-      });
-    }
-
-    // Mobile Sort Button Toggle
-    const mobileSortBtn = document.getElementById('mobileSortBtn');
-    const mobileSortDropdown = document.getElementById('mobileSortDropdown');
-    if (mobileSortBtn && mobileSortDropdown) {
-      mobileSortBtn.addEventListener('click', () => {
-        // Close other mobile dropdowns
-        const catDropdown = document.getElementById('mobileCategoryDropdown');
-        if (catDropdown) catDropdown.style.display = 'none';
-        const sidebar = document.getElementById('shopSidebar');
-        if (sidebar) sidebar.classList.remove('active');
-        
-        // Toggle sort dropdown
-        if (mobileSortDropdown.style.display === 'none' || mobileSortDropdown.style.display === '') {
-          mobileSortDropdown.style.display = 'block';
-        } else {
-          mobileSortDropdown.style.display = 'none';
-        }
-      });
-    }
-
-    // Bind Mobile Sort Selection Click Event
-    if (mobileSortDropdown) {
-      mobileSortDropdown.querySelectorAll('.mobile-sort-item').forEach(item => {
-        item.addEventListener('click', () => {
-          mobileSortDropdown.querySelectorAll('.mobile-sort-item').forEach(l => l.classList.remove('active'));
-          item.classList.add('active');
-          currentSort = item.dataset.sort;
-          
-          // Update desktop select dropdown to sync state
-          const desktopSortSelect = document.getElementById('shopSortSelect');
-          if (desktopSortSelect) {
-            desktopSortSelect.value = currentSort;
-          }
-          
-          // Close sort dropdown and reload product grid
-          mobileSortDropdown.style.display = 'none';
-          currentPage = 1;
-          renderFilteredProducts();
-        });
-      });
-    }
-
-    buildCategoriesFilter();
-    renderFilteredProducts();
   </script>
 
-
-  <!-- Mobile Bottom Navigation -->
-  <nav class="mobile-bottom-nav">
-    <div class="mobile-nav-items">
-      <a href="index.html" class="mobile-nav-item ">
-        <i class="ph ph-house"></i>
-        <span>Home</span>
-      </a>
-      <a href="javascript:void(0);" onclick="openMobileCategories();" class="mobile-nav-item active">
-        <i class="ph ph-squares-four"></i>
-        <span>Kategorie</span>
-      </a>
-      <a href="blog.html" class="mobile-nav-item ">
-        <i class="ph ph-article"></i>
-        <span>Blog</span>
-      </a>
-      <a href="about.html" class="mobile-nav-item ">
-        <i class="ph ph-info"></i>
-        <span>O nas</span>
-      </a>
-      <a href="contact.html" class="mobile-nav-item ">
-        <i class="ph ph-envelope-simple"></i>
-        <span>Kontakt</span>
-      </a>
-    </div>
-  </nav>
-
-  <script>
-    // iOS Safari Zoom-Out Hack on Blur
-    document.querySelectorAll('input').forEach(input => {
-      input.addEventListener('blur', () => {
-        if (window.innerWidth <= 768) {
-          const meta = document.querySelector('meta[name="viewport"]');
-          if (meta) {
-            meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
-            setTimeout(() => {
-              meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=5.0';
-            }, 300);
-          }
-        }
-      });
-    });
-  
-    // Robust mobile filter toggle
-    const mFilterBtn = document.getElementById('mobileFiltersBtn');
-    if (mFilterBtn) {
-      mFilterBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const sidebar = document.getElementById('shopSidebar');
-        if (sidebar) {
-          sidebar.classList.toggle('active');
-        }
-      });
-    }
-
-</script>
-<style>
-    
-    @media (max-width: 768px) {
-      .add-to-cart-btn, .buy-it-now-btn, .mockup-btn {
-        background: var(--accent-color) !important;
-        color: var(--white) !important;
-        border: none !important;
-        font-weight: 600 !important;
-        padding: 6px 12px !important;
-        font-size: 11px !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-      }
-    }
-    
-    
-    
-
-
-    
-
-
-    
-
-
-    /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
-    body .mockup-header:not(.scrolled) .magic-dropdown ul li a,
-    body .mockup-header.scrolled .magic-dropdown ul li a,
-    body .mockup-nav .magic-dropdown ul li a,
-    body .magic-dropdown ul li a {
-      background: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
-      color: var(--primary-color) !important;
-      padding: 12px 15px !important;
-      border-radius: 8px !important;
-      transition: all 0.3s ease !important;
-      font-size: 14px !important;
-      font-weight: 500 !important;
-    }
-    
-    body .mockup-header:not(.scrolled) .magic-dropdown ul li a:hover,
-    body .mockup-header.scrolled .magic-dropdown ul li a:hover,
-    body .mockup-nav .magic-dropdown ul li a:hover,
-    body .magic-dropdown ul li a:hover {
-      background: rgba(0, 0, 0, 0.05) !important;
-      color: var(--primary-color) !important;
-      transform: translateX(5px) !important;
-      border: none !important;
-    }
-
-    body .magic-dropdown {
-      background: rgba(255, 255, 255, 0.98) !important;
-      backdrop-filter: blur(24px) saturate(150%) !important;
-      border: 1px solid rgba(0, 0, 0, 0.08) !important;
-      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
-      opacity: 0 !important;
-      visibility: hidden !important;
-      position: absolute !important;
-      top: 100% !important;
-      transition: all 0.3s ease !important;
-    }
-    
-    body .has-mega-menu:hover .magic-dropdown {
-      opacity: 1 !important;
-      visibility: visible !important;
-    }
-    
-    /* Ensure the active tile is strictly enforced (White tile, navy text) */
-    body .mockup-header:not(.scrolled) .mockup-nav a.active,
-    body .mockup-header.scrolled .mockup-nav a.active {
-      background: #ffffff !important;
-      border: 2px solid #ffffff !important;
-      color: var(--primary-color) !important;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
-    }
-    
-    /* Ensure regular links are properly colored */
-    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
-      color: var(--white) !important;
-      background: rgba(255, 255, 255, 0.08) !important;
-      border: 1px solid rgba(255, 255, 255, 0.12) !important;
-    }
-    
-    body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
-      color: var(--primary-color) !important;
-      background: rgba(0, 0, 0, 0.04) !important;
-      border: 1px solid rgba(0, 0, 0, 0.06) !important;
-    }
-    /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
-
-</style>
 </body>
 </html>

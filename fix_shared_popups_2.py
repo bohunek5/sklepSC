@@ -1,7 +1,7 @@
 import os
 import re
 
-file_path = '/Users/karolbohdanowicz/my-ai-agents/scratch/cooken-offline/js/shared-popups.js'
+file_path = os.path.join(os.path.dirname(__file__), 'js', 'shared-popups.js')
 
 with open(file_path, 'r', encoding='utf-8') as f:
     content = f.read()

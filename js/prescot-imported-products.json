@@ -1,245 +1,4 @@
-const defaultPro[
-  {
-    "id": 6282,
-    "title": "Sterownik LED Mono 1x30A + pilot RF 12-24V Prescot",
-    "category": "Sterowniki LED",
-    "original_category": "Sterowniki LED/Sterowniki LED mono - jednokolorowe",
-    "price": 22.76,
-    "compareAtPrice": 26.17,
-    "stock": "8,000000",
-    "ean": "5903684853779",
-    "kod_handlowy": "00782",
-    "kod_katalogowy": "PR-MONO-360-RF",
-    "producent": "Prescot",
-    "description": "<p>Sterownik RF do <strong>taśm jednokolorowych</strong> z minimalistycznym pilotem. Umożliwia płynną<br />regulację jasności światła. Bardzo duża moc wyjściowa. Kompaktowy design.</p>\n<p><br /><strong>Funkcje: </strong></p>\n<p>- ON/OFF</p>\n<p>- Regulacja natężenia światła</p>",
-    "images": [
-      "https://prescot.com.pl/userdata/gfx/43265.jpg",
-      "https://prescot.com.pl/userdata/gfx/43266.jpg",
-      "https://prescot.com.pl/userdata/gfx/43267.png",
-      "https://prescot.com.pl/userdata/gfx/43268.jpg"
-    ],
-    "attributes": {
-      "Producent": "Prescot",
-      "Kod_produktu": "00782",
-      "EAN": "5903684853779",
-      "Kod_producenta": "PR-MONO-360-RF",
-      "Nazwa galerii": "00782",
-      "Napięcie Wyjściowe": "12-24V DC",
-      "Napięcie wejściowe": "-",
-      "Moc": "360/720W",
-      "Prąd maksymalny": "30A",
-      "Wymiar": "66x63x20mm",
-      "Kolor profilu": "-",
-      "Gwarancja": "24 miesiące",
-      "Producent odpowiedzialny": "producer_1",
-      "Podmiot odpowiedzialny": "responsible_1"
-    },
-    "gpsr": {
-      "producer": {
-        "name": "Prescot Sp. z o.o.",
-        "address": "",
-        "contact": ""
-      },
-      "responsible_person": {
-        "name": "Prescot",
-        "address": "",
-        "contact": ""
-      }
-    },
-    "has3D": true,
-    "modelSrc": "https://modelviewer.dev/shared-assets/models/Astronaut.glb"
-  },
-  {
-    "id": 6293,
-    "title": "Sterownik LED Mono 1x18A touch biały komplet pilot+uchwyt 12-24V Prescot",
-    "category": "Sterowniki LED",
-    "original_category": "Sterowniki LED/Sterowniki LED mono - jednokolorowe",
-    "price": 28.46,
-    "compareAtPrice": 32.73,
-    "stock": "1,000000",
-    "ean": "5903684853892",
-    "kod_handlowy": "PRE-00069",
-    "kod_katalogowy": "PR-MONO-216-TWS",
-    "producent": "Prescot",
-    "description": "<p>Sterownik RF z pilotem dotykowym do <strong>taśm jednokolorowych</strong>. Umożliwia płynną regulację jasności<br />światła. Posiada kilka wbudowanych programów migotania i poziomu jasności. <strong>Estetyczny design</strong>.</p>\n<p><br /><strong>Funkcje: </strong></p>\n<p>- ON/OFF</p>\n<p>- Regulacja natężenia światła</p>\n<p>- funkcje migotania</p>\n<p>- zmiana częstotliwości migotania</p>",
-    "images": [
-      "https://prescot.com.pl/userdata/gfx/63132.jpg",
-      "https://prescot.com.pl/userdata/gfx/63133.jpg"
-    ],
-    "attributes": {
-      "Producent": "Prescot",
-      "Kod_produktu": "PRE-00069",
-      "EAN": "5903684853892",
-      "Kod_producenta": "PR-MONO-216-TWS",
-      "Nazwa galerii": "PRE-00069",
-      "Napięcie Wyjściowe": "12-24V DC",
-      "Napięcie wejściowe": "-",
-      "Moc": "216/432W",
-      "Prąd maksymalny": "18A",
-      "Wymiar": "135x30x20mm",
-      "Kolor profilu": "-",
-      "Zasięg": "30m",
-      "Gwarancja": "24 miesiące",
-      "Producent odpowiedzialny": "producer_1",
-      "Podmiot odpowiedzialny": "responsible_1"
-    },
-    "gpsr": {
-      "producer": {
-        "name": "Prescot Sp. z o.o.",
-        "address": "",
-        "contact": ""
-      },
-      "responsible_person": {
-        "name": "Prescot",
-        "address": "",
-        "contact": ""
-      }
-    },
-    "has360": true,
-    "images360": [
-      "https://prescot.com.pl/userdata/gfx/63132.jpg"
-    ]
-  },
-  {
-    "id": 6294,
-    "title": "Sterownik LED Mono 1x18A touch czarny komplet pilot+uchwyt 12-24V Prescot",
-    "category": "Sterowniki LED",
-    "original_category": "Sterowniki LED/Sterowniki LED mono - jednokolorowe",
-    "price": 28.46,
-    "compareAtPrice": 32.73,
-    "stock": "9,000000",
-    "ean": "5903684853908",
-    "kod_handlowy": "PRE-00070",
-    "kod_katalogowy": "PR-MONO-216-TBS",
-    "producent": "Prescot",
-    "description": "<p>Sterownik RF do <strong>taśm jednokolorowych</strong> z pilotem dotykowym i uchwytem.<br />Umożliwia płynną regulację jasności światła. <strong>Estetyczny design</strong>.</p>\n<p><br /><strong>Funkcje: </strong></p>\n<p>- ON/OFF</p>\n<p>- Regulacja natężenia światła</p>",
-    "images": [
-      "https://prescot.com.pl/userdata/gfx/63130.jpg",
-      "https://prescot.com.pl/userdata/gfx/63131.jpg"
-    ],
-    "attributes": {
-      "Producent": "Prescot",
-      "Kod_produktu": "PRE-00070",
-      "EAN": "5903684853908",
-      "Kod_producenta": "PR-MONO-216-TBS",
-      "Nazwa galerii": "PRE-00070",
-      "Napięcie Wyjściowe": "12-24V DC",
-      "Napięcie wejściowe": "-",
-      "Moc": "216/432W",
-      "Prąd maksymalny": "18A",
-      "Wymiar": "135x30x20mm",
-      "Kolor profilu": "-",
-      "Zasięg": "30m",
-      "Gwarancja": "24 miesiące",
-      "Producent odpowiedzialny": "producer_1",
-      "Podmiot odpowiedzialny": "responsible_1"
-    },
-    "gpsr": {
-      "producer": {
-        "name": "Prescot Sp. z o.o.",
-        "address": "",
-        "contact": ""
-      },
-      "responsible_person": {
-        "name": "Prescot",
-        "address": "",
-        "contact": ""
-      }
-    }
-  },
-  {
-    "id": 6295,
-    "title": "Sterownik LED RGB 3x6A touch RF biały komplet pilot+uchwyt 12-24v Prescot",
-    "category": "Sterowniki LED",
-    "original_category": "Sterowniki LED/Sterowniki LED RGB/RGBW - wielokolorowe",
-    "price": 30.0,
-    "compareAtPrice": 34.5,
-    "stock": "86,000000",
-    "ean": "5903684853915",
-    "kod_handlowy": "PRE-00071",
-    "kod_katalogowy": "PR-RGB-216TWS",
-    "producent": "Prescot LED",
-    "description": "<p>Sterownik do <strong>taśm RGB</strong> z radiowym pilotem dotykowym i uchwytem. Pozwala na sterowanie<br />kolorem i jasnością. W zestawie ścienny uchwyt do pilota.</p>\n<p><br /><strong>Funkcje: </strong></p>\n<p>- ON/OFF</p>\n<p>- ściemnianie</p>\n<p>- zmiana koloru</p>\n<p>- 18 programów </p>",
-    "images": [
-      "https://prescot.com.pl/userdata/gfx/43255.jpg",
-      "https://prescot.com.pl/userdata/gfx/43256.jpg"
-    ],
-    "attributes": {
-      "Producent": "Prescot LED",
-      "Kod_produktu": "PRE-00071",
-      "EAN": "5903684853915",
-      "Kod_producenta": "PR-RGB-216TWS",
-      "Nazwa galerii": "PRE-00071",
-      "Napięcie Wyjściowe": "12-24V DC",
-      "Napięcie wejściowe": "-",
-      "Moc": "216/432W",
-      "Wymiar": "130x30x20mm",
-      "Kolor profilu": "-",
-      "Zasięg": "30m",
-      "Gwarancja": "24 miesiące",
-      "Producent odpowiedzialny": "producer_1",
-      "Podmiot odpowiedzialny": "responsible_1"
-    },
-    "gpsr": {
-      "producer": {
-        "name": "Prescot Sp. z o.o.",
-        "address": "",
-        "contact": ""
-      },
-      "responsible_person": {
-        "name": "Prescot",
-        "address": "",
-        "contact": ""
-      }
-    }
-  },
-  {
-    "id": 6296,
-    "title": "Sterownik LED RGB 3x6A touch RF czarny komplet pilot+uchwyt 12-24V Prescot",
-    "category": "Sterowniki LED",
-    "original_category": "Sterowniki LED/Sterowniki LED RGB/RGBW - wielokolorowe",
-    "price": 30.0,
-    "compareAtPrice": 34.5,
-    "stock": "81,000000",
-    "ean": "5903684853922",
-    "kod_handlowy": "PRE-00072",
-    "kod_katalogowy": "PR-RGB-216TBS",
-    "producent": "Prescot LED",
-    "description": "<p>Sterownik do <strong>taśm RGB</strong> z radiowym pilotem dotykowym w kolorze czarnym wraz z uchwytem.<br />Pozwala na sterowanie kolorem i jasnością.</p>\n<p><br /><strong>Funkcje:</strong></p>\n<p>- ON/OFF</p>\n<p>- ściemnianie</p>\n<p>- zmiana koloru</p>\n<p>- 18 programów</p>",
-    "images": [
-      "https://prescot.com.pl/userdata/gfx/43253.jpg",
-      "https://prescot.com.pl/userdata/gfx/43254.jpg"
-    ],
-    "attributes": {
-      "Producent": "Prescot LED",
-      "Kod_produktu": "PRE-00072",
-      "EAN": "5903684853922",
-      "Kod_producenta": "PR-RGB-216TBS",
-      "Nazwa galerii": "PRE-00072",
-      "Napięcie Wyjściowe": "12-24V DC",
-      "Napięcie wejściowe": "-",
-      "Moc": "216/432W",
-      "Prąd na 1 kanał": "6A",
-      "Wymiar": "135x30x20mm",
-      "Kolor profilu": "-",
-      "Zasięg": "30m",
-      "Gwarancja": "24 miesiące",
-      "Producent odpowiedzialny": "producer_1",
-      "Podmiot odpowiedzialny": "responsible_1"
-    },
-    "gpsr": {
-      "producer": {
-        "name": "Prescot Sp. z o.o.",
-        "address": "",
-        "contact": ""
-      },
-      "responsible_person": {
-        "name": "Prescot",
-        "address": "",
-        "contact": ""
-      }
-    }
-  },
+[
   {
     "id": 6258,
     "title": "Taśma LED Premium S-Shape | Do wyginania | Neutralna biała 4000K | 12V | 60 LED/m | SMD2835 | Rolka 5m | 5 lat gwarancji",
@@ -353,6 +112,54 @@ const defaultPro[
       "Kod_produktu": "EF018-050-6-WW",
       "EAN": "5901885264851",
       "Kod_producenta": "EF018-050-6-WW",
+      "Producent odpowiedzialny": "producer_1",
+      "Podmiot odpowiedzialny": "responsible_1"
+    },
+    "gpsr": {
+      "producer": {
+        "name": "Prescot Sp. z o.o.",
+        "address": "",
+        "contact": ""
+      },
+      "responsible_person": {
+        "name": "Prescot",
+        "address": "",
+        "contact": ""
+      }
+    }
+  },
+  {
+    "id": 6282,
+    "title": "Sterownik LED Mono 1x30A + pilot RF 12-24V Prescot",
+    "category": "Sterowniki LED",
+    "original_category": "Sterowniki LED/Sterowniki LED mono - jednokolorowe",
+    "price": 22.76,
+    "compareAtPrice": 26.17,
+    "stock": "8,000000",
+    "ean": "5903684853779",
+    "kod_handlowy": "00782",
+    "kod_katalogowy": "PR-MONO-360-RF",
+    "producent": "Prescot",
+    "description": "<p>Sterownik RF do <strong>taśm jednokolorowych</strong> z minimalistycznym pilotem. Umożliwia płynną<br />regulację jasności światła. Bardzo duża moc wyjściowa. Kompaktowy design.</p>\n<p><br /><strong>Funkcje: </strong></p>\n<p>- ON/OFF</p>\n<p>- Regulacja natężenia światła</p>",
+    "images": [
+      "https://prescot.com.pl/userdata/gfx/43265.jpg",
+      "https://prescot.com.pl/userdata/gfx/43266.jpg",
+      "https://prescot.com.pl/userdata/gfx/43267.png",
+      "https://prescot.com.pl/userdata/gfx/43268.jpg"
+    ],
+    "attributes": {
+      "Producent": "Prescot",
+      "Kod_produktu": "00782",
+      "EAN": "5903684853779",
+      "Kod_producenta": "PR-MONO-360-RF",
+      "Nazwa galerii": "00782",
+      "Napięcie Wyjściowe": "12-24V DC",
+      "Napięcie wejściowe": "-",
+      "Moc": "360/720W",
+      "Prąd maksymalny": "30A",
+      "Wymiar": "66x63x20mm",
+      "Kolor profilu": "-",
+      "Gwarancja": "24 miesiące",
       "Producent odpowiedzialny": "producer_1",
       "Podmiot odpowiedzialny": "responsible_1"
     },
@@ -819,6 +626,193 @@ const defaultPro[
       "Moc": "72/144W",
       "Prąd maksymalny": "6A",
       "Kolor profilu": "-",
+      "Gwarancja": "24 miesiące",
+      "Producent odpowiedzialny": "producer_1",
+      "Podmiot odpowiedzialny": "responsible_1"
+    },
+    "gpsr": {
+      "producer": {
+        "name": "Prescot Sp. z o.o.",
+        "address": "",
+        "contact": ""
+      },
+      "responsible_person": {
+        "name": "Prescot",
+        "address": "",
+        "contact": ""
+      }
+    }
+  },
+  {
+    "id": 6293,
+    "title": "Sterownik LED Mono 1x18A touch biały komplet pilot+uchwyt 12-24V Prescot",
+    "category": "Sterowniki LED",
+    "original_category": "Sterowniki LED/Sterowniki LED mono - jednokolorowe",
+    "price": 28.46,
+    "compareAtPrice": 32.73,
+    "stock": "1,000000",
+    "ean": "5903684853892",
+    "kod_handlowy": "PRE-00069",
+    "kod_katalogowy": "PR-MONO-216-TWS",
+    "producent": "Prescot",
+    "description": "<p>Sterownik RF z pilotem dotykowym do <strong>taśm jednokolorowych</strong>. Umożliwia płynną regulację jasności<br />światła. Posiada kilka wbudowanych programów migotania i poziomu jasności. <strong>Estetyczny design</strong>.</p>\n<p><br /><strong>Funkcje: </strong></p>\n<p>- ON/OFF</p>\n<p>- Regulacja natężenia światła</p>\n<p>- funkcje migotania</p>\n<p>- zmiana częstotliwości migotania</p>",
+    "images": [
+      "https://prescot.com.pl/userdata/gfx/63132.jpg",
+      "https://prescot.com.pl/userdata/gfx/63133.jpg"
+    ],
+    "attributes": {
+      "Producent": "Prescot",
+      "Kod_produktu": "PRE-00069",
+      "EAN": "5903684853892",
+      "Kod_producenta": "PR-MONO-216-TWS",
+      "Nazwa galerii": "PRE-00069",
+      "Napięcie Wyjściowe": "12-24V DC",
+      "Napięcie wejściowe": "-",
+      "Moc": "216/432W",
+      "Prąd maksymalny": "18A",
+      "Wymiar": "135x30x20mm",
+      "Kolor profilu": "-",
+      "Zasięg": "30m",
+      "Gwarancja": "24 miesiące",
+      "Producent odpowiedzialny": "producer_1",
+      "Podmiot odpowiedzialny": "responsible_1"
+    },
+    "gpsr": {
+      "producer": {
+        "name": "Prescot Sp. z o.o.",
+        "address": "",
+        "contact": ""
+      },
+      "responsible_person": {
+        "name": "Prescot",
+        "address": "",
+        "contact": ""
+      }
+    }
+  },
+  {
+    "id": 6294,
+    "title": "Sterownik LED Mono 1x18A touch czarny komplet pilot+uchwyt 12-24V Prescot",
+    "category": "Sterowniki LED",
+    "original_category": "Sterowniki LED/Sterowniki LED mono - jednokolorowe",
+    "price": 28.46,
+    "compareAtPrice": 32.73,
+    "stock": "9,000000",
+    "ean": "5903684853908",
+    "kod_handlowy": "PRE-00070",
+    "kod_katalogowy": "PR-MONO-216-TBS",
+    "producent": "Prescot",
+    "description": "<p>Sterownik RF do <strong>taśm jednokolorowych</strong> z pilotem dotykowym i uchwytem.<br />Umożliwia płynną regulację jasności światła. <strong>Estetyczny design</strong>.</p>\n<p><br /><strong>Funkcje: </strong></p>\n<p>- ON/OFF</p>\n<p>- Regulacja natężenia światła</p>",
+    "images": [
+      "https://prescot.com.pl/userdata/gfx/63130.jpg",
+      "https://prescot.com.pl/userdata/gfx/63131.jpg"
+    ],
+    "attributes": {
+      "Producent": "Prescot",
+      "Kod_produktu": "PRE-00070",
+      "EAN": "5903684853908",
+      "Kod_producenta": "PR-MONO-216-TBS",
+      "Nazwa galerii": "PRE-00070",
+      "Napięcie Wyjściowe": "12-24V DC",
+      "Napięcie wejściowe": "-",
+      "Moc": "216/432W",
+      "Prąd maksymalny": "18A",
+      "Wymiar": "135x30x20mm",
+      "Kolor profilu": "-",
+      "Zasięg": "30m",
+      "Gwarancja": "24 miesiące",
+      "Producent odpowiedzialny": "producer_1",
+      "Podmiot odpowiedzialny": "responsible_1"
+    },
+    "gpsr": {
+      "producer": {
+        "name": "Prescot Sp. z o.o.",
+        "address": "",
+        "contact": ""
+      },
+      "responsible_person": {
+        "name": "Prescot",
+        "address": "",
+        "contact": ""
+      }
+    }
+  },
+  {
+    "id": 6295,
+    "title": "Sterownik LED RGB 3x6A touch RF biały komplet pilot+uchwyt 12-24v Prescot",
+    "category": "Sterowniki LED",
+    "original_category": "Sterowniki LED/Sterowniki LED RGB/RGBW - wielokolorowe",
+    "price": 30.0,
+    "compareAtPrice": 34.5,
+    "stock": "86,000000",
+    "ean": "5903684853915",
+    "kod_handlowy": "PRE-00071",
+    "kod_katalogowy": "PR-RGB-216TWS",
+    "producent": "Prescot LED",
+    "description": "<p>Sterownik do <strong>taśm RGB</strong> z radiowym pilotem dotykowym i uchwytem. Pozwala na sterowanie<br />kolorem i jasnością. W zestawie ścienny uchwyt do pilota.</p>\n<p><br /><strong>Funkcje: </strong></p>\n<p>- ON/OFF</p>\n<p>- ściemnianie</p>\n<p>- zmiana koloru</p>\n<p>- 18 programów </p>",
+    "images": [
+      "https://prescot.com.pl/userdata/gfx/43255.jpg",
+      "https://prescot.com.pl/userdata/gfx/43256.jpg"
+    ],
+    "attributes": {
+      "Producent": "Prescot LED",
+      "Kod_produktu": "PRE-00071",
+      "EAN": "5903684853915",
+      "Kod_producenta": "PR-RGB-216TWS",
+      "Nazwa galerii": "PRE-00071",
+      "Napięcie Wyjściowe": "12-24V DC",
+      "Napięcie wejściowe": "-",
+      "Moc": "216/432W",
+      "Wymiar": "130x30x20mm",
+      "Kolor profilu": "-",
+      "Zasięg": "30m",
+      "Gwarancja": "24 miesiące",
+      "Producent odpowiedzialny": "producer_1",
+      "Podmiot odpowiedzialny": "responsible_1"
+    },
+    "gpsr": {
+      "producer": {
+        "name": "Prescot Sp. z o.o.",
+        "address": "",
+        "contact": ""
+      },
+      "responsible_person": {
+        "name": "Prescot",
+        "address": "",
+        "contact": ""
+      }
+    }
+  },
+  {
+    "id": 6296,
+    "title": "Sterownik LED RGB 3x6A touch RF czarny komplet pilot+uchwyt 12-24V Prescot",
+    "category": "Sterowniki LED",
+    "original_category": "Sterowniki LED/Sterowniki LED RGB/RGBW - wielokolorowe",
+    "price": 30.0,
+    "compareAtPrice": 34.5,
+    "stock": "81,000000",
+    "ean": "5903684853922",
+    "kod_handlowy": "PRE-00072",
+    "kod_katalogowy": "PR-RGB-216TBS",
+    "producent": "Prescot LED",
+    "description": "<p>Sterownik do <strong>taśm RGB</strong> z radiowym pilotem dotykowym w kolorze czarnym wraz z uchwytem.<br />Pozwala na sterowanie kolorem i jasnością.</p>\n<p><br /><strong>Funkcje:</strong></p>\n<p>- ON/OFF</p>\n<p>- ściemnianie</p>\n<p>- zmiana koloru</p>\n<p>- 18 programów</p>",
+    "images": [
+      "https://prescot.com.pl/userdata/gfx/43253.jpg",
+      "https://prescot.com.pl/userdata/gfx/43254.jpg"
+    ],
+    "attributes": {
+      "Producent": "Prescot LED",
+      "Kod_produktu": "PRE-00072",
+      "EAN": "5903684853922",
+      "Kod_producenta": "PR-RGB-216TBS",
+      "Nazwa galerii": "PRE-00072",
+      "Napięcie Wyjściowe": "12-24V DC",
+      "Napięcie wejściowe": "-",
+      "Moc": "216/432W",
+      "Prąd na 1 kanał": "6A",
+      "Wymiar": "135x30x20mm",
+      "Kolor profilu": "-",
+      "Zasięg": "30m",
       "Gwarancja": "24 miesiące",
       "Producent odpowiedzialny": "producer_1",
       "Podmiot odpowiedzialny": "responsible_1"
@@ -56516,30 +56510,4 @@ const defaultPro[
       }
     }
   }
-];
-
-function getProducts() {
-  if (typeof window !== 'undefined' && localStorage) {
-    const cacheVersion = "v_prescot_cloud_xml_v1";
-    const storedVersion = localStorage.getItem('sklepSC_products_version');
-    if (storedVersion !== cacheVersion) {
-      localStorage.removeItem('sklepSC_products');
-      localStorage.setItem('sklepSC_products_version', cacheVersion);
-    }
-
-    const localStr = localStorage.getItem('sklepSC_products');
-    if (localStr) {
-      try {
-        return JSON.parse(localStr);
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  }
-  return defaultProducts;
-}
-
-var products = getProducts();
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { defaultProducts, getProducts, products };
-}
+]

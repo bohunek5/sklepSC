@@ -1,8 +1,8 @@
 
 
 // --- CART STATE ---
-let wishlist = JSON.parse(localStorage.getItem('cooken_wishlist')) || [];
-let cart = JSON.parse(localStorage.getItem('cooken_cart')) || [];
+let wishlist = JSON.parse(localStorage.getItem('prescot_wishlist')) || [];
+let cart = JSON.parse(localStorage.getItem('prescot_cart')) || [];
 
 // --- TOAST NOTIFICATION ENGINE ---
 function showToast(message, type = 'success') {
@@ -104,7 +104,7 @@ function showToast(message, type = 'success') {
 window.showToast = showToast;
 
 function updateCartBadge() {
-  const currentCart = JSON.parse(localStorage.getItem('cooken_cart')) || [];
+  const currentCart = JSON.parse(localStorage.getItem('prescot_cart')) || [];
   const totalItems = currentCart.reduce((sum, item) => sum + (item.qty || 1), 0);
   
   // Find all cart buttons/links EXCEPT the ones in checkout breadcrumbs
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Update badge on storage changes from other tabs
 window.addEventListener('storage', (e) => {
-  if (e.key === 'cooken_cart') {
+  if (e.key === 'prescot_cart') {
     updateCartBadge();
   }
 });
@@ -1095,7 +1095,7 @@ function initSharedPopups() {
 
   function renderWishlist() {
     wishlistDrawerItems.innerHTML = '';
-    wishlist = JSON.parse(localStorage.getItem('cooken_wishlist')) || [];
+    wishlist = JSON.parse(localStorage.getItem('prescot_wishlist')) || [];
 
     if (wishlist.length === 0) {
       wishlistDrawerItems.innerHTML = `<div style="text-align: center; color: #999; margin-top: 50px;">Twoja lista życzeń jest pusta</div>`;
@@ -1146,7 +1146,7 @@ function initSharedPopups() {
             size: null
           });
         }
-        localStorage.setItem('cooken_cart', JSON.stringify(cart));
+        localStorage.setItem('prescot_cart', JSON.stringify(cart));
         window.dispatchEvent(new Event('storage'));
         
         // Remove from wishlist
@@ -1161,7 +1161,7 @@ function initSharedPopups() {
   }
 
   function updateWishlistStorage() {
-    localStorage.setItem('cooken_wishlist', JSON.stringify(wishlist));
+    localStorage.setItem('prescot_wishlist', JSON.stringify(wishlist));
   }
 
   // --- CONNECT ADD TO WISHLIST BUTTONS ON PRODUCTS ---
@@ -1176,7 +1176,7 @@ function initSharedPopups() {
       
       if (!p) return;
 
-      wishlist = JSON.parse(localStorage.getItem('cooken_wishlist')) || [];
+      wishlist = JSON.parse(localStorage.getItem('prescot_wishlist')) || [];
       const existing = wishlist.find(item => item.id === p.id);
       
       if (!existing) {
@@ -1272,7 +1272,7 @@ function initSharedPopups() {
   function renderCart() {
     cartDrawerItems.innerHTML = '';
     let total = 0;
-    cart = JSON.parse(localStorage.getItem('cooken_cart')) || [];
+    cart = JSON.parse(localStorage.getItem('prescot_cart')) || [];
 
     // Calculate Total
     cart.forEach(item => {
@@ -1431,7 +1431,7 @@ function initSharedPopups() {
   }
 
   function updateLocalStorage() {
-    localStorage.setItem('cooken_cart', JSON.stringify(cart));
+    localStorage.setItem('prescot_cart', JSON.stringify(cart));
     updateCartBadge();
   }
 
@@ -1600,7 +1600,7 @@ function initSharedPopups() {
     document.getElementById('qvCategory').textContent = selectedProduct.category;
     document.getElementById('qvTitle').textContent = selectedProduct.title;
     document.getElementById('qvPrice').innerHTML = `${selectedProduct.price.toFixed(2)} zł <span style="font-size: 14px; font-weight: normal; color: #888; margin-left: 5px;">/ ${selectedProduct.category === "Taśmy LED" ? "metr" : "szt."}</span>`;
-    document.getElementById('qvDesc').textContent = selectedProduct.description;
+    document.getElementById('qvDesc').innerHTML = selectedProduct.description;
 
     // Render Model Variants in Quick View
     const qvVariantsContainer = document.getElementById('qvVariantsContainer');
@@ -1879,7 +1879,7 @@ function initSharedPopups() {
       const p = products.find(prod => prod.id === pId);
       if (!p) return;
 
-      wishlist = JSON.parse(localStorage.getItem('cooken_wishlist')) || [];
+      wishlist = JSON.parse(localStorage.getItem('prescot_wishlist')) || [];
       const existing = wishlist.find(item => item.id === p.id);
       
       if (!existing) {
@@ -2165,7 +2165,7 @@ function initSharedPopups() {
 
   // --- NEWSLETTER POPUP LOGIC ---
   function openNews() {
-    if (localStorage.getItem('cooken_news_subscribed') === 'true') return;
+    if (localStorage.getItem('prescot_news_subscribed') === 'true') return;
     newsPopup.style.opacity = '1';
     newsPopup.style.pointerEvents = 'all';
     newsBox.style.transform = 'scale(1)';
@@ -2182,7 +2182,7 @@ function initSharedPopups() {
 
   // Auto newsletter popup disabled per user request
   /*
-  if (window.location.pathname === '/' || window.location.pathname.endsWith('index.html') || window.location.pathname === '/cooken-offline/' || window.location.pathname === '/cooken-offline/index.html') {
+  if (window.location.pathname === '/' || window.location.pathname.endsWith('index.html') || window.location.pathname === '/sklepSC/' || window.location.pathname === '/sklepSC/index.html') {
     setTimeout(openNews, 5000);
     document.addEventListener('mouseleave', (e) => {
       if (e.clientY < 20) {
@@ -2196,7 +2196,7 @@ function initSharedPopups() {
     newsSubmitBtn.addEventListener('click', () => {
       const email = document.getElementById('newsEmailInput').value;
       if (email && email.includes('@')) {
-        localStorage.setItem('cooken_news_subscribed', 'true');
+        localStorage.setItem('prescot_news_subscribed', 'true');
         document.getElementById('newsMsg').style.display = 'block';
         setTimeout(closeNews, 3000);
       } else {
@@ -2518,3 +2518,41 @@ window.toggleMobileCatRow = function(row) {
 
 
 window.initSharedPopups = initSharedPopups;
+
+
+
+// Global Header Search Listener
+function initGlobalHeaderSearch() {
+  const headerSearchInput = document.getElementById('headerSearchInput');
+  const headerSearchBtn = document.getElementById('headerSearchBtn');
+
+  function doSearch() {
+    if (!headerSearchInput) return;
+    const query = headerSearchInput.value.trim();
+    if (query) {
+      window.location.href = `shop.html?search=${encodeURIComponent(query)}`;
+    }
+  }
+
+  if (headerSearchBtn) {
+    headerSearchBtn.onclick = (e) => {
+      e.preventDefault();
+      doSearch();
+    };
+  }
+
+  if (headerSearchInput) {
+    headerSearchInput.onkeypress = (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        doSearch();
+      }
+    };
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initGlobalHeaderSearch);
+} else {
+  initGlobalHeaderSearch();
+}

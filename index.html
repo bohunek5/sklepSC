@@ -589,15 +589,30 @@
 
     .slide-banner-box h1 {
       font-family: 'Outfit', sans-serif;
-      font-size: 34px;
-      font-weight: 700;
-      margin-bottom: 6px;
+      font-size: clamp(20px, 3.2vw, 30px);
+      font-weight: 800;
+      margin-bottom: 8px;
       color: var(--white);
       letter-spacing: -0.3px;
+      text-shadow: 0 4px 14px rgba(0, 0, 0, 0.75), 0 1px 4px rgba(0, 0, 0, 0.9);
       opacity: 0;
       transform: translateY(15px);
       transition: opacity 0.8s ease 0.4s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
-      white-space: nowrap;
+      white-space: normal;
+      line-height: 1.25;
+    }
+
+    .slide-banner-box p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.95);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+      margin-bottom: 0;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity 0.8s ease 0.7s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
     }
 
     .slide-banner-box p {
@@ -971,7 +986,7 @@
       font-weight: 500;
       transition: var(--transition);
       display: -webkit-box;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;
       overflow: hidden;
       white-space: normal;
@@ -2369,7 +2384,7 @@
       font-weight: 500 !important;
       transition: all 0.3s ease !important;
       display: -webkit-box !important;
-      -webkit-line-clamp: 2 !important;
+      -webkit-line-clamp: 4 !important;
       -webkit-box-orient: vertical !important;
       overflow: hidden !important;
       white-space: normal !important;
@@ -3730,6 +3745,194 @@
     }
 </style>
 
+<link rel="stylesheet" href="css/prescot-responsive.css">
+
+<style id="clean-typography-no-truncation">
+  /* Clean, natural multi-line product titles without truncation or clipped words */
+  .mockup-product-title,
+  .mockup-product-title a,
+  .product-title,
+  #pTitle {
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    text-overflow: clip !important;
+    overflow: visible !important;
+    line-height: 1.4 !important;
+  }
+
+  .mockup-product-title {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    min-height: 42px !important;
+    margin: 8px 0 12px 0 !important;
+  }
+
+  .product-title, #pTitle {
+    font-size: clamp(22px, 3vw, 32px) !important;
+    font-weight: 800 !important;
+    color: #0b1a30 !important;
+    letter-spacing: -0.4px !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* Rich HTML Description Formatting */
+  .product-html-description {
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    font-size: 15px !important;
+    line-height: 1.85 !important;
+    color: #334155 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .product-html-description p {
+    margin-bottom: 20px !important;
+    line-height: 1.85 !important;
+  }
+
+  .product-html-description strong, 
+  .product-html-description b {
+    color: #0b1a30 !important;
+    font-weight: 700 !important;
+  }
+
+  .product-html-description ul, 
+  .product-html-description ol {
+    margin: 18px 0 24px 24px !important;
+    padding-left: 10px !important;
+  }
+
+  .product-html-description li {
+    margin-bottom: 10px !important;
+    line-height: 1.75 !important;
+  }
+
+  .product-html-description table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 24px 0 !important;
+    display: block !important;
+    overflow-x: auto !important;
+  }
+
+  .product-html-description table td, 
+  .product-html-description table th {
+    padding: 12px 16px !important;
+    border: 1px solid #e2e8f0 !important;
+    font-size: 14px !important;
+  }
+
+  .product-html-description table tr:nth-child(even) {
+    background-color: #f8fafc !important;
+  }
+</style>
+
+
+<style id="scrolled-nav-visibility-override">
+  /* Guaranteed 100% Contrast for Scrolled Header Navigation */
+  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active),
+  body .mockup-header.scrolled .mockup-nav ul li a:not(.active) {
+    color: #0b1a30 !important;
+    background: rgba(11, 26, 48, 0.06) !important;
+    border: 1px solid rgba(11, 26, 48, 0.12) !important;
+    font-weight: 600 !important;
+  }
+
+  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active):hover,
+  body .mockup-header.scrolled .mockup-nav ul li a:not(.active):hover {
+    background: rgba(11, 26, 48, 0.14) !important;
+    color: #0b1a30 !important;
+    border-color: rgba(11, 26, 48, 0.25) !important;
+  }
+
+  body .mockup-header.scrolled .mockup-nav > ul > li > a.active,
+  body .mockup-header.scrolled .mockup-nav ul li a.active {
+    background: #0b1a30 !important;
+    color: #ffffff !important;
+    border-color: #0b1a30 !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 14px rgba(11, 26, 48, 0.2) !important;
+  }
+</style>
+
+
+<style id="ultimate-header-footer-fix">
+  /* Force 100% Crisp Visibility for All Header Navigation Links regardless of scroll state */
+  body .mockup-header .mockup-nav ul li a:not(.active),
+  body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active),
+  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+    color: #0b1a30 !important;
+    background: rgba(11, 26, 48, 0.06) !important;
+    border: 1px solid rgba(11, 26, 48, 0.12) !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    padding: 8px 18px !important;
+    border-radius: 99px !important;
+    transition: all 0.2s ease !important;
+  }
+
+  body .mockup-header .mockup-nav ul li a:not(.active):hover,
+  body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active):hover,
+  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active):hover {
+    background: rgba(11, 26, 48, 0.14) !important;
+    color: #0b1a30 !important;
+    border-color: rgba(11, 26, 48, 0.25) !important;
+  }
+
+  body .mockup-header .mockup-nav ul li a.active,
+  body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a.active,
+  body .mockup-header.scrolled .mockup-nav > ul > li > a.active {
+    background: #0b1a30 !important;
+    color: #ffffff !important;
+    border: 1px solid #0b1a30 !important;
+    font-weight: 700 !important;
+    padding: 8px 18px !important;
+    border-radius: 99px !important;
+    box-shadow: 0 4px 14px rgba(11, 26, 48, 0.2) !important;
+  }
+
+  /* Footer White + Orange Logo Styling */
+  footer .footer-logo img,
+  .mockup-footer .footer-logo img {
+    height: 32px !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+</style>
+
+
+<style id="product-title-4-lines-override">
+  /* Force Up to 4 Full Lines for Product Titles (No Word Truncation) */
+  .mockup-product-title,
+  .mockup-product-title a,
+  div.mockup-product-title,
+  h3.mockup-product-title {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4 !important;
+    -webkit-box-orient: vertical !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    overflow: visible !important;
+    max-height: none !important;
+    min-height: 72px !important;
+    line-height: 1.35 !important;
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    color: #0b1a30 !important;
+    margin-bottom: 8px !important;
+    text-overflow: clip !important;
+  }
+
+  .mockup-product-title a:hover {
+    color: var(--accent-color, #ff5a00) !important;
+  }
+</style>
+
 </head>
 <body>
 <!-- Main Hero removed welcome overlay -->
@@ -4400,7 +4603,7 @@
         line-height: 1.2 !important;
         margin-bottom: 2px !important;
         display: -webkit-box !important;
-        -webkit-line-clamp: 2 !important;
+        -webkit-line-clamp: 4 !important;
         -webkit-box-orient: vertical !important;
         overflow: hidden !important;
         white-space: normal !important;
