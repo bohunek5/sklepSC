@@ -2955,6 +2955,14 @@
     }
     /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
 
+
+  /* Hide Category Text Above Product Card Blocks */
+  .mockup-product-category,
+  p.mockup-product-category,
+  div.mockup-product-category {
+    display: none !important;
+  }
+
 </style>
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
 <style>
@@ -5243,7 +5251,6 @@
 
         const cardHTML = `
           <div class="mockup-product-card" data-id="${p.id}">
-            <p class="mockup-product-category">${p.category}</p>
             <div class="mockup-product-media" style="position: relative; overflow: hidden;">
               <img src="${p.images[0]}" alt="${p.title}" class="mockup-product-img">
               ${p.video ? `
@@ -5334,7 +5341,6 @@
 
           const cardHTML = `
             <div class="mockup-product-card" data-id="${p.id}">
-              <p class="mockup-product-category">${p.category}</p>
               <div class="mockup-product-media" style="position: relative; overflow: hidden;">
                 <img src="${p.images[0]}" alt="${p.title}" class="mockup-product-img">
                 ${p.video ? `

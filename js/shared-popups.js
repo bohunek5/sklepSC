@@ -2031,7 +2031,6 @@ function initSharedPopups() {
 
         return `
           <div class="mockup-product-card" data-id="${p.id}">
-            <p class="mockup-product-category">${p.category}</p>
             <div class="mockup-product-media" style="position: relative; overflow: hidden; width: 100%; aspect-ratio: 1/1;">
               <img src="${p.images[0]}" alt="${p.title}" class="mockup-product-img">
               ${p.video ? `

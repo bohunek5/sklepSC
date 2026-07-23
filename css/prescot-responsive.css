@@ -440,7 +440,7 @@ body .mobile-menu a.configurator-nav-link:not(.active) {
   }
 
   .mockup-product-category {
-    font-size: 10px !important;
+    display: none !important;
   }
 
   .mockup-product-price {

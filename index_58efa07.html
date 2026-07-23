@@ -1591,6 +1591,14 @@
     }
     /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
 
+
+  /* Hide Category Text Above Product Card Blocks */
+  .mockup-product-category,
+  p.mockup-product-category,
+  div.mockup-product-category {
+    display: none !important;
+  }
+
 </style>
 
 <style id="scrolled-nav-visibility-override">
@@ -2798,7 +2806,6 @@
               </div>
             </div>
             <div class="mockup-product-info">
-              <p class="mockup-product-category">${p.category}</p>
               <h3 class="mockup-product-title"><a href="/product.html?id=${p.id}">${p.title}</a></h3>
               <p class="mockup-product-price">
                 ${p.compareAtPrice ? `<del>${p.compareAtPrice.toFixed(2)} zł</del>` : ''}
