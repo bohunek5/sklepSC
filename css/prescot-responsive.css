@@ -413,12 +413,13 @@ body .mobile-menu a.configurator-nav-link:not(.active) {
     height: auto !important;
     aspect-ratio: 1 / 1 !important;
     border-radius: 10px !important;
+    padding: 0 !important;
   }
 
   .mockup-product-img {
     width: 100% !important;
     height: 100% !important;
-    object-fit: contain !important;
+    object-fit: cover !important;
   }
 
   .mockup-product-info {
