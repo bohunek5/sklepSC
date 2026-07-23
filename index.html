@@ -2,6 +2,7 @@
 
 <html lang="pl">
 <head>
+  <link rel="icon" type="image/png" href="images/logo.png">
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Prescot LED - Nowoczesne systemy oświetlenia liniowego i zasilania</title>
@@ -3934,6 +3935,7 @@
 </style>
 
 
+
 <style id="custom-nav-configurator-cta-style">
   /* Autorski wyróżniony przycisk Dobierz Sam w menu nagłówka */
   body .mockup-header .mockup-nav ul li a.nav-configurator-cta,
@@ -3961,7 +3963,41 @@
     box-shadow: 0 6px 22px rgba(255, 90, 0, 0.5) !important;
     color: #ffffff !important;
   }
+
+  /* Scrolled Navigation Visibility Overrides */
+  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active),
+  body .mockup-header.scrolled .mockup-nav ul li a:not(.active) {
+    color: #0b1a30 !important;
+    background: rgba(11, 26, 48, 0.06) !important;
+    border: 1px solid rgba(11, 26, 48, 0.12) !important;
+    font-weight: 600 !important;
+  }
+
+  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active):hover,
+  body .mockup-header.scrolled .mockup-nav ul li a:not(.active):hover {
+    background: rgba(11, 26, 48, 0.14) !important;
+    color: #0b1a30 !important;
+    border-color: rgba(11, 26, 48, 0.25) !important;
+  }
+
+  body .mockup-header.scrolled .mockup-nav > ul > li > a.active,
+  body .mockup-header.scrolled .mockup-nav ul li a.active {
+    background: #0b1a30 !important;
+    color: #ffffff !important;
+    border: 1px solid #0b1a30 !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 14px rgba(11, 26, 48, 0.2) !important;
+  }
+
+  /* Footer White Logo Styling */
+  footer .footer-logo img,
+  .mockup-footer .footer-logo img {
+    height: 32px !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
 </style>
+
 
 </head>
 <body>
@@ -4078,9 +4114,9 @@
 </div>
 <nav class="mockup-nav">
 <ul>
-<li><a class="active" href="index.html">Home</a></li>
-              <li><a href="shop.html">Sklep</a></li>
-              <li><a class="configurator-nav-link" href="configurator.html">Dobierz Sam</a></li>
+<li><a href="index.html" class="active">Home</a></li>
+<li><a href="shop.html">Sklep</a></li>
+<li><a href="configurator.html" class="nav-configurator-cta"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Dobierz Sam</a></li>
 <li><a href="blog.html">Blog</a></li>
 <li><a href="about.html">O nas</a></li>
 <li><a href="contact.html">Kontakt</a></li>
@@ -4111,9 +4147,9 @@
 <!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
 <ul>
-<li><a class="active" href="index.html">Home</a></li>
-              <li><a href="shop.html">Sklep</a></li>
-              <li><a class="configurator-nav-link" href="configurator.html">Dobierz Sam</a></li>
+<li><a href="index.html" class="active">Home</a></li>
+<li><a href="shop.html">Sklep</a></li>
+<li><a href="configurator.html" class="nav-configurator-cta"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Dobierz Sam</a></li>
 <li><a href="blog.html">Blog</a></li>
 <li><a href="about.html">O nas</a></li>
 <li><a href="contact.html">Kontakt</a></li>
@@ -4268,7 +4304,7 @@
 </div>
 <div class="categories-banners-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 100%; margin: 0 auto; width: 100%;">
 <!-- Category 1: Taśmy LED -->
-<div class="category-banner-card" onclick="window.location.href='shop.html?cat=Tasma%20LED'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 420px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 40px;">
+<div class="category-banner-card" onclick="window.location.href='shop.html?category=Ta%C5%9Bmy%20LED'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 420px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 40px;">
 <div class="category-banner-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/hero_cob.webp') center/cover no-repeat; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></div>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
@@ -4276,19 +4312,19 @@
 <div style="text-align: right; max-width: 70%; display: flex; flex-direction: column; align-items: flex-end;">
 <span style="font-size: 13px; letter-spacing: 2px; color: var(--accent-color); font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 5px;">GWARANCJA DO 7 LAT</span>
 <h3 style="color: #fff; font-size: 28px; font-weight: 800; font-family: 'Outfit', sans-serif; margin: 5px 0 12px 0;">Taśmy LED Premium</h3>
-<p style="color: rgba(255,255,255,0.75); font-size: 14px; line-height: 1.6; margin-bottom: 0px; max-width: 100%;">Najwyższej jakości profesjonalne taśmy LED COB i SMD objęte pełną, 7-letnią gwarancją producenta.</p>
+<p style="color: rgba(255,255,255,0.75); font-size: 14px; line-height: 1.6; margin-bottom: 0px; max-width: 100%;">Taśmy COB i SMD w systemach 12 V, 24 V i 48 V — od światła meblowego po długie ciągi architektoniczne.</p>
 </div>
 </div>
 </div>
 <!-- Category 2: Sterowanie i Zasilanie -->
-<div class="category-banner-card" onclick="window.location.href='shop.html?cat=Zasilacze'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 420px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 40px;">
-<div class="category-banner-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/banner_controllers.webp') center/cover no-repeat; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></div>
+<div class="category-banner-card" onclick="window.location.href='shop.html?category=Zasilacze%20LED%20Scharfer'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 420px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 40px;">
+<div class="category-banner-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/banner_scharfer.webp') center/cover no-repeat; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></div>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
 <span class="glass-banner-btn">ZOBACZ ZASILACZE</span>
 <div style="text-align: right; max-width: 70%; display: flex; flex-direction: column; align-items: flex-end;">
 <span style="font-size: 13px; letter-spacing: 2px; color: var(--accent-color); font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 5px;">ZASILANIE</span>
-<h3 style="color: #fff; font-size: 28px; font-weight: 800; font-family: 'Outfit', sans-serif; margin: 5px 0 12px 0;">Zasilacze LED</h3>
+<h3 style="color: #fff; font-size: 28px; font-weight: 800; font-family: 'Outfit', sans-serif; margin: 5px 0 12px 0;">Zasilacze Scharfer</h3>
 <p style="color: rgba(255,255,255,0.75); font-size: 14px; line-height: 1.6; margin-bottom: 0px; max-width: 100%;">Hermetyczne zasilacze IP67 z 7-letnią gwarancją Scharfer Powermax oraz modele slim.</p>
 </div>
 </div>
@@ -4296,7 +4332,7 @@
 </div>
 <div class="categories-sub-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 100%; margin: 30px auto 0 auto; width: 100%;">
 <!-- Subcategory 1: COB -->
-<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?cat=Tasma%20LED%20COB'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
+<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?q=COB'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
 <div class="category-banner-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/hero_cob.webp') center/cover no-repeat; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></div>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
@@ -4308,7 +4344,7 @@
 </div>
 </div>
 <!-- Subcategory 2: RGB -->
-<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?cat=Tasma%20LED%20RGB'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
+<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?q=RGB'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
 <div class="category-banner-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/hero_rgb.webp') center/cover no-repeat; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></div>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
@@ -4320,7 +4356,7 @@
 </div>
 </div>
 <!-- Subcategory 3: CCT -->
-<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?cat=Tasma%20LED%20CCT'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
+<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?q=CCT'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
 <div class="category-banner-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/hero_cct.webp') center/cover no-repeat; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></div>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
@@ -4332,7 +4368,7 @@
 </div>
 </div>
 <!-- Subcategory 4: Zasilacze -->
-<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?cat=Zasilacze'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
+<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?category=Zasilacze%20LED%20Scharfer'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
 <div class="category-banner-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/banner_scharfer.webp') center/cover no-repeat; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></div>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
@@ -4344,7 +4380,7 @@
 </div>
 </div>
 <!-- Subcategory 5: Sterowniki -->
-<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?cat=Sterowniki'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
+<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?category=Sterowniki%20LED'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
 <div class="category-banner-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/banner_controllers.webp') center/cover no-repeat; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></div>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
@@ -4356,7 +4392,7 @@
 </div>
 </div>
 <!-- Subcategory 6: Akcesoria -->
-<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?cat=Akcesoria'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
+<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?category=Akcesoria%20do%20ta%C5%9Bm%20LED%20i%20zasilaczy'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
 <div class="category-banner-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/elegant-interior-design-with-neutral-colors-2026-03-25-07-06-00-utc.webp') center/cover no-repeat; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></div>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">

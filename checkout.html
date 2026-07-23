@@ -2,6 +2,7 @@
 
 <html lang="pl">
 <head>
+  <link rel="icon" type="image/png" href="images/logo.png">
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Prescot LED - Realizacja zamówienia (Checkout)</title>
@@ -1993,6 +1994,7 @@
 </style>
 
 
+
 <style id="custom-nav-configurator-cta-style">
   /* Autorski wyróżniony przycisk Dobierz Sam w menu nagłówka */
   body .mockup-header .mockup-nav ul li a.nav-configurator-cta,
@@ -2020,7 +2022,41 @@
     box-shadow: 0 6px 22px rgba(255, 90, 0, 0.5) !important;
     color: #ffffff !important;
   }
+
+  /* Scrolled Navigation Visibility Overrides */
+  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active),
+  body .mockup-header.scrolled .mockup-nav ul li a:not(.active) {
+    color: #0b1a30 !important;
+    background: rgba(11, 26, 48, 0.06) !important;
+    border: 1px solid rgba(11, 26, 48, 0.12) !important;
+    font-weight: 600 !important;
+  }
+
+  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active):hover,
+  body .mockup-header.scrolled .mockup-nav ul li a:not(.active):hover {
+    background: rgba(11, 26, 48, 0.14) !important;
+    color: #0b1a30 !important;
+    border-color: rgba(11, 26, 48, 0.25) !important;
+  }
+
+  body .mockup-header.scrolled .mockup-nav > ul > li > a.active,
+  body .mockup-header.scrolled .mockup-nav ul li a.active {
+    background: #0b1a30 !important;
+    color: #ffffff !important;
+    border: 1px solid #0b1a30 !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 14px rgba(11, 26, 48, 0.2) !important;
+  }
+
+  /* Footer White Logo Styling */
+  footer .footer-logo img,
+  .mockup-footer .footer-logo img {
+    height: 32px !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
 </style>
+
 
 </head>
 <body>

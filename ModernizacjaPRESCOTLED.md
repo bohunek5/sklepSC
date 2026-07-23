@@ -894,3 +894,39 @@ Wymagania prawne muszą zostać odniesione do konkretnego modelu działalności 
 | 2026-07-22 | Rozdzielić dane importowane i ręczne nadpisania | kolejne importy XML nie mogą kasować treści ani kompatybilności | do potwierdzenia |
 | 2026-07-22 | Nie budować konfiguratora przed modelem kompatybilności | wynik musi być technicznie uzasadniony | do potwierdzenia |
 | 2026-07-22 | Backend jest źródłem ceny, stanu, dostawy i statusu płatności | przeglądarka nie może zatwierdzać danych transakcyjnych | do potwierdzenia |
+
+## 14. Stan lokalnego prototypu — 23 lipca 2026
+
+### Konfigurator V4
+
+Wdrożona lokalnie wersja nie udaje jeszcze produkcyjnego systemu kompatybilności, ale kończy się realnym produktem z katalogu zamiast nazwą wymyślonej serii.
+
+- Sześć kolejnych decyzji: zastosowanie, oczekiwana moc, technologia, barwa, wymiary, środowisko oraz sterowanie z napięciem.
+- Każda opcja pokazuje liczbę dostępnych taśm spełniających dotychczasowe warunki. Opcje prowadzące do zera są blokowane.
+- Wynik zawiera od jednego do trzech realnych SKU z ceną katalogową, stanem, zdjęciem i podstawowymi parametrami.
+- Obsługiwane napięcia taśm: 12 V, 24 V i 48 V. Brak zasilacza 48 V w lokalnym katalogu jest jawnie oznaczany jako element do konsultacji.
+- Zasilacz 12/24 V dobierany jest na podstawie `W/m × długość × 1,20`. Jeżeli jedno urządzenie nie wystarcza, obciążenie jest dzielone na kilka zasilaczy.
+- Sterownik jest wymagany dla CCT, RGB i RGBW/RGB+CCT. Dla taśmy jednobarwnej pojawia się przy ściemnianiu, pilocie lub sterowaniu smart.
+- Usunięto fikcyjny rabat pakietowy. Cena i dostępność nadal wymagają potwierdzenia przez przyszły backend.
+- Warstwa wizualna wykorzystuje fotografie zastosowań oraz proste diagramy techniczne, bez piktogramów dekoracyjnych.
+
+### Mobilne kategorie i nawigacja
+
+- Dolna nawigacja ma pięć pozycji: Home, Sklep, Kategorie, Dobierz i Koszyk.
+- Panel kategorii odpowiada pięciu rzeczywistym rodzinom lokalnego katalogu: taśmy LED, sterowniki, zasilacze Scharfer, akcesoria oraz koszulki silikonowe PRO.
+- Skróty technologiczne prowadzą do działających wyszukiwań: COB, SMD, CCT, RGB/RGBW i 48 V.
+- Karty na stronie głównej prowadzą do realnych kategorii lub zapytań; usunięto martwe, sztuczne podziały gwarancyjne z mobilnego panelu.
+- Widok 375 px i układ poziomy nie mają poziomego przewijania.
+
+### Testy regresji prototypu
+
+Automatyczne scenariusze lokalne obejmują:
+
+1. kuchnię, COB, 4000 K, 5 m;
+2. kuchnię, SMD, 4000 K, 5 m;
+3. elewację, IP67, 10 m i dwa odcinki;
+4. RGB ze sterowaniem smart;
+5. ciąg komercyjny 100 m, 24 V i podział zasilania;
+6. mobilną nawigację oraz prezentację kategorii na szerokości 375 px.
+
+Pozostaje wymagana akceptacja technika Prescot dla reguł kompatybilności, profili, sposobu zasilania długich odcinków, obciążalności sterowników i stref łazienkowych. Produkcyjna wersja musi przenieść cenę, stan, kalkulację zestawu i zapis zamówienia na backend.

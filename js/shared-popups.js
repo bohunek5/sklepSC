@@ -2381,136 +2381,84 @@ function initSharedPopups() {
 // --- INJECT MOBILE CATEGORIES DRAWER ---
 function injectMobileCategoriesDrawer() {
   const drawerHTML = `
-    <!-- Mobile Categories Drawer -->
-    <div id="mobileCategoriesDrawer" style="position: fixed; top: 0; left: 0; right: 0; bottom: 65px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); z-index: 10000; display: none; flex-direction: column; color: #1a1a2e; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease; transform: translateY(100%); opacity: 0;">
-      
-      <!-- Drawer Header -->
-      <div style="display: flex; justify-content: space-between; align-items: center; padding: 25px; border-bottom: 1px solid rgba(0,0,0,0.08);">
-        <h3 style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin: 0; color: #1a1a2e;">Kategorie</h3>
-        <button onclick="closeMobileCategories()" style="background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.1); color: #1a1a2e; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.05);"><i class="ph ph-x"></i></button>
+    <div id="mobileCategoriesDrawer" class="mobile-category-drawer" role="dialog" aria-modal="true" aria-labelledby="mobileCategoryTitle" aria-hidden="true" hidden>
+      <div class="mobile-category-header">
+        <div><span>Sklep Prescot</span><h2 id="mobileCategoryTitle">Kategorie produktów</h2></div>
+        <button type="button" onclick="closeMobileCategories()" aria-label="Zamknij kategorie"><span>Zamknij</span><b aria-hidden="true">×</b></button>
       </div>
-      
-      <!-- Drawer Grid -->
-      <div style="flex-grow: 1; overflow-y: auto; padding: 25px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; align-content: flex-start; padding-bottom: 100px;">
-        
-        <style>
-          .glass-cat-card {
-            background: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            border-radius: 16px;
-            padding: 25px 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            gap: 12px;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            text-decoration: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-          }
-          .glass-cat-card:active {
-            transform: scale(0.96);
-            background: rgba(255, 255, 255, 0.8);
-            border-color: rgba(0, 0, 0, 0.15);
-          }
-          .glass-cat-icon {
-            font-size: 32px;
-            color: var(--accent-color, #ff6b00);
-            filter: drop-shadow(0 0 10px rgba(255, 107, 0, 0.2));
-          }
-          .glass-cat-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 14px;
-            font-weight: 700;
-            color: #1a1a2e;
-            margin: 0;
-            letter-spacing: 0.5px;
-            line-height: 1.3;
-          }
-          .glass-cat-badge {
-            font-size: 9px;
-            background: rgba(0, 0, 0, 0.05);
-            padding: 3px 8px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #555;
-            margin-bottom: 2px;
-          }
-        </style>
-
-        <!-- Taśmy LED -->
-        <a href="shop.html?category=Ta%C5%9Bmy%20LED" class="glass-cat-card">
-          <i class="ph ph-lightbulb glass-cat-icon"></i>
-          <span class="glass-cat-badge">Wszystkie</span>
-          <h4 class="glass-cat-title">Taśmy LED</h4>
-        </a>
-
-        <!-- Taśmy LED 7 lat -->
-        <a href="shop.html?category=Ta%C5%9Bmy%20LED%207%20lat%20gwarancji" class="glass-cat-card">
-          <i class="ph ph-star glass-cat-icon"></i>
-          <span class="glass-cat-badge">Premium</span>
-          <h4 class="glass-cat-title">Taśmy LED 7 lat gwarancji</h4>
-        </a>
-
-        <!-- Taśmy LED 5 lat -->
-        <a href="shop.html?category=Ta%C5%9Bmy%20LED%205%20lat%20gwarancji" class="glass-cat-card">
-          <i class="ph ph-shield-check glass-cat-icon"></i>
-          <span class="glass-cat-badge">Standard</span>
-          <h4 class="glass-cat-title">Taśmy LED 5 lat gwarancji</h4>
-        </a>
-
-        <!-- Sterowniki -->
-        <a href="shop.html?category=Sterowniki" class="glass-cat-card">
-          <i class="ph ph-faders glass-cat-icon"></i>
-          <span class="glass-cat-badge">Smart Home</span>
-          <h4 class="glass-cat-title">Sterowniki</h4>
-        </a>
-
-        <!-- Zasilacze -->
-        <a href="shop.html?category=Zasilacze" class="glass-cat-card">
-          <i class="ph ph-lightning glass-cat-icon"></i>
-          <span class="glass-cat-badge">Zasilanie</span>
-          <h4 class="glass-cat-title">Zasilacze</h4>
-        </a>
-
-        <!-- Akcesoria -->
-        <a href="shop.html?category=Akcesoria" class="glass-cat-card">
-          <i class="ph ph-plug glass-cat-icon"></i>
-          <span class="glass-cat-badge">Montaż</span>
-          <h4 class="glass-cat-title">Akcesoria</h4>
-        </a>
+      <div class="mobile-category-content">
+        <p class="mobile-category-intro">Wejdź przez rodzinę produktu albo od razu zawęź katalog po technologii.</p>
+        <nav class="mobile-category-list" aria-label="Rodziny produktów">
+          <a href="shop.html?category=Ta%C5%9Bmy%20LED"><img src="images/hero_cob.webp" alt="" loading="lazy"><span><small>01 · Źródła światła</small><strong>Taśmy LED</strong><em>COB, SMD, mono, CCT, RGB i systemy 48 V</em></span><b aria-hidden="true">→</b></a>
+          <a href="shop.html?category=Sterowniki%20LED"><img src="images/banner_controllers.webp" alt="" loading="lazy"><span><small>02 · Kontrola</small><strong>Sterowniki LED</strong><em>MONO, CCT, RGB, RGBW, pilot i Wi‑Fi</em></span><b aria-hidden="true">→</b></a>
+          <a href="shop.html?category=Zasilacze%20LED%20Scharfer"><img src="images/banner_scharfer.webp" alt="" loading="lazy"><span><small>03 · Zasilanie</small><strong>Zasilacze Scharfer</strong><em>12 V i 24 V · dobór mocy z rezerwą</em></span><b aria-hidden="true">→</b></a>
+          <a href="shop.html?category=Akcesoria%20do%20ta%C5%9Bm%20LED%20i%20zasilaczy"><img src="images/okladka-produkty.webp" alt="" loading="lazy"><span><small>04 · Montaż</small><strong>Akcesoria systemowe</strong><em>Złącza, przewody i elementy instalacyjne</em></span><b aria-hidden="true">→</b></a>
+          <a href="shop.html?category=Koszulki%20silikonowe%20PRO"><span class="category-material-visual" aria-hidden="true"><i></i></span><span><small>05 · Ochrona</small><strong>Koszulki silikonowe PRO</strong><em>Osłona i uszczelnienie taśmy LED</em></span><b aria-hidden="true">→</b></a>
+        </nav>
+        <section class="mobile-tech-shortcuts" aria-labelledby="mobileTechTitle"><span id="mobileTechTitle">Technologie taśm</span><div><a href="shop.html?q=COB">COB</a><a href="shop.html?q=SMD">SMD</a><a href="shop.html?q=CCT">CCT</a><a href="shop.html?q=RGB">RGB / RGBW</a><a href="shop.html?q=48V">48 V</a></div></section>
+        <a class="mobile-configurator-entry" href="configurator.html"><span><small>Nie znasz parametrów?</small><strong>Dobierz kompletny system LED</strong></span><b aria-hidden="true">Rozpocznij →</b></a>
       </div>
     </div>
   `;
   if (!document.getElementById('mobileCategoriesDrawer')) {
     document.body.insertAdjacentHTML('beforeend', drawerHTML);
   }
+  upgradeMobileCommerceNavigation();
+  setTimeout(upgradeMobileCommerceNavigation, 0);
+}
+
+function upgradeMobileCommerceNavigation() {
+  const path = window.location.pathname.split('/').pop() || 'index.html';
+  const icon = (content) => `<svg viewBox="0 0 24 24" aria-hidden="true">${content}</svg>`;
+  const entries = [
+    { label: 'Home', href: 'index.html', active: path === '' || path === 'index.html', icon: icon('<path d="M4 11.5 12 5l8 6.5V20h-5v-6H9v6H4Z"/>') },
+    { label: 'Sklep', href: 'shop.html', active: path === 'shop.html' || path === 'product.html', icon: icon('<path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/>') },
+    { label: 'Kategorie', action: true, active: false, icon: icon('<path d="M5 7h14M5 12h14M5 17h14"/>') },
+    { label: 'Dobierz', href: 'configurator.html', active: path === 'configurator.html', icon: icon('<path d="M4 18 18 4l2 2L6 20H4v-2Z"/><path d="m14 8 2 2M10 12l2 2M7 15l2 2"/>') },
+    { label: 'Koszyk', href: 'cart.html', active: path === 'cart.html' || path === 'checkout.html', icon: icon('<path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/>') }
+  ];
+  const markup = entries.map((entry) => entry.action
+    ? `<button class="mobile-nav-item ${entry.active ? 'active' : ''}" type="button" onclick="openMobileCategories()">${entry.icon}<span>${entry.label}</span></button>`
+    : `<a class="mobile-nav-item ${entry.active ? 'active' : ''}" href="${entry.href}">${entry.icon}<span>${entry.label}</span></a>`
+  ).join('');
+  document.querySelectorAll('.mobile-nav-items').forEach((navigation) => { navigation.innerHTML = markup; });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', upgradeMobileCommerceNavigation);
+} else {
+  upgradeMobileCommerceNavigation();
 }
 
 // Bind drawer functions to global window scope
 window.openMobileCategories = function() {
   const drawer = document.getElementById('mobileCategoriesDrawer');
   if (drawer) {
-    drawer.style.display = 'flex';
-    setTimeout(() => {
-      drawer.style.opacity = '1';
-      drawer.style.transform = 'translateY(0)';
-    }, 10);
+    drawer.hidden = false;
+    drawer.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('mobile-categories-open');
+    requestAnimationFrame(() => drawer.classList.add('is-open'));
+    drawer.querySelector('.mobile-category-header button')?.focus();
   }
 };
 
 window.closeMobileCategories = function() {
   const drawer = document.getElementById('mobileCategoriesDrawer');
   if (drawer) {
-    drawer.style.opacity = '0';
-    drawer.style.transform = 'translateY(100%)';
+    drawer.classList.remove('is-open');
+    drawer.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('mobile-categories-open');
     setTimeout(() => {
-      drawer.style.display = 'none';
-    }, 400);
+      drawer.hidden = true;
+    }, 280);
   }
 };
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && document.getElementById('mobileCategoriesDrawer')?.classList.contains('is-open')) {
+    window.closeMobileCategories();
+  }
+});
 
 window.toggleMobileCatRow = function(row) {
   row.classList.toggle('show-description');

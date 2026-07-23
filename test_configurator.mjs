@@ -21,6 +21,7 @@ const screenshotArgument = process.argv.find((argument) => argument.startsWith('
 const screenshotPath = screenshotArgument?.slice('--screenshot='.length);
 const heroScreenshotArgument = process.argv.find((argument) => argument.startsWith('--hero-screenshot='));
 const heroScreenshotPath = heroScreenshotArgument?.slice('--hero-screenshot='.length);
+const openCategories = process.argv.includes('--open-categories');
 const stepScreenshotArgument = process.argv.find((argument) => argument.startsWith('--step-screenshot='));
 const stepScreenshotPath = stepScreenshotArgument?.slice('--step-screenshot='.length);
 const scenarioArgument = process.argv.find((argument) => argument.startsWith('--scenario='));
@@ -167,9 +168,18 @@ try {
     throw new Error(`Lejek nie wystartował z poprawną pulą produktów: ${JSON.stringify(initialFunnel)}`);
   }
 
+  if (openCategories) {
+    await evaluate(client, `window.openMobileCategories(); true`);
+    await waitFor(client, `document.querySelector('#mobileCategoriesDrawer')?.classList.contains('is-open')`, 3000);
+    await delay(320);
+  }
   if (heroScreenshotPath) {
     const screenshot = await client.send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: false });
     writeFileSync(heroScreenshotPath, Buffer.from(screenshot.data, 'base64'));
+  }
+  if (openCategories) {
+    await evaluate(client, `window.closeMobileCategories(); true`);
+    await delay(320);
   }
   if (stepScreenshotPath) {
     await evaluate(client, `(() => {
