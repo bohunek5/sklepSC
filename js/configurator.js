@@ -1,3 +1,32 @@
+
+window.triggerConfiguratorInquiry = function(paramName, paramVal) {
+  const locNames = { kitchen: 'Kuchnia & Blat', living: 'Salon, sufit i wnęka', stairs: 'Schody i komunikacja', bathroom: 'Łazienka i strefa wilgotna', outdoor: 'Elewacja, taras i ogród', commercial: 'Ekspozycja i długie ciągi' };
+  const lightNames = { '3000K': 'Ciepła 3000K (COB)', '4000K': 'Neutralna 4000K', '6500K': 'Zimna 6500K', 'RGB': 'RGB Multikolor', warm: 'Ciepła 3000K', neutral: 'Neutralna 4000K', cold: 'Zimna 6500K', cct: 'CCT Dual White', rgbw: 'RGBW Multikolor' };
+  const controlNames = { 'touch-remote': 'Pilot dotykowy RF Prescot', 'wall-panel': 'Panel ścienny Prescot', 'smart-wifi': 'Smart WiFi (Tuya/App)', switch: 'Przełącznik ON/OFF', dimmer: 'Ściemniacz', smart: 'Smart WiFi' };
+  const envNames = { dry: 'IP20 (sucho)', damp: 'IP63+ (wilgoć)', outdoor: 'IP65/IP67 (zewnętrzne)' };
+
+  let loc = (typeof state !== 'undefined' && (state.location || state.application)) ? (locNames[state.location || state.application] || state.location || state.application) : 'Standardowe';
+  let len = (typeof state !== 'undefined' && (state.lengthMeters || state.length)) ? (state.lengthMeters || state.length) + ' m' : '5 m';
+  let light = (typeof state !== 'undefined' && (state.colorTemp || state.light)) ? (lightNames[state.colorTemp || state.light] || state.colorTemp || state.light) : 'Biała';
+  let ctrl = (typeof state !== 'undefined' && (state.controlType || state.control)) ? (controlNames[state.controlType || state.control] || state.controlType || state.control) : 'Pilot RF';
+  let env = (typeof state !== 'undefined' && (state.ipRating || state.environment)) ? (envNames[state.ipRating || state.environment] || state.ipRating || state.environment) : 'IP20';
+
+  let presetMessage = `Dzień dobry,\n\nProszę o przygotowanie wyceny indywidualnej dla taśmy LED i zasilacza o preferowanych parametrach:\n` +
+    `• Przeznaczenie / miejsce: ${loc}\n` +
+    `• Szacowana długość: ${len}\n` +
+    `• Barwa światła / technologia: ${light}\n` +
+    `• Klasa szczelności: ${env}\n` +
+    `• Sposób sterowania: ${ctrl}\n` +
+    (paramName ? `• Wybrany parametr: ${paramName} (${paramVal})\n` : '') +
+    `\nProszę o kontakt w sprawie doradztwa i dopasowania wariantu z oferty Prescot.`;
+
+  if (typeof window.openInquiryModal === 'function') {
+    window.openInquiryModal(presetMessage);
+  } else {
+    alert("Dziękujemy za zainteresowanie. Otwórz formularz zapytania lub skontaktuj się z nami.");
+  }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('configuratorForm');
   if (!form) return;
@@ -156,19 +185,28 @@ document.addEventListener('DOMContentLoaded', () => {
     return filteredTapes(hypothetical).length;
   }
 
-  function refreshOptionAvailability() {
+    function refreshOptionAvailability() {
     form.querySelectorAll('input[type="radio"]').forEach((input) => {
-      const label = input.closest('label');
+      const label = input.closest('label, .wizard-card-option, .option-select-card, .choice-card');
       if (!label) return;
-      const availability = label.querySelector('.option-availability');
+      let availability = label.querySelector('.option-availability');
+      if (!availability) {
+        availability = document.createElement('span');
+        availability.className = 'option-availability';
+        label.appendChild(availability);
+      }
       const count = optionCount(input);
       input.disabled = count === 0;
       label.classList.toggle('is-unavailable', count === 0);
-      if (availability) availability.textContent = count ? `${count} zgodnych` : 'Brak zgodnych';
+      if (count > 0) {
+        availability.innerHTML = `${count} zgodnych`;
+      } else {
+        availability.innerHTML = `<button type="button" class="btn-inquiry-unavailable" onclick="event.preventDefault(); event.stopPropagation(); triggerConfiguratorInquiry('${input.name}', '${input.value}');">✉ Zapytaj o taki produkt</button>`;
+      }
     });
   }
 
-  function currentStepValid() {
+function currentStepValid() {
     if (currentStep === 0) return Boolean(state.application);
     if (currentStep === 1) return Boolean(state.intensity && state.technology);
     if (currentStep === 2) return Boolean(state.light);

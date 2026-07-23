@@ -2503,3 +2503,45 @@ if (document.readyState === 'loading') {
 } else {
   initGlobalHeaderSearch();
 }
+
+
+// --- GLOBAL PRODUCT INQUIRY MODAL (Zapytaj o produkt) ---
+function openInquiryModal(presetText = '') {
+  let modal = document.getElementById('popupZapytaj');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.className = 'product-popup-overlay';
+    modal.id = 'popupZapytaj';
+    modal.style.cssText = 'display:none; z-index: 99999; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(11, 26, 48, 0.7); backdrop-filter: blur(8px); justify-content: center; align-items: center;';
+    modal.innerHTML = `
+      <div class="product-popup-box" style="max-width: 520px; width: 90%; background: #ffffff; border-radius: 24px; padding: 32px; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.25);">
+        <button class="popup-close" onclick="document.getElementById('popupZapytaj').style.display='none'" style="position: absolute; top: 20px; right: 20px; background: #f1f5f9; border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 16px; cursor: pointer; color: #0b1a30; font-weight: 700;">✕</button>
+        <div style="font-size: 11px; font-weight: 800; color: #ff5a00; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">Wycena Indywidualna</div>
+        <h3 style="margin-bottom: 8px; font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 22px; color: #0b1a30;">Zapytaj o produkt / ofertę</h3>
+        <p style="font-size: 13.5px; color: #64748b; margin-bottom: 20px; line-height: 1.4;">Nasi specjaliści przygotują wycenę indywidualną taśmy LED i dedykowanego zasilacza.</p>
+        <form id="askQuestionForm" onsubmit="event.preventDefault(); alert('Dziękujemy! Twoje zapytanie zostało wysłane. Odpowiemy w ciągu 24 godzin.'); document.getElementById('popupZapytaj').style.display='none';">
+          <div style="margin-bottom: 14px;">
+            <label style="display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 5px; color: #0b1a30;">Twoje Imię i Nazwisko</label>
+            <input type="text" required style="width: 100%; padding: 11px 14px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 13.5px; font-family: inherit; outline: none;" placeholder="np. Jan Kowalski">
+          </div>
+          <div style="margin-bottom: 14px;">
+            <label style="display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 5px; color: #0b1a30;">Twój Adres E-mail</label>
+            <input type="email" required style="width: 100%; padding: 11px 14px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 13.5px; font-family: inherit; outline: none;" placeholder="np. jan@example.com">
+          </div>
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 5px; color: #0b1a30;">Preferencje i treść zapytania</label>
+            <textarea id="askQuestionTextarea" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 13px; height: 130px; font-family: inherit; resize: vertical; outline: none; line-height: 1.4;" placeholder="Opisz swoje wymagania..."></textarea>
+          </div>
+          <button type="submit" style="background: linear-gradient(135deg, #0b1a30 0%, #162a45 100%) !important; color: #ffffff !important; width: 100%; border: none !important; cursor: pointer; height: 48px; border-radius: 99px; font-weight: 800; text-transform: uppercase; font-size: 13px; letter-spacing: 0.5px; box-shadow: 0 6px 20px rgba(11,26,48,0.25);">Wyślij Zapytanie</button>
+        </form>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  }
+  const textarea = modal.querySelector('#askQuestionTextarea');
+  if (textarea && presetText) {
+    textarea.value = presetText;
+  }
+  modal.style.display = 'flex';
+}
+window.openInquiryModal = openInquiryModal;
