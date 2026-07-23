@@ -495,24 +495,33 @@ function currentStepValid() {
     document.getElementById('configurator').scrollIntoView({ behavior: 'smooth' });
   });
 
-  const header = document.getElementById('siteHeader');
-  const logo = header.querySelector('.brand img');
+  const header = document.getElementById('mainHeader') || document.getElementById('siteHeader');
+  const logo = document.getElementById('headerLogo') || (header ? header.querySelector('img') : null);
   function updateHeader() {
+    if (!header) return;
     const scrolled = window.scrollY > 40;
     header.classList.toggle('scrolled', scrolled);
-    logo.src = scrolled || header.classList.contains('menu-active') ? logo.dataset.dark : logo.dataset.light;
+    if (logo) {
+      if (logo.dataset && logo.dataset.dark) {
+        logo.src = scrolled || header.classList.contains('menu-active') ? logo.dataset.dark : logo.dataset.light;
+      } else {
+        logo.src = scrolled ? 'images/logo-dark.png' : 'images/logo-white.png';
+      }
+    }
   }
   window.addEventListener('scroll', updateHeader, { passive: true });
   const menuButton = document.getElementById('menuButton');
   const mobileMenu = document.getElementById('mobileMenu');
-  menuButton.addEventListener('click', () => {
-    const expanded = menuButton.getAttribute('aria-expanded') === 'true';
-    menuButton.setAttribute('aria-expanded', String(!expanded));
-    mobileMenu.hidden = expanded;
-    header.classList.toggle('menu-active', !expanded);
-    document.body.classList.toggle('menu-open', !expanded);
-    updateHeader();
-  });
+  if (menuButton && mobileMenu) {
+    menuButton.addEventListener('click', () => {
+      const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!expanded));
+      mobileMenu.hidden = expanded;
+      if (header) header.classList.toggle('menu-active', !expanded);
+      document.body.classList.toggle('menu-open', !expanded);
+      updateHeader();
+    });
+  }
 
     function hideLoadingOverlay() {
     const loadingEl = document.getElementById('catalogLoading');
