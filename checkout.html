@@ -42,27 +42,31 @@
       overflow-x: hidden;
     }
 
-    /* Checkout Page Structure */
+    /* Checkout Page Structure - 50/50 Split */
     .checkout-wrapper {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
+      grid-template-columns: 1fr 1fr;
       min-height: 100vh;
-      max-width: 1250px;
+      max-width: 1400px;
       margin: 0 auto;
       width: 100%;
     }
 
     /* Left panel: Info & Forms */
     .checkout-form-panel {
-      padding: 60px 40px 60px 20px;
+      padding: 60px 45px 60px 25px;
       border-right: 1px solid #e1e1e1;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     /* Right panel: Order Summary */
     .checkout-summary-panel {
       background-color: var(--light-bg);
-      padding: 60px 20px 60px 40px;
+      padding: 60px 25px 60px 45px;
       position: relative;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     @media (min-width: 1025px) {
@@ -210,11 +214,13 @@
     .summary-product-img {
       width: 64px;
       height: 64px;
-      object-fit: cover;
+      object-fit: contain !important;
+      padding: 4px;
       border-radius: 12px !important;
       background: #fff;
       border: 1px solid rgba(0,0,0,0.08);
       aspect-ratio: 1 / 1;
+      box-sizing: border-box;
     }
 
     .summary-product-qty {
@@ -243,13 +249,18 @@
     }
 
     .summary-product-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--primary-color);
-      margin-bottom: 3px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-size: 13.5px !important;
+      font-weight: 600 !important;
+      color: var(--primary-color) !important;
+      margin-bottom: 4px !important;
+      line-height: 1.35 !important;
+      display: -webkit-box !important;
+      -webkit-line-clamp: 3 !important;
+      -webkit-box-orient: vertical !important;
+      white-space: normal !important;
+      overflow-wrap: break-word !important;
+      word-break: normal !important;
+      overflow: hidden !important;
     }
 
     .summary-product-meta {
