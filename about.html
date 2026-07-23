@@ -2313,56 +2313,51 @@
 
 
 <style id="custom-nav-configurator-cta-style">
-  /* Autorski wyróżniony przycisk Dobierz Sam w menu nagłówka */
-  body .mockup-header .mockup-nav ul li a.nav-configurator-cta,
-  body .mockup-header.scrolled .mockup-nav ul li a.nav-configurator-cta {
-    background: linear-gradient(135deg, #ff5a00 0%, #ff7a00 100%) !important;
-    color: #ffffff !important;
-    border: 1px solid #ff5a00 !important;
-    font-weight: 800 !important;
-    font-size: 13px !important;
+  /* Clean Unified Header Navigation */
+  body .mockup-header .mockup-nav ul li a,
+  body .mockup-header.scrolled .mockup-nav ul li a {
+    text-decoration: none !important;
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    color: #0b1a30 !important;
     padding: 8px 18px !important;
     border-radius: 99px !important;
+    transition: all 0.2s ease !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    box-shadow: none !important;
     display: inline-flex !important;
     align-items: center !important;
     gap: 6px !important;
-    box-shadow: 0 4px 15px rgba(255, 90, 0, 0.35) !important;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.4px !important;
   }
 
-  body .mockup-header .mockup-nav ul li a.nav-configurator-cta:hover,
-  body .mockup-header.scrolled .mockup-nav ul li a.nav-configurator-cta:hover {
-    background: linear-gradient(135deg, #e04f00 0%, #ff5a00 100%) !important;
-    transform: translateY(-1px) scale(1.03) !important;
-    box-shadow: 0 6px 22px rgba(255, 90, 0, 0.5) !important;
-    color: #ffffff !important;
-  }
-
-  /* Scrolled Navigation Visibility Overrides */
-  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active),
-  body .mockup-header.scrolled .mockup-nav ul li a:not(.active) {
+  body .mockup-header .mockup-nav ul li a:hover,
+  body .mockup-header.scrolled .mockup-nav ul li a:hover {
+    background: rgba(11, 26, 48, 0.08) !important;
     color: #0b1a30 !important;
-    background: rgba(11, 26, 48, 0.06) !important;
-    border: 1px solid rgba(11, 26, 48, 0.12) !important;
-    font-weight: 600 !important;
   }
 
-  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active):hover,
-  body .mockup-header.scrolled .mockup-nav ul li a:not(.active):hover {
-    background: rgba(11, 26, 48, 0.14) !important;
-    color: #0b1a30 !important;
-    border-color: rgba(11, 26, 48, 0.25) !important;
-  }
-
-  body .mockup-header.scrolled .mockup-nav > ul > li > a.active,
+  body .mockup-header .mockup-nav ul li a.active,
   body .mockup-header.scrolled .mockup-nav ul li a.active {
     background: #0b1a30 !important;
     color: #ffffff !important;
     border: 1px solid #0b1a30 !important;
     font-weight: 700 !important;
     box-shadow: 0 4px 14px rgba(11, 26, 48, 0.2) !important;
+  }
+
+  /* Scrolled Header Styling - Crisp Navy Elements */
+  body .mockup-header.scrolled {
+    background: rgba(255, 255, 255, 0.96) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  body .mockup-header.scrolled .mockup-action-icon,
+  body .mockup-header .mockup-action-icon {
+    color: #0b1a30 !important;
+    border-color: rgba(11, 26, 48, 0.15) !important;
   }
 
   /* Footer White Logo Styling */
@@ -2373,6 +2368,7 @@
     filter: none !important;
   }
 </style>
+
 
 
 <style id="square-product-images-override">
@@ -2429,7 +2425,7 @@
 <ul>
 <li><a href="index.html">Home</a></li>
 <li><a href="shop.html">Sklep</a></li>
-<li><a href="configurator.html" class="nav-configurator-cta"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Dobierz Sam</a></li>
+<li><a href="configurator.html">Dobierz Sam</a></li>
 <li><a href="blog.html">Blog</a></li>
 <li><a href="about.html" class="active">O nas</a></li>
 <li><a href="contact.html">Kontakt</a></li>
@@ -2462,7 +2458,7 @@
 <ul>
 <li><a href="index.html">Home</a></li>
 <li><a href="shop.html">Sklep</a></li>
-<li><a href="configurator.html" class="nav-configurator-cta"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Dobierz Sam</a></li>
+<li><a href="configurator.html">Dobierz Sam</a></li>
 <li><a href="blog.html">Blog</a></li>
 <li><a href="about.html" class="active">O nas</a></li>
 <li><a href="contact.html">Kontakt</a></li>

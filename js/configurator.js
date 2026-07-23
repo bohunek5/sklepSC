@@ -476,23 +476,46 @@ document.addEventListener('DOMContentLoaded', () => {
     updateHeader();
   });
 
+    function hideLoadingOverlay() {
+    const loadingEl = document.getElementById('catalogLoading');
+    if (loadingEl) loadingEl.hidden = true;
+    const loaderContainer = document.querySelector('.loading-overlay');
+    if (loaderContainer) loaderContainer.style.display = 'none';
+  }
+
   async function loadCatalog() {
+    if (typeof products !== 'undefined' && Array.isArray(products) && products.length > 0) {
+      catalog = products;
+    } else if (typeof getProducts === 'function') {
+      catalog = getProducts();
+    } else if (typeof defaultProducts !== 'undefined' && Array.isArray(defaultProducts)) {
+      catalog = defaultProducts;
+    }
+
     try {
       const response = await fetch('js/prescot-imported-products.json', { cache: 'no-store' });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      catalog = await response.json();
+      if (response.ok) {
+        const importedData = await response.json();
+        if (Array.isArray(importedData) && importedData.length > 0) {
+          catalog = importedData;
+        }
+      }
     } catch (error) {
+      // Fallback to existing catalog
+    }
+
+    if (!catalog || !catalog.length) {
       if (typeof products !== 'undefined' && Array.isArray(products)) catalog = products;
-      else {
-        document.getElementById('catalogError').hidden = false;
-        document.getElementById('catalogLoading').hidden = true;
-        form.hidden = true;
-        console.error('Błąd katalogu konfiguratora:', error);
-        return;
+    }
+
+    if (catalog && catalog.length) {
+      tapes = catalog.filter(isTape).map(normalizeTape).filter(hasRequiredTapeData);
+      if (!tapes.length) {
+        tapes = catalog.filter(isTape).map(normalizeTape);
       }
     }
-    tapes = catalog.filter(isTape).map(normalizeTape).filter(hasRequiredTapeData);
-    document.getElementById('catalogLoading').hidden = true;
+
+    hideLoadingOverlay();
     updateCartBadge();
     updateLengthTip();
     renderStep();
