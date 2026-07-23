@@ -148,23 +148,79 @@
   }
 </style>
 
+<style id="configurator-light-header-override">
+  /* Force dark text & navy icons for header on light pages */
+  body .mockup-header,
+  body .mockup-header.scrolled {
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  body .mockup-header .mockup-nav > ul > li > a:not(.active),
+  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+    color: #0b1a30 !important;
+    background: rgba(11, 26, 48, 0.05) !important;
+    border: 1px solid rgba(11, 26, 48, 0.08) !important;
+    font-weight: 600 !important;
+  }
+
+  body .mockup-header .mockup-nav > ul > li > a:not(.active):hover,
+  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active):hover {
+    background: rgba(11, 26, 48, 0.12) !important;
+    color: #0b1a30 !important;
+  }
+
+  body .mockup-header .mockup-nav a.active,
+  body .mockup-header.scrolled .mockup-nav a.active {
+    background: #0b1a30 !important;
+    color: #ffffff !important;
+    border: 1px solid #0b1a30 !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 15px rgba(11, 26, 48, 0.25) !important;
+  }
+
+  body .mockup-header .mockup-action-icon,
+  body .mockup-header.scrolled .mockup-action-icon {
+    color: #0b1a30 !important;
+    background: rgba(11, 26, 48, 0.05) !important;
+    border: 1px solid rgba(11, 26, 48, 0.1) !important;
+  }
+
+  body .mockup-header .mockup-search-container input {
+    color: #0b1a30 !important;
+    border-color: rgba(11, 26, 48, 0.2) !important;
+  }
+
+  body .mockup-header .mockup-search-container button svg {
+    stroke: #0b1a30 !important;
+  }
+
+  .loading-overlay[hidden],
+  #catalogLoading[hidden] {
+    display: none !important;
+  }
+</style>
+
 </head>
 
 <body>
   <a class="skip-link" href="#configurator">Przejdź do konfiguratora</a>
 
-  <header class="mockup-header" id="mainHeader">
+  <header class="mockup-header scrolled force-scrolled" id="mainHeader">
 <div class="mockup-header-logo">
-<a href="index.html"><img alt="Prescot Logo" id="headerLogo" src="images/logo-white.png"/></a>
+<a href="index.html"><img alt="Prescot Logo" id="headerLogo" src="images/logo-dark.png"/></a>
 </div>
 <nav class="mockup-nav">
 <ul>
-  <li><a href="index.html">Home</a></li>
-  <li><a href="shop.html">Sklep</a></li>
-  <li><a href="configurator.html" class="active">Dobierz Sam</a></li>
-  <li><a href="blog.html">Blog</a></li>
-  <li><a href="about.html">O nas</a></li>
-  <li><a href="contact.html">Kontakt</a></li>
+<li><a href="index.html">Home</a></li>
+<li><a href="shop.html">Sklep</a></li>
+<li><a href="configurator.html" class="active">Dobierz Sam</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="about.html">O nas</a></li>
+<li><a href="contact.html">Kontakt</a></li>
 </ul>
 </nav>
 <div class="mockup-actions">
