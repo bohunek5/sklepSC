@@ -24,6 +24,10 @@ const heroScreenshotPath = heroScreenshotArgument?.slice('--hero-screenshot='.le
 const openCategories = process.argv.includes('--open-categories');
 const stepScreenshotArgument = process.argv.find((argument) => argument.startsWith('--step-screenshot='));
 const stepScreenshotPath = stepScreenshotArgument?.slice('--step-screenshot='.length);
+const selectedScreenshotArgument = process.argv.find((argument) => argument.startsWith('--selected-screenshot='));
+const selectedScreenshotPath = selectedScreenshotArgument?.slice('--selected-screenshot='.length);
+const stagesPrefixArgument = process.argv.find((argument) => argument.startsWith('--stages-prefix='));
+const stagesPrefix = stagesPrefixArgument?.slice('--stages-prefix='.length);
 const scenarioArgument = process.argv.find((argument) => argument.startsWith('--scenario='));
 const scenarioName = scenarioArgument?.slice('--scenario='.length) || 'basic';
 const scenarios = {
@@ -158,6 +162,26 @@ try {
   if (initial.catalogFailed) throw new Error('Katalog zgłosił błąd w interfejsie.');
   if (initial.horizontalOverflow) throw new Error(`Strona ma poziomy overflow przed rozpoczęciem konfiguracji: ${JSON.stringify(initial.overflowElements)}`);
 
+  async function captureConfigurator(path) {
+    if (!path) return;
+    await evaluate(client, `(() => {
+      document.documentElement.style.scrollBehavior = 'auto';
+      const target = window.innerWidth <= 900
+        ? document.querySelector('.config-step:not([hidden])')
+        : document.querySelector('#configurator');
+      window.scrollTo(0, Math.max(0, target.getBoundingClientRect().top + window.scrollY - (window.innerWidth <= 900 ? 86 : 0)));
+      return true;
+    })()`);
+    await delay(180);
+    const screenshot = await client.send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: false });
+    writeFileSync(path, Buffer.from(screenshot.data, 'base64'));
+  }
+
+  async function captureStage(stage) {
+    if (!stagesPrefix) return;
+    await captureConfigurator(`${stagesPrefix}-step-${stage + 1}.png`);
+  }
+
   const initialFunnel = await evaluate(client, `({
     count: Number(document.querySelector('#funnelCount')?.textContent),
     enabledOptions: [...document.querySelectorAll('.config-step[data-step="0"] input[type="radio"]:not(:disabled)')].length,
@@ -219,10 +243,23 @@ try {
     }
   }
 
+  await evaluate(client, `document.querySelector('input[name="application"][value="${scenario.application}"]').click()`);
+  const selectedApplicationVisual = await evaluate(client, `(() => {
+    const card = document.querySelector('input[name="application"][value="${scenario.application}"]').closest('.application-card');
+    const style = getComputedStyle(card);
+    return { backgroundImage: style.backgroundImage, backgroundColor: style.backgroundColor };
+  })()`);
+  if (!selectedApplicationVisual.backgroundImage.includes('url(')) {
+    throw new Error(`Zaznaczona karta zastosowania straciła fotografię: ${JSON.stringify(selectedApplicationVisual)}`);
+  }
+  await captureConfigurator(selectedScreenshotPath);
   await selectAndNext('application', scenario.application, 1);
+  await captureStage(1);
   await evaluate(client, `document.querySelector('input[name="technology"][value="${scenario.technology}"]').click()`);
   await selectAndNext('intensity', scenario.intensity, 2);
+  await captureStage(2);
   await selectAndNext('light', scenario.light, 3);
+  await captureStage(3);
   const dimensionsStatus = await evaluate(client, `(() => {
     document.querySelector('#lengthInput').value = '${scenario.length}';
     document.querySelector('#lengthInput').dispatchEvent(new Event('input', { bubbles: true }));
@@ -234,6 +271,7 @@ try {
   })()`);
   if (dimensionsStatus.disabled) throw new Error('Przycisk Dalej pozostał nieaktywny dla wymiarów.');
   await waitFor(client, `document.querySelector('.config-step[data-step="4"]').hidden === false`, 3000);
+  await captureStage(4);
   if (scenario.application === 'outdoor') {
     const outdoorProtection = await evaluate(client, `({
       dryDisabled: document.querySelector('input[name="environment"][value="dry"]').disabled,
@@ -245,6 +283,7 @@ try {
     }
   }
   await selectAndNext('environment', scenario.environment, 5);
+  await captureStage(5);
   const finalStatus = await evaluate(client, `(() => {
     document.querySelector('input[name="control"][value="${scenario.control}"]').click();
     document.querySelector('input[name="voltage"][value="${scenario.voltage}"]').click();
@@ -311,7 +350,7 @@ try {
   );
   if (runtimeErrors.length) throw new Error(`Błędy runtime: ${JSON.stringify(runtimeErrors)}`);
 
-  console.log(JSON.stringify({ scenario: scenarioName, initial, result, cart, screenshotPath: screenshotPath || null, heroScreenshotPath: heroScreenshotPath || null, stepScreenshotPath: stepScreenshotPath || null }, null, 2));
+  console.log(JSON.stringify({ scenario: scenarioName, initial, selectedApplicationVisual, result, cart, screenshotPath: screenshotPath || null, heroScreenshotPath: heroScreenshotPath || null, stepScreenshotPath: stepScreenshotPath || null, selectedScreenshotPath: selectedScreenshotPath || null, stagesPrefix: stagesPrefix || null }, null, 2));
 } finally {
   client?.close();
   browser.kill();
