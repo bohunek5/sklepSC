@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfigurator Prescot 3D Pro</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Outfit:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.93/build/spline-viewer.js"></script>
+    <style>
+        :root {
+            --navy: #001f3f;
+            --orange: #ff5d00;
+            --glass: rgba(0, 31, 63, 0.65);
+            --border: rgba(255, 255, 255, 0.1);
+            --text: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background: #000;
+            color: var(--text);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Background Spline */
+        .spline-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Glass UX */
+        .config-overlay {
+            width: 90vw;
+            max-width: 1200px;
+            height: 80vh;
+            background: var(--glass);
+            backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid var(--border);
+            border-radius: 40px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+            position: relative;
+        }
+
+        header {
+            padding: 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--orange);
+        }
+
+        /* Step Progress */
+        .steps {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.3;
+            transition: 0.3s;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .step-item.active {
+            opacity: 1;
+            color: var(--orange);
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .active .step-num {
+            background: var(--orange);
+            color: white;
+            box-shadow: 0 0 15px var(--orange);
+        }
+
+        /* Content Area */
+        .main-content {
+            flex-grow: 1;
+            padding: 3rem;
+            display: flex;
+            gap: 3rem;
+        }
+
+        .selection-pane {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .preview-pane {
+            flex: 1.5;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 30px;
+            border: 1px solid var(--border);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .config-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .config-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: scale(1.02);
+            border-color: var(--orange);
+        }
+
+        .config-card.selected {
+            background: rgba(255, 93, 0, 0.1);
+            border-color: var(--orange);
+            box-shadow: 0 0 30px rgba(255, 93, 0, 0.1);
+        }
+
+        .config-card h4 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .config-card p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: var(--navy);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Footer / Navigation */
+        footer {
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .btn {
+            background: transparent;
+            color: white;
+            border: 1px solid var(--border);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-next {
+            background: var(--orange);
+            border-color: var(--orange);
+            box-shadow: 0 10px 20px rgba(255, 93, 0, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-content {
+            display: none;
+        }
+
+        .step-content.active {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .price-tag {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--orange);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="spline-container">
+        <!-- Używamy Spline Viewer z plikiem reactive_background.spline -->
+        <spline-viewer url="ThreeGame/reactive_background.spline"></spline-viewer>
+    </div>
+
+    <div class="config-overlay">
+        <header>
+            <div class="logo">PRESCOT <span>LED</span></div>
+            <div class="steps">
+                <div class="step-item active" id="s1">
+                    <div class="step-num">1</div> Profil
+                </div>
+                <div class="step-item" id="s2">
+                    <div class="step-num">2</div> Taśma LED
+                </div>
+                <div class="step-item" id="s3">
+                    <div class="step-num">3</div> Zasilanie
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="selection-pane">
+
+                <!-- STEP 1 -->
+                <div id="content-1" class="step-content active fade-in">
+                    <h2 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem;">Wybierz profil</h2>
+                    <p style="color: #94a3b8; margin-bottom: 1.5rem;">Fundament estetyki i radiator dla Twojego
+                        oświetlenia.</p>
+
+                    <div class="config-card selected" onclick="selectItem(this)">
+                        <div class="icon-box">🏗️</div>
+                        <div>
+                            <h4>PL-10 LINEAR</h4>
+                            <p>Wpuszczany, aluminiowy profil nawierzchniowy.</p>
+                        </div>
+                    </div>
+                    <div class="config-card" onclick="selectItem(this)">
+                        <div class="icon-box">📐</div>
+                        <div>
+                            <h4>PC-25 CORNER</h4>
+                            <p>Profil narożny 45°, idealny do szafek kuchennych.</p>
+                        </div>
+                    </div>
+                    <div class="config-card" onclick="selectItem(this)">
+                        <div class="icon-box">🧱</div>
+                        <div>
+                            <h4>PS-40 SURFACE</h4>
+                            <p>Masywny profil natynkowy o wysokiej wydajności.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2 -->
+                <div id="content-2" class="step-content fade-in">
+                    <h2 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem;">Wybierz źródło światła</h2>
+                    <p style="color: #94a3b8; margin-bottom: 1.5rem;">Technologia COB dla idealnej linii lub SMD dla
+                        mocy.</p>
+
+                    <div class="config-card selected" onclick="selectItem(this)">
+                        <div class="icon-box">✨</div>
+                        <div>
+                            <h4>COB MONO 320</h4>
+                            <p>Idealnie jednolita linia światła bez punktów.</p>
+                        </div>
+                    </div>
+                    <div class="config-card" onclick="selectItem(this)">
+                        <div class="icon-box">🔥</div>
+                        <div>
+                            <h4>DELUX HIGH BRIGHT</h4>
+                            <p>Potężna wydajność SMD4014 dla oświetlenia głównego.</p>
+                        </div>
+                    </div>
+                    <div class="config-card" onclick="selectItem(this)">
+                        <div class="icon-box">🌈</div>
+                        <div>
+                            <h4>PREMIUM RGBW</h4>
+                            <p>Pełna paleta barw + czysta biel w jednym.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 3 -->
+                <div id="content-3" class="step-content fade-in">
+                    <h2 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem;">Dobierz zasilanie</h2>
+                    <p style="color: #94a3b8; margin-bottom: 1.5rem;">Serce systemu gwarantujące lata bezawaryjnej
+                        pracy.</p>
+
+                    <div class="config-card selected" onclick="selectItem(this)">
+                        <div class="icon-box">🔋</div>
+                        <div>
+                            <h4>SCHARFER PREMIUM</h4>
+                            <p>5 lat gwarancji, pasywne chłodzenie, 0dB hałasu.</p>
+                        </div>
+                    </div>
+                    <div class="config-card" onclick="selectItem(this)">
+                        <div class="icon-box">⚡</div>
+                        <div>
+                            <h4>PROFESSIONAL PR</h4>
+                            <p>Standard branżowy, wysoka stabilizacja napięcia.</p>
+                        </div>
+                    </div>
+                    <div class="config-card" onclick="selectItem(this)">
+                        <div class="icon-box">🏠</div>
+                        <div>
+                            <h4>SLIM FURNITURE PG</h4>
+                            <p>Ultra cienki, mieści się za maskownicą meblową.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="preview-pane">
+                <div style="text-align: center; z-index: 5;">
+                    <div id="preview-text" class="fade-in">
+                        <span
+                            style="text-transform: uppercase; letter-spacing: 4px; font-size: 0.8rem; font-weight: 800; color: var(--orange);">Twoja
+                            Konfiguracja</span>
+                        <h3 id="current-selection" style="font-size: 2.5rem; margin-top: 10px;">LINEAR SYSTEM</h3>
+                        <p style="color: #94a3b8; width: 300px; margin: 20px auto;">Eksportujemy projekt do formatu PDF
+                            oraz listę zakupową w 30 sekund.</p>
+                        <div class="price-tag">~ 125,00 PLN</div>
+                    </div>
+                </div>
+                <!-- Można tu wstawić kolejny Spline Viewer z modelem konkretnego produktu -->
+                <div id="model-placeholder"
+                    style="position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; opacity: 0.1; font-size: 10rem;">
+                    💡
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <button class="btn" id="prevBtn" onclick="prevStep()" style="visibility: hidden;">Wstecz</button>
+            <div style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.7rem; color: #4b5563;">
+                KROK <span id="step-num-display">1</span> / 3
+            </div>
+            <button class="btn btn-next" id="nextBtn" onclick="nextStep()">Dalej ➔</button>
+        </footer>
+    </div>
+
+    <script>
+        let currentStep = 1;
+
+        function updateUI() {
+            // Update steps
+            document.querySelectorAll('.step-item').forEach((item, idx) => {
+                if (idx + 1 === currentStep) item.classList.add('active');
+                else item.classList.remove('active');
+            });
+
+            // Update content
+            document.querySelectorAll('.step-content').forEach((content, idx) => {
+                if (idx + 1 === currentStep) content.classList.add('active');
+                else content.classList.remove('active');
+            });
+
+            // Update footer
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const stepNumDisplay = document.getElementById('step-num-display');
+
+            stepNumDisplay.innerText = currentStep;
+
+            if (currentStep === 1) prevBtn.style.visibility = 'hidden';
+            else prevBtn.style.visibility = 'visible';
+
+            if (currentStep === 3) nextBtn.innerText = 'Zakończ i Eksportuj';
+            else nextBtn.innerText = 'Dalej ➔';
+        }
+
+        function nextStep() {
+            if (currentStep < 3) {
+                currentStep++;
+                updateUI();
+            } else {
+                alert("Konfiguracja zakończona! Przesyłam zestawienie na Twój e-mail.");
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateUI();
+            }
+        }
+
+        function selectItem(card) {
+            // Find sibling cards and remove selection
+            card.parentNode.querySelectorAll('.config-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+
+            // Update preview text (mockup)
+            const title = card.querySelector('h4').innerText;
+            document.getElementById('current-selection').innerText = title;
+
+            // Animacja zmiany
+            const preview = document.getElementById('preview-text');
+            preview.style.animation = 'none';
+            preview.offsetHeight; // trigger reflow
+            preview.style.animation = 'fadeIn 0.5s ease-out forwards';
+        }
+    </script>
+</body>
+
+</html>
