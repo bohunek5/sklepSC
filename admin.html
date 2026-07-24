@@ -1,0 +1,2744 @@
+<!DOCTYPE html>
+
+<html lang="pl">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Prescot LED - Panel Administratora</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Phosphor Icons -->
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<style>
+    :root {
+      --sidebar-bg: #1c2434;
+      --sidebar-text: #8a99af;
+      --sidebar-hover-bg: #333a48;
+      --sidebar-active-text: #ffffff;
+      --header-bg: #ffffff;
+      --body-bg: #f1f5f9;
+      --card-bg: #ffffff;
+      --text-main: #64748b;
+      --text-heading: #1e293b;
+      --primary: #3c50e0;
+      --primary-hover: #303f9f;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --border: #e2e8f0;
+      --orange: #ff5a00; /* Prescot Orange */
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--body-bg);
+      color: var(--text-main);
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Outfit', sans-serif;
+      color: var(--text-heading);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      background-color: var(--sidebar-bg);
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+
+    .sidebar-header {
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sidebar-logo {
+      color: white;
+      font-size: 24px;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sidebar-logo span { color: var(--orange); }
+
+    .sidebar-menu {
+      flex: 1;
+      padding: 16px 0;
+      overflow-y: auto;
+    }
+
+    .menu-group { margin-bottom: 24px; }
+    .menu-title {
+      padding: 0 32px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .menu-item {
+      padding: 10px 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--sidebar-text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .menu-item:hover, .menu-item.active {
+      background-color: var(--sidebar-hover-bg);
+      color: var(--sidebar-active-text);
+    }
+
+    .menu-item i { font-size: 20px; }
+    
+    .menu-badge {
+      margin-left: auto;
+      background: var(--primary);
+      color: white;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-weight: 700;
+    }
+
+    /* Main Content */
+    .main-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Header */
+    .header {
+      height: 80px;
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .header-search {
+      display: flex;
+      align-items: center;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 16px;
+      width: 300px;
+    }
+
+    .header-search input {
+      border: none;
+      background: transparent;
+      outline: none;
+      padding-left: 10px;
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .header-user {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .user-avatar {
+      
+      
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .user-info { display: flex; flex-direction: column; }
+    .user-name { font-weight: 600; color: var(--text-heading); font-size: 14px; }
+    .user-role { font-size: 12px; color: var(--text-main); }
+
+    /* Content Area */
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 32px;
+    }
+
+    .page-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 6px;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-heading); }
+    .btn-outline:hover { background: #f8fafc; }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .stat-icon {
+      width: 56px;
+      height: 56px;
+      
+      background: #eff6ff;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .stat-info h4 { font-size: 14px; color: var(--text-main); font-weight: 500; font-family: 'Inter', sans-serif; margin-bottom: 4px; }
+    .stat-info .value { font-size: 24px; font-weight: 700; color: var(--text-heading); }
+    .stat-info .trend { font-size: 12px; margin-top: 4px; display: inline-flex; align-items: center; gap: 4px; }
+    .trend.up { color: var(--success); }
+    .trend.down { color: var(--danger); }
+
+    /* Tables */
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+
+    .card-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-title { font-size: 18px; font-weight: 600; }
+
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 16px 24px; text-align: left; }
+    th {
+      background: #f8fafc;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--text-heading);
+      vertical-align: middle;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f8fafc; }
+
+    .status {
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 600;
+      display: block;
+    }
+    .status.pending { background: #fef3c7; color: #d97706; }
+    .status.processing { background: #e0e7ff; color: #4f46e5; }
+    .status.completed { background: #d1fae5; color: #059669; }
+    .status.cancelled { background: #fee2e2; color: #dc2626; }
+
+    .product-cell { display: flex; align-items: center; gap: 12px; }
+    .product-img { width: 40px; height: 40px; border-radius: 6px; object-fit: cover; border: 1px solid var(--border); }
+    .product-name { font-weight: 500; color: var(--text-heading); margin-bottom: 2px; }
+    .product-sku { font-size: 12px; color: var(--text-main); }
+
+    .action-btn {
+      background: none;
+      border: none;
+      color: var(--text-main);
+      cursor: pointer;
+      padding: 4px;
+      font-size: 18px;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .action-btn:hover { background: #f1f5f9; color: var(--primary); }
+
+    /* Modals */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5); z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden; transition: all 0.3s;
+      backdrop-filter: blur(4px);
+    }
+    .modal-overlay.active { opacity: 1; visibility: visible; }
+    
+    .modal {
+      background: white; border-radius: 12px; width: 800px; max-width: 90%;
+      max-height: 90vh; overflow-y: auto;
+      transform: translateY(20px); transition: all 0.3s;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    .modal-overlay.active .modal { transform: translateY(0); }
+    
+    .modal-header { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: white; z-index: 10; }
+    .modal-body { padding: 24px; }
+    .modal-footer { padding: 20px 24px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 12px; position: sticky; bottom: 0; background: white; z-index: 10;}
+    
+    .form-group { margin-bottom: 20px; }
+    .form-label { display: block; font-weight: 500; font-size: 14px; margin-bottom: 8px; color: var(--text-heading); }
+    .form-control { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 6px; font-family: 'Inter', sans-serif; font-size: 14px; color: var(--text-heading); outline: none; transition: border-color 0.2s; }
+    .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(60, 80, 224, 0.1); }
+    textarea.form-control { resize: vertical; min-height: 100px; }
+    
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+    /* Media Uploader */
+    .media-uploader {
+      border: 2px dashed var(--border);
+      border-radius: 8px;
+      padding: 30px;
+      text-align: center;
+      background: #f8fafc;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .media-uploader:hover { border-color: var(--primary); background: #f1f5f9; }
+    .media-uploader i { font-size: 32px; color: var(--text-main); margin-bottom: 10px; }
+    .media-preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 12px; margin-top: 16px; }
+    .media-item { position: relative; border-radius: 6px; overflow: hidden; border: 1px solid var(--border); aspect-ratio: 1; }
+    .media-item img { width: 100%; height: 100%; object-fit: cover; }
+    .media-item .remove-btn { position: absolute; top: 4px; right: 4px; background: rgba(0,0,0,0.5); color: white; border: none;  width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px; }
+
+    /* Switch Tabs in Content */
+    .view-section { display: none; }
+    .view-section.active { display: block; }
+      /* Concave Active States */
+    .mockup-nav ul li a:active,
+    .mega-menu-col ul li a:active,
+    .mockup-action-icon:active,
+    .mockup-search-container button:active,
+    .btn:active,
+    .filter-toggle-btn:active {
+      transform: scale(0.95) !important;
+      box-shadow: inset 0 3px 5px rgba(0,0,0,0.1) !important;
+      transition: all 0.1s ease !important;
+    }
+
+    /* Pressed effect for buttons and links */
+    .add-to-cart-btn:active, .buy-it-now-btn:active, .action-btn:active, .nav-links a:active, .mega-menu-col ul li a:active, .btn:active, .pagination-btn:active, .action-btn-circle:active {
+      transform: scale(0.96) translateY(2px);
+      box-shadow: inset 0 3px 5px rgba(0,0,0,0.2);
+    }
+    
+
+    
+    
+    
+    /* MAGIC DROPDOWN - DESKTOP */
+    .has-mega-menu {
+      position: relative;
+    }
+    .has-mega-menu > a {
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    .has-mega-menu:hover > a {
+      color: var(--accent-color);
+      text-shadow: 0 0 10px rgba(255, 170, 0, 0.2);
+    }
+    
+    .magic-dropdown {
+      position: absolute;
+      top: 100%; /* Removed gap to prevent hover loss */
+      left: 50%;
+      transform: translateX(-50%) perspective(1000px) rotateX(-10deg) scale(0.95);
+      background: rgba(255, 255, 255, 0.9); /* Premium white glassmorphism */
+      backdrop-filter: blur(30px) saturate(200%);
+      -webkit-backdrop-filter: blur(30px) saturate(200%);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.1), 0 0 0 1px rgba(255,255,255,0.6) inset;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      width: 600px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+      padding: 25px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      pointer-events: none;
+    }
+    
+    /* Magical animated glowing border inside */
+    .magic-dropdown::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 100%;
+      background: radial-gradient(circle 800px at var(--mouse-x, 50%) var(--mouse-y, 0%), rgba(255, 170, 0, 0.1), transparent 40%);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .has-mega-menu:hover .magic-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) perspective(1000px) rotateX(0deg) scale(1);
+      pointer-events: auto;
+    }
+    .has-mega-menu:hover .magic-dropdown::before {
+      opacity: 1;
+    }
+
+    .magic-dropdown-section {
+      position: relative;
+    }
+    .magic-dropdown-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(0, 0, 0, 0.4);
+      font-weight: 700;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      transform: translateY(10px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+    }
+    .has-mega-menu:hover .magic-dropdown-title {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .magic-dropdown ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .magic-dropdown ul li {
+      transform: translateY(15px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    /* Staggered animation */
+    .has-mega-menu:hover .magic-dropdown ul li:nth-child(1) { transition-delay: 0.15s; transform: translateY(0); opacity: 1; }
+    .has-mega-menu:hover .magic-dropdown ul li:nth-child(2) { transition-delay: 0.2s; transform: translateY(0); opacity: 1; }
+    .has-mega-menu:hover .magic-dropdown ul li:nth-child(3) { transition-delay: 0.25s; transform: translateY(0); opacity: 1; }
+    .has-mega-menu:hover .magic-dropdown ul li:nth-child(4) { transition-delay: 0.3s; transform: translateY(0); opacity: 1; }
+
+    .magic-dropdown ul li a {
+      color: var(--primary-color) !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+      text-decoration: none !important;
+      transition: all 0.3s ease !important;
+      display: flex !important;
+      align-items: center !important;
+      padding: 12px 15px !important;
+      background: transparent !important;
+      border-radius: 12px !important;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .magic-dropdown ul li a i {
+      margin-right: 12px;
+      font-size: 18px;
+      color: var(--accent-color);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .magic-dropdown ul li a::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0,0,0,0.02), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.5s ease;
+      z-index: -1;
+    }
+
+    .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.04) !important;
+      color: var(--accent-color) !important;
+      transform: translateX(5px) !important;
+    }
+    
+    .magic-dropdown ul li a:hover i {
+      transform: scale(1.2) rotate(-5deg);
+    }
+    
+    .magic-dropdown ul li a:hover::after {
+      transform: translateX(100%);
+    }
+
+    /* MOBILE BOTTOM NAV CSS */
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.90);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(0,0,0,0.05);
+      z-index: 9999;
+      padding-bottom: env(safe-area-inset-bottom); /* For iPhones */
+    }
+    .mobile-nav-items {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      height: 65px;
+      padding: 0 5px 8px 5px;
+    }
+    .mobile-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      text-decoration: none;
+      color: #777;
+      flex: 1;
+      height: 100%;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .mobile-nav-item i {
+      font-size: 22px;
+      margin-bottom: 4px;
+      
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      z-index: 3;
+    }
+    .mobile-nav-item span {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: color 0.3s ease;
+    }
+    
+    /* Active State */
+    .mobile-nav-item.active {
+      color: #001f3f;
+    }
+    .mobile-nav-item.active i {
+      color: #001f3f;
+    }
+    
+    @keyframes rotateBorderNav {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Magic ripple on click */
+    .mobile-nav-item:active i {
+      transform: scale(0.9);
+    }
+
+    @media (max-width: 768px) {
+      .mobile-bottom-nav {
+        display: block;
+      }
+      .mockup-footer {
+        margin-bottom: 40px; /* Space for bottom nav */
+      }
+      /* Keep top logo and icons visible, but we might hide the hamburger if everything is in bottom nav. Let's keep hamburger for complex menus if needed, but the user said "na dole menu kategorie". */
+      .menu-toggle {
+        display: none !important; /* Hide hamburger as we have bottom nav */
+      }
+      
+      .mockup-header-logo img {
+        height: 28px !important;
+        width: auto !important;
+        object-fit: contain !important;
+        max-width: 120px !important;
+      }
+      .mockup-action-icon {
+        width: 36px !important;
+        height: 32px !important;
+      }
+      .mockup-action-icon svg {
+        width: 16px !important;
+        height: 16px !important;
+      }
+    
+    }
+
+
+
+    /* Concave Active States */
+    .mockup-nav ul li a:active,
+    .mega-menu-col ul li a:active,
+    .mockup-action-icon:active,
+    .mockup-search-container button:active,
+    .btn:active,
+    .filter-toggle-btn:active {
+      transform: scale(0.95) !important;
+      box-shadow: inset 0 3px 5px rgba(0,0,0,0.1) !important;
+      transition: all 0.1s ease !important;
+    }
+
+    /* Pressed effect for buttons and links */
+    .add-to-cart-btn:active, .buy-it-now-btn:active, .action-btn:active, .nav-links a:active, .mega-menu-col ul li a:active, .btn:active, .pagination-btn:active, .action-btn-circle:active {
+      transform: scale(0.96) translateY(2px);
+      box-shadow: inset 0 3px 5px rgba(0,0,0,0.2);
+    }
+    
+
+    @keyframes arrow-bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+    .scroll-down-arrow:hover { opacity: 1 !important; }
+    .scroll-down-arrow .arrow-bounce { animation: arrow-bounce 2s infinite; }
+
+    /* Apple style dropdown */
+    .mockup-nav .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      padding: 8px 0;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0,0,0,0.05);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px) scale(0.95);
+      transform-origin: top left;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 100;
+    }
+    .mockup-nav .has-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(10px) scale(1);
+    }
+    .mockup-nav .dropdown-menu li {
+      list-style: none;
+    }
+    .mockup-nav .dropdown-menu a {
+      color: var(--primary-color) !important;
+      padding: 10px 20px;
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s;
+    }
+    .mockup-nav .dropdown-menu a:hover {
+      background: rgba(0, 0, 0, 0.05);
+      color: var(--accent-color) !important;
+    }
+
+  
+    .hero-btn-glass:hover {
+      background: rgba(255, 255, 255, 0.6) !important;
+      color: var(--primary-color) !important;
+      font-weight: 700 !important;
+      border-color: rgba(255, 255, 255, 0.8) !important;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+      transform: translateY(-2px);
+    }
+
+        /* Premium floating bubble mega menu on PC */
+    @media (min-width: 769px) {
+      .mockup-nav .magic-dropdown {
+        position: absolute;
+        top: calc(100% + 15px) !important; /* dymek z odstepem */
+        left: 50% !important;
+        transform: translateX(-50%) translateY(15px) !important;
+        background: #ffffff !important; /* white block like filter widget */
+        backdrop-filter: blur(20px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.08) !important;
+        border-radius: 24px !important; /* more rounded border */
+        border: 1px solid rgba(0, 0, 0, 0.08) !important; /* light border */
+        width: 900px !important;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        z-index: 1000 !important;
+        padding: 40px !important;
+        overflow: visible !important;
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 30px !important;
+        pointer-events: none;
+      }
+      
+      /* Pointer Arrow at the top of the bubble */
+      .mockup-nav .magic-dropdown::before {
+        content: '' !important;
+        position: absolute !important;
+        bottom: 100% !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 0 !important;
+        height: 0 !important;
+        border-left: 10px solid transparent !important;
+        border-right: 10px solid transparent !important;
+        border-bottom: 10px solid #ffffff !important;
+        pointer-events: none !important;
+        z-index: 1001 !important;
+      }
+      
+      /* Invisible hover bridge */
+      .mockup-nav .magic-dropdown::after {
+        content: '' !important;
+        position: absolute !important;
+        bottom: 100% !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 20px !important;
+        background: transparent !important;
+      }
+      
+      .mockup-nav .magic-dropdown-section {
+        border-right: none !important;
+        border-left: none !important;
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+        grid-column: auto !important;
+        grid-row: auto !important;
+      }
+      
+      .mockup-nav .magic-dropdown-section:not(:last-child) {
+        border-right: 1px solid #eee !important;
+        padding-right: 20px !important;
+      }
+      
+      .mockup-nav .magic-dropdown-title {
+        font-family: 'Outfit', sans-serif !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1.5px !important;
+        color: var(--primary-color) !important;
+        margin-bottom: 20px !important;
+        padding-bottom: 10px !important;
+        border-bottom: 1px solid #eee !important;
+        transform: none !important;
+      }
+      
+      .mockup-nav .magic-dropdown ul {
+        list-style: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      
+      .mockup-nav .magic-dropdown ul li {
+        margin-bottom: 12px !important;
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      
+      .mockup-nav .magic-dropdown ul li a {
+        font-size: 14px !important;
+        color: #666 !important;
+        text-decoration: none !important;
+        font-weight: normal !important;
+        transition: color 0.2s ease !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0 !important;
+      }
+      
+      .mockup-nav .magic-dropdown ul li a:hover {
+        color: var(--accent-color) !important;
+        font-weight: 600 !important;
+        background: transparent !important;
+      }
+      
+      /* Color dots in mega menu */
+      .mega-color-dots {
+        display: flex !important;
+        gap: 10px !important;
+        flex-wrap: wrap !important;
+        margin-top: 15px !important;
+      }
+      .mega-color-dot {
+        width: 24px !important;
+        height: 24px !important;
+        border-radius: 50% !important;
+        border: 1px solid #ddd !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+      }
+      .mega-color-dot:hover {
+        transform: scale(1.15) !important;
+        outline: 1.5px solid var(--primary-color) !important;
+        outline-offset: 2px !important;
+      }
+      
+      /* Search Input inside mega menu */
+      .mega-search-input {
+        width: 100% !important;
+        padding: 12px 15px !important;
+        border: 1px solid #ddd !important;
+        border-radius: 8px !important;
+        font-size: 14px !important;
+        outline: none !important;
+        transition: border-color 0.2s ease !important;
+        margin-top: 15px !important;
+        font-family: inherit !important;
+      }
+      .mega-search-input:focus {
+        border-color: var(--primary-color) !important;
+      }
+    }
+
+    /* Search bar scrolled states - turns dark navy when header is scrolled */
+    .mockup-header.scrolled .mockup-search-container {
+      background: rgba(0, 0, 0, 0.04) !important;
+      border-color: #0b1a30 !important;
+    }
+    .mockup-header.scrolled .mockup-search-container input {
+      color: #0b1a30 !important;
+    }
+    .mockup-header.scrolled .mockup-search-container input::placeholder {
+      color: rgba(11, 26, 48, 0.6) !important;
+      opacity: 1 !important;
+    }
+    .mockup-header.scrolled .mockup-search-container button svg {
+      stroke: #0b1a30 !important;
+    }
+
+    /* --- GLOBAL STYLING ALIGNMENTS (BUTTONS, PRICES, CARDS) --- */
+    /* Search Input Thicker Font and Autofill Reset */
+    .mockup-search-container input {
+      font-weight: 700 !important;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+      -webkit-text-fill-color: #0b1a30 !important;
+      transition: background-color 5000s ease-in-out 0s !important;
+    }
+
+    .mockup-product-card {
+      background: var(--white) !important;
+      position: relative !important;
+      cursor: pointer !important;
+      border-radius: 12px !important;
+      overflow: hidden !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
+      transition: all 0.3s ease !important;
+      border: 1px solid rgba(0, 0, 0, 0.02) !important;
+      padding: 15px !important;
+      text-align: center !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 10px !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    .mockup-product-card:hover {
+      transform: translateY(-6px) !important;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.09) !important;
+      border-color: transparent !important;
+    }
+    .mockup-product-media {
+      position: relative !important;
+      width: 100% !important;
+      aspect-ratio: 1 / 1 !important;
+      height: auto !important;
+      overflow: hidden !important;
+      background-color: var(--light-bg) !important;
+      border-radius: 8px !important;
+      padding: 0 !important;
+      margin-bottom: 5px !important;
+    }
+    .mockup-product-img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      transition: all 0.3s ease !important;
+    }
+    .mockup-product-card:hover .mockup-product-img {
+      transform: scale(1.05) !important;
+    }
+    .mockup-product-info {
+      padding: 10px 0 0 !important;
+      text-align: center !important;
+      width: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+    }
+    .mockup-product-category {
+      font-size: 11px !important;
+      color: #999 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 1px !important;
+      margin-bottom: 5px !important;
+    }
+    .mockup-product-title {
+      font-size: 16px !important;
+      margin-bottom: 8px !important;
+      font-weight: 500 !important;
+      transition: all 0.3s ease !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      width: 100% !important;
+    }
+    .mockup-product-title a {
+      text-decoration: none !important;
+      color: var(--primary-color) !important;
+    }
+    .mockup-product-card:hover .mockup-product-title a {
+      color: var(--accent-color) !important;
+    }
+    
+    /* Price badge style */
+    .mockup-product-price {
+      font-size: 15px !important;
+      font-weight: 700 !important;
+      color: var(--primary-color) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      padding: 6px 14px !important;
+      border-radius: 20px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 4px !important;
+      margin: 8px auto 14px auto !important;
+      width: max-content !important;
+    }
+    .mockup-product-price span.price-unit {
+      font-size: 12px !important;
+      font-weight: 500 !important;
+      color: #777 !important;
+      margin-left: 2px !important;
+    }
+    
+    /* Global CTA/Cart/Order Buttons overrides */
+    .mockup-btn, 
+    .add-to-cart-btn, 
+    .checkout-btn, 
+    .submit-order-btn {
+      background: var(--primary-color) !important;
+      color: var(--white) !important;
+      border: 2px solid var(--primary-color) !important;
+      border-radius: 99px !important;
+      padding: 14px 36px !important;
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      letter-spacing: 1px !important;
+      text-transform: uppercase !important;
+      cursor: pointer !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      transition: all 0.3s ease !important;
+      box-shadow: 0 4px 15px rgba(11,26,48,0.15) !important;
+      text-decoration: none !important;
+    }
+    
+    .mockup-btn:hover, 
+    .add-to-cart-btn:hover, 
+    .checkout-btn:hover, 
+    .submit-order-btn:hover,
+    .mockup-btn:active, 
+    .add-to-cart-btn:active, 
+    .checkout-btn:active, 
+    .submit-order-btn:active {
+      background: #ffffff !important;
+      color: var(--primary-color) !important;
+      border-color: var(--primary-color) !important;
+      box-shadow: 0 6px 20px rgba(11,26,48,0.1) !important;
+    }
+    
+    .mockup-btn:hover .btn-txt-default,
+    .mockup-btn:hover .btn-txt-hover {
+      color: var(--primary-color) !important;
+    }
+
+    /* --- END GLOBAL STYLING ALIGNMENTS */
+    /* --- LATEST FIXES --- */
+    /* Menu buttons less rounded */
+    .mockup-nav ul li a {
+      border-radius: 6px !important;
+    }
+    
+    /* Make top action icons perfectly round */
+    .mockup-action-icon {
+      border-radius: 50% !important;
+      background: rgba(255, 255, 255, 0.1) !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      width: 44px !important;
+      height: 44px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    .mockup-header.scrolled .mockup-action-icon {
+      background: rgba(0, 0, 0, 0.05) !important;
+      border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* Keep search bar input in header rounded but not the icons */
+    .mockup-search-container input {
+      border-radius: 20px !important;
+    }
+    .mockup-search-container button {
+      border-radius: 50% !important;
+    }
+
+    /* Main buttons not too rounded (reverting the 30px pill shape to a nice soft rectangle) */
+    .mockup-btn, 
+    .add-to-cart-btn, 
+    .checkout-btn, 
+    .submit-order-btn,
+    .qv-add-cart-btn,
+    .glass-banner-btn {
+      border-radius: 8px !important;
+    }
+
+    /* Ensure circles (scroll down, slider arrows) stay perfectly round */
+    .scroll-down-circle, .slider-arrow {
+      border-radius: 50% !important;
+    }
+
+    /* Bridge to prevent dropdown from disappearing too fast */
+    .magic-dropdown::after {
+      content: '';
+      position: absolute;
+      top: -30px;
+      left: 0;
+      right: 0;
+      height: 30px;
+      background: transparent;
+    }
+    
+    /* Dropdown width adjustment after removing a column */
+    .magic-dropdown {
+      min-width: 600px !important; /* Made it smaller since we removed a column */
+      grid-template-columns: repeat(3, 1fr) !important; /* Was 4, now 3 */
+    }
+    /* --- END LATEST FIXES --- */
+
+
+    /* --- MOBILE UI FIXES --- */
+    /* 1. Unify search bar: show header search on mobile */
+    @media (max-width: 1024px) {
+      /* Override the previous display: none */
+      .mockup-search-container {
+        display: flex !important;
+        width: auto !important;
+        margin: 0 10px !important;
+        flex: 1 !important;
+      }
+      .mockup-search-container input {
+        font-size: 13px !important;
+        padding: 8px 12px !important;
+        width: 100% !important;
+      }
+      .mockup-search-container button {
+        right: 4px !important;
+        width: 28px !important;
+        height: 28px !important;
+      }
+      /* Adjust header items to fit search */
+      .mockup-header-logo img {
+        height: 22px !important; /* Slightly smaller logo to fit search */
+      }
+      .mockup-actions {
+        gap: 8px !important;
+        flex: 1 !important;
+        justify-content: flex-end !important;
+      }
+      /* Hide some icons if needed to make space for search, or just make them smaller */
+      .mockup-action-icon {
+        width: 34px !important;
+        height: 34px !important;
+      }
+      .mockup-action-icon svg {
+        width: 16px !important;
+        height: 16px !important;
+      }
+      /* Smaller text on categories for mobile */
+      .mockup-category-card h3, .glass-cat-title {
+        font-size: 12px !important;
+      }
+      .mockup-category-card p, .glass-cat-subtitle {
+        font-size: 10px !important;
+      }
+    }
+
+    /* 2. Buy Now / Add to Cart smaller font */
+    .add-to-cart-btn, .buy-it-now-btn, .mockup-btn {
+      font-size: 12px !important;
+      padding: 8px 16px !important;
+    }
+
+    /* 3. Category Images Clearer (less dark overlay) */
+    .mockup-category-card::after {
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, transparent 50%) !important;
+    }
+    .mockup-category-card img {
+      opacity: 1 !important;
+      filter: brightness(0.9) !important;
+    }
+    .mockup-category-card:hover img {
+      filter: brightness(1.1) !important;
+    }
+    
+    /* FAQ Section Styles */
+    .faq-section {
+      padding: 80px 5%;
+      background: #fdfdfd;
+    }
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      transition: all 0.3s ease;
+    }
+    .faq-item:hover {
+      border-color: var(--primary-color);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+    }
+    .faq-question {
+      padding: 20px 25px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+      color: var(--primary-color);
+      font-size: 16px;
+    }
+    .faq-answer {
+      padding: 0 25px;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      color: #666;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .faq-item.active .faq-answer {
+      padding: 0 25px 25px;
+      max-height: 500px;
+    }
+    .faq-icon {
+      transition: transform 0.3s ease;
+    }
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+    }
+    /* --- END MOBILE UI FIXES --- */
+
+
+    /* Search Bar Subpage Colors & Mobile Shape */
+    .mockup-search-container input {
+      color: #0b1a30 !important;
+    }
+    .mockup-search-container input::placeholder {
+      color: rgba(11, 26, 48, 0.6) !important;
+    }
+    .mockup-search-container button svg {
+      stroke: #0b1a30 !important;
+    }
+
+    @media (max-width: 1024px) {
+      .mockup-search-container {
+        height: 32px !important;
+        border-radius: 16px !important;
+        background: rgba(0,0,0,0.05) !important;
+        border: 1px solid rgba(0,0,0,0.05) !important;
+        padding: 0 10px !important;
+      }
+      .mockup-search-container input {
+        height: 100% !important;
+        padding: 0 8px !important;
+      }
+      .mockup-search-container button {
+        height: 26px !important;
+        width: 26px !important;
+        right: 5px !important;
+        background: #0b1a30 !important;
+        border-radius: 50% !important;
+      }
+      .mockup-search-container button svg {
+        stroke: #ffffff !important; /* white icon inside the dark button */
+      }
+    }
+
+
+    /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a,
+    body .mockup-header.scrolled .magic-dropdown ul li a,
+    body .mockup-nav .magic-dropdown ul li a,
+    body .magic-dropdown ul li a {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: var(--primary-color) !important;
+      padding: 12px 15px !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+    
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a:hover,
+    body .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    body .mockup-nav .magic-dropdown ul li a:hover,
+    body .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--primary-color) !important;
+      transform: translateX(5px) !important;
+      border: none !important;
+    }
+
+    body .magic-dropdown {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      top: 100% !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    body .has-mega-menu:hover .magic-dropdown {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure regular links are properly colored */
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
+      color: var(--white) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    
+    body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+      color: var(--primary-color) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
+
+</style>
+<style>
+    /* Larger action buttons */
+    
+    .action-btn, .btn-icon, .admin-table button {
+      /* Base action btn */
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-heading);
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .btn-edit, .btn-delete, .btn-restore {
+      /* Override to make them bigger as requested */
+      width: auto !important;
+      padding: 8px 16px !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+      gap: 6px;
+    }
+    
+    .action-btn i, .btn-icon i, .admin-table button i {
+        font-size: 18px !important;
+    }
+    
+    .btn-edit { background: rgba(59, 130, 246, 0.1); color: #3b82f6; border: 1px solid #3b82f6; }
+    .btn-edit:hover { background: #3b82f6; color: white; }
+    
+    .btn-delete { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid #ef4444; }
+    .btn-delete:hover, .btn-delete:active, .btn-delete:focus { background: #ef4444 !important; color: white !important; }
+    
+    .btn-restore { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid #10b981; }
+    .btn-restore:hover { background: #10b981; color: white; }
+        /* Concave Active States */
+    .mockup-nav ul li a:active,
+    .mega-menu-col ul li a:active,
+    .mockup-action-icon:active,
+    .mockup-search-container button:active,
+    .btn:active,
+    .filter-toggle-btn:active {
+      transform: scale(0.95) !important;
+      box-shadow: inset 0 3px 5px rgba(0,0,0,0.1) !important;
+      transition: all 0.1s ease !important;
+    }
+
+    /* Pressed effect for buttons and links */
+    .add-to-cart-btn:active, .buy-it-now-btn:active, .action-btn:active, .nav-links a:active, .mega-menu-col ul li a:active, .btn:active, .pagination-btn:active, .action-btn-circle:active {
+      transform: scale(0.96) translateY(2px);
+      box-shadow: inset 0 3px 5px rgba(0,0,0,0.2);
+    }
+    
+
+    
+    
+    
+    /* MAGIC DROPDOWN - DESKTOP */
+    .has-mega-menu {
+      position: relative;
+    }
+    .has-mega-menu > a {
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    .has-mega-menu:hover > a {
+      color: var(--accent-color);
+      text-shadow: 0 0 10px rgba(255, 170, 0, 0.2);
+    }
+    
+    .magic-dropdown {
+      position: absolute;
+      top: 100%; /* Removed gap to prevent hover loss */
+      left: 50%;
+      transform: translateX(-50%) perspective(1000px) rotateX(-10deg) scale(0.95);
+      background: rgba(255, 255, 255, 0.9); /* Premium white glassmorphism */
+      backdrop-filter: blur(30px) saturate(200%);
+      -webkit-backdrop-filter: blur(30px) saturate(200%);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.1), 0 0 0 1px rgba(255,255,255,0.6) inset;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      width: 600px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+      padding: 25px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      pointer-events: none;
+    }
+    
+    /* Magical animated glowing border inside */
+    .magic-dropdown::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 100%;
+      background: radial-gradient(circle 800px at var(--mouse-x, 50%) var(--mouse-y, 0%), rgba(255, 170, 0, 0.1), transparent 40%);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .has-mega-menu:hover .magic-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) perspective(1000px) rotateX(0deg) scale(1);
+      pointer-events: auto;
+    }
+    .has-mega-menu:hover .magic-dropdown::before {
+      opacity: 1;
+    }
+
+    .magic-dropdown-section {
+      position: relative;
+    }
+    .magic-dropdown-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(0, 0, 0, 0.4);
+      font-weight: 700;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      transform: translateY(10px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+    }
+    .has-mega-menu:hover .magic-dropdown-title {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .magic-dropdown ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .magic-dropdown ul li {
+      transform: translateY(15px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    /* Staggered animation */
+    .has-mega-menu:hover .magic-dropdown ul li:nth-child(1) { transition-delay: 0.15s; transform: translateY(0); opacity: 1; }
+    .has-mega-menu:hover .magic-dropdown ul li:nth-child(2) { transition-delay: 0.2s; transform: translateY(0); opacity: 1; }
+    .has-mega-menu:hover .magic-dropdown ul li:nth-child(3) { transition-delay: 0.25s; transform: translateY(0); opacity: 1; }
+    .has-mega-menu:hover .magic-dropdown ul li:nth-child(4) { transition-delay: 0.3s; transform: translateY(0); opacity: 1; }
+
+    .magic-dropdown ul li a {
+      color: var(--primary-color) !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+      text-decoration: none !important;
+      transition: all 0.3s ease !important;
+      display: flex !important;
+      align-items: center !important;
+      padding: 12px 15px !important;
+      background: transparent !important;
+      border-radius: 12px !important;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .magic-dropdown ul li a i {
+      margin-right: 12px;
+      font-size: 18px;
+      color: var(--accent-color);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .magic-dropdown ul li a::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0,0,0,0.02), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.5s ease;
+      z-index: -1;
+    }
+
+    .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.04) !important;
+      color: var(--accent-color) !important;
+      transform: translateX(5px) !important;
+    }
+    
+    .magic-dropdown ul li a:hover i {
+      transform: scale(1.2) rotate(-5deg);
+    }
+    
+    .magic-dropdown ul li a:hover::after {
+      transform: translateX(100%);
+    }
+
+    /* MOBILE BOTTOM NAV CSS */
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.90);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(0,0,0,0.05);
+      z-index: 9999;
+      padding-bottom: env(safe-area-inset-bottom); /* For iPhones */
+    }
+    .mobile-nav-items {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 65px;
+      padding: 0 10px;
+    }
+    .mobile-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--primary-color);
+      flex: 1;
+      height: 100%;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .mobile-nav-item i {
+      font-size: 22px;
+      margin-bottom: 4px;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .mobile-nav-item span {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .mobile-nav-item.active {
+      color: var(--accent-color);
+      text-shadow: 0 0 8px rgba(255, 94, 0, 0.3);
+    }
+    .mobile-nav-item.active i {
+      transform: translateY(-2px);
+      filter: drop-shadow(0 0 8px rgba(255, 94, 0, 0.5));
+    }
+    /* Magic ripple on click */
+    .mobile-nav-item:active i {
+      transform: scale(0.8);
+    }
+
+    @media (max-width: 768px) {
+      .mobile-bottom-nav {
+        display: block;
+      }
+      .mockup-footer {
+        margin-bottom: 40px; /* Space for bottom nav */
+      }
+      /* Keep top logo and icons visible, but we might hide the hamburger if everything is in bottom nav. Let's keep hamburger for complex menus if needed, but the user said "na dole menu kategorie". */
+      .menu-toggle {
+        display: none !important; /* Hide hamburger as we have bottom nav */
+      }
+      
+      .mockup-header-logo img {
+        height: 28px !important;
+        width: auto !important;
+        object-fit: contain !important;
+        max-width: 120px !important;
+      }
+      .mockup-action-icon {
+        width: 36px !important;
+        height: 32px !important;
+      }
+      .mockup-action-icon svg {
+        width: 16px !important;
+        height: 16px !important;
+      }
+    
+    }
+
+
+    /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a,
+    body .mockup-header.scrolled .magic-dropdown ul li a,
+    body .mockup-nav .magic-dropdown ul li a,
+    body .magic-dropdown ul li a {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: var(--primary-color) !important;
+      padding: 12px 15px !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+    
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a:hover,
+    body .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    body .mockup-nav .magic-dropdown ul li a:hover,
+    body .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--primary-color) !important;
+      transform: translateX(5px) !important;
+      border: none !important;
+    }
+
+    body .magic-dropdown {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      top: 100% !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    body .has-mega-menu:hover .magic-dropdown {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure regular links are properly colored */
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
+      color: var(--white) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    
+    body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+      color: var(--primary-color) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
+
+</style>
+<style>
+    /* Make buttons fully rounded as requested */
+    .mockup-btn, 
+    .add-to-cart-btn, 
+    .checkout-btn, 
+    .submit-order-btn,
+    .qv-add-cart-btn,
+    .glass-banner-btn {
+      border-radius: 8px !important;
+    }
+    
+    /* Make slider arrows and scroll down circle perfectly round */
+    .scroll-down-circle,
+    .slider-arrow {
+      border-radius: 50% !important;
+    }
+    
+    /* Enable native smooth scrolling */
+    html {
+      scroll-behavior: smooth !important;
+    }
+  
+    /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a,
+    body .mockup-header.scrolled .magic-dropdown ul li a,
+    body .mockup-nav .magic-dropdown ul li a,
+    body .magic-dropdown ul li a {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: var(--primary-color) !important;
+      padding: 12px 15px !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+    
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a:hover,
+    body .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    body .mockup-nav .magic-dropdown ul li a:hover,
+    body .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--primary-color) !important;
+      transform: translateX(5px) !important;
+      border: none !important;
+    }
+
+    body .magic-dropdown {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      top: 100% !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    body .has-mega-menu:hover .magic-dropdown {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure regular links are properly colored */
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
+      color: var(--white) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    
+    body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+      color: var(--primary-color) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
+
+</style>
+<style>
+    @media (max-width: 768px) {
+      /* Fix sizes for buttons without changing colors */
+      .add-to-cart-btn, .buy-it-now-btn, .mockup-btn {
+        padding: 8px 16px !important;
+        font-size: 12px !important;
+        width: auto !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        white-space: normal !important;
+        text-align: center !important;
+        line-height: 1.2 !important;
+        border-radius: 8px !important;
+      }
+      .mockup-search-container button {
+        background: transparent !important;
+      }
+    }
+  
+    /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a,
+    body .mockup-header.scrolled .magic-dropdown ul li a,
+    body .mockup-nav .magic-dropdown ul li a,
+    body .magic-dropdown ul li a {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: var(--primary-color) !important;
+      padding: 12px 15px !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+    
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a:hover,
+    body .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    body .mockup-nav .magic-dropdown ul li a:hover,
+    body .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--primary-color) !important;
+      transform: translateX(5px) !important;
+      border: none !important;
+    }
+
+    body .magic-dropdown {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      top: 100% !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    body .has-mega-menu:hover .magic-dropdown {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure regular links are properly colored */
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
+      color: var(--white) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    
+    body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+      color: var(--primary-color) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
+
+</style>
+<style>
+    /* Dropdown item "ramki" style */
+    .magic-dropdown ul li a {
+      border-radius: 8px !important;
+      padding: 10px 16px !important;
+      margin-bottom: 6px !important;
+      background: rgba(0,0,0,0.02) !important;
+      border: 1px solid rgba(0,0,0,0.04) !important;
+      transition: all 0.3s ease !important;
+    }
+    .mockup-header:not(.scrolled) .magic-dropdown ul li a {
+      background: rgba(255,255,255,0.05) !important;
+      border: 1px solid rgba(255,255,255,0.1) !important;
+      color: rgba(255,255,255,0.9) !important;
+    }
+    .mockup-header:not(.scrolled) .magic-dropdown ul li a:hover {
+      background: rgba(255,255,255,0.15) !important;
+      border-color: rgba(255,255,255,0.3) !important;
+      transform: translateX(4px);
+    }
+    .mockup-header.scrolled .magic-dropdown ul li a:hover {
+      background: rgba(0,0,0,0.06) !important;
+      border-color: rgba(0,0,0,0.12) !important;
+      transform: translateX(4px);
+    }
+    /* Remove the > icon if it was visible, or keep it */
+    .magic-dropdown ul li a i {
+      display: none !important;
+    }
+    .magic-dropdown ul li {
+      border-top: none !important;
+    }
+    .magic-dropdown ul {
+      gap: 4px;
+    }
+  
+    /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a,
+    body .mockup-header.scrolled .magic-dropdown ul li a,
+    body .mockup-nav .magic-dropdown ul li a,
+    body .magic-dropdown ul li a {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: var(--primary-color) !important;
+      padding: 12px 15px !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+    
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a:hover,
+    body .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    body .mockup-nav .magic-dropdown ul li a:hover,
+    body .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--primary-color) !important;
+      transform: translateX(5px) !important;
+      border: none !important;
+    }
+
+    body .magic-dropdown {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      top: 100% !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    body .has-mega-menu:hover .magic-dropdown {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure regular links are properly colored */
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
+      color: var(--white) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    
+    body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+      color: var(--primary-color) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
+
+</style>
+<style>
+    @media (min-width: 1025px) {
+      /* Make top icons slightly larger */
+      .mockup-action-icon {
+        width: 48px !important;
+        height: 48px !important;
+      }
+      .mockup-action-icon i {
+        font-size: 22px !important;
+      }
+      
+      /* Top menu text slightly larger */
+      .mockup-nav ul li a {
+        font-size: 13px !important;
+        padding: 10px 24px !important;
+      }
+      
+      /* Logo slightly larger */
+      .mockup-header-logo img {
+        height: 38px !important;
+      }
+      
+      /* Slider arrows and scroll down slightly larger */
+      .slider-arrow, .scroll-down-circle {
+        width: 46px !important;
+        height: 46px !important;
+      }
+      .slider-arrow svg, .scroll-down-circle svg {
+        width: 20px !important;
+        height: 20px !important;
+      }
+      
+      /* Bottom banner (footer) slightly larger */
+      .mockup-footer {
+        padding: 60px 8% !important;
+      }
+      .mockup-footer h4 {
+        font-size: 15px !important;
+      }
+      .mockup-footer ul li a, .mockup-footer p {
+        font-size: 14px !important;
+      }
+    }
+  
+    /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a,
+    body .mockup-header.scrolled .magic-dropdown ul li a,
+    body .mockup-nav .magic-dropdown ul li a,
+    body .magic-dropdown ul li a {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: var(--primary-color) !important;
+      padding: 12px 15px !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+    
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a:hover,
+    body .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    body .mockup-nav .magic-dropdown ul li a:hover,
+    body .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--primary-color) !important;
+      transform: translateX(5px) !important;
+      border: none !important;
+    }
+
+    body .magic-dropdown {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      top: 100% !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    body .has-mega-menu:hover .magic-dropdown {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure regular links are properly colored */
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
+      color: var(--white) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    
+    body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+      color: var(--primary-color) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
+
+</style>
+<style>
+    /* FIX DROPDOWN TEXT COLOR - WHITE ON WHITE ISSUE */
+    .magic-dropdown {
+      background: rgba(255, 255, 255, 0.95) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      -webkit-backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+    }
+    .mockup-nav .magic-dropdown ul li a, 
+    .mockup-header.scrolled .magic-dropdown ul li a,
+    .magic-dropdown ul li a {
+      color: #1a1a1a !important; /* Dark text for visibility */
+      background: rgba(0,0,0,0.03) !important;
+      border: 1px solid rgba(0,0,0,0.05) !important;
+    }
+    .mockup-nav .magic-dropdown ul li a:hover, 
+    .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    .magic-dropdown ul li a:hover {
+      background: rgba(0,0,0,0.06) !important;
+      border-color: rgba(0,0,0,0.12) !important;
+      color: #ff5e00 !important; /* Orange text on hover */
+    }
+  
+    /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a,
+    body .mockup-header.scrolled .magic-dropdown ul li a,
+    body .mockup-nav .magic-dropdown ul li a,
+    body .magic-dropdown ul li a {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: var(--primary-color) !important;
+      padding: 12px 15px !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+    
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a:hover,
+    body .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    body .mockup-nav .magic-dropdown ul li a:hover,
+    body .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--primary-color) !important;
+      transform: translateX(5px) !important;
+      border: none !important;
+    }
+
+    body .magic-dropdown {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      top: 100% !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    body .has-mega-menu:hover .magic-dropdown {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure regular links are properly colored */
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
+      color: var(--white) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    
+    body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+      color: var(--primary-color) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
+
+</style>
+<style>
+    @keyframes kenBurns {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.15); }
+    }
+  
+    /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a,
+    body .mockup-header.scrolled .magic-dropdown ul li a,
+    body .mockup-nav .magic-dropdown ul li a,
+    body .magic-dropdown ul li a {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: var(--primary-color) !important;
+      padding: 12px 15px !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+    
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a:hover,
+    body .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    body .mockup-nav .magic-dropdown ul li a:hover,
+    body .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--primary-color) !important;
+      transform: translateX(5px) !important;
+      border: none !important;
+    }
+
+    body .magic-dropdown {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      top: 100% !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    body .has-mega-menu:hover .magic-dropdown {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure regular links are properly colored */
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
+      color: var(--white) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    
+    body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+      color: var(--primary-color) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
+
+</style>
+<style>
+/* Clean Search Bar Styling */
+.mockup-search-container {
+  display: flex !important;
+  align-items: center !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border-radius: 99px !important;
+  padding: 6px 16px !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.mockup-search-container:focus-within {
+  background: rgba(255, 255, 255, 0.22) !important;
+  border-color: rgba(255, 255, 255, 0.55) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.mockup-search-container input {
+  border: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  outline: none !important;
+  font-size: 13px !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  box-shadow: none !important;
+  letter-spacing: 0.3px !important;
+}
+
+.mockup-search-container input::placeholder {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  color: rgba(255, 255, 255, 0.75) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.75) !important;
+  opacity: 1 !important;
+  font-weight: 400 !important;
+}
+
+.mockup-search-container button {
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.mockup-search-container button svg {
+  stroke: #ffffff !important;
+  transition: stroke 0.3s ease !important;
+}
+
+/* Scrolled Header Search Bar State */
+.mockup-header.scrolled .mockup-search-container {
+  background: rgba(11, 26, 48, 0.05) !important;
+  border-color: rgba(11, 26, 48, 0.15) !important;
+}
+
+.mockup-header.scrolled .mockup-search-container:focus-within {
+  background: rgba(11, 26, 48, 0.08) !important;
+  border-color: rgba(11, 26, 48, 0.3) !important;
+}
+
+.mockup-header.scrolled .mockup-search-container input {
+  color: #0b1a30 !important;
+  -webkit-text-fill-color: #0b1a30 !important;
+}
+
+.mockup-header.scrolled .mockup-search-container input::placeholder {
+  color: rgba(11, 26, 48, 0.6) !important;
+  -webkit-text-fill-color: rgba(11, 26, 48, 0.6) !important;
+}
+
+.mockup-header.scrolled .mockup-search-container button svg {
+  stroke: #0b1a30 !important;
+}
+
+/* Autofill Overrides */
+.mockup-search-container input:-webkit-autofill,
+.mockup-search-container input:-webkit-autofill:hover, 
+.mockup-search-container input:-webkit-autofill:focus, 
+.mockup-search-container input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transition: background-color 50000s ease-in-out 0s !important;
+}
+
+.mockup-header.scrolled .mockup-search-container input:-webkit-autofill,
+.mockup-header.scrolled .mockup-search-container input:-webkit-autofill:hover, 
+.mockup-header.scrolled .mockup-search-container input:-webkit-autofill:focus, 
+.mockup-header.scrolled .mockup-search-container input:-webkit-autofill:active {
+  -webkit-text-fill-color: #0b1a30 !important;
+}
+</style>
+</head>
+<body>
+<!-- Sidebar -->
+<aside class="sidebar">
+<div class="sidebar-header">
+<a class="sidebar-logo" href="index.html">
+<img alt="Prescot LED Logo" src="images/logo-white.png" style="max-width: 100%; object-fit: contain; max-height: 40px; filter: drop-shadow(0 0 8px rgba(0,0,0,0.5));"/>
+</a>
+</div>
+<div class="sidebar-menu">
+<div class="menu-group">
+<div class="menu-title">Menu Główne</div>
+<a class="menu-item active" data-view="dashboard" href="#">
+<i class="ph ph-squares-four"></i>
+          Dashboard
+        </a>
+<a class="menu-item" data-view="orders" href="#">
+<i class="ph ph-shopping-cart"></i>
+          Zamówienia
+          <span class="menu-badge" id="order-badge">0</span>
+</a>
+<a class="menu-item" data-view="products" href="#">
+<i class="ph ph-package"></i>
+          Produkty
+        </a>
+<a class="menu-item" data-view="categories" href="#">
+<i class="ph ph-folders"></i>
+          Kategorie
+        </a>
+<a class="menu-item" data-view="trash" href="#" style="color: var(--danger);">
+<i class="ph ph-trash"></i>
+          Kosz
+        </a>
+</div>
+<div class="menu-group">
+<div class="menu-title">Narzędzia i Integracje</div>
+<a class="menu-item" data-view="stats" href="#">
+<i class="ph ph-chart-line-up"></i>
+          Statystyki
+        </a>
+<a class="menu-item" data-view="api" href="#">
+<i class="ph ph-plugs-connected"></i>
+          Połączenia API
+        </a>
+<a class="menu-item" data-view="marketplace" href="#">
+<i class="ph ph-storefront"></i>
+          Marketplace (Allegro/Erli)
+        </a>
+</div>
+<div class="menu-group">
+<div class="menu-title">Konfiguracja</div>
+<a class="menu-item" data-view="settings" href="#">
+<i class="ph ph-gear"></i>
+          Ustawienia Konta
+        </a>
+<a class="menu-item" href="index.html">
+<i class="ph ph-arrow-square-out"></i>
+          Wróć do sklepu
+        </a>
+</div>
+</div>
+<a class="menu-item" data-view="trash" href="#" style="color: var(--danger);">
+<i class="ph ph-trash"></i>
+          Kosz
+        </a>
+</aside>
+<!-- Main Content -->
+<main class="main-wrapper">
+<!-- Header -->
+<header class="mockup-header scrolled" id="mainHeader">
+<div class="mockup-header-logo">
+<a href="index.html"><img alt="Prescot Logo" id="headerLogo" src="images/logo-dark.png"/></a>
+</div>
+<nav class="mockup-nav">
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="shop.html">Sklep</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="about.html">O nas</a></li>
+<li><a href="contact.html">Kontakt</a></li>
+</ul>
+</nav>
+<div class="mockup-actions">
+<div class="mockup-search-container">
+<input id="headerSearchInput" placeholder="Czego szukasz..." type="text"/>
+<button aria-label="Szukaj" id="headerSearchBtn">
+<svg fill="none" height="18" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
+</button>
+</div>
+<button aria-label="Konto użytkownika" class="mockup-action-icon">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+</button>
+<a aria-label="Lista Życzeń" class="mockup-action-icon wishlist-trigger" href="#">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</a>
+<a aria-label="Koszyk" class="mockup-action-icon" href="cart.html" style="position: relative;">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
+<span class="cart-badge"></span>
+</a>
+<button class="menu-toggle" id="menuToggle">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg>
+</button>
+</div>
+</header>
+<!-- Content Area -->
+<div class="content">
+<!-- DASHBOARD VIEW -->
+<div class="view-section active" id="view-dashboard">
+<div class="page-title">
+          Dashboard
+          <button class="btn btn-outline"><i class="ph ph-download-simple"></i> Pobierz Raport</button>
+</div>
+<div class="stats-grid">
+<div class="stat-card">
+<div class="stat-icon"><i class="ph ph-currency-pln"></i></div>
+<div class="stat-info">
+<h4>Przychody (Dzisiaj)</h4>
+<div class="value">4 250,00 zł</div>
+<div class="trend up"><i class="ph ph-trend-up"></i> +12.5%</div>
+</div>
+</div>
+<div class="stat-card">
+<div class="stat-icon" style="background: #fef3c7; color: #d97706;"><i class="ph ph-shopping-cart"></i></div>
+<div class="stat-info">
+<h4>Nowe Zamówienia</h4>
+<div class="value" id="dash-new-orders">12</div>
+<div class="trend up"><i class="ph ph-trend-up"></i> +3.2%</div>
+</div>
+</div>
+<div class="stat-card">
+<div class="stat-icon" style="background: #fee2e2; color: #dc2626;"><i class="ph ph-users"></i></div>
+<div class="stat-info">
+<h4>Odwiedziny Sklepu</h4>
+<div class="value">1 042</div>
+<div class="trend down"><i class="ph ph-trend-down"></i> -1.8%</div>
+</div>
+</div>
+<div class="stat-card">
+<div class="stat-icon" style="background: #d1fae5; color: #059669;"><i class="ph ph-package"></i></div>
+<div class="stat-info">
+<h4>Produkty B2B</h4>
+<div class="value" id="dash-total-products">156</div>
+<div class="trend up"><i class="ph ph-trend-up"></i> +5 Nowych</div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header">
+<div class="card-title">Ostatnie Zamówienia B2B</div>
+<button class="btn btn-outline" onclick="switchView('orders')">Zobacz Wszystkie</button>
+</div>
+<table id="dash-orders-table">
+<thead>
+<tr>
+<th>ID Zamówienia</th>
+<th>Klient / Firma</th>
+<th>Data</th>
+<th>Kwota</th>
+<th>Status</th>
+<th>Akcje</th>
+</tr>
+</thead>
+<tbody>
+<!-- Populated by JS -->
+</tbody>
+</table>
+</div>
+</div>
+<!-- ORDERS VIEW -->
+<div class="view-section" id="view-orders">
+<div class="page-title">
+          Zamówienia B2B
+          <button class="btn btn-primary"><i class="ph ph-plus"></i> Nowe Zamówienie Ręczne</button>
+</div>
+<div class="card">
+<div class="card-header">
+<div class="header-search" style="width: 400px; border: 1px solid var(--border); background: white;">
+<i class="ph ph-magnifying-glass"></i>
+<input id="order-search" placeholder="Szukaj po ID, nazwie firmy lub e-mailu..." type="text">
+</input></div>
+</div>
+<table id="orders-table">
+<thead>
+<tr>
+<th>ID Zamówienia</th>
+<th>Klient / Firma</th>
+<th>Produkty</th>
+<th>Data</th>
+<th>Kwota</th>
+<th>Status</th>
+<th>Akcje</th>
+</tr>
+</thead>
+<tbody>
+<!-- Populated by JS -->
+</tbody>
+</table>
+</div>
+</div>
+<!-- PRODUCTS VIEW -->
+<div class="view-section" id="view-products">
+<div class="page-title">
+          Zarządzanie Produktami
+          <button class="btn btn-primary" onclick="openProductModal()"><i class="ph ph-plus"></i> Dodaj Produkt</button>
+</div>
+<div class="card">
+<div class="card-header">
+<div class="header-search" style="width: 400px; border: 1px solid var(--border); background: white;">
+<i class="ph ph-magnifying-glass"></i>
+<input id="product-search" placeholder="Szukaj po nazwie lub SKU..." type="text"/>
+</div>
+</div>
+<table id="products-table">
+<thead>
+<tr>
+<th>Produkt</th>
+<th>Kategoria</th>
+<th>Cena Netto</th>
+<th>Stan Magazynowy</th>
+<th>Media (3D/360/Vid)</th>
+<th>Status</th>
+<th>Akcje</th>
+</tr>
+</thead>
+<tbody>
+<!-- Populated by JS -->
+</tbody>
+</table>
+</div>
+</div>
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="product-modal">
+<div class="modal">
+<div class="modal-header">
+<h3 class="card-title" id="product-modal-title">Dodaj Nowy Produkt</h3>
+<button class="action-btn" onclick="closeProductModal()"><i class="ph ph-x"></i></button>
+</div>
+<div class="modal-body">
+<form id="product-form">
+<input id="prod-id" type="hidden"/>
+<div class="form-row">
+<div class="form-group">
+<label class="form-label">Nazwa Produktu</label>
+<input class="form-control" id="prod-name" placeholder="np. Profil Aluminiowy KOZEL" required="" type="text"/>
+</div>
+<div class="form-group">
+<label class="form-label">SKU / Kod Kreskowy</label>
+<input class="form-control" id="prod-sku" placeholder="np. PR-KOZ-001" required="" type="text"/>
+</div>
+</div>
+<div class="form-row">
+<div class="form-group">
+<label class="form-label">Kategoria</label>
+<select class="form-control" id="prod-category">
+<option value="Profile Aluminiowe LED">Profile Aluminiowe LED</option>
+<option value="Taśmy LED">Taśmy LED</option>
+<option value="Zasilacze LED">Zasilacze LED</option>
+<option value="Sterowniki LED">Sterowniki LED</option>
+</select>
+</div>
+<div class="form-group">
+<label class="form-label">Cena Netto (PLN)</label>
+<input class="form-control" id="prod-price" required="" step="0.01" type="number"/>
+</div>
+</div>
+<div class="form-group">
+<label class="form-label">Opis Produktu (synchronizowany ze stroną)</label>
+<textarea class="form-control" id="prod-desc" placeholder="Wprowadź szczegółowy opis produktu..."></textarea>
+</div>
+<div class="form-group" style="margin-top: 30px; border-top: 1px solid var(--border); padding-top: 20px;">
+<label class="form-label" style="font-size: 16px; color: var(--primary);">Media i Interaktywne Materiały</label>
+<p style="font-size: 12px; color: var(--text-main); margin-bottom: 15px;">Te materiały będą automatycznie dostępne na karcie produktu w sklepie.</p>
+<div class="form-row">
+<div class="form-group">
+<label class="form-label">Zdjęcie Główne (URL)</label>
+<input class="form-control" id="prod-img" placeholder="/images/products/example.jpg" type="text"/>
+</div>
+<div class="form-group">
+<label class="form-label">Link do Wideo (YouTube/MP4)</label>
+<input class="form-control" id="prod-video" placeholder="np. https://youtube.com/..." type="text"/>
+</div>
+</div>
+<div class="form-row">
+<div class="form-group">
+<label class="form-label">Model 3D (.glb / .gltf URL)</label>
+<input class="form-control" id="prod-3d" placeholder="URL do modelu 3D dla wizualizacji" type="text"/>
+</div>
+<div class="form-group">
+<label class="form-label">Widok 360° (URL lub folder z klatkami)</label>
+<input class="form-control" id="prod-360" placeholder="Ścieżka do zdjęć 360" type="text"/>
+</div>
+</div>
+<label class="form-label">Galeria Zdjęć (Kliknij, aby wgrać - Mockup)</label>
+<div class="media-uploader">
+<i class="ph ph-upload-simple"></i>
+<div>Przeciągnij zdjęcia lub kliknij, aby przeglądać</div>
+<div style="font-size: 12px; color: var(--text-main); margin-top: 5px;">PNG, JPG, WEBP do 5MB</div>
+</div>
+</div>
+</form>
+</div>
+<div class="modal-footer">
+<button class="btn btn-outline" onclick="closeProductModal()">Anuluj</button>
+<button class="btn btn-primary" onclick="saveProduct()">Zapisz Produkt</button>
+</div>
+</div>
+</div>
+</div>
+<section class="view-section" id="view-trash">
+<div class="page-title">
+    Kosz (Usunięte Produkty)
+    <div>
+<button class="btn btn-primary" onclick="emptyTrash()" style="background: var(--danger);"><i class="ph ph-warning"></i> Opróżnij Kosz</button>
+</div>
+</div>
+<div class="admin-table">
+<table id="trash-table">
+<thead>
+<tr>
+<th>Typ</th>
+<th>Produkt</th>
+<th>Data usunięcia</th>
+<th style="width: 250px;">Akcje</th>
+</tr>
+</thead>
+<tbody id="trash-list">
+<!-- Rendered by admin.js -->
+</tbody>
+</table>
+</div>
+</section>
+</main>
+<script src="js/products-data.js"></script>
+<script src="js/admin.js"></script>
+<!-- Mobile Bottom Navigation -->
+<nav class="mobile-bottom-nav">
+<div class="mobile-nav-items">
+<a class="mobile-nav-item active" href="index.html">
+<i class="ph ph-house"></i>
+<span>Home</span>
+</a>
+<a class="mobile-nav-item" href="javascript:void(0);" onclick="openMobileCategories();">
+<i class="ph ph-squares-four"></i>
+<span>Kategorie</span>
+</a>
+<a class="mobile-nav-item" href="blog.html">
+<i class="ph ph-article"></i>
+<span>Blog</span>
+</a>
+<a class="mobile-nav-item" href="about.html">
+<i class="ph ph-info"></i>
+<span>O nas</span>
+</a>
+<a class="mobile-nav-item" href="contact.html">
+<i class="ph ph-envelope-simple"></i>
+<span>Kontakt</span>
+</a>
+</div>
+</nav>
+  <script src="js/shared-popups.js"></script>
+  <script>
+      // Header Scroll Effect
+    const header = document.getElementById('mainHeader');
+    const headerLogo = document.getElementById('headerLogo');
+    const hasHero = document.querySelector('.page-hero, .mockup-hero-slider, .hero, .hero-section');
+    
+    if (!hasHero && header) {
+      header.classList.add('scrolled');
+      if (headerLogo) headerLogo.src = 'images/logo-dark.png';
+      header.classList.add('force-scrolled');
+    }
+    
+    window.addEventListener('scroll', () => {
+      if (!header) return;
+      if (header.classList.contains('force-scrolled')) return;
+      
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+        if (headerLogo) headerLogo.src = 'images/logo-dark.png';
+      } else {
+        header.classList.remove('scrolled');
+        if (headerLogo) headerLogo.src = 'images/logo-white.png';
+      }
+    });
+
+    initSharedPopups();
+</script>
+<style>
+    
+    @media (max-width: 768px) {
+      .add-to-cart-btn, .buy-it-now-btn, .mockup-btn {
+        background: var(--accent-color) !important;
+        color: var(--white) !important;
+        border: none !important;
+        font-weight: 600 !important;
+        padding: 6px 12px !important;
+        font-size: 11px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+    }
+    
+    
+    
+
+
+    
+
+
+    
+
+
+    /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a,
+    body .mockup-header.scrolled .magic-dropdown ul li a,
+    body .mockup-nav .magic-dropdown ul li a,
+    body .magic-dropdown ul li a {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: var(--primary-color) !important;
+      padding: 12px 15px !important;
+      border-radius: 8px !important;
+      transition: all 0.3s ease !important;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+    }
+    
+    body .mockup-header:not(.scrolled) .magic-dropdown ul li a:hover,
+    body .mockup-header.scrolled .magic-dropdown ul li a:hover,
+    body .mockup-nav .magic-dropdown ul li a:hover,
+    body .magic-dropdown ul li a:hover {
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: var(--primary-color) !important;
+      transform: translateX(5px) !important;
+      border: none !important;
+    }
+
+    body .magic-dropdown {
+      background: rgba(255, 255, 255, 0.98) !important;
+      backdrop-filter: blur(24px) saturate(150%) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      position: absolute !important;
+      top: 100% !important;
+      transition: all 0.3s ease !important;
+    }
+    
+    body .has-mega-menu:hover .magic-dropdown {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    
+    /* Ensure regular links are properly colored */
+    body .mockup-header:not(.scrolled) .mockup-nav > ul > li > a:not(.active) {
+      color: var(--white) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    
+    body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
+      color: var(--primary-color) !important;
+      background: rgba(0, 0, 0, 0.04) !important;
+      border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    }
+    /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
+
+</style>
+</body>
+</html>
