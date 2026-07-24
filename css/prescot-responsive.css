@@ -59,7 +59,7 @@ body .mobile-menu a.configurator-nav-link:not(.active) {
 }
 
 .mobile-nav-item.configurator-mobile-link i {
-  color: #ff5a00 !important;
+  color: #0b1a30 !important;
 }
 
 @media (min-width: 769px) and (max-width: 1320px) {
@@ -628,7 +628,7 @@ body .mobile-menu a.configurator-nav-link:not(.active) {
   }
 
   .mobile-nav-item.active::before {
-    background: #ff5a00;
+    background: #0b1a30;
   }
 
   .mobile-nav-item svg {
@@ -685,7 +685,7 @@ body .mobile-menu a.configurator-nav-link:not(.active) {
     gap: 18px;
     padding: 15px 18px;
     color: #fff;
-    border-bottom: 3px solid #ff5a00;
+    border-bottom: 3px solid #0b1a30;
     background: #0b1a30;
   }
 
@@ -794,7 +794,7 @@ body .mobile-menu a.configurator-nav-link:not(.active) {
   }
 
   .mobile-category-list small {
-    color: #ff5a00;
+    color: #0b1a30;
     font-size: 7px;
     font-style: normal;
     font-weight: 800;
@@ -820,7 +820,7 @@ body .mobile-menu a.configurator-nav-link:not(.active) {
 
   .mobile-category-list>a>b {
     padding-right: 11px;
-    color: #ff5a00;
+    color: #0b1a30;
     font-size: 18px;
     font-weight: 500;
   }
@@ -902,7 +902,7 @@ body .mobile-menu a.configurator-nav-link:not(.active) {
     margin-top: 16px;
     padding: 16px;
     color: #fff;
-    border-left: 4px solid #ff5a00;
+    border-left: 4px solid #0b1a30;
     background: #0b1a30;
     text-decoration: none;
   }

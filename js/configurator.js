@@ -1,32 +1,3 @@
-
-window.triggerConfiguratorInquiry = function(paramName, paramVal) {
-  const locNames = { kitchen: 'Kuchnia & Blat', living: 'Salon, sufit i wnęka', stairs: 'Schody i komunikacja', bathroom: 'Łazienka i strefa wilgotna', outdoor: 'Elewacja, taras i ogród', commercial: 'Ekspozycja i długie ciągi' };
-  const lightNames = { '3000K': 'Ciepła 3000K (COB)', '4000K': 'Neutralna 4000K', '6500K': 'Zimna 6500K', 'RGB': 'RGB Multikolor', warm: 'Ciepła 3000K', neutral: 'Neutralna 4000K', cold: 'Zimna 6500K', cct: 'CCT Dual White', rgbw: 'RGBW Multikolor' };
-  const controlNames = { 'touch-remote': 'Pilot dotykowy RF Prescot', 'wall-panel': 'Panel ścienny Prescot', 'smart-wifi': 'Smart WiFi (Tuya/App)', switch: 'Przełącznik ON/OFF', dimmer: 'Ściemniacz', smart: 'Smart WiFi' };
-  const envNames = { dry: 'IP20 (sucho)', damp: 'IP63+ (wilgoć)', outdoor: 'IP65/IP67 (zewnętrzne)' };
-
-  let loc = (typeof state !== 'undefined' && (state.location || state.application)) ? (locNames[state.location || state.application] || state.location || state.application) : 'Standardowe';
-  let len = (typeof state !== 'undefined' && (state.lengthMeters || state.length)) ? (state.lengthMeters || state.length) + ' m' : '5 m';
-  let light = (typeof state !== 'undefined' && (state.colorTemp || state.light)) ? (lightNames[state.colorTemp || state.light] || state.colorTemp || state.light) : 'Biała';
-  let ctrl = (typeof state !== 'undefined' && (state.controlType || state.control)) ? (controlNames[state.controlType || state.control] || state.controlType || state.control) : 'Pilot RF';
-  let env = (typeof state !== 'undefined' && (state.ipRating || state.environment)) ? (envNames[state.ipRating || state.environment] || state.ipRating || state.environment) : 'IP20';
-
-  let presetMessage = `Dzień dobry,\n\nProszę o przygotowanie wyceny indywidualnej dla taśmy LED i zasilacza o preferowanych parametrach:\n` +
-    `• Przeznaczenie / miejsce: ${loc}\n` +
-    `• Szacowana długość: ${len}\n` +
-    `• Barwa światła / technologia: ${light}\n` +
-    `• Klasa szczelności: ${env}\n` +
-    `• Sposób sterowania: ${ctrl}\n` +
-    (paramName ? `• Wybrany parametr: ${paramName} (${paramVal})\n` : '') +
-    `\nProszę o kontakt w sprawie doradztwa i dopasowania wariantu z oferty Prescot.`;
-
-  if (typeof window.openInquiryModal === 'function') {
-    window.openInquiryModal(presetMessage);
-  } else {
-    alert("Dziękujemy za zainteresowanie. Otwórz formularz zapytania lub skontaktuj się z nami.");
-  }
-};
-
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('configuratorForm');
   if (!form) return;
@@ -79,104 +50,39 @@ document.addEventListener('DOMContentLoaded', () => {
   let tapes = [];
   let selectedResult = null;
 
-  const normalize = (value) => String(value ?? '')
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase();
+  const normalize = ConfiguratorCore.normalize;
 
-  const productText = (product) => normalize([
-    product.title,
-    product.original_category,
-    ...Object.entries(product.attributes || {}).flat()
-  ].join(' '));
+  const productText = ConfiguratorCore.productText;
 
-  const stockNumber = (product) => Number.parseFloat(String(product.stock ?? '0').replace(',', '.')) || 0;
-  const firstNumber = (text, expression) => {
-    const match = text.match(expression);
-    return match ? Number.parseFloat(match[1].replace(',', '.')) : null;
-  };
-  const productVoltage = (product) => firstNumber(productText(product), /(?:^|\s|\|)(12|24|48)\s*v(?:dc)?(?:\s|\||$)/i);
-  const productPower = (product) => firstNumber(productText(product), /(\d+(?:[.,]\d+)?)\s*w\s*\/\s*m/i);
-  const productLumens = (product) => firstNumber(productText(product), /(\d+(?:[.,]\d+)?)\s*lm\s*\/\s*m/i);
-  const productIp = (product) => firstNumber(productText(product), /ip\s*(20|63|65|67|68)/i) || 20;
-  const productCri = (product) => firstNumber(productText(product), /cri\s*(\d{2,3})/i);
-  const productWidth = (product) => firstNumber(productText(product), /(\d+(?:[.,]\d+)?)\s*mm/i);
-  const productTechnology = (product) => /cob/i.test(productText(product)) ? 'COB' : /smd/i.test(productText(product)) ? 'SMD' : null;
+  const stockNumber = ConfiguratorCore.stockNumber;
+  const firstNumber = ConfiguratorCore.firstNumber;
+  const productVoltage = ConfiguratorCore.productVoltage;
+  const productPower = ConfiguratorCore.productPower;
+  const productLumens = ConfiguratorCore.productLumens;
+  const productIp = ConfiguratorCore.productIp;
+  const productCri = ConfiguratorCore.productCri;
+  const productWidth = ConfiguratorCore.productWidth;
+  const productTechnology = ConfiguratorCore.productTechnology;
 
-  function productLight(product) {
-    const text = productText(product);
-    if (/rgb\s*\+\s*cct|rgbcct|rgbww|rgb\s*\+\s*(?:ciepla|neutralna|zimna|white)|rgbw|4w1/.test(text)) return 'rgbw';
-    if (/\brgb\b/.test(text)) return 'rgb';
-    if (/\bcct\b|dual\s*white|biala\s*regulowana/.test(text)) return 'cct';
-    if (/(?:2700|2800|3000|3200)\s*k|ciepla\s*biala/.test(text)) return 'warm';
-    if (/(?:3800|4000|4200|4500)\s*k|neutralna\s*biala/.test(text)) return 'neutral';
-    if (/(?:6000|6500|7000)\s*k|zimna\s*biala/.test(text)) return 'cold';
-    return null;
-  }
+  const productLight = ConfiguratorCore.productLight;
 
-  function normalizeTape(product) {
-    return {
-      product,
-      voltage: productVoltage(product),
-      power: productPower(product),
-      lumens: productLumens(product),
-      ip: productIp(product),
-      cri: productCri(product),
-      width: productWidth(product),
-      technology: productTechnology(product),
-      light: productLight(product),
-      stock: stockNumber(product)
-    };
-  }
+  const normalizeTape = ConfiguratorCore.normalizeTape;
 
-  function isTape(product) {
-    const category = normalize(product.category);
-    return category.includes('tasmy led') || category.includes('tasma led');
-  }
+  const isTape = ConfiguratorCore.isTape;
 
-  function hasRequiredTapeData(tape) {
-    return tape.stock > 0 && Number(tape.product.price) > 0 && tape.voltage && tape.power && tape.ip && tape.technology && tape.light;
-  }
+  const hasRequiredTapeData = ConfiguratorCore.hasRequiredTapeData;
 
-  function applicationMatches(tape, application) {
-    if (!application) return true;
-    if (application === 'outdoor') return tape.ip >= 65;
-    if (application === 'bathroom') return tape.ip >= 63;
-    if (application === 'stairs') return tape.power <= 15;
-    return true;
-  }
+  const applicationMatches = ConfiguratorCore.applicationMatches;
 
-  function intensityMatches(power, intensity) {
-    if (!intensity) return true;
-    if (intensity === 'decorative') return power <= 12;
-    if (intensity === 'functional') return power >= 8 && power <= 16;
-    return power >= 15;
-  }
+  const intensityMatches = ConfiguratorCore.intensityMatches;
 
-  function environmentMatches(tape, environment, application) {
-    if (!environment) return true;
-    if (application === 'outdoor' && environment !== 'outdoor') return false;
-    if (application === 'bathroom' && environment === 'dry') return false;
-    if (environment === 'dry') return tape.ip === 20;
-    if (environment === 'damp') return tape.ip >= 63;
-    return tape.ip >= 65;
-  }
+  const environmentMatches = ConfiguratorCore.environmentMatches;
 
-  function controlMatches(configuration) {
-    return !(configuration.control === 'switch' && ['cct', 'rgb', 'rgbw'].includes(configuration.light));
-  }
+  const controlMatches = ConfiguratorCore.controlMatches;
 
-  function tapeMatches(tape, configuration) {
-    if (!applicationMatches(tape, configuration.application)) return false;
-    if (!intensityMatches(tape.power, configuration.intensity)) return false;
-    if (configuration.technology && configuration.technology !== 'auto' && tape.technology.toLowerCase() !== configuration.technology) return false;
-    if (configuration.light && tape.light !== configuration.light) return false;
-    if (!environmentMatches(tape, configuration.environment, configuration.application)) return false;
-    if (configuration.voltage && configuration.voltage !== 'auto' && tape.voltage !== Number(configuration.voltage)) return false;
-    return controlMatches(configuration);
-  }
+  const tapeMatches = ConfiguratorCore.tapeMatches;
 
-  const filteredTapes = (configuration = state) => tapes.filter((tape) => tapeMatches(tape, configuration));
+  const filteredTapes = (configuration = state) => ConfiguratorCore.filteredTapes(tapes, configuration);
 
   function optionCount(input) {
     const hypothetical = { ...state, [input.name]: input.value };
@@ -185,33 +91,25 @@ document.addEventListener('DOMContentLoaded', () => {
     return filteredTapes(hypothetical).length;
   }
 
-    function refreshOptionAvailability() {
+  function refreshOptionAvailability() {
     form.querySelectorAll('input[type="radio"]').forEach((input) => {
-      const label = input.closest('label, .wizard-card-option, .option-select-card, .choice-card');
+      const label = input.closest('label');
       if (!label) return;
-      let availability = label.querySelector('.option-availability');
-      if (!availability) {
-        availability = document.createElement('span');
-        availability.className = 'option-availability';
-        label.appendChild(availability);
-      }
+      const availability = label.querySelector('.option-availability');
       const count = optionCount(input);
       input.disabled = count === 0;
       label.classList.toggle('is-unavailable', count === 0);
-      if (count > 0) {
-        availability.innerHTML = `${count} zgodnych`;
-      } else {
-        availability.innerHTML = `<button type="button" class="btn-inquiry-unavailable" onclick="event.preventDefault(); event.stopPropagation(); triggerConfiguratorInquiry('${input.name}', '${input.value}');">✉ Zapytaj o taki produkt</button>`;
-      }
+      if (availability) availability.textContent = count ? `${count} zgodnych` : 'Brak zgodnych';
     });
   }
 
-function currentStepValid() {
+  function currentStepValid() {
     if (currentStep === 0) return Boolean(state.application);
-    if (currentStep === 1) return Boolean(state.intensity && state.technology);
-    if (currentStep === 2) return Boolean(state.light);
-    if (currentStep === 3) return state.length >= 0.5 && state.length <= 200 && state.segments >= 1 && state.segments <= 20;
-    if (currentStep === 4) return Boolean(state.environment);
+    if (currentStep === 1) return Boolean(state.intensity);
+    if (currentStep === 2) return Boolean(state.technology);
+    if (currentStep === 3) return Boolean(state.light);
+    if (currentStep === 4) return state.length >= 0.5 && state.length <= 200 && state.segments >= 1 && state.segments <= 20;
+    if (currentStep === 5) return Boolean(state.environment);
     return Boolean(state.control && state.voltage && controlMatches(state) && filteredTapes().length);
   }
 
@@ -243,6 +141,12 @@ function currentStepValid() {
 
   function renderStep() {
     stepElements.forEach((element, index) => { element.hidden = index !== currentStep; });
+    const currentFieldset = stepElements[currentStep];
+    const h2 = currentFieldset.querySelector('.step-description') || currentFieldset.querySelector('h3, h2');
+    const actions = document.querySelector('.step-actions');
+    if (h2 && actions) {
+      h2.insertAdjacentElement('afterend', actions);
+    }
     stepIndicators.forEach((element, index) => {
       element.classList.toggle('active', index === currentStep);
       element.classList.toggle('complete', index < currentStep);
@@ -254,83 +158,19 @@ function currentStepValid() {
     refreshFunnel();
   }
 
-  function parseRollLength(product) {
-    const text = normalize(product.title);
-    if (/tasma\s*na\s*metry/.test(text)) return 1;
-    return firstNumber(text, /rolka\s*(\d+(?:[.,]\d+)?)\s*m/i) || firstNumber(text, /(?:^|\s)(1|5|10|50)\s*m(?:\s|$)/i) || 5;
-  }
+  const parseRollLength = ConfiguratorCore.parseRollLength;
 
-  function scoreTape(tape) {
-    const targetPower = state.intensity === 'decorative' ? 8 : state.intensity === 'strong' ? 19 : 11;
-    let score = 180 - Math.abs(tape.power - targetPower) * 8;
-    if (state.technology !== 'auto' && tape.technology.toLowerCase() === state.technology) score += 80;
-    if (state.technology === 'auto' && tape.technology === 'COB') score += 18;
-    if (state.length >= 20 && tape.voltage === 48) score += 70;
-    else if (state.length > 5 && tape.voltage === 24) score += 42;
-    else if (state.length <= 5 && [12, 24].includes(tape.voltage)) score += 20;
-    if (['kitchen', 'commercial', 'bathroom'].includes(state.application) && tape.cri >= 90) score += 28;
-    if (tape.lumens) score += Math.min(tape.lumens / 180, 15);
-    score += Math.min(tape.stock, 100) / 20;
-    return score;
-  }
+  const scoreTape = (tape) => ConfiguratorCore.scoreTape(tape, state);
 
-  function chooseCandidates() {
-    return filteredTapes()
-      .slice()
-      .sort((a, b) => scoreTape(b) - scoreTape(a))
-      .filter((tape, index, array) => array.findIndex((candidate) => candidate.product.id === tape.product.id) === index)
-      .slice(0, 3);
-  }
+  const chooseCandidates = () => ConfiguratorCore.chooseCandidates(tapes, state);
 
-  function categoryProducts(fragment) {
-    const normalizedFragment = normalize(fragment);
-    return catalog.filter((product) => normalize(product.category).includes(normalizedFragment) && stockNumber(product) > 0 && Number(product.price) > 0);
-  }
+  const categoryProducts = (fragment) => ConfiguratorCore.categoryProducts(catalog, fragment);
 
-  function powerSupplyPlan(tape) {
-    if (tape.voltage === 48) return { product: null, quantity: 0, capacity: 0, load: tape.power * state.length, required: tape.power * state.length * 1.2, reason: 'W lokalnym katalogu nie ma obecnie zasilacza Scharfer 48 V.' };
-    const totalLoad = tape.power * state.length;
-    const required = totalLoad * 1.2;
-    const segmentRequired = required / state.segments;
-    const supplies = categoryProducts('zasilacze led scharfer')
-      .map((product) => ({ product, voltage: productVoltage(product), watts: firstNumber(productText(product), /(\d+(?:[.,]\d+)?)\s*w/i) }))
-      .filter((supply) => supply.voltage === tape.voltage && supply.watts)
-      .sort((a, b) => a.watts - b.watts);
-    if (!supplies.length) return { product: null, quantity: 0, capacity: 0, load: totalLoad, required, reason: `Brak dostępnego zasilacza ${tape.voltage} V.` };
-    const maxSupply = supplies[supplies.length - 1];
-    const selected = supplies.find((supply) => supply.watts >= segmentRequired) || maxSupply;
-    const unitsPerSegment = Math.max(1, Math.ceil(segmentRequired / selected.watts));
-    const quantity = unitsPerSegment * state.segments;
-    return { product: selected.product, quantity, wattsEach: selected.watts, capacity: selected.watts * quantity, load: totalLoad, required, reason: null };
-  }
+  const powerSupplyPlan = (tape) => ConfiguratorCore.powerSupplyPlan(tape, state, catalog);
 
-  function controllerChannels(light) {
-    if (light === 'cct') return 'cct';
-    if (light === 'rgb') return 'rgb';
-    if (light === 'rgbw') return 'rgbw';
-    return 'mono';
-  }
+  const controllerChannels = ConfiguratorCore.controllerChannels;
 
-  function controllerPlan(tape, psuPlan) {
-    const required = state.control !== 'switch' || ['cct', 'rgb', 'rgbw'].includes(state.light);
-    if (!required) return { required: false, product: null, quantity: 0 };
-    const channel = controllerChannels(state.light);
-    const candidates = categoryProducts('sterowniki led').filter((product) => {
-      const text = productText(product);
-      const channelMatch = channel === 'mono' ? /mono|sciem|dimmer|5w1/.test(text) : channel === 'cct' ? /cct|5w1/.test(text) : channel === 'rgb' ? /\brgb\b|5w1/.test(text) : /rgbw|rgbcct|5w1/.test(text);
-      const modeMatch = state.control !== 'smart' || /wi\s*-?\s*fi|wifi|tuya|app/.test(text);
-      const voltageMatch = text.includes(`${tape.voltage}v`) || /12\s*-\s*48\s*v|12\s*-\s*24\s*v/.test(text);
-      return channelMatch && modeMatch && voltageMatch;
-    });
-    if (!candidates.length) return { required: true, product: null, quantity: 0, reason: 'Brak dostępnego sterownika o zgodnej liczbie kanałów i napięciu.' };
-    const ranked = candidates.map((product) => ({
-      product,
-      amperes: firstNumber(productText(product), /max\.?\s*(\d+(?:[.,]\d+)?)\s*a/i) || firstNumber(productText(product), /(\d+(?:[.,]\d+)?)\s*a\s*\/\s*kan/i) || 10
-    })).sort((a, b) => b.amperes - a.amperes);
-    const selected = ranked[0];
-    const totalCurrent = psuPlan.load / tape.voltage;
-    return { required: true, product: selected.product, quantity: Math.max(1, Math.ceil(totalCurrent / selected.amperes)), current: totalCurrent, maxCurrent: selected.amperes };
-  }
+  const controllerPlan = (tape, psuPlan) => ConfiguratorCore.controllerPlan(tape, psuPlan, state, catalog);
 
   function formatPrice(value) {
     return new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' }).format(Number(value) || 0);
@@ -393,15 +233,14 @@ function currentStepValid() {
     selectedResult = { primary, alternatives, tapeQuantity, psu, controller, ready };
     results.hidden = false;
     bindResultActions();
-    results.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+      }
 
   function renderResults() {
     const candidates = chooseCandidates();
     if (!candidates.length) {
       results.hidden = false;
       resultContent.innerHTML = '<div class="no-results"><h3>Ta kombinacja nie występuje w aktualnym katalogu.</h3><p>Wróć o krok i zmień jeden parametr. Konfigurator nie zastąpi brakującego produktu przypadkowym odpowiednikiem.</p><button class="button-secondary" type="button" id="returnToConfiguration">Wróć do konfiguracji</button></div>';
-      document.getElementById('returnToConfiguration').onclick = () => document.getElementById('configurator').scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('returnToConfiguration').onclick = () => { results.hidden = true; };
       return;
     }
     renderResult(candidates[0], candidates.slice(1));
@@ -479,8 +318,7 @@ function currentStepValid() {
     if (currentStep < stepElements.length - 1) {
       currentStep += 1;
       renderStep();
-      document.querySelector('.configurator-shell').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else renderResults();
+          } else renderResults();
   });
 
   previousButton.addEventListener('click', () => {
@@ -492,77 +330,44 @@ function currentStepValid() {
 
   document.getElementById('editConfiguration').addEventListener('click', () => {
     results.hidden = true;
-    document.getElementById('configurator').scrollIntoView({ behavior: 'smooth' });
-  });
+      });
 
-  const header = document.getElementById('mainHeader') || document.getElementById('siteHeader');
-  const logo = document.getElementById('headerLogo') || (header ? header.querySelector('img') : null);
+  const header = document.getElementById('siteHeader');
+  const logo = header.querySelector('.brand img');
   function updateHeader() {
-    if (!header) return;
     const scrolled = window.scrollY > 40;
     header.classList.toggle('scrolled', scrolled);
-    if (logo) {
-      if (logo.dataset && logo.dataset.dark) {
-        logo.src = scrolled || header.classList.contains('menu-active') ? logo.dataset.dark : logo.dataset.light;
-      } else {
-        logo.src = scrolled ? 'images/logo-dark.png' : 'images/logo-white.png';
-      }
-    }
+    logo.src = scrolled || header.classList.contains('menu-active') ? logo.dataset.dark : logo.dataset.light;
   }
   window.addEventListener('scroll', updateHeader, { passive: true });
   const menuButton = document.getElementById('menuButton');
   const mobileMenu = document.getElementById('mobileMenu');
-  if (menuButton && mobileMenu) {
-    menuButton.addEventListener('click', () => {
-      const expanded = menuButton.getAttribute('aria-expanded') === 'true';
-      menuButton.setAttribute('aria-expanded', String(!expanded));
-      mobileMenu.hidden = expanded;
-      if (header) header.classList.toggle('menu-active', !expanded);
-      document.body.classList.toggle('menu-open', !expanded);
-      updateHeader();
-    });
-  }
-
-    function hideLoadingOverlay() {
-    const loadingEl = document.getElementById('catalogLoading');
-    if (loadingEl) loadingEl.hidden = true;
-    const loaderContainer = document.querySelector('.loading-overlay');
-    if (loaderContainer) loaderContainer.style.display = 'none';
-  }
+  menuButton.addEventListener('click', () => {
+    const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+    menuButton.setAttribute('aria-expanded', String(!expanded));
+    mobileMenu.hidden = expanded;
+    header.classList.toggle('menu-active', !expanded);
+    document.body.classList.toggle('menu-open', !expanded);
+    updateHeader();
+  });
 
   async function loadCatalog() {
-    if (typeof products !== 'undefined' && Array.isArray(products) && products.length > 0) {
-      catalog = products;
-    } else if (typeof getProducts === 'function') {
-      catalog = getProducts();
-    } else if (typeof defaultProducts !== 'undefined' && Array.isArray(defaultProducts)) {
-      catalog = defaultProducts;
-    }
-
     try {
       const response = await fetch('js/prescot-imported-products.json', { cache: 'no-store' });
-      if (response.ok) {
-        const importedData = await response.json();
-        if (Array.isArray(importedData) && importedData.length > 0) {
-          catalog = importedData;
-        }
-      }
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      catalog = await response.json();
     } catch (error) {
-      // Fallback to existing catalog
-    }
-
-    if (!catalog || !catalog.length) {
       if (typeof products !== 'undefined' && Array.isArray(products)) catalog = products;
-    }
-
-    if (catalog && catalog.length) {
-      tapes = catalog.filter(isTape).map(normalizeTape).filter(hasRequiredTapeData);
-      if (!tapes.length) {
-        tapes = catalog.filter(isTape).map(normalizeTape);
+      else {
+        document.getElementById('catalogError').hidden = false;
+        document.getElementById('catalogLoading').hidden = true;
+        form.hidden = true;
+        console.error('Błąd katalogu konfiguratora:', error);
+        return;
       }
     }
-
-    hideLoadingOverlay();
+    tapes = catalog.filter(isTape).map(normalizeTape).filter(hasRequiredTapeData);
+    document.getElementById('catalogLoading').hidden = true;
     updateCartBadge();
     updateLengthTip();
     renderStep();
@@ -570,4 +375,7 @@ function currentStepValid() {
 
   updateHeader();
   loadCatalog();
+
+  
+
 });

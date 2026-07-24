@@ -1,73 +1,75 @@
 import re
 
-print("Unifying header, scripts, and catalog loading in configurator.html to match index.html & shop.html...")
+def unify():
+    with open('d:/MY-AI-AGENTS/sklepSC/contact.html', 'r', encoding='utf-8') as f:
+        contact_html = f.read()
+    
+    with open('d:/MY-AI-AGENTS/sklepSC/configurator.html', 'r', encoding='utf-8') as f:
+        conf_html = f.read()
 
-# Read index.html to extract the exact header & mobile menu HTML
-with open("index.html", "r", encoding="utf-8") as f:
-    index_html = f.read()
+    # Extract header + mobile menu from contact
+    header_match = re.search(r'(<header class="mockup-header".*?</header>\s*<!-- Mobile Menu -->\s*<div class="mobile-menu" id="mobileMenu">.*?</div>)', contact_html, re.DOTALL)
+    
+    # Extract page-hero from contact
+    hero_match = re.search(r'(<section class="page-hero".*?</section>)', contact_html, re.DOTALL)
+    
+    # Extract header CSS from contact
+    css_match = re.search(r'(/\* Common Header \*/.*?\/\* Magic Dropdown Universal Fix \*/)', contact_html, re.DOTALL)
 
-# Extract header HTML from index.html
-header_match = re.search(r'(<header class="mockup-header"[^>]*>.*?</header>)', index_html, re.DOTALL)
-header_html = header_match.group(1) if header_match else ""
+    if not header_match or not hero_match:
+        print("Could not find header or hero in contact.html")
+        return
 
-# Extract mobile menu HTML from index.html
-mobile_menu_match = re.search(r'(<!-- Mobile Menu -->\s*<div class="mobile-menu" id="mobileMenu">.*?</div>\s*<!-- Mobile Menu -->)', index_html, re.DOTALL)
-if not mobile_menu_match:
-    mobile_menu_match = re.search(r'(<div class="mobile-menu" id="mobileMenu">.*?</div>)', index_html, re.DOTALL)
-mobile_menu_html = mobile_menu_match.group(1) if mobile_menu_match else ""
+    new_header = header_match.group(1)
+    new_hero = hero_match.group(1)
+    
+    # Modify the active state in header
+    new_header = new_header.replace('class="active" href="contact.html"', 'href="contact.html"')
+    new_header = new_header.replace('href="configurator.html"', 'href="configurator.html" class="active"')
+    
+    # Modify hero content for configurator
+    new_hero = new_hero.replace('Kontakt', 'Konfigurator')
+    new_hero = new_hero.replace('Jesteśmy do Twojej dyspozycji', 'Dobierz system LED w 6 prostych krokach')
+    new_hero = new_hero.replace("images/stairs.jpg", "images/kitchen.jpg") # Change background image for configurator if we want, or keep stairs
 
-# Adjust active class in nav for configurator.html
-nav_items_html = """<ul>
-  <li><a href="index.html">Home</a></li>
-  <li><a href="shop.html">Sklep</a></li>
-  <li><a href="configurator.html" class="active">Dobierz Sam</a></li>
-  <li><a href="blog.html">Blog</a></li>
-  <li><a href="about.html">O nas</a></li>
-  <li><a href="contact.html">Kontakt</a></li>
-</ul>"""
-
-header_html = re.sub(r'<nav class="mockup-nav">\s*<ul>.*?</ul>\s*</nav>', f'<nav class="mockup-nav">\n{nav_items_html}\n</nav>', header_html, flags=re.DOTALL)
-
-# Read configurator.html
-with open("configurator.html", "r", encoding="utf-8") as f:
-    config_html = f.read()
-
-# 1. Replace <header class="site-header" id="siteHeader">...</header> with unified header_html
-config_html = re.sub(r'<header class="site-header"[^>]*>.*?</header>', header_html, config_html, flags=re.DOTALL)
-config_html = re.sub(r'<header class="mockup-header"[^>]*>.*?</header>', header_html, config_html, flags=re.DOTALL)
-
-# 2. Add products-data.js and shared-popups.js script tags before configurator.js
-script_block = """  <script src="js/products-data.js"></script>
-  <script src="js/shared-popups.js"></script>
-  <script type="module" src="js/configurator.js"></script>"""
-
-config_html = re.sub(r'\s*<script type="module" src="js/configurator\.js"></script>', f'\n{script_block}', config_html)
-
-# 3. Add scroll listener for headerLogo and mainHeader inside configurator.html if missing
-scroll_script = """
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const header = document.getElementById('mainHeader');
-      const headerLogo = document.getElementById('headerLogo');
-      function handleScroll() {
-        if (window.scrollY > 40) {
-          if (header) header.classList.add('scrolled');
-          if (headerLogo) headerLogo.src = 'images/logo-dark.png';
-        } else {
-          if (header) header.classList.remove('scrolled');
-          if (headerLogo) headerLogo.src = 'images/logo-white.png';
+    # Find the header to replace in configurator
+    conf_html = re.sub(r'<header class="site-header" id="siteHeader">.*?</header>', new_header, conf_html, flags=re.DOTALL)
+    
+    # Find the hero to replace in configurator
+    conf_html = re.sub(r'<section class="hero" aria-labelledby="heroTitle">.*?</section>', new_hero, conf_html, flags=re.DOTALL)
+    
+    # Make sure we add the script for scrolling if it doesn't exist
+    if 'standard-header-scroll-script' not in conf_html:
+        script = """
+  <script id="standard-header-scroll-script">
+      document.addEventListener('DOMContentLoaded', () => {
+        const header = document.getElementById('mainHeader');
+        const headerLogo = document.getElementById('headerLogo');
+        function handleScroll() {
+          if (window.scrollY > 40) {
+            if (header) header.classList.add('scrolled');
+            if (headerLogo) headerLogo.src = 'images/logo-dark.png';
+          } else {
+            if (header) header.classList.remove('scrolled');
+            if (headerLogo) headerLogo.src = 'images/logo-white.png';
+          }
         }
-      }
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      handleScroll();
-    });
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+      });
   </script>
-"""
+</body>"""
+        conf_html = conf_html.replace('</body>', script)
 
-if "images/logo-dark.png" not in config_html or "handleScroll" not in config_html:
-    config_html = config_html.replace("</body>", f"{scroll_script}\n</body>")
+    # We also need to bring over the CSS for mockup-header if it doesn't exist
+    # Let's just put it in a style tag in head
+    if css_match and 'mockup-header' not in conf_html.split('</head>')[0]:
+        style_block = "\n<style>\n" + css_match.group(1) + "\n</style>\n</head>"
+        conf_html = conf_html.replace('</head>', style_block)
+        
+    with open('d:/MY-AI-AGENTS/sklepSC/configurator.html', 'w', encoding='utf-8') as f:
+        f.write(conf_html)
+        
+    print("Updated configurator.html")
 
-with open("configurator.html", "w", encoding="utf-8") as f:
-    f.write(config_html)
-
-print("configurator.html header and scripts successfully unified.")
+unify()

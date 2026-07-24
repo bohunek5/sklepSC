@@ -1,593 +1,332 @@
 <!doctype html>
 <html lang="pl">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-    content="Konfigurator systemu LED Prescot: dobierz taśmę, zasilacz i sterownik na podstawie miejsca montażu i oczekiwanego efektu.">
-  <title>Dobierz system LED | Prescot LED</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1a30">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>Dobierz system LED | Prescot</title>
+  <meta name="description" content="Techniczny konfigurator Prescot: dobór realnej taśmy LED, napięcia, zasilacza i sterowania na podstawie zastosowania oraz parametrów katalogowych.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/configurator.css">
-<style id="square-product-images-override">
-  /* Full Square Fill Product Cards (object-fit: cover) */
+  <link rel="stylesheet" href="css/prescot-responsive.css">
+<style id="uncropped-product-images-override">
+  /* Guaranteed 100% Uncropped & Unclipped Product Images Across All Views */
   .mockup-product-media,
+  .product-main-media,
+  .product-card-media,
+  .media-container,
+  .product-media,
   div.mockup-product-media {
     position: relative !important;
     width: 100% !important;
     aspect-ratio: 1 / 1 !important;
-    height: auto !important;
+    background-color: #ffffff !important;
+    border-radius: 14px !important;
+    padding: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     overflow: hidden !important;
-    border-radius: 12px !important;
-    padding: 0 !important;
-    margin-bottom: 8px !important;
-    background-color: #f4f6f9 !important;
-    display: block !important;
+    box-sizing: border-box !important;
+    border: 1px solid rgba(11, 26, 48, 0.06) !important;
   }
 
   .mockup-product-img,
-  .mockup-product-media img {
-    width: 100% !important;
-    height: 100% !important;
-    max-width: none !important;
-    max-height: none !important;
-    object-fit: cover !important;
+  .product-main-img,
+  .product-card-img,
+  .mockup-product-media img,
+  .product-main-media img,
+  .schematic-img,
+  .bundle-item-img,
+  .cart-item-img,
+  .cart-table img,
+  .qv-image-container img,
+  .quickview-slider img,
+  .thumbnail img,
+  .thumbnail-item img,
+  .alternative-card img,
+  .product-img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
     object-position: center !important;
-    border-radius: inherit !important;
-    padding: 0 !important;
+    background-color: transparent !important;
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
 
   .mockup-product-card:hover .mockup-product-img,
   .mockup-product-card:hover .mockup-product-media img {
-    transform: scale(1.05) !important;
-  }
-
-  /* Hide category text line above product card blocks */
-  .mockup-product-category,
-  p.mockup-product-category,
-  div.mockup-product-category {
-    display: none !important;
-  }
-</style>
-
-<style id="custom-nav-configurator-cta-style">
-  /* Clean Unified Header Navigation */
-  body .mockup-header .mockup-nav ul li a,
-  body .mockup-header.scrolled .mockup-nav ul li a {
-    text-decoration: none !important;
-    font-size: 13.5px !important;
-    font-weight: 600 !important;
-    color: #0b1a30 !important;
-    padding: 8px 18px !important;
-    border-radius: 99px !important;
-    transition: all 0.2s ease !important;
-    background: transparent !important;
-    border: 1px solid transparent !important;
-    box-shadow: none !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-  }
-
-  body .mockup-header .mockup-nav ul li a:hover,
-  body .mockup-header.scrolled .mockup-nav ul li a:hover {
-    background: rgba(11, 26, 48, 0.08) !important;
-    color: #0b1a30 !important;
-  }
-
-  body .mockup-header .mockup-nav ul li a.active,
-  body .mockup-header.scrolled .mockup-nav ul li a.active {
-    background: #0b1a30 !important;
-    color: #ffffff !important;
-    border: 1px solid #0b1a30 !important;
-    font-weight: 700 !important;
-    box-shadow: 0 4px 14px rgba(11, 26, 48, 0.2) !important;
-  }
-
-  /* Scrolled Header Styling - Crisp Navy Elements */
-  body .mockup-header.scrolled {
-    background: rgba(255, 255, 255, 0.96) !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
-  }
-
-  body .mockup-header.scrolled .mockup-action-icon,
-  body .mockup-header .mockup-action-icon {
-    color: #0b1a30 !important;
-    border-color: rgba(11, 26, 48, 0.15) !important;
-  }
-
-  /* Footer White Logo Styling */
-  footer .footer-logo img,
-  .mockup-footer .footer-logo img {
-    height: 32px !important;
-    opacity: 1 !important;
-    filter: none !important;
-  }
-</style>
-
-<style id="configurator-inquiry-unavailable-style">
-  .btn-inquiry-unavailable {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 4px !important;
-    margin-top: 8px !important;
-    padding: 6px 14px !important;
-    background: #0b1a30 !important;
-    color: #ffffff !important;
-    font-size: 11px !important;
-    font-weight: 800 !important;
-    border: none !important;
-    border-radius: 99px !important;
-    cursor: pointer !important;
-    box-shadow: 0 4px 12px rgba(11, 26, 48, 0.2) !important;
-    transition: all 0.25s ease !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.3px !important;
-    position: relative !important;
-    z-index: 20 !important;
-  }
-
-  .btn-inquiry-unavailable:hover {
-    background: #ff5a00 !important;
-    transform: translateY(-1px) scale(1.04) !important;
-    box-shadow: 0 6px 18px rgba(255, 90, 0, 0.4) !important;
-  }
-
-  .is-unavailable {
-    opacity: 0.88 !important;
-    border-color: #e2e8f0 !important;
-  }
-</style>
-
-<style id="configurator-light-header-override">
-  /* Force dark text & navy icons for header on light pages */
-  body .mockup-header,
-  body .mockup-header.scrolled {
-    background: rgba(255, 255, 255, 0.98) !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
-  }
-
-  body .mockup-header .mockup-nav > ul > li > a:not(.active),
-  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active) {
-    color: #0b1a30 !important;
-    background: rgba(11, 26, 48, 0.05) !important;
-    border: 1px solid rgba(11, 26, 48, 0.08) !important;
-    font-weight: 600 !important;
-  }
-
-  body .mockup-header .mockup-nav > ul > li > a:not(.active):hover,
-  body .mockup-header.scrolled .mockup-nav > ul > li > a:not(.active):hover {
-    background: rgba(11, 26, 48, 0.12) !important;
-    color: #0b1a30 !important;
-  }
-
-  body .mockup-header .mockup-nav a.active,
-  body .mockup-header.scrolled .mockup-nav a.active {
-    background: #0b1a30 !important;
-    color: #ffffff !important;
-    border: 1px solid #0b1a30 !important;
-    font-weight: 700 !important;
-    box-shadow: 0 4px 15px rgba(11, 26, 48, 0.25) !important;
-  }
-
-  body .mockup-header .mockup-action-icon,
-  body .mockup-header.scrolled .mockup-action-icon {
-    color: #0b1a30 !important;
-    background: rgba(11, 26, 48, 0.05) !important;
-    border: 1px solid rgba(11, 26, 48, 0.1) !important;
-  }
-
-  body .mockup-header .mockup-search-container input {
-    color: #0b1a30 !important;
-    border-color: rgba(11, 26, 48, 0.2) !important;
-  }
-
-  body .mockup-header .mockup-search-container button svg {
-    stroke: #0b1a30 !important;
-  }
-
-  .loading-overlay[hidden],
-  #catalogLoading[hidden] {
-    display: none !important;
+    transform: scale(1.06) !important;
   }
 </style>
 
 </head>
-
 <body>
   <a class="skip-link" href="#configurator">Przejdź do konfiguratora</a>
 
-  <header class="mockup-header scrolled force-scrolled" id="mainHeader">
-<div class="mockup-header-logo">
-<a href="index.html"><img alt="Prescot Logo" id="headerLogo" src="images/logo-dark.png"/></a>
-</div>
-<nav class="mockup-nav">
-<ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="shop.html">Sklep</a></li>
-<li><a href="configurator.html" class="active">Dobierz Sam</a></li>
-<li><a href="blog.html">Blog</a></li>
-<li><a href="about.html">O nas</a></li>
-<li><a href="contact.html">Kontakt</a></li>
-</ul>
-</nav>
-<div class="mockup-actions">
-<div class="mockup-search-container">
-<input id="headerSearchInput" placeholder="Czego szukasz..." type="text"/>
-<button aria-label="Szukaj" id="headerSearchBtn">
-<svg fill="none" height="18" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
-</button>
-</div>
-<button aria-label="Konto użytkownika" class="mockup-action-icon">
-<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-</button>
-<a aria-label="Lista Życzeń" class="mockup-action-icon wishlist-trigger" href="#">
-<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-</a>
-<a aria-label="Koszyk" class="mockup-action-icon" href="cart.html" style="position: relative;">
-<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
-<span class="cart-badge"></span>
-</a>
-<button class="menu-toggle" id="menuToggle">
-<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg>
-</button>
-</div>
-</header>
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="index.html" aria-label="Prescot — strona główna">
+      <img src="images/logo-white.png" data-dark="images/logo-dark.png" data-light="images/logo-white.png" alt="Prescot">
+    </a>
+    <nav class="desktop-nav" aria-label="Nawigacja główna">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Sklep</a>
+      <a href="blog.html">Wiedza</a>
+      <a href="about.html">O nas</a>
+      <a href="contact.html">Kontakt</a>
+      <a class="active" href="configurator.html">Dobierz system</a>
+      <a  href="ai-shopping.html">Zakup AI <svg class="gemini-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block; vertical-align:middle; margin-left:4px; margin-bottom:2px;"><path d="M12 0L14.645 9.355L24 12L14.645 14.645L12 24L9.355 14.645L0 12L9.355 9.355L12 0Z"/></svg></a>
+    </nav>
+    <div class="header-actions">
+      <form class="header-search" action="shop.html" role="search">
+        <label class="sr-only" for="configSearch">Szukaj produktu</label>
+        <input id="configSearch" name="q" type="search" placeholder="SKU, barwa, moc…">
+        <button type="submit" aria-label="Szukaj">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+        </button>
+      </form>
+      <a class="header-icon" href="cart.html" aria-label="Koszyk">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L21 7H6"></path><circle cx="10" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle></svg>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </a>
+      <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Otwórz menu"><span></span><span></span><span></span></button>
+    </div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Nawigacja mobilna" hidden>
+      <a href="index.html">Home</a>
+      <a href="shop.html">Sklep</a>
+      <a href="blog.html">Wiedza</a>
+      <a href="about.html">O nas</a>
+      <a href="contact.html">Kontakt</a>
+      <a class="active" href="configurator.html">Dobierz system</a>
+      <a  href="ai-shopping.html">Zakup AI <svg class="gemini-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block; vertical-align:middle; margin-left:4px; margin-bottom:2px;"><path d="M12 0L14.645 9.355L24 12L14.645 14.645L12 24L9.355 14.645L0 12L9.355 9.355L12 0Z"/></svg></a>
+    </nav>
+  </header>
 
   <main>
-    <section class="hero" aria-labelledby="heroTitle">
-      <div class="hero-inner">
-        <nav class="hero-breadcrumbs" aria-label="Okruszki">
-          <a href="index.html">Główna</a><span>•</span><strong>Dobierz system LED</strong>
-        </nav>
-        <p class="eyebrow">Konfigurator Prescot LED</p>
-        <h1 id="heroTitle">Jedna konkretna taśma.<br><span>Zamiast setki podobnych.</span></h1>
-        <p class="hero-lead">Powiedz, gdzie i jak ma świecić. Na końcu pokażemy konkretną taśmę z katalogu, potrzebną
-          ilość oraz elementy zgodne z jej napięciem i mocą.</p>
-        <div class="hero-actions">
-          <a class="hero-primary" href="#configurator">Dobierz taśmę</a>
-          <a class="hero-secondary" href="contact.html">Wolę porozmawiać z doradcą</a>
-        </div>
-      </div>
-
-      <aside class="hero-result-preview" aria-label="Co otrzymasz na końcu">
-        <span class="preview-label">Na końcu otrzymasz</span>
-        <strong>Konkretny produkt z katalogu</strong>
-        <div class="preview-chain">
-          <span><b>01</b> Taśma LED</span>
-          <i></i>
-          <span><b>02</b> Zasilacz</span>
-          <i></i>
-          <span><b>03</b> Sterowanie</span>
-        </div>
-        <small>Bez przypadkowego łączenia napięć i typów sterowania.</small>
-      </aside>
-
-      <div class="hero-facts" aria-label="Zasady działania">
-        <span><strong>1323</strong><small>produkty w imporcie</small></span>
-        <span><strong>20%</strong><small>zapas mocy zasilacza</small></span>
-        <span><strong>1</strong><small>główna rekomendacja taśmy</small></span>
+    
+    
+    <section class="page-hero" aria-labelledby="heroTitle" style="background: url('images/kuchnia.jpg') center/cover no-repeat; min-height: 280px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 120px 20px 40px; text-align: center; position: relative; box-sizing: border-box;">
+      <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(11, 26, 48, 0.6);"></div>
+      <div class="container" style="position: relative; z-index: 1;">
+        <h1 id="heroTitle" style="font-size: clamp(32px, 5vw, 56px); margin: 0 0 16px; color: #fff; font-weight: 700;">Konfigurator</h1>
+        <p class="hero-lead" style="font-size: clamp(16px, 2vw, 20px); color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto;">Przeprowadzimy Cię przez proces doboru komponentów oświetlenia.</p>
       </div>
     </section>
 
+
+
     <section class="configurator-section" id="configurator" aria-labelledby="configuratorTitle">
       <div class="configurator-intro">
-        <div>
-          <p class="section-kicker">Dobór krok po kroku</p>
-          <h2 id="configuratorTitle">Najpierw zastosowanie.<br>Na końcu konkretny produkt.</h2>
-        </div>
-        <p>Sześć krótkich kroków zawęzi katalog do taśm zgodnych z projektem. Możesz wrócić i zmienić każdą odpowiedź.
-        </p>
+        <div><p class="section-kicker">Dobór krok po kroku</p><h2 id="configuratorTitle">Zawężamy wybór, nie zgadujemy.</h2></div>
+        <p>Każda odpowiedź przelicza dostępny katalog. Opcje bez zgodnych, dostępnych taśm są automatycznie blokowane.</p>
       </div>
 
       <div class="configurator-shell">
         <aside class="step-sidebar" aria-label="Postęp konfiguracji">
-          <div class="project-visual">
-            <span>Twój projekt</span>
-            <strong id="projectPreviewTitle">Nowy system LED</strong>
-            <small id="projectPreviewMeta">Uzupełnij pierwszy krok</small>
+          <div class="project-visual" id="projectVisual">
+            <span>Wybrane zastosowanie</span>
+            <strong id="projectVisualTitle">Wybierz miejsce montażu</strong>
+            <small id="projectVisualMeta">Zdjęcie i parametry zmienią się wraz z projektem.</small>
           </div>
-          <div class="progress-summary">
-            <span>Postęp</span>
-            <strong id="progressPercent">17%</strong>
-          </div>
-          <div class="progress-track" aria-hidden="true"><span id="progressBar"></span></div>
+          <div class="progress-summary"><span>Postęp</span><strong id="progressText">1 / 6</strong></div>
+          <div class="progress-track"><span id="progressBar"></span></div>
           <ol class="step-list" id="stepList">
-            <li class="active" data-step-indicator="0"><span>1</span>
-              <div><strong>Miejsce</strong><small>Gdzie montujesz?</small></div>
-            </li>
-            <li data-step-indicator="1"><span>2</span>
-              <div><strong>Efekt</strong><small>Jak mocne światło?</small></div>
-            </li>
-            <li data-step-indicator="2"><span>3</span>
-              <div><strong>Barwa</strong><small>Kolor światła</small></div>
-            </li>
-            <li data-step-indicator="3"><span>4</span>
-              <div><strong>Wymiary</strong><small>Długość instalacji</small></div>
-            </li>
-            <li data-step-indicator="4"><span>5</span>
-              <div><strong>Warunki</strong><small>Wilgoć i szczelność</small></div>
-            </li>
-            <li data-step-indicator="5"><span>6</span>
-              <div><strong>Sterowanie</strong><small>Obsługa i napięcie</small></div>
-            </li>
+            <li class="active"><span>01</span><div><strong>Zastosowanie</strong><small>miejsce i funkcja</small></div></li>
+            <li><span>02</span><div><strong>Efekt</strong><small>Moc i jasność</small></div></li>
+            <li><span>03</span><div><strong>Technologia</strong><small>COB lub SMD</small></div></li>
+            <li><span>04</span><div><strong>Barwa</strong><small>biała, CCT, RGB</small></div></li>
+            <li><span>05</span><div><strong>Wymiary</strong><small>długość i odcinki</small></div></li>
+            <li><span>06</span><div><strong>Warunki</strong><small>klasa szczelności</small></div></li>
+            <li><span>07</span><div><strong>Sterowanie</strong><small>tryb i napięcie</small></div></li>
           </ol>
           <div class="sidebar-note">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"></path>
-              <path d="M12 11v6M12 7h.01"></path>
-            </svg>
-            <p>Jeśli szukasz niestandardowego rozwiązania, nasi specjaliści przygotują wycenę indywidualną dobranej taśmy LED i zasilacza.</p>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"></path><path d="M12 16v-5M12 8h.01"></path></svg>
+            <p>Konfigurator dobiera elementy z aktualnego pliku katalogowego. Ostateczne warunki montażu powinien sprawdzić wykonawca.</p>
           </div>
         </aside>
 
-        <form class="steps-panel" id="configuratorForm" novalidate>
-          <div class="loading-overlay" id="catalogLoading" role="status">
-            <span class="loader"></span>
-            <strong>Wczytujemy katalog Prescot…</strong>
-            <small>Analizujemy parametry produktów</small>
+        <div class="steps-panel">
+          <div class="loading-overlay" id="catalogLoading">
+            <div class="loader"></div><strong>Analizuję katalog Prescot</strong><small>Sprawdzam parametry i dostępność taśm.</small>
           </div>
+          <div class="catalog-error" id="catalogError" hidden><strong>Nie udało się wczytać katalogu.</strong><p>Odśwież stronę lub przejdź do <a href="shop.html">sklepu</a>.</p></div>
 
-          <div class="catalog-error" id="catalogError" role="alert" hidden>
-            <strong>Nie udało się wczytać katalogu.</strong>
-            <p>Odśwież stronę albo przejdź do kontaktu — pomożemy dobrać zestaw ręcznie.</p>
-            <a href="contact.html">Skontaktuj się z nami</a>
-          </div>
+          <form id="configuratorForm" novalidate>
+            <div class="step-actions"><button class="button-secondary" id="previousButton" type="button" hidden>Wstecz</button><button class="button-primary" id="nextButton" type="button" disabled>Dalej</button></div>
+            <div class="funnel-status" id="funnelStatus"><span>Aktualna pula</span><strong id="funnelCount">0</strong><small id="funnelMessage">taśm spełnia dotychczasowe warunki</small></div>
 
-          <div class="funnel-status" id="funnelStatus" role="status" aria-live="polite">
-            <span>Produkty po tym kroku</span>
-            <strong id="funnelCount">—</strong>
-            <small id="funnelMessage">Wczytujemy dostępne taśmy</small>
-          </div>
-
-          <fieldset class="config-step" data-step="0">
-            <legend>Krok 1 z 6</legend>
-            <p class="step-kicker">Miejsce montażu</p>
-            <h3>Gdzie zamontujesz taśmę?</h3>
-            <p class="step-description">Zastosowanie wpływa na potrzebną jasność, jakość światła i stopień ochrony.</p>
-            <div class="choice-grid choice-grid-three">
-              <label class="choice-card"><input type="radio" name="application" value="kitchen" required><span
-                  class="choice-icon">01</span><strong>Kuchnia</strong><small>Blat, szafki, wyspa</small></label>
-              <label class="choice-card"><input type="radio" name="application" value="living"><span
-                  class="choice-icon">02</span><strong>Salon i meble</strong><small>Nisze, półki,
-                  zabudowa</small></label>
-              <label class="choice-card"><input type="radio" name="application" value="stairs"><span
-                  class="choice-icon">03</span><strong>Schody i komunikacja</strong><small>Stopnie, korytarz,
-                  poręcz</small></label>
-              <label class="choice-card"><input type="radio" name="application" value="bathroom"><span
-                  class="choice-icon">04</span><strong>Łazienka</strong><small>Lustro, wnęka, sufit</small></label>
-              <label class="choice-card"><input type="radio" name="application" value="outdoor"><span
-                  class="choice-icon">05</span><strong>Na zewnątrz</strong><small>Elewacja, taras, ogród</small></label>
-              <label class="choice-card"><input type="radio" name="application" value="commercial"><span
-                  class="choice-icon">06</span><strong>Sklep i ekspozycja</strong><small>Witryna, regał,
-                  stanowisko</small></label>
-            </div>
-          </fieldset>
-
-          <fieldset class="config-step" data-step="1" hidden>
-            <legend>Krok 2 z 6</legend>
-            <p class="step-kicker">Oczekiwany efekt</p>
-            <h3>Do czego potrzebujesz światła?</h3>
-            <p class="step-description">Najbliższa odpowiedź wystarczy. Konkretną moc odczytamy później z produktu.</p>
-            <div class="choice-grid">
-              <label class="choice-card choice-card-wide"><input type="radio" name="intensity" value="decorative"
-                  required><span class="choice-icon">A</span>
-                <div><strong>Dekoracyjne</strong><small>Delikatny akcent, nastrój, podświetlenie półek</small></div>
-                <span class="choice-meta">do ok. 8 W/m</span>
-              </label>
-              <label class="choice-card choice-card-wide"><input type="radio" name="intensity" value="functional"><span
-                  class="choice-icon">B</span>
-                <div><strong>Funkcjonalne</strong><small>Wygodne światło robocze i codzienne</small></div><span
-                  class="choice-meta">ok. 8–15 W/m</span>
-              </label>
-              <label class="choice-card choice-card-wide"><input type="radio" name="intensity" value="strong"><span
-                  class="choice-icon">C</span>
-                <div><strong>Mocne</strong><small>Dużo światła na blacie, w witrynie lub wnętrzu</small></div><span
-                  class="choice-meta">od ok. 14 W/m</span>
-              </label>
-            </div>
-            <div class="technology-block">
-              <div><strong>Jak ma wyglądać linia światła?</strong><small>To rozstrzyga, czy mamy szukać technologii
-                  COB.</small></div>
-              <div class="technology-options">
-                <label><input type="radio" name="technology" value="auto" checked><span><b>Bez
-                      preferencji</b><small>Dobierz najlepszą</small></span></label>
-                <label><input type="radio" name="technology" value="cob"><span><b>Jednolita linia COB</b><small>Bez
-                      widocznych punktów</small></span></label>
-                <label><input type="radio" name="technology" value="smd"><span><b>Klasyczna SMD</b><small>Priorytet:
-                      wydajność</small></span></label>
+            <fieldset class="config-step" data-step="0">
+              <legend>Zastosowanie</legend>
+              <p class="step-kicker">Krok 01 • zastosowanie</p>
+              <h3 style="text-align: center;">Gdzie powstaje linia światła?</h3>
+              <p class="step-description">Wybierz najbliższy scenariusz. Na jego podstawie ustawimy sensowną funkcję światła oraz wymagania środowiskowe.</p>
+              <div class="application-grid choice-grid">
+                <label class="application-card choice-card" style="--application-image:url('../images/configurator/kitchen_new.png')">
+                  <input type="radio" name="application" value="kitchen">
+                  <span class="application-index">01</span><span class="application-copy"><strong>Blat i zabudowa kuchenna</strong><small>Równomierne światło robocze, naturalna biel i dobre oddanie kolorów.</small></span><span class="application-parameters">IP20–63 · 8–16 W/m</span><span class="option-availability"></span>
+                </label>
+                <label class="application-card choice-card" style="--application-image:url('../images/configurator/living_new.png')">
+                  <input type="radio" name="application" value="living">
+                  <span class="application-index">02</span><span class="application-copy"><strong>Salon, sufit i wnęka</strong><small>Światło pośrednie lub dekoracyjne, dobrane do oczekiwanego efektu.</small></span><span class="application-parameters">IP20 · COB / SMD</span><span class="option-availability"></span>
+                </label>
+                <label class="application-card choice-card" style="--application-image:url('../images/configurator/stairs_new.png')">
+                  <input type="radio" name="application" value="stairs">
+                  <span class="application-index">03</span><span class="application-copy"><strong>Schody i komunikacja</strong><small>Ciągła, spokojna linia orientacyjna lub światło stopni.</small></span><span class="application-parameters">IP20–63 · 4–12 W/m</span><span class="option-availability"></span>
+                </label>
+                <label class="application-card choice-card" style="--application-image:url('../images/configurator/bathroom_new.png')">
+                  <input type="radio" name="application" value="bathroom">
+                  <span class="application-index">04</span><span class="application-copy"><strong>Łazienka i strefa wilgotna</strong><small>Dobór pod kątem wilgoci; o klasie IP decyduje dokładna strefa montażu.</small></span><span class="application-parameters">IP63+ · CRI</span><span class="option-availability"></span>
+                </label>
+                <label class="application-card choice-card" style="--application-image:url('../images/configurator/outdoor_new.png')">
+                  <input type="radio" name="application" value="outdoor">
+                  <span class="application-index">05</span><span class="application-copy"><strong>Elewacja, taras i ogród</strong><small>Rozwiązania do warunków zewnętrznych z ochroną połączeń i zasilania.</small></span><span class="application-parameters">IP65 / IP67 · 24 V</span><span class="option-availability"></span>
+                </label>
+                <label class="application-card choice-card" style="--application-image:url('../images/configurator/retail_new.png')">
+                  <input type="radio" name="application" value="commercial">
+                  <span class="application-index">06</span><span class="application-copy"><strong>Ekspozycja i długie ciągi</strong><small>Światło funkcjonalne, wysokie CRI oraz systemy 24 V i 48 V.</small></span><span class="application-parameters">CRI 90+ · do 48 V</span><span class="option-availability"></span>
+                </label>
               </div>
-            </div>
-          </fieldset>
+            </fieldset>
 
-          <fieldset class="config-step" data-step="2" hidden>
-            <legend>Krok 3 z 6</legend>
-            <p class="step-kicker">Barwa światła</p>
-            <h3>Jaki efekt kolorystyczny wybierasz?</h3>
-            <p class="step-description">Barwa wpływa na klimat wnętrza i wymagany typ sterownika.</p>
-            <div class="choice-grid choice-grid-three color-choices">
-              <label class="choice-card"><input type="radio" name="light" value="warm" required><span
-                  class="light-swatch warm"></span><strong>Ciepła biała</strong><small>Przytulna, ok. 2200–3500
-                  K</small></label>
-              <label class="choice-card"><input type="radio" name="light" value="neutral"><span
-                  class="light-swatch neutral"></span><strong>Neutralna biała</strong><small>Naturalna, ok. 3800–5000
-                  K</small></label>
-              <label class="choice-card"><input type="radio" name="light" value="cold"><span
-                  class="light-swatch cold"></span><strong>Zimna biała</strong><small>Techniczna, powyżej 5000
-                  K</small></label>
-              <label class="choice-card"><input type="radio" name="light" value="cct"><span
-                  class="light-swatch cct"></span><strong>CCT</strong><small>Regulowana biel
-                  ciepła–zimna</small></label>
-              <label class="choice-card"><input type="radio" name="light" value="rgb"><span
-                  class="light-swatch rgb"></span><strong>RGB</strong><small>Kolorowe światło
-                  dekoracyjne</small></label>
-              <label class="choice-card"><input type="radio" name="light" value="rgbw"><span
-                  class="light-swatch rgbw"></span><strong>RGB + biel</strong><small>Kolor oraz osobny kanał
-                  bieli</small></label>
-            </div>
-          </fieldset>
+            <fieldset class="config-step" data-step="1" hidden>
+              <legend>Efekt i moc</legend>
+              <p class="step-kicker">Krok 02 • ilość światła</p>
+              <h3>Jaką pracę ma wykonać światło?</h3>
+              <p class="step-description">Moc na metr jest użytecznym filtrem wejściowym. Ostateczną jasność potwierdzą lumeny, profil i sposób odbicia światła.</p>
+              <div class="choice-grid choice-grid-three intensity-grid">
+                <label class="choice-card visual-choice intensity-choice" style="--choice-image:url('../images/hero_mono.webp');--choice-position:center"><input type="radio" name="intensity" value="decorative"><span class="visual-card-index">01 · do 12 W/m</span><span class="visual-card-copy"><strong>Akcent i orientacja</strong><small>Spokojna linia we wnęce, cokole lub przy stopniach.</small></span><span class="option-availability"></span></label>
+                <label class="choice-card visual-choice intensity-choice" style="--choice-image:url('../images/configurator/kitchen_new.png');--choice-position:center"><input type="radio" name="intensity" value="functional"><span class="visual-card-index">02 · 8–16 W/m</span><span class="visual-card-copy"><strong>Światło funkcjonalne</strong><small>Realne doświetlenie blatu, lustra albo półki roboczej.</small></span><span class="option-availability"></span></label>
+                <label class="choice-card visual-choice intensity-choice" style="--choice-image:url('../images/hero_digital.webp');--choice-position:center"><input type="radio" name="intensity" value="strong"><span class="visual-card-index">03 · od 15 W/m</span><span class="visual-card-copy"><strong>Wysoki strumień</strong><small>Mocna linia do ekspozycji i dużych przestrzeni komercyjnych.</small></span><span class="option-availability"></span></label>
+              </div>
+              </fieldset>
 
-          <fieldset class="config-step" data-step="3" hidden>
-            <legend>Krok 4 z 6</legend>
-            <p class="step-kicker">Wymiary instalacji</p>
-            <h3>Ile metrów taśmy potrzebujesz?</h3>
-            <p class="step-description">Podaj sumę wszystkich odcinków. Wynik mocy policzymy dla całej instalacji.</p>
-            <div class="measure-grid">
-              <label class="field-card" for="lengthInput">
-                <span>Łączna długość taśmy</span>
-                <span class="input-with-unit"><input id="lengthInput" name="length" type="number" inputmode="decimal"
-                    min="0.5" max="100" step="0.5" value="5" required><b>m</b></span>
-                <small>Od 0,5 do 100 metrów</small>
-              </label>
-              <label class="field-card" for="segmentsInput">
-                <span>Liczba osobnych odcinków</span>
-                <span class="input-with-unit"><input id="segmentsInput" name="segments" type="number"
-                    inputmode="numeric" min="1" max="30" step="1" value="1" required><b>szt.</b></span>
-                <small>Pomaga ocenić sposób podziału instalacji</small>
-              </label>
-            </div>
-            <div class="inline-tip"><svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"></path>
-                <path d="M12 11v6M12 7h.01"></path>
-              </svg>
-              <p>Przy długich odcinkach może być potrzebne zasilanie w kilku punktach. Konfigurator zaznaczy taki
-                przypadek w wyniku.</p>
-            </div>
-          </fieldset>
 
-          <fieldset class="config-step" data-step="4" hidden>
-            <legend>Krok 5 z 6</legend>
-            <p class="step-kicker">Warunki pracy</p>
-            <h3>Czy instalacja będzie narażona na wilgoć?</h3>
-            <p class="step-description">Wybierz warunki w miejscu samej taśmy. Zasilacz i połączenia również muszą być
-              właściwie chronione.</p>
-            <div class="choice-grid">
-              <label class="choice-card choice-card-wide"><input type="radio" name="environment" value="dry"
-                  required><span class="choice-icon">IP20</span>
-                <div><strong>Suche wnętrze</strong><small>Salon, meble, suche strefy kuchni</small></div>
-              </label>
-              <label class="choice-card choice-card-wide"><input type="radio" name="environment" value="damp"><span
-                  class="choice-icon">IP63+</span>
-                <div><strong>Wilgoć i zachlapania</strong><small>Odpowiednia strefa łazienki, okolice blatu</small>
+            <fieldset class="config-step" data-step="2" hidden>
+              <legend>Technologia taśmy</legend>
+              <p class="step-kicker">Krok 03 • technologia</p>
+              <h3>Jaką budowę ma mieć taśma?</h3>
+              <p class="step-description">COB tworzy jednolitą linię, a SMD jest bardziej uniwersalne i często jaśniejsze.</p>
+<div class="technology-showcase">
+                <div class="technology-photo" role="img" aria-label="Porównanie ciągłej taśmy COB i taśmy SMD z widocznymi diodami"></div>
+                <div class="technology-copy"><span>Technologia taśmy</span><strong>COB czy SMD?</strong><small>Po lewej ciągła linia COB, po prawej widoczne diody SMD. Możesz zdecydować albo zostawić wybór katalogowi.</small></div>
+                <div class="technology-options technology-options-visual">
+                  <label style="--technology-position:center"><input type="radio" name="technology" value="auto" checked><span><b>Dobierz automatycznie</b><small>Najlepszy zgodny wariant</small><em class="option-availability"></em></span></label>
+                  <label style="--technology-position:left center"><input type="radio" name="technology" value="cob"><span><b>COB</b><small>Jednolita linia światła</small><em class="option-availability"></em></span></label>
+                  <label style="--technology-position:right center"><input type="radio" name="technology" value="smd"><span><b>SMD</b><small>Szeroki zakres parametrów</small><em class="option-availability"></em></span></label>
                 </div>
-              </label>
-              <label class="choice-card choice-card-wide"><input type="radio" name="environment" value="outdoor"><span
-                  class="choice-icon">IP65+</span>
-                <div><strong>Zewnętrzne lub trudne warunki</strong><small>Wymagana podwyższona szczelność całej
-                    instalacji</small></div>
-              </label>
-            </div>
-          </fieldset>
-
-          <fieldset class="config-step" data-step="5" hidden>
-            <legend>Krok 6 z 6</legend>
-            <p class="step-kicker">Sterowanie i napięcie</p>
-            <h3>Jak chcesz obsługiwać światło?</h3>
-            <p class="step-description">Dla RGB i regulowanej bieli sterownik jest obowiązkowy.</p>
-            <div class="choice-grid control-grid">
-              <label class="choice-card"><input type="radio" name="control" value="switch" required><span
-                  class="choice-icon">01</span><strong>Zwykły włącznik</strong><small>Włącz / wyłącz</small></label>
-              <label class="choice-card"><input type="radio" name="control" value="dimmer"><span
-                  class="choice-icon">02</span><strong>Ściemnianie / pilot</strong><small>Regulacja
-                  jasności</small></label>
-              <label class="choice-card"><input type="radio" name="control" value="smart"><span
-                  class="choice-icon">03</span><strong>Aplikacja / smart</strong><small>Telefon lub system smart
-                  home</small></label>
-            </div>
-            <div class="voltage-block">
-              <span>Preferowane napięcie</span>
-              <div class="segmented-control">
-                <label><input type="radio" name="voltage" value="auto" checked><span>Dobierz
-                    automatycznie</span></label>
-                <label><input type="radio" name="voltage" value="12"><span>12 V</span></label>
-                <label><input type="radio" name="voltage" value="24"><span>24 V</span></label>
               </div>
-              <small>Przy dłuższych instalacjach konfigurator preferuje 24 V.</small>
-            </div>
-          </fieldset>
+            </fieldset>
+            <fieldset class="config-step" data-step="3" hidden>
+              <legend>Barwa światła</legend>
+              <p class="step-kicker">Krok 03 • widmo i sterowanie</p>
+              <h3>Jakie światło ma być widoczne?</h3>
+              <p class="step-description">Biel regulowana CCT i systemy kolorowe wymagają odpowiedniego sterownika. Nie mieszamy ich ze zwykłą taśmą jednobarwną.</p>
+              <div class="choice-grid choice-grid-three color-choices">
+                <label class="choice-card visual-choice light-choice light-warm" style="--choice-image:url('../images/hero_cct.webp');--choice-position:82% center"><input type="radio" name="light" value="warm"><span class="visual-card-index">2700–3200 K</span><span class="visual-card-copy"><strong>Ciepła biel</strong><small>Wypoczynek, drewno i miękkie wieczorne światło.</small></span><span class="option-availability"></span></label>
+                <label class="choice-card visual-choice light-choice light-neutral" style="--choice-image:url('../images/hero_mono.webp');--choice-position:center"><input type="radio" name="light" value="neutral"><span class="visual-card-index">3800–4500 K</span><span class="visual-card-copy"><strong>Neutralna biel</strong><small>Praca, kuchnia, łazienka i wierne kolory.</small></span><span class="option-availability"></span></label>
+                <label class="choice-card visual-choice light-choice light-cold" style="--choice-image:url('../images/hero_cct.webp');--choice-position:18% center"><input type="radio" name="light" value="cold"><span class="visual-card-index">6000–7000 K</span><span class="visual-card-copy"><strong>Zimna biel</strong><small>Techniczny charakter i wyraźny, chłodny kontrast.</small></span><span class="option-availability"></span></label>
+                <label class="choice-card visual-choice light-choice" style="--choice-image:url('../images/hero_cct.webp');--choice-position:center 35%"><input type="radio" name="light" value="cct"><span class="visual-card-index">2700–6500 K</span><span class="visual-card-copy"><strong>Biel regulowana CCT</strong><small>Jedna instalacja, płynna zmiana temperatury bieli.</small></span><span class="option-availability"></span></label>
+                <label class="choice-card visual-choice light-choice" style="--choice-image:url('../images/hero_rgb.webp');--choice-position:center"><input type="radio" name="light" value="rgb"><span class="visual-card-index">RGB · 3 kanały</span><span class="visual-card-copy"><strong>RGB</strong><small>Kolor dekoracyjny bez osobnego kanału białego.</small></span><span class="option-availability"></span></label>
+                <label class="choice-card visual-choice light-choice" style="--choice-image:url('../images/hero_rgbcct.webp');--choice-position:center"><input type="radio" name="light" value="rgbw"><span class="visual-card-index">RGBW / RGB+CCT</span><span class="visual-card-copy"><strong>Kolor i użyteczna biel</strong><small>Wielokanałowy system do scen i codziennego oświetlenia.</small></span><span class="option-availability"></span></label>
+              </div>
+            </fieldset>
 
-          <p class="validation-message" id="validationMessage" role="alert" aria-live="assertive"></p>
-          <div class="step-actions" id="stepActions">
-            <button class="button-secondary" id="backButton" type="button" hidden>
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="m15 18-6-6 6-6"></path>
-              </svg> Wstecz
-            </button>
-            <button class="button-primary" id="nextButton" type="button" disabled>
-              Dalej <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="m9 18 6-6-6-6"></path>
-              </svg>
-            </button>
-          </div>
-        </form>
+            <fieldset class="config-step" data-step="4" hidden>
+              <legend>Wymiary instalacji</legend>
+              <p class="step-kicker">Krok 04 • obciążenie systemu</p>
+              <h3>Ile metrów i ile niezależnych odcinków?</h3>
+              <p class="step-description">Długość służy do obliczenia mocy. Długie ciągi mogą wymagać zasilania z kilku stron, kilku zasilaczy albo systemu 48 V.</p>
+              <div class="measure-stage">
+                <div class="measure-photo" role="img" aria-label="Rolka taśmy LED, trzy osobne odcinki, profile i miarka na planie instalacji"></div>
+                <div class="measure-fields">
+                  <div class="measure-grid">
+                    <label class="field-card"><span>Łączna długość taśmy</span><span class="input-with-unit"><input id="lengthInput" name="length" type="number" min="0.5" max="200" step="0.5" value="5" inputmode="decimal"><b>m</b></span><small>Suma wszystkich odcinków.</small></label>
+                    <label class="field-card"><span>Liczba niezależnych odcinków</span><span class="input-with-unit"><input id="segmentsInput" name="segments" type="number" min="1" max="20" step="1" value="1" inputmode="numeric"><b>szt.</b></span><small>Osobno zasilane lub sterowane fragmenty.</small></label>
+                  </div>
+                  <div class="inline-tip"><p id="lengthTip">Dla 5 m standardowy system 12 V lub 24 V zwykle nie wymaga dzielenia odcinka.</p></div>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="config-step" data-step="5" hidden>
+              <legend>Warunki montażu</legend>
+              <p class="step-kicker">Krok 05 • ochrona</p>
+              <h3>Na co będzie narażona taśma?</h3>
+              <p class="step-description">Klasa IP dotyczy całego rozwiązania: taśmy, połączeń, profilu i zasilacza. W łazience znaczenie ma także konkretna strefa montażu.</p>
+              <div class="choice-grid choice-grid-three protection-grid">
+                <label class="choice-card visual-choice protection-choice" style="--choice-image:url('../images/configurator/application-furniture.webp');--choice-position:center"><input type="radio" name="environment" value="dry"><span class="visual-card-index">IP20</span><span class="visual-card-copy"><strong>Wnętrze suche</strong><small>Szafy, sufity i zabudowy bez ryzyka zachlapania.</small></span><span class="option-availability"></span></label>
+                <label class="choice-card visual-choice protection-choice" style="--choice-image:url('../images/configurator/bathroom_new.png');--choice-position:center"><input type="radio" name="environment" value="damp"><span class="visual-card-index">IP63+</span><span class="visual-card-copy"><strong>Wilgoć lub pył</strong><small>Kuchnia, właściwa strefa łazienki lub miejsce osłonięte.</small></span><span class="option-availability"></span></label>
+                <label class="choice-card visual-choice protection-choice" style="--choice-image:url('../images/configurator/outdoor_new.png');--choice-position:center"><input type="radio" name="environment" value="outdoor"><span class="visual-card-index">IP65 / IP67</span><span class="visual-card-copy"><strong>Warunki zewnętrzne</strong><small>Elewacja i taras wraz z ochroną połączeń oraz zasilania.</small></span><span class="option-availability"></span></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="config-step" data-step="6" hidden>
+              <legend>Sterowanie i napięcie</legend>
+              <p class="step-kicker">Krok 06 • architektura systemu</p>
+              <h3>Jak chcesz sterować światłem?</h3>
+              <p class="step-description">Dla RGB, RGBW i CCT sterownik jest obowiązkowy. Dla bieli jednobarwnej potrzebujesz go dopiero przy ściemnianiu, pilocie lub aplikacji.</p>
+              <div class="choice-grid control-grid">
+                <label class="choice-card visual-choice control-choice control-switch" style="--choice-image:url('../images/configurator/control_switch_new.png');--choice-position:center"><input type="radio" name="control" value="switch"><span class="visual-card-index">01</span><span class="visual-card-copy"><strong>Nie potrzebuję</strong><small>Sama taśma bez dodatkowego sterowania.</small></span><span class="option-availability"></span></label>
+                <label class="choice-card visual-choice control-choice control-dimmer" style="--choice-image:url('../images/configurator/control_dimmer_new.png');--choice-position:center"><input type="radio" name="control" value="dimmer"><span class="visual-card-index">02</span><span class="visual-card-copy"><strong>Zestaw sterownik + pilot</strong><small>Odbiornik ze sparowanym dedykowanym pilotem.</small></span><span class="option-availability"></span></label>
+                <label class="choice-card visual-choice control-choice control-smart" style="--choice-image:url('../images/configurator/control_smart_new.png');--choice-position:center"><input type="radio" name="control" value="smart"><span class="visual-card-index">03</span><span class="visual-card-copy"><strong>Sterowniki / piloty</strong><small>Osobno dobierane pod aplikację i system.</small></span><span class="option-availability"></span></label>
+              </div>
+              <div class="voltage-block">
+                <div class="voltage-heading"><span>Napięcie systemu</span><small>Wybierz ręcznie tylko wtedy, gdy istniejąca instalacja narzuca napięcie.</small></div>
+                <div class="segmented-control voltage-visual-options">
+                  <label style="--voltage-image:url('../images/configurator/technology-cob-smd-v2.webp');--voltage-position:center"><input type="radio" name="voltage" value="auto" checked><span><b>Dobierz</b><small>na podstawie całego projektu</small><em class="option-availability"></em></span></label>
+                  <label style="--voltage-image:url('../images/slide_tasma_10.webp');--voltage-position:center"><input type="radio" name="voltage" value="12"><span><b>12 V</b><small>krótkie odcinki i zabudowa</small><em class="option-availability"></em></span></label>
+                  <label style="--voltage-image:url('../images/hero_mono.webp');--voltage-position:center"><input type="radio" name="voltage" value="24"><span><b>24 V</b><small>standard instalacji architektonicznej</small><em class="option-availability"></em></span></label>
+                  <label style="--voltage-image:url('../images/hero_digital.webp');--voltage-position:center"><input type="radio" name="voltage" value="48"><span><b>48 V</b><small>długie ciągi projektowe</small><em class="option-availability"></em></span></label>
+                </div>
+                <small>48 V jest przeznaczone przede wszystkim do długich ciągów. Lokalny katalog nie zawiera obecnie zasilaczy Scharfer 48 V, więc taki wynik oznaczymy do weryfikacji projektowej.</small>
+              </div>
+            </fieldset>
+
+            <p class="validation-message" id="validationMessage" role="alert"></p>
+            
+          </form>
+        </div>
       </div>
     </section>
 
     <section class="results-section" id="results" aria-labelledby="resultsTitle" hidden>
-      <div class="results-heading">
-        <div>
-          <p class="section-kicker">Koniec lejka</p>
-          <h2 id="resultsTitle">Najlepsze zgodne taśmy</h2>
-        </div>
-        <button class="button-secondary" id="editConfiguration" type="button">Zmień odpowiedzi</button>
-      </div>
-      <div id="resultsContent" aria-live="polite"></div>
+      <div class="results-heading"><div><p class="section-kicker">Wynik zawężonego wyboru</p><h2 id="resultsTitle">Konkretny produkt i plan systemu.</h2></div><button class="button-secondary" id="editConfiguration" type="button">Zmień odpowiedzi</button></div>
+      <div id="resultContent"></div>
     </section>
 
     <section class="trust-strip" aria-label="Zasady doboru">
-      <div><strong>01</strong><span><b>Zgodność napięcia</b><small>Taśma, zasilacz i sterownik pracują w tym samym
-            systemie.</small></span></div>
-      <div><strong>02</strong><span><b>Zapas mocy</b><small>Zasilacz dobieramy z minimum 20% rezerwy.</small></span>
-      </div>
-      <div><strong>03</strong><span><b>Wycena Indywidualna</b><small>Brak danych oznaczamy do potwierdzenia z
-            doradcą.</small></span></div>
+      <div><strong>01</strong><span><b>Realne SKU</b><small>Wynik pochodzi z lokalnego katalogu produktów.</small></span></div>
+      <div><strong>02</strong><span><b>Zapas mocy</b><small>Zasilacz dobierany jest z rezerwą do obciążenia taśmy.</small></span></div>
+      <div><strong>03</strong><span><b>Jawne ograniczenia</b><small>Brak elementu oznaczamy, zamiast udawać kompletny zestaw.</small></span></div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div><img src="images/logo-white.png" alt="Prescot LED">
-      <p>Profesjonalne systemy oświetlenia LED dobierane jako spójna całość.</p>
-    </div>
-    <div><strong>Potrzebujesz pomocy?</strong><a href="contact.html">Skontaktuj się z doradcą</a></div>
-    <small>Konfigurator ma charakter pomocniczy. Montaż instalacji elektrycznej powierz osobie z odpowiednimi
-      kwalifikacjami.</small>
+    <div><img src="images/logo-white.png" alt="Prescot"><p>Profesjonalne systemy LED dla meblarstwa, architektury, ekspozycji i instalacji specjalistycznych.</p></div>
+    <div><strong>Potrzebujesz konsultacji technicznej?</strong><a href="contact.html">Skontaktuj się z Prescot</a></div>
+    <small>Konfigurator jest narzędziem pomocniczym. Parametry finalnej instalacji wymagają weryfikacji pod kątem miejsca montażu, spadków napięcia i odprowadzania ciepła.</small>
   </footer>
 
+  <nav class="mobile-bottom-nav" aria-label="Skróty mobilne">
+    <div class="mobile-nav-items">
+      <a class="mobile-nav-item" href="index.html"><span>Home</span></a>
+      <a class="mobile-nav-item" href="shop.html"><span>Sklep</span></a>
+      <button class="mobile-nav-item" type="button" onclick="openMobileCategories()"><span>Kategorie</span></button>
+      <a class="mobile-nav-item active" href="configurator.html"><span>Dobierz</span></a>
+      <a class="mobile-nav-item" href="cart.html"><span>Koszyk</span></a>
+    </div>
+  </nav>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
   <script src="js/products-data.js"></script>
   <script src="js/shared-popups.js"></script>
-  <script type="module" src="js/configurator.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const header = document.getElementById('mainHeader');
-      const headerLogo = document.getElementById('headerLogo');
-      function handleScroll() {
-        if (window.scrollY > 40) {
-          if (header) header.classList.add('scrolled');
-          if (headerLogo) headerLogo.src = 'images/logo-dark.png';
-        } else {
-          if (header) header.classList.remove('scrolled');
-          if (headerLogo) headerLogo.src = 'images/logo-white.png';
-        }
-      }
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      handleScroll();
-    });
-  </script>
-
+  <script src="js/configurator-core.js"></script>
+  <script src="js/configurator.js"></script>
+  <script src="js/smart-search.js"></script>
 </body>
-
 </html>
