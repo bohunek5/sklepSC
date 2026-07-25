@@ -151,25 +151,25 @@
     }
 
     .ai-input-area button {
-      position: absolute;
-      bottom: 8px;
-      right: 8px;
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: #ffffff;
-      border: none;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: #ffffff;
+        border: 1px solid rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
     .ai-input-area button:hover {
-      background: #ff7a33;
-    }
+        background: #ff5a00;
+      }
+      .ai-input-area button:hover img {
+        filter: brightness(0) invert(1);
+      }
 
     /* Glow effect for menu link */
     .desktop-nav a.ai-glow-link {
@@ -254,15 +254,17 @@
       <form class="header-search" action="shop.html" role="search">
         <label class="sr-only" for="configSearch">Szukaj produktu</label>
         <input id="configSearch" name="q" type="search" placeholder="Czego szukasz?">
-        <button type="submit" aria-label="Szukaj">
-          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        </button>
+        <button type="button" aria-label="Wyślij">
+              <img src="images/prescot-pattern.png" style="width: 22px; height: 22px; object-fit: contain; transition: filter 0.2s;" alt="Send">
+            </button>
       </form>
       <a class="header-icon" href="cart.html" aria-label="Koszyk">
         <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
         <span class="cart-badge" id="cartBadge">0</span>
       </a>
-      <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Otwórz menu"><span></span><span></span><span></span></button>
+      <button type="button" aria-label="Wyślij">
+              <img src="images/prescot-pattern.png" style="width: 22px; height: 22px; object-fit: contain; transition: filter 0.2s;" alt="Send">
+            </button>
     </div>
     <nav class="mobile-menu" id="mobileMenu" aria-label="Nawigacja mobilna" hidden>
       <a href="index.html">Home</a>
