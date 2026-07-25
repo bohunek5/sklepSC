@@ -297,22 +297,20 @@
       <a class="active" href="ai-shopping.html"><img class="gemini-icon" src="images/prescot-pattern.png" style="width: 18px; height: 18px; object-fit: contain; margin-right: 6px; vertical-align: middle;">Zakup AI</a>
     </nav>
     <div class="header-actions">
-      <form class="header-search" action="shop.html" role="search">
-        <label class="sr-only" for="configSearch">Szukaj produktu</label>
-        <input id="configSearch" name="q" type="search" placeholder="Czego szukasz?">
-        <button type="button" aria-label="Wyślij">
-              <img src="images/prescot-pattern.png" style="width: 22px; height: 22px; object-fit: contain; transition: filter 0.2s;" alt="Send">
-            </button>
-      </form>
-      <a class="header-icon" href="cart.html" aria-label="Koszyk">
-        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-        <span class="cart-badge" id="cartBadge">0</span>
-      </a>
-      <button type="button" aria-label="Wyślij">
-              <img src="images/prescot-pattern.png" style="width: 22px; height: 22px; object-fit: contain; transition: filter 0.2s;" alt="Send">
-            </button>
-    </div>
-    <nav class="mobile-menu" id="mobileMenu" aria-label="Nawigacja mobilna" hidden>
+        <form class="header-search" action="shop.html" role="search">
+          <label class="sr-only" for="configSearch">Szukaj produktu</label>
+          <input id="configSearch" name="q" type="search" placeholder="Czego szukasz?">
+          <button type="submit" aria-label="Szukaj">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+          </button>
+        </form>
+        <a class="header-icon" href="cart.html" aria-label="Koszyk">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </a>
+        <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Otwórz menu"><span></span><span></span><span></span></button>
+      </div>
+      <nav class="mobile-menu" id="mobileMenu" aria-label="Nawigacja mobilna" hidden>
       <a href="index.html">Home</a>
       <a href="shop.html">Sklep</a>
       <a href="blog.html">Wiedza</a>
