@@ -116,14 +116,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       productsContainer.innerHTML = html;
       
       const cta = document.createElement('a');
-      cta.className = 'pro-product-card';
-      cta.style.justifyContent = 'center';
-      cta.style.background = isBought ? '#10b981' : '#0b1a30';
-      cta.style.color = '#fff';
-      cta.style.textDecoration = 'none';
-      cta.style.fontWeight = 'bold';
-      cta.style.border = 'none';
-      cta.style.marginTop = '12px';
+      cta.className = 'pro-product-card ai-add-all-btn' + (isBought ? ' bought' : '');
       cta.textContent = isBought ? 'DODANO! Przejdź do kasy' : 'Dodaj wszystko do koszyka';
       cta.href = '#';
       
@@ -132,15 +125,13 @@ document.addEventListener('DOMContentLoaded', async () => {
           if (!isBought) {
               addItemsToCart(lastProposedItems);
               cta.textContent = 'DODANO! Przejdź do kasy';
-              cta.style.background = '#ffffff';
-                cta.style.color = '#0b1a30';
-                cta.style.border = '1px solid #0b1a30';
+              cta.classList.add('bought');
               lastProposedItems = [];
               const clone = cta.cloneNode(true);
-              clone.onclick = (e) => { e.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
+              clone.onclick = (e) => { e.preventDefault(); window.location.href = 'cart.html'; };
               cta.replaceWith(clone);
           }
-          if(window.openCartDrawer) window.openCartDrawer();
+          window.location.href = 'cart.html';
       };
       
       productsContainer.appendChild(cta);
@@ -320,14 +311,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 
                 const cta = document.createElement('a');
                 cta.href = '#';
-                cta.onclick = (e) => { e.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
-                cta.className = 'pro-product-card';
-                cta.style.justifyContent = 'center';
-                cta.style.background = '#0b1a30';
-                cta.style.color = '#fff';
-                cta.style.textDecoration = 'none';
-                cta.style.fontWeight = 'bold';
-                cta.style.border = 'none';
+                cta.onclick = (e) => { e.preventDefault(); window.location.href = 'cart.html'; };
+                cta.className = 'pro-product-card ai-add-all-btn' + (overallBuy ? ' bought' : '');
                 cta.textContent = 'Przejdź do kasy';
                 productsContainer.appendChild(cta);
                 
@@ -431,14 +416,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         const cta = document.createElement('a');
         cta.href = '#';
-                cta.onclick = (e) => { e.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
-        cta.className = 'pro-product-card';
-        cta.style.justifyContent = 'center';
-        cta.style.background = '#0b1a30';
-        cta.style.color = '#fff';
-        cta.style.textDecoration = 'none';
-        cta.style.fontWeight = 'bold';
-        cta.style.border = 'none';
+                cta.onclick = (e) => { e.preventDefault(); window.location.href = 'cart.html'; };
+        cta.className = 'pro-product-card ai-add-all-btn' + (overallBuy ? ' bought' : '');
         cta.textContent = overallBuy ? 'Przejdź do kasy' : 'Dodaj wszystko do koszyka';
         
         if (!overallBuy) {
@@ -448,10 +427,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 addItemsToCart(lastProposedItems);
                 cta.textContent = 'DODANO! Przejdź do kasy';
                 cta.href = '#';
-                cta.onclick = (e) => { e.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
-                cta.style.background = '#ffffff';
-                cta.style.color = '#0b1a30';
-                cta.style.border = '1px solid #0b1a30'; // Green
+                cta.onclick = (e) => { e.preventDefault(); window.location.href = 'cart.html'; };
+                cta.classList.add('bought'); // Green
                 lastProposedItems = [];
                 // recreate listener for href click now
                 cta.replaceWith(cta.cloneNode(true));
