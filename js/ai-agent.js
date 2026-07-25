@@ -282,8 +282,11 @@ document.addEventListener('DOMContentLoaded', async () => {
               cta.style.boxShadow = 'none';
               cta.classList.add('bought');
               aiSessionState.lastProposedItems = [];
+              if(window.openCartDrawer) window.openCartDrawer();
+          } else {
+              // Redirect to cart if already added
+              window.location.href = 'cart.html';
           }
-          if(window.openCartDrawer) window.openCartDrawer();
       };
       
       productsContainer.appendChild(cta);
