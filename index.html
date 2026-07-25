@@ -672,6 +672,11 @@
       z-index: 20;
     }
     /* Slider Arrows — far edges, vertically centered */
+    
+    .hero-controls-bar .slider-arrow, .hero-controls-bar .scroll-down-arrow {
+      pointer-events: auto !important;
+    }
+
     .slider-arrows {
       position: absolute;
       top: 0;
@@ -1260,7 +1265,12 @@
         z-index: 100 !important;
         order: 2 !important;
       }
-      .slider-arrows {
+      
+    .hero-controls-bar .slider-arrow, .hero-controls-bar .scroll-down-arrow {
+      pointer-events: auto !important;
+    }
+
+    .slider-arrows {
         display: contents !important;
       }
       .slider-arrow {
