@@ -5767,12 +5767,14 @@
     });
 
     // Slideshow Functionality
-    const slides = document.querySelectorAll('.slide');
+    (function initHeroSlider() {
+      const slides = document.querySelectorAll('.slide');
+      if (!slides || slides.length === 0) return;
+      
       const prevBtn = document.getElementById('prevSlide');
       const nextBtn = document.getElementById('nextSlide');
       const indicators = document.querySelectorAll('.hero-indicator');
       let currentSlide = 0;
-  
       let slideTimeout = null;
   
       function showSlide(index) {
@@ -5786,7 +5788,6 @@
         currentSlide = (index + slides.length) % slides.length;
         const activeSlide = slides[currentSlide];
   
-        // Update indicators
         indicators.forEach((ind, i) => {
           if (i === currentSlide) ind.classList.add('active');
           else ind.classList.remove('active');
@@ -5795,7 +5796,6 @@
         if (prevActive && prevActive !== activeSlide) {
           prevActive.classList.remove('active');
           prevActive.classList.add('leaving');
-          // Pause videos and remove ended event listener
           prevActive.querySelectorAll('video').forEach(v => {
             v.pause();
             v.onended = null;
@@ -5809,20 +5809,16 @@
         
         if (activeVideo) {
           activeVideo.currentTime = 0;
-          
           activeVideo.onended = () => {
             showSlide(currentSlide + 1);
           };
-  
           activeVideo.play().catch(err => {
             console.log("Autoplay blocked:", err);
           });
         }
         
-        // Always force switch after exactly 5 seconds
         resetTimeout(5000);
   
-        // Clean up leaving class after transition finishes
         if (prevActive && prevActive !== activeSlide) {
           setTimeout(() => {
             slides.forEach(s => {
@@ -5841,16 +5837,35 @@
         }, duration);
       }
   
-      if (prevBtn) prevBtn.addEventListener('click', () => { showSlide(currentSlide - 1); });
-      if (nextBtn) nextBtn.addEventListener('click', () => { showSlide(currentSlide + 1); });
+      if (prevBtn) {
+        // Remove old listeners by cloning
+        const newPrev = prevBtn.cloneNode(true);
+        prevBtn.parentNode.replaceChild(newPrev, prevBtn);
+        newPrev.addEventListener('click', () => { showSlide(currentSlide - 1); });
+      }
       
-      indicators.forEach((ind, i) => {
-        ind.addEventListener('click', () => {
+      if (nextBtn) {
+        const newNext = nextBtn.cloneNode(true);
+        nextBtn.parentNode.replaceChild(newNext, nextBtn);
+        newNext.addEventListener('click', () => { showSlide(currentSlide + 1); });
+      }
+      
+      const freshIndicators = document.querySelectorAll('.hero-indicator');
+      freshIndicators.forEach((ind, i) => {
+        const newInd = ind.cloneNode(true);
+        ind.parentNode.replaceChild(newInd, ind);
+        newInd.addEventListener('click', () => {
           showSlide(i);
         });
       });
   
-      // Initialize first slide transition on page load
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => { showSlide(0); });
+      } else {
+        showSlide(0);
+      }
+    })();
+    // Initialize first slide transition on page load
     document.addEventListener('DOMContentLoaded', () => {
       showSlide(0);
     });
