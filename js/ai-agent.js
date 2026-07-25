@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     let avatar = isUser 
       ? `<div class="avatar avatar-user"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>`
-      : `<div class="avatar avatar-ai"><img src="images/prescot-pattern.png" style="width: 100%; height: 100%; object-fit: contain; padding: 4px; border-radius: 8px;"></div>`;
+      : `<div class="avatar avatar-ai"><img src="images/prescot-pattern.png" style="width: 100%; height: 100%; object-fit: contain; width: 24px !important; height: 24px !important; object-fit: contain; border-radius: 8px;"></div>`;
 
     const bubble = document.createElement('div');
     bubble.className = 'message-bubble';
