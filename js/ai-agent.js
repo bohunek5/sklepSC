@@ -231,26 +231,53 @@ document.addEventListener('DOMContentLoaded', async () => {
       productsContainer.innerHTML = html;
       
       const cta = document.createElement('a');
-      cta.className = 'mockup-btn ai-add-all-btn' + (isBought ? ' bought' : '');
-      cta.style.justifyContent = 'center';
-      cta.style.marginTop = '12px';
-      cta.style.background = isBought ? '#10b981' : '#ff5a00';
-      cta.style.color = '#fff';
-      cta.style.fontWeight = '600';
-      cta.style.textDecoration = 'none';
-      cta.textContent = isBought ? 'DODANO! Przejdź do kasy' : 'Dodaj wszystko do koszyka';
+      cta.className = 'ai-add-all-btn';
+      Object.assign(cta.style, {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '8px',
+        marginTop: '12px',
+        padding: '12px 28px',
+        borderRadius: '99px',
+        border: isBought ? '2px solid #10b981' : '2px solid #ff5a00',
+        background: 'transparent',
+        color: isBought ? '#10b981' : '#ff5a00',
+        fontWeight: '600',
+        fontSize: '13px',
+        letterSpacing: '0.5px',
+        textTransform: 'uppercase',
+        textDecoration: 'none',
+        cursor: 'pointer',
+        transition: 'all 0.3s ease',
+        fontFamily: "'Outfit', sans-serif"
+      });
+      cta.textContent = isBought ? '✓ DODANO — Przejdź do kasy' : 'Dodaj do koszyka';
       cta.href = '#';
+
+      cta.onmouseover = () => {
+        if (!cta.classList.contains('bought')) {
+          cta.style.background = '#ff5a00';
+          cta.style.color = '#fff';
+        }
+      };
+      cta.onmouseout = () => {
+        if (!cta.classList.contains('bought')) {
+          cta.style.background = 'transparent';
+          cta.style.color = '#ff5a00';
+        }
+      };
       
       cta.onclick = (e) => {
           e.preventDefault();
-          if (!isBought) {
+          if (!cta.classList.contains('bought')) {
               addItemsToCart(aiSessionState.lastProposedItems);
-              cta.textContent = 'DODANO! Przejdź do kasy';
-              cta.style.background = '#10b981';
+              cta.textContent = '✓ DODANO — Przejdź do kasy';
+              cta.style.borderColor = '#10b981';
+              cta.style.color = '#10b981';
+              cta.style.background = 'transparent';
+              cta.classList.add('bought');
               aiSessionState.lastProposedItems = [];
-              const clone = cta.cloneNode(true);
-              clone.onclick = (e) => { e.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
-              cta.replaceWith(clone);
           }
           if(window.openCartDrawer) window.openCartDrawer();
       };
@@ -401,27 +428,69 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Keyword Search Fallback if no specific application intent was captured
     const cleanText = lowerText.replace(/[.,!?]/g, ' ').replace(/ledip/g, 'led ip');
     const stopWords = ['do', 'na', 'w', 'o', 'z', 'i', 'a', 'oraz', 'potrzebuje', 'szukam', 'poszukuję', 'chcę', 'kupić', 'proszę', 'potrzebuję'];
-    const rawKeywords = cleanText.split(/\s+/).filter(w => w.length > 2 && !stopWords.includes(w));
+    const rawKeywords = cleanText.split(/\s+/).filter(w => w.length > 1 && !stopWords.includes(w));
     
-    const keywords = rawKeywords.map(w => {
-        if (w.startsWith('zasilacz') || w.startsWith('zasial')) return 'zasilacz';
-        if (w.startsWith('profil')) return 'profil';
-        if (w.startsWith('taśm') || w.startsWith('tasm')) return 'taśm';
-        if (w.startsWith('sterownik')) return 'sterownik';
-        if (w === 'ip67' || w === 'hermetyczny' || w === 'wodoodporny') return 'hermetyczny';
-        return w;
+    // Extract spec keywords (e.g. "60w", "24v", "12v", "ip67") separately
+    const specPattern = /^(\d+)\s*(w|v|k)$/i;
+    const specKeywords = [];
+    const textKeywords = [];
+    
+    rawKeywords.forEach(w => {
+        const specMatch = w.match(specPattern);
+        if (specMatch) {
+            specKeywords.push(w.toLowerCase());
+        } else {
+            // Normalize common stems
+            if (w.startsWith('zasilacz') || w.startsWith('zasial')) textKeywords.push('zasilacz');
+            else if (w.startsWith('profil')) textKeywords.push('profil');
+            else if (w.startsWith('taśm') || w.startsWith('tasm')) textKeywords.push('taśm');
+            else if (w.startsWith('sterownik')) textKeywords.push('sterownik');
+            else if (w === 'ip67' || w === 'hermetyczny' || w === 'wodoodporny') textKeywords.push('hermetyczny');
+            else if (w.length > 2) textKeywords.push(w);
+        }
     });
+    
+    // Also catch "60 w" (number + unit separated by space)
+    const spacedSpec = lowerText.match(/(\d+)\s+(w|v|k)(?:\b)/gi);
+    if (spacedSpec) {
+        spacedSpec.forEach(m => {
+            const joined = m.replace(/\s+/g, '').toLowerCase();
+            if (!specKeywords.includes(joined)) specKeywords.push(joined);
+        });
+    }
+    
+    const keywords = [...textKeywords, ...specKeywords];
     
     let matchedProducts = [];
     if (keywords.length > 0) {
         matchedProducts = catalog.map(p => {
+            const titleLower = p.title.toLowerCase().replace(/\s+/g, ' ');
+            // Normalize title: collapse multiple spaces for matching "60W" in titles like "12V   60W"
+            const titleNorm = titleLower.replace(/\s+/g, '');
             let score = 0;
-            keywords.forEach(k => {
-                if (p.title.toLowerCase().includes(k)) score += 3;
+            let specMismatch = false;
+            
+            textKeywords.forEach(k => {
+                if (titleLower.includes(k)) score += 3;
                 if (p.category && p.category.toLowerCase().includes(k)) score += 1;
             });
+            
+            // Spec keywords: MUST match. If spec is present in query but NOT in title, penalize heavily.
+            specKeywords.forEach(spec => {
+                if (titleNorm.includes(spec) || titleLower.includes(spec)) {
+                    score += 5; // Strong bonus for exact spec match
+                } else {
+                    specMismatch = true; // This product doesn't have the requested spec
+                }
+            });
+            
+            // If there were spec keywords and this product doesn't match ANY of them, reject it
+            if (specKeywords.length > 0 && specMismatch) {
+                score = 0;
+            }
+            
             return { product: p, score };
-        }).filter(x => x.score > 0).sort((a, b) => b.score - a.score).map(x => x.product).slice(0, 3);
+        }).filter(x => x.score > 0).sort((a, b) => b.score - a.score).map(x => x.product).slice(0, 5);
     }
 
     if (matchedProducts.length > 0) {

@@ -5758,9 +5758,11 @@
     const menuToggle = document.getElementById('menuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
     
-    menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('active');
-    });
+    if (menuToggle) {
+      menuToggle.addEventListener('click', () => {
+        if (mobileMenu) mobileMenu.classList.toggle('active');
+      });
+    }
 
     // Slideshow Functionality
     (function initHeroSlider() {
