@@ -4367,8 +4367,8 @@
   <!-- Slide 1: Salon & Elegancja -->
   <div class="slide active" data-tech="living">
     <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-      <video class="slide-video desktop-bg" muted autoplay playsinline preload="auto" src="videos/hero_living_room.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-      <video class="slide-video mobile-bg" muted autoplay playsinline preload="auto" src="videos/hero_living_room.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video desktop-bg" muted autoplay loop playsinline preload="auto" src="videos/hero_living_room.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video mobile-bg" muted autoplay loop playsinline preload="auto" src="videos/hero_living_room.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
     </div>
     <div class="slide-banner-box" style="z-index: 2;">
       <svg class="glass-border-svg">
@@ -4386,8 +4386,8 @@
   <!-- Slide 2: Kuchenny Minimalizm -->
   <div class="slide" data-tech="kitchen">
     <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-      <video class="slide-video desktop-bg" muted autoplay playsinline preload="auto" src="videos/hero_kitchen.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-      <video class="slide-video mobile-bg" muted autoplay playsinline preload="auto" src="videos/hero_kitchen.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video desktop-bg" muted autoplay loop playsinline preload="auto" src="videos/hero_kitchen.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video mobile-bg" muted autoplay loop playsinline preload="auto" src="videos/hero_kitchen.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
     </div>
     <div class="slide-banner-box" style="z-index: 2;">
       <svg class="glass-border-svg">
@@ -4405,8 +4405,8 @@
   <!-- Slide 3: Nowoczesne Biuro -->
   <div class="slide" data-tech="office">
     <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-      <video class="slide-video desktop-bg" muted autoplay playsinline preload="auto" src="videos/hero_office.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-      <video class="slide-video mobile-bg" muted autoplay playsinline preload="auto" src="videos/hero_office.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video desktop-bg" muted autoplay loop playsinline preload="auto" src="videos/hero_office.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video mobile-bg" muted autoplay loop playsinline preload="auto" src="videos/hero_office.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
     </div>
     <div class="slide-banner-box" style="z-index: 2;">
       <svg class="glass-border-svg">
@@ -4424,8 +4424,8 @@
   <!-- Slide 4: Oświetlenie Schodów -->
   <div class="slide" data-tech="stairs">
     <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-      <video class="slide-video desktop-bg" muted autoplay playsinline preload="auto" src="videos/hero_staircase.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-      <video class="slide-video mobile-bg" muted autoplay playsinline preload="auto" src="videos/hero_staircase.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video desktop-bg" muted autoplay loop playsinline preload="auto" src="videos/hero_staircase.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video mobile-bg" muted autoplay loop playsinline preload="auto" src="videos/hero_staircase.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
     </div>
     <div class="slide-banner-box" style="z-index: 2;">
       <svg class="glass-border-svg">
@@ -5773,7 +5773,6 @@
       
       const prevBtn = document.getElementById('prevSlide');
       const nextBtn = document.getElementById('nextSlide');
-      const indicators = document.querySelectorAll('.hero-indicator');
       let currentSlide = 0;
       let slideTimeout = null;
   
@@ -5788,6 +5787,8 @@
         currentSlide = (index + slides.length) % slides.length;
         const activeSlide = slides[currentSlide];
   
+        // Query indicators directly from DOM
+        const indicators = document.querySelectorAll('.hero-indicator');
         indicators.forEach((ind, i) => {
           if (i === currentSlide) ind.classList.add('active');
           else ind.classList.remove('active');
@@ -5798,7 +5799,6 @@
           prevActive.classList.add('leaving');
           prevActive.querySelectorAll('video').forEach(v => {
             v.pause();
-            v.onended = null;
           });
         }
   
@@ -5808,13 +5808,10 @@
         const activeVideo = isMobile ? (activeSlide.querySelector('video.mobile-bg') || activeSlide.querySelector('video')) : (activeSlide.querySelector('video.desktop-bg') || activeSlide.querySelector('video'));
         
         if (activeVideo) {
-          activeVideo.currentTime = 0;
-          activeVideo.onended = () => {
-            showSlide(currentSlide + 1);
-          };
-          activeVideo.play().catch(err => {
-            console.log("Autoplay blocked:", err);
-          });
+          try {
+            activeVideo.currentTime = 0;
+            activeVideo.play().catch(err => { console.log("Autoplay blocked:", err); });
+          } catch(e) {}
         }
         
         resetTimeout(5000);
@@ -5838,25 +5835,15 @@
       }
   
       if (prevBtn) {
-        // Remove old listeners by cloning
-        const newPrev = prevBtn.cloneNode(true);
-        prevBtn.parentNode.replaceChild(newPrev, prevBtn);
-        newPrev.addEventListener('click', () => { showSlide(currentSlide - 1); });
+        prevBtn.onclick = (e) => { e.preventDefault(); showSlide(currentSlide - 1); };
       }
       
       if (nextBtn) {
-        const newNext = nextBtn.cloneNode(true);
-        nextBtn.parentNode.replaceChild(newNext, nextBtn);
-        newNext.addEventListener('click', () => { showSlide(currentSlide + 1); });
+        nextBtn.onclick = (e) => { e.preventDefault(); showSlide(currentSlide + 1); };
       }
       
-      const freshIndicators = document.querySelectorAll('.hero-indicator');
-      freshIndicators.forEach((ind, i) => {
-        const newInd = ind.cloneNode(true);
-        ind.parentNode.replaceChild(newInd, ind);
-        newInd.addEventListener('click', () => {
-          showSlide(i);
-        });
+      document.querySelectorAll('.hero-indicator').forEach((ind, i) => {
+        ind.onclick = (e) => { e.preventDefault(); showSlide(i); };
       });
   
       if (document.readyState === 'loading') {
