@@ -51,9 +51,15 @@
       max-width: 600px;
       max-height: 600px;
       background: url('images/logo-white.png') center/contain no-repeat;
-      opacity: 0.02; /* Bardzo delikatny znak wodny */
-      z-index: -1;
+      opacity: 0.025; /* Bardzo delikatny znak wodny */
+      z-index: 0;
       pointer-events: none;
+      transition: opacity 0.3s ease, filter 0.3s ease;
+    }
+
+    .ai-hero.typing::before {
+      opacity: 0.12;
+      filter: brightness(0) saturate(100%) invert(48%) sepia(85%) saturate(2254%) hue-rotate(346deg) brightness(101%) contrast(106%) drop-shadow(0 0 30px rgba(255, 90, 0, 0.7));
     }
 
     /* Chat window styled like a pro LLM */
@@ -430,10 +436,6 @@
 
   <main>
     <section class="ai-hero">
-      <div class="ai-bg-logo-container">
-        <img src="images/logo-white.png" class="ai-bg-logo-base" alt="">
-        <img src="images/logo-white.png" class="ai-bg-logo-glow" alt="">
-      </div>
       <div class="ai-chat-interface">
         
         <div class="chat-history">
@@ -477,15 +479,15 @@
 
       // Typing background glow logic
       const aiChatInput = document.getElementById('aiChatInput');
-      const glowLogo = document.querySelector('.ai-bg-logo-glow');
+      const aiHero = document.querySelector('.ai-hero');
       let typingTimeout;
 
-      if (aiChatInput && glowLogo) {
+      if (aiChatInput && aiHero) {
         aiChatInput.addEventListener('input', () => {
-          glowLogo.classList.add('typing');
+          aiHero.classList.add('typing');
           clearTimeout(typingTimeout);
           typingTimeout = setTimeout(() => {
-            glowLogo.classList.remove('typing');
+            aiHero.classList.remove('typing');
           }, 400); // Effect lingers for 400ms after last keystroke
         });
       }
