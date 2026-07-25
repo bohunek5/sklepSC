@@ -257,6 +257,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
       cta.textContent = isBought ? '\u2713 DODANO \u2014 Przejd\u017a do kasy' : 'Dodaj do koszyka';
       cta.href = '#';
+      if (isBought) {
+        cta.classList.add('bought');
+      }
 
       cta.onmouseover = () => {
         if (!cta.classList.contains('bought')) {

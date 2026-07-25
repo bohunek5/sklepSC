@@ -454,8 +454,8 @@ function injectCartDrawer() {
           </button>
           <button id="cartDrawerGoToCart" class="cart-viewcart-btn-new">
             <div class="btn-slide-wrap">
-              <span class="btn-txt-default">Powrót</span>
-              <span class="btn-txt-hover">Zamknij</span>
+              <span class="btn-txt-default">Przejdź do koszyka</span>
+              <span class="btn-txt-hover">Zobacz cały koszyk</span>
             </div>
           </button>
         </div>
@@ -1245,6 +1245,7 @@ function initSharedPopups() {
   if (goToCartBtn) {
     goToCartBtn.addEventListener('click', () => {
       closeCart();
+      window.location.href = 'cart.html';
     });
   }
 
