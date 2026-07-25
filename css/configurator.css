@@ -868,7 +868,8 @@ img {
   font-family: "Outfit", sans-serif;
   font-size: clamp(30px, 3.3vw, 48px);
   letter-spacing: -0.035em;
-  line-height: 1.05;
+  line-height: 1.25;
+    padding-bottom: 5px;
 }
 
 .step-description {
