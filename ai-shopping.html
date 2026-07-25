@@ -430,6 +430,10 @@
 
   <main>
     <section class="ai-hero">
+      <div class="ai-bg-logo-container">
+        <img src="images/logo-white.png" class="ai-bg-logo-base" alt="">
+        <img src="images/logo-white.png" class="ai-bg-logo-glow" alt="">
+      </div>
       <div class="ai-chat-interface">
         
         <div class="chat-history">
@@ -459,6 +463,7 @@
   <script src="js/smart-search.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Header scroll logic
       const header = document.getElementById('siteHeader');
       function handleScroll() {
         if (window.scrollY > 40) {
@@ -469,6 +474,21 @@
       }
       window.addEventListener('scroll', handleScroll, { passive: true });
       handleScroll();
+
+      // Typing background glow logic
+      const aiChatInput = document.getElementById('aiChatInput');
+      const glowLogo = document.querySelector('.ai-bg-logo-glow');
+      let typingTimeout;
+
+      if (aiChatInput && glowLogo) {
+        aiChatInput.addEventListener('input', () => {
+          glowLogo.classList.add('typing');
+          clearTimeout(typingTimeout);
+          typingTimeout = setTimeout(() => {
+            glowLogo.classList.remove('typing');
+          }, 400); // Effect lingers for 400ms after last keystroke
+        });
+      }
     });
   </script>
 </body>
