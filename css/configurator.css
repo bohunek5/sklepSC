@@ -1995,7 +1995,7 @@ label.is-unavailable {
   min-height: 390px;
   background-image:
     linear-gradient(90deg, rgba(5,17,33,.05), rgba(5,17,33,.14)),
-    url("../images/configurator/installation-planning-v2.webp");
+    url("../images/configurator/install_planning_new.png");
   background-position: center;
   background-size: cover;
 }
