@@ -5768,148 +5768,89 @@
 
     // Slideshow Functionality
     const slides = document.querySelectorAll('.slide');
-    const prevBtn = document.getElementById('prevSlide');
-    const nextBtn = document.getElementById('nextSlide');
-    let currentSlide = 0;
-
-    let slideTimeout = null;
-
-    function showSlide(index) {
-      if (slideTimeout) {
-        clearTimeout(slideTimeout);
-        slideTimeout = null;
-      }
-
-      const prevActive = document.querySelector('.slide.active');
-      
-      currentSlide = (index + slides.length) % slides.length;
-      const activeSlide = slides[currentSlide];
-
-      if (prevActive && prevActive !== activeSlide) {
-        prevActive.classList.remove('active');
-        prevActive.classList.add('leaving');
-        // Pause videos and remove ended event listener
-        prevActive.querySelectorAll('video').forEach(v => {
-          v.pause();
-          v.onended = null;
-        });
-      }
-
-      activeSlide.classList.add('active');
-      
-      // Select the active video tag matching screen size
-      const isMobile = window.innerWidth <= 768;
-      const activeVideo = isMobile ? (activeSlide.querySelector('video.mobile-bg') || activeSlide.querySelector('video')) : (activeSlide.querySelector('video.desktop-bg') || activeSlide.querySelector('video'));
-      
-      let fallbackDuration = 10000; // 10s safety fallback
-
-      if (activeVideo) {
-        activeVideo.currentTime = 0;
+      const prevBtn = document.getElementById('prevSlide');
+      const nextBtn = document.getElementById('nextSlide');
+      const indicators = document.querySelectorAll('.hero-indicator');
+      let currentSlide = 0;
+  
+      let slideTimeout = null;
+  
+      function showSlide(index) {
+        if (slideTimeout) {
+          clearTimeout(slideTimeout);
+          slideTimeout = null;
+        }
+  
+        const prevActive = document.querySelector('.slide.active');
         
-        // Listen for ended event to switch slides immediately
-        activeVideo.onended = () => {
+        currentSlide = (index + slides.length) % slides.length;
+        const activeSlide = slides[currentSlide];
+  
+        // Update indicators
+        indicators.forEach((ind, i) => {
+          if (i === currentSlide) ind.classList.add('active');
+          else ind.classList.remove('active');
+        });
+  
+        if (prevActive && prevActive !== activeSlide) {
+          prevActive.classList.remove('active');
+          prevActive.classList.add('leaving');
+          // Pause videos and remove ended event listener
+          prevActive.querySelectorAll('video').forEach(v => {
+            v.pause();
+            v.onended = null;
+          });
+        }
+  
+        activeSlide.classList.add('active');
+        
+        const isMobile = window.innerWidth <= 768;
+        const activeVideo = isMobile ? (activeSlide.querySelector('video.mobile-bg') || activeSlide.querySelector('video')) : (activeSlide.querySelector('video.desktop-bg') || activeSlide.querySelector('video'));
+        
+        if (activeVideo) {
+          activeVideo.currentTime = 0;
+          
+          activeVideo.onended = () => {
+            showSlide(currentSlide + 1);
+          };
+  
+          activeVideo.play().catch(err => {
+            console.log("Autoplay blocked:", err);
+          });
+        }
+        
+        // Always force switch after exactly 5 seconds
+        resetTimeout(5000);
+  
+        // Clean up leaving class after transition finishes
+        if (prevActive && prevActive !== activeSlide) {
+          setTimeout(() => {
+            slides.forEach(s => {
+              if (s !== activeSlide) {
+                s.classList.remove('leaving');
+              }
+            });
+          }, 1400);
+        }
+      }
+  
+      function resetTimeout(duration) {
+        if (slideTimeout) clearTimeout(slideTimeout);
+        slideTimeout = setTimeout(() => {
           showSlide(currentSlide + 1);
-        };
-
-        // Try playing video and calculate transition duration
-        activeVideo.play()
-          .then(() => {
-            if (activeVideo.duration) {
-              fallbackDuration = activeVideo.duration * 1000;
-              resetTimeout(fallbackDuration);
-            } else {
-              activeVideo.onloadedmetadata = () => {
-                fallbackDuration = activeVideo.duration * 1000;
-                resetTimeout(fallbackDuration);
-              };
-            }
-          })
-          .catch(err => {
-            console.log("Autoplay blocked, using fallback:", err);
-            resetTimeout(10000);
-          });
-      } else {
-        resetTimeout(10000);
+        }, duration);
       }
-
-      // Clean up leaving class after transition finishes
-      if (prevActive && prevActive !== activeSlide) {
-        setTimeout(() => {
-          slides.forEach(s => {
-            if (s !== activeSlide) {
-              s.classList.remove('leaving');
-            }
-          });
-        }, 1400);
-      }
-    }
-
-    function resetTimeout(duration) {
-      if (slideTimeout) clearTimeout(slideTimeout);
-      slideTimeout = setTimeout(() => {
-        showSlide(currentSlide + 1);
-      }, duration);
-    }
-
-    let audioCtx = null;
-    function initAudio() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-    }
-
-    function playPlumSound() {
-      initAudio();
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      const osc = audioCtx.createOscillator();
-      const gainNode = audioCtx.createGain();
+  
+      if (prevBtn) prevBtn.addEventListener('click', () => { showSlide(currentSlide - 1); });
+      if (nextBtn) nextBtn.addEventListener('click', () => { showSlide(currentSlide + 1); });
       
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(400, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.1);
-      
-      gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + 0.02);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
-      
-      osc.connect(gainNode);
-      gainNode.connect(audioCtx.destination);
-      
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.2);
-    }
-
-    function playHoverSound() {
-      if (!audioCtx) return;
-      if (audioCtx.state === 'suspended') return;
-      const osc = audioCtx.createOscillator();
-      const gainNode = audioCtx.createGain();
-      
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(300, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.1);
-      
-      gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.03, audioCtx.currentTime + 0.02);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
-      
-      osc.connect(gainNode);
-      gainNode.connect(audioCtx.destination);
-      
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.1);
-    }
-
-    prevBtn.addEventListener('click', () => {
-      showSlide(currentSlide - 1);
-    });
-    nextBtn.addEventListener('click', () => {
-      showSlide(currentSlide + 1);
-    });
-    
-
-
-    // Initialize first slide transition on page load
+      indicators.forEach((ind, i) => {
+        ind.addEventListener('click', () => {
+          showSlide(i);
+        });
+      });
+  
+      // Initialize first slide transition on page load
     document.addEventListener('DOMContentLoaded', () => {
       showSlide(0);
     });
