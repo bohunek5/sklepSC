@@ -233,38 +233,41 @@ document.addEventListener('DOMContentLoaded', async () => {
       const cta = document.createElement('a');
       cta.className = 'ai-add-all-btn';
       Object.assign(cta.style, {
-        display: 'flex',
+        display: 'inline-flex',
         alignItems: 'center',
         justifyContent: 'center',
         gap: '8px',
         marginTop: '12px',
-        padding: '12px 28px',
+        minHeight: '42px',
+        padding: '9px 20px',
         borderRadius: '99px',
-        border: isBought ? '2px solid #10b981' : '2px solid #ff5a00',
-        background: 'transparent',
-        color: isBought ? '#10b981' : '#ff5a00',
-        fontWeight: '600',
-        fontSize: '13px',
-        letterSpacing: '0.5px',
+        border: isBought ? '1px solid rgba(16,185,129,0.4)' : '1px solid rgba(255, 255, 255, 0.24)',
+        background: isBought ? 'rgba(16,185,129,0.15)' : 'rgba(255, 255, 255, 0.09)',
+        boxShadow: isBought ? 'none' : '0 6px 18px rgba(0, 0, 0, 0.04)',
+        color: isBought ? '#10b981' : '#ffffff',
+        fontWeight: '700',
+        fontSize: '11px',
+        letterSpacing: '0.06em',
         textTransform: 'uppercase',
         textDecoration: 'none',
+        whiteSpace: 'nowrap',
         cursor: 'pointer',
-        transition: 'all 0.3s ease',
-        fontFamily: "'Outfit', sans-serif"
+        transition: 'color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
+        fontFamily: "'Inter', sans-serif"
       });
-      cta.textContent = isBought ? '✓ DODANO — Przejdź do kasy' : 'Dodaj do koszyka';
+      cta.textContent = isBought ? '\u2713 DODANO \u2014 Przejd\u017a do kasy' : 'Dodaj do koszyka';
       cta.href = '#';
 
       cta.onmouseover = () => {
         if (!cta.classList.contains('bought')) {
-          cta.style.background = '#ff5a00';
-          cta.style.color = '#fff';
+          cta.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+          cta.style.background = 'rgba(255, 255, 255, 0.18)';
         }
       };
       cta.onmouseout = () => {
         if (!cta.classList.contains('bought')) {
-          cta.style.background = 'transparent';
-          cta.style.color = '#ff5a00';
+          cta.style.borderColor = 'rgba(255, 255, 255, 0.24)';
+          cta.style.background = 'rgba(255, 255, 255, 0.09)';
         }
       };
       
@@ -272,10 +275,11 @@ document.addEventListener('DOMContentLoaded', async () => {
           e.preventDefault();
           if (!cta.classList.contains('bought')) {
               addItemsToCart(aiSessionState.lastProposedItems);
-              cta.textContent = '✓ DODANO — Przejdź do kasy';
-              cta.style.borderColor = '#10b981';
+              cta.textContent = '\u2713 DODANO \u2014 Przejd\u017a do kasy';
+              cta.style.borderColor = 'rgba(16,185,129,0.4)';
               cta.style.color = '#10b981';
-              cta.style.background = 'transparent';
+              cta.style.background = 'rgba(16,185,129,0.15)';
+              cta.style.boxShadow = 'none';
               cta.classList.add('bought');
               aiSessionState.lastProposedItems = [];
           }
