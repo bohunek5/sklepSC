@@ -190,15 +190,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         btn.textContent = opt.label;
         btn.style.padding = '8px 16px';
         btn.style.borderRadius = '20px';
-        btn.style.border = '1px solid rgba(225, 79, 39, 0.4)';
-        btn.style.background = 'rgba(225, 79, 39, 0.1)';
+        btn.style.border = '1px solid rgba(255, 90, 0, 0.4)';
+        btn.style.background = 'rgba(255, 90, 0, 0.1)';
         btn.style.color = '#fff';
         btn.style.fontSize = '13px';
         btn.style.cursor = 'pointer';
         btn.style.transition = 'all 0.2s';
         
-        btn.onmouseover = () => { btn.style.background = '#e14f27'; };
-        btn.onmouseout = () => { btn.style.background = 'rgba(225, 79, 39, 0.1)'; };
+        btn.onmouseover = () => { btn.style.background = '#ff5a00'; };
+        btn.onmouseout = () => { btn.style.background = 'rgba(255, 90, 0, 0.1)'; };
         
         btn.onclick = () => {
             container.remove();
@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <div style="font-weight: 600; font-size: 14px; margin-bottom: 4px; line-height: 1.3;"><a href="product.html?id=${p.id}" target="_blank" style="color: #f8fafc; text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${p.title}</a></div>
                 <div style="font-size: 12px; color: #64748b;">${p.category || 'Produkt'}</div>
               </div>
-              <div style="font-weight: 700; color: #e14f27; font-size: 15px;">${formatPrice(p.price)}</div>
+              <div style="font-weight: 700; color: #ff5a00; font-size: 15px;">${formatPrice(p.price)}</div>
             </div>
           `;
       });
@@ -231,10 +231,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       productsContainer.innerHTML = html;
       
       const cta = document.createElement('a');
-      cta.className = 'pro-product-card ai-add-all-btn' + (isBought ? ' bought' : '');
+      cta.className = 'mockup-btn ai-add-all-btn' + (isBought ? ' bought' : '');
       cta.style.justifyContent = 'center';
       cta.style.marginTop = '12px';
-      cta.style.background = isBought ? '#10b981' : '#e14f27';
+      cta.style.background = isBought ? '#10b981' : '#ff5a00';
       cta.style.color = '#fff';
       cta.style.fontWeight = '600';
       cta.style.textDecoration = 'none';

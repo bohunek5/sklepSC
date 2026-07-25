@@ -46,21 +46,17 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 60vw;
-      height: 60vw;
-      max-width: 600px;
-      max-height: 600px;
+      width: 50vw;
+      height: 50vw;
+      max-width: 500px;
+      max-height: 500px;
       background: url('images/logo-white.png') center/contain no-repeat;
-      opacity: 0.025; /* Bardzo delikatny znak wodny */
+      opacity: 0.035; /* Static clean faint watermark */
       z-index: 0;
       pointer-events: none;
-      transition: opacity 0.3s ease, filter 0.3s ease;
     }
 
-    .ai-hero.typing::before {
-      opacity: 0.12;
-      filter: brightness(0) saturate(100%) invert(48%) sepia(85%) saturate(2254%) hue-rotate(346deg) brightness(101%) contrast(106%) drop-shadow(0 0 30px rgba(255, 90, 0, 0.7));
-    }
+    
 
     /* Chat window styled like a pro LLM */
     .ai-chat-interface {

@@ -5792,10 +5792,7 @@
             slide.classList.add('active');
             slide.classList.remove('leaving');
             slide.querySelectorAll('video').forEach(v => {
-              try {
-                v.currentTime = 0;
-                v.play().catch(() => {});
-              } catch(e) {}
+              try { v.play().catch(() => {}); } catch(e) {}
             });
           } else {
             if (slide.classList.contains('active')) {
@@ -5803,9 +5800,6 @@
               setTimeout(() => slide.classList.remove('leaving'), 1200);
             }
             slide.classList.remove('active');
-            slide.querySelectorAll('video').forEach(v => {
-              try { v.pause(); } catch(e) {}
-            });
           }
         });
 
@@ -5818,32 +5812,35 @@
         startAutoSlide();
       }
 
-      // Event delegation for arrows and indicators
+      // Attach direct event handlers to prev, next and indicators
+      const prevBtn = document.getElementById('prevSlide');
+      const nextBtn = document.getElementById('nextSlide');
+
+      if (prevBtn) {
+        prevBtn.onclick = (e) => { e.preventDefault(); showSlide(currentSlide - 1); };
+      }
+      if (nextBtn) {
+        nextBtn.onclick = (e) => { e.preventDefault(); showSlide(currentSlide + 1); };
+      }
+
+      document.querySelectorAll('.hero-indicator').forEach((ind, i) => {
+        ind.onclick = (e) => { e.preventDefault(); showSlide(i); };
+      });
+
+      // Global click fallback for arrows/indicators
       document.addEventListener('click', (e) => {
-        const prevBtn = e.target.closest('#prevSlide');
-        if (prevBtn) {
+        const prev = e.target.closest('#prevSlide');
+        if (prev) { e.preventDefault(); showSlide(currentSlide - 1); }
+        const next = e.target.closest('#nextSlide');
+        if (next) { e.preventDefault(); showSlide(currentSlide + 1); }
+        const ind = e.target.closest('.hero-indicator');
+        if (ind) {
           e.preventDefault();
-          showSlide(currentSlide - 1);
-          return;
-        }
-
-        const nextBtn = e.target.closest('#nextSlide');
-        if (nextBtn) {
-          e.preventDefault();
-          showSlide(currentSlide + 1);
-          return;
-        }
-
-        const indicator = e.target.closest('.hero-indicator');
-        if (indicator) {
-          e.preventDefault();
-          const idx = parseInt(indicator.getAttribute('data-index') || '0', 10);
+          const idx = parseInt(ind.getAttribute('data-index') || '0', 10);
           showSlide(idx);
-          return;
         }
       });
 
-      // Start slider immediately or on DOM ready
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => { showSlide(0); });
       } else {
