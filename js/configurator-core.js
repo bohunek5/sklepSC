@@ -110,6 +110,7 @@ window.ConfiguratorCore = (() => {
     else if (state.length <= 5 && [12, 24].includes(tape.voltage)) score += 20;
     if (['kitchen', 'commercial', 'bathroom'].includes(state.application) && tape.cri >= 90) score += 28;
     if (tape.lumens) score += Math.min(tape.lumens / 180, 15);
+      if (state.warranty === 7 && (tape.product.title.includes("7Y") || tape.product.title.includes("Delux"))) score += 300;
     score += Math.min(tape.stock, 100) / 20;
     return score;
   }

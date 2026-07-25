@@ -33,11 +33,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       segments: 1,
       environment: null,
       control: null,
-      voltage: 'auto'
+      voltage: 'auto',
+      warranty: null
     };
 
     const lengthMatch = lower.match(/(\d+(?:\.\d+)?)\s*m/);
     if (lengthMatch) state.length = parseFloat(lengthMatch[1]);
+
+    if (/7\s*lat|delux|7y/i.test(lower)) state.warranty = 7;
 
     if (/kuchni|blat|szafk/i.test(lower)) state.application = 'kitchen';
     else if (/salon|sufit|wnęk|sypialn|pok/i.test(lower)) state.application = 'living';
@@ -129,7 +132,9 @@ document.addEventListener('DOMContentLoaded', async () => {
           if (!isBought) {
               addItemsToCart(lastProposedItems);
               cta.textContent = 'DODANO! Przejdź do kasy';
-              cta.style.background = '#10b981';
+              cta.style.background = '#ffffff';
+                cta.style.color = '#0b1a30';
+                cta.style.border = '1px solid #0b1a30';
               lastProposedItems = [];
               const clone = cta.cloneNode(true);
               clone.onclick = (e) => { e.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
@@ -444,7 +449,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 cta.textContent = 'DODANO! Przejdź do kasy';
                 cta.href = '#';
                 cta.onclick = (e) => { e.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
-                cta.style.background = '#10b981'; // Green
+                cta.style.background = '#ffffff';
+                cta.style.color = '#0b1a30';
+                cta.style.border = '1px solid #0b1a30'; // Green
                 lastProposedItems = [];
                 // recreate listener for href click now
                 cta.replaceWith(cta.cloneNode(true));
