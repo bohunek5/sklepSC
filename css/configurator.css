@@ -1898,7 +1898,7 @@ label.is-unavailable {
   min-height: 214px;
   background-image:
     linear-gradient(90deg, rgba(6,18,35,.06), rgba(6,18,35,.22)),
-    url("../images/configurator/technology-cob-smd-v2.webp");
+    url("../images/configurator/tech_cob_smd_new.png");
   background-position: center;
   background-size: cover;
 }

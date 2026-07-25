@@ -244,42 +244,68 @@
       color: var(--primary-color);
     }
 
+        /* Premium Mobile Menu - Glassmorphism */
     .mobile-menu {
       position: fixed;
-      top: 75px;
+      top: 0;
       left: 0;
       width: 100%;
-      height: calc(100vh - 75px);
-      background: var(--white);
-      z-index: 999;
-      padding: 40px 8%;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.05);
-      transform: translateY(-20px);
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      z-index: 998;
+      padding: 120px 8% 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transform: translateY(-100%);
       opacity: 0;
       visibility: hidden;
-      transition: var(--transition);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
-
     .mobile-menu.active {
       transform: translateY(0);
       opacity: 1;
       visibility: visible;
     }
-
     .mobile-menu ul {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 25px;
+      gap: 30px;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      width: 100%;
     }
-
     .mobile-menu a {
       text-decoration: none;
-      color: var(--primary-color);
-      font-size: 18px;
-      font-weight: 600;
+      color: #fff;
+      font-size: 28px;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 2px;
+      display: inline-block;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mobile-menu.active a {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .mobile-menu.active li:nth-child(1) a { transition-delay: 0.1s; }
+    .mobile-menu.active li:nth-child(2) a { transition-delay: 0.15s; }
+    .mobile-menu.active li:nth-child(3) a { transition-delay: 0.2s; }
+    .mobile-menu.active li:nth-child(4) a { transition-delay: 0.25s; }
+    .mobile-menu.active li:nth-child(5) a { transition-delay: 0.3s; }
+    .mobile-menu.active li:nth-child(6) a { transition-delay: 0.35s; }
+    .mobile-menu.active li:nth-child(7) a { transition-delay: 0.4s; }
+    .mobile-menu a:active {
+      transform: scale(0.95);
+      color: rgba(255,255,255,0.7);
     }
 
     /* Hero Slideshow Styling */
@@ -345,7 +371,34 @@
       display: none;
     }
     
+    
     @media (max-width: 768px) {
+      .banner-text h1 {
+        font-size: 30px !important;
+        line-height: 1.1 !important;
+        margin-bottom: 12px !important;
+        text-align: center;
+      }
+      .banner-text p {
+        font-size: 15px !important;
+        text-align: center;
+      }
+      .slide-banner-box {
+        align-items: center !important;
+      }
+      .mockup-btn {
+        width: 100% !important;
+        text-align: center;
+        justify-content: center;
+      }
+      .btn-slide-wrap {
+        width: 100%;
+        justify-content: center;
+      }
+      .mockup-btn:active {
+        transform: scale(0.96);
+      }
+
       /* removed hide */      .mobile-bg {
         display: block !important;
         background-position: center center;
@@ -4340,13 +4393,15 @@
       <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Otwórz menu"><span></span><span></span><span></span></button>
     </div>
     <nav class="mobile-menu" id="mobileMenu" aria-label="Nawigacja mobilna" hidden>
-      <a class="active" href="index.html">Home</a>
-      <a href="shop.html">Sklep</a>
-      <a href="blog.html">Wiedza</a>
-      <a href="about.html">O nas</a>
-      <a href="contact.html">Kontakt</a>
-      <a href="configurator.html">Dobierz system</a>
-      <a  href="ai-shopping.html"><img class="gemini-icon" src="images/prescot-pattern.png" style="width: 18px; height: 18px; object-fit: contain; margin-right: 6px; vertical-align: middle;">Zakup AI</a>
+      <ul>
+        <li><a class="active" href="index.html">Home</a></li>
+        <li><a href="shop.html">Sklep</a></li>
+        <li><a href="blog.html">Wiedza</a></li>
+        <li><a href="about.html">O nas</a></li>
+        <li><a href="contact.html">Kontakt</a></li>
+        <li><a href="configurator.html">Dobierz system</a></li>
+        <li><a href="ai-shopping.html"><img class="gemini-icon" src="images/prescot-pattern.png" style="width: 24px; height: 24px; object-fit: contain; margin-right: 10px; vertical-align: middle; filter: brightness(0) invert(1);">Zakup AI</a></li>
+      </ul>
     </nav>
   </header>
 
@@ -4369,8 +4424,8 @@
         <rect class="car" pathlength="100"></rect>
       </svg>
       <div class="banner-text">
-        <h1>O�wietlenie Salonu</h1>
-        <p>Ta�my LED RGB i Mono do pod�wietle�</p>
+        <h1>Oświetlenie Salonu</h1>
+        <p>Taśmy LED RGB i Mono do podświetleń</p>
       </div>
       <a class="mockup-btn" href="shop.html"><div class="btn-slide-wrap"><span class="btn-txt-default">Odkryj</span><span class="btn-txt-hover">Odkryj</span></div></a>
     </div>
@@ -4388,8 +4443,8 @@
         <rect class="car" pathlength="100"></rect>
       </svg>
       <div class="banner-text">
-        <h1>O�wietlenie Blat�w</h1>
-        <p>Jasne ta�my COB i profile meblowe</p>
+        <h1>Oświetlenie Blatów</h1>
+        <p>Jasne taśmy COB i profile meblowe</p>
       </div>
       <a class="mockup-btn" href="shop.html"><div class="btn-slide-wrap"><span class="btn-txt-default">Odkryj</span><span class="btn-txt-hover">Odkryj</span></div></a>
     </div>
@@ -4408,7 +4463,7 @@
       </svg>
       <div class="banner-text">
         <h1>Nowoczesne Biuro</h1>
-        <p>Liniowe systemy �wietlne i profile architektoniczne</p>
+        <p>Liniowe systemy świetlne i profile architektoniczne</p>
       </div>
       <a class="mockup-btn" href="shop.html"><div class="btn-slide-wrap"><span class="btn-txt-default">Odkryj</span><span class="btn-txt-hover">Odkryj</span></div></a>
     </div>
@@ -4426,8 +4481,8 @@
         <rect class="car" pathlength="100"></rect>
       </svg>
       <div class="banner-text">
-        <h1>O�wietlenie Schodowe</h1>
-        <p>Cyfrowe ta�my LED i czujniki ruchu</p>
+        <h1>Oświetlenie Schodowe</h1>
+        <p>Cyfrowe taśmy LED i czujniki ruchu</p>
       </div>
       <a class="mockup-btn" href="shop.html"><div class="btn-slide-wrap"><span class="btn-txt-default">Odkryj</span><span class="btn-txt-hover">Odkryj</span></div></a>
     </div>
@@ -4445,8 +4500,8 @@
         <rect class="car" pathlength="100"></rect>
       </svg>
       <div class="banner-text">
-        <h1>�azienka i SPA</h1>
-        <p>Wodoodporne ta�my LED w silikonie (IP67)</p>
+        <h1>Łazienka i SPA</h1>
+        <p>Wodoodporne taśmy LED w silikonie (IP67)</p>
       </div>
       <a class="mockup-btn" href="shop.html"><div class="btn-slide-wrap"><span class="btn-txt-default">Odkryj</span><span class="btn-txt-hover">Odkryj</span></div></a>
     </div>
