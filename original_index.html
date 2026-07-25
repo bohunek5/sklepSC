@@ -4340,7 +4340,7 @@
 <div class="categories-banners-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 100%; margin: 0 auto; width: 100%;">
 <!-- Category 1: Taśmy LED -->
 <div class="category-banner-card" onclick="window.location.href='shop.html?category=Ta%C5%9Bmy%20LED'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 420px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 40px;">
-<div class="category-banner-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/led_showroom.png') center/cover no-repeat; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></div>
+<div class="category-banner-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/hero_cob.webp') center/cover no-repeat; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></div>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
 <span class="glass-banner-btn">ZOBACZ PRODUKTY</span>
@@ -5581,8 +5581,8 @@
 
     // Header Scroll Effect
         // Header Scroll Effect
-    const header = document.getElementById('siteHeader');
-    const headerLogo = document.querySelector('.brand img');
+    const header = document.getElementById('mainHeader');
+    const headerLogo = document.getElementById('headerLogo');
     const hasHero = document.querySelector('.page-hero, .mockup-hero-slider, .hero, .hero-section');
     
     if (!hasHero && header) {
@@ -5945,8 +5945,8 @@
 
   <script id="standard-header-scroll-script">
     document.addEventListener('DOMContentLoaded', () => {
-      const header = document.getElementById('siteHeader');
-      const headerLogo = document.querySelector('.brand img');
+      const header = document.getElementById('mainHeader');
+      const headerLogo = document.getElementById('headerLogo');
       function handleScroll() {
         if (window.scrollY > 40) {
           if (header) header.classList.add('scrolled');
