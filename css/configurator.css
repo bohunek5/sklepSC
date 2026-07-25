@@ -2230,3 +2230,92 @@ label.is-unavailable {
 #nextButton { margin-left: auto; }
 
 .choice-card span, .application-index, .application-copy strong, .application-copy small, .application-parameters { text-shadow: 0 2px 6px rgba(0,0,0,1), 0 4px 16px rgba(0,0,0,1), 0 0 4px rgba(0,0,0,0.8) !important; }
+
+
+/* === SCROLLED HEADER DARK MENU CONTRAST FIX === */
+.site-header.scrolled,
+.site-header.menu-active,
+.mockup-header.scrolled {
+  background: rgba(255, 255, 255, 0.96) !important;
+  box-shadow: 0 7px 25px rgba(8, 25, 47, 0.12) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+.site-header.scrolled .desktop-nav a:not(.active),
+.site-header.menu-active .desktop-nav a:not(.active),
+.mockup-header.scrolled .desktop-nav a:not(.active),
+.scrolled .desktop-nav a:not(.active),
+.scrolled .mockup-nav a:not(.active) {
+  color: #0b1a30 !important;
+  border-color: rgba(11, 26, 48, 0.18) !important;
+  background: rgba(11, 26, 48, 0.05) !important;
+  font-weight: 700 !important;
+}
+
+.site-header.scrolled .desktop-nav a:not(.active):hover,
+.site-header.menu-active .desktop-nav a:not(.active):hover,
+.mockup-header.scrolled .desktop-nav a:not(.active):hover,
+.scrolled .desktop-nav a:not(.active):hover,
+.scrolled .mockup-nav a:not(.active):hover {
+  color: var(--accent-color, #ff5a00) !important;
+  border-color: rgba(255, 90, 0, 0.35) !important;
+  background: rgba(255, 90, 0, 0.08) !important;
+}
+
+.site-header.scrolled .desktop-nav a.active,
+.site-header.menu-active .desktop-nav a.active,
+.mockup-header.scrolled .desktop-nav a.active,
+.scrolled .desktop-nav a.active,
+.scrolled .mockup-nav a.active {
+  color: #ffffff !important;
+  background: #0b1a30 !important;
+  border-color: #0b1a30 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 14px rgba(11, 26, 48, 0.25) !important;
+}
+
+.site-header.scrolled .header-search,
+.site-header.menu-active .header-search,
+.mockup-header.scrolled .header-search,
+.scrolled .header-search {
+  color: #0b1a30 !important;
+  border-color: rgba(11, 26, 48, 0.22) !important;
+  background: rgba(11, 26, 48, 0.04) !important;
+}
+
+.site-header.scrolled .header-search input,
+.site-header.menu-active .header-search input,
+.scrolled .header-search input {
+  color: #0b1a30 !important;
+}
+
+.site-header.scrolled .header-search input::placeholder,
+.site-header.menu-active .header-search input::placeholder,
+.scrolled .header-search input::placeholder {
+  color: rgba(11, 26, 48, 0.55) !important;
+}
+
+.site-header.scrolled .header-search button,
+.site-header.scrolled .header-icon,
+.site-header.scrolled .menu-button,
+.site-header.menu-active .header-icon,
+.site-header.menu-active .menu-button,
+.scrolled .header-icon,
+.scrolled .menu-button {
+  color: #0b1a30 !important;
+  border-color: rgba(11, 26, 48, 0.18) !important;
+  background: rgba(11, 26, 48, 0.05) !important;
+}
+
+.site-header.scrolled .header-actions svg,
+.scrolled .header-actions svg {
+  stroke: #0b1a30 !important;
+}
+
+.site-header.scrolled .mobile-menu a,
+.scrolled .mobile-menu a {
+  color: #0b1a30 !important;
+}
+/* === END SCROLLED HEADER DARK MENU CONTRAST FIX === */

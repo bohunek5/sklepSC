@@ -2838,7 +2838,7 @@
     .magic-dropdown ul li a:hover {
       background: rgba(0,0,0,0.06) !important;
       border-color: rgba(0,0,0,0.12) !important;
-      color: #ff5e00 !important; /* Orange text on hover */
+      color: #ff5a00 !important; /* Orange text on hover */
     }
   
     /* --- ULTIMATE DROPDOWN OVERRIDE START --- */
@@ -3805,7 +3805,7 @@
   transition: all 0.3s ease;
 }
 .premium-footer .social-links a:hover {
-  background: var(--accent-color, #ff5e00);
+  background: var(--accent-color, #ff5a00);
   transform: translateY(-3px);
 }
 .premium-footer h3 {
@@ -3845,7 +3845,7 @@
 }
 .premium-footer .contact-info i {
   font-size: 20px;
-  color: var(--accent-color, #ff5e00);
+  color: var(--accent-color, #ff5a00);
   margin-top: 2px;
 }
 .premium-footer .footer-bottom {
@@ -3942,8 +3942,8 @@
   </header>
 
 </div>
-  <section class="page-hero" style="background: url('images/led_shop_hero.png') center/cover no-repeat; height: 35vh; min-height: 280px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 90px 20px 20px; text-align: center; position: relative; box-sizing: border-box;">
-    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(11, 26, 48, 0.6);"></div>
+  <section class="page-hero" style="background: url(\'images/led_shop_hero.png\') center/cover no-repeat; filter: contrast(1.08) brightness(1.05); image-rendering: -webkit-optimize-contrast; height: 35vh; min-height: 280px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 90px 20px 20px; text-align: center; position: relative; box-sizing: border-box;">
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(11, 26, 48, 0.18) 0%, rgba(11, 26, 48, 0.5) 100%);"></div>
     <div style="position: relative; z-index: 1;">
       <h1 style="color: #fff; font-size: 48px; font-weight: 800; font-family: 'Outfit', sans-serif; margin-bottom: 10px; text-transform: uppercase; letter-spacing: -1px; text-shadow: 0 4px 12px rgba(0,0,0,0.3);">Nasz Sklep</h1>
       <p style="color: #eee; font-size: 16px;">Sprawdź pełną ofertę Prescot LED</p>
@@ -4657,10 +4657,10 @@
   </script>
 
 
-  <script id="standard-header-scroll-script">
+    <script id="standard-header-scroll-script">
     document.addEventListener('DOMContentLoaded', () => {
-      const header = document.getElementById('mainHeader');
-      const headerLogo = document.getElementById('headerLogo');
+      const header = document.getElementById('siteHeader') || document.querySelector('.site-header') || document.querySelector('.mockup-header');
+      const headerLogo = document.querySelector('.brand img') || document.querySelector('.mockup-header-logo img');
       function handleScroll() {
         if (window.scrollY > 40) {
           if (header) header.classList.add('scrolled');

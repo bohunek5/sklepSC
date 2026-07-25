@@ -172,9 +172,9 @@
     }
 
     .ai-input-area button:hover {
-      background: #e14f27; /* The brand orange */
-      border-color: #e14f27;
-      box-shadow: 0 4px 15px rgba(225, 79, 39, 0.4);
+      background: #ff5a00; /* The brand orange */
+      border-color: #ff5a00;
+      box-shadow: 0 4px 15px rgba(255, 90, 0, 0.4);
     }
     
     .ai-input-area button:hover img {
@@ -214,8 +214,8 @@
         rgba(5, 12, 25, 1) 0%,         /* Very dark navy */
         rgba(5, 12, 25, 1) 40%, 
         rgba(11, 26, 48, 1) 60%,       /* Deep navy */
-        rgba(225, 79, 39, 0.7) 80%,    /* Brand orange fading in */
-        #e14f27 95%,                   /* Pure brand orange */
+        rgba(255, 90, 0, 0.7) 80%,    /* Brand orange fading in */
+        #ff5a00 95%,                   /* Pure brand orange */
         rgba(5, 12, 25, 1) 100%        /* Seamless loop to dark navy */
       );
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -235,7 +235,7 @@
       animation: spinHalo 4s linear infinite; /* Smooth 4s rotation */
     }
     .ai-input-area.focused {
-      box-shadow: 0 8px 30px rgba(11, 26, 48, 0.5), 0 0 15px rgba(225, 79, 39, 0.15);
+      box-shadow: 0 8px 30px rgba(11, 26, 48, 0.5), 0 0 15px rgba(255, 90, 0, 0.15);
       background: #151e2e; /* Slightly darker background when focused */
     }
 
@@ -291,7 +291,7 @@
   transition: all 0.3s ease;
 }
 .premium-footer .social-links a:hover {
-  background: var(--accent-color, #ff5e00);
+  background: var(--accent-color, #ff5a00);
   transform: translateY(-3px);
 }
 .premium-footer h3 {
@@ -331,7 +331,7 @@
 }
 .premium-footer .contact-info i {
   font-size: 20px;
-  color: var(--accent-color, #ff5e00);
+  color: var(--accent-color, #ff5a00);
   margin-top: 2px;
 }
 .premium-footer .footer-bottom {
@@ -489,6 +489,23 @@
           }, 400); // Effect lingers for 400ms after last keystroke
         });
       }
+    });
+  </script>
+  <script id="standard-header-scroll-script">
+    document.addEventListener('DOMContentLoaded', () => {
+      const header = document.getElementById('siteHeader') || document.querySelector('.site-header') || document.querySelector('.mockup-header');
+      const headerLogo = document.querySelector('.brand img') || document.querySelector('.mockup-header-logo img');
+      function handleScroll() {
+        if (window.scrollY > 40) {
+          if (header) header.classList.add('scrolled');
+          if (headerLogo) headerLogo.src = 'images/logo-dark.png';
+        } else {
+          if (header) header.classList.remove('scrolled');
+          if (headerLogo) headerLogo.src = 'images/logo-white.png';
+        }
+      }
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll();
     });
   </script>
 </body>

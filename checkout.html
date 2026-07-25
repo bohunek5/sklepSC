@@ -1896,7 +1896,7 @@
     .magic-dropdown ul li a:hover {
       background: rgba(0, 0, 0, 0.06) !important;
       border-color: rgba(0, 0, 0, 0.12) !important;
-      color: #ff5e00 !important;
+      color: #ff5a00 !important;
       /* Orange text on hover */
     }
 
@@ -2321,7 +2321,7 @@
   transition: all 0.3s ease;
 }
 .premium-footer .social-links a:hover {
-  background: var(--accent-color, #ff5e00);
+  background: var(--accent-color, #ff5a00);
   transform: translateY(-3px);
 }
 .premium-footer h3 {
@@ -2361,7 +2361,7 @@
 }
 .premium-footer .contact-info i {
   font-size: 20px;
-  color: var(--accent-color, #ff5e00);
+  color: var(--accent-color, #ff5a00);
   margin-top: 2px;
 }
 .premium-footer .footer-bottom {
@@ -3318,10 +3318,10 @@
     /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
   </style>
 
-  <script id="standard-header-scroll-script">
+    <script id="standard-header-scroll-script">
     document.addEventListener('DOMContentLoaded', () => {
-      const header = document.getElementById('mainHeader');
-      const headerLogo = document.getElementById('headerLogo');
+      const header = document.getElementById('siteHeader') || document.querySelector('.site-header') || document.querySelector('.mockup-header');
+      const headerLogo = document.querySelector('.brand img') || document.querySelector('.mockup-header-logo img');
       function handleScroll() {
         if (window.scrollY > 40) {
           if (header) header.classList.add('scrolled');

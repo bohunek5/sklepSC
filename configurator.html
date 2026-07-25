@@ -111,7 +111,7 @@
   transition: all 0.3s ease;
 }
 .premium-footer .social-links a:hover {
-  background: var(--accent-color, #ff5e00);
+  background: var(--accent-color, #ff5a00);
   transform: translateY(-3px);
 }
 .premium-footer h3 {
@@ -151,7 +151,7 @@
 }
 .premium-footer .contact-info i {
   font-size: 20px;
-  color: var(--accent-color, #ff5e00);
+  color: var(--accent-color, #ff5a00);
   margin-top: 2px;
 }
 .premium-footer .footer-bottom {
@@ -252,7 +252,7 @@
     
     
     <section class="page-hero" aria-labelledby="heroTitle" style="background: url('images/kuchnia.jpg') center/cover no-repeat; min-height: 280px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 120px 20px 40px; text-align: center; position: relative; box-sizing: border-box;">
-      <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(11, 26, 48, 0.6);"></div>
+      <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(11, 26, 48, 0.2) 0%, rgba(11, 26, 48, 0.52) 100%); backdrop-filter: blur(0px);"></div>
       <div class="container" style="position: relative; z-index: 1;">
         <h1 id="heroTitle" style="font-size: clamp(32px, 5vw, 56px); margin: 0 0 16px; color: #fff; font-weight: 700;">Konfigurator</h1>
         <p class="hero-lead" style="font-size: clamp(16px, 2vw, 20px); color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto;">Przeprowadzimy Cię przez proces doboru komponentów oświetlenia.</p>
@@ -514,5 +514,22 @@
   <script src="js/configurator-core.js"></script>
   <script src="js/configurator.js"></script>
   <script src="js/smart-search.js"></script>
+  <script id="standard-header-scroll-script">
+    document.addEventListener('DOMContentLoaded', () => {
+      const header = document.getElementById('siteHeader') || document.querySelector('.site-header') || document.querySelector('.mockup-header');
+      const headerLogo = document.querySelector('.brand img') || document.querySelector('.mockup-header-logo img');
+      function handleScroll() {
+        if (window.scrollY > 40) {
+          if (header) header.classList.add('scrolled');
+          if (headerLogo) headerLogo.src = 'images/logo-dark.png';
+        } else {
+          if (header) header.classList.remove('scrolled');
+          if (headerLogo) headerLogo.src = 'images/logo-white.png';
+        }
+      }
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll();
+    });
+  </script>
 </body>
 </html>
