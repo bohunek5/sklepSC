@@ -654,7 +654,7 @@ img {
 }
 
 .project-visual > * { position: relative; z-index: 1; display: block; }
-.project-visual > span { color: #ff8b4d; font-size: 9px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.project-visual > span { color: #ffffff; font-size: 9px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
 .project-visual > strong { margin-top: 88px; font-family: "Outfit", sans-serif; font-size: 20px; line-height: 1.1; }
 .project-visual > small { margin-top: 5px; color: #d6dde6; font-size: 10px; }
 
@@ -1088,7 +1088,7 @@ label.is-unavailable {
 .inline-tip p { margin: 0; }
 
 .control-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
-.voltage-block { margin-top: 19px; padding: 19px; border: 1px solid var(--line); border-radius: 13px; background: #f8f9fb; }
+.voltage-block { margin-top: 19px; padding: 12px; border: 1px solid var(--line); border-radius: 13px; background: #f8f9fb; }
 .segmented-control { display: flex; flex-wrap: wrap; gap: 7px; }
 .segmented-control label { position: relative; cursor: pointer; }
 .segmented-control input { position: absolute; opacity: 0; }
@@ -2085,6 +2085,7 @@ label.is-unavailable {
 
 .voltage-visual-options label:hover > span { filter: brightness(1.05); }
 .voltage-visual-options b {
+    white-space: nowrap;
   color: #fff;
   font-family: "Outfit", sans-serif;
   font-size: 16px;
