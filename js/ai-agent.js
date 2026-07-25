@@ -128,10 +128,10 @@ document.addEventListener('DOMContentLoaded', async () => {
               cta.classList.add('bought');
               lastProposedItems = [];
               const clone = cta.cloneNode(true);
-              clone.onclick = (e) => { e.preventDefault(); window.location.href = 'cart.html'; };
+              clone.onclick = (e) => { e.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
               cta.replaceWith(clone);
           }
-          window.location.href = 'cart.html';
+          if(window.openCartDrawer) window.openCartDrawer();
       };
       
       productsContainer.appendChild(cta);
@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 
                 const cta = document.createElement('a');
                 cta.href = '#';
-                cta.onclick = (e) => { e.preventDefault(); window.location.href = 'cart.html'; };
+                cta.onclick = (e) => { e.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
                 cta.className = 'pro-product-card ai-add-all-btn' + (overallBuy ? ' bought' : '');
                 cta.textContent = 'Przejdź do kasy';
                 productsContainer.appendChild(cta);
@@ -416,7 +416,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         const cta = document.createElement('a');
         cta.href = '#';
-                cta.onclick = (e) => { e.preventDefault(); window.location.href = 'cart.html'; };
+                cta.onclick = (e) => { e.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
         cta.className = 'pro-product-card ai-add-all-btn' + (overallBuy ? ' bought' : '');
         cta.textContent = overallBuy ? 'Przejdź do kasy' : 'Dodaj wszystko do koszyka';
         
@@ -427,7 +427,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 addItemsToCart(lastProposedItems);
                 cta.textContent = 'DODANO! Przejdź do kasy';
                 cta.href = '#';
-                cta.onclick = (e) => { e.preventDefault(); window.location.href = 'cart.html'; };
+                cta.onclick = (e) => { e.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
                 cta.classList.add('bought'); // Green
                 lastProposedItems = [];
                 // recreate listener for href click now

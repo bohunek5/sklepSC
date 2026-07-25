@@ -262,7 +262,7 @@
         inset: -1px;
         border-radius: 17px;
         padding: 1px;
-        background: rgba(255,255,255,0.1);
+        background: rgba(5, 12, 25, 0.8);
         -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
         mask-composite: exclude;
@@ -276,7 +276,14 @@
         inset: -1px;
         border-radius: 17px;
         padding: 1.5px; /* Slightly thicker for the glow effect */
-        background: conic-gradient(from var(--halo-angle, 0deg), transparent 65%, rgba(255,255,255,0.3) 90%, #ff5a00 100%);
+        background: conic-gradient(
+          from var(--halo-angle, 0deg), 
+          rgba(5, 12, 25, 0.9) 0%, 
+          rgba(5, 12, 25, 0.9) 40%, 
+          rgba(11, 26, 48, 0.9) 60%, 
+          rgba(255, 90, 0, 0.5) 85%, 
+          #ff5a00 100%
+        );
         -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
         mask-composite: exclude;
@@ -290,7 +297,7 @@
       }
       .ai-input-area.focused::after {
         opacity: 1;
-        animation: spinHalo 4.5s linear infinite;
+        animation: spinHalo 6s linear infinite;
       }
       .ai-input-area.focused {
         box-shadow: 0 4px 25px rgba(255,90,0,0.15);

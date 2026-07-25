@@ -1261,7 +1261,7 @@ function initSharedPopups() {
     // Check if the icon contains cart icon or links to cart.html
     if (btn.href && btn.href.includes('cart.html') || btn.textContent.includes('🛒')) {
       btn.addEventListener('click', (e) => {
-        if (!window.location.pathname.includes('cart.html') && !window.location.pathname.includes('checkout.html') && !window.location.pathname.includes('ai-shopping.html')) {
+        if (!window.location.pathname.includes('cart.html') && !window.location.pathname.includes('checkout.html')) {
           e.preventDefault();
           openCart();
         }
