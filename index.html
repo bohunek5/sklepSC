@@ -4069,6 +4069,147 @@
 
 
   <link rel="stylesheet" href="css/configurator.css">
+
+<style id="global-premium-overrides">
+/* Premium Footer CSS */
+.premium-footer {
+  background: var(--primary-color, #0b1a30) !important;
+  color: #fff !important;
+  padding: 80px 8% 40px !important;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  font-family: 'Outfit', sans-serif;
+  margin-top: auto;
+}
+.premium-footer .footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+.premium-footer .footer-logo img {
+  height: 38px !important;
+  opacity: 1 !important;
+  margin-bottom: 25px;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+}
+.premium-footer .brand-desc {
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+  font-size: 15px;
+  margin-bottom: 25px;
+}
+.premium-footer .social-links {
+  display: flex;
+  gap: 15px;
+}
+.premium-footer .social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+.premium-footer .social-links a:hover {
+  background: var(--accent-color, #ff5e00);
+  transform: translateY(-3px);
+}
+.premium-footer h3 {
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+.premium-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.premium-footer ul li {
+  margin-bottom: 12px;
+}
+.premium-footer ul li a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 15px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+.premium-footer ul li a:hover {
+  color: #fff;
+  transform: translateX(5px);
+}
+.premium-footer .contact-info li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: rgba(255,255,255,0.7);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.premium-footer .contact-info i {
+  font-size: 20px;
+  color: var(--accent-color, #ff5e00);
+  margin-top: 2px;
+}
+.premium-footer .footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.5);
+  font-size: 13px;
+}
+.premium-footer .payment-methods {
+  display: flex;
+  gap: 15px;
+  font-size: 24px;
+  color: rgba(255,255,255,0.5);
+}
+@media (max-width: 992px) {
+  .premium-footer .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+@media (max-width: 768px) {
+  .premium-footer .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+  .premium-footer .footer-bottom {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+}
+
+/* Logo Header Fix */
+.site-header .brand {
+  display: flex !important;
+  align-items: center !important;
+  height: 100%;
+}
+.site-header .brand img {
+  height: 40px !important;
+  max-width: none !important;
+  object-fit: contain !important;
+  transform: translateY(2px);
+}
+@media (max-width: 768px) {
+  .site-header .brand img {
+    height: 32px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <!-- Main Hero removed welcome overlay -->
@@ -4218,124 +4359,98 @@
 
 </div>
 <section class="mockup-hero-slider">
-<!-- SVG Defs for Glowing Borders -->
-<svg style="position: absolute; width: 0; height: 0; pointer-events: none;">
+  <svg style="position: absolute; width: 0; height: 0; pointer-events: none;">
 <defs>
 </defs>
 </svg>
-<!-- Slide 1: CCT -->
-<div class="slide active" data-tech="cct">
-<div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-<video class="slide-video desktop-bg" muted="" playsinline="" poster="images/elegant-interior-design-with-neutral-colors-2026-03-25-07-06-00-utc.webp" preload="auto" src="videos/cct_salon.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-<video class="slide-video mobile-bg" muted="" playsinline="" poster="images/image2_opt.webp" preload="auto" src="videos/cct_lewa_pion.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-</div>
-<div class="slide-banner-box" style="z-index: 2;">
-<svg class="glass-border-svg">
-<rect class="track" pathlength="100"></rect>
-<rect class="car" pathlength="100"></rect>
-</svg>
-<div class="banner-text">
-<h1>Taśmy LED CCT</h1>
-<p>Regulowana temperatura bieli</p>
-</div>
-<a class="mockup-btn" href="shop.html"><div class="btn-slide-wrap"><span class="btn-txt-default">Kup teraz</span><span class="btn-txt-hover">Kup teraz</span></div></a>
-</div>
-</div>
-<!-- Slide 2: Digital -->
-<div class="slide" data-tech="digital">
-<div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-<video class="slide-video desktop-bg" muted="" playsinline="" poster="images/hero_digital.webp" preload="auto" src="videos/cyfrowe_tasmy.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-<video class="slide-video mobile-bg" muted="" playsinline="" poster="images/image3_opt.webp" preload="auto" src="videos/CW PION.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-</div>
-<div class="slide-banner-box" style="z-index: 2;">
-<svg class="glass-border-svg">
-<rect class="track" pathlength="100"></rect>
-<rect class="car" pathlength="100"></rect>
-<rect class="car-runner" pathlength="100"></rect>
-</svg>
-<div class="banner-text">
-<h1>Inteligentne systemy</h1>
-<p>Zyskaj pełną kontrolę i programuj efekty świetlne</p>
-</div>
-<a class="mockup-btn" href="shop.html"><div class="btn-slide-wrap"><span class="btn-txt-default">Kup teraz</span><span class="btn-txt-hover">Kup teraz</span></div></a>
-</div>
-</div>
-<!-- Slide 3: Digital CCT -->
-<div class="slide" data-tech="digital_cct">
-<div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-<video class="slide-video desktop-bg" muted="" playsinline="" poster="images/elegant-interior-design-with-neutral-colors-2026-03-25-07-06-00-utc.webp" preload="auto" src="videos/DIGITAL CCT EFEKT.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-<video class="slide-video mobile-bg" muted="" playsinline="" poster="images/image2_opt.webp" preload="auto" src="videos/cct_lewa_pion.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-</div>
-<div class="slide-banner-box" style="z-index: 2;">
-<svg class="glass-border-svg">
-<rect class="track" pathlength="100"></rect>
-<rect class="car" pathlength="100"></rect>
-<rect class="car-runner" pathlength="100"></rect>
-</svg>
-<div class="banner-text">
-<h1>Cyfrowe CCT</h1>
-<p>To Ty decydujesz o barwie i efektach świetlnych</p>
-</div>
-<a class="mockup-btn" href="shop.html"><div class="btn-slide-wrap"><span class="btn-txt-default">Kup teraz</span><span class="btn-txt-hover">Kup teraz</span></div></a>
-</div>
-</div>
-<!-- Slide 4: Mono -->
-<div class="slide" data-tech="mono">
-<div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-<video class="slide-video desktop-bg" muted="" playsinline="" poster="images/banner_controllers.webp" preload="auto" src="videos/sterownik_mono.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-<video class="slide-video mobile-bg" muted="" playsinline="" poster="images/image0_opt.webp" preload="auto" src="videos/PRESCOT LED START PION FILM ZAPETLIC.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-</div>
-<div class="slide-banner-box" style="z-index: 2;">
-<svg class="glass-border-svg">
-<rect class="track" pathlength="100"></rect>
-<rect class="car" pathlength="100"></rect>
-</svg>
-<div class="banner-text">
-<h1>Mono sterowniki</h1>
-<p>Steruj jasnością i dostosuj otoczenie do swoich potrzeb</p>
-</div>
-<a class="mockup-btn" href="shop.html"><div class="btn-slide-wrap"><span class="btn-txt-default">Kup teraz</span><span class="btn-txt-hover">Kup teraz</span></div></a>
-</div>
-</div>
-<!-- Slide 5: Bread -->
-<div class="slide" data-tech="bread">
-<div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-<video class="slide-video desktop-bg" muted="" playsinline="" poster="images/kuchnia_opt.webp" preload="auto" src="videos/envato_video_gen_Oct_31_2025_17_15_42.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-<video class="slide-video mobile-bg" muted="" playsinline="" poster="images/image4_opt.webp" preload="auto" src="videos/PRESCOT LED START PION FILM ZAPETLIC V2.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-</div>
-<div class="slide-banner-box" style="z-index: 2;">
-<svg class="glass-border-svg">
-<rect class="track" pathlength="100"></rect>
-<rect class="car" pathlength="100"></rect>
-</svg>
-<div class="banner-text">
-<h1>Taśmy LED do pieczywa</h1>
-<p>Wypieki świeże i apetyczne w ciepłym świetle</p>
-</div>
-<a class="mockup-btn" href="shop.html"><div class="btn-slide-wrap"><span class="btn-txt-default">Kup teraz</span><span class="btn-txt-hover">Kup teraz</span></div></a>
-</div>
-</div>
-<!-- Slide 6: Accessories -->
-<div class="slide" data-tech="accessories">
-<div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-<video autoplay="" class="slide-video desktop-bg" loop="" muted="" playsinline="" poster="images/hero_cob.webp" preload="auto" style="width: 100%; height: 100%; object-fit: cover;">
-<source src="videos/zlaczka_9w1.mp4" type="video/mp4"/>
-</video>
-<video class="slide-video mobile-bg" muted="" playsinline="" poster="images/hero_cob.webp" preload="auto" src="videos/zlaczka_9w1.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-</div>
-<div class="slide-banner-box" style="z-index: 2;">
-<svg class="glass-border-svg">
-<rect class="track" pathlength="100"></rect>
-<rect class="car" pathlength="100"></rect>
-</svg>
-<div class="banner-text">
-<h1>Akcesoria LED</h1>
-<p>Niewidoczne i niezawodne połączenia</p>
-</div>
-<a class="mockup-btn" href="shop.html"><div class="btn-slide-wrap"><span class="btn-txt-default">Odkryj</span><span class="btn-txt-hover">Odkryj</span></div></a>
-</div>
-</div>
-<div class="hero-controls-bar">
+
+  <!-- Slide 1: Salon & Elegancja -->
+  <div class="slide active" data-tech="living">
+    <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
+      <video class="slide-video desktop-bg" muted playsinline preload="auto" src="videos/hero_living_room.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video mobile-bg" muted playsinline preload="auto" src="videos/hero_living_room.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+    </div>
+    <div class="slide-banner-box" style="z-index: 2;">
+      <svg class="glass-border-svg">
+        <rect class="track" pathlength="100"></rect>
+        <rect class="car" pathlength="100"></rect>
+      </svg>
+      <div class="banner-text">
+        <h1>Salon & Elegancja</h1>
+        <p>Zjawiskowe oświetlenie nocne</p>
+      </div>
+      <a class="mockup-btn" href="shop.html"><div class="btn-slide-wrap"><span class="btn-txt-default">Odkryj</span><span class="btn-txt-hover">Odkryj</span></div></a>
+    </div>
+  </div>
+
+  <!-- Slide 2: Kuchenny Minimalizm -->
+  <div class="slide" data-tech="kitchen">
+    <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
+      <video class="slide-video desktop-bg" muted playsinline preload="auto" src="videos/hero_kitchen.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video mobile-bg" muted playsinline preload="auto" src="videos/hero_kitchen.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+    </div>
+    <div class="slide-banner-box" style="z-index: 2;">
+      <svg class="glass-border-svg">
+        <rect class="track" pathlength="100"></rect>
+        <rect class="car" pathlength="100"></rect>
+      </svg>
+      <div class="banner-text">
+        <h1>Kuchenny Minimalizm</h1>
+        <p>Czyste światło do pracy</p>
+      </div>
+      <a class="mockup-btn" href="shop.html"><div class="btn-slide-wrap"><span class="btn-txt-default">Odkryj</span><span class="btn-txt-hover">Odkryj</span></div></a>
+    </div>
+  </div>
+
+  <!-- Slide 3: Nowoczesne Biuro -->
+  <div class="slide" data-tech="office">
+    <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
+      <video class="slide-video desktop-bg" muted playsinline preload="auto" src="videos/hero_office.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video mobile-bg" muted playsinline preload="auto" src="videos/hero_office.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+    </div>
+    <div class="slide-banner-box" style="z-index: 2;">
+      <svg class="glass-border-svg">
+        <rect class="track" pathlength="100"></rect>
+        <rect class="car" pathlength="100"></rect>
+      </svg>
+      <div class="banner-text">
+        <h1>Nowoczesne Biuro</h1>
+        <p>Przestrzeń, która inspiruje</p>
+      </div>
+      <a class="mockup-btn" href="shop.html"><div class="btn-slide-wrap"><span class="btn-txt-default">Odkryj</span><span class="btn-txt-hover">Odkryj</span></div></a>
+    </div>
+  </div>
+
+  <!-- Slide 4: Oświetlenie Schodów -->
+  <div class="slide" data-tech="stairs">
+    <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
+      <video class="slide-video desktop-bg" muted playsinline preload="auto" src="videos/hero_staircase.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video mobile-bg" muted playsinline preload="auto" src="videos/hero_staircase.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+    </div>
+    <div class="slide-banner-box" style="z-index: 2;">
+      <svg class="glass-border-svg">
+        <rect class="track" pathlength="100"></rect>
+        <rect class="car" pathlength="100"></rect>
+      </svg>
+      <div class="banner-text">
+        <h1>Oświetlenie Schodów</h1>
+        <p>Bezpieczeństwo i styl</p>
+      </div>
+      <a class="mockup-btn" href="shop.html"><div class="btn-slide-wrap"><span class="btn-txt-default">Odkryj</span><span class="btn-txt-hover">Odkryj</span></div></a>
+    </div>
+  </div>
+
+<style>
+.hero-indicator {
+  width: 10px; height: 10px; background: rgba(255,255,255,0.3); border-radius: 50%;
+  transition: all 0.3s ease; pointer-events: auto; cursor: pointer;
+}
+.hero-indicator.active {
+  background: #fff; width: 30px; border-radius: 10px;
+}
+</style>
+
+  <div class="hero-controls-bar">
 <div class="slider-arrows">
 <button class="slider-arrow" id="prevSlide">
 <svg viewbox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
@@ -4344,13 +4459,20 @@
 <svg viewbox="0 0 24 24"><polyline points="9 6 15 12 9 18"></polyline></svg>
 </button>
 </div>
-<a class="scroll-down-arrow" href="#kategorie-banners" onclick="const el = document.getElementById('kategorie-banners'); const y = el.getBoundingClientRect().top + (window.pageYOffset || window.scrollY) - 90; window.scrollTo({ top: y, behavior: 'smooth' }); event.preventDefault();">
+<div class="hero-indicators" style="position: absolute; bottom: 30px; width: 100%; display: flex; justify-content: center; gap: 8px; z-index: 20; pointer-events: none;">
+      <div class="hero-indicator active" data-index="0"></div>
+      <div class="hero-indicator" data-index="1"></div>
+      <div class="hero-indicator" data-index="2"></div>
+      <div class="hero-indicator" data-index="3"></div>
+    </div>
+  <a class="scroll-down-arrow" href="#kategorie-banners" onclick="const el = document.getElementById('kategorie-banners'); const y = el.getBoundingClientRect().top + (window.pageYOffset || window.scrollY) - 90; window.scrollTo({ top: y, behavior: 'smooth' }); event.preventDefault();">
 <span>Odkryj</span>
 <div class="scroll-down-circle">
 <svg viewbox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
 </div>
 </a>
 </div>
+
 </section>
 <!-- Banners Section (2 premium category banners side by side) -->
 <section class="mockup-banners" id="kategorie-banners" style="scroll-margin-top: 120px; padding: 80px 0; background: #fafafa;">
@@ -5550,46 +5672,56 @@
   </div>
 </section>
 
-<footer class="mockup-footer">
-<div class="footer-grid">
-<div class="footer-col">
-<div class="footer-logo" style="margin-bottom: 0px;">
-<img alt="Prescot Logo" src="images/logo-white.png" style="height: 22px; opacity: 0.8; display: block;"/>
-</div>
-<p style="margin-top: 15px;">Prescot LED to profesjonalny dostawca najwyższej jakości taśm LED, profili aluminiowych, nowoczesnych sterowników oraz niezawodnych zasilaczy hermetycznych.</p><p style="margin-top: 15px; color: #ccc;"><strong>PRESCOT LED</strong><br/>ul. Przykładowa 12<br/>00-001 Warszawa<br/>kontakt@prescot.com.pl</p>
-</div>
-<div class="footer-col">
-<h3>Link</h3>
-<ul>
-<li><a href="#">Kolekcje</a></li>
-<li><a href="#">Wszystkie Produkty</a></li>
-<li><a href="#">Nowości</a></li>
-<li><a href="#">Wyprzedaż</a></li>
-</ul>
-</div>
-<div class="footer-col">
-<h3>Wsparcie</h3>
-<ul>
-<li><a href="#">Polityka Prywatności</a></li>
-<li><a href="#">Regulamin</a></li>
-<li><a href="#">Wysyłka i Zwroty</a></li>
-<li><a href="#">FAQ</a></li>
-</ul>
-</div>
-<div class="footer-col">
-<h3>Newsletter</h3>
-<p style="margin-bottom: 20px;">Zapisz się, aby otrzymywać informacje o nowych kolekcjach i ofertach specjalnych.</p>
-<div class="newsletter-glass-box" style="display: flex; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 4px; width: 100%;">
-<input aria-label="E-mail" placeholder="Twój e-mail" style="border: none; background: transparent; color: #fff; padding: 8px 12px; width: 100%; font-size: 13px; font-family: \'Inter\', sans-serif; outline: none;" type="email"/>
-<button onmouseout="this.style.background='rgba(255, 255, 255, 0.15)'" onmouseover="this.style.background='rgba(255, 255, 255, 0.25)'" style="background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; font-weight: 600; font-size: 11px; padding: 8px 20px; border-radius: 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease;">OK</button>
-</div>
-</div>
-</div>
-<div class="footer-bottom">
-<p>© 2026 Prescot LED. Wszelkie prawa zastrzeżone.</p>
-<p>Powered by PRESCOT LED</p>
-</div>
+
+<footer class="mockup-footer premium-footer">
+  <div class="footer-grid">
+    <div class="footer-col brand-col">
+      <div class="footer-logo">
+        <img alt="Prescot Logo" src="images/logo-white.png" />
+      </div>
+      <p class="brand-desc">Tworzymy oświetlenie jutra. Prescot LED to bezkompromisowa jakość, zaawansowana technologia COB i inteligentne systemy sterowania światłem dla profesjonalistów.</p>
+      <div class="social-links">
+        <a href="#"><i class="ph ph-facebook-logo"></i></a>
+        <a href="#"><i class="ph ph-instagram-logo"></i></a>
+        <a href="#"><i class="ph ph-youtube-logo"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h3>Odkryj</h3>
+      <ul>
+        <li><a href="shop.html">Produkty Premium</a></li>
+        <li><a href="configurator.html">Dobierz System AI</a></li>
+        <li><a href="#">Bestsellery</a></li>
+        <li><a href="#">Nowości 2026</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h3>Wsparcie</h3>
+      <ul>
+        <li><a href="contact.html">Kontakt & Pomoc</a></li>
+        <li><a href="#">Gwarancja 5 Lat</a></li>
+        <li><a href="#">Baza Wiedzy</a></li>
+        <li><a href="#">Polityka Prywatności</a></li>
+      </ul>
+    </div>
+    <div class="footer-col contact-col">
+      <h3>Kontakt</h3>
+      <ul class="contact-info">
+        <li><i class="ph ph-envelope-simple"></i> kontakt@prescot.com.pl</li>
+        <li><i class="ph ph-phone"></i> +48 22 123 45 67</li>
+        <li><i class="ph ph-map-pin"></i> ul. Przykładowa 12, 00-001 Warszawa</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 PRESCOT LED. Wszelkie prawa zastrzeżone.</p>
+    <div class="payment-methods">
+      <i class="ph ph-stripe-logo"></i>
+      <i class="ph ph-paypal-logo"></i>
+    </div>
+  </div>
 </footer>
+
 <script>
     // Mobile Collapsible Footer Columns
     document.querySelectorAll('.footer-col h3').forEach(h3 => {
