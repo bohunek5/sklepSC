@@ -293,37 +293,33 @@
 
     .slide {
       position: absolute;
-      pointer-events: none;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       z-index: 1;
+      opacity: 0;
+      visibility: hidden;
       display: flex;
       align-items: flex-end;
       justify-content: flex-end;
       padding: 0 40px 80px 40px;
-      transition: clip-path 1.4s cubic-bezier(0.76, 0, 0.24, 1);
-    }
-
-    .slide:nth-child(even) {
-      clip-path: inset(0 0 0 100%);
-    }
-    
-    .slide:nth-child(odd) {
-      clip-path: inset(0 100% 0 0);
+      transition: opacity 1.2s ease-in-out, visibility 1.2s ease-in-out;
+      pointer-events: none;
     }
 
     .slide.active {
+      opacity: 1;
+      visibility: visible;
       z-index: 10;
       pointer-events: auto;
-      clip-path: inset(0 0 0 0) !important;
     }
 
     .slide.leaving {
+      opacity: 0;
+      visibility: visible;
       z-index: 5;
-      clip-path: inset(0 0 0 0) !important;
-      transition: none;
+      transition: opacity 1.2s ease-in-out;
     }
 
     .slide-bg, .slide-video {
@@ -5770,82 +5766,84 @@
     (function initHeroSlider() {
       const slides = document.querySelectorAll('.slide');
       if (!slides || slides.length === 0) return;
-      
-      const prevBtn = document.getElementById('prevSlide');
-      const nextBtn = document.getElementById('nextSlide');
+
       let currentSlide = 0;
-      let slideTimeout = null;
-  
-      function showSlide(index) {
-        if (slideTimeout) {
-          clearTimeout(slideTimeout);
-          slideTimeout = null;
+      let slideTimer = null;
+
+      function startAutoSlide() {
+        stopAutoSlide();
+        slideTimer = setInterval(() => {
+          showSlide((currentSlide + 1) % slides.length);
+        }, 5000);
+      }
+
+      function stopAutoSlide() {
+        if (slideTimer) {
+          clearInterval(slideTimer);
+          slideTimer = null;
         }
-  
-        const prevActive = document.querySelector('.slide.active');
-        
-        currentSlide = (index + slides.length) % slides.length;
-        const activeSlide = slides[currentSlide];
-  
-        // Query indicators directly from DOM
-        const indicators = document.querySelectorAll('.hero-indicator');
-        indicators.forEach((ind, i) => {
+      }
+
+      function showSlide(targetIndex) {
+        currentSlide = (targetIndex + slides.length) % slides.length;
+
+        slides.forEach((slide, i) => {
+          if (i === currentSlide) {
+            slide.classList.add('active');
+            slide.classList.remove('leaving');
+            slide.querySelectorAll('video').forEach(v => {
+              try {
+                v.currentTime = 0;
+                v.play().catch(() => {});
+              } catch(e) {}
+            });
+          } else {
+            if (slide.classList.contains('active')) {
+              slide.classList.add('leaving');
+              setTimeout(() => slide.classList.remove('leaving'), 1200);
+            }
+            slide.classList.remove('active');
+            slide.querySelectorAll('video').forEach(v => {
+              try { v.pause(); } catch(e) {}
+            });
+          }
+        });
+
+        // Update indicators
+        document.querySelectorAll('.hero-indicator').forEach((ind, i) => {
           if (i === currentSlide) ind.classList.add('active');
           else ind.classList.remove('active');
         });
-  
-        if (prevActive && prevActive !== activeSlide) {
-          prevActive.classList.remove('active');
-          prevActive.classList.add('leaving');
-          prevActive.querySelectorAll('video').forEach(v => {
-            v.pause();
-          });
-        }
-  
-        activeSlide.classList.add('active');
-        
-        const isMobile = window.innerWidth <= 768;
-        const activeVideo = isMobile ? (activeSlide.querySelector('video.mobile-bg') || activeSlide.querySelector('video')) : (activeSlide.querySelector('video.desktop-bg') || activeSlide.querySelector('video'));
-        
-        if (activeVideo) {
-          try {
-            activeVideo.currentTime = 0;
-            activeVideo.play().catch(err => { console.log("Autoplay blocked:", err); });
-          } catch(e) {}
-        }
-        
-        resetTimeout(5000);
-  
-        if (prevActive && prevActive !== activeSlide) {
-          setTimeout(() => {
-            slides.forEach(s => {
-              if (s !== activeSlide) {
-                s.classList.remove('leaving');
-              }
-            });
-          }, 1400);
-        }
+
+        startAutoSlide();
       }
-  
-      function resetTimeout(duration) {
-        if (slideTimeout) clearTimeout(slideTimeout);
-        slideTimeout = setTimeout(() => {
+
+      // Event delegation for arrows and indicators
+      document.addEventListener('click', (e) => {
+        const prevBtn = e.target.closest('#prevSlide');
+        if (prevBtn) {
+          e.preventDefault();
+          showSlide(currentSlide - 1);
+          return;
+        }
+
+        const nextBtn = e.target.closest('#nextSlide');
+        if (nextBtn) {
+          e.preventDefault();
           showSlide(currentSlide + 1);
-        }, duration);
-      }
-  
-      if (prevBtn) {
-        prevBtn.onclick = (e) => { e.preventDefault(); showSlide(currentSlide - 1); };
-      }
-      
-      if (nextBtn) {
-        nextBtn.onclick = (e) => { e.preventDefault(); showSlide(currentSlide + 1); };
-      }
-      
-      document.querySelectorAll('.hero-indicator').forEach((ind, i) => {
-        ind.onclick = (e) => { e.preventDefault(); showSlide(i); };
+          return;
+        }
+
+        const indicator = e.target.closest('.hero-indicator');
+        if (indicator) {
+          e.preventDefault();
+          const idx = parseInt(indicator.getAttribute('data-index') || '0', 10);
+          showSlide(idx);
+          return;
+        }
       });
-  
+
+      // Start slider immediately or on DOM ready
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => { showSlide(0); });
       } else {
