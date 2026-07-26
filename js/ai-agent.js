@@ -230,68 +230,29 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const productsContainer = document.createElement('div');
       productsContainer.innerHTML = html;
-      
-      const cta = document.createElement('a');
-      cta.className = 'ai-add-all-btn';
-      Object.assign(cta.style, {
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '8px',
-        marginTop: '12px',
-        minHeight: '42px',
-        padding: '9px 20px',
-        borderRadius: '99px',
-        border: isBought ? '1px solid rgba(16,185,129,0.4)' : '1px solid rgba(255, 255, 255, 0.24)',
-        background: isBought ? 'rgba(16,185,129,0.15)' : 'rgba(255, 255, 255, 0.09)',
-        boxShadow: isBought ? 'none' : '0 6px 18px rgba(0, 0, 0, 0.04)',
-        color: isBought ? '#10b981' : '#ffffff',
-        fontWeight: '700',
-        fontSize: '11px',
-        letterSpacing: '0.06em',
-        textTransform: 'uppercase',
-        textDecoration: 'none',
-        whiteSpace: 'nowrap',
-        cursor: 'pointer',
-        transition: 'color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
-        fontFamily: "'Inter', sans-serif"
-      });
-      cta.textContent = isBought ? '\u2713 DODANO \u2014 Przejd\u017a do kasy' : 'Dodaj do koszyka';
-      cta.href = '#';
+      const cta = document.createElement('button');
+      cta.type = 'button';
       if (isBought) {
-        cta.classList.add('bought');
-      }
-
-      cta.onmouseover = () => {
-        if (!cta.classList.contains('bought')) {
-          cta.style.borderColor = 'rgba(255, 255, 255, 0.5)';
-          cta.style.background = 'rgba(255, 255, 255, 0.18)';
-        }
-      };
-      cta.onmouseout = () => {
-        if (!cta.classList.contains('bought')) {
-          cta.style.borderColor = 'rgba(255, 255, 255, 0.24)';
-          cta.style.background = 'rgba(255, 255, 255, 0.09)';
-        }
-      };
-      
-      cta.onclick = (e) => {
+        cta.className = 'btn btn-secondary';
+        cta.style.width = '100%';
+        cta.style.marginTop = '12px';
+        cta.innerHTML = '\u2713 DODANO \u2014 Przejd\u017a do kasy';
+        cta.onclick = (e) => { e.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
+      } else {
+        cta.className = 'btn btn-primary btn-icon btn-cart qv-add-cart-btn';
+        cta.style.width = '100%';
+        cta.style.marginTop = '12px';
+        cta.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg><span class="btn-txt-default">Dodaj do koszyka</span>';
+        cta.onclick = (e) => {
           e.preventDefault();
-          if (!cta.classList.contains('bought')) {
-              addItemsToCart(aiSessionState.lastProposedItems);
-              cta.textContent = '\u2713 DODANO \u2014 Przejd\u017a do kasy';
-              cta.style.borderColor = 'rgba(16,185,129,0.4)';
-              cta.style.color = '#10b981';
-              cta.style.background = 'rgba(16,185,129,0.15)';
-              cta.style.boxShadow = 'none';
-              cta.classList.add('bought');
-              aiSessionState.lastProposedItems = [];
-              if(window.openCartDrawer) window.openCartDrawer();
-          } else {
-              // Redirect to cart if already added
-              window.location.href = 'cart.html';
-          }
-      };
+          addItemsToCart(aiSessionState.lastProposedItems);
+          aiSessionState.lastProposedItems = [];
+          cta.className = 'btn btn-secondary';
+          cta.innerHTML = '\u2713 DODANO \u2014 Przejd\u017a do kasy';
+          cta.onclick = (e2) => { e2.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
+          if(window.openCartDrawer) window.openCartDrawer();
+        };
+      }
       
       productsContainer.appendChild(cta);
       aiBubble.appendChild(productsContainer);

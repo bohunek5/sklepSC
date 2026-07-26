@@ -231,7 +231,7 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
         </button>
       </form>
-      <a class="header-icon" href="cart.html" aria-label="Koszyk">
+      <a class="header-icon" href="javascript:void(0);" onclick="openCartDrawer();" aria-label="Koszyk">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L21 7H6"></path><circle cx="10" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle></svg>
         <span class="cart-badge" id="cartBadge">0</span>
       </a>
@@ -510,7 +510,7 @@
       <a class="mobile-nav-item" href="shop.html"><span>Sklep</span></a>
       <button class="mobile-nav-item" type="button" onclick="openMobileCategories()"><span>Kategorie</span></button>
       <a class="mobile-nav-item active" href="configurator.html"><span>Dobierz</span></a>
-      <a class="mobile-nav-item" href="cart.html"><span>Koszyk</span></a>
+      <a class="mobile-nav-item" href="javascript:void(0);" onclick="openCartDrawer();"><span>Koszyk</span></a>
     </div>
   </nav>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>

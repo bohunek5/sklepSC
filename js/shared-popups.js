@@ -2417,13 +2417,13 @@ function upgradeMobileCommerceNavigation() {
   const icon = (content) => `<svg viewBox="0 0 24 24" aria-hidden="true">${content}</svg>`;
   const entries = [
     { label: 'Home', href: 'index.html', active: path === '' || path === 'index.html', icon: icon('<path d="M4 11.5 12 5l8 6.5V20h-5v-6H9v6H4Z"/>') },
-    { label: 'Kategorie', action: true, active: false, icon: icon('<path d="M5 7h14M5 12h14M5 17h14"/>') },
+    { label: 'Kategorie', action: true, onClick: 'openMobileCategories()', active: false, icon: icon('<path d="M5 7h14M5 12h14M5 17h14"/>') },
     { label: 'Dobierz', href: 'configurator.html', active: path === 'configurator.html', icon: icon('<path d="M4 18 18 4l2 2L6 20H4v-2Z"/><path d="m14 8 2 2M10 12l2 2M7 15l2 2"/>') },
     { label: 'Zakup AI', href: 'ai-shopping.html', active: path === 'ai-shopping.html', icon: icon('<path d="M12 2a2 2 0 0 1 2 2c0 1.1-.9 2-2 2a2 2 0 0 1-2-2c0-1.1.9-2 2-2z"/><path d="M10 6h4a2 2 0 0 1 2 2v6h-8V8a2 2 0 0 1 2-2z"/><path d="M10 14h4v6h-4v-6z"/>') },
-    { label: 'Koszyk', href: 'cart.html', active: path === 'cart.html' || path === 'checkout.html', icon: icon('<path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/>') }
+    { label: 'Koszyk', action: true, onClick: 'openCartDrawer()', active: false, icon: icon('<path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/>') }
   ];
   const markup = entries.map((entry) => entry.action
-    ? `<button class="mobile-nav-item ${entry.active ? 'active' : ''}" type="button" onclick="openMobileCategories()">${entry.icon}<span>${entry.label}</span></button>`
+    ? `<button class="mobile-nav-item ${entry.active ? 'active' : ''}" type="button" onclick="${entry.onClick}">${entry.icon}<span>${entry.label}</span></button>`
     : `<a class="mobile-nav-item ${entry.active ? 'active' : ''}" href="${entry.href}">${entry.icon}<span>${entry.label}</span></a>`
   ).join('');
   document.querySelectorAll('.mobile-nav-items').forEach((navigation) => { navigation.innerHTML = markup; });

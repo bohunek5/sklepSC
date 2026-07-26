@@ -2849,14 +2849,14 @@
     max-width: 170px !important;
   }
   .slide {
-    padding-bottom: 95px !important;
+    padding-bottom: 75px !important;
   }
   .hero-controls-bar {
-    bottom: 20px !important;
+    bottom: 155px !important;
   }
   .slide-banner-box {
     padding: 12px 16px !important;
-    max-width: calc(100% - 140px) !important;
+    max-width: calc(100% - 32px) !important;
   }
   .slide-banner-box h1 {
     font-size: 19px !important;
@@ -4417,7 +4417,28 @@
     </a>
     <nav class="desktop-nav" aria-label="Nawigacja główna">
       <a class="active" href="index.html">Home</a>
-      <a href="shop.html">Sklep</a>
+      <div class="has-mega-menu" style="display:inline-block; position:relative;">
+        <a href="shop.html" style="display:flex; align-items:center; gap:4px;">Sklep <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 256 256"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path></svg></a>
+        <div class="magic-dropdown" style="width: 700px; padding: 20px; margin-top:-10px;">
+          <div class="categories-sub-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+            <a href="shop.html?category=Ta%C5%9Bmy%20LED" class="sub-category-card" style="height:120px; border-radius:12px; overflow:hidden; position:relative; text-decoration:none;">
+               <img src="images/cat_strip.png" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;">
+               <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);"></div>
+               <span style="position:absolute; bottom:15px; left:15px; color:white; font-weight:700; font-size:14px; letter-spacing:1px; z-index:2;">TAŚMY LED</span>
+            </a>
+            <a href="shop.html?category=Profile%20LED" class="sub-category-card" style="height:120px; border-radius:12px; overflow:hidden; position:relative; text-decoration:none;">
+               <img src="images/cat_profile.png" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;">
+               <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);"></div>
+               <span style="position:absolute; bottom:15px; left:15px; color:white; font-weight:700; font-size:14px; letter-spacing:1px; z-index:2;">PROFILE LED</span>
+            </a>
+            <a href="shop.html?category=Zasilacze" class="sub-category-card" style="height:120px; border-radius:12px; overflow:hidden; position:relative; text-decoration:none;">
+               <img src="images/cat_power.png" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;">
+               <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);"></div>
+               <span style="position:absolute; bottom:15px; left:15px; color:white; font-weight:700; font-size:14px; letter-spacing:1px; z-index:2;">ZASILACZE</span>
+            </a>
+          </div>
+        </div>
+      </div>
       <a href="blog.html">Wiedza</a>
       <a href="about.html">O nas</a>
       <a href="contact.html">Kontakt</a>
@@ -4432,7 +4453,7 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
         </button>
       </form>
-      <a class="header-icon" href="cart.html" aria-label="Koszyk">
+      <a class="header-icon" href="javascript:void(0);" onclick="openCartDrawer();" aria-label="Koszyk">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L21 7H6"></path><circle cx="10" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle></svg>
         <span class="cart-badge" id="cartBadge">0</span>
       </a>
@@ -4750,19 +4771,19 @@
         gap: 15px !important;
       }
       .categories-sub-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 10px !important;
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
       }
       .category-banner-card {
         height: 280px !important;
         padding: 25px 20px !important;
       }
       .category-banner-card.sub-card {
-        height: 180px !important;
-        padding: 15px !important;
+        height: 280px !important;
+        padding: 25px 20px !important;
       }
       .category-banner-card.sub-card h3 {
-        font-size: 16px !important;
+        font-size: 24px !important;
         margin-bottom: 8px !important;
       }
       
