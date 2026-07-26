@@ -1898,7 +1898,7 @@ label.is-unavailable {
   min-height: 214px;
   background-image:
     linear-gradient(90deg, rgba(6,18,35,.06), rgba(6,18,35,.22)),
-    url("../images/configurator/tech_cob_smd_new.png");
+    url("../images/banner_scharfer.webp");
   background-position: center;
   background-size: cover;
 }
@@ -1952,7 +1952,7 @@ label.is-unavailable {
   border-radius: 0;
   background-image:
     linear-gradient(180deg, rgba(6,18,35,.12), rgba(6,18,35,.96)),
-    url("../images/configurator/technology-cob-smd-v2.webp");
+    var(--technology-image, url("../images/configurator/technology-cob-smd-v2.webp"));
   background-position: center, var(--technology-position, center);
   background-repeat: no-repeat;
   background-size: 100% 100%, cover;
@@ -1972,7 +1972,7 @@ label.is-unavailable {
   border-color: transparent;
   background-image:
     linear-gradient(180deg, rgba(6,18,35,.12), rgba(6,18,35,.96)),
-    url("../images/configurator/technology-cob-smd-v2.webp");
+    var(--technology-image, url("../images/configurator/technology-cob-smd-v2.webp"));
   background-position: center, var(--technology-position, center);
   background-size: 100% 100%, cover;
   box-shadow: inset 0 0 0 3px #fff;
