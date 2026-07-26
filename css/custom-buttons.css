@@ -147,3 +147,10 @@ body .quantity-selector input {
     object-fit: contain !important;
   }
 }
+
+/* Hide cart recommendations on mobile */
+@media (max-width: 768px) {
+  #cartRecommendations {
+    display: none !important;
+  }
+}

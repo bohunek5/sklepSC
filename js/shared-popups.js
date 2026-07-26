@@ -356,15 +356,6 @@ function injectCartDrawer() {
         </div>
       </div>
       
-      <!-- Order Note -->
-      <div style="padding: 15px 25px; border-bottom: 1px solid #eee;">
-        <div id="toggleNoteBtn" style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #555; cursor: pointer; user-select: none;">
-          <i class="ph ph-note-pencil" style="font-size: 16px;"></i>
-          <span>Dodaj uwagi do zamówienia</span>
-        </div>
-        <textarea id="orderNoteInput" placeholder="Wpisz swoje uwagi..." style="width: 100%; height: 60px; margin-top: 10px; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 12px; resize: none; display: none; font-family: inherit; box-sizing: border-box;"></textarea>
-      </div>
-      
       <!-- Drawer Footer -->
       <div style="padding: 25px; border-top: 1px solid #eee; background: #fff;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
