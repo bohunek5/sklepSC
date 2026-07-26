@@ -951,10 +951,16 @@
     }
     .mobile-nav-items {
       display: flex;
-      justify-content: space-around;
-      align-items: flex-end;
+      justify-content: space-between;
+      align-items: center;
       height: 65px;
-      padding: 0 5px 8px 5px;
+      padding: 0 10px 8px 10px;
+      gap: 2px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .mobile-nav-items::-webkit-scrollbar {
+      display: none;
     }
     .mobile-nav-item {
       display: flex;
@@ -4542,8 +4548,9 @@
                   <p class="mockup-product-price">
                     ${p.price.toFixed(2)} zł <span class="price-unit">/ ${p.category && p.category.includes("Taśmy") ? "metr" : "szt."}</span>
                   </p>
-                  <button class="mockup-btn qv-add-cart-btn" data-id="${p.id}" style="width: 100%; margin-top: 10px; padding: 0 10px !important; font-size: 11px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; justify-content: center; align-items: center; height: 36px;">
-                    Dodaj do koszyka
+                  <button class="btn btn-primary btn-icon btn-cart qv-add-cart-btn" data-id="${p.id}" type="button" aria-label="Dodaj do koszyka" style="width: 100%; margin-top: 10px;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                    <span class="btn-txt-default">Dodaj do koszyka</span>
                   </button>
                 </div>
               </div>

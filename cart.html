@@ -816,10 +816,16 @@
     }
     .mobile-nav-items {
       display: flex;
-      justify-content: space-around;
-      align-items: flex-end;
+      justify-content: space-between;
+      align-items: center;
       height: 65px;
-      padding: 0 5px 8px 5px;
+      padding: 0 10px 8px 10px;
+      gap: 2px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .mobile-nav-items::-webkit-scrollbar {
+      display: none;
     }
     .mobile-nav-item {
       display: flex;

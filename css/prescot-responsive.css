@@ -755,36 +755,49 @@ body .mobile-menu a.configurator-nav-link:not(.active) {
   }
 
   .mobile-category-list {
-    display: grid;
-    gap: 1px;
-    overflow: hidden;
-    border: 1px solid #dce2e8;
-    background: #dce2e8;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    background: transparent;
+    border: none;
   }
 
   .mobile-category-list>a {
-    display: grid;
-    grid-template-columns: 94px minmax(0, 1fr) 20px;
-    min-height: 104px;
+    display: flex;
     align-items: center;
-    gap: 14px;
-    color: #172237;
-    background: #fff;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    min-height: 80px;
     text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .mobile-category-list>a:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   }
 
   .mobile-category-list>a>img,
   .category-material-visual {
-    width: 94px;
-    height: 100%;
-    min-height: 104px;
+    width: 64px;
+    height: 64px;
+    min-height: auto;
+    border-radius: 12px;
     object-fit: cover;
     background: #e9edf1;
   }
 
   .mobile-category-list>a>span:nth-child(2) {
+    flex: 1;
     min-width: 0;
-    padding: 12px 0;
+    padding: 0;
   }
 
   .mobile-category-list small,
@@ -794,34 +807,35 @@ body .mobile-menu a.configurator-nav-link:not(.active) {
   }
 
   .mobile-category-list small {
-    color: #0b1a30;
-    font-size: 7px;
-    font-style: normal;
+    color: #007bff;
+    font-size: 8px;
     font-weight: 800;
-    letter-spacing: .1em;
+    letter-spacing: .05em;
     text-transform: uppercase;
+    margin-bottom: 2px;
   }
 
   .mobile-category-list strong {
-    margin-top: 3px;
     color: #0b1a30;
     font-family: "Outfit", sans-serif;
     font-size: 16px;
-    line-height: 1.15;
+    line-height: 1.2;
+    margin-bottom: 2px;
+    margin-top: 0;
   }
 
   .mobile-category-list em {
-    margin-top: 4px;
     color: #69778a;
-    font-size: 9px;
+    font-size: 11px;
     font-style: normal;
     line-height: 1.35;
+    margin-top: 0;
   }
 
   .mobile-category-list>a>b {
-    padding-right: 11px;
-    color: #0b1a30;
-    font-size: 18px;
+    padding-right: 8px;
+    color: #a0aab8;
+    font-size: 20px;
     font-weight: 500;
   }
 
