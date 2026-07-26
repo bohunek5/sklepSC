@@ -134,7 +134,7 @@ window.ConfiguratorCore = (() => {
     const required = totalLoad * 1.2;
     const segmentRequired = required / state.segments;
     const supplies = categoryProducts(catalog, 'zasilacze led scharfer')
-      .map((product) => ({ product, voltage: productVoltage(product), watts: firstNumber(productText(product), /(\d+(?:[.,]\d+)?)\s*w/i) }))
+      .map((product) => ({ product, voltage: productVoltage(product), watts: firstNumber(product.title, /(\d+(?:[.,]\d+)?)\s*w/i) }))
       .filter((supply) => supply.voltage === tape.voltage && supply.watts)
       .sort((a, b) => a.watts - b.watts);
     if (!supplies.length) return { product: null, quantity: 0, capacity: 0, load: totalLoad, required, reason: `Brak dostępnego zasilacza ${tape.voltage} V.` };

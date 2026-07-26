@@ -1,4 +1,4 @@
-<!doctype html>
+﻿﻿<!doctype html>
 <html lang="pl">
 <head>
   <meta charset="utf-8">
@@ -111,7 +111,7 @@
   transition: all 0.3s ease;
 }
 .premium-footer .social-links a:hover {
-  background: var(--accent-color, #ff5a00);
+  background: var(--accent-color, #0b1a30);
   transform: translateY(-3px);
 }
 .premium-footer h3 {
@@ -151,7 +151,7 @@
 }
 .premium-footer .contact-info i {
   font-size: 20px;
-  color: var(--accent-color, #ff5a00);
+  color: var(--accent-color, #0b1a30);
   margin-top: 2px;
 }
 .premium-footer .footer-bottom {
@@ -356,17 +356,28 @@
 
             <fieldset class="config-step" data-step="2" hidden>
               <legend>Technologia taśmy</legend>
-              <p class="step-kicker">Krok 03 • technologia</p>
+              <p class="step-kicker">Krok 03 — technologia</p>
               <h3>Jaką budowę ma mieć taśma?</h3>
-              <p class="step-description">COB tworzy jednolitą linię, a SMD jest bardziej uniwersalne i często jaśniejsze.</p>
-<div class="technology-showcase">
-                <div class="technology-photo" role="img" aria-label="Porównanie ciągłej taśmy COB i taśmy SMD z widocznymi diodami"></div>
-                <div class="technology-copy"><span>Technologia taśmy</span><strong>COB czy SMD?</strong><small>Po lewej ciągła linia COB, po prawej widoczne diody SMD. Możesz zdecydować albo zostawić wybór katalogowi.</small></div>
-                <div class="technology-options technology-options-visual">
-                  <label style="--technology-position:center; --technology-image: url('../images/cat_office.png')"><input type="radio" name="technology" value="auto" checked><span><b>Dobierz automatycznie</b><small>Najlepszy zgodny wariant</small><em class="option-availability"></em></span></label>
-                  <label style="--technology-position:left center; --technology-image: url('../images/hero_cob.webp')"><input type="radio" name="technology" value="cob"><span><b>COB</b><small>Jednolita linia światła</small><em class="option-availability"></em></span></label>
-                  <label style="--technology-position:right center; --technology-image: url('../images/hero_mono.webp')"><input type="radio" name="technology" value="smd"><span><b>SMD</b><small>Szeroki zakres parametrów</small><em class="option-availability"></em></span></label>
-                </div>
+              <p class="step-description">Wybierz technologię diod pasującą do Twojego projektu. Opcja COB (jednolita linia światła) lub SMD (klasyczne, bardzo jasne diody punktowe).</p>
+              <div class="choice-grid choice-grid-two">
+                <label class="choice-card visual-choice" style="--choice-image:url('images/configurator/cob_tech_new.png'); --choice-position:center;">
+                  <input type="radio" name="technology" value="cob">
+                  <span class="visual-card-index">COB</span>
+                  <span class="visual-card-copy">
+                    <strong>Technologia COB</strong>
+                    <small>Jednolita linia światła bez widocznych kropek. Idealna do płytkich profili aluminiowych i braku maskownicy.</small>
+                  </span>
+                  <span class="option-availability"></span>
+                </label>
+                <label class="choice-card visual-choice" style="--choice-image:url('images/configurator/smd_tech_new.png'); --choice-position:center;">
+                  <input type="radio" name="technology" value="smd">
+                  <span class="visual-card-index">SMD</span>
+                  <span class="visual-card-copy">
+                    <strong>Technologia SMD</strong>
+                    <small>Klasyczne diody punktowe o wielkiej jasności. Szeroki zakres modyfikacji i mocy.</small>
+                  </span>
+                  <span class="option-availability"></span>
+                </label>
               </div>
             </fieldset>
             <fieldset class="config-step" data-step="3" hidden>
@@ -519,6 +530,37 @@
   <script src="js/products-data.js"></script>
   <script src="js/shared-popups.js"></script>
   <script src="js/configurator-core.js"></script>
+  
+  <style>
+    .sticky-next-bar {
+      display: none;
+      position: fixed;
+      bottom: 60px; /* above mobile nav */
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(0,0,0,0.1);
+      padding: 10px 20px;
+      z-index: 1000;
+      box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+    }
+    #stickyNextBtn:not(:disabled), #nextButton:not(:disabled) { cursor: pointer !important; }
+    #stickyNextBtn:disabled, #nextButton:disabled { cursor: not-allowed !important; }
+    @media (max-width: 760px) {
+      .sticky-next-bar { display: block; }
+    }
+  </style>
+
+  <div class="sticky-next-bar">
+    <button class="add-to-cart-btn btn-cart" id="stickyNextBtn" type="button" disabled style="width: 100%; height: 52px; border: none; padding: 0;">
+      <span class="btn-slide-wrap">
+        <span class="btn-txt-default">Przejdź dalej</span>
+        <span class="btn-txt-hover"><i class="ph ph-arrow-right" style="margin-right: 6px;"></i> Przejdź dalej</span>
+      </span>
+    </button>
+  </div>
+
   <script src="js/configurator.js"></script>
   <script src="js/smart-search.js"></script>
   <script id="standard-header-scroll-script">

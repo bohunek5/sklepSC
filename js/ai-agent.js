@@ -191,15 +191,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         btn.textContent = opt.label;
         btn.style.padding = '8px 16px';
         btn.style.borderRadius = '20px';
-        btn.style.border = '1px solid rgba(255, 90, 0, 0.4)';
-        btn.style.background = 'rgba(255, 90, 0, 0.1)';
+        btn.style.border = '1px solid rgba(11, 26, 48, 0.4)';
+        btn.style.background = 'rgba(11, 26, 48, 0.1)';
         btn.style.color = '#fff';
         btn.style.fontSize = '13px';
         btn.style.cursor = 'pointer';
         btn.style.transition = 'all 0.2s';
         
-        btn.onmouseover = () => { btn.style.background = '#ff5a00'; };
-        btn.onmouseout = () => { btn.style.background = 'rgba(255, 90, 0, 0.1)'; };
+        btn.onmouseover = () => { btn.style.background = '#0b1a30'; };
+        btn.onmouseout = () => { btn.style.background = 'rgba(11, 26, 48, 0.1)'; };
         
         btn.onclick = () => {
             container.remove();
@@ -216,13 +216,16 @@ document.addEventListener('DOMContentLoaded', async () => {
       
       productsList.forEach(p => {
           html += `
-            <div class="pro-product-card" style="padding: 12px; border: 1px solid rgba(255,255,255,0.05); background: rgba(15,23,42,0.6); backdrop-filter: blur(8px); border-radius: 12px; transition: transform 0.2s;">
-              <a href="product.html?id=${p.id}" target="_blank" style="flex-shrink: 0;"><img src="${productImage(p)}" style="width: 54px; height: 54px; object-fit: cover; border-radius: 8px; background: #fff;"></a>
+            <div class="pro-product-card" style="padding: 12px; border: 1px solid rgba(255,255,255,0.05); background: rgba(15,23,42,0.6); backdrop-filter: blur(8px); border-radius: 12px; transition: transform 0.2s; display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="if(window.openQuickView) window.openQuickView('${p.id}');">
+              <div style="flex-shrink: 0;"><img src="${productImage(p)}" style="width: 54px; height: 54px; object-fit: cover; border-radius: 8px; background: #fff;"></div>
               <div style="flex: 1;">
-                <div style="font-weight: 600; font-size: 14px; margin-bottom: 4px; line-height: 1.3;"><a href="product.html?id=${p.id}" target="_blank" style="color: #f8fafc; text-decoration: none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${p.title}</a></div>
+                <div style="font-weight: 600; font-size: 14px; margin-bottom: 4px; line-height: 1.3; color: #f8fafc;">${p.title}</div>
                 <div style="font-size: 12px; color: #64748b;">${p.category || 'Produkt'}</div>
               </div>
-              <div style="font-weight: 700; color: #ff5a00; font-size: 15px;">${formatPrice(p.price)}</div>
+              <div style="text-align: right;">
+                <div style="font-weight: 700; color: #0b1a30; font-size: 15px; margin-bottom: 5px;">${formatPrice(p.price)}</div>
+                <button type="button" class="mockup-btn mockup-btn-outline" style="padding: 4px 10px; font-size: 11px; height: auto;" onclick="event.stopPropagation(); if(window.openQuickView) window.openQuickView('${p.id}');">Sprawdź produkt</button>
+              </div>
             </div>
           `;
       });
@@ -264,21 +267,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           if(window.openCartDrawer) window.openCartDrawer();
         };
 
-        const ctaBuy = document.createElement('button');
-        ctaBuy.type = 'button';
-        ctaBuy.className = 'buy-it-now-btn';
-        ctaBuy.style.width = '100%';
-        ctaBuy.style.border = 'none';
-        ctaBuy.innerHTML = '<span class="btn-slide-wrap"><span class="btn-txt-default">Szybki zakup</span><span class="btn-txt-hover"><i class="ph ph-shopping-cart-simple" style="margin-right: 6px;"></i> Przejdź do kasy</span></span>';
-        ctaBuy.onclick = (e) => {
-          e.preventDefault();
-          addItemsToCart(aiSessionState.lastProposedItems);
-          aiSessionState.lastProposedItems = [];
-          window.location.href = 'checkout.html';
-        };
-
         buttonsRow.appendChild(ctaAdd);
-        buttonsRow.appendChild(ctaBuy);
         productsContainer.appendChild(buttonsRow);
       }
       

@@ -150,9 +150,50 @@ body .quantity-selector input {
 @media (max-width: 768px) {
   .site-header .brand img,
   .mockup-header-logo img {
-    height: auto !important;
-    max-width: 140px !important;
+    height: 32px !important;
+    max-width: none !important;
     width: auto !important;
     object-fit: contain !important;
   }
+}
+
+/* Animated Slide Text Effect */
+.btn-slide-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  height: 1.3em;
+  position: relative;
+  width: 100%;
+}
+.btn-slide-wrap .btn-txt-default,
+.btn-slide-wrap .btn-txt-hover {
+  display: block;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  width: 100%;
+}
+.btn-slide-wrap .btn-txt-default {
+  transform: translateY(0);
+}
+.btn-slide-wrap .btn-txt-hover {
+  position: absolute;
+  left: 0;
+  top: 0;
+  text-align: center;
+  transform: translateY(100%);
+}
+.mockup-btn:hover .btn-slide-wrap .btn-txt-default,
+.add-to-cart-btn:hover .btn-slide-wrap .btn-txt-default,
+.buy-it-now-btn:hover .btn-slide-wrap .btn-txt-default,
+body #qvAddToCart:hover .btn-slide-wrap .btn-txt-default {
+  transform: translateY(-100%) !important;
+}
+.mockup-btn:hover .btn-slide-wrap .btn-txt-hover,
+.add-to-cart-btn:hover .btn-slide-wrap .btn-txt-hover,
+.buy-it-now-btn:hover .btn-slide-wrap .btn-txt-hover,
+body #qvAddToCart:hover .btn-slide-wrap .btn-txt-hover {
+  transform: translateY(0) !important;
 }

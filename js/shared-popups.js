@@ -186,7 +186,7 @@ customStyles.innerHTML = `
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    color: var(--accent-color, #ff5a00);
+    color: var(--accent-color, #0b1a30);
     font-size: 11px;
     font-weight: 800;
     min-width: 18px;
@@ -365,89 +365,18 @@ function injectCartDrawer() {
         <p style="font-size: 11px; color: #777; margin: 0 0 20px 0;">Podatki i koszt dostawy obliczane przy kasie</p>
         
         <div style="display: flex; gap: 12px; flex-direction: row;">
-          <style>
-            .cart-checkout-btn-new {
-              flex: 1; padding: 14px; background: #000; color: #fff; border: 1px solid #000; font-weight: 700; text-transform: uppercase; font-size: 13px; cursor: pointer; border-radius: 4px; transition: all 0.3s ease; letter-spacing: 1px;
-              overflow: hidden; position: relative; display: block; box-sizing: border-box; text-align: center;
-            }
-            .cart-checkout-btn-new:hover {
-              background: transparent !important;
-              border-color: var(--primary-color, #ffd700) !important;
-              color: var(--primary-color, #ffd700) !important;
-            }
-            .cart-viewcart-btn-new {
-              flex: 1; padding: 14px; background: #fff; color: #000; border: 1px solid #000; font-weight: 700; text-transform: uppercase; font-size: 13px; cursor: pointer; border-radius: 4px; transition: all 0.3s ease; letter-spacing: 1px;
-              overflow: hidden; position: relative; display: block; box-sizing: border-box; text-align: center;
-            }
-            .cart-viewcart-btn-new:hover {
-              background: #000 !important;
-              color: #fff !important;
-              border-color: #000 !important;
-            }
-            
-            /* Sliding text animation styles */
-            .cart-checkout-btn-new .btn-slide-wrap,
-            .cart-viewcart-btn-new .btn-slide-wrap {
-              display: block;
-              height: 18px;
-              line-height: 18px;
-              overflow: hidden;
-              position: relative;
-              width: 100%;
-            }
-            .cart-checkout-btn-new .btn-slide-wrap .btn-txt-default,
-            .cart-checkout-btn-new .btn-slide-wrap .btn-txt-hover,
-            .cart-viewcart-btn-new .btn-slide-wrap .btn-txt-default,
-            .cart-viewcart-btn-new .btn-slide-wrap .btn-txt-hover {
-              display: block;
-              height: 100%;
-              width: 100%;
-              transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            }
-            .cart-checkout-btn-new .btn-slide-wrap .btn-txt-default,
-            .cart-viewcart-btn-new .btn-slide-wrap .btn-txt-default {
-              transform: translateY(0);
-            }
-            .cart-checkout-btn-new .btn-slide-wrap .btn-txt-hover,
-            .cart-viewcart-btn-new .btn-slide-wrap .btn-txt-hover {
-              position: absolute;
-              left: 0;
-              top: 0;
-              transform: translateY(100%);
-            }
-            .cart-checkout-btn-new:hover .btn-slide-wrap .btn-txt-default,
-            .cart-viewcart-btn-new:hover .btn-slide-wrap .btn-txt-default {
-              transform: translateY(-100%);
-            }
-            .cart-checkout-btn-new:hover .btn-slide-wrap .btn-txt-hover,
-            .cart-viewcart-btn-new:hover .btn-slide-wrap .btn-txt-hover {
-              transform: translateY(0);
-            }
-
-            @media (max-width: 480px) {
-              .cart-checkout-btn-new, .cart-viewcart-btn-new {
-                padding: 12px 6px !important;
-                font-size: 11px !important;
-                letter-spacing: 0px !important;
-              }
-              .cart-checkout-btn-new .btn-slide-wrap,
-              .cart-viewcart-btn-new .btn-slide-wrap {
-                height: 16px;
-                line-height: 16px;
-              }
-            }
-          </style>
-          <button id="cartDrawerCheckout" class="cart-checkout-btn-new">
-            <div class="btn-slide-wrap">
-              <span class="btn-txt-default">Przejdź do kasy</span>
-              <span class="btn-txt-hover">Płatność i dostawa</span>
-            </div>
+        <div style="display: flex; gap: 12px; flex-direction: row; width: 100%;">
+          <button id="cartDrawerGoToCart" class="add-to-cart-btn" onclick="window.location.href='cart.html'" style="flex: 1; padding: 0; min-height: 44px; font-size: 13px;">
+            <span class="btn-slide-wrap">
+              <span class="btn-txt-default">Do koszyka</span>
+              <span class="btn-txt-hover">Edytuj</span>
+            </span>
           </button>
-          <button id="cartDrawerGoToCart" class="cart-viewcart-btn-new">
-            <div class="btn-slide-wrap">
-              <span class="btn-txt-default">Przejdź do koszyka</span>
-              <span class="btn-txt-hover">Zobacz cały koszyk</span>
-            </div>
+          <button id="cartDrawerCheckout" class="buy-it-now-btn" onclick="window.location.href='checkout.html'" style="flex: 1; padding: 0; min-height: 44px; font-size: 13px;">
+            <span class="btn-slide-wrap">
+              <span class="btn-txt-default">Do kasy</span>
+              <span class="btn-txt-hover">Płatność</span>
+            </span>
           </button>
         </div>
       </div>
@@ -495,7 +424,7 @@ function injectQuickViewModal() {
           border-color: var(--primary-color, #0f172a);
         }
         .qv-variant-card:hover .qv-variant-card-img {
-          border-color: var(--accent-color, #ff5a00);
+          border-color: var(--accent-color, #0b1a30);
           box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         .qv-variant-card-img img {
@@ -530,7 +459,7 @@ function injectQuickViewModal() {
           color: var(--primary-color, #0f172a);
         }
         .qv-variant-card:hover .qv-variant-card-label {
-          color: var(--accent-color, #ff5a00);
+          color: var(--accent-color, #0b1a30);
         }
         @media (max-width: 768px) {
           #quickViewBox {
@@ -580,7 +509,7 @@ function injectQuickViewModal() {
         </div>
         <div style="padding: 40px; display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto;">
           <div>
-            <div id="qvCategory" style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #ff5a00; font-weight: 600; margin-bottom: 10px;"></div>
+            <div id="qvCategory" style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #0b1a30; font-weight: 600; margin-bottom: 10px;"></div>
             <h2 id="qvTitle" style="font-family: 'Outfit', sans-serif; font-size: 26px; margin-bottom: 15px; font-weight: 700;"></h2>
             <div id="qvPrice" style="font-size: 22px; font-weight: 700; color: #1a1a1a; margin-bottom: 20px;"></div>
             <p id="qvDesc" style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 25px;"></p>
@@ -940,7 +869,7 @@ function initSharedPopups() {
       transition: color 0.3s !important;
     }
     .mobile-menu a:hover, .mobile-menu a.active {
-      color: #ff5a00 !important;
+      color: #0b1a30 !important;
     }
 
     /* Auto-suggest search card styling */
@@ -957,7 +886,7 @@ function initSharedPopups() {
       box-shadow: 0 4px 15px rgba(0,0,0,0.02);
     }
     .suggest-card:hover {
-      border-color: #ff5a00;
+      border-color: #0b1a30;
       box-shadow: 0 8px 25px rgba(0,0,0,0.05);
       transform: translateY(-2px);
     }
@@ -2378,11 +2307,8 @@ function initSharedPopups() {
 function injectMobileCategoriesDrawer() {
   const drawerHTML = `
     <div id="mobileCategoriesDrawer" class="mobile-category-drawer" role="dialog" aria-modal="true" aria-labelledby="mobileCategoryTitle" aria-hidden="true" hidden>
-      <div class="mobile-category-header">
-        <div><span>Sklep Prescot</span><h2 id="mobileCategoryTitle">Kategorie produktów</h2></div>
-        <button type="button" onclick="closeMobileCategories()" aria-label="Zamknij kategorie"><span>Zamknij</span><b aria-hidden="true">×</b></button>
-      </div>
       <div class="mobile-category-content">
+        <h2 id="mobileCategoryTitle" style="font-size: 20px; font-weight: 800; margin: 0 0 10px 0; color: #0b1a30; font-family: 'Outfit', sans-serif;">Kategorie produktów</h2>
         <p class="mobile-category-intro">Wejdź przez rodzinę produktu albo od razu zawęź katalog po technologii.</p>
         <nav class="mobile-category-list" aria-label="Rodziny produktów">
           <a href="shop.html?category=Ta%C5%9Bmy%20LED"><img src="images/hero_cob.webp" alt="" loading="lazy"><span><small>01 · Źródła światła</small><strong>Taśmy LED</strong><em>COB, SMD, mono, CCT, RGB i systemy 48 V</em></span><b aria-hidden="true">→</b></a>
@@ -2405,13 +2331,12 @@ function injectMobileCategoriesDrawer() {
 
 function upgradeMobileCommerceNavigation() {
   const path = window.location.pathname.split('/').pop() || 'index.html';
-  const icon = (content) => `<svg viewBox="0 0 24 24" aria-hidden="true">${content}</svg>`;
+  const icon = (content) => `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${content}</svg>`;
   const entries = [
-    { label: 'Home', href: 'index.html', active: path === '' || path === 'index.html', icon: icon('<path d="M4 11.5 12 5l8 6.5V20h-5v-6H9v6H4Z"/>') },
-    { label: 'Kategorie', action: true, onClick: 'openMobileCategories()', active: false, icon: icon('<path d="M5 7h14M5 12h14M5 17h14"/>') },
-    { label: 'Dobierz', href: 'configurator.html', active: path === 'configurator.html', icon: icon('<path d="M4 18 18 4l2 2L6 20H4v-2Z"/><path d="m14 8 2 2M10 12l2 2M7 15l2 2"/>') },
-    { label: 'Zakup AI', href: 'ai-shopping.html', active: path === 'ai-shopping.html', icon: icon('<path d="M12 2a2 2 0 0 1 2 2c0 1.1-.9 2-2 2a2 2 0 0 1-2-2c0-1.1.9-2 2-2z"/><path d="M10 6h4a2 2 0 0 1 2 2v6h-8V8a2 2 0 0 1 2-2z"/><path d="M10 14h4v6h-4v-6z"/>') },
-    { label: 'Koszyk', action: true, onClick: 'openCartDrawer()', active: false, icon: icon('<path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/>') }
+    { label: 'Home', href: 'index.html', active: path === '' || path === 'index.html', icon: icon('<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>') },
+    { label: 'Kategorie', action: true, onClick: 'openMobileCategories()', active: false, icon: icon('<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>') },
+    { label: 'Dobierz', href: 'configurator.html', active: path === 'configurator.html', icon: icon('<line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="12" y1="12" y2="12"/><line x1="8" x2="3" y1="12" y2="12"/><line x1="21" x2="16" y1="20" y2="20"/><line x1="12" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="16" x2="16" y1="18" y2="22"/>') },
+    { label: 'Zakup AI', href: 'ai-shopping.html', active: path === 'ai-shopping.html', icon: icon('<path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>') }
   ];
   const markup = entries.map((entry) => entry.action
     ? `<button class="mobile-nav-item ${entry.active ? 'active' : ''}" type="button" onclick="${entry.onClick}">${entry.icon}<span>${entry.label}</span></button>`
@@ -2433,8 +2358,8 @@ window.openMobileCategories = function() {
     drawer.hidden = false;
     drawer.setAttribute('aria-hidden', 'false');
     document.body.classList.add('mobile-categories-open');
+    document.querySelector('.site-header')?.classList.add('menu-active');
     requestAnimationFrame(() => drawer.classList.add('is-open'));
-    drawer.querySelector('.mobile-category-header button')?.focus();
   }
 };
 
@@ -2444,6 +2369,7 @@ window.closeMobileCategories = function() {
     drawer.classList.remove('is-open');
     drawer.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('mobile-categories-open');
+    document.querySelector('.site-header')?.classList.remove('menu-active');
     setTimeout(() => {
       drawer.hidden = true;
     }, 280);
@@ -2513,7 +2439,7 @@ function openInquiryModal(presetText = '') {
     modal.innerHTML = `
       <div class="product-popup-box" style="max-width: 520px; width: 90%; background: #ffffff; border-radius: 24px; padding: 32px; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.25);">
         <button class="popup-close" onclick="document.getElementById('popupZapytaj').style.display='none'" style="position: absolute; top: 20px; right: 20px; background: #f1f5f9; border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 16px; cursor: pointer; color: #0b1a30; font-weight: 700;">✕</button>
-        <div style="font-size: 11px; font-weight: 800; color: #ff5a00; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">Wycena Indywidualna</div>
+        <div style="font-size: 11px; font-weight: 800; color: #0b1a30; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">Wycena Indywidualna</div>
         <h3 style="margin-bottom: 8px; font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 22px; color: #0b1a30;">Zapytaj o produkt / ofertę</h3>
         <p style="font-size: 13.5px; color: #64748b; margin-bottom: 20px; line-height: 1.4;">Nasi specjaliści przygotują wycenę indywidualną taśmy LED i dedykowanego zasilacza.</p>
         <form id="askQuestionForm" onsubmit="event.preventDefault(); alert('Dziękujemy! Twoje zapytanie zostało wysłane. Odpowiemy w ciągu 24 godzin.'); document.getElementById('popupZapytaj').style.display='none';">

@@ -1,4 +1,4 @@
-<!doctype html>
+﻿﻿<!doctype html>
 <html lang="pl">
 <head>
   <meta charset="utf-8">
@@ -10,7 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/configurator.css">
-  
+  <link rel="stylesheet" href="css/custom-buttons.css">
+  <link rel="stylesheet" href="css/prescot-responsive.css">
   <style>
     /* Futuristic AI Chat Design - LLM Style */
     body.ai-shopping-body {
@@ -174,9 +175,9 @@
     }
 
     .ai-input-area button:hover {
-      background: #ff5a00; /* The brand orange */
-      border-color: #ff5a00;
-      box-shadow: 0 4px 15px rgba(255, 90, 0, 0.4);
+      background: #0b1a30; /* The brand orange */
+      border-color: #0b1a30;
+      box-shadow: 0 4px 15px rgba(11, 26, 48, 0.4);
     }
     
     .ai-input-area button:hover img {
@@ -216,8 +217,8 @@
         rgba(5, 12, 25, 1) 0%,         /* Very dark navy */
         rgba(5, 12, 25, 1) 40%, 
         rgba(11, 26, 48, 1) 60%,       /* Deep navy */
-        rgba(255, 90, 0, 0.7) 80%,    /* Brand orange fading in */
-        #ff5a00 95%,                   /* Pure brand orange */
+        rgba(11, 26, 48, 0.7) 80%,    /* Brand orange fading in */
+        #0b1a30 95%,                   /* Pure brand orange */
         rgba(5, 12, 25, 1) 100%        /* Seamless loop to dark navy */
       );
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -237,7 +238,7 @@
       animation: spinHalo 4s linear infinite; /* Smooth 4s rotation */
     }
     .ai-input-area.focused {
-      box-shadow: 0 8px 30px rgba(11, 26, 48, 0.5), 0 0 15px rgba(255, 90, 0, 0.15);
+      box-shadow: 0 8px 30px rgba(11, 26, 48, 0.5), 0 0 15px rgba(11, 26, 48, 0.15);
       background: #151e2e; /* Slightly darker background when focused */
     }
 
@@ -245,6 +246,77 @@
       to { --halo-angle: 360deg; }
     }
     /* --- END AI STUDIO STYLE --- */
+
+    /* MOBILE BOTTOM NAV CSS */
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(15, 23, 42, 0.90);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      z-index: 9999;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    .mobile-nav-items {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 65px;
+      padding: 0 10px 8px 10px;
+      gap: 2px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .mobile-nav-items::-webkit-scrollbar { display: none; }
+    .mobile-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      text-decoration: none;
+      color: #94a3b8;
+      flex: 1;
+      height: 100%;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .mobile-nav-item i {
+      font-size: 22px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      z-index: 3;
+    }
+    .mobile-nav-item span {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: color 0.3s ease;
+    }
+    .mobile-nav-item.active { color: #f8fafc; }
+    .mobile-nav-item.active i { color: #f8fafc; }
+    .mobile-nav-item:active i { transform: scale(0.9); }
+
+    body.keyboard-open .mobile-bottom-nav {
+      display: none !important;
+    }
+    body.keyboard-open .ai-hero {
+      padding-bottom: 40px !important;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-bottom-nav { display: block; }
+      .ai-hero { padding-bottom: 90px; } /* Room for mobile bottom nav */
+    }
+
 
 </style>
 
@@ -293,7 +365,7 @@
   transition: all 0.3s ease;
 }
 .premium-footer .social-links a:hover {
-  background: var(--accent-color, #ff5a00);
+  background: var(--accent-color, #0b1a30);
   transform: translateY(-3px);
 }
 .premium-footer h3 {
@@ -333,7 +405,7 @@
 }
 .premium-footer .contact-info i {
   font-size: 20px;
-  color: var(--accent-color, #ff5a00);
+  color: var(--accent-color, #0b1a30);
   margin-top: 2px;
 }
 .premium-footer .footer-bottom {
@@ -445,6 +517,16 @@
     </section>
   </main>
 
+  <nav class="mobile-bottom-nav" aria-label="Nawigacja mobilna">
+    <div class="mobile-nav-items">
+      <a class="mobile-nav-item" href="index.html"><i class="ph ph-house"></i><span>Home</span></a>
+      <a class="mobile-nav-item" href="javascript:void(0);" onclick="openMobileCategories();"><i class="ph ph-squares-four"></i><span>Kategorie</span></a>
+      <a class="mobile-nav-item configurator-mobile-link" href="configurator.html"><i class="ph ph-lightbulb-filament"></i><span>Dobierz</span></a>
+      <a class="mobile-nav-item active" href="ai-shopping.html"><img class="gemini-icon" src="images/prescot-pattern.png" style="width: 22px; height: 22px; object-fit: contain; margin-bottom: 4px; filter: grayscale(1) brightness(2);"><span>Zakup AI</span></a>
+      <a class="mobile-nav-item" href="contact.html"><i class="ph ph-envelope-simple"></i><span>Kontakt</span></a>
+    </div>
+  </nav>
+
 
   <script src="js/configurator-core.js"></script>
   <script src="js/ai-agent.js"></script>
@@ -478,6 +560,18 @@
           typingTimeout = setTimeout(() => {
             aiHero.classList.remove('typing');
           }, 400); // Effect lingers for 400ms after last keystroke
+        });
+
+        // Hide bottom nav on mobile when input is focused
+        aiChatInput.addEventListener('focus', () => {
+          document.body.classList.add('keyboard-open');
+        });
+        aiChatInput.addEventListener('blur', () => {
+          setTimeout(() => {
+            document.body.classList.remove('keyboard-open');
+          }, 100);
+        });
+      }
         });
       }
     });

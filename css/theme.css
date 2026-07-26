@@ -35,7 +35,7 @@
 }
 
 [data-theme="light"] .desktop-nav a.active {
-  color: #ff5a00;
+  color: #0b1a30;
 }
 
 [data-theme="light"] .pro-product-card {
@@ -96,6 +96,6 @@
 
 [data-theme="light"] .led-switch::before {
   transform: translateX(24px);
-  background: #ff5a00;
-  box-shadow: 0 0 8px #ff5a00, 0 0 15px #ff5a00;
+  background: #0b1a30;
+  box-shadow: 0 0 8px #0b1a30, 0 0 15px #0b1a30;
 }
