@@ -2106,8 +2106,8 @@ label.is-unavailable {
 
 @media (max-width: 760px) {
   .visual-choice,
-  .control-choice { min-height: 205px; padding: 18px; }
-  .light-choice { min-height: 192px; }
+  .control-choice { min-height: auto; padding: 12px; gap: 8px; }
+  .light-choice { min-height: auto; }
   .visual-choice .visual-card-copy strong { font-size: 18px; }
   .technology-showcase { grid-template-columns: 1fr; }
   .technology-photo { min-height: 186px; }

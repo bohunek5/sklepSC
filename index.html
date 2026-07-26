@@ -961,16 +961,9 @@
       background-color: var(--light-bg);
     }
 
-    .mockup-product-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: var(--transition);
-    }
+    .mockup-product-img { width: 100%; aspect-ratio: 1/1; object-fit: contain; background: #fff; padding: 10px; border-radius: 8px 8px 0 0; }
 
-    .mockup-product-card:hover .mockup-product-img {
-      transform: scale(1.05);
-    }
+    .mockup-product-card:hover .mockup-product-img { width: 100%; aspect-ratio: 1/1; object-fit: contain; background: #fff; padding: 10px; border-radius: 8px 8px 0 0; }
 
     .mockup-product-badge {
       position: absolute;
@@ -2422,15 +2415,8 @@
       padding: 0 !important;
       margin-bottom: 5px !important;
     }
-    .mockup-product-img {
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: cover !important;
-      transition: all 0.3s ease !important;
-    }
-    .mockup-product-card:hover .mockup-product-img {
-      transform: scale(1.05) !important;
-    }
+    .mockup-product-img { width: 100%; aspect-ratio: 1/1; object-fit: contain; background: #fff; padding: 10px; border-radius: 8px 8px 0 0; }
+    .mockup-product-card:hover .mockup-product-img { width: 100%; aspect-ratio: 1/1; object-fit: contain; background: #fff; padding: 10px; border-radius: 8px 8px 0 0; }
     .mockup-product-info {
       padding: 10px 0 0 !important;
       text-align: center !important;
@@ -4256,6 +4242,22 @@
 }
 </style>
 
+
+            <style>
+            .category-banner-card:has(video[src*="cat_living"]) { background-image: url('images/cat_living.png'); }
+            .category-banner-card:has(video[src*="cat_kitchen"]) { background-image: url('images/cat_kitchen.png'); }
+            .category-banner-card:has(video[src*="cat_bathroom"]) { background-image: url('images/cat_bathroom.png'); }
+            .category-banner-card:has(video[src*="cat_stairs"]) { background-image: url('images/cat_stairs.png'); }
+            .category-banner-card:has(video[src*="cat_garden"]) { background-image: url('images/cat_garden.png'); }
+            .category-banner-card:has(video[src*="cat_office"]) { background-image: url('images/cat_office.png'); }
+            .category-banner-card:has(video[src*="cat_showroom"]) { background-image: url('images/cat_showroom.png'); }
+            .category-banner-card:has(video[src*="cat_bedroom"]) { background-image: url('images/cat_bedroom.png'); }
+            
+            @media (max-width: 768px) {
+                .slider-arrow { bottom: 130px !important; top: auto !important; transform: none !important; }
+            }
+            </style>
+            
 </head>
 <body>
 <!-- Main Hero removed welcome overlay -->
@@ -4415,8 +4417,8 @@
   <!-- Slide 1: Salon & Elegancja -->
   <div class="slide active" data-tech="living">
     <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-      <video class="slide-video desktop-bg" muted playsinline preload="auto" src="videos/hero_living_room.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-      <video class="slide-video mobile-bg" muted playsinline preload="auto" src="videos/hero_living_room.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video desktop-bg" poster="images/led_living_room.png" muted playsinline preload="auto" src="videos/hero_living_room.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video mobile-bg" poster="images/led_living_room.png" muted playsinline preload="auto" src="videos/hero_living_room.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
     </div>
     <div class="slide-banner-box" style="z-index: 2;">
       <svg class="glass-border-svg">
@@ -4434,8 +4436,8 @@
   <!-- Slide 2: Kuchenny Minimalizm -->
   <div class="slide" data-tech="kitchen">
     <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-      <video class="slide-video desktop-bg" muted playsinline preload="auto" src="videos/hero_kitchen.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-      <video class="slide-video mobile-bg" muted playsinline preload="auto" src="videos/hero_kitchen.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video desktop-bg" poster="images/led_kitchen.png" muted playsinline preload="auto" src="videos/hero_kitchen.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video mobile-bg" poster="images/led_kitchen.png" muted playsinline preload="auto" src="videos/hero_kitchen.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
     </div>
     <div class="slide-banner-box" style="z-index: 2;">
       <svg class="glass-border-svg">
@@ -4453,8 +4455,8 @@
   <!-- Slide 3: Nowoczesne Biuro -->
   <div class="slide" data-tech="office">
     <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-      <video class="slide-video desktop-bg" muted playsinline preload="auto" src="videos/hero_office.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-      <video class="slide-video mobile-bg" muted playsinline preload="auto" src="videos/hero_office.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video desktop-bg" poster="images/led_office.png" muted playsinline preload="auto" src="videos/hero_office.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video mobile-bg" poster="images/led_office.png" muted playsinline preload="auto" src="videos/hero_office.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
     </div>
     <div class="slide-banner-box" style="z-index: 2;">
       <svg class="glass-border-svg">
@@ -4472,8 +4474,8 @@
   <!-- Slide 4: Oświetlenie Schodów -->
   <div class="slide" data-tech="stairs">
     <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-      <video class="slide-video desktop-bg" muted playsinline preload="auto" src="videos/hero_staircase.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-      <video class="slide-video mobile-bg" muted playsinline preload="auto" src="videos/hero_staircase.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video desktop-bg" poster="images/led_staircase.png" muted playsinline preload="auto" src="videos/hero_staircase.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video mobile-bg" poster="images/led_staircase.png" muted playsinline preload="auto" src="videos/hero_staircase.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
     </div>
     <div class="slide-banner-box" style="z-index: 2;">
       <svg class="glass-border-svg">
@@ -4491,8 +4493,8 @@
   <!-- Slide 5: Spa & Relaks -->
   <div class="slide" data-tech="spa">
     <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-      <video class="slide-video desktop-bg" muted playsinline preload="auto" src="videos/hero_spa.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-      <video class="slide-video mobile-bg" muted playsinline preload="auto" src="videos/hero_spa.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video desktop-bg" poster="images/cat_spa.png" muted playsinline preload="auto" src="videos/hero_spa.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video mobile-bg" poster="images/cat_spa.png" muted playsinline preload="auto" src="videos/hero_spa.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
     </div>
     <div class="slide-banner-box" style="z-index: 2;">
       <svg class="glass-border-svg">
@@ -4578,7 +4580,7 @@
 </div>
 <div class="categories-sub-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 100%; margin: 30px auto 0 auto; width: 100%;">
 <!-- Subcategory 1: COB -->
-<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?q=COB'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
+<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?q=COB'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;" style="background-size: cover; background-position: center;">
 <video class="category-banner-bg" src="videos/cat_bathroom.mp4#t=0,5" poster="images/cat_bathroom.png" autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
@@ -4590,7 +4592,7 @@
 </div>
 </div>
 <!-- Subcategory 2: RGB -->
-<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?q=RGB'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
+<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?q=RGB'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;" style="background-size: cover; background-position: center;">
 <video class="category-banner-bg" src="videos/cat_stairs.mp4#t=0,5" poster="images/cat_stairs.png" autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
@@ -4602,7 +4604,7 @@
 </div>
 </div>
 <!-- Subcategory 3: CCT -->
-<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?q=CCT'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
+<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?q=CCT'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;" style="background-size: cover; background-position: center;">
 <video class="category-banner-bg" src="videos/cat_garden.mp4#t=0,5" poster="images/cat_garden.png" autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
@@ -4614,7 +4616,7 @@
 </div>
 </div>
 <!-- Subcategory 4: Zasilacze -->
-<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?category=Zasilacze%20LED%20Scharfer'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
+<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?category=Zasilacze%20LED%20Scharfer'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;" style="background-size: cover; background-position: center;">
 <video class="category-banner-bg" src="videos/cat_office.mp4#t=0,5" poster="images/cat_office.png" autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
@@ -4626,7 +4628,7 @@
 </div>
 </div>
 <!-- Subcategory 5: Sterowniki -->
-<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?category=Sterowniki%20LED'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
+<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?category=Sterowniki%20LED'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;" style="background-size: cover; background-position: center;">
 <video class="category-banner-bg" src="videos/cat_showroom.mp4#t=0,5" poster="images/cat_showroom.png" autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
@@ -4638,7 +4640,7 @@
 </div>
 </div>
 <!-- Subcategory 6: Akcesoria -->
-<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?category=Akcesoria%20do%20ta%C5%9Bm%20LED%20i%20zasilaczy'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;">
+<div class="category-banner-card sub-card" onclick="window.location.href='shop.html?category=Akcesoria%20do%20ta%C5%9Bm%20LED%20i%20zasilaczy'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 280px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;" style="background-size: cover; background-position: center;">
 <video class="category-banner-bg" src="videos/cat_bedroom.mp4#t=0,5" poster="images/cat_bedroom.png" autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
