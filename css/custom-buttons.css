@@ -1,0 +1,138 @@
+/* Global Add to Cart & Buy Now Button Reskin (Matches screenshot design) */
+  
+/* DODAJ DO KOSZYKA & Generic Cart Buttons */
+body .add-to-cart-btn,
+body .qv-add-cart-btn,
+body .btn-cart,
+body #stickyAddToCartBtn,
+body #qvAddToCart {
+  background: #0b1a30 !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  box-shadow: none !important;
+  transition: all 0.3s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+body .add-to-cart-btn:hover,
+body .qv-add-cart-btn:hover,
+body .btn-cart:hover,
+body #stickyAddToCartBtn:hover,
+body #qvAddToCart:hover {
+  background: #1a365d !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(11, 26, 48, 0.2) !important;
+}
+
+/* Disable Slide Animation for exact match to screenshot */
+body .add-to-cart-btn .btn-slide-wrap,
+body .buy-it-now-btn .btn-slide-wrap {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transform: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+body .add-to-cart-btn .btn-txt-default,
+body .buy-it-now-btn .btn-txt-default {
+  position: static !important;
+  transform: none !important;
+  opacity: 1 !important;
+}
+body .add-to-cart-btn .btn-txt-hover,
+body .buy-it-now-btn .btn-txt-hover {
+  display: none !important;
+}
+body .add-to-cart-btn:hover .btn-txt-default,
+body .buy-it-now-btn:hover .btn-txt-default {
+  transform: none !important;
+}
+
+/* KUP TERAZ (SZYBKA PŁATNOŚĆ) */
+body .buy-it-now-btn,
+body #buyItNow,
+body .btn-secondary:not(.mockup-btn) {
+  background: #ffffff !important;
+  color: #0b1a30 !important;
+  border: 2px solid #0b1a30 !important;
+  border-radius: 8px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  box-shadow: none !important;
+  transition: all 0.3s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+body .buy-it-now-btn:hover,
+body #buyItNow:hover,
+body .btn-secondary:not(.mockup-btn):hover {
+  background: #f8fafc !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(11, 26, 48, 0.1) !important;
+}
+
+/* Quantity Selector Styling */
+body .quantity-selector {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  height: 48px !important;
+}
+
+body .quantity-selector button {
+  background: transparent !important;
+  color: #000000 !important;
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  border: none !important;
+  width: 40px !important;
+  height: 100% !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+body .quantity-selector button:hover {
+  background: #f1f5f9 !important;
+}
+
+body .quantity-selector input {
+  background: transparent !important;
+  border: none !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  text-align: center !important;
+  width: 40px !important;
+  height: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Mobile specific sizing to match exactly */
+@media (max-width: 768px) {
+  body .add-to-cart-btn, 
+  body .buy-it-now-btn,
+  body .btn-cart,
+  body .btn-secondary:not(.mockup-btn) {
+    height: 48px !important;
+    min-height: 48px !important;
+    font-size: 13px !important;
+    padding: 0 16px !important;
+  }
+}
