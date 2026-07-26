@@ -2832,25 +2832,32 @@
 
 /* MOBILE HERO BOX & DOTS FIX */
 @media (max-width: 768px) {
-  .slider-dots {
+  .slider-dots, .hero-indicators {
     display: none !important;
+  }
+  .menu-button {
+    display: none !important;
+  }
+  .site-header .brand img, .mockup-header-logo img {
+    height: 36px !important;
+    max-width: 170px !important;
   }
   .slide-banner-box {
     padding: 16px 20px !important;
-    max-width: 85% !important;
-    bottom: 10% !important;
+    max-width: calc(100% - 150px) !important;
+    bottom: 5% !important;
   }
   .slide-banner-box h1 {
-    font-size: 22px !important;
+    font-size: 20px !important;
     margin-bottom: 4px !important;
   }
   .slide-banner-box p {
-    font-size: 13px !important;
+    font-size: 12px !important;
     margin-bottom: 12px !important;
   }
   .slide-banner-box .mockup-btn {
-    height: 40px !important;
-    padding: 0 20px !important;
+    height: 36px !important;
+    padding: 0 16px !important;
     font-size: 12px !important;
   }
 }
