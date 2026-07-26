@@ -1,5 +1,5 @@
-/* Global Add to Cart & Buy Now Button Reskin (Matches screenshot design) */
-  
+/* Global Add to Cart & Buy Now Button Reskin */
+
 /* DODAJ DO KOSZYKA & Generic Cart Buttons */
 body .add-to-cart-btn,
 body .qv-add-cart-btn,
@@ -8,7 +8,7 @@ body #stickyAddToCartBtn,
 body #qvAddToCart {
   background: #0b1a30 !important;
   color: #ffffff !important;
-  border: none !important;
+  border: 2px solid #0b1a30 !important;
   border-radius: 8px !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
@@ -18,41 +18,30 @@ body #qvAddToCart {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
+  overflow: hidden !important;
 }
 
+/* Hover: White center, Navy text */
 body .add-to-cart-btn:hover,
 body .qv-add-cart-btn:hover,
 body .btn-cart:hover,
 body #stickyAddToCartBtn:hover,
 body #qvAddToCart:hover {
-  background: #1a365d !important;
+  background: #ffffff !important;
+  color: #0b1a30 !important;
   transform: translateY(-1px) !important;
   box-shadow: 0 4px 12px rgba(11, 26, 48, 0.2) !important;
 }
 
-/* Disable Slide Animation for exact match to screenshot */
-body .add-to-cart-btn .btn-slide-wrap,
-body .buy-it-now-btn .btn-slide-wrap {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  transform: none !important;
-  height: auto !important;
-  min-height: 0 !important;
-}
+/* For buttons with .btn-slide-wrap (ensure colors inherit properly) */
 body .add-to-cart-btn .btn-txt-default,
-body .buy-it-now-btn .btn-txt-default {
-  position: static !important;
-  transform: none !important;
-  opacity: 1 !important;
+body .qv-add-cart-btn .btn-txt-default {
+  color: inherit !important;
 }
-body .add-to-cart-btn .btn-txt-hover,
-body .buy-it-now-btn .btn-txt-hover {
-  display: none !important;
-}
-body .add-to-cart-btn:hover .btn-txt-default,
-body .buy-it-now-btn:hover .btn-txt-default {
-  transform: none !important;
+
+body .add-to-cart-btn:hover .btn-txt-hover,
+body .qv-add-cart-btn:hover .btn-txt-hover {
+  color: #0b1a30 !important;
 }
 
 /* KUP TERAZ (SZYBKA PŁATNOŚĆ) */
@@ -71,15 +60,27 @@ body .btn-secondary:not(.mockup-btn) {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
+  overflow: hidden !important;
 }
 
+/* Hover: Navy center, White text */
 body .buy-it-now-btn:hover,
 body #buyItNow:hover,
 body .btn-secondary:not(.mockup-btn):hover {
-  background: #f8fafc !important;
+  background: #0b1a30 !important;
+  color: #ffffff !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 4px 12px rgba(11, 26, 48, 0.1) !important;
+  box-shadow: 0 4px 12px rgba(11, 26, 48, 0.2) !important;
 }
+
+body .buy-it-now-btn .btn-txt-default {
+  color: inherit !important;
+}
+
+body .buy-it-now-btn:hover .btn-txt-hover {
+  color: #ffffff !important;
+}
+
 
 /* Quantity Selector Styling */
 body .quantity-selector {
@@ -124,12 +125,20 @@ body .quantity-selector input {
   margin: 0 !important;
 }
 
+/* Hide cart recommendations on mobile */
+@media (max-width: 768px) {
+  #cartRecommendations {
+    display: none !important;
+  }
+}
+
 /* Mobile specific sizing to match exactly */
 @media (max-width: 768px) {
   body .add-to-cart-btn, 
   body .buy-it-now-btn,
   body .btn-cart,
-  body .btn-secondary:not(.mockup-btn) {
+  body .btn-secondary:not(.mockup-btn),
+  body #qvAddToCart {
     height: 48px !important;
     min-height: 48px !important;
     font-size: 13px !important;
@@ -145,12 +154,5 @@ body .quantity-selector input {
     max-width: 140px !important;
     width: auto !important;
     object-fit: contain !important;
-  }
-}
-
-/* Hide cart recommendations on mobile */
-@media (max-width: 768px) {
-  #cartRecommendations {
-    display: none !important;
   }
 }
