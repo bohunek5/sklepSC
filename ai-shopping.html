@@ -459,8 +459,11 @@
   <script src="js/configurator-core.js"></script>
   <script src="js/ai-agent.js"></script>
   <script src="js/smart-search.js"></script>
+  <script src="js/shared-popups.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      if (typeof initSharedPopups === 'function') initSharedPopups();
+      
       // Header scroll logic
       const header = document.getElementById('siteHeader');
       function handleScroll() {
