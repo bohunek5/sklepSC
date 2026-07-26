@@ -19,6 +19,7 @@ export default defineConfig({
         blog: resolve(__dirname, 'blog.html'),
         checkout: resolve(__dirname, 'checkout.html'),
         admin: resolve(__dirname, 'admin.html'),
+        aishopping: resolve(__dirname, 'ai-shopping.html'),
       }
     }
   }
