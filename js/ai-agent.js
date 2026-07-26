@@ -230,31 +230,58 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const productsContainer = document.createElement('div');
       productsContainer.innerHTML = html;
-      const cta = document.createElement('button');
-      cta.type = 'button';
       if (isBought) {
-        cta.className = 'btn btn-secondary';
+        const cta = document.createElement('button');
+        cta.type = 'button';
+        cta.className = 'add-to-cart-btn bought';
         cta.style.width = '100%';
         cta.style.marginTop = '12px';
-        cta.innerHTML = '\u2713 DODANO \u2014 Przejd\u017a do kasy';
+        cta.style.border = 'none';
+        cta.innerHTML = '<span class="btn-slide-wrap"><span class="btn-txt-default">✓ DODANO — Przejdź do kasy</span><span class="btn-txt-hover">Zobacz koszyk</span></span>';
         cta.onclick = (e) => { e.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
+        productsContainer.appendChild(cta);
       } else {
-        cta.className = 'btn btn-primary btn-icon btn-cart qv-add-cart-btn';
-        cta.style.width = '100%';
-        cta.style.marginTop = '12px';
-        cta.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg><span class="btn-txt-default">Dodaj do koszyka</span>';
-        cta.onclick = (e) => {
+        const buttonsRow = document.createElement('div');
+        buttonsRow.style.display = 'flex';
+        buttonsRow.style.flexDirection = 'column';
+        buttonsRow.style.gap = '8px';
+        buttonsRow.style.width = '100%';
+        buttonsRow.style.marginTop = '12px';
+
+        const ctaAdd = document.createElement('button');
+        ctaAdd.type = 'button';
+        ctaAdd.className = 'add-to-cart-btn';
+        ctaAdd.style.width = '100%';
+        ctaAdd.style.border = 'none';
+        ctaAdd.innerHTML = '<span class="btn-slide-wrap"><span class="btn-txt-default">Dodaj do koszyka</span><span class="btn-txt-hover"><i class="ph ph-shopping-cart-simple" style="margin-right: 6px;"></i> Dodaj teraz!</span></span>';
+        ctaAdd.onclick = (e) => {
           e.preventDefault();
           addItemsToCart(aiSessionState.lastProposedItems);
           aiSessionState.lastProposedItems = [];
-          cta.className = 'btn btn-secondary';
-          cta.innerHTML = '\u2713 DODANO \u2014 Przejd\u017a do kasy';
-          cta.onclick = (e2) => { e2.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
+          ctaAdd.className = 'add-to-cart-btn bought';
+          ctaAdd.innerHTML = '<span class="btn-slide-wrap"><span class="btn-txt-default">✓ DODANO — Przejdź do kasy</span><span class="btn-txt-hover">Zobacz koszyk</span></span>';
+          ctaAdd.onclick = (e2) => { e2.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
           if(window.openCartDrawer) window.openCartDrawer();
         };
+
+        const ctaBuy = document.createElement('button');
+        ctaBuy.type = 'button';
+        ctaBuy.className = 'buy-it-now-btn';
+        ctaBuy.style.width = '100%';
+        ctaBuy.style.border = 'none';
+        ctaBuy.innerHTML = '<span class="btn-slide-wrap"><span class="btn-txt-default">Szybki zakup</span><span class="btn-txt-hover"><i class="ph ph-shopping-cart-simple" style="margin-right: 6px;"></i> Przejdź do kasy</span></span>';
+        ctaBuy.onclick = (e) => {
+          e.preventDefault();
+          addItemsToCart(aiSessionState.lastProposedItems);
+          aiSessionState.lastProposedItems = [];
+          window.location.href = 'checkout.html';
+        };
+
+        buttonsRow.appendChild(ctaAdd);
+        buttonsRow.appendChild(ctaBuy);
+        productsContainer.appendChild(buttonsRow);
       }
       
-      productsContainer.appendChild(cta);
       aiBubble.appendChild(productsContainer);
       scrollToBottom();
   }

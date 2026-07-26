@@ -136,3 +136,14 @@ body .quantity-selector input {
     padding: 0 16px !important;
   }
 }
+
+/* Mobile Logo Fix */
+@media (max-width: 768px) {
+  .site-header .brand img,
+  .mockup-header-logo img {
+    height: auto !important;
+    max-width: 140px !important;
+    width: auto !important;
+    object-fit: contain !important;
+  }
+}
