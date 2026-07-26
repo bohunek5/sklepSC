@@ -1349,6 +1349,11 @@ function initSharedPopups() {
     const recList = document.getElementById('recItemsList');
     if (!recContainer || !recList) return;
 
+    if (typeof products === 'undefined') {
+      recContainer.style.display = 'none';
+      return;
+    }
+
     const inCartIds = cart.map(item => item.id);
     const recs = products.filter(p => !inCartIds.includes(p.id));
 
