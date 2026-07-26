@@ -1,4 +1,4 @@
-﻿﻿﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pl">
 <head>
   <link rel="icon" type="image/png" href="images/prescot-pattern.png">
@@ -1535,7 +1535,7 @@
       }
       
       /* Show search on mobile, hide wishlist/account to match Envato */
-      .wishlist-trigger, .mockup-action-icon[aria-label="Konto uĹĽytkownika"] {
+      .wishlist-trigger, .mockup-action-icon[aria-label="Konto użytkownika"] {
         display: none !important;
       }
       .mockup-search-container {
@@ -3319,7 +3319,7 @@
     flex-wrap: wrap;
   }
 
-  /* Status Tag: "Aktualnie jesteĹ›: ..." */
+  /* Status Tag: "Aktualnie jesteś: ..." */
   .hub-status-breadcrumb {
     display: inline-flex;
     align-items: center;
@@ -3400,7 +3400,18 @@
   }
 
   /* Horizontal Filter Strips (Width-Based Scrollable Rows) */
-  .horizontal-ribbon-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; padding: 5px; align-items: center; }
+  .horizontal-ribbon-row { 
+    display: flex; 
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+    gap: 8px; 
+    margin-bottom: 12px; 
+    padding: 5px 5px 12px 5px; 
+    align-items: center; 
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
   .horizontal-ribbon-row::-webkit-scrollbar {
     display: none;
   }
@@ -3413,34 +3424,40 @@
     letter-spacing: 0.5px;
     white-space: nowrap;
     padding-right: 6px;
+    flex-shrink: 0;
   }
 
   .filter-chip {
-    padding: 6px 15px;
-    border-radius: 99px;
-    border: 1px solid rgba(11, 26, 48, 0.12);
-    background: #ffffff;
-    color: #334155;
-    font-size: 12px;
+    padding: 8px 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.06);
+    background: #f8fafc;
+    color: #475569;
+    font-size: 13px;
     font-weight: 600;
     cursor: pointer;
     white-space: nowrap;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     user-select: none;
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
   }
 
   .filter-chip:hover {
-    background: rgba(11, 26, 48, 0.06);
-    color: #0b1a30;
-    border-color: #0b1a30;
+    background: #ffffff;
+    color: var(--primary-color, #0b1a30);
+    border-color: rgba(11, 26, 48, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(11, 26, 48, 0.08);
   }
 
   .filter-chip.active {
-    background: #0b1a30 !important;
+    background: var(--primary-color, #0b1a30) !important;
     color: #ffffff !important;
-    border-color: #0b1a30 !important;
+    border-color: var(--primary-color, #0b1a30) !important;
     font-weight: 700 !important;
-    box-shadow: 0 3px 10px rgba(11, 26, 48, 0.18) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(11, 26, 48, 0.25) !important;
   }
 </style>
 
@@ -3889,33 +3906,12 @@
 <body>
   
   <header class="site-header" id="siteHeader">
-    <a class="brand" href="index.html" aria-label="Prescot â€” strona gĹ‚Ăłwna">
+    <a class="brand" href="index.html" aria-label="Prescot — strona główna">
       <img src="images/logo-white.png" data-dark="images/logo-dark.png" data-light="images/logo-white.png" alt="Prescot">
     </a>
-    <nav class="desktop-nav" aria-label="Nawigacja gĹ‚Ăłwna">
+    <nav class="desktop-nav" aria-label="Nawigacja główna">
       <a href="index.html">Home</a>
-      <div class="has-mega-menu" style="display:inline-block; position:relative;">
-        <a class="active" href="shop.html" style="display:flex; align-items:center; gap:4px;">Sklep <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 256 256"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path></svg></a>
-        <div class="magic-dropdown" style="width: 700px; padding: 20px; margin-top:-10px;">
-          <div class="categories-sub-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
-            <a href="shop.html?category=Ta%C5%9Bmy%20LED" class="sub-category-card" style="height:120px; border-radius:12px; overflow:hidden; position:relative; text-decoration:none;">
-               <img src="images/cat_strip.png" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;">
-               <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);"></div>
-               <span style="position:absolute; bottom:15px; left:15px; color:white; font-weight:700; font-size:14px; letter-spacing:1px; z-index:2;">TAĹšMY LED</span>
-            </a>
-            <a href="shop.html?category=Profile%20LED" class="sub-category-card" style="height:120px; border-radius:12px; overflow:hidden; position:relative; text-decoration:none;">
-               <img src="images/cat_profile.png" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;">
-               <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);"></div>
-               <span style="position:absolute; bottom:15px; left:15px; color:white; font-weight:700; font-size:14px; letter-spacing:1px; z-index:2;">PROFILE LED</span>
-            </a>
-            <a href="shop.html?category=Zasilacze" class="sub-category-card" style="height:120px; border-radius:12px; overflow:hidden; position:relative; text-decoration:none;">
-               <img src="images/cat_power.png" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;">
-               <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);"></div>
-               <span style="position:absolute; bottom:15px; left:15px; color:white; font-weight:700; font-size:14px; letter-spacing:1px; z-index:2;">ZASILACZE</span>
-            </a>
-          </div>
-        </div>
-      </div>
+      <a class="active" href="shop.html">Sklep</a>
       <a href="blog.html">Wiedza</a>
       <a href="about.html">O nas</a>
       <a href="contact.html">Kontakt</a>
@@ -3925,7 +3921,7 @@
     <div class="header-actions">
       <form class="header-search" action="shop.html" role="search">
         <label class="sr-only" for="configSearch">Szukaj produktu</label>
-        <input id="configSearch" name="q" type="search" placeholder="SKU, barwa, mocâ€¦">
+        <input id="configSearch" name="q" type="search" placeholder="SKU, barwa, moc…">
         <button type="submit" aria-label="Szukaj">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
         </button>
@@ -3934,7 +3930,7 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L21 7H6"></path><circle cx="10" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle></svg>
         <span class="cart-badge" id="cartBadge">0</span>
       </a>
-      <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="OtwĂłrz menu"><span></span><span></span><span></span></button>
+      <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Otwórz menu"><span></span><span></span><span></span></button>
     </div>
     <nav class="mobile-menu" id="mobileMenu" aria-label="Nawigacja mobilna" hidden>
       <a href="index.html">Home</a>
@@ -3952,10 +3948,10 @@
     <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(180deg, rgba(11, 26, 48, 0.18) 0%, rgba(11, 26, 48, 0.5) 100%);"></div>
     <div style="position: relative; z-index: 1;">
       <h1 style="color: #fff; font-size: 48px; font-weight: 800; font-family: 'Outfit', sans-serif; margin-bottom: 10px; text-transform: uppercase; letter-spacing: -1px; text-shadow: 0 4px 12px rgba(0,0,0,0.3);">Nasz Sklep</h1>
-      <p style="color: #eee; font-size: 16px;">SprawdĹş peĹ‚nÄ… ofertÄ™ Prescot LED</p>
+      <p style="color: #eee; font-size: 16px;">Sprawdź pełną ofertę Prescot LED</p>
     <div class="hero-breadcrumbs" style="font-size: 12px; color: rgba(255,255,255,0.6); font-weight: 500; letter-spacing: 0.5px; margin-top: 15px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: rgba(0,0,0,0.2); padding: 8px 16px; border-radius: 20px; backdrop-filter: blur(5px);">
-      <a href="index.html" style="color: #fff; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='#fff'">GĹ‚Ăłwna</a> 
-      <span style="color: rgba(255,255,255,0.4); font-size: 10px;">â€˘</span> 
+      <a href="index.html" style="color: #fff; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='#fff'">Główna</a> 
+      <span style="color: rgba(255,255,255,0.4); font-size: 10px;">•</span> 
       <span style="color: #fff; font-weight: 700;">Sklep</span>
     </div>
       <!-- Pulsating Down Arrow -->
@@ -3976,10 +3972,10 @@
       <div class="hub-header-bar">
         <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
           
-          <!-- Only: "Aktualnie jesteĹ›: [Status]" -->
+          <!-- Only: "Aktualnie jesteś: [Status]" -->
           <div class="hub-status-breadcrumb">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0b1a30" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-            Aktualnie jesteĹ›:
+            Aktualnie jesteś:
             <span class="status-highlight-badge" id="statusHighlightBadge">
               Wszystkie produkty (1323)
             </span>
@@ -3987,7 +3983,7 @@
 
           <button class="hub-toggle-btn" id="hubToggleBtn">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-            <span>Parametry filtrĂłw</span>
+            <span>Parametry filtrów</span>
             <span class="hub-active-badge" id="activeFilterBadge" style="display: none;">0</span>
           </button>
         </div>
@@ -3995,9 +3991,9 @@
         <div style="display: flex; align-items: center; gap: 8px;">
           <span style="font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase;">Sortowanie:</span>
           <div class="horizontal-ribbon-row" id="sortChips" style="margin-bottom: 0;">
-            <button class="filter-chip active" data-sort="default">DomyĹ›lnie</button>
-            <button class="filter-chip" data-sort="price-asc">Cena: â¬†</button>
-            <button class="filter-chip" data-sort="price-desc">Cena: â¬‡</button>
+            <button class="filter-chip active" data-sort="default">Domyślnie</button>
+            <button class="filter-chip" data-sort="price-asc">Cena: ⬆</button>
+            <button class="filter-chip" data-sort="price-desc">Cena: ⬇</button>
             <button class="filter-chip" data-sort="title-asc">Nazwa: A-Z</button>
           </div>
         </div>
@@ -4013,7 +4009,7 @@
 
         <!-- Row 2: Technical Parameters Horizontal Rows -->
         <div class="horizontal-ribbon-row" id="voltageChips">
-          <span class="ribbon-label">NapiÄ™cie:</span>
+          <span class="ribbon-label">Napięcie:</span>
           <button class="filter-chip active" data-val="all">Wszystkie</button>
           <button class="filter-chip" data-val="12V">12V DC</button>
           <button class="filter-chip" data-val="24V">24V DC</button>
@@ -4023,7 +4019,7 @@
         <div class="horizontal-ribbon-row" id="colorTempChips">
           <span class="ribbon-label">Barwa:</span>
           <button class="filter-chip active" data-val="all">Wszystkie</button>
-          <button class="filter-chip" data-val="ciepĹ‚a">CiepĹ‚a (3000K)</button>
+          <button class="filter-chip" data-val="ciepła">Ciepła (3000K)</button>
           <button class="filter-chip" data-val="neutralna">Neutralna (4000K)</button>
           <button class="filter-chip" data-val="zimna">Zimna (6500K)</button>
           <button class="filter-chip" data-val="rgb">RGB / CCT</button>
@@ -4039,10 +4035,10 @@
           <span style="color: #cbd5e1; margin: 0 4px;">|</span>
           <span id="priceRangeChips" style="display: inline-flex; gap: 6px;">
             <button class="filter-chip active" data-val="all">Wszystkie ceny</button>
-            <button class="filter-chip" data-val="0-50">0 - 50 zĹ‚</button>
-            <button class="filter-chip" data-val="50-100">50 - 100 zĹ‚</button>
-            <button class="filter-chip" data-val="100-250">100 - 250 zĹ‚</button>
-            <button class="filter-chip" data-val="250+">250+ zĹ‚</button>
+            <button class="filter-chip" data-val="0-50">0 - 50 zł</button>
+            <button class="filter-chip" data-val="50-100">50 - 100 zł</button>
+            <button class="filter-chip" data-val="100-250">100 - 250 zł</button>
+            <button class="filter-chip" data-val="250+">250+ zł</button>
           </span>
 
           <button id="resetFiltersBtn" style="margin-left: auto; background: none; border: 1px solid #fee2e2; color: #ef4444; padding: 5px 14px; border-radius: 99px; font-size: 11.5px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 4px; white-space: nowrap;">
@@ -4061,7 +4057,7 @@
         </div>
 
         <div class="pagination-wrapper">
-          <div class="pagination-container" id="shopPagination" role="navigation" aria-label="Stronicowanie produktĂłw">
+          <div class="pagination-container" id="shopPagination" role="navigation" aria-label="Stronicowanie produktów">
             <!-- Pagination controls render dynamically -->
           </div>
         </div>
@@ -4071,17 +4067,17 @@
   <!-- Sekcja Informacyjna o Systemach LED -->
   <section class="led-systems-info-section" style="max-width: 1200px; margin: 80px auto 40px; padding: 0 5%; text-align: center;">
     <h2 style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 700; color: var(--primary-color); margin-bottom: 24px; line-height: 1.2;">
-      Zaawansowane Systemy OĹ›wietleniowe LED
+      Zaawansowane Systemy Oświetleniowe LED
     </h2>
     <div style="max-width: 800px; margin: 0 auto;">
       <p style="font-size: 16px; color: #555; line-height: 1.8; margin-bottom: 20px;">
-        Nasze produkty sÄ… tworzone z myĹ›lÄ… o profesjonalistach poszukujÄ…cych niezawodnych i precyzyjnych rozwiÄ…zaĹ„.
-        UĹĽywamy najwyĹĽszej klasy komponentĂłw, gwarantujÄ…c staĹ‚Ä… jasnoĹ›Ä‡ diod oraz stabilnoĹ›Ä‡ zasilania. Idealne do
-        nowoczesnych projektĂłw hoteli, biur, salonĂłw oraz luksusowych przestrzeni mieszkalnych.
+        Nasze produkty są tworzone z myślą o profesjonalistach poszukujących niezawodnych i precyzyjnych rozwiązań.
+        Używamy najwyższej klasy komponentów, gwarantując stałą jasność diod oraz stabilność zasilania. Idealne do
+        nowoczesnych projektów hoteli, biur, salonów oraz luksusowych przestrzeni mieszkalnych.
       </p>
       <p style="font-size: 16px; color: #555; line-height: 1.8; margin: 0;">
-        Systemy zasilaczy Scharfer z unikalnÄ… 7-letniÄ… gwarancjÄ… i zaawansowanymi sterownikami radiowymi RF Prescot
-        gwarantujÄ… bezproblemowe uĹĽytkowanie i peĹ‚nÄ… integracjÄ™ ze standardami inteligentnego domu.
+        Systemy zasilaczy Scharfer z unikalną 7-letnią gwarancją i zaawansowanymi sterownikami radiowymi RF Prescot
+        gwarantują bezproblemowe użytkowanie i pełną integrację ze standardami inteligentnego domu.
       </p>
     </div>
   </section>
@@ -4093,7 +4089,7 @@
       <div class="footer-logo">
         <img alt="Prescot Logo" src="images/logo-white.png" />
       </div>
-      <p class="brand-desc">Tworzymy oĹ›wietlenie jutra. Prescot LED to bezkompromisowa jakoĹ›Ä‡, zaawansowana technologia COB i inteligentne systemy sterowania Ĺ›wiatĹ‚em dla profesjonalistĂłw.</p>
+      <p class="brand-desc">Tworzymy oświetlenie jutra. Prescot LED to bezkompromisowa jakość, zaawansowana technologia COB i inteligentne systemy sterowania światłem dla profesjonalistów.</p>
       <div class="social-links">
         <a href="#"><i class="ph ph-facebook-logo"></i></a>
         <a href="#"><i class="ph ph-instagram-logo"></i></a>
@@ -4106,7 +4102,7 @@
         <li><a href="shop.html">Produkty Premium</a></li>
         <li><a href="configurator.html">Dobierz System AI</a></li>
         <li><a href="#">Bestsellery</a></li>
-        <li><a href="#">NowoĹ›ci 2026</a></li>
+        <li><a href="#">Nowości 2026</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -4115,7 +4111,7 @@
         <li><a href="contact.html">Kontakt & Pomoc</a></li>
         <li><a href="#">Gwarancja 5 Lat</a></li>
         <li><a href="#">Baza Wiedzy</a></li>
-        <li><a href="#">Polityka PrywatnoĹ›ci</a></li>
+        <li><a href="#">Polityka Prywatności</a></li>
       </ul>
     </div>
     <div class="footer-col contact-col">
@@ -4123,12 +4119,12 @@
       <ul class="contact-info">
         <li><i class="ph ph-envelope-simple"></i> kontakt@prescot.com.pl</li>
         <li><i class="ph ph-phone"></i> +48 22 123 45 67</li>
-        <li><i class="ph ph-map-pin"></i> ul. PrzykĹ‚adowa 12, 00-001 Warszawa</li>
+        <li><i class="ph ph-map-pin"></i> ul. Przykładowa 12, 00-001 Warszawa</li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>&copy; 2026 PRESCOT LED. Wszelkie prawa zastrzeĹĽone.</p>
+    <p>&copy; 2026 PRESCOT LED. Wszelkie prawa zastrzeżone.</p>
     <div class="payment-methods">
       <i class="ph ph-stripe-logo"></i>
       <i class="ph ph-paypal-logo"></i>
@@ -4418,11 +4414,11 @@
           if (currentCategory !== 'all') {
             statusText = currentCategory;
           } else if (currentVoltage !== 'all') {
-            statusText = `NapiÄ™cie ${currentVoltage}`;
+            statusText = `Napięcie ${currentVoltage}`;
           } else if (currentColorTemp !== 'all') {
             statusText = `Barwa ${currentColorTemp}`;
           } else if (currentPriceRange !== 'all') {
-            statusText = `Cena ${currentPriceRange} zĹ‚`;
+            statusText = `Cena ${currentPriceRange} zł`;
           }
           statusHighlightBadge.textContent = `${statusText} (${totalFilteredCount})`;
         }
@@ -4432,7 +4428,7 @@
       function renderFilteredProducts() {
         if (typeof products === 'undefined' || !Array.isArray(products)) {
           console.error("Products array is undefined!");
-          if (shopGrid) shopGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 100px 0; color: #ef4444;">BĹ‚Ä…d Ĺ‚adowania bazy produktĂłw. OdĹ›wieĹĽ stronÄ™.</div>`;
+          if (shopGrid) shopGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 100px 0; color: #ef4444;">Błąd ładowania bazy produktów. Odśwież stronę.</div>`;
           return;
         }
 
@@ -4465,7 +4461,7 @@
         // Voltage Filter
         if (currentVoltage !== 'all') {
           filtered = filtered.filter(p => {
-            const attrV = (p.attributes && p.attributes["NapiÄ™cie wejĹ›ciowe"]) || "";
+            const attrV = (p.attributes && p.attributes["Napięcie wejściowe"]) || "";
             const title = p.title || "";
             return attrV.includes(currentVoltage) || title.includes(currentVoltage);
           });
@@ -4474,10 +4470,10 @@
         // Color Temp Filter
         if (currentColorTemp !== 'all') {
           filtered = filtered.filter(p => {
-            const attrB = (p.attributes && p.attributes["Barwa Ĺ›wiatĹ‚a"]) || "";
+            const attrB = (p.attributes && p.attributes["Barwa światła"]) || "";
             const title = (p.title || "").toLowerCase();
             const desc = (p.description || "").toLowerCase();
-            if (currentColorTemp === 'ciepĹ‚a') return attrB.toLowerCase().includes('ciepĹ‚a') || title.includes('3000k') || title.includes('ciepĹ‚a') || desc.includes('ciepĹ‚a');
+            if (currentColorTemp === 'ciepła') return attrB.toLowerCase().includes('ciepła') || title.includes('3000k') || title.includes('ciepła') || desc.includes('ciepła');
             if (currentColorTemp === 'neutralna') return attrB.toLowerCase().includes('neutralna') || title.includes('4000k') || title.includes('neutralna') || desc.includes('neutralna');
             if (currentColorTemp === 'zimna') return attrB.toLowerCase().includes('zimna') || title.includes('6500k') || title.includes('zimna') || desc.includes('zimna');
             if (currentColorTemp === 'rgb') return attrB.toLowerCase().includes('rgb') || attrB.toLowerCase().includes('cct') || title.includes('rgb') || title.includes('cct');
@@ -4488,7 +4484,7 @@
         // Lumens Filter
         if (currentLumens !== 'all') {
           filtered = filtered.filter(p => {
-            const attrJ = (p.attributes && p.attributes["JasnoĹ›Ä‡"]) || (p.attributes && p.attributes["StrumieĹ„ Ĺ›wietlny"]) || "";
+            const attrJ = (p.attributes && p.attributes["Jasność"]) || (p.attributes && p.attributes["Strumień świetlny"]) || "";
             const title = p.title || "";
             const match = (attrJ + " " + title).match(/(\d+)\s*lm/i);
             if (match) {
@@ -4504,7 +4500,7 @@
         // IP Rating Filter
         if (currentIP !== 'all') {
           filtered = filtered.filter(p => {
-            const attrIP = (p.attributes && p.attributes["Klasa szczelnoĹ›ci"]) || "";
+            const attrIP = (p.attributes && p.attributes["Klasa szczelności"]) || "";
             const title = p.title || "";
             if (currentIP === 'IP20') return attrIP.includes('IP20') || title.includes('IP20');
             if (currentIP === 'IP65+') return attrIP.includes('IP63') || attrIP.includes('IP65') || attrIP.includes('IP67') || title.includes('IP65') || title.includes('IP67');
@@ -4537,7 +4533,7 @@
         if (shopGrid) {
           shopGrid.innerHTML = '';
           if (itemsToShow.length === 0) {
-            shopGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 100px 0; color: #777; font-size: 16px;">Brak produktĂłw speĹ‚niajÄ…cych wybrane kryteria.</div>`;
+            shopGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 100px 0; color: #777; font-size: 16px;">Brak produktów spełniających wybrane kryteria.</div>`;
             if (shopPagination) shopPagination.innerHTML = '';
             return;
           }
@@ -4546,13 +4542,13 @@
             let thirdBtn = '';
             if (p.has3D) {
               thirdBtn = `
-                <button class="action-btn-circle qv-3d-btn" data-id="${p.id}" aria-label="PodglÄ…d 3D">
+                <button class="action-btn-circle qv-3d-btn" data-id="${p.id}" aria-label="Podgląd 3D">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
                 </button>
               `;
             } else if (p.has360) {
               thirdBtn = `
-                <button class="action-btn-circle qv-360-btn" data-id="${p.id}" aria-label="PodglÄ…d 360">
+                <button class="action-btn-circle qv-360-btn" data-id="${p.id}" aria-label="Podgląd 360">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
                 </button>
               `;
@@ -4566,10 +4562,10 @@
                     <video class="mockup-product-video" data-src="${p.video}" loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
                   ` : ''}
                   <div class="product-actions-hover">
-                    <button class="action-btn-circle qv-wishlist-btn" data-id="${p.id}" aria-label="Dodaj do listy ĹĽyczeĹ„">
+                    <button class="action-btn-circle qv-wishlist-btn" data-id="${p.id}" aria-label="Dodaj do listy życzeń">
                       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                     </button>
-                    <button class="action-btn-circle qv-eye-btn" data-id="${p.id}" aria-label="Szybki podglÄ…d">
+                    <button class="action-btn-circle qv-eye-btn" data-id="${p.id}" aria-label="Szybki podgląd">
                       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                     </button>
                     ${thirdBtn}
@@ -4578,7 +4574,7 @@
                 <div class="mockup-product-info">
                   <h3 class="mockup-product-title"><a href="product.html?id=${p.id}">${p.title}</a></h3>
                   <p class="mockup-product-price">
-                    ${p.price.toFixed(2)} zĹ‚ <span class="price-unit">/ ${p.category && p.category.includes("TaĹ›my") ? "metr" : "szt."}</span>
+                    ${p.price.toFixed(2)} zł <span class="price-unit">/ ${p.category && p.category.includes("Taśmy") ? "metr" : "szt."}</span>
                   </p>
                                     <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px; width: 100%;">
                     <button class="add-to-cart-btn qv-add-cart-btn" data-id="${p.id}" style="width: 100%;">
@@ -4608,7 +4604,7 @@
             if (currentPage > 1) {
               const prevBtn = document.createElement('button');
               prevBtn.className = 'pagination-btn';
-              prevBtn.textContent = 'â—€';
+              prevBtn.textContent = '◀';
               prevBtn.addEventListener('click', () => {
                 currentPage--;
                 renderFilteredProducts();
@@ -4650,7 +4646,7 @@
               if (previousPage && pageNumber - previousPage > 1) {
                 const ellipsis = document.createElement('span');
                 ellipsis.className = 'pagination-ellipsis';
-                ellipsis.textContent = 'â€¦';
+                ellipsis.textContent = '…';
                 ellipsis.setAttribute('aria-hidden', 'true');
                 shopPagination.appendChild(ellipsis);
               }
@@ -4661,7 +4657,7 @@
             if (currentPage < totalPages) {
               const nextBtn = document.createElement('button');
               nextBtn.className = 'pagination-btn';
-              nextBtn.textContent = 'â–¶';
+              nextBtn.textContent = '▶';
               nextBtn.addEventListener('click', () => {
                 currentPage++;
                 renderFilteredProducts();
