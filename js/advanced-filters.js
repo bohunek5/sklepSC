@@ -23,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
     cri: null,
     r9: null,
     oz: null,
+    cover: null,
+    profile_color: null,
     profile: null,
     price: null
   };

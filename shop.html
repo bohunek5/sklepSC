@@ -3995,7 +3995,7 @@
         <div class="pro-toggle-switch" id="proToggleSwitch">
           <div class="toggle-slider"></div>
           <button class="toggle-btn active" data-mode="b2c" type="button"><i class="ph ph-house-line" aria-hidden="true"></i>Dla domu</button>
-          <button class="toggle-btn" data-mode="b2b" type="button"><i class="ph ph-toolbox" aria-hidden="true"></i>Znam się bardziej</button>
+          <button class="toggle-btn" data-mode="b2b" type="button"><i class="ph ph-toolbox" aria-hidden="true"></i>Znam się</button>
         </div>
       </div>
       
@@ -4110,20 +4110,69 @@
         
         <!-- Common Filters (Always visible) -->
         <div class="filter-group">
-          <div class="filter-group-title">Kształt Profilu</div>
+          <div class="filter-group-title">Czy potrzebujesz profil?</div>
           <div class="horizontal-scroll-pills">
             <button class="svg-filter-btn filter-pill" data-type="profile" data-val="Wpuszczany">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M6 6v8a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4V6"></path></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 6h16M7 6v6h10V6" stroke-linecap="square"/>
+                <path d="M12 12v6m-4-3l2 3m6-3l-2 3" stroke="#fbbf24" stroke-linecap="round"/>
+              </svg>
               <span>Wpuszczany</span>
             </button>
+            <button class="svg-filter-btn filter-pill" data-type="profile" data-val="GK">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 6h6v6h8V6h6M8 6v8h8V6" stroke-linecap="square"/>
+                <path d="M12 14v6m-4-3l2 3m6-3l-2 3" stroke="#fbbf24" stroke-linecap="round"/>
+              </svg>
+              <span>Do G-K</span>
+            </button>
             <button class="svg-filter-btn filter-pill" data-type="profile" data-val="Nawierzchniowy">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="8" width="16" height="12" rx="2"></rect><path d="M4 8V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2"></path></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="7" y="4" width="10" height="8" />
+                <path d="M12 12v6m-4-3l2 3m6-3l-2 3" stroke="#fbbf24" stroke-linecap="round"/>
+              </svg>
               <span>Nawierzchniowy</span>
             </button>
             <button class="svg-filter-btn filter-pill" data-type="profile" data-val="Kątowy">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20L20 4M4 20V8M4 20h12"></path></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 18L18 6M6 18V6M6 18h12"/>
+                <path d="M14 10l4-4m-2 4l3-3m-5 1l3-3" stroke="#fbbf24" stroke-linecap="round"/>
+              </svg>
               <span>Kątowy</span>
             </button>
+            <button class="svg-filter-btn filter-pill" data-type="profile" data-val="Zwieszany">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v4M8 6h8v6H8z"/>
+                <path d="M12 12v6m-4-3l2 3m6-3l-2 3" stroke="#fbbf24" stroke-linecap="round"/>
+              </svg>
+              <span>Zwieszany</span>
+            </button>
+            <button class="svg-filter-btn filter-pill" data-type="profile" data-val="Zewnętrzny">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 14a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v4H4z"/>
+                <path d="M12 18v4m-4-2l2 2m6-2l-2 2" stroke="#fbbf24" stroke-linecap="round"/>
+              </svg>
+              <span>Zewnętrzny</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group-title">Typ osłony</div>
+          <div class="horizontal-scroll-pills">
+            <button class="filter-pill b2b-pill" data-type="cover" data-val="Pryzmat">Pryzmat</button>
+            <button class="filter-pill b2b-pill" data-type="cover" data-val="Mleczna">Mleczna</button>
+            <button class="filter-pill b2b-pill" data-type="cover" data-val="Transparentna">Transparentna</button>
+            <button class="filter-pill b2b-pill" data-type="cover" data-val="Mrożona">Mrożona</button>
+            <button class="filter-pill b2b-pill" data-type="cover" data-val="Black">Black</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-group-title">Kolor profilu</div>
+          <div class="horizontal-scroll-pills">
+            <button class="filter-pill b2b-pill" data-type="profile_color" data-val="Anoda">Anoda</button>
+            <button class="filter-pill b2b-pill" data-type="profile_color" data-val="Surowy">Surowy</button>
           </div>
         </div>
         
@@ -4367,6 +4416,8 @@
       let currentCRI = 'all';
       let currentR9 = 'all';
       let currentOZ = 'all';
+      let currentCover = 'all';
+      let currentProfileColor = 'all';
       let currentProfile = 'all';
       let currentSearch = '';
       let currentSort = 'default';
@@ -4452,6 +4503,8 @@
         currentCRI = filters.cri || 'all';
         currentR9 = filters.r9 || 'all';
         currentOZ = filters.oz || 'all';
+        currentCover = filters.cover || 'all';
+        currentProfileColor = filters.profile_color || 'all';
         currentProfile = filters.profile || 'all';
         currentPage = 1;
         renderFilteredProducts();
@@ -4817,11 +4870,32 @@
             });
           }
 
+          if (currentCover !== 'all') {
+            const reqCover = currentCover.toLowerCase();
+            filtered = filtered.filter(p => {
+              const specList = p.specs ? p.specs.map(s => s.toLowerCase()) : [];
+              return specList.some(s => s.includes(reqCover)) || 
+                     (p.title && p.title.toLowerCase().includes(reqCover));
+            });
+          }
+
+          if (currentProfileColor !== 'all') {
+            const reqColor = currentProfileColor.toLowerCase();
+            filtered = filtered.filter(p => {
+              const specList = p.specs ? p.specs.map(s => s.toLowerCase()) : [];
+              return specList.some(s => s.includes(reqColor)) || 
+                     (p.title && p.title.toLowerCase().includes(reqColor));
+            });
+          }
+
         if (currentProfile !== 'all') {
           const profilePatterns = {
-            Wpuszczany: /wpuszcz|do zabudowy/,
-            Nawierzchniowy: /nawierzch|natynk/,
-            Kątowy: /katow|naroz/
+            Wpuszczany: /wpuszcz|do zabudowy/i,
+            GK: /g-k|gk|gips/i,
+            Nawierzchniowy: /nawierzch|natynk/i,
+            Kątowy: /k\u0105tow|naro\u017c/i,
+            Zwieszany: /zwiesz/i,
+            Zewnętrzny: /zewn\u0119trz|elewac/i
           };
           const pattern = profilePatterns[currentProfile];
           if (pattern) filtered = filtered.filter((product) => pattern.test(productSpecText(product)));
