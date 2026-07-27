@@ -30,7 +30,7 @@ html {
 body {
   margin: 0;
   color: var(--ink);
-  background: var(--soft);
+  background: var(--white);
   font-family: "Inter", system-ui, sans-serif;
   line-height: 1.55;
   overflow-x: clip;
@@ -2319,3 +2319,20 @@ label.is-unavailable {
   color: #0b1a30 !important;
 }
 /* === END SCROLLED HEADER DARK MENU CONTRAST FIX === */
+
+/* Dark mode overrides for outside text */
+.configurator-intro h2,
+.results-heading h2,
+.trust-strip h3 { color: #fff !important; }
+
+.configurator-intro > p,
+.section-kicker { color: rgba(255,255,255,0.7) !important; }
+
+.button-secondary#editConfiguration {
+    background: transparent !important;
+    color: #fff !important;
+    border-color: rgba(255,255,255,0.3) !important;
+}
+.button-secondary#editConfiguration:hover {
+    border-color: #fff !important;
+}

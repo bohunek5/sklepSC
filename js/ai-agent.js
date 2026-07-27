@@ -275,6 +275,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         ctaBuy.innerHTML = '<span class="btn-slide-wrap"><span class="btn-txt-default">Szybki zakup</span><span class="btn-txt-hover"><i class="ph ph-shopping-cart-simple" style="margin-right: 6px;"></i> Przejdź do kasy</span></span>';
         ctaBuy.onclick = (e) => {
           e.preventDefault();
+          addItemsToCart(aiSessionState.lastProposedItems);
           window.location.href = 'checkout.html';
         };
 
