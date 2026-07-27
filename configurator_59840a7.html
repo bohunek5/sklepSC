@@ -316,15 +316,32 @@
     <small>Konfigurator jest narz─Ödziem pomocniczym. Parametry finalnej instalacji wymagaj─ů weryfikacji pod k─ůtem miejsca monta┼╝u, spadk├│w napi─Öcia i odprowadzania ciep┼éa.</small>
   </footer>
 
-  <nav class="mobile-bottom-nav" aria-label="Skr├│ty mobilne">
-    <div class="mobile-nav-items">
-      <a class="mobile-nav-item" href="index.html"><span>Home</span></a>
-      <a class="mobile-nav-item" href="shop.html"><span>Sklep</span></a>
-      <button class="mobile-nav-item" type="button" onclick="openMobileCategories()"><span>Kategorie</span></button>
-      <a class="mobile-nav-item active" href="configurator.html"><span>Dobierz</span></a>
-      <a class="mobile-nav-item" href="javascript:void(0);" onclick="openCartDrawer();"><span>Koszyk</span></a>
-    </div>
-  </nav>
+  <nav class="new-glass-nav">
+  <div class="mobile-nav-items">
+    <a class="mobile-nav-item" href="index.html">
+      <i class="ph ph-house"></i>
+      <span>Start</span>
+    </a>
+    <a class="mobile-nav-item" href="shop.html">
+      <i class="ph ph-squares-four"></i>
+      <span>Sklep</span>
+    </a>
+    <a class="mobile-nav-item active" href="configurator.html" style="position:relative;">
+      <div class="nav-center-pill">
+        <i class="ph ph-lightbulb-filament"></i>
+      </div>
+      <span style="margin-top:24px;">Dobierz</span>
+    </a>
+    <a class="mobile-nav-item" href="ai-shopping.html">
+      <img src="images/prescot-pattern.png" class="nav-ai-icon" alt="">
+      <span>Zakup AI</span>
+    </a>
+    <a class="mobile-nav-item" href="contact.html">
+      <i class="ph ph-envelope-simple"></i>
+      <span>Kontakt</span>
+    </a>
+  </div>
+</nav>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="js/products-data.js"></script>

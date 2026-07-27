@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+  if (typeof window.initSharedPopups === 'function') window.initSharedPopups();
+
   const state = {
     environment: 'living',
     shape: 'line',
@@ -15,10 +17,18 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const environments = {
-    living: { name: 'Salon', ip: 20, image: 'images/configurator/living_new.png', powerBias: 0 },
-    kitchen: { name: 'Kuchnia', ip: 44, image: 'images/configurator/kitchen_new.png', powerBias: 2 },
-    bathroom: { name: 'Łazienka', ip: 65, image: 'images/configurator/bathroom_new.png', powerBias: 2 },
-    outdoor: { name: 'Elewacja', ip: 67, image: 'images/configurator/outdoor_new.png', powerBias: 4 }
+    living: { name: 'Salon', ip: 20, image: 'images/configurator/living_new.png', powerBias: 0, pricePremium: 0, tags: ['salon', 'sufit', 'wnęka', 'ściana-tv'] },
+    kitchen: { name: 'Kuchnia', ip: 44, image: 'images/configurator/kitchen_new.png', powerBias: 2, pricePremium: 7, tags: ['kuchnia', 'blat', 'zabudowa'] },
+    bathroom: { name: 'Łazienka', ip: 65, image: 'images/configurator/bathroom_new.png', powerBias: 2, pricePremium: 11, tags: ['łazienka', 'strefa-wilgotna'] },
+    outdoor: { name: 'Elewacja', ip: 67, image: 'images/configurator/outdoor_new.png', powerBias: 4, pricePremium: 18, force24: true, tags: ['elewacja', 'zewnątrz'] },
+    bedroom: { name: 'Sypialnia', ip: 20, image: 'images/cat_bedroom.png', powerBias: 0, pricePremium: 0, tags: ['sypialnia', 'zagłówek', 'nastrojowe'] },
+    stairs: { name: 'Schody i korytarz', ip: 20, image: 'images/configurator/stairs_new.png', powerBias: 0, pricePremium: 0, tags: ['schody', 'korytarz', 'stopnie'] },
+    wardrobe: { name: 'Garderoba i szafy', ip: 20, image: 'images/szafy.jpg', powerBias: 0, pricePremium: 0, tags: ['garderoba', 'szafa', 'półki'] },
+    office: { name: 'Biuro', ip: 20, image: 'images/cat_office.png', powerBias: 2, pricePremium: 0, tags: ['biuro', 'biurko', 'robocze'] },
+    retail: { name: 'Sklep i ekspozycja', ip: 20, image: 'images/configurator/retail_new.png', powerBias: 4, pricePremium: 4, tags: ['sklep', 'ekspozycja', 'witryna'] },
+    furniture: { name: 'Meble i półki', ip: 20, image: 'images/configurator/application-furniture.webp', powerBias: 0, pricePremium: 0, tags: ['meble', 'półki', 'rtv'] },
+    garden: { name: 'Ogród i taras', ip: 67, image: 'images/cat_garden.png', powerBias: 4, pricePremium: 18, force24: true, tags: ['ogród', 'taras', 'zewnątrz'] },
+    garage: { name: 'Garaż i warsztat', ip: 44, image: 'images/led_office.png', powerBias: 4, pricePremium: 7, tags: ['garaż', 'warsztat', 'robocze'] }
   };
   const shapes = {
     line: { name: 'Linia prosta', arms: 1, labels: ['Długość'] },
@@ -62,12 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const wattsPerMeter = (state.light === 'rgbw' ? 18 : state.light === 'cct' ? 16 : 12) + environments[state.environment].powerBias;
     const power = Math.ceil(length * wattsPerMeter);
     const required = Math.ceil(power * 1.2);
-    const voltage = length > 5 || power > 72 || state.environment === 'outdoor' ? 24 : 12;
+    const voltage = length > 5 || power > 72 || environments[state.environment].force24 ? 24 : 12;
     const supplySteps = [20, 30, 40, 60, 75, 100, 120, 150, 200, 240, 300, 360];
     const supply = supplySteps.find((value) => value >= required) || Math.ceil(required / 50) * 50;
     const tapeRate = state.technology === 'cob' ? 46 : 31;
     const lightPremium = state.light === 'rgbw' ? 24 : state.light === 'cct' ? 13 : 0;
-    const environmentPremium = state.environment === 'outdoor' ? 18 : state.environment === 'bathroom' ? 11 : 0;
+    const environmentPremium = environments[state.environment].pricePremium || 0;
     const tapePrice = length * (tapeRate + lightPremium + environmentPremium);
     const profileLength = Math.ceil(length / 2) * 2;
     const profilePrice = profileLength * profiles[state.profile].unit;
@@ -77,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const supplyPrice = 49 + supply * .72 + (state.powerPlacement === 'wall' ? 30 : state.powerPlacement === 'plug' ? 22 : 0);
     const controlPrice = controls[state.control].price + (state.light === 'rgbw' && state.control === 'switch' ? 79 : 0);
     const plugPlayPrice = state.plugPlay ? 89 : 0;
-    const total = Math.round(tapePrice + profilePrice + diffuserPrice + accessoriesPrice + supplyPrice + controlPrice + plugPlayPrice);
+    const total = Math.round((tapePrice + profilePrice + diffuserPrice + accessoriesPrice + supplyPrice + controlPrice + plugPlayPrice) * 100) / 100;
     const lumens = Math.round(length * (state.technology === 'cob' ? 960 : 820) * diffusers[state.diffuser].loss);
     const amplifier = power / voltage > 10 && ['remote', 'wifi', 'zigbee'].includes(state.control);
     return { roundedDimensions, lengthCm, length, tapeWidth, wattsPerMeter, power, required, voltage, supply, profileLength, corners, tapePrice, profilePrice, diffuserPrice, accessoriesPrice, supplyPrice, controlPrice, plugPlayPrice, total, lumens, amplifier };
@@ -248,6 +258,31 @@ document.addEventListener('DOMContentLoaded', () => {
     toastTimer = setTimeout(() => $('#configToast').classList.remove('show'), 2800);
   }
 
+  function buildCatalogCriteria() {
+    const environment = environments[state.environment];
+    return {
+      selectionMode: 'attribute-filter',
+      application: state.environment,
+      applicationTags: [...environment.tags],
+      minimumIp: environment.ip,
+      shape: state.shape,
+      totalLengthCm: calc.lengthCm,
+      lightType: state.light,
+      colorTemperatureK: state.light === 'white' ? state.temperature : null,
+      technology: state.technology.toUpperCase(),
+      tapeWidthMm: calc.tapeWidth,
+      profileType: state.profile,
+      diffuserType: state.diffuser,
+      voltageV: calc.voltage,
+      minimumPowerSupplyW: calc.required,
+      powerPlacement: state.powerPlacement,
+      controlType: state.control,
+      plugAndPlay: state.plugPlay,
+      stockRequired: true,
+      productFamilies: ['led-strip', 'profile', 'diffuser', 'power-supply', 'controller', 'accessories']
+    };
+  }
+
   function addToCart() {
     const cart = JSON.parse(localStorage.getItem('prescot_cart') || '[]');
     const signature = [state.environment, state.shape, state.light, state.technology, state.profile, state.diffuser, state.control, state.plugPlay, calc.length].join('-');
@@ -258,11 +293,12 @@ document.addEventListener('DOMContentLoaded', () => {
         price: Math.round(part.price * 100) / 100,
         image: environments[state.environment].image,
         qty: 1,
-        color: lightShort(),
-        size: `${part.qty} · ${part.sku}`,
+        color: state.light === 'rgbw' ? 'linear-gradient(135deg,#ff3d81,#8d5bff,#23d9ff,#7dffb2)' : kelvinColor().core,
+        size: `${lightShort()} · ${part.qty} · ${part.sku}`,
         isConfiguredLed: true,
         configurationGroup: signature,
-        configuration: { ...state, calculations: calc }
+        configuration: { ...state, calculations: calc },
+        catalogCriteria: buildCatalogCriteria()
       };
       const existing = cart.find((record) => record.id === item.id);
       existing ? existing.qty += 1 : cart.push(item);
@@ -272,6 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof window.updateCartBadge === 'function') window.updateCartBadge();
     showToast('BOM zestawu LED dodany do koszyka.');
     closeDialog($('#bomDialog'));
+    if (typeof window.openCartDrawer === 'function') window.openCartDrawer();
   }
 
   $$('[data-field]').forEach((button) => button.addEventListener('click', () => {
@@ -306,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#menuButton').addEventListener('click', () => {
     const expanded = $('#menuButton').getAttribute('aria-expanded') === 'true';
     $('#menuButton').setAttribute('aria-expanded', String(!expanded));
-    $('#mobileMenu').hidden = expanded;
+    $('#configMobileMenu').hidden = expanded;
   });
   const openCart = () => typeof window.openCartDrawer === 'function' ? window.openCartDrawer() : window.location.assign('cart.html');
   $('#headerCartButton').addEventListener('click', openCart);
@@ -315,4 +352,8 @@ document.addEventListener('DOMContentLoaded', () => {
   renderDimensions();
   updateAll();
   showStep(0);
+  window.PrescotLedConfigurator = {
+    getCatalogCriteria: () => buildCatalogCriteria(),
+    getState: () => JSON.parse(JSON.stringify(state))
+  };
 });

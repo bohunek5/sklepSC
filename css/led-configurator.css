@@ -9,6 +9,10 @@
   --cyan-soft: rgba(40,215,255,.13);
   --success: #6ee7a8;
   --warning: #ffca62;
+  --button-navy: #0b1a30;
+  --button-navy-hover: #102b4c;
+  --button-white: #fff;
+  --button-muted: #5f7084;
   --header-h: 72px;
   --summary-h: 88px;
   color-scheme: dark;
@@ -76,6 +80,15 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 }
 .config-desktop-nav a.active i { color: var(--cyan); font-size: 17px; }
 .config-header-actions { display: flex; align-items: center; gap: 8px; }
+.header-action svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 .header-action, .config-menu-button {
   width: 44px;
   height: 44px;
@@ -179,6 +192,8 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 
 .option-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 11px; }
 .option-card { min-height: 112px; display: grid; grid-template-columns: 92px 1fr auto; align-items: center; gap: 14px; padding: 9px; border: 1px solid var(--line); border-radius: 15px; text-align: left; background: rgba(255,255,255,.025); cursor: pointer; transition: .2s ease; }
+.environment-grid .option-card { min-height: 92px; grid-template-columns: 74px 1fr auto; }
+.environment-grid .option-image { width: 74px; height: 74px; }
 .option-card:hover { transform: translateY(-2px); border-color: rgba(40,215,255,.3); }
 .option-card.selected { border-color: rgba(40,215,255,.62); background: var(--cyan-soft); }
 .option-image { width: 92px; height: 92px; border-radius: 11px; background: linear-gradient(0deg,rgba(4,13,23,.24),transparent), var(--card-image) center / cover; }
@@ -325,6 +340,232 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 .config-toast { position: fixed; right: 24px; bottom: calc(var(--summary-h) + 18px); z-index: 1200; min-height: 48px; display: flex; align-items: center; gap: 10px; padding: 0 17px; border: 1px solid rgba(110,231,168,.28); border-radius: 99px; color: #fff; background: rgba(11,32,31,.94); box-shadow: 0 18px 45px rgba(0,0,0,.34); opacity: 0; transform: translateY(14px); pointer-events: none; transition: .25s ease; font-size: 10px; font-weight: 700; }
 .config-toast i { color: var(--success); font-size: 19px; }.config-toast.show { opacity: 1; transform: none; }
 
+/* Wspólny system przycisków: biały + granat, z odwróconym hoverem. */
+.header-action,
+.config-menu-button,
+.option-card,
+.shape-card,
+.light-card,
+.power-card,
+.control-card,
+.profile-card,
+.technology-choice button,
+.diffuser-choice button,
+.scheme-link,
+.back-button,
+.next-button,
+.summary-details,
+.add-kit-button,
+.dialog-primary,
+.dialog-secondary,
+.dialog-head button {
+  border-color: var(--button-navy);
+  color: var(--button-navy);
+  background: var(--button-white);
+  box-shadow: none;
+  transition: color .2s ease, background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.option-card small,
+.shape-card small,
+.light-card small,
+.power-card small,
+.control-card small,
+.profile-card small,
+.technology-choice small,
+.diffuser-choice small,
+.scheme-link small,
+.summary-details small {
+  color: var(--button-muted);
+}
+.option-check,
+.scheme-link > i:first-child,
+.scheme-link > i:last-child,
+.summary-details > i {
+  color: var(--button-navy);
+}
+.profile-card > b,
+.control-card > b { color: var(--button-navy); }
+.power-card > i:first-child,
+.control-card > i:first-child,
+.summary-product-icon {
+  color: var(--button-navy);
+  border-color: rgba(11,26,48,.18);
+  background: rgba(11,26,48,.08);
+}
+.shape-card svg path,
+.shape-card svg rect {
+  stroke: var(--button-navy);
+  filter: none;
+}
+.technology-choice em {
+  color: var(--button-navy);
+  background: rgba(11,26,48,.08);
+}
+.technology-choice .tech-line.smd {
+  background: repeating-linear-gradient(90deg,var(--button-navy) 0 4px,transparent 4px 10px);
+}
+.diffuser-dot { border-color: rgba(11,26,48,.28); }
+.header-action svg { stroke: currentColor; }
+.config-menu-button span { background: var(--button-navy); }
+
+.option-card.selected,
+.shape-card.selected,
+.light-card.selected,
+.power-card.selected,
+.control-card.selected,
+.profile-card.selected,
+.technology-choice button.selected,
+.diffuser-choice button.selected {
+  border-color: var(--button-navy);
+  color: var(--button-white);
+  background: var(--button-navy-hover);
+  box-shadow: 0 8px 24px rgba(4,15,29,.22);
+}
+.selected > .option-check,
+.option-card.selected small,
+.shape-card.selected small,
+.light-card.selected small,
+.power-card.selected small,
+.control-card.selected small,
+.profile-card.selected small,
+.technology-choice button.selected small,
+.diffuser-choice button.selected small {
+  color: rgba(255,255,255,.74);
+}
+.shape-card.selected svg path,
+.shape-card.selected svg rect {
+  stroke: var(--button-white);
+  filter: none;
+}
+.light-card.selected .option-check,
+.power-card.selected .option-check,
+.control-card.selected .option-check,
+.profile-card.selected .option-check,
+.technology-choice button.selected em {
+  color: var(--button-white);
+}
+.power-card.selected > i:first-child,
+.control-card.selected > i:first-child {
+  color: var(--button-white);
+  background: rgba(255,255,255,.12);
+}
+.technology-choice button.selected em { background: rgba(255,255,255,.12); }
+.profile-card.selected > b,
+.control-card.selected > b { color: rgba(255,255,255,.78); }
+.technology-choice button.selected .tech-line.smd {
+  background: repeating-linear-gradient(90deg,var(--button-white) 0 4px,transparent 4px 10px);
+}
+
+.step-tabs { gap: 5px; padding-bottom: 9px; }
+.step-tabs button {
+  min-height: 42px;
+  border: 1px solid var(--button-navy);
+  border-radius: 9px;
+  color: var(--button-navy);
+  background: var(--button-white);
+  transition: color .2s ease, background-color .2s ease, border-color .2s ease;
+}
+.step-tabs button b { border-color: currentColor; }
+.step-tabs button.active {
+  border-color: var(--button-navy);
+  color: var(--button-white);
+  background: var(--button-navy-hover);
+}
+.step-tabs button.active b {
+  border-color: rgba(255,255,255,.5);
+  color: var(--button-white);
+  background: transparent;
+}
+.step-tabs button.complete { color: var(--button-navy); }
+.step-tabs button.complete b { color: var(--button-navy); border-color: currentColor; }
+.step-tabs button:disabled { opacity: .72; }
+
+.summary-details {
+  min-height: 54px;
+  padding: 6px 10px;
+  border: 1px solid var(--button-navy);
+  border-radius: 12px;
+}
+.summary-details strong { color: var(--button-navy); }
+.back-button,
+.next-button,
+.add-kit-button,
+.dialog-primary,
+.dialog-secondary {
+  border: 1px solid var(--button-navy);
+  color: var(--button-navy);
+  background: var(--button-white);
+}
+.dialog-head button { color: var(--button-navy); }
+
+@media (hover: hover) {
+  .header-action:hover,
+  .config-menu-button:hover,
+  .option-card:hover:not(:disabled),
+  .shape-card:hover:not(:disabled),
+  .light-card:hover:not(:disabled),
+  .power-card:hover:not(:disabled),
+  .control-card:hover:not(:disabled),
+  .profile-card:hover:not(:disabled),
+  .technology-choice button:hover:not(:disabled),
+  .diffuser-choice button:hover:not(:disabled),
+  .scheme-link:hover,
+  .back-button:hover,
+  .next-button:hover,
+  .summary-details:hover,
+  .add-kit-button:hover,
+  .dialog-primary:hover,
+  .dialog-secondary:hover,
+  .dialog-head button:hover,
+  .step-tabs button:hover:not(:disabled) {
+    border-color: var(--button-navy);
+    color: var(--button-white);
+    background: var(--button-navy-hover);
+    box-shadow: 0 8px 24px rgba(4,15,29,.22);
+  }
+  .option-card:hover:not(:disabled) small,
+  .shape-card:hover:not(:disabled) small,
+  .light-card:hover:not(:disabled) small,
+  .power-card:hover:not(:disabled) small,
+  .control-card:hover:not(:disabled) small,
+  .profile-card:hover:not(:disabled) small,
+  .technology-choice button:hover:not(:disabled) small,
+  .diffuser-choice button:hover:not(:disabled) small,
+  .scheme-link:hover small,
+  .summary-details:hover small {
+    color: rgba(255,255,255,.74);
+  }
+  .option-card:hover:not(:disabled) .option-check,
+  .scheme-link:hover > i,
+  .summary-details:hover > i,
+  .summary-details:hover strong {
+    color: var(--button-white);
+  }
+  .shape-card:hover:not(:disabled) svg path,
+  .shape-card:hover:not(:disabled) svg rect {
+    stroke: var(--button-white);
+  }
+  .power-card:hover:not(:disabled) > i:first-child,
+  .control-card:hover:not(:disabled) > i:first-child,
+  .summary-details:hover .summary-product-icon {
+    color: var(--button-white);
+    border-color: rgba(255,255,255,.2);
+    background: rgba(255,255,255,.12);
+  }
+  .technology-choice button:hover:not(:disabled) em {
+    color: var(--button-white);
+    background: rgba(255,255,255,.12);
+  }
+  .profile-card:hover:not(:disabled) > b,
+  .control-card:hover:not(:disabled) > b { color: rgba(255,255,255,.78); }
+  .technology-choice button:hover:not(:disabled) .tech-line.smd {
+    background: repeating-linear-gradient(90deg,var(--button-white) 0 4px,transparent 4px 10px);
+  }
+  .config-menu-button:hover span { background: var(--button-white); }
+  .option-card:hover:not(:disabled),
+  .add-kit-button:hover { transform: translateY(-1px); }
+}
+
 @media (max-width: 1260px) {
   .config-main { grid-template-columns: minmax(0,52%) minmax(430px,48%); }
   .config-desktop-nav a { padding-inline: 5px; }
@@ -395,8 +636,8 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
 }
 @media (max-width: 560px) {
   .environment-grid { grid-template-columns: 1fr; }
-  .option-card { min-height: 82px; grid-template-columns: 64px 1fr auto; }
-  .option-image { width: 64px; height: 64px; }
+  .option-card, .environment-grid .option-card { min-height: 82px; grid-template-columns: 64px 1fr auto; }
+  .option-image, .environment-grid .option-image { width: 64px; height: 64px; }
   .shape-grid { grid-template-columns: repeat(2,1fr); }
   .shape-card { min-height: 112px; }
   .dimension-fields, .technology-choice { grid-template-columns: 1fr; }

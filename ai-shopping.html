@@ -520,15 +520,32 @@
     </section>
   </main>
 
-  <nav class="mobile-bottom-nav" aria-label="Nawigacja mobilna">
-    <div class="mobile-nav-items">
-      <a class="mobile-nav-item" href="index.html"><i class="ph ph-house"></i><span>Home</span></a>
-      <a class="mobile-nav-item" href="javascript:void(0);" onclick="openMobileCategories();"><i class="ph ph-squares-four"></i><span>Kategorie</span></a>
-      <a class="mobile-nav-item configurator-mobile-link" href="konfigurator-led.html"><i class="ph ph-lightbulb-filament"></i><span>Konfig. LED</span></a>
-      <a class="mobile-nav-item active" href="ai-shopping.html"><img class="gemini-icon" src="images/prescot-pattern.png" style="width: 22px; height: 22px; object-fit: contain; margin-bottom: 4px; filter: grayscale(1) brightness(2);"><span>Zakup AI</span></a>
-      <a class="mobile-nav-item" href="contact.html"><i class="ph ph-envelope-simple"></i><span>Kontakt</span></a>
-    </div>
-  </nav>
+  <nav class="new-glass-nav">
+  <div class="mobile-nav-items">
+    <a class="mobile-nav-item" href="index.html">
+      <i class="ph ph-house"></i>
+      <span>Start</span>
+    </a>
+    <a class="mobile-nav-item" href="shop.html">
+      <i class="ph ph-squares-four"></i>
+      <span>Sklep</span>
+    </a>
+    <a class="mobile-nav-item active" href="ai-shopping.html" style="position:relative;">
+      <div class="nav-center-pill">
+        <img src="images/prescot-pattern.png" class="nav-ai-icon active-center-ai" style="filter: brightness(0) invert(1); width:24px; height:24px; margin-bottom:0;" alt="">
+      </div>
+      <span style="margin-top:24px;">Zakup AI</span>
+    </a>
+    <a class="mobile-nav-item" href="configurator.html">
+      <i class="ph ph-lightbulb-filament"></i>
+      <span>Dobierz</span>
+    </a>
+    <a class="mobile-nav-item" href="contact.html">
+      <i class="ph ph-envelope-simple"></i>
+      <span>Kontakt</span>
+    </a>
+  </div>
+</nav>
 
 
   <script src="js/configurator-core.js"></script>

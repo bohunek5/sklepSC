@@ -2,6 +2,8 @@
 <html lang="pl">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0; url=configurator.html">
+  <link rel="canonical" href="configurator.html">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#07111f">
   <link rel="icon" type="image/png" href="images/prescot-pattern.png">
@@ -29,10 +31,10 @@
     </nav>
     <div class="config-header-actions">
       <button class="header-action" id="headerHelpButton" type="button" aria-label="Jak działa konfigurator"><i class="ph ph-question" aria-hidden="true"></i></button>
-      <button class="header-action cart-toggle" id="headerCartButton" type="button" aria-label="Otwórz koszyk"><i class="ph ph-shopping-bag" aria-hidden="true"></i><span class="cart-badge" id="cartBadge">0</span></button>
-      <button class="config-menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Otwórz menu"><span></span><span></span><span></span></button>
+      <button class="header-action cart-toggle" id="headerCartButton" type="button" aria-label="Otwórz koszyk"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L21 7H6"></path><circle cx="10" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle></svg><span class="cart-badge" id="cartBadge">0</span></button>
+      <button class="config-menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="configMobileMenu" aria-label="Otwórz menu"><span></span><span></span><span></span></button>
     </div>
-    <nav class="config-mobile-menu" id="mobileMenu" aria-label="Nawigacja mobilna" hidden>
+    <nav class="config-mobile-menu" id="configMobileMenu" aria-label="Nawigacja mobilna" hidden>
       <a href="index.html"><i class="ph ph-house" aria-hidden="true"></i>Home</a>
       <a href="shop.html"><i class="ph ph-storefront" aria-hidden="true"></i>Sklep</a>
       <a class="active" href="konfigurator-led.html"><i class="ph ph-lightbulb-filament" aria-hidden="true"></i>Konfigurator LED</a>
@@ -105,6 +107,14 @@
             <button class="option-card" type="button" data-field="environment" data-value="kitchen" aria-pressed="false"><span class="option-image" style="--card-image:url('images/configurator/kitchen_new.png')"></span><span class="option-copy"><strong>Kuchnia</strong><small>Blat i zabudowa</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
             <button class="option-card" type="button" data-field="environment" data-value="bathroom" aria-pressed="false"><span class="option-image" style="--card-image:url('images/configurator/bathroom_new.png')"></span><span class="option-copy"><strong>Łazienka</strong><small>Strefa wilgotna · IP65</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
             <button class="option-card" type="button" data-field="environment" data-value="outdoor" aria-pressed="false"><span class="option-image" style="--card-image:url('images/configurator/outdoor_new.png')"></span><span class="option-copy"><strong>Elewacja</strong><small>Na zewnątrz · IP67</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+            <button class="option-card" type="button" data-field="environment" data-value="bedroom" aria-pressed="false"><span class="option-image" style="--card-image:url('images/cat_bedroom.png')"></span><span class="option-copy"><strong>Sypialnia</strong><small>Zagłówek, sufit, nastrój</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+            <button class="option-card" type="button" data-field="environment" data-value="stairs" aria-pressed="false"><span class="option-image" style="--card-image:url('images/configurator/stairs_new.png')"></span><span class="option-copy"><strong>Schody i korytarz</strong><small>Stopnie i ciągi komunikacyjne</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+            <button class="option-card" type="button" data-field="environment" data-value="wardrobe" aria-pressed="false"><span class="option-image" style="--card-image:url('images/szafy.jpg')"></span><span class="option-copy"><strong>Garderoba i szafy</strong><small>Półki, drążki, wnętrza</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+            <button class="option-card" type="button" data-field="environment" data-value="office" aria-pressed="false"><span class="option-image" style="--card-image:url('images/cat_office.png')"></span><span class="option-copy"><strong>Biuro</strong><small>Biurko i światło robocze</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+            <button class="option-card" type="button" data-field="environment" data-value="retail" aria-pressed="false"><span class="option-image" style="--card-image:url('images/configurator/retail_new.png')"></span><span class="option-copy"><strong>Sklep i ekspozycja</strong><small>Regały, witryny, produkty</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+            <button class="option-card" type="button" data-field="environment" data-value="furniture" aria-pressed="false"><span class="option-image" style="--card-image:url('images/configurator/application-furniture.webp')"></span><span class="option-copy"><strong>Meble i półki</strong><small>Gabloty, RTV, zabudowa</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+            <button class="option-card" type="button" data-field="environment" data-value="garden" aria-pressed="false"><span class="option-image" style="--card-image:url('images/cat_garden.png')"></span><span class="option-copy"><strong>Ogród i taras</strong><small>Pergola i ścieżki · IP67</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+            <button class="option-card" type="button" data-field="environment" data-value="garage" aria-pressed="false"><span class="option-image" style="--card-image:url('images/led_office.png')"></span><span class="option-copy"><strong>Garaż i warsztat</strong><small>Regały i blat · IP44</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
           </div>
           <div class="smart-note"><i class="ph ph-shield-check" aria-hidden="true"></i><p><strong>Bezpieczny wybór</strong><span>Po wybraniu łazienki lub elewacji pokażemy wyłącznie elementy o właściwej szczelności.</span></p></div>
         </section>
@@ -192,7 +202,7 @@
     <a href="shop.html"><i class="ph ph-storefront" aria-hidden="true"></i><span>Sklep</span></a>
     <a class="active" href="konfigurator-led.html" aria-current="page"><span class="bottom-main-icon"><i class="ph ph-lightbulb-filament" aria-hidden="true"></i></span><span>Konfig. LED</span></a>
     <a href="ai-shopping.html"><i class="ph ph-sparkle" aria-hidden="true"></i><span>Zakup AI</span></a>
-    <button id="mobileCartButton" type="button"><i class="ph ph-shopping-bag" aria-hidden="true"></i><span>Koszyk</span></button>
+    <button id="mobileCartButton" type="button"><i class="ph ph-shopping-cart-simple" aria-hidden="true"></i><span>Koszyk</span></button>
   </nav>
 
   <dialog class="config-dialog bom-dialog" id="bomDialog" aria-labelledby="bomTitle">

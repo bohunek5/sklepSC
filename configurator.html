@@ -2,8 +2,7 @@
 <html lang="pl">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0; url=konfigurator-led.html">
-  <link rel="canonical" href="konfigurator-led.html">
+  <link rel="canonical" href="configurator.html">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b1a30">
   <link rel="icon" type="image/png" href="images/prescot-pattern.png">
@@ -12,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <link rel="stylesheet" href="css/configurator.css">
   <link rel="stylesheet" href="css/prescot-responsive.css">
 <style id="uncropped-product-images-override">
@@ -226,7 +226,7 @@
       <a href="blog.html">Wiedza</a>
       <a href="about.html">O nas</a>
       <a href="contact.html">Kontakt</a>
-      <a class="active" href="configurator.html">Dobierz system</a>
+      <a class="active" href="configurator.html">Konfigurator LED</a>
       <a  href="ai-shopping.html"><img class="gemini-icon" src="images/prescot-pattern.png" style="width: 18px; height: 18px; object-fit: contain; margin-right: 6px; vertical-align: middle;">Zakup AI</a>
     </nav>
     <div class="header-actions">
@@ -249,7 +249,7 @@
       <a href="blog.html">Wiedza</a>
       <a href="about.html">O nas</a>
       <a href="contact.html">Kontakt</a>
-      <a class="active" href="configurator.html">Dobierz system</a>
+      <a class="active" href="configurator.html">Konfigurator LED</a>
       <a  href="ai-shopping.html"><img class="gemini-icon" src="images/prescot-pattern.png" style="width: 18px; height: 18px; object-fit: contain; margin-right: 6px; vertical-align: middle;">Zakup AI</a>
     </nav>
   </header>
@@ -280,7 +280,7 @@
             <strong id="projectVisualTitle">Wybierz miejsce montażu</strong>
             <small id="projectVisualMeta">Zdjęcie i parametry zmienią się wraz z projektem.</small>
           </div>
-          <div class="progress-summary"><span>Postęp</span><strong id="progressText">1 / 6</strong></div>
+          <div class="progress-summary"><span>Postęp</span><strong id="progressText">1 / 7</strong></div>
           <div class="progress-track"><span id="progressBar"></span></div>
           <ol class="step-list" id="stepList">
             <li class="active"><span>01</span><div><strong>Zastosowanie</strong><small>miejsce i funkcja</small></div></li>
@@ -521,15 +521,32 @@
 </footer>
 
 
-  <nav class="mobile-bottom-nav" aria-label="Skróty mobilne">
-    <div class="mobile-nav-items">
-      <a class="mobile-nav-item" href="index.html"><span>Home</span></a>
-      <a class="mobile-nav-item" href="shop.html"><span>Sklep</span></a>
-      <button class="mobile-nav-item" type="button" onclick="openMobileCategories()"><span>Kategorie</span></button>
-      <a class="mobile-nav-item active" href="configurator.html"><span>Dobierz</span></a>
-      <a class="mobile-nav-item" href="javascript:void(0);" onclick="openCartDrawer();"><span>Koszyk</span></a>
-    </div>
-  </nav>
+  <nav class="new-glass-nav">
+  <div class="mobile-nav-items">
+    <a class="mobile-nav-item" href="index.html">
+      <i class="ph ph-house"></i>
+      <span>Start</span>
+    </a>
+    <a class="mobile-nav-item" href="shop.html">
+      <i class="ph ph-squares-four"></i>
+      <span>Sklep</span>
+    </a>
+    <a class="mobile-nav-item active" href="configurator.html" style="position:relative;">
+      <div class="nav-center-pill">
+        <i class="ph ph-lightbulb-filament"></i>
+      </div>
+      <span style="margin-top:24px;">Dobierz</span>
+    </a>
+    <a class="mobile-nav-item" href="ai-shopping.html">
+      <img src="images/prescot-pattern.png" class="nav-ai-icon" alt="">
+      <span>Zakup AI</span>
+    </a>
+    <a class="mobile-nav-item" href="contact.html">
+      <i class="ph ph-envelope-simple"></i>
+      <span>Kontakt</span>
+    </a>
+  </div>
+</nav>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="js/products-data.js"></script>
