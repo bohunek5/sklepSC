@@ -1,4 +1,4 @@
-Ôªø<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
@@ -172,7 +172,7 @@
         <div class="card">
             <img src="images/cat_living.png" alt="Living Room">
             <div class="content">
-                <h2>1. Salon (Ciep≈Çe ≈õwiat≈Ço)</h2>
+                <h2>1. Salon (Ciep≥e úwiat≥o)</h2>
                 <div class="prompt-box" id="p1">A slow, cinematic tracking shot of a luxurious modern living room at night. Perfectly straight, seamless, glowing warm orange LED light lines (3000K) run across the ceiling and dark slate walls. The glowing light lines cast soft shadows. Volumetric lighting, 8k resolution, photorealistic real-estate video.</div>
                 <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('p1').innerText); this.innerText='Skopiowano!'; setTimeout(() => this.innerText='Kopiuj Prompt', 2000);">Kopiuj Prompt</button>
             </div>
@@ -192,7 +192,7 @@
         <div class="card">
             <img src="images/cat_bathroom.png" alt="Bathroom">
             <div class="content">
-                <h2>3. ≈Åazienka SPA (Neutralne)</h2>
+                <h2>3. £azienka SPA (Neutralne)</h2>
                 <div class="prompt-box" id="p3">A cinematic, moody pan across a luxurious modern spa bathroom clad in dark marble. A flawless continuous glowing LED line (4000K neutral white) frames the large vanity mirror and illuminates the sleek shower niche. Atmospheric steam slowly rising in the background, extreme realism, ray tracing, 8k.</div>
                 <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('p3').innerText); this.innerText='Skopiowano!'; setTimeout(() => this.innerText='Kopiuj Prompt', 2000);">Kopiuj Prompt</button>
             </div>
@@ -212,7 +212,7 @@
         <div class="card">
             <img src="images/cat_garden.png" alt="Garden">
             <div class="content">
-                <h2>5. Ogr√≥d / ZewnƒÖtrz (Zmierzch)</h2>
+                <h2>5. OgrÛd / Zewnπtrz (Zmierzch)</h2>
                 <div class="prompt-box" id="p5">A smooth drone-style tracking shot of a modern luxury villa exterior and garden at twilight. The dark architecture and pathway are dramatically highlighted by razor-sharp, continuous glowing LED lines (3000K warm white) embedded in the concrete. Cinematic twilight sky, premium real estate, photorealistic motion.</div>
                 <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('p5').innerText); this.innerText='Skopiowano!'; setTimeout(() => this.innerText='Kopiuj Prompt', 2000);">Kopiuj Prompt</button>
             </div>
@@ -222,7 +222,7 @@
         <div class="card">
             <img src="images/cat_office.png" alt="Office">
             <div class="content">
-                <h2>6. Biuro / Przestrze≈Ñ Pracy</h2>
+                <h2>6. Biuro / PrzestrzeÒ Pracy</h2>
                 <div class="prompt-box" id="p6">A slow pan inside a premium modern office interior. Sleek, perfectly straight LED light lines (4000K neutral white) run seamlessly across the acoustic slatted wood ceiling and down the dark concrete walls. The space features high-end modern furniture and a moody, professional atmosphere. Cinematic lighting, architectural 8k video.</div>
                 <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('p6').innerText); this.innerText='Skopiowano!'; setTimeout(() => this.innerText='Kopiuj Prompt', 2000);">Kopiuj Prompt</button>
             </div>
@@ -242,7 +242,7 @@
         <div class="card">
             <img src="images/cat_bedroom.png" alt="Bedroom">
             <div class="content">
-                <h2>8. Sypialnia (≈öwiat≈Ço Nastrojowe)</h2>
+                <h2>8. Sypialnia (åwiat≥o Nastrojowe)</h2>
                 <div class="prompt-box" id="p8">A cinematic, very slow push-in shot of a luxurious moody master bedroom at night. Hidden, seamless warm LED strip lights (2700K) create a soft glowing halo behind the massive upholstered headboard and underneath the floating bed. Deep cinematic shadows, elegant atmosphere, ray tracing, 8k.</div>
                 <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('p8').innerText); this.innerText='Skopiowano!'; setTimeout(() => this.innerText='Kopiuj Prompt', 2000);">Kopiuj Prompt</button>
             </div>
@@ -435,10 +435,10 @@ body.index-page .site-header:not(.scrolled) {
     margin-bottom: 100px !important;
   }
 }
-/* 5. Mobile Category Banners (Wƒô≈ºej, 1 linia) */
+/* 5. Mobile Category Banners (WÍøej, 1 linia) */
 @media (max-width: 768px) {
   .category-banner-card, .category-banner-card.sub-card {
-    height: 180px !important; /* Wƒô≈ºej w pionie */
+    height: 180px !important; /* WÍøej w pionie */
     padding: 20px 15px !important;
   }
   .category-banner-card h3, .category-banner-card.sub-card h3 {
@@ -524,6 +524,7 @@ body.index-page .site-header:not(.scrolled) {
 
 
 <style id="global-config-nav-css">
+.config-bottom-nav { display: none; }
 /* Exact bottom nav styles from led-configurator.css */
 @media (max-width: 768px) {
   .config-bottom-nav { position: fixed; inset: auto 0 0; z-index: 950; height: 76px; display: grid; grid-template-columns: repeat(5,1fr); padding: 7px 8px calc(6px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(255,255,255,0.1); background: rgba(6,16,28,.98); backdrop-filter: blur(20px); }
@@ -555,3 +556,4 @@ body.index-page .site-header:not(.scrolled) {
 
 </body>
 </html>
+

@@ -1,4 +1,4 @@
-ï»¿ï»¿<!doctype html>
+?<!doctype html>
 <html lang="pl">
 <head>
   <meta charset="utf-8">
@@ -469,10 +469,10 @@
 
   <!-- Include existing header here via JS injection or python -->
   <header class="site-header" id="siteHeader">
-    <a class="brand" href="index.html" aria-label="Prescot â€” strona gÅ‚Ã³wna">
+    <a class="brand" href="index.html" aria-label="Prescot — strona g³ówna">
       <img src="images/logo-white.png" data-dark="images/logo-dark.png" data-light="images/logo-white.png" alt="Prescot">
     </a>
-    <nav class="desktop-nav" aria-label="Nawigacja gÅ‚Ã³wna">
+    <nav class="desktop-nav" aria-label="Nawigacja g³ówna">
       <a href="index.html">Home</a>
       <a href="shop.html">Sklep</a>
       <a href="blog.html">Wiedza</a>
@@ -506,14 +506,14 @@
               <img class="gemini-icon" src="images/prescot-pattern.png" style="width: 14px; height: 14px; object-fit: contain; margin-left: 4px; vertical-align: middle;">
             </div>
             <div class="message-bubble">
-              CzeÅ›Ä‡! Jestem Twoim wirtualnym doradcÄ… oÅ›wietleniowym. Opowiedz mi o swoim projekcie. Co i gdzie chcesz oÅ›wietliÄ‡? Wpisz np. "PotrzebujÄ™ 12m mocnej taÅ›my COB ciepÅ‚ej do salonu".
+              Czeœæ! Jestem Twoim wirtualnym doradc¹ oœwietleniowym. Opowiedz mi o swoim projekcie. Co i gdzie chcesz oœwietliæ? Wpisz np. "Potrzebujê 12m mocnej taœmy COB ciep³ej do salonu".
             </div>
           </div>
         </div>
 
         <div class="ai-input-area">
-          <input type="text" placeholder="Twoja kolej! Opisz swÃ³j pomysÅ‚ tutaj..." id="aiChatInput">
-          <button type="button" aria-label="WyÅ›lij">
+          <input type="text" placeholder="Twoja kolej! Opisz swój pomys³ tutaj..." id="aiChatInput">
+          <button type="button" aria-label="Wyœlij">
               <img src="images/prescot-pattern.png" style="width: 22px; height: 22px; object-fit: contain; transition: filter 0.2s;" alt="Send">
             </button>
         </div>
@@ -521,7 +521,7 @@
     </section>
   </main>
 
-  <nav class="config-bottom-nav" aria-label="SkrÃ³ty mobilne">
+  <nav class="config-bottom-nav" aria-label="Skróty mobilne">
     <a href="index.html" ><i class="ph ph-house" aria-hidden="true"></i><span>Start</span></a>
     <a href="shop.html" ><i class="ph ph-storefront" aria-hidden="true"></i><span>Sklep</span></a>
     <a href="configurator.html" ><i class="ph ph-lightbulb-filament" aria-hidden="true"></i><span>Konfig. LED</span></a>
@@ -765,10 +765,10 @@ body.index-page .site-header:not(.scrolled) {
     margin-bottom: 100px !important;
   }
 }
-/* 5. Mobile Category Banners (WÄ™Å¼ej, 1 linia) */
+/* 5. Mobile Category Banners (Wê¿ej, 1 linia) */
 @media (max-width: 768px) {
   .category-banner-card, .category-banner-card.sub-card {
-    height: 180px !important; /* WÄ™Å¼ej w pionie */
+    height: 180px !important; /* Wê¿ej w pionie */
     padding: 20px 15px !important;
   }
   .category-banner-card h3, .category-banner-card.sub-card h3 {
@@ -854,6 +854,7 @@ body.index-page .site-header:not(.scrolled) {
 
 
 <style id="global-config-nav-css">
+.config-bottom-nav { display: none; }
 /* Exact bottom nav styles from led-configurator.css */
 @media (max-width: 768px) {
   .config-bottom-nav { position: fixed; inset: auto 0 0; z-index: 950; height: 76px; display: grid; grid-template-columns: repeat(5,1fr); padding: 7px 8px calc(6px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(255,255,255,0.1); background: rgba(6,16,28,.98); backdrop-filter: blur(20px); }
@@ -885,3 +886,4 @@ body.index-page .site-header:not(.scrolled) {
 
 </body>
 </html>
+

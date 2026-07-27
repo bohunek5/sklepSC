@@ -4,6 +4,7 @@ import os
 
 CSS_TO_INJECT = """
 <style id="global-config-nav-css">
+.config-bottom-nav { display: none; }
 /* Exact bottom nav styles from led-configurator.css */
 @media (max-width: 768px) {
   .config-bottom-nav { position: fixed; inset: auto 0 0; z-index: 950; height: 76px; display: grid; grid-template-columns: repeat(5,1fr); padding: 7px 8px calc(6px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(255,255,255,0.1); background: rgba(6,16,28,.98); backdrop-filter: blur(20px); }
@@ -97,7 +98,8 @@ def update_files():
             modified = True
             
         if 'id="global-config-nav-css"' in content:
-            content = re.sub(r'<style id="global-config-nav-css">.*?</style>', CSS_TO_INJECT.strip(), content, flags=re.DOTALL)
+            content = re.sub(r'<style id="global-config-nav-css">
+.config-bottom-nav { display: none; }.*?</style>', CSS_TO_INJECT.strip(), content, flags=re.DOTALL)
             modified = True
         else:
             content = content.replace('</body>', f'{CSS_TO_INJECT}\n</body>')
@@ -110,3 +112,4 @@ def update_files():
 
 if __name__ == '__main__':
     update_files()
+
