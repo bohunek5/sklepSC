@@ -12,10 +12,15 @@ const browserPath = browserCandidates.find(existsSync);
 if (!browserPath) throw new Error('Nie znaleziono Chrome ani Edge.');
 
 const mobile = process.argv.includes('--mobile');
-const viewportWidth = mobile ? 390 : 1440;
-const viewportHeight = mobile ? 844 : 1000;
+const viewportArgument = process.argv.find((argument) => argument.startsWith('--viewport='));
+const viewportMatch = viewportArgument?.slice('--viewport='.length).match(/^(\d+)x(\d+)$/i);
+const viewportWidth = viewportMatch ? Number(viewportMatch[1]) : mobile ? 390 : 1440;
+const viewportHeight = viewportMatch ? Number(viewportMatch[2]) : mobile ? 844 : 1000;
+const emulateMobile = viewportWidth <= 600;
 const screenshotArgument = process.argv.find((argument) => argument.startsWith('--screenshot='));
 const screenshotPath = screenshotArgument?.slice('--screenshot='.length);
+const filterScreenshotArgument = process.argv.find((argument) => argument.startsWith('--filter-screenshot='));
+const filterScreenshotPath = filterScreenshotArgument?.slice('--filter-screenshot='.length);
 const port = 9800 + Math.floor(Math.random() * 150);
 const profilePath = mkdtempSync(join(tmpdir(), 'prescot-shop-'));
 const browser = spawn(browserPath, [
@@ -118,7 +123,7 @@ try {
     width: viewportWidth,
     height: viewportHeight,
     deviceScaleFactor: 1,
-    mobile
+    mobile: emulateMobile
   });
   await client.send('Page.reload', { ignoreCache: true });
   await waitFor(client, `document.readyState === 'complete'`);
@@ -140,7 +145,8 @@ try {
       addButtons: grid.querySelectorAll('.add-to-cart-btn').length,
       buyButtons: grid.querySelectorAll('.buy-it-now-btn').length,
       horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth,
-      filterVisible: getComputedStyle(document.querySelector('#advancedFilterContainer')).visibility !== 'hidden'
+      filterVisible: getComputedStyle(document.querySelector('#advancedFilterContainer')).visibility !== 'hidden',
+      resetFunction: typeof window.resetShopCatalogFilters
     };
   })()`);
 
@@ -149,6 +155,66 @@ try {
     throw new Error('Karty utraciły istniejące przyciski zakupu.');
   }
   if (audit.horizontalOverflow) throw new Error('Katalog powoduje poziome przewijanie.');
+  if (audit.resetFunction !== 'function') throw new Error('Reset filtrów nie został udostępniony.');
+
+  await evaluate(client, `document.querySelector('[data-type="expect"][data-val="Brak kropek"]').click()`);
+  await waitFor(client, `document.querySelector('#shopResultSummary').textContent !== 'Produkty 1–24 z 1323'`);
+  const filteredAudit = await evaluate(client, `(() => {
+    const total = Number(document.querySelector('#shopResultSummary').textContent.match(/z\\s+(\\d+)/)?.[1] || 0);
+    const cards = [...document.querySelectorAll('#shopGrid .mockup-product-card')];
+    return {
+      total,
+      cards: cards.length,
+      activeChips: document.querySelectorAll('#activeChipsContainer .active-chip').length,
+      url: window.location.search,
+      applyText: document.querySelector('#applyFiltersBtn').textContent.trim(),
+      buyAction: cards[0]?.querySelector('.buy-it-now-btn')?.getAttribute('onclick') || ''
+    };
+  })()`);
+  if (!filteredAudit.total || filteredAudit.total >= 1323) throw new Error(`Filtr COB nie zawęził katalogu: ${JSON.stringify(filteredAudit)}.`);
+  if (!filteredAudit.activeChips || !filteredAudit.url.includes('expect=')) throw new Error('Aktywny filtr nie jest widoczny lub zapisany w URL.');
+  if (!filteredAudit.buyAction.includes("checkout.html")) throw new Error('Przycisk Szybki zakup utracił swoje działanie.');
+
+  await evaluate(client, `document.querySelector('.toggle-btn[data-mode="b2b"]').click()`);
+  await evaluate(client, `document.querySelector('[data-type="voltage"][data-val="24V"]').click()`);
+  await waitFor(client, `Number(document.querySelector('#shopResultSummary').textContent.match(/z\\s+(\\d+)/)?.[1] || 0) < ${filteredAudit.total}`);
+  const proFilterAudit = await evaluate(client, `({
+    total: Number(document.querySelector('#shopResultSummary').textContent.match(/z\\s+(\\d+)/)?.[1] || 0),
+    activeChips: document.querySelectorAll('#activeChipsContainer .active-chip').length,
+    mode: document.querySelector('.toggle-btn[data-mode="b2b"]').getAttribute('aria-pressed')
+  })`);
+  if (!proFilterAudit.total || proFilterAudit.activeChips !== 2 || proFilterAudit.mode !== 'true') {
+    throw new Error(`Filtry PRO nie łączą kryteriów: ${JSON.stringify(proFilterAudit)}.`);
+  }
+
+  await evaluate(client, `(() => {
+    const select = document.querySelector('#shopSortSelect');
+    select.value = 'price-asc';
+    select.dispatchEvent(new Event('change', { bubbles: true }));
+  })()`);
+  const sortedPrices = await evaluate(client, `[...document.querySelectorAll('#shopGrid .catalog-current-price')].map((element) => Number(element.textContent.replace(',', '.').replace(/[^0-9.]/g, '')))`);
+  if (sortedPrices.some((price, index) => index > 0 && price < sortedPrices[index - 1])) {
+    throw new Error('Sortowanie ceny rosnąco nie działa.');
+  }
+
+  await evaluate(client, `document.querySelector('#shopGrid .add-to-cart-btn').click()`);
+  const cart = await evaluate(client, `(() => {
+    const items = JSON.parse(localStorage.getItem('prescot_cart') || '[]');
+    return { rows: items.length, quantity: items.reduce((sum, item) => sum + Number(item.qty || 1), 0) };
+  })()`);
+  if (cart.rows !== 1 || cart.quantity !== 1) throw new Error(`Istniejący przycisk Dodaj do koszyka działa wielokrotnie: ${JSON.stringify(cart)}.`);
+
+  await evaluate(client, `document.querySelector('#catalogResetFilters').click()`);
+  await waitFor(client, `document.querySelector('#shopResultSummary').textContent.includes('1323')`);
+
+  if (filterScreenshotPath) {
+    await evaluate(client, `document.querySelector('#mobileFabFilterBtn').click()`);
+    await waitFor(client, `document.querySelector('#advancedFilterContainer').classList.contains('active')`);
+    await delay(220);
+    const filterScreenshot = await client.send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: false });
+    writeFileSync(filterScreenshotPath, Buffer.from(filterScreenshot.data, 'base64'));
+    await evaluate(client, `document.querySelector('#closeFilterSheetBtn').click()`);
+  }
 
   if (screenshotPath) {
     await evaluate(client, `window.scrollTo(0, document.querySelector('.shop-container').offsetTop)`);
@@ -157,7 +223,7 @@ try {
     writeFileSync(screenshotPath, Buffer.from(screenshot.data, 'base64'));
   }
 
-  console.log(JSON.stringify(audit, null, 2));
+  console.log(JSON.stringify({ ...audit, filteredAudit, proFilterAudit, sortedPrices: sortedPrices.slice(0, 5), cart }, null, 2));
 } finally {
   client?.close();
   browser.kill();

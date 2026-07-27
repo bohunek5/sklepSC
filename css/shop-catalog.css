@@ -148,9 +148,13 @@
 }
 
 .shop-page .filter-group {
+  flex: none !important;
   margin: 0 0 20px !important;
-  padding: 0 0 20px;
-  border-bottom: 1px solid #e8edf3;
+  padding: 0 0 20px !important;
+  border: 0 !important;
+  border-bottom: 1px solid #e8edf3 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
 }
 
 .shop-page .filter-group:last-child {
@@ -932,6 +936,10 @@
     gap: 12px !important;
   }
 
+  .shop-page #shopGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
   .shop-page .mockup-product-card {
     padding: 0 10px 10px !important;
     border-radius: 13px !important;
@@ -1042,8 +1050,16 @@
   }
 }
 
+@media (min-width: 650px) and (max-width: 991px) {
+  .shop-page .shop-grid,
+  .shop-page #shopGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
 @media (max-width: 370px) {
-  .shop-page .shop-grid {
+  .shop-page .shop-grid,
+  .shop-page #shopGrid {
     grid-template-columns: 1fr !important;
   }
 

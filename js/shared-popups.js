@@ -624,6 +624,12 @@ function injectMobileMenuOverlay() {
 
 // --- INIT POPUPS AND DRAWER ACTIONS ---
 function initSharedPopups() {
+  if (window.__prescotSharedPopupsInitialized) {
+    updateCartBadge();
+    return;
+  }
+  window.__prescotSharedPopupsInitialized = true;
+
   injectWishlistDrawer();
   injectProductModals();
   injectCartDrawer();
@@ -1838,8 +1844,8 @@ function initSharedPopups() {
         price: p.price,
         image: p.images[0],
         qty: 1,
-        color: p.colors[0] || null,
-        size: p.sizes[0] || null
+        color: p.colors?.[0] || null,
+        size: p.sizes?.[0] || null
       };
 
       const existingIndex = cart.findIndex(item => item.id === cartItem.id && item.color === cartItem.color && item.size === cartItem.size);
@@ -2468,3 +2474,13 @@ function openInquiryModal(presetText = '') {
   modal.style.display = 'flex';
 }
 window.openInquiryModal = openInquiryModal;
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (window.location.search.includes('cart=open')) {
+    setTimeout(() => {
+      if (typeof window.openCartDrawer === 'function') {
+        window.openCartDrawer();
+      }
+    }, 200);
+  }
+});
