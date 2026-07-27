@@ -1885,7 +1885,7 @@ function initSharedPopups() {
 
     // 5. Product card click (navigate to details)
     const card = e.target.closest('.mockup-product-card');
-    if (card && !e.target.closest('.action-btn-circle') && !e.target.closest('a')) {
+    if (card && !e.target.closest('.action-btn-circle') && !e.target.closest('a') && !e.target.closest('button')) {
       const pId = card.dataset.id;
       if (pId) {
         window.location.href = `product.html?id=${pId}`;
