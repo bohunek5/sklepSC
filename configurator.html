@@ -213,7 +213,7 @@
 
 
 </head>
-<body>
+<body class="product-finder-page">
   <a class="skip-link" href="#configurator">Przejdź do konfiguratora</a>
 
   <header class="site-header" id="siteHeader">
@@ -298,7 +298,7 @@
         </aside>
 
         <div class="steps-panel">
-          <div class="loading-overlay" id="catalogLoading">
+          <div class="loading-overlay" id="catalogLoading" role="status" aria-live="polite">
             <div class="loader"></div><strong>Analizuję katalog Prescot</strong><small>Sprawdzam parametry i dostępność taśm.</small>
           </div>
           <div class="catalog-error" id="catalogError" hidden><strong>Nie udało się wczytać katalogu.</strong><p>Odśwież stronę lub przejdź do <a href="shop.html">sklepu</a>.</p></div>
@@ -311,7 +311,7 @@
                 <span class="btn-txt-default">Przejdź dalej</span>
               </button>
             </div>
-            <div class="funnel-status" id="funnelStatus"><span>Aktualna pula</span><strong id="funnelCount">0</strong><small id="funnelMessage">taśm spełnia dotychczasowe warunki</small></div>
+            <div class="funnel-status" id="funnelStatus" role="status" aria-live="polite"><span>Aktualna pula</span><strong id="funnelCount">0</strong><small id="funnelMessage">taśm spełnia dotychczasowe warunki</small></div>
 
             <fieldset class="config-step" data-step="0">
               <legend>Zastosowanie</legend>
@@ -327,21 +327,45 @@
                   <input type="radio" name="application" value="living">
                   <span class="application-index">02</span><span class="application-copy"><strong>Salon, sufit i wnęka</strong><small>Światło pośrednie lub dekoracyjne, dobrane do oczekiwanego efektu.</small></span><span class="application-parameters">IP20 · COB / SMD</span><span class="option-availability"></span>
                 </label>
-                <label class="application-card choice-card" style="--application-image:url('images/configurator/stairs_new.png')">
-                  <input type="radio" name="application" value="stairs">
-                  <span class="application-index">03</span><span class="application-copy"><strong>Schody i komunikacja</strong><small>Ciągła, spokojna linia orientacyjna lub światło stopni.</small></span><span class="application-parameters">IP20–63 · 4–12 W/m</span><span class="option-availability"></span>
+                <label class="application-card choice-card" style="--application-image:url('images/cat_bedroom.png')">
+                  <input type="radio" name="application" value="bedroom">
+                  <span class="application-index">03</span><span class="application-copy"><strong>Sypialnia</strong><small>Miękkie światło przy zagłówku, suficie lub w strefie wypoczynku.</small></span><span class="application-parameters">IP20 · światło nastrojowe</span><span class="option-availability"></span>
                 </label>
                 <label class="application-card choice-card" style="--application-image:url('images/configurator/bathroom_new.png')">
                   <input type="radio" name="application" value="bathroom">
                   <span class="application-index">04</span><span class="application-copy"><strong>Łazienka i strefa wilgotna</strong><small>Dobór pod kątem wilgoci; o klasie IP decyduje dokładna strefa montażu.</small></span><span class="application-parameters">IP63+ · CRI</span><span class="option-availability"></span>
                 </label>
-                <label class="application-card choice-card" style="--application-image:url('images/configurator/outdoor_new.png')">
-                  <input type="radio" name="application" value="outdoor">
-                  <span class="application-index">05</span><span class="application-copy"><strong>Elewacja, taras i ogród</strong><small>Rozwiązania do warunków zewnętrznych z ochroną połączeń i zasilania.</small></span><span class="application-parameters">IP65 / IP67 · 24 V</span><span class="option-availability"></span>
+                <label class="application-card choice-card" style="--application-image:url('images/configurator/stairs_new.png')">
+                  <input type="radio" name="application" value="stairs">
+                  <span class="application-index">05</span><span class="application-copy"><strong>Schody i komunikacja</strong><small>Ciągła, spokojna linia orientacyjna lub światło stopni.</small></span><span class="application-parameters">IP20–63 · 4–12 W/m</span><span class="option-availability"></span>
+                </label>
+                <label class="application-card choice-card" style="--application-image:url('images/szafy.jpg')">
+                  <input type="radio" name="application" value="wardrobe">
+                  <span class="application-index">06</span><span class="application-copy"><strong>Garderoba i szafy</strong><small>Światło półek, drążków i wnętrz zabudowy bez widocznych punktów.</small></span><span class="application-parameters">IP20 · COB / SMD</span><span class="option-availability"></span>
+                </label>
+                <label class="application-card choice-card" style="--application-image:url('images/configurator/application-furniture.webp')">
+                  <input type="radio" name="application" value="furniture">
+                  <span class="application-index">07</span><span class="application-copy"><strong>Meble, półki i RTV</strong><small>Precyzyjna linia w gablotach, regałach i zabudowie meblowej.</small></span><span class="application-parameters">IP20 · wąska taśma</span><span class="option-availability"></span>
+                </label>
+                <label class="application-card choice-card" style="--application-image:url('images/cat_office.png')">
+                  <input type="radio" name="application" value="office">
+                  <span class="application-index">08</span><span class="application-copy"><strong>Biuro i stanowisko pracy</strong><small>Światło robocze z dobrym oddaniem kolorów i kontrolą olśnienia.</small></span><span class="application-parameters">CRI 90+ · 8–16 W/m</span><span class="option-availability"></span>
                 </label>
                 <label class="application-card choice-card" style="--application-image:url('images/configurator/retail_new.png')">
                   <input type="radio" name="application" value="commercial">
-                  <span class="application-index">06</span><span class="application-copy"><strong>Ekspozycja i długie ciągi</strong><small>Światło funkcjonalne, wysokie CRI oraz systemy 24 V i 48 V.</small></span><span class="application-parameters">CRI 90+ · do 48 V</span><span class="option-availability"></span>
+                  <span class="application-index">09</span><span class="application-copy"><strong>Sklep i ekspozycja</strong><small>Światło funkcjonalne, wysokie CRI oraz systemy 24 V i 48 V.</small></span><span class="application-parameters">CRI 90+ · do 48 V</span><span class="option-availability"></span>
+                </label>
+                <label class="application-card choice-card" style="--application-image:url('images/led_office.png')">
+                  <input type="radio" name="application" value="garage">
+                  <span class="application-index">10</span><span class="application-copy"><strong>Garaż i warsztat</strong><small>Mocne światło regałów, blatu roboczego i stref technicznych.</small></span><span class="application-parameters">IP20–63 · wysoki strumień</span><span class="option-availability"></span>
+                </label>
+                <label class="application-card choice-card" style="--application-image:url('images/configurator/outdoor_new.png')">
+                  <input type="radio" name="application" value="outdoor">
+                  <span class="application-index">11</span><span class="application-copy"><strong>Elewacja</strong><small>Rozwiązania zewnętrzne z ochroną połączeń i równomiernym zasilaniem.</small></span><span class="application-parameters">IP65 / IP67 · 24 V</span><span class="option-availability"></span>
+                </label>
+                <label class="application-card choice-card" style="--application-image:url('images/cat_garden.png')">
+                  <input type="radio" name="application" value="garden">
+                  <span class="application-index">12</span><span class="application-copy"><strong>Ogród i taras</strong><small>Pergole, ścieżki i strefy wypoczynku odporne na warunki zewnętrzne.</small></span><span class="application-parameters">IP65 / IP67 · 24 V</span><span class="option-availability"></span>
                 </label>
               </div>
             </fieldset>
@@ -488,7 +512,7 @@
       <h3>Odkryj</h3>
       <ul>
         <li><a href="shop.html">Produkty Premium</a></li>
-        <li><a href="configurator.html">Dobierz System AI</a></li>
+        <li><a href="configurator.html">Konfigurator LED</a></li>
         <li><a href="#">Bestsellery</a></li>
         <li><a href="#">Nowości 2026</a></li>
       </ul>
@@ -521,68 +545,19 @@
 </footer>
 
 
-  <nav class="new-glass-nav">
-  <div class="mobile-nav-items">
-    <a class="mobile-nav-item" href="index.html">
-      <i class="ph ph-house"></i>
-      <span>Start</span>
-    </a>
-    <a class="mobile-nav-item" href="shop.html">
-      <i class="ph ph-squares-four"></i>
-      <span>Sklep</span>
-    </a>
-    <a class="mobile-nav-item active" href="configurator.html" style="position:relative;">
-      <div class="nav-center-pill">
-        <i class="ph ph-lightbulb-filament"></i>
-      </div>
-      <span style="margin-top:24px;">Dobierz</span>
-    </a>
-    <a class="mobile-nav-item" href="ai-shopping.html">
-      <img src="images/prescot-pattern.png" class="nav-ai-icon" alt="">
-      <span>Zakup AI</span>
-    </a>
-    <a class="mobile-nav-item" href="contact.html">
-      <i class="ph ph-envelope-simple"></i>
-      <span>Kontakt</span>
-    </a>
-  </div>
-</nav>
+  <nav class="config-bottom-nav" aria-label="Skróty mobilne">
+    <a href="index.html" ><i class="ph ph-house" aria-hidden="true"></i><span>Start</span></a>
+    <a href="shop.html" ><i class="ph ph-storefront" aria-hidden="true"></i><span>Sklep</span></a>
+    <a href="configurator.html" class="active"><span class="bottom-main-icon"><i class="ph ph-lightbulb-filament" aria-hidden="true"></i></span><span>Konfig. LED</span></a>
+    <a href="ai-shopping.html" ><i class="ph ph-sparkle" aria-hidden="true"></i><span>Zakup AI</span></a>
+    <button id="mobileCartButton" type="button" onclick="openCartDrawer && openCartDrawer()"><i class="ph ph-shopping-cart-simple" aria-hidden="true"></i><span>Koszyk</span></button>
+  </nav>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="js/products-data.js"></script>
   <script src="js/shared-popups.js"></script>
   <script src="js/configurator-core.js"></script>
   
-  <style>
-    .sticky-next-bar {
-      display: none;
-      position: fixed;
-      bottom: 60px; /* above mobile nav */
-      left: 0;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-top: 1px solid rgba(0,0,0,0.1);
-      padding: 10px 20px;
-      z-index: 1000;
-      box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
-    }
-    #stickyNextBtn:not(:disabled), #nextButton:not(:disabled) { cursor: pointer !important; }
-    #stickyNextBtn:disabled, #nextButton:disabled { cursor: not-allowed !important; }
-    @media (max-width: 760px) {
-      .sticky-next-bar { display: block; }
-    }
-  </style>
-
-  <div class="sticky-next-bar">
-    <button class="add-to-cart-btn btn-cart" id="stickyNextBtn" type="button" disabled style="width: 100%; height: 52px; border: none; padding: 0;">
-      <span class="btn-slide-wrap">
-        <span class="btn-txt-default">Przejdź dalej</span>
-        <span class="btn-txt-hover"><i class="ph ph-arrow-right" style="margin-right: 6px;"></i> Przejdź dalej</span>
-      </span>
-    </button>
-  </div>
-
   <script src="js/configurator.js"></script>
   <script src="js/smart-search.js"></script>
   <script id="standard-header-scroll-script">
@@ -855,6 +830,38 @@ body.index-page .site-header:not(.scrolled) {
     font-size: 11px !important;
     display: block !important;
     margin: 0 !important;
+  }
+}
+</style>
+
+<link rel="stylesheet" href="css/configurator-module.css">
+
+<style id="global-config-nav-css">
+/* Exact bottom nav styles from led-configurator.css */
+@media (max-width: 768px) {
+  .config-bottom-nav { position: fixed; inset: auto 0 0; z-index: 950; height: 76px; display: grid; grid-template-columns: repeat(5,1fr); padding: 7px 8px calc(6px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(255,255,255,0.1); background: rgba(6,16,28,.98); backdrop-filter: blur(20px); }
+  .config-bottom-nav a, .config-bottom-nav button { min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 0; border: 0; color: rgba(255,255,255,.5); background: transparent; text-decoration: none; font-size: 8px; font-weight: 600; cursor: pointer; }
+  .config-bottom-nav i { font-size: 20px; }
+  .config-bottom-nav .active { color: #fff; }
+  .bottom-main-icon { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; margin-top: -20px; border: 2px solid #00e5ff; border-radius: 50%; color: #00e5ff; background: #10233a; box-shadow: 0 0 22px rgba(40,215,255,.2); }
+  .bottom-main-icon i { font-size: 21px; }
+  
+  /* Fix cart button in top header to render like the old one */
+  .site-header .header-icon, .mockup-header .header-icon {
+    display: inline-flex !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  .site-header .header-icon svg, .mockup-header .header-icon svg {
+    stroke: #0b1a30 !important;
+    fill: none !important;
+  }
+  .index-page .site-header:not(.scrolled) .header-icon svg {
+    stroke: #ffffff !important;
+  }
+  .menu-toggle, .menu-button {
+    display: block !important;
   }
 }
 </style>

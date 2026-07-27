@@ -33,9 +33,9 @@ const scenarioName = scenarioArgument?.slice('--scenario='.length) || 'basic';
 const scenarios = {
   basic: { application: 'kitchen', intensity: 'functional', technology: 'cob', expectedTechnology: 'COB', light: 'neutral', length: 5, segments: 1, environment: 'dry', control: 'switch', voltage: 'auto', ready: true, minProducts: 2 },
   smd: { application: 'kitchen', intensity: 'functional', technology: 'smd', expectedTechnology: 'SMD', light: 'neutral', length: 5, segments: 1, environment: 'dry', control: 'switch', voltage: 'auto', ready: true, minProducts: 2 },
-  outdoor: { application: 'outdoor', intensity: 'functional', technology: 'auto', light: 'neutral', length: 10, segments: 2, environment: 'outdoor', control: 'switch', voltage: 'auto', ready: true, minProducts: 2 },
-  'rgb-smart': { application: 'living', intensity: 'decorative', technology: 'auto', light: 'rgb', length: 5, segments: 1, environment: 'dry', control: 'smart', voltage: 'auto', ready: true, minProducts: 3 },
-  long: { application: 'commercial', intensity: 'strong', technology: 'auto', light: 'neutral', length: 100, segments: 1, environment: 'dry', control: 'switch', voltage: '24', ready: true, minProducts: 2 }
+  outdoor: { application: 'outdoor', intensity: 'functional', technology: 'cob', expectedTechnology: 'COB', light: 'neutral', length: 10, segments: 2, environment: 'outdoor', control: 'switch', voltage: 'auto', ready: true, minProducts: 2 },
+  'rgb-smart': { application: 'living', intensity: 'decorative', technology: 'smd', expectedTechnology: 'SMD', light: 'rgb', length: 5, segments: 1, environment: 'dry', control: 'smart', voltage: 'auto', ready: true, minProducts: 3 },
+  long: { application: 'commercial', intensity: 'strong', technology: 'smd', expectedTechnology: 'SMD', light: 'neutral', length: 100, segments: 1, environment: 'dry', control: 'switch', voltage: '24', ready: true, minProducts: 2 }
 };
 const scenario = scenarios[scenarioName];
 if (!scenario) throw new Error(`Nieznany scenariusz: ${scenarioName}`);
@@ -157,6 +157,14 @@ try {
       })
       .slice(0, 8)
       .map((element) => ({ tag: element.tagName, className: element.className, left: Math.round(element.getBoundingClientRect().left), right: Math.round(element.getBoundingClientRect().right) })),
+    mobileNavigation: [...document.querySelectorAll('.new-glass-nav .mobile-nav-item')]
+      .map((element) => ({ label: element.textContent.trim(), hidden: getComputedStyle(element).display === 'none', left: Math.round(element.getBoundingClientRect().left), right: Math.round(element.getBoundingClientRect().right) })),
+    mobileNavigationContainer: (() => {
+      const element = document.querySelector('.new-glass-nav .mobile-nav-items');
+      const rect = element.getBoundingClientRect();
+      const style = getComputedStyle(element);
+      return { left: Math.round(rect.left), right: Math.round(rect.right), width: Math.round(rect.width), display: style.display, justifyContent: style.justifyContent };
+    })(),
     viewport: [window.innerWidth, window.innerHeight]
   })`);
   if (initial.catalogFailed) throw new Error('Katalog zgłosił błąd w interfejsie.');
@@ -184,11 +192,14 @@ try {
 
   const initialFunnel = await evaluate(client, `({
     count: Number(document.querySelector('#funnelCount')?.textContent),
+    roomCount: document.querySelectorAll('.config-step[data-step="0"] input[name="application"]').length,
     enabledOptions: [...document.querySelectorAll('.config-step[data-step="0"] input[type="radio"]:not(:disabled)')].length,
+    visibleOptionCounts: [...document.querySelectorAll('.config-step[data-step="0"] .option-availability')]
+      .filter((element) => /\\d+ zgodnych/.test(element.textContent)).length,
     invalidEnabledOptions: [...document.querySelectorAll('.config-step[data-step="0"] input[type="radio"]:not(:disabled)')]
       .filter((input) => input.closest('label')?.querySelector('.option-availability')?.textContent.includes('Brak zgodnych')).length
   })`);
-  if (!initialFunnel.count || !initialFunnel.enabledOptions || initialFunnel.invalidEnabledOptions) {
+  if (!initialFunnel.count || initialFunnel.roomCount !== 12 || initialFunnel.visibleOptionCounts !== 12 || !initialFunnel.enabledOptions || initialFunnel.invalidEnabledOptions) {
     throw new Error(`Lejek nie wystartował z poprawną pulą produktów: ${JSON.stringify(initialFunnel)}`);
   }
 
@@ -217,6 +228,7 @@ try {
   }
 
   async function selectAndNext(name, value, expectedStep) {
+    await waitFor(client, `document.querySelector('input[name="${name}"][value="${value}"]') !== null`, 3000);
     const status = await evaluate(client, `(() => {
       const option = document.querySelector('input[name="${name}"][value="${value}"]');
       const unavailable = option.disabled || option.closest('label')?.classList.contains('is-unavailable');
@@ -238,7 +250,7 @@ try {
         funnelCount: Number(document.querySelector('#funnelCount').textContent)
       };
     })()`);
-    if (!nextStepAudit.funnelCount || nextStepAudit.invalidEnabled || (expectedStep !== 3 && !nextStepAudit.enabled)) {
+    if (!nextStepAudit.funnelCount || nextStepAudit.invalidEnabled || (expectedStep !== 4 && !nextStepAudit.enabled)) {
       throw new Error(`Krok ${expectedStep + 1} ma nieprawidłowe zawężenie: ${JSON.stringify(nextStepAudit)}`);
     }
   }
@@ -255,11 +267,12 @@ try {
   await captureConfigurator(selectedScreenshotPath);
   await selectAndNext('application', scenario.application, 1);
   await captureStage(1);
-  await evaluate(client, `document.querySelector('input[name="technology"][value="${scenario.technology}"]').click()`);
   await selectAndNext('intensity', scenario.intensity, 2);
   await captureStage(2);
-  await selectAndNext('light', scenario.light, 3);
+  await selectAndNext('technology', scenario.technology, 3);
   await captureStage(3);
+  await selectAndNext('light', scenario.light, 4);
+  await captureStage(4);
   const dimensionsStatus = await evaluate(client, `(() => {
     document.querySelector('#lengthInput').value = '${scenario.length}';
     document.querySelector('#lengthInput').dispatchEvent(new Event('input', { bubbles: true }));
@@ -270,8 +283,8 @@ try {
     return { disabled, validation: document.querySelector('#validationMessage').textContent };
   })()`);
   if (dimensionsStatus.disabled) throw new Error('Przycisk Dalej pozostał nieaktywny dla wymiarów.');
-  await waitFor(client, `document.querySelector('.config-step[data-step="4"]').hidden === false`, 3000);
-  await captureStage(4);
+  await waitFor(client, `document.querySelector('.config-step[data-step="5"]').hidden === false`, 3000);
+  await captureStage(5);
   if (scenario.application === 'outdoor') {
     const outdoorProtection = await evaluate(client, `({
       dryDisabled: document.querySelector('input[name="environment"][value="dry"]').disabled,
@@ -282,8 +295,8 @@ try {
       throw new Error(`Lejek dopuścił niewłaściwe IP dla zastosowania zewnętrznego: ${JSON.stringify(outdoorProtection)}`);
     }
   }
-  await selectAndNext('environment', scenario.environment, 5);
-  await captureStage(5);
+  await selectAndNext('environment', scenario.environment, 6);
+  await captureStage(6);
   const finalStatus = await evaluate(client, `(() => {
     document.querySelector('input[name="control"][value="${scenario.control}"]').click();
     document.querySelector('input[name="voltage"][value="${scenario.voltage}"]').click();
@@ -326,6 +339,18 @@ try {
   })`);
   if (scenario.ready && cart.items < scenario.minProducts) throw new Error('Zestaw nie został zapisany w koszyku.');
 
+  await evaluate(client, `window.openCartDrawer()`);
+  await waitFor(client, `getComputedStyle(document.querySelector('#cartDrawer')).right === '0px' && getComputedStyle(document.querySelector('#cartDrawerOverlay')).pointerEvents === 'all'`, 2500);
+  const drawer = await evaluate(client, `({
+    right: getComputedStyle(document.querySelector('#cartDrawer')).right,
+    overlayActive: getComputedStyle(document.querySelector('#cartDrawerOverlay')).pointerEvents === 'all',
+    renderedItems: document.querySelectorAll('#cartDrawerItems .cart-drawer-remove').length
+  })`);
+  if (drawer.right !== '0px' || !drawer.overlayActive) throw new Error(`Boczny koszyk nie wysuwa się poprawnie: ${JSON.stringify(drawer)}.`);
+  if (drawer.renderedItems !== cart.items) throw new Error('Boczny koszyk nie renderuje zapisanych produktów.');
+  await evaluate(client, `document.querySelector('#closeCartDrawer').click()`);
+  await delay(450);
+
   if (screenshotPath) {
     await evaluate(client, `(() => {
       document.documentElement.style.scrollBehavior = 'auto';
@@ -344,13 +369,18 @@ try {
     writeFileSync(screenshotPath, Buffer.from(screenshot.data, 'base64'));
   }
 
-  const runtimeErrors = client.events.filter((event) =>
-    event.method === 'Runtime.exceptionThrown' ||
-    (event.method === 'Log.entryAdded' && event.params.entry.level === 'error')
-  );
+const runtimeErrors = client.events.filter((event) =>
+  event.method === 'Runtime.exceptionThrown' ||
+  (
+    event.method === 'Log.entryAdded' &&
+    event.params.entry.level === 'error' &&
+    event.params.entry.source !== 'network' &&
+    !String(event.params.entry.url || '').endsWith('/favicon.ico')
+  )
+);
   if (runtimeErrors.length) throw new Error(`Błędy runtime: ${JSON.stringify(runtimeErrors)}`);
 
-  console.log(JSON.stringify({ scenario: scenarioName, initial, selectedApplicationVisual, result, cart, screenshotPath: screenshotPath || null, heroScreenshotPath: heroScreenshotPath || null, stepScreenshotPath: stepScreenshotPath || null, selectedScreenshotPath: selectedScreenshotPath || null, stagesPrefix: stagesPrefix || null }, null, 2));
+  console.log(JSON.stringify({ scenario: scenarioName, initial, selectedApplicationVisual, result, cart, drawer, screenshotPath: screenshotPath || null, heroScreenshotPath: heroScreenshotPath || null, stepScreenshotPath: stepScreenshotPath || null, selectedScreenshotPath: selectedScreenshotPath || null, stagesPrefix: stagesPrefix || null }, null, 2));
 } finally {
   client?.close();
   browser.kill();

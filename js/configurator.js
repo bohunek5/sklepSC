@@ -18,14 +18,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const applicationData = {
     kitchen: { title: 'Blat i zabudowa kuchenna', meta: 'Światło robocze · preferowane CRI 90+', image: 'images/kuchnia_opt.webp' },
     living: { title: 'Salon, sufit i wnęka', meta: 'Światło pośrednie lub dekoracyjne', image: 'images/elegant-interior-design-with-neutral-colors-2026-03-25-07-06-00-utc.webp' },
+    bedroom: { title: 'Sypialnia', meta: 'Miękkie światło · komfort i wypoczynek', image: 'images/cat_bedroom.png' },
     stairs: { title: 'Schody i komunikacja', meta: 'Linia orientacyjna · umiarkowana moc', image: 'images/configurator/application-stairs.webp' },
+    wardrobe: { title: 'Garderoba i szafy', meta: 'Półki, drążki i wnętrza zabudowy', image: 'images/szafy.jpg' },
+    furniture: { title: 'Meble, półki i RTV', meta: 'Precyzyjna linia w zabudowie', image: 'images/configurator/application-furniture.webp' },
+    office: { title: 'Biuro i stanowisko pracy', meta: 'Światło robocze · preferowane CRI 90+', image: 'images/cat_office.png' },
     bathroom: { title: 'Łazienka i strefa wilgotna', meta: 'Wymagana weryfikacja strefy i IP', image: 'images/configurator/application-bathroom.webp' },
-    outdoor: { title: 'Elewacja, taras i ogród', meta: 'Warunki zewnętrzne · IP65 lub IP67', image: 'images/configurator/application-outdoor.webp' },
-    commercial: { title: 'Ekspozycja i długie ciągi', meta: 'Wysokie CRI · systemy do 48 V', image: 'images/configurator/application-retail.webp' }
+    commercial: { title: 'Sklep i ekspozycja', meta: 'Wysokie CRI · systemy do 48 V', image: 'images/configurator/application-retail.webp' },
+    garage: { title: 'Garaż i warsztat', meta: 'Wysoki strumień · strefy techniczne', image: 'images/led_office.png' },
+    outdoor: { title: 'Elewacja', meta: 'Warunki zewnętrzne · IP65 lub IP67', image: 'images/configurator/application-outdoor.webp' },
+    garden: { title: 'Ogród i taras', meta: 'Pergola i ścieżki · IP65 lub IP67', image: 'images/cat_garden.png' }
   };
 
   const labels = {
-    application: { kitchen: 'Kuchnia', living: 'Salon / wnęka', stairs: 'Schody', bathroom: 'Łazienka', outdoor: 'Zewnętrzne', commercial: 'Komercyjne' },
+    application: { kitchen: 'Kuchnia', living: 'Salon / wnęka', bedroom: 'Sypialnia', bathroom: 'Łazienka', stairs: 'Schody', wardrobe: 'Garderoba', furniture: 'Meble / RTV', office: 'Biuro', commercial: 'Sklep / ekspozycja', garage: 'Garaż / warsztat', outdoor: 'Elewacja', garden: 'Ogród / taras' },
     intensity: { decorative: 'Akcent', functional: 'Funkcjonalne', strong: 'Wysoki strumień' },
     technology: { auto: 'Automatycznie', cob: 'COB', smd: 'SMD' },
     light: { warm: 'Ciepła biel', neutral: 'Neutralna biel', cold: 'Zimna biel', cct: 'CCT', rgb: 'RGB', rgbw: 'RGBW / RGB+CCT' },
@@ -141,12 +147,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderStep() {
     stepElements.forEach((element, index) => { element.hidden = index !== currentStep; });
-    const currentFieldset = stepElements[currentStep];
-    const h2 = currentFieldset.querySelector('.step-description') || currentFieldset.querySelector('h3, h2');
-    const actions = document.querySelector('.step-actions');
-    if (h2 && actions) {
-      h2.insertAdjacentElement('afterend', actions);
-    }
     stepIndicators.forEach((element, index) => {
       element.classList.toggle('active', index === currentStep);
       element.classList.toggle('complete', index < currentStep);
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderSystemItem(role, product, quantity, specs = []) {
-    return `<article class="system-item" style="cursor: pointer;" onclick="if(window.openQuickView) window.openQuickView('${product.id}')"><div class="system-image"><img src="${escapeHtml(productImage(product))}" alt="" loading="lazy"></div><div class="system-info"><span class="system-role">${escapeHtml(role)}</span><h4>${escapeHtml(product.title)}</h4><div class="spec-pills">${specs.map((spec) => `<span>${escapeHtml(spec)}</span>`).join('')}<span>${quantity} szt.</span></div></div><div class="system-price"><strong>${formatPrice(product.price * quantity)}</strong><small>${formatPrice(product.price)} / szt.</small></div></article>`;
+    return `<article class="system-item" style="cursor: pointer;" onclick="if(window.openQuickView) window.openQuickView('${product.id}')"><div class="system-image"><img src="${escapeHtml(productImage(product))}" alt="${escapeHtml(product.title)}" loading="lazy" onerror="this.onerror=null;this.src='images/okladka-produkty.webp'"></div><div class="system-info"><span class="system-role">${escapeHtml(role)}</span><h4>${escapeHtml(product.title)}</h4><div class="spec-pills">${specs.map((spec) => `<span>${escapeHtml(spec)}</span>`).join('')}<span>${quantity} szt.</span></div></div><div class="system-price"><strong>${formatPrice(product.price * quantity)}</strong><small>${formatPrice(product.price)} / szt.</small></div></article>`;
   }
 
   function renderAlternatives(alternatives) {

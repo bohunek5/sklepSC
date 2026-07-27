@@ -2875,32 +2875,13 @@
 <script src="js/products-data.js"></script>
 <script src="js/admin.js"></script>
 <!-- Mobile Bottom Navigation -->
-<nav class="new-glass-nav">
-  <div class="mobile-nav-items">
-    <a class="mobile-nav-item" href="index.html">
-      <i class="ph ph-house"></i>
-      <span>Start</span>
-    </a>
-    <a class="mobile-nav-item" href="shop.html">
-      <i class="ph ph-squares-four"></i>
-      <span>Sklep</span>
-    </a>
-    <a class="mobile-nav-item active" href="configurator.html" style="position:relative;">
-      <div class="nav-center-pill">
-        <i class="ph ph-lightbulb-filament"></i>
-      </div>
-      <span style="margin-top:24px;">Dobierz</span>
-    </a>
-    <a class="mobile-nav-item" href="ai-shopping.html">
-      <img src="images/prescot-pattern.png" class="nav-ai-icon" alt="">
-      <span>Zakup AI</span>
-    </a>
-    <a class="mobile-nav-item" href="contact.html">
-      <i class="ph ph-envelope-simple"></i>
-      <span>Kontakt</span>
-    </a>
-  </div>
-</nav>
+<nav class="config-bottom-nav" aria-label="Skróty mobilne">
+    <a href="index.html" ><i class="ph ph-house" aria-hidden="true"></i><span>Start</span></a>
+    <a href="shop.html" ><i class="ph ph-storefront" aria-hidden="true"></i><span>Sklep</span></a>
+    <a href="configurator.html" ><span class="bottom-main-icon"><i class="ph ph-lightbulb-filament" aria-hidden="true"></i></span><span>Konfig. LED</span></a>
+    <a href="ai-shopping.html" ><i class="ph ph-sparkle" aria-hidden="true"></i><span>Zakup AI</span></a>
+    <button id="mobileCartButton" type="button" onclick="openCartDrawer && openCartDrawer()"><i class="ph ph-shopping-cart-simple" aria-hidden="true"></i><span>Koszyk</span></button>
+  </nav>
   <script src="js/shared-popups.js"></script>
   <script>
       // Header Scroll Effect
@@ -3285,6 +3266,37 @@ body.index-page .site-header:not(.scrolled) {
     font-size: 11px !important;
     display: block !important;
     margin: 0 !important;
+  }
+}
+</style>
+
+
+<style id="global-config-nav-css">
+/* Exact bottom nav styles from led-configurator.css */
+@media (max-width: 768px) {
+  .config-bottom-nav { position: fixed; inset: auto 0 0; z-index: 950; height: 76px; display: grid; grid-template-columns: repeat(5,1fr); padding: 7px 8px calc(6px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(255,255,255,0.1); background: rgba(6,16,28,.98); backdrop-filter: blur(20px); }
+  .config-bottom-nav a, .config-bottom-nav button { min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 0; border: 0; color: rgba(255,255,255,.5); background: transparent; text-decoration: none; font-size: 8px; font-weight: 600; cursor: pointer; }
+  .config-bottom-nav i { font-size: 20px; }
+  .config-bottom-nav .active { color: #fff; }
+  .bottom-main-icon { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; margin-top: -20px; border: 2px solid #00e5ff; border-radius: 50%; color: #00e5ff; background: #10233a; box-shadow: 0 0 22px rgba(40,215,255,.2); }
+  .bottom-main-icon i { font-size: 21px; }
+  
+  /* Fix cart button in top header to render like the old one */
+  .site-header .header-icon, .mockup-header .header-icon {
+    display: inline-flex !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  .site-header .header-icon svg, .mockup-header .header-icon svg {
+    stroke: #0b1a30 !important;
+    fill: none !important;
+  }
+  .index-page .site-header:not(.scrolled) .header-icon svg {
+    stroke: #ffffff !important;
+  }
+  .menu-toggle, .menu-button {
+    display: block !important;
   }
 }
 </style>

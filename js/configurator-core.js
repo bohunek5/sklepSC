@@ -62,9 +62,11 @@ window.ConfiguratorCore = (() => {
 
   function applicationMatches(tape, application) {
     if (!application) return true;
-    if (application === 'outdoor') return tape.ip >= 65;
+    if (['outdoor', 'garden'].includes(application)) return tape.ip >= 65;
     if (application === 'bathroom') return tape.ip >= 63;
     if (application === 'stairs') return tape.power <= 15;
+    if (['bedroom', 'wardrobe', 'furniture'].includes(application)) return tape.power <= 16;
+    if (['office', 'commercial', 'garage'].includes(application)) return tape.power >= 8;
     return true;
   }
 
@@ -77,7 +79,7 @@ window.ConfiguratorCore = (() => {
 
   function environmentMatches(tape, environment, application) {
     if (!environment) return true;
-    if (application === 'outdoor' && environment !== 'outdoor') return false;
+    if (['outdoor', 'garden'].includes(application) && environment !== 'outdoor') return false;
     if (application === 'bathroom' && environment === 'dry') return false;
     if (environment === 'dry') return tape.ip === 20;
     if (environment === 'damp') return tape.ip >= 63;
@@ -108,7 +110,7 @@ window.ConfiguratorCore = (() => {
     if (state.length >= 20 && tape.voltage === 48) score += 70;
     else if (state.length > 5 && tape.voltage === 24) score += 42;
     else if (state.length <= 5 && [12, 24].includes(tape.voltage)) score += 20;
-    if (['kitchen', 'commercial', 'bathroom'].includes(state.application) && tape.cri >= 90) score += 28;
+    if (['kitchen', 'commercial', 'bathroom', 'office', 'garage'].includes(state.application) && tape.cri >= 90) score += 28;
     if (tape.lumens) score += Math.min(tape.lumens / 180, 15);
       if (state.warranty === 7 && (tape.product.title.includes("7Y") || tape.product.title.includes("Delux"))) score += 300;
     score += Math.min(tape.stock, 100) / 20;
