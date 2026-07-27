@@ -16,12 +16,19 @@
     /* Futuristic AI Chat Design - LLM Style */
     body.ai-shopping-body {
       background: #0b1a30 !important;
-      color: #ffffff !important;
+      color: #333333 !important;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
       margin: 0;
+    }
+    
+    /* Ukryj szary overlay koszyka na stronie AI, żeby można było czytać czat */
+    #cartDrawerOverlay {
+      background: transparent !important;
+      pointer-events: none !important;
+      backdrop-filter: none !important;
     }
     
     .site-header {
@@ -109,7 +116,7 @@
     }
 
     .avatar-ai {
-      background: #ff5a00;
+      background: #ffffff;
       color: #fff;
     }
 
@@ -175,9 +182,9 @@
     }
 
     .ai-input-area button:hover {
-      background: #ff5a00; /* The brand orange */
-      border-color: #ff5a00;
-      box-shadow: 0 4px 15px rgba(255, 90, 0, 0.4);
+      background: #0b1a30; /* The brand orange */
+      border-color: #0b1a30;
+      box-shadow: 0 4px 15px rgba(11, 26, 48, 0.4);
     }
     
     .ai-input-area button:hover img {

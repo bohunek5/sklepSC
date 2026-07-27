@@ -382,8 +382,7 @@ function injectCartDrawer() {
       </div>
     </div>
     
-    <!-- Cart Drawer Overlay -->
-    <div id="cartDrawerOverlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.4); z-index: 100000; opacity: 0; pointer-events: none; transition: opacity 0.4s;"></div>
+    <!-- No Cart Drawer Overlay -->
   `;
   if (!document.getElementById('cartDrawer')) {
     document.body.insertAdjacentHTML('beforeend', drawerHTML);
@@ -948,7 +947,6 @@ function initSharedPopups() {
 
   // Cart Drawer Dom Elements
   const cartDrawer = document.getElementById('cartDrawer');
-  const cartDrawerOverlay = document.getElementById('cartDrawerOverlay');
   const closeCartDrawer = document.getElementById('closeCartDrawer');
   const cartDrawerItems = document.getElementById('cartDrawerItems');
   const cartDrawerTotal = document.getElementById('cartDrawerTotal');
@@ -1117,20 +1115,15 @@ function initSharedPopups() {
   function openCart() {
     renderCart();
     cartDrawer.style.right = '0px';
-    cartDrawerOverlay.style.opacity = '1';
-    cartDrawerOverlay.style.pointerEvents = 'all';
   }
 
   window.openCartDrawer = openCart;
 
   function closeCart() {
     cartDrawer.style.right = '-450px';
-    cartDrawerOverlay.style.opacity = '0';
-    cartDrawerOverlay.style.pointerEvents = 'none';
   }
 
   if (closeCartDrawer) closeCartDrawer.addEventListener('click', closeCart);
-  if (cartDrawerOverlay) cartDrawerOverlay.addEventListener('click', closeCart);
 
   // Notes toggle
   const toggleNoteBtn = document.getElementById('toggleNoteBtn');
