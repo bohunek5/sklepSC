@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ï»¿<!DOCTYPE html>
 
 <html lang="pl">
 
@@ -6,7 +6,7 @@
   <link rel="icon" type="image/png" href="images/prescot-pattern.png">
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Prescot LED - Realizacja zamówienia (Checkout)</title>
+  <title>Prescot LED - Realizacja zamÃ³wienia (Checkout)</title>
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect" />
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
@@ -2446,7 +2446,7 @@
                 <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
                 <line x1="12" y1="22.08" x2="12" y2="12"></line>
               </svg>
-              Wysy³ka kurierem
+              WysyÅ‚ka kurierem
             </button>
             <button type="button" class="delivery-tab" id="tab_pickup" onclick="setDeliveryType('pickup')">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -2463,11 +2463,11 @@
         <div style="margin-bottom: 30px;">
           <h3 class="section-title">Dane odbiorcy</h3>
           <div class="form-row">
-            <input class="form-control" id="firstName" placeholder="Imiê" required="" type="text" />
+            <input class="form-control" id="firstName" placeholder="ImiÄ™" required="" type="text" />
             <input class="form-control" id="lastName" placeholder="Nazwisko" required="" type="text" />
           </div>
           <div class="form-group">
-            <input class="form-control" id="phone" placeholder="Telefon (wymagany do powiadomieñ SMS i kodu odbioru)"
+            <input class="form-control" id="phone" placeholder="Telefon (wymagany do powiadomieÅ„ SMS i kodu odbioru)"
               required="" type="tel" />
           </div>
         </div>
@@ -2494,7 +2494,7 @@
         </div>
 
         <div style="margin-bottom: 40px;">
-          <h3 class="section-title" id="deliveryMethodsTitle">Metoda wysy³ki</h3>
+          <h3 class="section-title" id="deliveryMethodsTitle">Metoda wysyÅ‚ki</h3>
 
           <!-- Courier Methods Box -->
           <div id="courierMethodsBox" class="delivery-box"
@@ -2508,7 +2508,7 @@
                   style="margin-right: 12px; accent-color: var(--primary-color);" type="radio" value="dpd_kurier" />
                 <div>
                   <strong style="color: #1a1a1a;">Kurier DPD</strong>
-                  <span style="display: block; font-size: 12px; color: #666; margin-top: 2px;">Bezpoœrednia dostawa pod
+                  <span style="display: block; font-size: 12px; color: #666; margin-top: 2px;">BezpoÅ›rednia dostawa pod
                     wskazany adres (1-2 dni)</span>
                 </div>
               </label>
@@ -2525,22 +2525,22 @@
                 <div>
                   <strong style="color: #1a1a1a;">Kurier InPost</strong>
                   <span style="display: block; font-size: 12px; color: #666; margin-top: 2px;">Dostawa kurierska InPost
-                    na Twój adres (1-2 dni)</span>
+                    na TwÃ³j adres (1-2 dni)</span>
                 </div>
               </label>
               <img alt="InPost" src="images/kurier_inpost.png"
                 style="height: 56px; max-width: 100px; margin-right: -12px; mix-blend-mode: multiply; object-fit: contain; display: block;" />
             </div>
-            <!-- Option 5: SUUS Logistics D³u¿yca -->
+            <!-- Option 5: SUUS Logistics DÅ‚uÅ¼yca -->
             <div class="delivery-option-header" id="header_suus_dluzyca" onclick="selectDeliveryOption('suus_dluzyca')"
               style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: none; background: #fff; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.3s;">
               <label style="display: flex; align-items: center; cursor: pointer; margin: 0; width: 100%;">
                 <input id="shipSuusDluzyca" name="shippingMethod"
                   style="margin-right: 12px; accent-color: var(--primary-color);" type="radio" value="suus_dluzyca" />
                 <div>
-                  <strong style="color: #1a1a1a;">Röhlig SUUS Logistics (D³u¿yca)</strong>
+                  <strong style="color: #1a1a1a;">RÃ¶hlig SUUS Logistics (DÅ‚uÅ¼yca)</strong>
                   <span style="display: block; font-size: 12px; color: #666; margin-top: 2px;">Specjalistyczny transport
-                    paczek d³u¿ycowych (profile aluminiowe itp.)</span>
+                    paczek dÅ‚uÅ¼ycowych (profile aluminiowe itp.)</span>
                 </div>
               </label>
               <span
@@ -2577,14 +2577,14 @@
                   style="margin-right: 12px; accent-color: var(--primary-color);" type="radio" value="dpd_paczkomat" />
                 <div>
                   <strong style="color: #1a1a1a;">DPD Pickup (Paczkomaty i Punkty)</strong>
-                  <span style="display: block; font-size: 12px; color: #666; margin-top: 2px;">Odbiór w automatach
+                  <span style="display: block; font-size: 12px; color: #666; margin-top: 2px;">OdbiÃ³r w automatach
                     paczkowych i punktach DPD (1-2 dni)</span>
                 </div>
               </label>
               <img alt="DPD" src="images/dpd_logo.svg"
                 style="height: 30px; max-width: 100px; object-fit: contain; display: block;" />
             </div>
-            <!-- Option 6: Odbiór osobisty w salonie -->
+            <!-- Option 6: OdbiÃ³r osobisty w salonie -->
             <div class="delivery-option-header" id="header_odbior_osobisty"
               onclick="selectDeliveryOption('odbior_osobisty')"
               style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: none; background: #fff; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.3s;">
@@ -2593,9 +2593,9 @@
                   style="margin-right: 12px; accent-color: var(--primary-color);" type="radio"
                   value="odbior_osobisty" />
                 <div>
-                  <strong style="color: #1a1a1a;">Odbiór osobisty na miejscu (salon)</strong>
-                  <span style="display: block; font-size: 12px; color: #666; margin-top: 2px;">Odbierz zamówienie
-                    bezpoœrednio w naszym salonie (Darmowy)</span>
+                  <strong style="color: #1a1a1a;">OdbiÃ³r osobisty na miejscu (salon)</strong>
+                  <span style="display: block; font-size: 12px; color: #666; margin-top: 2px;">Odbierz zamÃ³wienie
+                    bezpoÅ›rednio w naszym salonie (Darmowy)</span>
                 </div>
               </label>
               <span
@@ -2619,19 +2619,19 @@
             </div>
             <p id="salonPickupDisclaimer"
               style="display: none; margin: 10px 0 0 0; font-size: 12px; color: #666; line-height: 1.4;">
-              Odbiór osobisty w: <strong>Prescot LED Showroom, ul. LEDowa 12, Warszawa</strong>. Zapraszamy po
-              skompletowaniu zamówienia.
+              OdbiÃ³r osobisty w: <strong>Prescot LED Showroom, ul. LEDowa 12, Warszawa</strong>. Zapraszamy po
+              skompletowaniu zamÃ³wienia.
             </p>
           </div>
         </div>
         <div style="margin-bottom: 40px;">
-          <h3 class="section-title">P³atnoœæ</h3>
+          <h3 class="section-title">PÅ‚atnoÅ›Ä‡</h3>
           <div class="payment-box">
             <!-- Option 1: Card -->
             <div class="payment-option-header active" onclick="togglePaymentTab('card')">
               <label style="display: flex; align-items: center; cursor: pointer;">
                 <input checked="" id="payCard" name="paymentMethod" type="radio" value="card" />
-                Karta p³atnicza (Credit Card)
+                Karta pÅ‚atnicza (Credit Card)
               </label>
               <img alt="Karty" src="images/payu_cards.png" style="height: 24px; object-fit: contain;" />
             </div>
@@ -2666,12 +2666,12 @@
               <img alt="PayPal" src="images/paypal.svg" style="height: 24px; object-fit: contain;" />
             </div>
             <div class="payment-option-content" id="contentPaypal">
-              <p style="font-size: 13px; color: #777;">Po klikniêciu "Kupujê i p³acê", zostaniesz przekierowany do
-                PayPal w celu dokoñczenia p³atnoœci.</p>
+              <p style="font-size: 13px; color: #777;">Po klikniÄ™ciu "KupujÄ™ i pÅ‚acÄ™", zostaniesz przekierowany do
+                PayPal w celu dokoÅ„czenia pÅ‚atnoÅ›ci.</p>
             </div>
           </div>
         </div>
-        <button class="submit-order-btn" type="submit">Kupujê i p³acê</button>
+        <button class="submit-order-btn" type="submit">KupujÄ™ i pÅ‚acÄ™</button>
       </form>
     </section>
     <section class="checkout-summary-panel">
@@ -2682,17 +2682,17 @@
         <div class="checkout-breadcrumbs">
           <a href="javascript:void(0);" onclick="openCartDrawer();">Koszyk</a>
           <span>&gt;</span>
-          <span class="active">Dane do wysy³ki</span>
+          <span class="active">Dane do wysyÅ‚ki</span>
           <span>&gt;</span>
-          <span>P³atnoœæ</span>
+          <span>PÅ‚atnoÅ›Ä‡</span>
         </div>
         <div class="summary-product-list" id="checkoutItemsList">
           <!-- Loaded dynamically -->
         </div>
         <div class="summary-divider"></div>
         <div class="summary-row">
-          <span>Suma czêœciowa</span>
-          <span id="summarySubtotal">0,00 z³</span>
+          <span>Suma czÄ™Å›ciowa</span>
+          <span id="summarySubtotal">0,00 zÅ‚</span>
         </div>
         <div class="summary-row">
           <span>Dostawa</span>
@@ -2700,8 +2700,8 @@
         </div>
         <div class="summary-divider"></div>
         <div class="summary-row total">
-          <span>Razem (Suma koñcowa)</span>
-          <span id="summaryTotal">0,00 z³</span>
+          <span>Razem (Suma koÅ„cowa)</span>
+          <span id="summaryTotal">0,00 zÅ‚</span>
         </div>
       </div>
     </section>
@@ -2709,13 +2709,13 @@
   <!-- Success Thank You Screen -->
   <div class="thankyou-overlay" id="thankyouOverlay">
     <div class="thankyou-box">
-      <div class="success-icon">?</div>
-      <h1>Dziêkujemy za zamówienie!</h1>
-      <p>Twoje zamówienie zosta³o pomyœlnie przyjête do realizacji. Na Twój adres e-mail wys³aliœmy potwierdzenie zakupu
-        wraz z faktur¹.</p>
-      <div class="order-number" id="orderNumLabel">Numer zamówienia: #PRSC-000000</div>
+      <div class="success-icon">âœ“</div>
+      <h1>DziÄ™kujemy za zamÃ³wienie!</h1>
+      <p>Twoje zamÃ³wienie zostaÅ‚o pomyÅ›lnie przyjÄ™te do realizacji. Na TwÃ³j adres e-mail wysÅ‚aliÅ›my potwierdzenie zakupu
+        wraz z fakturÄ….</p>
+      <div class="order-number" id="orderNumLabel">Numer zamÃ³wienia: #PRSC-000000</div>
       <div>
-        <a class="return-btn" href="index.html">Wróæ na stronê g³ówn¹</a>
+        <a class="return-btn" href="index.html">WrÃ³Ä‡ na stronÄ™ gÅ‚Ã³wnÄ…</a>
       </div>
     </div>
   </div>
@@ -2750,16 +2750,16 @@
               <h4 class="summary-product-title">
                 <a href="product.html?id=${item.id}" target="_blank" style="color: inherit; text-decoration: none; cursor: pointer;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${item.title}</a>
               </h4>
-              <div class="summary-product-meta">Kolor: ${item.color ? `<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${item.color}; vertical-align:middle;"></span>` : 'Domyœlny'} / Rozmiar: ${item.size || 'Domyœlny'}</div>
+              <div class="summary-product-meta">Kolor: ${item.color ? `<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${item.color}; vertical-align:middle;"></span>` : 'DomyÅ›lny'} / Rozmiar: ${item.size || 'DomyÅ›lny'}</div>
             </div>
-            <div class="summary-product-price">${pTotal.toFixed(2)} z³</div>
+            <div class="summary-product-price">${pTotal.toFixed(2)} zÅ‚</div>
           </div>
         `;
         checkoutItemsList.insertAdjacentHTML('beforeend', itemHTML);
       });
 
-      summarySubtotal.textContent = `${subtotal.toFixed(2)} z³`;
-      summaryTotal.textContent = `${subtotal.toFixed(2)} z³`;
+      summarySubtotal.textContent = `${subtotal.toFixed(2)} zÅ‚`;
+      summaryTotal.textContent = `${subtotal.toFixed(2)} zÅ‚`;
     }
 
     // Toggle between payment tabs
@@ -2817,7 +2817,7 @@
         // Toggle Delivery Options list
         courierBox.style.display = 'block';
         pickupBox.style.display = 'none';
-        title.textContent = 'Metoda wysy³ki';
+        title.textContent = 'Metoda wysyÅ‚ki';
 
         // Hide locker point selector
         document.getElementById('pointSelectorBox').style.display = 'none';
@@ -2902,17 +2902,17 @@
     const mockLockers = {
       inpost: [
         { id: 'WAW101', name: 'Paczkomat WAW101', address: 'Al. Jerozolimskie 54, Warszawa', coords: { x: '25%', y: '30%' } },
-        { id: 'WAW102', name: 'Paczkomat WAW102', address: 'ul. Marsza³kowska 104, Warszawa', coords: { x: '45%', y: '25%' } },
-        { id: 'WAW103', name: 'Paczkomat WAW103', address: 'ul. Nowy Œwiat 22, Warszawa', coords: { x: '60%', y: '45%' } },
-        { id: 'WAW104', name: 'Paczkomat WAW104', address: 'ul. Œwiêtokrzyska 14, Warszawa', coords: { x: '35%', y: '60%' } },
-        { id: 'GDY201', name: 'Paczkomat GDY201', address: 'ul. Œwiêtojañska 45, Gdynia', coords: { x: '50%', y: '50%' } },
-        { id: 'KRA301', name: 'Paczkomat KRA301', address: 'ul. Floriañska 12, Kraków', coords: { x: '55%', y: '55%' } },
-        { id: 'POZ401', name: 'Paczkomat POZ401', address: 'Pó³wiejska 8, Poznañ', coords: { x: '40%', y: '40%' } }
+        { id: 'WAW102', name: 'Paczkomat WAW102', address: 'ul. MarszaÅ‚kowska 104, Warszawa', coords: { x: '45%', y: '25%' } },
+        { id: 'WAW103', name: 'Paczkomat WAW103', address: 'ul. Nowy Åšwiat 22, Warszawa', coords: { x: '60%', y: '45%' } },
+        { id: 'WAW104', name: 'Paczkomat WAW104', address: 'ul. ÅšwiÄ™tokrzyska 14, Warszawa', coords: { x: '35%', y: '60%' } },
+        { id: 'GDY201', name: 'Paczkomat GDY201', address: 'ul. ÅšwiÄ™tojaÅ„ska 45, Gdynia', coords: { x: '50%', y: '50%' } },
+        { id: 'KRA301', name: 'Paczkomat KRA301', address: 'ul. FloriaÅ„ska 12, KrakÃ³w', coords: { x: '55%', y: '55%' } },
+        { id: 'POZ401', name: 'Paczkomat POZ401', address: 'PÃ³Å‚wiejska 8, PoznaÅ„', coords: { x: '40%', y: '40%' } }
       ],
       dpd: [
         { id: 'DPD-WAW1', name: 'Automat DPD WAW1', address: 'ul. Chmielna 25, Warszawa', coords: { x: '30%', y: '35%' } },
         { id: 'DPD-WAW2', name: 'Punkt DPD WAW2', address: 'ul. Krucza 49, Warszawa', coords: { x: '50%', y: '40%' } },
-        { id: 'DPD-KRA1', name: 'Automat DPD KRA1', address: 'Grodzka 15, Kraków', coords: { x: '45%', y: '45%' } },
+        { id: 'DPD-KRA1', name: 'Automat DPD KRA1', address: 'Grodzka 15, KrakÃ³w', coords: { x: '45%', y: '45%' } },
         { id: 'DPD-GDY1', name: 'Automat DPD GDY1', address: '10 Lutego 24, Gdynia', coords: { x: '35%', y: '50%' } }
       ]
     };
@@ -2985,7 +2985,7 @@
       pinsContainer.innerHTML = '';
 
       if (items.length === 0) {
-        list.innerHTML = '<div style="padding: 20px; text-align: center; color: #999; font-size: 13px;">Brak punktów spe³niaj¹cych kryteria</div>';
+        list.innerHTML = '<div style="padding: 20px; text-align: center; color: #999; font-size: 13px;">Brak punktÃ³w speÅ‚niajÄ…cych kryteria</div>';
         return;
       }
 
@@ -3102,13 +3102,13 @@
         const cardExp = document.getElementById('cardExpiry').value.trim();
         const cardCvv = document.getElementById('cardCvv').value.trim();
         if (cardNum.length < 15 || cardExp.length < 4 || cardCvv.length < 3) {
-          alert('Proszê uzupe³niæ poprawne dane karty p³atniczej!');
+          alert('ProszÄ™ uzupeÅ‚niÄ‡ poprawne dane karty pÅ‚atniczej!');
           return;
         }
       } else if (activeMethod === 'blik') {
         const blikVal = document.getElementById('blikCode').value.trim();
         if (blikVal.length !== 6 || isNaN(blikVal)) {
-          alert('Kod BLIK musi sk³adaæ siê z 6 cyfr!');
+          alert('Kod BLIK musi skÅ‚adaÄ‡ siÄ™ z 6 cyfr!');
           return;
         }
       }
@@ -3119,7 +3119,7 @@
         if (method === 'inpost_paczkomat' || method === 'dpd_paczkomat') {
           const point = document.getElementById('selectedPointVal').value;
           if (!point) {
-            alert('Proszê wybraæ paczkomat lub punkt odbioru z mapy!');
+            alert('ProszÄ™ wybraÄ‡ paczkomat lub punkt odbioru z mapy!');
             return;
           }
         }
@@ -3127,7 +3127,7 @@
 
       // Generate random order number
       const randomOrderNum = Math.floor(100000 + Math.random() * 900000);
-      document.getElementById('orderNumLabel').textContent = `Numer zamówienia: #PRSC-${randomOrderNum}`;
+      document.getElementById('orderNumLabel').textContent = `Numer zamÃ³wienia: #PRSC-${randomOrderNum}`;
 
       // Show Thank you Screen overlay
       const thankyouOverlay = document.getElementById('thankyouOverlay');
@@ -3206,7 +3206,7 @@
   </div>
 
   <!-- Mobile Bottom Navigation -->
-  <nav class="config-bottom-nav" aria-label="Skróty mobilne">
+  <nav class="config-bottom-nav" aria-label="SkrÃ³ty mobilne">
     <a href="index.html" class="active"><span class="bottom-main-icon"><i class="ph ph-house" aria-hidden="true"></i></span><span>Start</span></a>
     <a href="shop.html" ><i class="ph ph-storefront" aria-hidden="true"></i><span>Sklep</span></a>
     <a href="configurator.html" ><i class="ph ph-lightbulb-filament" aria-hidden="true"></i><span>Konfig. LED</span></a>
@@ -3493,10 +3493,10 @@ body.index-page .site-header:not(.scrolled) {
     margin-bottom: 100px !important;
   }
 }
-/* 5. Mobile Category Banners (Wê¿ej, 1 linia) */
+/* 5. Mobile Category Banners (WÄ™Å¼ej, 1 linia) */
 @media (max-width: 768px) {
   .category-banner-card, .category-banner-card.sub-card {
-    height: 180px !important; /* Wê¿ej w pionie */
+    height: 180px !important; /* WÄ™Å¼ej w pionie */
     padding: 20px 15px !important;
   }
   .category-banner-card h3, .category-banner-card.sub-card h3 {
@@ -3615,4 +3615,3 @@ body.index-page .site-header:not(.scrolled) {
 </body>
 
 </html>
-

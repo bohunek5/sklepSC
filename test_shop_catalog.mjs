@@ -72,6 +72,11 @@ class CdpClient {
         if (message.error) reject(new Error(message.error.message));
         else resolve(message.result);
       } else if (message.method) {
+        if (message.method === 'Runtime.consoleAPICalled') {
+          console.log('[Browser Console]', message.params.args.map(a => a.value || a.description || '').join(' '));
+        } else if (message.method === 'Runtime.exceptionThrown') {
+          console.error('[Browser Exception]', message.params.exceptionDetails.exception?.description || message.params.exceptionDetails.text);
+        }
         this.events.push(message);
       }
     });
