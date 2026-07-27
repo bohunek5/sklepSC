@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07111f">
+  <link rel="icon" type="image/png" href="images/prescot-pattern.png">
+  <title>Konfigurator LED | Prescot</title>
+  <meta name="description" content="Skonfiguruj kompletny system LED: taśmę, profil, klosz, zasilacz i sterowanie. Parametry, moc i cena aktualizują się na żywo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="css/led-configurator.css">
+</head>
+<body class="led-configurator-page">
+  <a class="skip-link" href="#wizardPanel">Przejdź do konfiguratora</a>
+
+  <header class="config-header">
+    <a class="config-brand" href="index.html" aria-label="Prescot — strona główna"><img src="images/logo-white.png" alt="Prescot"></a>
+    <nav class="config-desktop-nav" aria-label="Nawigacja główna">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Sklep</a>
+      <a href="blog.html">Wiedza</a>
+      <a href="about.html">O nas</a>
+      <a href="contact.html">Kontakt</a>
+      <a class="active" href="konfigurator-led.html"><i class="ph ph-lightbulb-filament" aria-hidden="true"></i>Konfigurator LED</a>
+      <a href="ai-shopping.html"><img src="images/prescot-pattern.png" alt="" aria-hidden="true">Zakup AI</a>
+    </nav>
+    <div class="config-header-actions">
+      <button class="header-action" id="headerHelpButton" type="button" aria-label="Jak działa konfigurator"><i class="ph ph-question" aria-hidden="true"></i></button>
+      <button class="header-action cart-toggle" id="headerCartButton" type="button" aria-label="Otwórz koszyk"><i class="ph ph-shopping-bag" aria-hidden="true"></i><span class="cart-badge" id="cartBadge">0</span></button>
+      <button class="config-menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Otwórz menu"><span></span><span></span><span></span></button>
+    </div>
+    <nav class="config-mobile-menu" id="mobileMenu" aria-label="Nawigacja mobilna" hidden>
+      <a href="index.html"><i class="ph ph-house" aria-hidden="true"></i>Home</a>
+      <a href="shop.html"><i class="ph ph-storefront" aria-hidden="true"></i>Sklep</a>
+      <a class="active" href="konfigurator-led.html"><i class="ph ph-lightbulb-filament" aria-hidden="true"></i>Konfigurator LED</a>
+      <a href="ai-shopping.html"><i class="ph ph-sparkle" aria-hidden="true"></i>Zakup AI</a>
+      <a href="blog.html"><i class="ph ph-book-open-text" aria-hidden="true"></i>Wiedza</a>
+      <a href="contact.html"><i class="ph ph-envelope-simple" aria-hidden="true"></i>Kontakt</a>
+    </nav>
+  </header>
+
+  <main class="config-main" id="configurator">
+    <section class="config-visual" aria-labelledby="configTitle">
+      <div class="scene-media" id="sceneMedia" aria-hidden="true"></div>
+      <div class="scene-shade" aria-hidden="true"></div>
+      <div class="scene-aurora" aria-hidden="true"></div>
+      <div class="visual-topbar">
+        <div class="visual-intro">
+          <span class="eyebrow"><i class="ph ph-magic-wand" aria-hidden="true"></i> System dobrany za Ciebie</span>
+          <h1 id="configTitle">Zaprojektuj własną<br>linię światła.</h1>
+          <p>Bez liczenia watów i bez niedopasowanych części.</p>
+        </div>
+        <label class="pro-switch"><input id="proMode" type="checkbox"><span aria-hidden="true"></span>Tryb PRO</label>
+      </div>
+      <div class="live-stage">
+        <div class="stage-label"><span class="live-dot"></span>Podgląd na żywo <b id="shapeName">Linia prosta</b></div>
+        <svg class="led-preview" viewBox="0 0 760 430" role="img" aria-label="Podgląd kształtu i koloru zestawu LED">
+          <defs>
+            <filter id="ledGlow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="18" result="blur"></feGaussianBlur><feMerge><feMergeNode in="blur"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter>
+            <linearGradient id="rgbGradient" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ff3d81"></stop><stop offset="32%" stop-color="#8d5bff"></stop><stop offset="66%" stop-color="#23d9ff"></stop><stop offset="100%" stop-color="#7dffb2"></stop></linearGradient>
+          </defs>
+          <path id="profileShadow" d="M150 218 H610" fill="none" stroke="rgba(0,0,0,.55)" stroke-width="28" stroke-linecap="round"></path>
+          <path id="ledGlowPath" d="M150 210 H610" fill="none" stroke="#ffd9a8" stroke-width="22" stroke-linecap="round" opacity=".66" filter="url(#ledGlow)"></path>
+          <path id="ledCorePath" d="M150 210 H610" fill="none" stroke="#fff2d3" stroke-width="7" stroke-linecap="round"></path>
+          <path id="ledDotsPath" d="M150 210 H610" fill="none" stroke="rgba(255,255,255,.94)" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 18" hidden></path>
+          <g class="dimension-mark" id="dimensionMark">
+            <path d="M150 278 H610 M150 266 V290 M610 266 V290" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5"></path>
+            <rect x="330" y="263" width="100" height="29" rx="14.5" fill="rgba(7,17,31,.8)" stroke="rgba(255,255,255,.14)"></rect>
+            <text id="dimensionText" x="380" y="283" text-anchor="middle">200 cm</text>
+          </g>
+        </svg>
+        <div class="visual-specs" aria-live="polite">
+          <div><span>Miejsce</span><strong id="visualEnvironment">Salon</strong></div>
+          <div><span>Efekt</span><strong id="visualLight">Ciepła biel</strong></div>
+          <div><span>Ochrona</span><strong id="visualIp">IP20</strong></div>
+          <div class="pro-only"><span>Strumień</span><strong id="visualLumens">1 920 lm</strong></div>
+          <div class="pro-only"><span>CRI</span><strong>≥ 90</strong></div>
+        </div>
+      </div>
+      <div class="voltage-alert" id="voltageAlert" role="status" hidden><i class="ph ph-shield-check" aria-hidden="true"></i><div><strong>Automatycznie wybraliśmy 24 V</strong><span>Dłuższy odcinek zachowa równą jasność na całej długości.</span></div></div>
+    </section>
+
+    <section class="wizard-panel" id="wizardPanel" aria-label="Kroki konfiguracji">
+      <div class="wizard-header">
+        <div class="wizard-heading"><span id="stepCounter">Krok 1 z 6</span><strong id="stepShortTitle">Miejsce montażu</strong></div>
+        <div class="wizard-progress" role="progressbar" aria-label="Postęp konfiguracji" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1"><span id="progressFill"></span></div>
+        <div class="step-tabs" id="stepTabs" aria-label="Etapy">
+          <button class="active" type="button" data-goto="0" aria-current="step"><b>1</b><span>Miejsce</span></button>
+          <button type="button" data-goto="1" disabled><b>2</b><span>Kształt</span></button>
+          <button type="button" data-goto="2" disabled><b>3</b><span>Światło</span></button>
+          <button type="button" data-goto="3" disabled><b>4</b><span>Profil</span></button>
+          <button type="button" data-goto="4" disabled><b>5</b><span>Zasilanie</span></button>
+          <button type="button" data-goto="5" disabled><b>6</b><span>Sterowanie</span></button>
+        </div>
+      </div>
+
+      <form class="wizard-form" id="ledForm">
+        <section class="wizard-step active" data-step="0" aria-labelledby="step1Title">
+          <div class="step-copy"><span class="step-kicker">Zacznijmy od podstaw</span><h2 id="step1Title">Gdzie montujesz światło?</h2><p>Dobierzemy odpowiednią szczelność i ukryjemy elementy, które nie pasują do wybranego miejsca.</p></div>
+          <div class="option-grid environment-grid">
+            <button class="option-card selected" type="button" data-field="environment" data-value="living" aria-pressed="true"><span class="option-image" style="--card-image:url('images/configurator/living_new.png')"></span><span class="option-copy"><strong>Salon</strong><small>Sufit, wnęka, ściana TV</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+            <button class="option-card" type="button" data-field="environment" data-value="kitchen" aria-pressed="false"><span class="option-image" style="--card-image:url('images/configurator/kitchen_new.png')"></span><span class="option-copy"><strong>Kuchnia</strong><small>Blat i zabudowa</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+            <button class="option-card" type="button" data-field="environment" data-value="bathroom" aria-pressed="false"><span class="option-image" style="--card-image:url('images/configurator/bathroom_new.png')"></span><span class="option-copy"><strong>Łazienka</strong><small>Strefa wilgotna · IP65</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+            <button class="option-card" type="button" data-field="environment" data-value="outdoor" aria-pressed="false"><span class="option-image" style="--card-image:url('images/configurator/outdoor_new.png')"></span><span class="option-copy"><strong>Elewacja</strong><small>Na zewnątrz · IP67</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+          </div>
+          <div class="smart-note"><i class="ph ph-shield-check" aria-hidden="true"></i><p><strong>Bezpieczny wybór</strong><span>Po wybraniu łazienki lub elewacji pokażemy wyłącznie elementy o właściwej szczelności.</span></p></div>
+        </section>
+
+        <section class="wizard-step" data-step="1" aria-labelledby="step2Title" hidden>
+          <div class="step-copy"><span class="step-kicker">Geometria instalacji</span><h2 id="step2Title">Jaki kształt ma mieć linia?</h2><p>Podaj długości ramion. Wymiary automatycznie dopasujemy do modułu cięcia taśmy.</p></div>
+          <div class="shape-grid">
+            <button class="shape-card selected" type="button" data-field="shape" data-value="line" aria-pressed="true"><svg viewBox="0 0 84 56" aria-hidden="true"><path d="M13 28H71"></path></svg><strong>Prosta</strong><small>1 ramię</small></button>
+            <button class="shape-card" type="button" data-field="shape" data-value="l" aria-pressed="false"><svg viewBox="0 0 84 56" aria-hidden="true"><path d="M19 12V43H68"></path></svg><strong>Kąt L</strong><small>2 ramiona</small></button>
+            <button class="shape-card" type="button" data-field="shape" data-value="u" aria-pressed="false"><svg viewBox="0 0 84 56" aria-hidden="true"><path d="M18 11V43H66V11"></path></svg><strong>Podkowa U</strong><small>3 ramiona</small></button>
+            <button class="shape-card" type="button" data-field="shape" data-value="o" aria-pressed="false"><svg viewBox="0 0 84 56" aria-hidden="true"><rect x="19" y="10" width="46" height="36" rx="2"></rect></svg><strong>Obwód O</strong><small>4 ramiona</small></button>
+          </div>
+          <div class="dimension-fields" id="dimensionFields"></div>
+          <div class="rounding-note" id="roundingNote"><i class="ph ph-ruler" aria-hidden="true"></i><span>Taśmę tniemy co 5 cm. Podane wymiary są zgodne z modułem cięcia.</span></div>
+        </section>
+
+        <section class="wizard-step" data-step="2" aria-labelledby="step3Title" hidden>
+          <div class="step-copy"><span class="step-kicker">Efekt światła</span><h2 id="step3Title">Jak ma świecić Twój zestaw?</h2><p>Wybierz efekt, a parametry techniczne dopasujemy automatycznie.</p></div>
+          <div class="light-grid">
+            <button class="light-card selected" type="button" data-field="light" data-value="white" aria-pressed="true"><span class="light-swatch warm"></span><span><strong>Stała biel</strong><small>Najprostsza i najbardziej wydajna</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+            <button class="light-card" type="button" data-field="light" data-value="cct" aria-pressed="false"><span class="light-swatch cct"></span><span><strong>Zmienna biel CCT</strong><small>Od relaksu do pracy</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+            <button class="light-card" type="button" data-field="light" data-value="rgbw" aria-pressed="false"><span class="light-swatch rgb"></span><span><strong>Kolor RGBW</strong><small>Kolory i użyteczna biel</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+          </div>
+          <div class="temperature-control" id="temperatureControl"><div><span>Temperatura bieli</span><strong id="temperatureValue">3000 K · ciepła</strong></div><input id="temperatureRange" type="range" min="2700" max="6500" step="100" value="3000" aria-label="Temperatura barwowa w kelwinach"><div class="range-labels"><span>2700 K<br><small>ciepła</small></span><span>4000 K<br><small>neutralna</small></span><span>6500 K<br><small>zimna</small></span></div></div>
+          <fieldset class="technology-choice">
+            <legend>Technologia taśmy</legend>
+            <button class="selected" type="button" data-field="technology" data-value="cob" aria-pressed="true"><span class="tech-line cob"></span><span><strong>COB</strong><small>Jednolita linia światła</small></span><em>Polecana</em></button>
+            <button type="button" data-field="technology" data-value="smd" aria-pressed="false"><span class="tech-line smd"></span><span><strong>SMD</strong><small>Widoczne punkty diod</small></span></button>
+          </fieldset>
+        </section>
+
+        <section class="wizard-step" data-step="3" aria-labelledby="step4Title" hidden>
+          <div class="step-copy"><span class="step-kicker">Wykończenie linii</span><h2 id="step4Title">Jak osadzamy światło?</h2><p>Wyświetlamy tylko profile, w których zmieści się wybrana taśma.</p></div>
+          <div class="profile-grid">
+            <button class="profile-card selected" type="button" data-field="profile" data-value="surface" data-width="14" aria-pressed="true"><span class="profile-icon surface"><i></i></span><span><strong>Nawierzchniowy</strong><small>Najbardziej uniwersalny</small></span><b>14 mm</b></button>
+            <button class="profile-card" type="button" data-field="profile" data-value="recessed" data-width="12" aria-pressed="false"><span class="profile-icon recessed"><i></i></span><span><strong>Wpuszczany</strong><small>Czysta linia w zabudowie</small></span><b>12 mm</b></button>
+            <button class="profile-card" type="button" data-field="profile" data-value="corner" data-width="10" aria-pressed="false"><span class="profile-icon corner"><i></i></span><span><strong>Kątowy 45°</strong><small>Szafki i narożniki</small></span><b>10 mm</b></button>
+          </div>
+          <div class="compatibility-note" id="compatibilityNote"><i class="ph ph-check-circle" aria-hidden="true"></i><span>Wszystkie widoczne profile pasują do taśmy COB 8 mm.</span></div>
+          <fieldset class="diffuser-choice">
+            <legend>Rodzaj klosza</legend>
+            <button type="button" data-field="diffuser" data-value="clear" aria-pressed="false"><i class="diffuser-dot clear"></i>Transparentny<small>+12% światła</small></button>
+            <button type="button" data-field="diffuser" data-value="frosted" aria-pressed="false"><i class="diffuser-dot frosted"></i>Szron<small>miękki efekt</small></button>
+            <button class="selected" type="button" data-field="diffuser" data-value="milky" aria-pressed="true"><i class="diffuser-dot milky"></i>Mleczny<small>równa linia</small></button>
+            <button type="button" data-field="diffuser" data-value="black" aria-pressed="false"><i class="diffuser-dot black"></i>Czarny<small>designerski</small></button>
+          </fieldset>
+        </section>
+
+        <section class="wizard-step" data-step="4" aria-labelledby="step5Title" hidden>
+          <div class="step-copy"><span class="step-kicker">Moc liczona automatycznie</span><h2 id="step5Title">Gdzie ukryjemy zasilacz?</h2><p>Policzyliśmy pobór mocy i dodaliśmy 20% zapasu dla stabilnej, wieloletniej pracy.</p></div>
+          <div class="power-result"><div class="power-ring"><strong id="powerRingValue">29</strong><span>W poboru</span></div><div><span>Automatyczny dobór</span><h3 id="powerSupplyTitle">Zasilacz 12 V · 40 W</h3><p id="powerSupplyCopy">29 W obciążenia + bezpieczny zapas mocy.</p></div></div>
+          <div class="power-grid">
+            <button class="power-card selected" type="button" data-field="powerPlacement" data-value="slim" aria-pressed="true"><i class="ph ph-minus" aria-hidden="true"></i><span><strong>Wąski / meblowy</strong><small>Do profilu i zabudowy</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+            <button class="power-card" type="button" data-field="powerPlacement" data-value="wall" aria-pressed="false"><i class="ph ph-square-split-vertical" aria-hidden="true"></i><span><strong>Do puszki ściennej</strong><small>Całkowicie niewidoczny</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+            <button class="power-card" type="button" data-field="powerPlacement" data-value="plug" aria-pressed="false"><i class="ph ph-plug" aria-hidden="true"></i><span><strong>Wtyczkowy</strong><small>Gotowy do gniazdka 230 V</small></span><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+          </div>
+          <div class="safety-math"><i class="ph ph-calculator" aria-hidden="true"></i><span id="safetyMathText">2,0 m × 12 W/m = 24 W · z zapasem: 29 W</span></div>
+        </section>
+
+        <section class="wizard-step" data-step="5" aria-labelledby="step6Title" hidden>
+          <div class="step-copy"><span class="step-kicker">Ostatni krok</span><h2 id="step6Title">Jak chcesz sterować światłem?</h2><p>Sterownik i ewentualny wzmacniacz dobierzemy do napięcia, liczby kanałów i prądu zestawu.</p></div>
+          <div class="control-grid">
+            <button class="control-card selected" type="button" data-field="control" data-value="switch" aria-pressed="true"><i class="ph ph-toggle-left" aria-hidden="true"></i><span><strong>Zwykły włącznik</strong><small>Bez dodatkowego sterownika</small></span><b>0 zł</b><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+            <button class="control-card" type="button" data-field="control" data-value="remote" aria-pressed="false"><i class="ph ph-device-mobile-camera" aria-hidden="true"></i><span><strong>Pilot radiowy</strong><small>Ściemnianie i sceny</small></span><b>+69 zł</b><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+            <button class="control-card" type="button" data-field="control" data-value="wifi" aria-pressed="false"><i class="ph ph-wifi-high" aria-hidden="true"></i><span><strong>Aplikacja Wi‑Fi</strong><small>Tuya / Supla</small></span><b>+119 zł</b><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+            <button class="control-card" type="button" data-field="control" data-value="zigbee" aria-pressed="false"><i class="ph ph-broadcast" aria-hidden="true"></i><span><strong>Zigbee</strong><small>Hue / Home Assistant</small></span><b>+149 zł</b><i class="ph ph-check-circle option-check" aria-hidden="true"></i></button>
+          </div>
+          <label class="plug-play-card"><input id="plugPlay" type="checkbox"><span class="plug-play-check"><i class="ph ph-check" aria-hidden="true"></i></span><span><strong>Zróbcie to za mnie — Plug & Play</strong><small>Przytniemy profile, polutujemy i przetestujemy zestaw. Otrzymasz go gotowy do podłączenia.</small></span><b>+89 zł</b></label>
+          <button class="scheme-link" id="schemeButton" type="button"><i class="ph ph-circuitry" aria-hidden="true"></i><span><strong>Zobacz schemat podłączenia</strong><small>Generowany dla Twojej konfiguracji</small></span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></button>
+        </section>
+      </form>
+      <div class="wizard-actions"><button class="back-button" id="backButton" type="button" hidden><i class="ph ph-arrow-left" aria-hidden="true"></i>Wstecz</button><button class="next-button" id="nextButton" type="button">Dalej<i class="ph ph-arrow-right" aria-hidden="true"></i></button></div>
+    </section>
+  </main>
+
+  <aside class="live-summary" aria-label="Podsumowanie konfiguracji">
+    <button class="summary-details" id="summaryDetailsButton" type="button" aria-label="Pokaż listę elementów"><span class="summary-product-icon"><i class="ph ph-package" aria-hidden="true"></i></span><span><small>Twój zestaw</small><strong id="summaryName">COB · ciepła biel · 2,0 m</strong></span><i class="ph ph-caret-up" aria-hidden="true"></i></button>
+    <div class="summary-metrics"><div><small>Długość</small><strong id="summaryLength">2,0 m</strong></div><div><small>Pobór</small><strong id="summaryPower">24 W</strong></div><div><small>Napięcie</small><strong id="summaryVoltage">12 V</strong></div><div><small>Zasilacz</small><strong id="summarySupply">40 W</strong></div></div>
+    <div class="summary-price"><small>Cena zestawu</small><strong id="summaryPrice">389,00 zł</strong><span>brutto</span></div>
+    <button class="add-kit-button" id="addKitButton" type="button"><i class="ph ph-shopping-bag-open" aria-hidden="true"></i><span>Dodaj zestaw</span></button>
+  </aside>
+
+  <nav class="config-bottom-nav" aria-label="Skróty mobilne">
+    <a href="index.html"><i class="ph ph-house" aria-hidden="true"></i><span>Start</span></a>
+    <a href="shop.html"><i class="ph ph-storefront" aria-hidden="true"></i><span>Sklep</span></a>
+    <a class="active" href="konfigurator-led.html" aria-current="page"><span class="bottom-main-icon"><i class="ph ph-lightbulb-filament" aria-hidden="true"></i></span><span>Konfig. LED</span></a>
+    <a href="ai-shopping.html"><i class="ph ph-sparkle" aria-hidden="true"></i><span>Zakup AI</span></a>
+    <button id="mobileCartButton" type="button"><i class="ph ph-shopping-bag" aria-hidden="true"></i><span>Koszyk</span></button>
+  </nav>
+
+  <dialog class="config-dialog bom-dialog" id="bomDialog" aria-labelledby="bomTitle">
+    <div class="dialog-head"><div><span>Bill of Materials</span><h2 id="bomTitle">Co znajduje się w zestawie?</h2></div><button type="button" data-close-dialog aria-label="Zamknij"><i class="ph ph-x" aria-hidden="true"></i></button></div>
+    <div class="bom-list" id="bomList"></div>
+    <div class="dialog-total"><span>Razem brutto</span><strong id="dialogTotal">389,00 zł</strong></div>
+    <button class="dialog-primary" id="dialogAddButton" type="button"><i class="ph ph-shopping-bag-open" aria-hidden="true"></i>Dodaj cały zestaw do koszyka</button>
+  </dialog>
+
+  <dialog class="config-dialog scheme-dialog" id="schemeDialog" aria-labelledby="schemeTitle">
+    <div class="dialog-head"><div><span>Twój układ</span><h2 id="schemeTitle">Schemat podłączenia</h2></div><button type="button" data-close-dialog aria-label="Zamknij"><i class="ph ph-x" aria-hidden="true"></i></button></div>
+    <div class="scheme-canvas">
+      <div class="scheme-node"><i class="ph ph-plug" aria-hidden="true"></i><span>230 V</span><small>gniazdo / przewód</small></div><i class="ph ph-arrow-right scheme-arrow" aria-hidden="true"></i>
+      <div class="scheme-node"><i class="ph ph-lightning" aria-hidden="true"></i><span id="schemeSupply">Zasilacz 12 V</span><small id="schemeSupplyPower">40 W</small></div><i class="ph ph-arrow-right scheme-arrow" aria-hidden="true"></i>
+      <div class="scheme-node" id="schemeController"><i class="ph ph-sliders-horizontal" aria-hidden="true"></i><span>Sterownik</span><small>opcjonalny</small></div><i class="ph ph-arrow-right scheme-arrow" aria-hidden="true"></i>
+      <div class="scheme-node"><i class="ph ph-lightbulb-filament" aria-hidden="true"></i><span>Taśma LED</span><small id="schemeStripLength">2,0 m</small></div>
+    </div>
+    <div class="scheme-legend"><span><i class="wire brown"></i>Brązowy: L</span><span><i class="wire blue"></i>Niebieski: N</span><span><i class="wire red"></i>Czerwony: +V</span><span><i class="wire black"></i>Czarny: −V</span></div>
+    <p class="scheme-warning"><i class="ph ph-warning" aria-hidden="true"></i>Schemat ma charakter pomocniczy. Podłączenie części 230 V powierz osobie z odpowiednimi uprawnieniami.</p>
+    <button class="dialog-secondary" id="printSchemeButton" type="button"><i class="ph ph-file-pdf" aria-hidden="true"></i>Zapisz schemat jako PDF</button>
+  </dialog>
+
+  <dialog class="config-dialog help-dialog" id="helpDialog" aria-labelledby="helpTitle">
+    <div class="dialog-head"><div><span>Jak to działa?</span><h2 id="helpTitle">Kompletny zestaw w 6 krokach</h2></div><button type="button" data-close-dialog aria-label="Zamknij"><i class="ph ph-x" aria-hidden="true"></i></button></div>
+    <ol class="help-list"><li><b>1</b><span><strong>Ty opisujesz projekt</strong><small>Miejsce, kształt, efekt i sposób sterowania.</small></span></li><li><b>2</b><span><strong>My pilnujemy zgodności</strong><small>Szczelność, szerokość profilu, moc i spadki napięcia.</small></span></li><li><b>3</b><span><strong>Otrzymujesz gotowy BOM</strong><small>Taśma, profil, akcesoria, zasilacz i sterowanie.</small></span></li></ol>
+  </dialog>
+
+  <div class="config-toast" id="configToast" role="status" aria-live="polite"><i class="ph ph-check-circle" aria-hidden="true"></i><span>Zestaw dodany do koszyka.</span></div>
+  <script src="js/products-data.js"></script>
+  <script src="js/shared-popups.js"></script>
+  <script src="js/led-configurator.js"></script>
+
+<style id="urgent-mobile-fixes-3">
+/* FIX 1: White patch on navy nav on mobile */
+.new-glass-nav a.active, 
+.new-glass-nav .mobile-nav-item.active {
+  background: transparent !important;
+  color: #00e5ff !important;
+}
+.new-glass-nav .nav-center-pill {
+  background: linear-gradient(135deg, #0b1a30, #1a365d) !important;
+  border: 2px solid #00e5ff !important;
+  border-radius: 50% !important; /* ensure it's round and no white corners */
+}
+.new-glass-nav .nav-center-pill i {
+  background: transparent !important;
+}
+
+/* FIX 2: Scroll arrow overlap & Huge category banners */
+@media (max-width: 768px) {
+  .scroll-down-arrow {
+    bottom: 140px !important; /* Move higher to not overlap */
+  }
+  .hero-section, .mockup-hero-slider, .page-hero {
+    padding-bottom: 140px !important;
+  }
+
+  /* Force ALL category banners to be slim */
+  .category-banner-card, 
+  .category-banner-card.sub-card, 
+  .mockup-category-card, 
+  .category-card,
+  .shop-category-card {
+    height: 160px !important;
+    min-height: 160px !important;
+    padding: 20px 15px !important;
+  }
+  .category-banner-card h3, 
+  .category-banner-card.sub-card h3, 
+  .mockup-category-card h3, 
+  .glass-cat-title,
+  .category-card h3 {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    font-size: 18px !important;
+    line-height: 1 !important;
+    margin-bottom: 4px !important;
+  }
+  .category-banner-card div > span, 
+  .category-banner-card.sub-card div > span, 
+  .mockup-category-card p, 
+  .glass-cat-subtitle,
+  .category-card p {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    font-size: 11px !important;
+    display: block !important;
+    margin: 0 !important;
+  }
+}
+</style>
+
+</body>
+</html>

@@ -1147,3 +1147,36 @@ html, body {
 img, video, canvas {
   max-width: 100% !important;
 }
+
+/* Konfigurator LED — wyróżniona pozycja głównej nawigacji */
+.desktop-nav a[href$="konfigurator-led.html"],
+.mockup-nav a[href$="konfigurator-led.html"] {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding-inline: 14px !important;
+  border: 1px solid rgba(40, 215, 255, .45) !important;
+  border-radius: 999px !important;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #0b1a30, #173c5d) !important;
+  box-shadow: 0 8px 22px rgba(11, 26, 48, .16), inset 0 0 16px rgba(40, 215, 255, .06);
+}
+
+.desktop-nav a[href$="konfigurator-led.html"]:hover,
+.mockup-nav a[href$="konfigurator-led.html"]:hover {
+  border-color: rgba(40, 215, 255, .85) !important;
+  background: linear-gradient(135deg, #102641, #1c4f76) !important;
+}
+
+.mobile-menu a[href$="konfigurator-led.html"],
+.mobile-nav-menu a[href$="konfigurator-led.html"] {
+  border: 1px solid rgba(40, 215, 255, .25);
+  border-radius: 12px;
+  color: #ffffff !important;
+  background: linear-gradient(135deg, rgba(11, 26, 48, .98), rgba(23, 60, 93, .98)) !important;
+}
+
+.configurator-mobile-link span {
+  white-space: nowrap;
+}

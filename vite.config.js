@@ -12,6 +12,7 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         shop: resolve(__dirname, 'shop.html'),
         configurator: resolve(__dirname, 'configurator.html'),
+        ledConfigurator: resolve(__dirname, 'konfigurator-led.html'),
         product: resolve(__dirname, 'product.html'),
         about: resolve(__dirname, 'about.html'),
         contact: resolve(__dirname, 'contact.html'),

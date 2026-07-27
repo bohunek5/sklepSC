@@ -2676,7 +2676,7 @@
       <a class="active" href="blog.html">Wiedza</a>
       <a href="about.html">O nas</a>
       <a href="contact.html">Kontakt</a>
-      <a href="configurator.html">Dobierz system</a>
+      <a href="konfigurator-led.html">Konfigurator LED</a>
       <a  href="ai-shopping.html"><img class="gemini-icon" src="images/prescot-pattern.png" style="width: 18px; height: 18px; object-fit: contain; margin-right: 6px; vertical-align: middle;">Zakup AI</a>
     </nav>
     <div class="header-actions">
@@ -2699,7 +2699,7 @@
       <a class="active" href="blog.html">Wiedza</a>
       <a href="about.html">O nas</a>
       <a href="contact.html">Kontakt</a>
-      <a href="configurator.html">Dobierz system</a>
+      <a href="konfigurator-led.html">Konfigurator LED</a>
       <a  href="ai-shopping.html"><img class="gemini-icon" src="images/prescot-pattern.png" style="width: 18px; height: 18px; object-fit: contain; margin-right: 6px; vertical-align: middle;">Zakup AI</a>
     </nav>
   </header>
@@ -2878,7 +2878,7 @@
       <h3>Odkryj</h3>
       <ul>
         <li><a href="shop.html">Produkty Premium</a></li>
-        <li><a href="configurator.html">Dobierz System AI</a></li>
+        <li><a href="konfigurator-led.html">Konfigurator LED</a></li>
         <li><a href="#">Bestsellery</a></li>
         <li><a href="#">Nowości 2026</a></li>
       </ul>
@@ -3048,11 +3048,11 @@
       <i class="ph ph-squares-four"></i>
       <span>Sklep</span>
     </a>
-    <a class="mobile-nav-item configurator-mobile-link" href="configurator.html" style="position:relative;">
+    <a class="mobile-nav-item configurator-mobile-link" href="konfigurator-led.html" style="position:relative;">
       <div class="nav-center-pill">
         <i class="ph ph-lightbulb-filament"></i>
       </div>
-      <span style="margin-top:24px;">Dobierz</span>
+      <span style="margin-top:24px;">Konfig. LED</span>
     </a>
     <a class="mobile-nav-item" href="ai-shopping.html">
       <img src="images/prescot-pattern.png" class="nav-ai-icon" alt="">
@@ -3370,6 +3370,69 @@ body.index-page .site-header:not(.scrolled) {
 }
 </style>
 <!-- END MOBILE UI FIXES -->
+
+
+<style id="urgent-mobile-fixes-3">
+/* FIX 1: White patch on navy nav on mobile */
+.new-glass-nav a.active, 
+.new-glass-nav .mobile-nav-item.active {
+  background: transparent !important;
+  color: #00e5ff !important;
+}
+.new-glass-nav .nav-center-pill {
+  background: linear-gradient(135deg, #0b1a30, #1a365d) !important;
+  border: 2px solid #00e5ff !important;
+  border-radius: 50% !important; /* ensure it's round and no white corners */
+}
+.new-glass-nav .nav-center-pill i {
+  background: transparent !important;
+}
+
+/* FIX 2: Scroll arrow overlap & Huge category banners */
+@media (max-width: 768px) {
+  .scroll-down-arrow {
+    bottom: 140px !important; /* Move higher to not overlap */
+  }
+  .hero-section, .mockup-hero-slider, .page-hero {
+    padding-bottom: 140px !important;
+  }
+
+  /* Force ALL category banners to be slim */
+  .category-banner-card, 
+  .category-banner-card.sub-card, 
+  .mockup-category-card, 
+  .category-card,
+  .shop-category-card {
+    height: 160px !important;
+    min-height: 160px !important;
+    padding: 20px 15px !important;
+  }
+  .category-banner-card h3, 
+  .category-banner-card.sub-card h3, 
+  .mockup-category-card h3, 
+  .glass-cat-title,
+  .category-card h3 {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    font-size: 18px !important;
+    line-height: 1 !important;
+    margin-bottom: 4px !important;
+  }
+  .category-banner-card div > span, 
+  .category-banner-card.sub-card div > span, 
+  .mockup-category-card p, 
+  .glass-cat-subtitle,
+  .category-card p {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    font-size: 11px !important;
+    display: block !important;
+    margin: 0 !important;
+  }
+}
+</style>
 
 </body>
 

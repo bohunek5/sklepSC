@@ -477,7 +477,7 @@
       <a href="blog.html">Wiedza</a>
       <a href="about.html">O nas</a>
       <a href="contact.html">Kontakt</a>
-      <a href="configurator.html">Dobierz system</a>
+      <a href="konfigurator-led.html">Konfigurator LED</a>
       <a class="active" href="ai-shopping.html"><img class="gemini-icon" src="images/prescot-pattern.png" style="width: 18px; height: 18px; object-fit: contain; margin-right: 6px; vertical-align: middle;">Zakup AI</a>
     </nav>
     <div class="header-actions">
@@ -524,7 +524,7 @@
     <div class="mobile-nav-items">
       <a class="mobile-nav-item" href="index.html"><i class="ph ph-house"></i><span>Home</span></a>
       <a class="mobile-nav-item" href="javascript:void(0);" onclick="openMobileCategories();"><i class="ph ph-squares-four"></i><span>Kategorie</span></a>
-      <a class="mobile-nav-item configurator-mobile-link" href="configurator.html"><i class="ph ph-lightbulb-filament"></i><span>Dobierz</span></a>
+      <a class="mobile-nav-item configurator-mobile-link" href="konfigurator-led.html"><i class="ph ph-lightbulb-filament"></i><span>Konfig. LED</span></a>
       <a class="mobile-nav-item active" href="ai-shopping.html"><img class="gemini-icon" src="images/prescot-pattern.png" style="width: 22px; height: 22px; object-fit: contain; margin-bottom: 4px; filter: grayscale(1) brightness(2);"><span>Zakup AI</span></a>
       <a class="mobile-nav-item" href="contact.html"><i class="ph ph-envelope-simple"></i><span>Kontakt</span></a>
     </div>
@@ -789,6 +789,69 @@ body.index-page .site-header:not(.scrolled) {
 }
 </style>
 <!-- END MOBILE UI FIXES -->
+
+
+<style id="urgent-mobile-fixes-3">
+/* FIX 1: White patch on navy nav on mobile */
+.new-glass-nav a.active, 
+.new-glass-nav .mobile-nav-item.active {
+  background: transparent !important;
+  color: #00e5ff !important;
+}
+.new-glass-nav .nav-center-pill {
+  background: linear-gradient(135deg, #0b1a30, #1a365d) !important;
+  border: 2px solid #00e5ff !important;
+  border-radius: 50% !important; /* ensure it's round and no white corners */
+}
+.new-glass-nav .nav-center-pill i {
+  background: transparent !important;
+}
+
+/* FIX 2: Scroll arrow overlap & Huge category banners */
+@media (max-width: 768px) {
+  .scroll-down-arrow {
+    bottom: 140px !important; /* Move higher to not overlap */
+  }
+  .hero-section, .mockup-hero-slider, .page-hero {
+    padding-bottom: 140px !important;
+  }
+
+  /* Force ALL category banners to be slim */
+  .category-banner-card, 
+  .category-banner-card.sub-card, 
+  .mockup-category-card, 
+  .category-card,
+  .shop-category-card {
+    height: 160px !important;
+    min-height: 160px !important;
+    padding: 20px 15px !important;
+  }
+  .category-banner-card h3, 
+  .category-banner-card.sub-card h3, 
+  .mockup-category-card h3, 
+  .glass-cat-title,
+  .category-card h3 {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    font-size: 18px !important;
+    line-height: 1 !important;
+    margin-bottom: 4px !important;
+  }
+  .category-banner-card div > span, 
+  .category-banner-card.sub-card div > span, 
+  .mockup-category-card p, 
+  .glass-cat-subtitle,
+  .category-card p {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    font-size: 11px !important;
+    display: block !important;
+    margin: 0 !important;
+  }
+}
+</style>
 
 </body>
 </html>
