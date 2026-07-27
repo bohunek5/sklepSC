@@ -256,6 +256,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         ctaAdd.className = 'add-to-cart-btn';
         ctaAdd.style.width = '100%';
         ctaAdd.style.border = 'none';
+        ctaAdd.style.padding = '0';
         ctaAdd.innerHTML = '<span class="btn-slide-wrap"><span class="btn-txt-default">Dodaj do koszyka</span><span class="btn-txt-hover"><i class="ph ph-shopping-cart-simple" style="margin-right: 6px;"></i> Dodaj teraz!</span></span>';
         ctaAdd.onclick = (e) => {
           e.preventDefault();
@@ -267,7 +268,20 @@ document.addEventListener('DOMContentLoaded', async () => {
           if(window.openCartDrawer) window.openCartDrawer();
         };
 
+        const ctaBuy = document.createElement('button');
+        ctaBuy.type = 'button';
+        ctaBuy.className = 'buy-it-now-btn';
+        ctaBuy.style.width = '100%';
+        ctaBuy.style.border = 'none';
+        ctaBuy.style.padding = '0';
+        ctaBuy.innerHTML = '<span class="btn-slide-wrap"><span class="btn-txt-default">Szybki zakup</span><span class="btn-txt-hover"><i class="ph ph-shopping-cart-simple" style="margin-right: 6px;"></i> Przejdź do kasy</span></span>';
+        ctaBuy.onclick = (e) => {
+          e.preventDefault();
+          window.location.href = 'checkout.html';
+        };
+
         buttonsRow.appendChild(ctaAdd);
+        buttonsRow.appendChild(ctaBuy);
         productsContainer.appendChild(buttonsRow);
       }
       

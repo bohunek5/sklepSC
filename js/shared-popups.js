@@ -1828,6 +1828,7 @@ function initSharedPopups() {
     if (addCartBtn) {
       e.preventDefault();
       e.stopPropagation();
+      e.stopImmediatePropagation();
       const pId = parseInt(addCartBtn.dataset.id);
       const p = products.find(prod => prod.id === pId);
       if (!p) return;
@@ -1838,8 +1839,8 @@ function initSharedPopups() {
         price: p.price,
         image: p.images[0],
         qty: 1,
-        color: p.colors[0] || null,
-        size: p.sizes[0] || null
+        color: p.colors?.[0] || null,
+        size: p.sizes?.[0] || null
       };
 
       const existingIndex = cart.findIndex(item => item.id === cartItem.id && item.color === cartItem.color && item.size === cartItem.size);

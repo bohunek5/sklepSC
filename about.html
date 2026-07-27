@@ -3172,19 +3172,9 @@ body.index-page .site-header:not(.scrolled) {
   .bottom-main-icon { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; margin-top: -20px; border: 2px solid #00e5ff; border-radius: 50%; color: #00e5ff; background: #10233a; box-shadow: 0 0 22px rgba(40,215,255,.2); }
   .bottom-main-icon i { font-size: 21px; }
   
-  /* Fix cart button in top header to render like the old one */
-  .site-header .header-icon, .mockup-header .header-icon {
-    display: inline-flex !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-  }
-  .site-header .header-icon svg, .mockup-header .header-icon svg {
+  /* Only force dark icons on white headers (scrolled) */
+  .site-header.scrolled .header-icon svg, .mockup-header.scrolled .header-icon svg {
     stroke: #0b1a30 !important;
-    fill: none !important;
-  }
-  .index-page .site-header:not(.scrolled) .header-icon svg {
-    stroke: #ffffff !important;
   }
   .menu-toggle, .menu-button {
     display: block !important;

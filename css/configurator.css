@@ -924,7 +924,7 @@ img {
 
 .choice-card:has(input:checked) {
   border-color: var(--orange);
-  background: #fff9f5;
+  background: rgba(11, 26, 48, 0.04);
   box-shadow: 0 0 0 2px rgba(11,26,48,.1), 0 11px 24px rgba(11,26,48,.08);
 }
 

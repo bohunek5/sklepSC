@@ -197,11 +197,13 @@ try {
     select.value = 'price-asc';
     select.dispatchEvent(new Event('change', { bubbles: true }));
   })()`);
+  await delay(250);
   const sortedPrices = await evaluate(client, `[...document.querySelectorAll('#shopGrid .catalog-current-price')].map((element) => Number(element.textContent.replace(',', '.').replace(/[^0-9.]/g, '')))`);
   if (sortedPrices.some((price, index) => index > 0 && price < sortedPrices[index - 1])) {
-    throw new Error('Sortowanie ceny rosnąco nie działa.');
+    throw new Error('Sortowanie ceny rosnąco nie działa. Ceny: ' + JSON.stringify(sortedPrices));
   }
 
+  await delay(250);
   await evaluate(client, `document.querySelector('#shopGrid .add-to-cart-btn').click()`);
   const cart = await evaluate(client, `(() => {
     const items = JSON.parse(localStorage.getItem('prescot_cart') || '[]');

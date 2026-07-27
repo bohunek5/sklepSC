@@ -214,12 +214,10 @@
       padding: 2px;
       background: conic-gradient(
         from var(--halo-angle, 0deg), 
-        rgba(5, 12, 25, 1) 0%,         /* Very dark navy */
-        rgba(5, 12, 25, 1) 40%, 
-        rgba(11, 26, 48, 1) 60%,       /* Deep navy */
-        rgba(11, 26, 48, 0.7) 80%,    /* Brand orange fading in */
-        #0b1a30 95%,                   /* Pure brand orange */
-        rgba(5, 12, 25, 1) 100%        /* Seamless loop to dark navy */
+        #0b1a30 0%,
+        #ffffff 33%,
+        #FF5A00 66%,
+        #0b1a30 100%
       );
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
@@ -864,19 +862,9 @@ body.index-page .site-header:not(.scrolled) {
   .bottom-main-icon { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; margin-top: -20px; border: 2px solid #00e5ff; border-radius: 50%; color: #00e5ff; background: #10233a; box-shadow: 0 0 22px rgba(40,215,255,.2); }
   .bottom-main-icon i { font-size: 21px; }
   
-  /* Fix cart button in top header to render like the old one */
-  .site-header .header-icon, .mockup-header .header-icon {
-    display: inline-flex !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-  }
-  .site-header .header-icon svg, .mockup-header .header-icon svg {
+  /* Only force dark icons on white headers (scrolled) */
+  .site-header.scrolled .header-icon svg, .mockup-header.scrolled .header-icon svg {
     stroke: #0b1a30 !important;
-    fill: none !important;
-  }
-  .index-page .site-header:not(.scrolled) .header-icon svg {
-    stroke: #ffffff !important;
   }
   .menu-toggle, .menu-button {
     display: block !important;
