@@ -20,6 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
     voltage: null,
     color: null,
     pcb: null,
+    cri: null,
+    r9: null,
+    oz: null,
     profile: null,
     price: null
   };

@@ -3982,7 +3982,6 @@
     <div id="advancedFilterContainer" class="advanced-filter-container">
       <div class="filter-sheet-header">
         <div>
-          <span class="filter-panel-eyebrow">Katalog Prescot</span>
           <h3>Filtry i kategorie</h3>
         </div>
         <div class="filter-header-actions">
@@ -3996,7 +3995,7 @@
         <div class="pro-toggle-switch" id="proToggleSwitch">
           <div class="toggle-slider"></div>
           <button class="toggle-btn active" data-mode="b2c" type="button"><i class="ph ph-house-line" aria-hidden="true"></i>Dla domu</button>
-          <button class="toggle-btn" data-mode="b2b" type="button"><i class="ph ph-toolbox" aria-hidden="true"></i>Tryb PRO</button>
+          <button class="toggle-btn" data-mode="b2b" type="button"><i class="ph ph-toolbox" aria-hidden="true"></i>Znam się bardziej</button>
         </div>
       </div>
       
@@ -4014,6 +4013,11 @@
               <button class="filter-pill b2c-pill" data-type="room" data-val="Łazienka/Prysznic">Łazienka/Prysznic</button>
               <button class="filter-pill b2c-pill" data-type="room" data-val="Kuchnia pod szafki">Kuchnia pod szafki</button>
               <button class="filter-pill b2c-pill" data-type="room" data-val="Salon">Salon / Sufit</button>
+              <button class="filter-pill b2c-pill" data-type="room" data-val="Schody">Schody</button>
+              <button class="filter-pill b2c-pill" data-type="room" data-val="Sypialnia">Sypialnia</button>
+              <button class="filter-pill b2c-pill" data-type="room" data-val="Podłoga">Podłoga</button>
+              <button class="filter-pill b2c-pill" data-type="room" data-val="Garaż">Garaż / Warsztat</button>
+              <button class="filter-pill b2c-pill" data-type="room" data-val="Elewacja">Elewacja (zewnętrzne)</button>
             </div>
           </div>
           <div class="filter-group">
@@ -4022,6 +4026,10 @@
               <button class="filter-pill b2c-pill" data-type="expect" data-val="Brak kropek">Brak kropek na taśmie (COB)</button>
               <button class="filter-pill b2c-pill" data-type="expect" data-val="Zmienne kolory">Zmienne kolory (RGB/CCT)</button>
               <button class="filter-pill b2c-pill" data-type="expect" data-val="Mocne światło">Mocne światło do pracy</button>
+              <button class="filter-pill b2c-pill" data-type="expect" data-val="Subtelne oświetlenie">Subtelne oświetlenie dekoracyjne</button>
+              <button class="filter-pill b2c-pill" data-type="expect" data-val="Długa żywotność">Długa żywotność (Premium)</button>
+              <button class="filter-pill b2c-pill" data-type="expect" data-val="Smart">Sterowanie Smart (Wi-Fi/Zigbee)</button>
+              <button class="filter-pill b2c-pill" data-type="expect" data-val="Wąski profil">Wąski profil (do 5mm)</button>
             </div>
           </div>
         </div>
@@ -4069,6 +4077,35 @@
               <button class="filter-pill b2b-pill" data-type="pcb" data-val="12mm">12 mm</button>
             </div>
           </div>
+          
+          <div class="filter-group">
+            <div class="filter-group-title">CRI (Oddawanie barw)</div>
+            <div class="horizontal-scroll-pills">
+              <button class="filter-pill b2b-pill" data-type="cri" data-val="CRI>80">CRI>80</button>
+              <button class="filter-pill b2b-pill" data-type="cri" data-val="CRI>90">CRI>90</button>
+              <button class="filter-pill b2b-pill" data-type="cri" data-val="CRI>95">CRI>95</button>
+              <button class="filter-pill b2b-pill" data-type="cri" data-val="CRI>98">CRI>98</button>
+            </div>
+          </div>
+          
+          <div class="filter-group">
+            <div class="filter-group-title">R9 (Czerwień)</div>
+            <div class="horizontal-scroll-pills">
+              <button class="filter-pill b2b-pill" data-type="r9" data-val="R9>50">R9>50</button>
+              <button class="filter-pill b2b-pill" data-type="r9" data-val="R9>80">R9>80</button>
+              <button class="filter-pill b2b-pill" data-type="r9" data-val="R9>90">R9>90</button>
+            </div>
+          </div>
+          
+          <div class="filter-group">
+            <div class="filter-group-title">Grubość PCB (w OZ)</div>
+            <div class="horizontal-scroll-pills">
+              <button class="filter-pill b2b-pill" data-type="oz" data-val="1oz">1 OZ</button>
+              <button class="filter-pill b2b-pill" data-type="oz" data-val="2oz">2 OZ</button>
+              <button class="filter-pill b2b-pill" data-type="oz" data-val="3oz">3 OZ</button>
+              <button class="filter-pill b2b-pill" data-type="oz" data-val="4oz">4 OZ</button>
+            </div>
+          </div>
         </div>
         
         <!-- Common Filters (Always visible) -->
@@ -4112,7 +4149,7 @@
       
       <!-- Sticky Footer inside Sheet -->
       <div class="filter-sheet-footer">
-        <button id="applyFiltersBtn" class="apply-filters-btn">Pokaż 1323 produktów</button>
+        <button id="applyFiltersBtn" class="apply-filters-btn">Pokaż produkty</button>
       </div>
     </div>
     
@@ -4120,9 +4157,7 @@
     <div class="shop-grid-wrapper" style="flex: 1;">
       <header class="shop-catalog-toolbar">
         <div class="shop-catalog-heading">
-          <span class="catalog-eyebrow">Pełna oferta Prescot LED</span>
-          <h2>Produkty LED</h2>
-          <p id="shopResultSummary" role="status" aria-live="polite">Wczytuję produkty…</p>
+          <h2 style="display: flex; align-items: baseline; margin: 0;">Produkty <span id="shopResultSummary" style="font-size: 16px; color: #64748b; font-weight: normal; margin-left: 8px;">(Wczytuję...)</span></h2>
         </div>
         <div class="shop-toolbar-controls">
           <label class="catalog-sort-control" for="shopSortSelect">
@@ -4329,6 +4364,9 @@
       let currentRoom = 'all';
       let currentExpectation = 'all';
       let currentPCB = 'all';
+      let currentCRI = 'all';
+      let currentR9 = 'all';
+      let currentOZ = 'all';
       let currentProfile = 'all';
       let currentSearch = '';
       let currentSort = 'default';
@@ -4411,6 +4449,9 @@
         currentRoom = filters.room || 'all';
         currentExpectation = filters.expect || 'all';
         currentPCB = filters.pcb || 'all';
+        currentCRI = filters.cri || 'all';
+        currentR9 = filters.r9 || 'all';
+        currentOZ = filters.oz || 'all';
         currentProfile = filters.profile || 'all';
         currentPage = 1;
         renderFilteredProducts();
@@ -4741,10 +4782,40 @@
         }
 
         if (currentPCB !== 'all') {
-          const pcbWidth = currentPCB.replace(/\D/g, '');
-          const pcbPattern = new RegExp(`(?:^|\\D)${pcbWidth}\\s*mm(?:\\D|$)`, 'i');
-          filtered = filtered.filter((product) => pcbPattern.test(productSpecText(product)));
-        }
+            const reqPCB = currentPCB.toLowerCase().replace(/\s+/g, '');
+            filtered = filtered.filter(p => {
+              const specList = p.specs ? p.specs.map(s => s.toLowerCase().replace(/\s+/g, '')) : [];
+              return specList.some(s => s.includes('pcb') && s.includes(reqPCB)) || 
+                     (p.title && p.title.toLowerCase().replace(/\s+/g, '').includes(reqPCB));
+            });
+          }
+          
+          if (currentCRI !== 'all') {
+            const reqCRI = currentCRI.toLowerCase().replace(/\s+/g, '');
+            filtered = filtered.filter(p => {
+              const specList = p.specs ? p.specs.map(s => s.toLowerCase().replace(/\s+/g, '')) : [];
+              return specList.some(s => s.includes(reqCRI)) || 
+                     (p.title && p.title.toLowerCase().replace(/\s+/g, '').includes(reqCRI));
+            });
+          }
+
+          if (currentR9 !== 'all') {
+            const reqR9 = currentR9.toLowerCase().replace(/\s+/g, '');
+            filtered = filtered.filter(p => {
+              const specList = p.specs ? p.specs.map(s => s.toLowerCase().replace(/\s+/g, '')) : [];
+              return specList.some(s => s.includes(reqR9)) || 
+                     (p.title && p.title.toLowerCase().replace(/\s+/g, '').includes(reqR9));
+            });
+          }
+
+          if (currentOZ !== 'all') {
+            const reqOZ = currentOZ.toLowerCase().replace(/\s+/g, '');
+            filtered = filtered.filter(p => {
+              const specList = p.specs ? p.specs.map(s => s.toLowerCase().replace(/\s+/g, '')) : [];
+              return specList.some(s => s.includes(reqOZ)) || 
+                     (p.title && p.title.toLowerCase().replace(/\s+/g, '').includes(reqOZ));
+            });
+          }
 
         if (currentProfile !== 'all') {
           const profilePatterns = {
@@ -4778,8 +4849,8 @@
         const itemsToShow = filtered.slice(startIndex, endIndex);
         if (shopResultSummary) {
           shopResultSummary.textContent = totalItems
-            ? `Produkty ${startIndex + 1}–${endIndex} z ${totalItems}`
-            : 'Nie znaleziono produktów dla tych kryteriów';
+            ? `(${totalItems})`
+            : '(0)';
         }
         window.updateAdvancedFilterProductCount?.(totalItems);
 
