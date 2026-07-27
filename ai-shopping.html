@@ -134,6 +134,22 @@
       margin-top: 4px;
     }
 
+    /* AI Quick Reply Pills */
+    .ai-suggestion-pill {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 8px 16px;
+      color: #e2e8f0;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .ai-suggestion-pill:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
     /* AI input styled like LLM prompt box */
     
     /* --- AI STUDIO GOOGLE STYLE INPUT BAR --- */
@@ -512,6 +528,18 @@
             </div>
             <div class="message-bubble">
               Cześć! Jestem Twoim wirtualnym doradcą oświetleniowym. Opowiedz mi o swoim projekcie. Co i gdzie chcesz oświetlić? Wpisz np. "Potrzebuję 12m mocnej taśmy COB ciepłej do salonu".
+              <div class="ai-quick-replies" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px;">
+                <button class="ai-suggestion-pill" onclick="document.getElementById('aiChatInput').value=this.innerText; document.getElementById('aiChatInput').focus();">🔥 Taśma na schody</button>
+                <button class="ai-suggestion-pill" onclick="document.getElementById('aiChatInput').value=this.innerText; document.getElementById('aiChatInput').focus();">💡 Oświetlenie podszafkowe do kuchni</button>
+                <button class="ai-suggestion-pill" onclick="document.getElementById('aiChatInput').value=this.innerText; document.getElementById('aiChatInput').focus();">✨ Taśma do salonu na sufit</button>
+                <button class="ai-suggestion-pill" onclick="document.getElementById('aiChatInput').value=this.innerText; document.getElementById('aiChatInput').focus();">🎨 Kolorowa taśma RGBW</button>
+                <button class="ai-suggestion-pill" onclick="document.getElementById('aiChatInput').value=this.innerText; document.getElementById('aiChatInput').focus();">🔌 Jaki zasilacz wybrać?</button>
+                <button class="ai-suggestion-pill" onclick="document.getElementById('aiChatInput').value=this.innerText; document.getElementById('aiChatInput').focus();">📏 Jakie macie profile?</button>
+                <button class="ai-suggestion-pill" onclick="document.getElementById('aiChatInput').value=this.innerText; document.getElementById('aiChatInput').focus();">💦 Taśmy wodoodporne IP67</button>
+                <button class="ai-suggestion-pill" onclick="document.getElementById('aiChatInput').value=this.innerText; document.getElementById('aiChatInput').focus();">📐 Mocny LED do garażu</button>
+                <button class="ai-suggestion-pill" onclick="document.getElementById('aiChatInput').value=this.innerText; document.getElementById('aiChatInput').focus();">🌈 Taśmy cyfrowe</button>
+                <button class="ai-suggestion-pill" onclick="document.getElementById('aiChatInput').value=this.innerText; document.getElementById('aiChatInput').focus();">🎯 Pokaż bestsellery</button>
+              </div>
             </div>
           </div>
         </div>
@@ -577,8 +605,6 @@
           setTimeout(() => {
             document.body.classList.remove('keyboard-open');
           }, 100);
-        });
-      }
         });
       }
     });

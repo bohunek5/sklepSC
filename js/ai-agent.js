@@ -212,19 +212,25 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function renderProducts(aiBubble, productsList, isBought, headerText) {
-      let html = `<div style="margin-top: 15px; font-weight: 600; font-size: 13px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">${headerText}</div><div style="margin-top: 12px; display: flex; flex-direction: column; gap: 12px;">`;
+      let html = `<div style="margin-top: 15px; font-weight: 600; font-size: 13px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">${headerText}</div><div style="margin-top: 12px; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px;">`;
       
       productsList.forEach(p => {
           html += `
             <div class="pro-product-card" style="padding: 12px; border: 1px solid rgba(255,255,255,0.05); background: rgba(15,23,42,0.6); backdrop-filter: blur(8px); border-radius: 12px; transition: transform 0.2s; display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="if(window.openQuickView) window.openQuickView('${p.id}');">
-              <div style="flex-shrink: 0;"><img src="${productImage(p)}" style="width: 54px; height: 54px; object-fit: cover; border-radius: 8px; background: #fff;"></div>
-              <div style="flex: 1;">
-                <div style="font-weight: 600; font-size: 14px; margin-bottom: 4px; line-height: 1.3; color: #f8fafc;">${p.title}</div>
-                <div style="font-size: 12px; color: #64748b;">${p.category || 'Produkt'}</div>
+              <div style="display: flex; align-items: center; gap: 12px; width: 100%;">
+                <div style="flex-shrink: 0;"><img src="${productImage(p)}" style="width: 54px; height: 54px; object-fit: cover; border-radius: 8px; background: #fff;"></div>
+                <div style="flex: 1;">
+                  <div style="font-weight: 600; font-size: 14px; margin-bottom: 4px; line-height: 1.3; color: #f8fafc;">${p.title}</div>
+                  <div style="font-size: 12px; color: #64748b;">${p.category || 'Produkt'}</div>
+                </div>
+                <div style="text-align: right;">
+                  <div style="font-weight: 700; color: #0b1a30; font-size: 15px; margin-bottom: 5px;">${formatPrice(p.price)}</div>
+                  <button type="button" class="mockup-btn mockup-btn-outline" style="padding: 4px 10px; font-size: 11px; height: auto;" onclick="event.stopPropagation(); if(window.openQuickView) window.openQuickView('${p.id}');">Sprawdź produkt</button>
+                </div>
               </div>
-              <div style="text-align: right;">
-                <div style="font-weight: 700; color: #0b1a30; font-size: 15px; margin-bottom: 5px;">${formatPrice(p.price)}</div>
-                <button type="button" class="mockup-btn mockup-btn-outline" style="padding: 4px 10px; font-size: 11px; height: auto;" onclick="event.stopPropagation(); if(window.openQuickView) window.openQuickView('${p.id}');">Sprawdź produkt</button>
+              <div class="product-actions" style="display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 4px;">
+                <button type="button" class="add-to-cart-btn ai-add-btn" data-id="${p.id}" style="width: 100%;">DODAJ DO KOSZYKA</button>
+                <button type="button" class="buy-it-now-btn ai-buy-btn" data-id="${p.id}" style="width: 100%;">SZYBKI ZAKUP</button>
               </div>
             </div>
           `;
@@ -237,54 +243,34 @@ document.addEventListener('DOMContentLoaded', async () => {
         const cta = document.createElement('button');
         cta.type = 'button';
         cta.className = 'add-to-cart-btn bought';
-        cta.style.width = '100%';
-        cta.style.marginTop = '12px';
-        cta.style.border = 'none';
-        cta.innerHTML = '✓ DODANO — Przejdź do kasy';
-        cta.onclick = (e) => { e.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
-        productsContainer.appendChild(cta);
-      } else {
-        const buttonsRow = document.createElement('div');
-        buttonsRow.style.display = 'flex';
-        buttonsRow.style.flexDirection = 'column';
-        buttonsRow.style.gap = '8px';
-        buttonsRow.style.width = '100%';
-        buttonsRow.style.marginTop = '12px';
-
-        const ctaAdd = document.createElement('button');
-        ctaAdd.type = 'button';
-        ctaAdd.className = 'add-to-cart-btn';
-        ctaAdd.style.width = '100%';
         
-        ctaAdd.innerHTML = 'DODAJ DO KOSZYKA';
-        ctaAdd.onclick = (e) => {
-          e.preventDefault();
-          addItemsToCart(aiSessionState.lastProposedItems);
-          aiSessionState.lastProposedItems = [];
-          ctaAdd.className = 'add-to-cart-btn bought';
-          ctaAdd.innerHTML = '✓ DODANO — Przejdź do kasy';
-          ctaAdd.onclick = (e2) => { e2.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
-          if(window.openCartDrawer) window.openCartDrawer();
-        };
+        // Add event listeners for per-product buttons
+        productsContainer.querySelectorAll('.ai-add-btn').forEach(btn => {
+          btn.onclick = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const p = productsList.find(x => x.id === btn.getAttribute('data-id'));
+            if (p) {
+              addItemsToCart([cartRecord(p, 1)]);
+              btn.className = 'add-to-cart-btn bought';
+              btn.innerHTML = '✓ DODANO';
+            }
+          };
+        });
 
-        const ctaBuy = document.createElement('button');
-        ctaBuy.type = 'button';
-        ctaBuy.className = 'buy-it-now-btn';
-        ctaBuy.style.width = '100%';
+        productsContainer.querySelectorAll('.ai-buy-btn').forEach(btn => {
+          btn.onclick = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const p = productsList.find(x => x.id === btn.getAttribute('data-id'));
+            if (p) {
+              addItemsToCart([cartRecord(p, 1)]);
+              window.location.href = 'checkout.html';
+            }
+          };
+        });
         
-        ctaBuy.innerHTML = 'SZYBKI ZAKUP';
-        ctaBuy.onclick = (e) => {
-          e.preventDefault();
-          addItemsToCart(aiSessionState.lastProposedItems);
-          window.location.href = 'checkout.html';
-        };
-
-        buttonsRow.appendChild(ctaAdd);
-        buttonsRow.appendChild(ctaBuy);
-        productsContainer.appendChild(buttonsRow);
-      }
-      
-      aiBubble.appendChild(productsContainer);
+        aiBubble.appendChild(productsContainer);
       scrollToBottom();
   }
 
@@ -491,7 +477,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
             
             return { product: p, score };
-        }).filter(x => x.score > 0).sort((a, b) => b.score - a.score).map(x => x.product).slice(0, 5);
+        }).filter(x => x.score > 0).sort((a, b) => b.score - a.score).map(x => x.product).slice(0, 24);
     }
 
     if (matchedProducts.length > 0) {
@@ -514,10 +500,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     
     // Generic Fallback
-    streamText(aiBubble, "Nie do końca Cię zrozumiałem. Będę mógł pomóc najskuteczniej, jeśli napiszesz, **do jakiego pomieszczenia** potrzebujesz oświetlenia (np. salon, kuchnia).", () => {
+    streamText(aiBubble, "Nie do końca Cię zrozumiałem. Będę mógł pomóc najskuteczniej, jeśli napiszesz do jakiego zastosowania potrzebujesz oświetlenia lub zapytasz o konkrety.", () => {
         renderQuickReplies(aiBubble, [
-            { label: 'Oświetlenie do kuchni', value: 'LED do kuchni' },
-            { label: 'LED na schody', value: 'Taśma na schody' }
+            { label: '🔥 LED na schody', value: 'Taśma na schody' },
+            { label: '💡 Zestaw do kuchni', value: 'Oświetlenie podszafkowe do kuchni' },
+            { label: '✨ Do salonu (sufit)', value: 'Taśma do salonu na sufit' },
+            { label: '🎨 Zmienne kolory (RGB)', value: 'Kolorowa taśma RGBW' },
+            { label: '🔌 Jaki zasilacz?', value: 'Jaki zasilacz wybrać?' },
+            { label: '📏 Jakie profile?', value: 'Jakie macie profile?' },
+            { label: '💦 Wodoodporne', value: 'Taśmy wodoodporne IP67' },
+            { label: '📐 Oświetlenie garażu', value: 'Mocny LED do garażu' },
+            { label: '🌈 Cyfrowe (magiczne)', value: 'Taśmy cyfrowe' },
+            { label: '🎯 Pokaż bestsellery', value: 'Pokaż bestsellery' }
         ]);
     });
 
