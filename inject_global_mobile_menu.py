@@ -35,25 +35,54 @@ CSS_TO_INJECT = """
 """
 
 def generate_config_nav(f):
-    is_start = 'class="active"' if f in ['index.html', 'original_index.html', 'old_index.html'] else ''
-    is_sklep = 'class="active"' if f == 'shop.html' else ''
-    is_config = 'class="active"' if 'configurator' in f else ''
-    is_ai = 'class="active"' if f == 'ai-shopping.html' else ''
+    # Determine which tab is active
+    active_tab = 'start'
+    if f == 'shop.html':
+        active_tab = 'sklep'
+    elif 'configurator' in f or 'konfigurator' in f:
+        active_tab = 'config'
+    elif f == 'ai-shopping.html':
+        active_tab = 'ai'
+    elif f == 'cart.html':
+        active_tab = 'cart'
+        
+    def render_icon(tab_id, icon_html):
+        if active_tab == tab_id:
+            return '<span class="bottom-main-icon">' + icon_html + '</span>'
+        return icon_html
+
+    html = '<nav class="config-bottom-nav" aria-label="Skróty mobilne">\n'
     
-    return f'''<nav class="config-bottom-nav" aria-label="Skróty mobilne">
-    <a href="index.html" {is_start}><i class="ph ph-house" aria-hidden="true"></i><span>Start</span></a>
-    <a href="shop.html" {is_sklep}><i class="ph ph-storefront" aria-hidden="true"></i><span>Sklep</span></a>
-    <a href="configurator.html" {is_config}><span class="bottom-main-icon"><i class="ph ph-lightbulb-filament" aria-hidden="true"></i></span><span>Konfig. LED</span></a>
-    <a href="ai-shopping.html" {is_ai}><i class="ph ph-sparkle" aria-hidden="true"></i><span>Zakup AI</span></a>
-    <button id="mobileCartButton" type="button" onclick="openCartDrawer && openCartDrawer()"><i class="ph ph-shopping-cart-simple" aria-hidden="true"></i><span>Koszyk</span></button>
-  </nav>'''
+    # 1. Start
+    cls = 'class="active"' if active_tab == 'start' else ''
+    icon = render_icon("start", '<i class="ph ph-house" aria-hidden="true"></i>')
+    html += f'    <a href="index.html" {cls}>{icon}<span>Start</span></a>\n'
+    
+    # 2. Sklep
+    cls = 'class="active"' if active_tab == 'sklep' else ''
+    icon = render_icon("sklep", '<i class="ph ph-storefront" aria-hidden="true"></i>')
+    html += f'    <a href="shop.html" {cls}>{icon}<span>Sklep</span></a>\n'
+    
+    # 3. Konfigurator
+    cls = 'class="active"' if active_tab == 'config' else ''
+    icon = render_icon("config", '<i class="ph ph-lightbulb-filament" aria-hidden="true"></i>')
+    html += f'    <a href="configurator.html" {cls}>{icon}<span>Konfig. LED</span></a>\n'
+    
+    # 4. Zakup AI
+    cls = 'class="active"' if active_tab == 'ai' else ''
+    icon = render_icon("ai", '<i class="ph ph-sparkle" aria-hidden="true"></i>')
+    html += f'    <a href="ai-shopping.html" {cls}>{icon}<span>Zakup AI</span></a>\n'
+    
+    # 5. Koszyk
+    cls = 'class="active"' if active_tab == 'cart' else ''
+    icon = render_icon("cart", '<i class="ph ph-shopping-cart-simple" aria-hidden="true"></i>')
+    html += f'    <button id="mobileCartButton" type="button" {cls} onclick="openCartDrawer && openCartDrawer()">{icon}<span>Koszyk</span></button>\n'
+    
+    html += '  </nav>'
+    return html
 
 def update_files():
     html_files = glob.glob('*.html')
-    
-    # We want to replace new-glass-nav or mobile-bottom-nav
-    nav_pattern_new = re.compile(r'<nav class="new-glass-nav".*?</nav>', re.DOTALL)
-    nav_pattern_old = re.compile(r'<nav class="mobile-bottom-nav".*?</nav>', re.DOTALL)
     nav_pattern_config = re.compile(r'<nav class="config-bottom-nav".*?</nav>', re.DOTALL)
     
     for f in html_files:
@@ -63,18 +92,10 @@ def update_files():
         modified = False
         new_nav = generate_config_nav(f)
         
-        # Replace existing nav
-        if nav_pattern_new.search(content):
-            content = nav_pattern_new.sub(new_nav, content)
-            modified = True
-        elif nav_pattern_old.search(content):
-            content = nav_pattern_old.sub(new_nav, content)
-            modified = True
-        elif nav_pattern_config.search(content):
+        if nav_pattern_config.search(content):
             content = nav_pattern_config.sub(new_nav, content)
             modified = True
             
-        # Inject CSS
         if 'id="global-config-nav-css"' in content:
             content = re.sub(r'<style id="global-config-nav-css">.*?</style>', CSS_TO_INJECT.strip(), content, flags=re.DOTALL)
             modified = True

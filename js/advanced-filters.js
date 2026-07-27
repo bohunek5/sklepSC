@@ -1,231 +1,197 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Mobile Bottom Sheet Logic
-    const fabBtn = document.getElementById('mobileFabFilterBtn');
-    const filterContainer = document.getElementById('advancedFilterContainer');
-    const filterBackdrop = document.getElementById('filterBackdrop');
-    const closeSheetBtn = document.getElementById('closeFilterSheetBtn');
-    
-    function openFilterSheet() {
-        if(filterContainer) filterContainer.classList.add('active');
-        if(filterBackdrop) filterBackdrop.classList.add('active');
-        document.body.style.overflow = 'hidden'; // prevent background scrolling
-    }
-    
-    function closeFilterSheet() {
-        if(filterContainer) filterContainer.classList.remove('active');
-        if(filterBackdrop) filterBackdrop.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-    
-    if(fabBtn) fabBtn.addEventListener('click', openFilterSheet);
-    if(closeSheetBtn) closeSheetBtn.addEventListener('click', closeFilterSheet);
-    if(filterBackdrop) filterBackdrop.addEventListener('click', closeFilterSheet);
+  const fabButton = document.getElementById('mobileFabFilterBtn');
+  const filterContainer = document.getElementById('advancedFilterContainer');
+  const filterBackdrop = document.getElementById('filterBackdrop');
+  const closeButton = document.getElementById('closeFilterSheetBtn');
+  const applyButton = document.getElementById('applyFiltersBtn');
+  const activeChipsContainer = document.getElementById('activeChipsContainer');
+  const fabFilterCount = document.getElementById('fabFilterCount');
+  const toggleButtons = [...document.querySelectorAll('.pro-toggle-switch .toggle-btn')];
+  const proToggle = document.getElementById('proToggleSwitch');
+  const b2cSection = document.getElementById('b2cFilters');
+  const b2bSection = document.getElementById('b2bFilters');
+  const filterPills = [...document.querySelectorAll(
+    '.advanced-filter-container .filter-pill, .advanced-filter-container .color-swatch-btn, .advanced-filter-container .svg-filter-btn'
+  )];
 
-    // Swipe down to close on mobile
-    let touchStartY = 0;
-    if(filterContainer) {
-        filterContainer.addEventListener('touchstart', e => {
-            touchStartY = e.changedTouches[0].screenY;
-        }, {passive: true});
-        filterContainer.addEventListener('touchend', e => {
-            const touchEndY = e.changedTouches[0].screenY;
-            if (touchEndY - touchStartY > 100) { // Swipe down
-                closeFilterSheet();
-            }
-        }, {passive: true});
-    }
+  const activeFilters = {
+    room: null,
+    expect: null,
+    voltage: null,
+    color: null,
+    pcb: null,
+    profile: null,
+    price: null
+  };
 
-    // 2. Amator / PRO Toggle Logic
-    const toggleBtns = document.querySelectorAll('.pro-toggle-switch .toggle-btn');
-    const proToggleSwitch = document.getElementById('proToggleSwitch');
-    const b2cSection = document.getElementById('b2cFilters');
-    const b2bSection = document.getElementById('b2bFilters');
-    
-    let currentMode = 'b2c';
+  const params = new URLSearchParams(window.location.search);
+  let currentMode = ['pro', 'b2b'].includes(params.get('mode')) ? 'b2b' : 'b2c';
 
-    toggleBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const mode = btn.dataset.mode;
-            currentMode = mode;
-            
-            toggleBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            if (mode === 'b2b') {
-                proToggleSwitch.classList.add('is-pro');
-                b2cSection.classList.remove('active');
-                b2bSection.classList.add('active');
-            } else {
-                proToggleSwitch.classList.remove('is-pro');
-                b2bSection.classList.remove('active');
-                b2cSection.classList.add('active');
-            }
-            updateURL();
-        });
+  Object.keys(activeFilters).forEach((key) => {
+    const value = params.get(key);
+    if (value) activeFilters[key] = value;
+  });
+
+  function setSheetState(open) {
+    filterContainer?.classList.toggle('active', open);
+    filterBackdrop?.classList.toggle('active', open);
+    filterContainer?.setAttribute('aria-hidden', String(!open));
+    fabButton?.setAttribute('aria-expanded', String(open));
+    document.body.classList.toggle('filter-sheet-open', open);
+  }
+
+  function openFilterSheet() {
+    setSheetState(true);
+    closeButton?.focus({ preventScroll: true });
+  }
+
+  function closeFilterSheet() {
+    setSheetState(false);
+    fabButton?.focus({ preventScroll: true });
+  }
+
+  fabButton?.addEventListener('click', openFilterSheet);
+  closeButton?.addEventListener('click', closeFilterSheet);
+  filterBackdrop?.addEventListener('click', closeFilterSheet);
+  applyButton?.addEventListener('click', closeFilterSheet);
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && filterContainer?.classList.contains('active')) closeFilterSheet();
+  });
+
+  let touchStartY = 0;
+  filterContainer?.addEventListener('touchstart', (event) => {
+    touchStartY = event.changedTouches[0].screenY;
+  }, { passive: true });
+  filterContainer?.addEventListener('touchend', (event) => {
+    if (event.changedTouches[0].screenY - touchStartY > 100) closeFilterSheet();
+  }, { passive: true });
+
+  function setMode(mode, { update = true } = {}) {
+    currentMode = mode === 'b2b' ? 'b2b' : 'b2c';
+    toggleButtons.forEach((button) => {
+      const selected = button.dataset.mode === currentMode;
+      button.classList.toggle('active', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+    proToggle?.classList.toggle('is-pro', currentMode === 'b2b');
+    b2cSection?.classList.toggle('active', currentMode === 'b2c');
+    b2bSection?.classList.toggle('active', currentMode === 'b2b');
+    if (update) syncUI();
+  }
+
+  toggleButtons.forEach((button) => {
+    button.addEventListener('click', () => setMode(button.dataset.mode));
+  });
+
+  function updateURL() {
+    const nextURL = new URL(window.location.href);
+    nextURL.searchParams.set('mode', currentMode);
+    let activeCount = 0;
+
+    Object.entries(activeFilters).forEach(([key, value]) => {
+      if (value) {
+        nextURL.searchParams.set(key, value);
+        activeCount += 1;
+      } else {
+        nextURL.searchParams.delete(key);
+      }
     });
 
-    // 3. Faceted Navigation Logic
-    // This will hold active filters
-    const activeFilters = {
-        room: null,
-        expect: null,
-        voltage: null,
-        color: null,
-        pcb: null,
-        profile: null,
-        price: null
+    window.history.replaceState({}, '', nextURL);
+    if (fabFilterCount) fabFilterCount.textContent = activeCount ? `(${activeCount})` : '';
+  }
+
+  function displayValue(key, value) {
+    const prefixes = {
+      color: 'Barwa',
+      voltage: 'Napięcie',
+      pcb: 'PCB',
+      price: 'Cena'
     };
+    return prefixes[key] ? `${prefixes[key]}: ${value}` : value;
+  }
 
-    const filterPills = document.querySelectorAll('.advanced-filter-container .filter-pill, .advanced-filter-container .color-swatch-btn, .advanced-filter-container .svg-filter-btn');
-    const activeChipsContainer = document.getElementById('activeChipsContainer');
-    const fabFilterCount = document.getElementById('fabFilterCount');
-    const applyFiltersBtn = document.getElementById('applyFiltersBtn');
-    
-    // Read from URL on load (Shallow Routing)
-    const urlParams = new URLSearchParams(window.location.search);
-    let urlMode = urlParams.get('mode');
-    if (urlMode === 'pro' || urlMode === 'b2b') {
-        const b2bBtn = document.querySelector('.toggle-btn[data-mode="b2b"]');
-        if(b2bBtn) b2bBtn.click();
-    }
-    
-    Object.keys(activeFilters).forEach(key => {
-        const val = urlParams.get(key);
-        if (val) activeFilters[key] = val;
-    });
+  function renderActiveChips() {
+    if (!activeChipsContainer) return;
+    activeChipsContainer.innerHTML = '';
 
-    // Update UI based on activeFilters state
-    function syncUI() {
-        filterPills.forEach(pill => {
-            const type = pill.dataset.type;
-            const val = pill.dataset.val;
-            if (activeFilters[type] === val) {
-                pill.classList.add('active');
-            } else {
-                pill.classList.remove('active');
-            }
-        });
-        
-        renderActiveChips();
-        updateURL();
-        triggerGridUpdate();
-    }
+    Object.entries(activeFilters).forEach(([key, value]) => {
+      if (!value) return;
+      const chip = document.createElement('div');
+      const label = displayValue(key, value);
+      chip.className = 'active-chip';
+      chip.append(document.createTextNode(label));
 
-    function updateURL() {
-        const newUrl = new URL(window.location.href);
-        newUrl.searchParams.set('mode', currentMode);
-        
-        let count = 0;
-        Object.keys(activeFilters).forEach(key => {
-            if (activeFilters[key]) {
-                newUrl.searchParams.set(key, activeFilters[key]);
-                count++;
-            } else {
-                newUrl.searchParams.delete(key);
-            }
-        });
-        
-        window.history.replaceState({}, '', newUrl);
-        
-        if(fabFilterCount) fabFilterCount.textContent = count > 0 ? `(${count})` : '';
-        
-        // Mocking product count update (in real app, this comes from filtered array length)
-        if(applyFiltersBtn) {
-            applyFiltersBtn.textContent = count > 0 ? `Pokaż przefiltrowane produkty` : `Pokaż wszystkie produkty`;
-        }
-    }
-
-    function renderActiveChips() {
-        if(!activeChipsContainer) return;
-        activeChipsContainer.innerHTML = '';
-        
-        Object.keys(activeFilters).forEach(key => {
-            const val = activeFilters[key];
-            if (val) {
-                const chip = document.createElement('div');
-                chip.className = 'active-chip';
-                
-                let displayVal = val;
-                if (key === 'color') displayVal = "Barwa: " + val;
-                if (key === 'voltage') displayVal = "Napięcie: " + val;
-                
-                chip.innerHTML = `
-                    ${displayVal}
-                    <div class="remove-chip" data-type="${key}"><i class="ph ph-x"></i></div>
-                `;
-                activeChipsContainer.appendChild(chip);
-            }
-        });
-
-        // Bind remove events
-        activeChipsContainer.querySelectorAll('.remove-chip').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const type = e.currentTarget.dataset.type;
-                activeFilters[type] = null;
-                syncUI();
-            });
-        });
-    }
-
-    function triggerGridUpdate() {
-        // Trigger a custom event that shop.html can listen to, or just map them to global variables
-        window.currentVoltage = activeFilters.voltage || 'all';
-        window.currentColorTemp = activeFilters.color || 'all';
-        window.currentPriceRange = activeFilters.price || 'all';
-        // Add smooth transition to grid
-        const grid = document.getElementById('shopGrid');
-        if (grid) {
-            grid.style.opacity = '0';
-            setTimeout(() => {
-                if(typeof window.renderFilteredProducts === 'function') {
-                    window.renderFilteredProducts();
-                }
-                grid.style.opacity = '1';
-            }, 300);
-        }
-    }
-
-    // Pill click handler
-    filterPills.forEach(pill => {
-        pill.addEventListener('click', (e) => {
-            const type = pill.dataset.type;
-            const val = pill.dataset.val;
-            
-            // Toggle
-            if (activeFilters[type] === val) {
-                activeFilters[type] = null;
-            } else {
-                activeFilters[type] = val;
-            }
-            
-            // AI Magic: If Łazienka is selected, maybe auto-select something in PRO mode? (Optional)
-            
-            syncUI();
-        });
-    });
-
-    // Exposed for AI
-    window.applyFiltersFromAI = function(filtersConfig) {
-        console.log("AI Applying filters:", filtersConfig);
-        // Example: filtersConfig = { mode: 'b2b', color: 'czarny', profile: 'Wpuszczany' }
-        if (filtersConfig.mode) {
-            const btn = document.querySelector(`.toggle-btn[data-mode="${filtersConfig.mode}"]`);
-            if(btn) btn.click();
-        }
-        
-        Object.keys(filtersConfig).forEach(key => {
-            if(key !== 'mode' && activeFilters[key] !== undefined) {
-                activeFilters[key] = filtersConfig[key];
-            }
-        });
-        
+      const removeButton = document.createElement('button');
+      removeButton.className = 'remove-chip';
+      removeButton.type = 'button';
+      removeButton.dataset.type = key;
+      removeButton.setAttribute('aria-label', `Usuń filtr ${label}`);
+      removeButton.innerHTML = '<i class="ph ph-x" aria-hidden="true"></i>';
+      removeButton.addEventListener('click', () => {
+        activeFilters[key] = null;
         syncUI();
-        
-        if (window.innerWidth <= 991) {
-            openFilterSheet();
-        }
-    };
+      });
+      chip.appendChild(removeButton);
+      activeChipsContainer.appendChild(chip);
+    });
+  }
 
-    // Initial sync
+  function emitFilterChange() {
+    window.dispatchEvent(new CustomEvent('prescot:filters-change', {
+      detail: { ...activeFilters, mode: currentMode }
+    }));
+  }
+
+  function syncUI() {
+    filterPills.forEach((pill) => {
+      const selected = activeFilters[pill.dataset.type] === pill.dataset.val;
+      pill.classList.toggle('active', selected);
+      pill.setAttribute('aria-pressed', String(selected));
+    });
+    renderActiveChips();
+    updateURL();
+    emitFilterChange();
+  }
+
+  filterPills.forEach((pill) => {
+    pill.type = 'button';
+    pill.addEventListener('click', () => {
+      const { type, val } = pill.dataset;
+      activeFilters[type] = activeFilters[type] === val ? null : val;
+      syncUI();
+    });
+  });
+
+  window.applyFiltersFromAI = function applyFiltersFromAI(filtersConfig = {}) {
+    if (filtersConfig.mode) setMode(filtersConfig.mode, { update: false });
+    Object.entries(filtersConfig).forEach(([key, value]) => {
+      if (key in activeFilters) activeFilters[key] = value;
+    });
     syncUI();
+    if (window.innerWidth <= 991) openFilterSheet();
+  };
+
+  window.resetAdvancedShopFilters = function resetAdvancedShopFilters() {
+    Object.keys(activeFilters).forEach((key) => { activeFilters[key] = null; });
+    syncUI();
+  };
+
+  window.updateAdvancedFilterProductCount = function updateAdvancedFilterProductCount(total) {
+    if (!applyButton) return;
+    applyButton.dataset.resultCount = String(total);
+    applyButton.textContent = `Pokaż ${total} ${total === 1 ? 'produkt' : 'produktów'}`;
+  };
+
+  document.getElementById('catalogResetFilters')?.addEventListener('click', () => {
+    window.resetAdvancedShopFilters();
+    window.resetPrimaryShopFilters?.();
+  });
+
+  fabButton?.setAttribute('aria-controls', 'advancedFilterContainer');
+  fabButton?.setAttribute('aria-expanded', 'false');
+  if (filterContainer) filterContainer.setAttribute('aria-hidden', String(window.innerWidth <= 991));
+
+  setMode(currentMode, { update: false });
+  syncUI();
 });

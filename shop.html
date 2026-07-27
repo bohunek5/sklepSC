@@ -3907,7 +3907,7 @@
 
   <link rel="stylesheet" href="css/advanced-filters.css">
 </head>
-<body>
+<body class="shop-page">
   
   <header class="site-header" id="siteHeader">
     <a class="brand" href="index.html" aria-label="Prescot — strona główna">
@@ -3981,20 +3981,31 @@
     <!-- Filter Container (Sidebar on Desktop, Bottom Sheet on Mobile) -->
     <div id="advancedFilterContainer" class="advanced-filter-container">
       <div class="filter-sheet-header">
-        <h3>Filtry i kategorie</h3>
-        <button id="closeFilterSheetBtn" class="close-sheet-btn"><i class="ph ph-x"></i></button>
+        <div>
+          <span class="filter-panel-eyebrow">Katalog Prescot</span>
+          <h3>Filtry i kategorie</h3>
+        </div>
+        <div class="filter-header-actions">
+          <button id="catalogResetFilters" class="catalog-reset-filters" type="button">Wyczyść</button>
+          <button id="closeFilterSheetBtn" class="close-sheet-btn" type="button" aria-label="Zamknij filtry"><i class="ph ph-x" aria-hidden="true"></i></button>
+        </div>
       </div>
       
       <!-- B2C / B2B Toggle -->
       <div class="filter-toggle-wrapper">
         <div class="pro-toggle-switch" id="proToggleSwitch">
           <div class="toggle-slider"></div>
-          <button class="toggle-btn active" data-mode="b2c">🏠 Dla Domu</button>
-          <button class="toggle-btn" data-mode="b2b">🛠️ Tryb PRO</button>
+          <button class="toggle-btn active" data-mode="b2c" type="button"><i class="ph ph-house-line" aria-hidden="true"></i>Dla domu</button>
+          <button class="toggle-btn" data-mode="b2b" type="button"><i class="ph ph-toolbox" aria-hidden="true"></i>Tryb PRO</button>
         </div>
       </div>
       
       <div class="filter-scroll-area">
+        <div class="filter-group catalog-category-group">
+          <div class="filter-group-title">Kategorie produktów</div>
+          <div id="shopCategoryFilters" class="catalog-category-list" role="group" aria-label="Kategorie produktów"></div>
+        </div>
+
         <!-- B2C Filters -->
         <div id="b2cFilters" class="filter-mode-section active">
           <div class="filter-group">
@@ -4107,6 +4118,25 @@
     
     <!-- Main content area wrapper -->
     <div class="shop-grid-wrapper" style="flex: 1;">
+      <header class="shop-catalog-toolbar">
+        <div class="shop-catalog-heading">
+          <span class="catalog-eyebrow">Pełna oferta Prescot LED</span>
+          <h2>Produkty LED</h2>
+          <p id="shopResultSummary" role="status" aria-live="polite">Wczytuję produkty…</p>
+        </div>
+        <div class="shop-toolbar-controls">
+          <label class="catalog-sort-control" for="shopSortSelect">
+            <span>Sortowanie</span>
+            <select id="shopSortSelect" class="sort-select">
+              <option value="default">Polecane</option>
+              <option value="price-asc">Cena: od najniższej</option>
+              <option value="price-desc">Cena: od najwyższej</option>
+              <option value="title-asc">Nazwa: A–Z</option>
+            </select>
+          </label>
+        </div>
+      </header>
+
       <!-- Active Chips Row -->
       <div id="activeChipsContainer" class="active-chips-container">
         <!-- Dynamically populated -->
@@ -4196,10 +4226,10 @@
 
   <nav class="config-bottom-nav" aria-label="Skróty mobilne">
     <a href="index.html" ><i class="ph ph-house" aria-hidden="true"></i><span>Start</span></a>
-    <a href="shop.html" class="active"><i class="ph ph-storefront" aria-hidden="true"></i><span>Sklep</span></a>
-    <a href="configurator.html" ><span class="bottom-main-icon"><i class="ph ph-lightbulb-filament" aria-hidden="true"></i></span><span>Konfig. LED</span></a>
+    <a href="shop.html" class="active"><span class="bottom-main-icon"><i class="ph ph-storefront" aria-hidden="true"></i></span><span>Sklep</span></a>
+    <a href="configurator.html" ><i class="ph ph-lightbulb-filament" aria-hidden="true"></i><span>Konfig. LED</span></a>
     <a href="ai-shopping.html" ><i class="ph ph-sparkle" aria-hidden="true"></i><span>Zakup AI</span></a>
-    <button id="mobileCartButton" type="button" onclick="openCartDrawer && openCartDrawer()"><i class="ph ph-shopping-cart-simple" aria-hidden="true"></i><span>Koszyk</span></button>
+    <button id="mobileCartButton" type="button"  onclick="openCartDrawer && openCartDrawer()"><i class="ph ph-shopping-cart-simple" aria-hidden="true"></i><span>Koszyk</span></button>
   </nav>
 
   <!-- Shared Data & Scripts -->
@@ -4209,8 +4239,9 @@
     document.addEventListener('DOMContentLoaded', () => {
       
       // Header Search Bar Handler for shop.html
-      const headerSearchInput = document.getElementById('headerSearchInput');
-      const headerSearchBtn = document.getElementById('headerSearchBtn');
+      const headerSearchInput = document.getElementById('headerSearchInput') || document.getElementById('configSearch');
+      const headerSearchBtn = document.getElementById('headerSearchBtn') || headerSearchInput?.closest('form')?.querySelector('button[type="submit"]');
+      const headerSearchForm = headerSearchInput?.closest('form');
 
       function executeHeaderSearch() {
         if (!headerSearchInput) return;
@@ -4232,6 +4263,13 @@
 
       if (headerSearchBtn) {
         headerSearchBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          executeHeaderSearch();
+        });
+      }
+
+      if (headerSearchForm) {
+        headerSearchForm.addEventListener('submit', (e) => {
           e.preventDefault();
           executeHeaderSearch();
         });
@@ -4288,6 +4326,10 @@
       let currentColorTemp = 'all';
       let currentLumens = 'all';
       let currentIP = 'all';
+      let currentRoom = 'all';
+      let currentExpectation = 'all';
+      let currentPCB = 'all';
+      let currentProfile = 'all';
       let currentSearch = '';
       let currentSort = 'default';
       let currentPage = 1;
@@ -4299,6 +4341,9 @@
       const resetFiltersBtn = document.getElementById('resetFiltersBtn');
       const topCategoryPills = document.getElementById('topCategoryPills');
       const statusHighlightBadge = document.getElementById('statusHighlightBadge');
+      const shopCategoryFilters = document.getElementById('shopCategoryFilters');
+      const shopSortSelect = document.getElementById('shopSortSelect');
+      const shopResultSummary = document.getElementById('shopResultSummary');
 
       // Helper function to bind Chip Container
       function bindChipContainer(containerId, onSelectCallback) {
@@ -4352,6 +4397,25 @@
         renderFilteredProducts();
       });
 
+      shopSortSelect?.addEventListener('change', (event) => {
+        currentSort = event.target.value;
+        currentPage = 1;
+        renderFilteredProducts();
+      });
+
+      window.addEventListener('prescot:filters-change', (event) => {
+        const filters = event.detail || {};
+        currentVoltage = filters.voltage || 'all';
+        currentColorTemp = filters.color || 'all';
+        currentPriceRange = filters.price || 'all';
+        currentRoom = filters.room || 'all';
+        currentExpectation = filters.expect || 'all';
+        currentPCB = filters.pcb || 'all';
+        currentProfile = filters.profile || 'all';
+        currentPage = 1;
+        renderFilteredProducts();
+      });
+
       // 4. Parse URL params
       const urlParams = new URLSearchParams(window.location.search);
       const urlSearch = urlParams.get('search') || urlParams.get('q');
@@ -4398,7 +4462,48 @@
           });
         });
       }
+
+      function setCategory(category) {
+        currentCategory = category;
+        currentPage = 1;
+        const nextURL = new URL(window.location.href);
+        if (category === 'all') nextURL.searchParams.delete('category');
+        else nextURL.searchParams.set('category', category);
+        window.history.replaceState({}, '', nextURL);
+        buildSidebarCategoryFilters();
+        buildTopCategoryPills();
+        renderFilteredProducts();
+      }
+
+      function buildSidebarCategoryFilters() {
+        if (!shopCategoryFilters || typeof products === 'undefined') return;
+        const categoryCounts = products.reduce((counts, product) => {
+          if (product.category) counts[product.category] = (counts[product.category] || 0) + 1;
+          return counts;
+        }, {});
+        const categories = [
+          ['all', 'Wszystkie produkty', products.length],
+          ...Object.entries(categoryCounts)
+            .sort((first, second) => second[1] - first[1])
+            .map(([category, count]) => [category, category, count])
+        ];
+
+        shopCategoryFilters.innerHTML = '';
+        categories.forEach(([value, label, count]) => {
+          const button = document.createElement('button');
+          button.className = 'catalog-category-option';
+          button.type = 'button';
+          button.dataset.category = value;
+          button.classList.toggle('active', currentCategory === value);
+          button.setAttribute('aria-pressed', String(currentCategory === value));
+          button.innerHTML = `<span>${label}</span><strong>${count}</strong>`;
+          button.addEventListener('click', () => setCategory(value));
+          shopCategoryFilters.appendChild(button);
+        });
+      }
+
       buildTopCategoryPills();
+      buildSidebarCategoryFilters();
 
       // 6. Reset Filters Button
       if (resetFiltersBtn) {
@@ -4437,6 +4542,29 @@
         });
       }
 
+      window.resetPrimaryShopFilters = function resetPrimaryShopFilters() {
+        currentCategory = 'all';
+        currentSearch = '';
+        currentSort = 'default';
+        currentPage = 1;
+        if (headerSearchInput) headerSearchInput.value = '';
+        if (shopSortSelect) shopSortSelect.value = 'default';
+        const nextURL = new URL(window.location.href);
+        nextURL.searchParams.delete('category');
+        nextURL.searchParams.delete('cat');
+        nextURL.searchParams.delete('search');
+        nextURL.searchParams.delete('q');
+        window.history.replaceState({}, '', nextURL);
+        buildSidebarCategoryFilters();
+        buildTopCategoryPills();
+        renderFilteredProducts();
+      };
+
+      window.resetShopCatalogFilters = function resetShopCatalogFilters() {
+        window.resetAdvancedShopFilters?.();
+        window.resetPrimaryShopFilters();
+      };
+
       // 7. Update Active Filter Count Badge & Status Highlight Text
       function updateActiveFilterBadge(totalFilteredCount) {
         let activeCount = 0;
@@ -4472,6 +4600,57 @@
         }
       }
 
+      const normalizeCatalogText = (value) => String(value || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase();
+
+      function productSpecText(product) {
+        return normalizeCatalogText([
+          product.title,
+          product.category,
+          product.original_category,
+          ...Object.entries(product.attributes || {}).flat()
+        ].join(' '));
+      }
+
+      function productFullText(product) {
+        return `${productSpecText(product)} ${normalizeCatalogText(product.description)}`;
+      }
+
+      function productIPRating(product) {
+        const matches = productSpecText(product).match(/\bip\s*(\d{2})\b/g) || [];
+        return Math.max(0, ...matches.map((match) => Number(match.replace(/\D/g, ''))));
+      }
+
+      function matchesRoom(product, room) {
+        if (room === 'all') return true;
+        const spec = productSpecText(product);
+        const full = productFullText(product);
+        const category = normalizeCatalogText(product.category);
+        if (room.includes('Łazienka')) return productIPRating(product) >= 63 || /\blazien|prysznic|wilgoc/.test(full);
+        if (room.includes('Kuchnia')) {
+          return /kuchni|podszaf|blat/.test(full) || /tasmy led|akcesoria/.test(category) && /profil|tasma led|opraw/.test(spec);
+        }
+        if (room.includes('Salon')) return /salon|sufit|wn[eę]k|dekorac/.test(full) || /tasmy led|sterowniki led/.test(category);
+        return true;
+      }
+
+      function matchesExpectation(product, expectation) {
+        if (expectation === 'all') return true;
+        const spec = productSpecText(product);
+        if (expectation.includes('Brak kropek')) return /\bcob\b/.test(spec);
+        if (expectation.includes('Zmienne kolory')) return /\brgbw?\b|\bcct\b|wielokolor/.test(spec);
+        if (expectation.includes('Mocne światło')) {
+          const wattMatches = [...spec.matchAll(/(\d+(?:[.,]\d+)?)\s*w\s*\/?\s*m\b/g)]
+            .map((match) => Number(match[1].replace(',', '.')));
+          const lumenMatches = [...spec.matchAll(/(\d+)\s*lm\s*\/?\s*m?\b/g)]
+            .map((match) => Number(match[1]));
+          return wattMatches.some((value) => value >= 14) || lumenMatches.some((value) => value >= 900);
+        }
+        return true;
+      }
+
       // 8. Primary Filter and Render Function
       function renderFilteredProducts() {
         if (typeof products === 'undefined' || !Array.isArray(products)) {
@@ -4484,13 +4663,17 @@
 
         // Search Filter
         if (currentSearch) {
-          filtered = filtered.filter(p => p.title.toLowerCase().includes(currentSearch) || (p.description && p.description.toLowerCase().includes(currentSearch)));
+          const normalizedSearch = normalizeCatalogText(currentSearch);
+          filtered = filtered.filter((product) => productFullText(product).includes(normalizedSearch));
         }
 
         // Category Filter
         if (currentCategory !== 'all') {
-          const targetLower = currentCategory.toLowerCase();
-          filtered = filtered.filter(p => p.category === currentCategory || p.category.toLowerCase().includes(targetLower) || targetLower.includes(p.category.toLowerCase()));
+          const targetCategory = normalizeCatalogText(currentCategory);
+          filtered = filtered.filter((product) => {
+            const productCategory = normalizeCatalogText(product.category);
+            return productCategory === targetCategory || productCategory.includes(targetCategory) || targetCategory.includes(productCategory);
+          });
         }
 
         // Price Filter (PLN)
@@ -4508,23 +4691,18 @@
 
         // Voltage Filter
         if (currentVoltage !== 'all') {
-          filtered = filtered.filter(p => {
-            const attrV = (p.attributes && p.attributes["Napięcie wejściowe"]) || "";
-            const title = p.title || "";
-            return attrV.includes(currentVoltage) || title.includes(currentVoltage);
-          });
+          const targetVoltage = normalizeCatalogText(currentVoltage).replace(/\s/g, '');
+          filtered = filtered.filter((product) => productSpecText(product).replace(/\s/g, '').includes(targetVoltage));
         }
 
         // Color Temp Filter
         if (currentColorTemp !== 'all') {
-          filtered = filtered.filter(p => {
-            const attrB = (p.attributes && p.attributes["Barwa światła"]) || "";
-            const title = (p.title || "").toLowerCase();
-            const desc = (p.description || "").toLowerCase();
-            if (currentColorTemp === 'ciepła') return attrB.toLowerCase().includes('ciepła') || title.includes('3000k') || title.includes('ciepła') || desc.includes('ciepła');
-            if (currentColorTemp === 'neutralna') return attrB.toLowerCase().includes('neutralna') || title.includes('4000k') || title.includes('neutralna') || desc.includes('neutralna');
-            if (currentColorTemp === 'zimna') return attrB.toLowerCase().includes('zimna') || title.includes('6500k') || title.includes('zimna') || desc.includes('zimna');
-            if (currentColorTemp === 'rgb') return attrB.toLowerCase().includes('rgb') || attrB.toLowerCase().includes('cct') || title.includes('rgb') || title.includes('cct');
+          filtered = filtered.filter((product) => {
+            const spec = productSpecText(product);
+            if (currentColorTemp === 'ciepła') return /ciepla|2200k|2400k|2700k|3000k/.test(spec);
+            if (currentColorTemp === 'neutralna') return /neutralna|3500k|4000k|4500k/.test(spec);
+            if (currentColorTemp === 'zimna') return /zimna|5000k|6000k|6500k/.test(spec);
+            if (currentColorTemp === 'rgb') return /\brgbw?\b|\bcct\b|wielokolor/.test(spec);
             return true;
           });
         }
@@ -4548,12 +4726,34 @@
         // IP Rating Filter
         if (currentIP !== 'all') {
           filtered = filtered.filter(p => {
-            const attrIP = (p.attributes && p.attributes["Klasa szczelności"]) || "";
-            const title = p.title || "";
-            if (currentIP === 'IP20') return attrIP.includes('IP20') || title.includes('IP20');
-            if (currentIP === 'IP65+') return attrIP.includes('IP63') || attrIP.includes('IP65') || attrIP.includes('IP67') || title.includes('IP65') || title.includes('IP67');
+            if (currentIP === 'IP20') return productIPRating(p) === 20;
+            if (currentIP === 'IP65+') return productIPRating(p) >= 63;
             return true;
           });
+        }
+
+        if (currentRoom !== 'all') {
+          filtered = filtered.filter((product) => matchesRoom(product, currentRoom));
+        }
+
+        if (currentExpectation !== 'all') {
+          filtered = filtered.filter((product) => matchesExpectation(product, currentExpectation));
+        }
+
+        if (currentPCB !== 'all') {
+          const pcbWidth = currentPCB.replace(/\D/g, '');
+          const pcbPattern = new RegExp(`(?:^|\\D)${pcbWidth}\\s*mm(?:\\D|$)`, 'i');
+          filtered = filtered.filter((product) => pcbPattern.test(productSpecText(product)));
+        }
+
+        if (currentProfile !== 'all') {
+          const profilePatterns = {
+            Wpuszczany: /wpuszcz|do zabudowy/,
+            Nawierzchniowy: /nawierzch|natynk/,
+            Kątowy: /katow|naroz/
+          };
+          const pattern = profilePatterns[currentProfile];
+          if (pattern) filtered = filtered.filter((product) => pattern.test(productSpecText(product)));
         }
 
         // Sorting
@@ -4576,12 +4776,25 @@
         const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
 
         const itemsToShow = filtered.slice(startIndex, endIndex);
+        if (shopResultSummary) {
+          shopResultSummary.textContent = totalItems
+            ? `Produkty ${startIndex + 1}–${endIndex} z ${totalItems}`
+            : 'Nie znaleziono produktów dla tych kryteriów';
+        }
+        window.updateAdvancedFilterProductCount?.(totalItems);
 
         // Render Grid
         if (shopGrid) {
           shopGrid.innerHTML = '';
           if (itemsToShow.length === 0) {
-            shopGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 100px 0; color: #777; font-size: 16px;">Brak produktów spełniających wybrane kryteria.</div>`;
+            shopGrid.innerHTML = `
+              <div class="catalog-empty-state">
+                <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+                <h3>Brak produktów dla tych filtrów</h3>
+                <p>Usuń część kryteriów albo wróć do pełnej oferty.</p>
+                <button type="button" onclick="window.resetShopCatalogFilters()">Wyczyść filtry</button>
+              </div>
+            `;
             if (shopPagination) shopPagination.innerHTML = '';
             return;
           }
@@ -4602,10 +4815,22 @@
               `;
             }
 
+            const productImage = p.images?.[0] || 'images/okladka-produkty.webp';
+            const stockValue = Number.parseFloat(String(p.stock || '0').replace(',', '.'));
+            const productCode = p.kod_handlowy || p.kod_katalogowy || p.attributes?.Kod_produktu || '';
+            const hasDiscount = Number(p.compareAtPrice) > Number(p.price);
+            const discountPercent = hasDiscount
+              ? Math.round((1 - Number(p.price) / Number(p.compareAtPrice)) * 100)
+              : 0;
+
             const cardHTML = `
               <div class="mockup-product-card" data-id="${p.id}">
                 <div class="mockup-product-media" style="position: relative; overflow: hidden;">
-                  <img src="${p.images[0]}" alt="${p.title}" class="mockup-product-img" loading="lazy">
+                  <div class="catalog-product-badges">
+                    <span class="catalog-stock-badge ${stockValue > 0 ? 'is-available' : 'is-unavailable'}">${stockValue > 0 ? 'Dostępny' : 'Na zamówienie'}</span>
+                    ${discountPercent > 0 ? `<span class="catalog-sale-badge">−${discountPercent}%</span>` : ''}
+                  </div>
+                  <img src="${productImage}" alt="${p.title}" class="mockup-product-img" loading="lazy" onerror="this.onerror=null;this.src='images/okladka-produkty.webp'">
                   ${p.video ? `
                     <video class="mockup-product-video" data-src="${p.video}" loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
                   ` : ''}
@@ -4620,9 +4845,15 @@
                   </div>
                 </div>
                 <div class="mockup-product-info">
+                  <div class="catalog-product-meta">
+                    <span>${p.category || 'Produkt LED'}</span>
+                    ${productCode ? `<small>${productCode}</small>` : ''}
+                  </div>
                   <h3 class="mockup-product-title"><a href="product.html?id=${p.id}">${p.title}</a></h3>
                   <p class="mockup-product-price">
-                    ${p.price.toFixed(2)} zł <span class="price-unit">/ ${p.category && p.category.includes("Taśmy") ? "metr" : "szt."}</span>
+                    <span class="catalog-current-price">${p.price.toFixed(2)} zł</span>
+                    ${hasDiscount ? `<del>${Number(p.compareAtPrice).toFixed(2)} zł</del>` : ''}
+                    <span class="price-unit">/ ${p.category && p.category.includes("Taśmy") ? "metr" : "szt."}</span>
                   </p>
                                     <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px; width: 100%;">
                     <button class="add-to-cart-btn qv-add-cart-btn" data-id="${p.id}" style="width: 100%;">
@@ -5035,6 +5266,8 @@ body.index-page .site-header:not(.scrolled) {
   }
 }
 </style>
+
+<link rel="stylesheet" href="css/shop-catalog.css">
 
 </body>
 </html>
