@@ -4855,18 +4855,12 @@
                     ${hasDiscount ? `<del>${Number(p.compareAtPrice).toFixed(2)} zł</del>` : ''}
                     <span class="price-unit">/ ${p.category && p.category.includes("Taśmy") ? "metr" : "szt."}</span>
                   </p>
-                                    <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px; width: 100%;">
+                  <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px; width: 100%;">
                     <button class="add-to-cart-btn qv-add-cart-btn" data-id="${p.id}" style="width: 100%;">
-                      <span class="btn-slide-wrap">
-                        <span class="btn-txt-default">Dodaj do koszyka</span>
-                        <span class="btn-txt-hover"><i class="ph ph-shopping-cart-simple" style="margin-right: 6px;"></i> Dodaj teraz!</span>
-                      </span>
+                      DODAJ DO KOSZYKA
                     </button>
                     <button class="buy-it-now-btn" onclick="window.location.href='checkout.html'" style="width: 100%;">
-                      <span class="btn-slide-wrap">
-                        <span class="btn-txt-default">Szybki zakup</span>
-                        <span class="btn-txt-hover"><i class="ph ph-shopping-cart-simple" style="margin-right: 6px;"></i> Przejdź do kasy</span>
-                      </span>
+                      SZYBKI ZAKUP
                     </button>
                   </div>
                 </div>

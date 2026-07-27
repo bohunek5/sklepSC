@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         cta.style.width = '100%';
         cta.style.marginTop = '12px';
         cta.style.border = 'none';
-        cta.innerHTML = '<span class="btn-slide-wrap"><span class="btn-txt-default">✓ DODANO — Przejdź do kasy</span><span class="btn-txt-hover">Zobacz koszyk</span></span>';
+        cta.innerHTML = '✓ DODANO — Przejdź do kasy';
         cta.onclick = (e) => { e.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
         productsContainer.appendChild(cta);
       } else {
@@ -256,13 +256,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         ctaAdd.className = 'add-to-cart-btn';
         ctaAdd.style.width = '100%';
         
-        ctaAdd.innerHTML = '<span class="btn-slide-wrap"><span class="btn-txt-default">Dodaj do koszyka</span><span class="btn-txt-hover"><i class="ph ph-shopping-cart-simple" style="margin-right: 6px;"></i> Dodaj teraz!</span></span>';
+        ctaAdd.innerHTML = 'DODAJ DO KOSZYKA';
         ctaAdd.onclick = (e) => {
           e.preventDefault();
           addItemsToCart(aiSessionState.lastProposedItems);
           aiSessionState.lastProposedItems = [];
           ctaAdd.className = 'add-to-cart-btn bought';
-          ctaAdd.innerHTML = '<span class="btn-slide-wrap"><span class="btn-txt-default">✓ DODANO — Przejdź do kasy</span><span class="btn-txt-hover">Zobacz koszyk</span></span>';
+          ctaAdd.innerHTML = '✓ DODANO — Przejdź do kasy';
           ctaAdd.onclick = (e2) => { e2.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
           if(window.openCartDrawer) window.openCartDrawer();
         };
@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         ctaBuy.className = 'buy-it-now-btn';
         ctaBuy.style.width = '100%';
         
-        ctaBuy.innerHTML = '<span class="btn-slide-wrap"><span class="btn-txt-default">Szybki zakup</span><span class="btn-txt-hover"><i class="ph ph-shopping-cart-simple" style="margin-right: 6px;"></i> Przejdź do kasy</span></span>';
+        ctaBuy.innerHTML = 'SZYBKI ZAKUP';
         ctaBuy.onclick = (e) => {
           e.preventDefault();
           addItemsToCart(aiSessionState.lastProposedItems);
