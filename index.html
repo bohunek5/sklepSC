@@ -5,7 +5,8 @@
   <link rel="icon" type="image/png" href="images/prescot-pattern.png">
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<script src="js/mobile-app-shell.js"></script>
+<script>if (window.matchMedia('(max-width: 768px)').matches) document.write('<script src="js/mobile-app-shell.js"><\/script>');</script>
+<link href="images/led_living_room.png" rel="preload" as="image" fetchpriority="high"/>
 <title>Prescot LED - Nowoczesne systemy oświetlenia liniowego i zasilania</title>
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -4294,14 +4295,14 @@
 
 
             <style>
-            .category-banner-card:has(video[src*="cat_living"]) { background-image: url('images/cat_living.png'); }
-            .category-banner-card:has(video[src*="cat_kitchen"]) { background-image: url('images/cat_kitchen.png'); }
-            .category-banner-card:has(video[src*="cat_bathroom"]) { background-image: url('images/cat_bathroom.png'); }
-            .category-banner-card:has(video[src*="cat_stairs"]) { background-image: url('images/cat_stairs.png'); }
-            .category-banner-card:has(video[src*="cat_garden"]) { background-image: url('images/cat_garden.png'); }
-            .category-banner-card:has(video[src*="cat_office"]) { background-image: url('images/cat_office.png'); }
-            .category-banner-card:has(video[src*="cat_showroom"]) { background-image: url('images/cat_showroom.png'); }
-            .category-banner-card:has(video[src*="cat_bedroom"]) { background-image: url('images/cat_bedroom.png'); }
+            .category-banner-card.media-ready:has(video[data-poster*="cat_living"]) { background-image: url('images/cat_living.png'); }
+            .category-banner-card.media-ready:has(video[data-poster*="cat_kitchen"]) { background-image: url('images/cat_kitchen.png'); }
+            .category-banner-card.media-ready:has(video[data-poster*="cat_bathroom"]) { background-image: url('images/cat_bathroom.png'); }
+            .category-banner-card.media-ready:has(video[data-poster*="cat_stairs"]) { background-image: url('images/cat_stairs.png'); }
+            .category-banner-card.media-ready:has(video[data-poster*="cat_garden"]) { background-image: url('images/cat_garden.png'); }
+            .category-banner-card.media-ready:has(video[data-poster*="cat_office"]) { background-image: url('images/cat_office.png'); }
+            .category-banner-card.media-ready:has(video[data-poster*="cat_showroom"]) { background-image: url('images/cat_showroom.png'); }
+            .category-banner-card.media-ready:has(video[data-poster*="cat_bedroom"]) { background-image: url('images/cat_bedroom.png'); }
             
             @media (max-width: 768px) {
                 .slider-arrow { bottom: 130px !important; top: auto !important; transform: none !important; }
@@ -4462,6 +4463,27 @@
   </header>
 
 </div>
+<template id="deferredMediaAssets" aria-hidden="true">
+  <img data-source="images/led_kitchen.png" src="images/led_kitchen.png" alt="">
+  <img data-source="images/led_office.png" src="images/led_office.png" alt="">
+  <img data-source="images/led_staircase.png" src="images/led_staircase.png" alt="">
+  <img data-source="images/cat_spa.png" src="images/cat_spa.png" alt="">
+  <img data-source="images/cat_living.png" src="images/cat_living.png" alt="">
+  <img data-source="images/cat_kitchen.png" src="images/cat_kitchen.png" alt="">
+  <img data-source="images/cat_bathroom.png" src="images/cat_bathroom.png" alt="">
+  <img data-source="images/cat_stairs.png" src="images/cat_stairs.png" alt="">
+  <img data-source="images/cat_garden.png" src="images/cat_garden.png" alt="">
+  <img data-source="images/cat_office.png" src="images/cat_office.png" alt="">
+  <img data-source="images/cat_showroom.png" src="images/cat_showroom.png" alt="">
+  <img data-source="images/cat_bedroom.png" src="images/cat_bedroom.png" alt="">
+  <img data-source="images/contemporary-apartment-interior-with-stylish-decor-2026-03-10-02-45-38-utc.webp" src="images/contemporary-apartment-interior-with-stylish-decor-2026-03-10-02-45-38-utc.webp" alt="">
+  <img data-source="images/kuchnia.jpg" src="images/kuchnia.jpg" alt="">
+  <img data-source="images/szafy.jpg" src="images/szafy.jpg" alt="">
+  <video data-source="videos/hero_kitchen.mp4" src="videos/hero_kitchen.mp4"></video>
+  <video data-source="videos/hero_office.mp4" src="videos/hero_office.mp4"></video>
+  <video data-source="videos/hero_staircase.mp4" src="videos/hero_staircase.mp4"></video>
+  <video data-source="videos/hero_spa.mp4" src="videos/hero_spa.mp4"></video>
+</template>
 <section class="mockup-hero-slider">
   <svg style="position: absolute; width: 0; height: 0; pointer-events: none;">
 <defs>
@@ -4490,8 +4512,8 @@
   <!-- Slide 2: Kuchenny Minimalizm -->
   <div class="slide" data-tech="kitchen">
     <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-      <video class="slide-video desktop-bg" poster="images/led_kitchen.png" muted playsinline preload="auto" src="videos/hero_kitchen.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-      <video class="slide-video mobile-bg" poster="images/led_kitchen.png" muted playsinline preload="none" src="videos/hero_kitchen.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video desktop-bg" data-poster="images/led_kitchen.png" data-src="videos/hero_kitchen.mp4" muted playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video mobile-bg" data-poster="images/led_kitchen.png" data-src="videos/hero_kitchen.mp4" muted playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover;"></video>
     </div>
     <div class="slide-banner-box" style="z-index: 2;">
       <svg class="glass-border-svg">
@@ -4509,8 +4531,8 @@
   <!-- Slide 3: Nowoczesne Biuro -->
   <div class="slide" data-tech="office">
     <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-      <video class="slide-video desktop-bg" poster="images/led_office.png" muted playsinline preload="auto" src="videos/hero_office.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-      <video class="slide-video mobile-bg" poster="images/led_office.png" muted playsinline preload="none" src="videos/hero_office.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video desktop-bg" data-poster="images/led_office.png" data-src="videos/hero_office.mp4" muted playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video mobile-bg" data-poster="images/led_office.png" data-src="videos/hero_office.mp4" muted playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover;"></video>
     </div>
     <div class="slide-banner-box" style="z-index: 2;">
       <svg class="glass-border-svg">
@@ -4528,8 +4550,8 @@
   <!-- Slide 4: Oświetlenie Schodów -->
   <div class="slide" data-tech="stairs">
     <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-      <video class="slide-video desktop-bg" poster="images/led_staircase.png" muted playsinline preload="auto" src="videos/hero_staircase.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-      <video class="slide-video mobile-bg" poster="images/led_staircase.png" muted playsinline preload="none" src="videos/hero_staircase.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video desktop-bg" data-poster="images/led_staircase.png" data-src="videos/hero_staircase.mp4" muted playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video mobile-bg" data-poster="images/led_staircase.png" data-src="videos/hero_staircase.mp4" muted playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover;"></video>
     </div>
     <div class="slide-banner-box" style="z-index: 2;">
       <svg class="glass-border-svg">
@@ -4547,8 +4569,8 @@
   <!-- Slide 5: Spa & Relaks -->
   <div class="slide" data-tech="spa">
     <div class="slide-video-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1;">
-      <video class="slide-video desktop-bg" poster="images/cat_spa.png" muted playsinline preload="auto" src="videos/hero_spa.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
-      <video class="slide-video mobile-bg" poster="images/cat_spa.png" muted playsinline preload="none" src="videos/hero_spa.mp4" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video desktop-bg" data-poster="images/cat_spa.png" data-src="videos/hero_spa.mp4" muted playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover;"></video>
+      <video class="slide-video mobile-bg" data-poster="images/cat_spa.png" data-src="videos/hero_spa.mp4" muted playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover;"></video>
     </div>
     <div class="slide-banner-box" style="z-index: 2;">
       <svg class="glass-border-svg">
@@ -4556,7 +4578,7 @@
         <rect class="car" pathlength="100"></rect>
       </svg>
       <div class="banner-text">
-        <h1>ÄąÂazienka i SPA</h1>
+        <h1>Łazienka i SPA</h1>
         <p>Wodoodporne taśmy LED w silikonie (IP67)</p>
       </div>
       <a class="mockup-btn" href="shop.html"><div class="btn-slide-wrap"><span class="btn-txt-default">Odkryj</span><span class="btn-txt-hover">Odkryj</span></div></a>
@@ -4607,7 +4629,7 @@
 <div class="categories-banners-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 100%; margin: 0 auto; width: 100%;">
 <!-- Category 1: Taśmy LED -->
 <div class="category-banner-card" onclick="window.location.href='shop.html?category=Ta%C5%9Bmy%20LED'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 420px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 40px;">
-<video class="category-banner-bg" src="videos/cat_living.mp4#t=0,5" poster="images/cat_living.png" autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
+<video class="category-banner-bg" data-poster="images/cat_living.png" preload="none" muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
 <span class="glass-banner-btn">ZOBACZ PRODUKTY</span>
@@ -4620,7 +4642,7 @@
 </div>
 <!-- Category 2: Sterowanie i Zasilanie -->
 <div class="category-banner-card" onclick="window.location.href='shop.html?category=Zasilacze%20LED%20Scharfer'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 420px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 40px;">
-<video class="category-banner-bg" src="videos/cat_kitchen.mp4#t=0,5" poster="images/cat_kitchen.png" autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
+<video class="category-banner-bg" data-poster="images/cat_kitchen.png" preload="none" muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
 <span class="glass-banner-btn">ZOBACZ ZASILACZE</span>
@@ -4635,7 +4657,7 @@
 <div class="categories-sub-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 100%; margin: 30px auto 0 auto; width: 100%;">
 <!-- Subcategory 1: COB -->
 <div class="category-banner-card sub-card" onclick="window.location.href='shop.html?q=COB'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 420px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;" style="background-size: cover; background-position: center;">
-<video class="category-banner-bg" src="videos/cat_bathroom.mp4#t=0,5" poster="images/cat_bathroom.png" autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
+<video class="category-banner-bg" data-poster="images/cat_bathroom.png" preload="none" muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
 <span class="glass-banner-btn">Odkryj</span>
@@ -4647,7 +4669,7 @@
 </div>
 <!-- Subcategory 2: RGB -->
 <div class="category-banner-card sub-card" onclick="window.location.href='shop.html?q=RGB'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 420px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;" style="background-size: cover; background-position: center;">
-<video class="category-banner-bg" src="videos/cat_stairs.mp4#t=0,5" poster="images/cat_stairs.png" autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
+<video class="category-banner-bg" data-poster="images/cat_stairs.png" preload="none" muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
 <span class="glass-banner-btn">Zobacz</span>
@@ -4659,7 +4681,7 @@
 </div>
 <!-- Subcategory 3: CCT -->
 <div class="category-banner-card sub-card" onclick="window.location.href='shop.html?q=CCT'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 420px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;" style="background-size: cover; background-position: center;">
-<video class="category-banner-bg" src="videos/cat_garden.mp4#t=0,5" poster="images/cat_garden.png" autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
+<video class="category-banner-bg" data-poster="images/cat_garden.png" preload="none" muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
 <span class="glass-banner-btn">Wybierz</span>
@@ -4671,19 +4693,19 @@
 </div>
 <!-- Subcategory 4: Zasilacze -->
 <div class="category-banner-card sub-card" onclick="window.location.href='shop.html?category=Zasilacze%20LED%20Scharfer'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 420px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;" style="background-size: cover; background-position: center;">
-<video class="category-banner-bg" src="videos/cat_office.mp4#t=0,5" poster="images/cat_office.png" autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
+<video class="category-banner-bg" data-poster="images/cat_office.png" preload="none" muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
 <span class="glass-banner-btn">Zobacz</span>
 <div style="text-align: right; max-width: 70%; display: flex; flex-direction: column; align-items: flex-end;">
-<span style="font-size: 13px; letter-spacing: 2px; color: var(--accent-color); font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 5px;">MOCNE I TRWAÄąÂE</span>
+<span style="font-size: 13px; letter-spacing: 2px; color: var(--accent-color); font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 5px;">MOCNE I TRWAŁE</span>
 <h3 style="color: #fff; font-size: 22px; font-weight: 800; font-family: 'Outfit', sans-serif; margin: 5px 0 15px 0;">Zasilacze</h3>
 </div>
 </div>
 </div>
 <!-- Subcategory 5: Sterowniki -->
 <div class="category-banner-card sub-card" onclick="window.location.href='shop.html?category=Sterowniki%20LED'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 420px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;" style="background-size: cover; background-position: center;">
-<video class="category-banner-bg" src="videos/cat_showroom.mp4#t=0,5" poster="images/cat_showroom.png" autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
+<video class="category-banner-bg" data-poster="images/cat_showroom.png" preload="none" muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
 <span class="glass-banner-btn">Steruj</span>
@@ -4695,7 +4717,7 @@
 </div>
 <!-- Subcategory 6: Akcesoria -->
 <div class="category-banner-card sub-card" onclick="window.location.href='shop.html?category=Akcesoria%20do%20ta%C5%9Bm%20LED%20i%20zasilaczy'" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 12px; height: 420px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: flex-end; padding: 30px;" style="background-size: cover; background-position: center;">
-<video class="category-banner-bg" src="videos/cat_bedroom.mp4#t=0,5" poster="images/cat_bedroom.png" autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
+<video class="category-banner-bg" data-poster="images/cat_bedroom.png" preload="none" muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); pointer-events: none;"></video>
 <div class="category-banner-overlay"></div>
 <div style="position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;">
 <span class="glass-banner-btn">Kup</span>
@@ -5366,7 +5388,7 @@
         transition: transform 0.3s ease;
       }
       .footer-col.active h3::after {
-        content: 'Ă˘Ââ€™';
+        content: '−';
         transform: rotate(180deg);
       }
       .footer-col ul {
@@ -5656,7 +5678,7 @@
 </style>
 <section class="mockup-products">
 <div class="mockup-section-header">
-<span>NAJLEPIEJ SPRZEDAJĄCE SIĂ„Â</span>
+<span>NAJLEPIEJ SPRZEDAJĄCE SIĘ</span>
 <h2 class="mockup-section-title">Trending Products</h2>
 </div>
 <div class="mockup-grid" id="trendingGrid">
@@ -5709,12 +5731,12 @@
 <!-- Article 1 -->
 <article class="mockup-blog-card" onclick="window.location.href='/blog.html#blog-1'" style="cursor: pointer;">
 <div class="mockup-blog-media" style="position: relative;">
-<img alt="Jak dobrać zasilacz LED do taśmy" class="mockup-blog-img" src="images/contemporary-apartment-interior-with-stylish-decor-2026-03-10-02-45-38-utc.webp" style="width: 100%; height: 250px; object-fit: cover;"/>
+<img alt="Jak dobrać zasilacz LED do taśmy" class="mockup-blog-img deferred-content-image" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-deferred-src="images/contemporary-apartment-interior-with-stylish-decor-2026-03-10-02-45-38-utc.webp" loading="lazy" decoding="async" style="width: 100%; height: 250px; object-fit: cover;"/>
 <span class="mockup-blog-tag" style="position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.9); color: var(--primary-color); padding: 5px 15px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">Poradniki</span>
 </div>
 <div class="mockup-blog-content" style="padding: 25px;">
 <div class="mockup-blog-meta" style="font-size: 13px; color: #ccc; margin-bottom: 10px;">
-<span>8 Lipca, 2026</span> Ă˘â‚¬Ë <span>5 min czytania</span>
+<span>8 Lipca, 2026</span> · <span>5 min czytania</span>
 </div>
 <h3 class="mockup-blog-title" style="font-size: 20px; margin-bottom: 15px; line-height: 1.4;">Jak dobrać zasilacz LED do taśmy?</h3>
 <p class="mockup-blog-excerpt" style="color: #666; line-height: 1.6; margin-bottom: 20px;">Zasilacz LED dobiera się do konkretnej taśmy, a nie „na oko”. Zobacz, jak obliczyć moc, sprawdzić napięcie i bezpiecznie zasilić taśmę.</p>
@@ -5724,12 +5746,12 @@
 <!-- Article 2 -->
 <article class="mockup-blog-card" onclick="window.location.href='/blog.html#blog-2'" style="cursor: pointer;">
 <div class="mockup-blog-media" style="position: relative;">
-<img alt="Zasilacze LED - gdzie użyć którego" class="mockup-blog-img" src="images/kuchnia.jpg" style="width: 100%; height: 250px; object-fit: cover;"/>
+<img alt="Zasilacze LED - gdzie użyć którego" class="mockup-blog-img deferred-content-image" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-deferred-src="images/kuchnia.jpg" loading="lazy" decoding="async" style="width: 100%; height: 250px; object-fit: cover;"/>
 <span class="mockup-blog-tag" style="position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.9); color: var(--primary-color); padding: 5px 15px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">Techniczne</span>
 </div>
 <div class="mockup-blog-content" style="padding: 25px;">
 <div class="mockup-blog-meta" style="font-size: 13px; color: #ccc; margin-bottom: 10px;">
-<span>6 Lipca, 2026</span> Ă˘â‚¬Ë <span>4 min czytania</span>
+<span>6 Lipca, 2026</span> · <span>4 min czytania</span>
 </div>
 <h3 class="mockup-blog-title" style="font-size: 20px; margin-bottom: 15px; line-height: 1.4;">Zasilacze LED - gdzie użyć którego?</h3>
 <p class="mockup-blog-excerpt" style="color: #666; line-height: 1.6; margin-bottom: 20px;">Desktop, slim, siatkowy czy hermetyczny IP67? Zobacz praktyczne porównanie typów zasilaczy w zależności od miejsca montażu.</p>
@@ -5739,12 +5761,12 @@
 <!-- Article 3 -->
 <article class="mockup-blog-card" onclick="window.location.href='/blog.html#blog-3'" style="cursor: pointer;">
 <div class="mockup-blog-media" style="position: relative;">
-<img alt="Do czego służą zasilacze LED" class="mockup-blog-img" src="images/szafy.jpg" style="width: 100%; height: 250px; object-fit: cover;"/>
+<img alt="Do czego służą zasilacze LED" class="mockup-blog-img deferred-content-image" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-deferred-src="images/szafy.jpg" loading="lazy" decoding="async" style="width: 100%; height: 250px; object-fit: cover;"/>
 <span class="mockup-blog-tag" style="position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.9); color: var(--primary-color); padding: 5px 15px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">Podstawy</span>
 </div>
 <div class="mockup-blog-content" style="padding: 25px;">
 <div class="mockup-blog-meta" style="font-size: 13px; color: #ccc; margin-bottom: 10px;">
-<span>3 Lipca, 2026</span> Ă˘â‚¬Ë <span>3 min czytania</span>
+<span>3 Lipca, 2026</span> · <span>3 min czytania</span>
 </div>
 <h3 class="mockup-blog-title" style="font-size: 20px; margin-bottom: 15px; line-height: 1.4;">Do czego służą zasilacze LED?</h3>
 <p class="mockup-blog-excerpt" style="color: #666; line-height: 1.6; margin-bottom: 20px;">Dlaczego nie wolno podłączać taśmy bezpośrednio do gniazdka 230V? Dowiedz się, jaką rolę pełni zasilacz w bezpiecznej instalacji.</p>
@@ -5897,6 +5919,16 @@
       });
     }
 
+    const deferredAssetTemplate = document.getElementById('deferredMediaAssets');
+    const deferredAssetUrls = new Map(
+      Array.from(deferredAssetTemplate?.content.querySelectorAll('[data-source]') || [])
+        .map((asset) => [asset.dataset.source, asset.getAttribute('src')])
+    );
+
+    function resolveDeferredAsset(source) {
+      return deferredAssetUrls.get(source) || source;
+    }
+
     // Slideshow Functionality — Video Carousel
     (function initHeroSlider() {
       const slides = document.querySelectorAll('.mockup-hero-slider > .slide');
@@ -5909,6 +5941,28 @@
       // Determine which video class to use based on screen width
       function getVideoClass() {
         return window.innerWidth <= 768 ? '.mobile-bg' : '.desktop-bg';
+      }
+
+      function prepareVideo(video) {
+        if (!video) return;
+        if (!video.poster && video.dataset.poster) {
+          video.poster = resolveDeferredAsset(video.dataset.poster);
+        }
+        if (!video.getAttribute('src') && video.dataset.src) {
+          video.src = resolveDeferredAsset(video.dataset.src);
+          video.load();
+        }
+      }
+
+      function warmNextPoster() {
+        const nextIndex = (currentSlide + 1) % slides.length;
+        const nextVideo = slides[nextIndex].querySelector('video' + getVideoClass());
+        const posterSource = nextVideo?.dataset.poster;
+        if (posterSource) {
+          const poster = new Image();
+          poster.decoding = 'async';
+          poster.src = resolveDeferredAsset(posterSource);
+        }
       }
 
       // Initialize all videos: pause and reset to 0
@@ -5928,6 +5982,7 @@
         const video = slideEl.querySelector('video' + videoClass);
         if (video) {
           try {
+            prepareVideo(video);
             // Do NOT set currentTime = 0 here to avoid stutter/flash. It was pre-queued.
             video.play().catch(() => {});
           } catch(e) {}
@@ -5955,6 +6010,7 @@
         // Skip if same slide
         if (prevSlideIndex === currentSlide && slides[currentSlide].classList.contains('active')) {
           startAutoSlide();
+          window.setTimeout(warmNextPoster, 900);
           return;
         }
 
@@ -5989,6 +6045,7 @@
         });
 
         startAutoSlide();
+        window.setTimeout(warmNextPoster, 900);
       }
 
       // Arrow buttons
@@ -6026,6 +6083,67 @@
       playActiveVideo(slides[0]);
       showSlide(0);
     })();
+
+    // Load full-quality category media only when its card approaches the viewport.
+    (function initLazyCategoryMedia() {
+      const categoryVideos = document.querySelectorAll('.category-banner-bg[data-poster]');
+      if (!categoryVideos.length) return;
+
+      function prepareCategoryVideo(video) {
+        if (!video.poster && video.dataset.poster) {
+          video.poster = resolveDeferredAsset(video.dataset.poster);
+        }
+        video.closest('.category-banner-card')?.classList.add('media-ready');
+        if (!video.getAttribute('src') && video.dataset.src) {
+          video.src = resolveDeferredAsset(video.dataset.src);
+          video.load();
+          video.play().catch(() => {});
+        }
+      }
+
+      if (!('IntersectionObserver' in window)) {
+        categoryVideos.forEach(prepareCategoryVideo);
+        return;
+      }
+
+      const mediaObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          if (entry.isIntersecting) {
+            prepareCategoryVideo(video);
+          } else if (video.getAttribute('src')) {
+            video.pause();
+          }
+        });
+      }, { rootMargin: '120px 0px', threshold: 0.01 });
+
+      categoryVideos.forEach((video) => mediaObserver.observe(video));
+    })();
+
+    (function initDeferredContentImages() {
+      const deferredImages = document.querySelectorAll('.deferred-content-image[data-deferred-src]');
+      if (!deferredImages.length) return;
+
+      function loadDeferredImage(image) {
+        image.src = resolveDeferredAsset(image.dataset.deferredSrc);
+        image.removeAttribute('data-deferred-src');
+      }
+
+      if (!('IntersectionObserver' in window)) {
+        deferredImages.forEach(loadDeferredImage);
+        return;
+      }
+
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          loadDeferredImage(entry.target);
+          observer.unobserve(entry.target);
+        });
+      }, { rootMargin: '240px 0px', threshold: 0.01 });
+
+      deferredImages.forEach((image) => imageObserver.observe(image));
+    })();
   </script>
 <!-- Load Shared Interactive Popups Script -->
 <script src="js/products-data.js"></script>
@@ -6058,7 +6176,7 @@
                 const cardHTML = `
           <div class="mockup-product-card" data-id="${p.id}">
             <div class="mockup-product-media" style="position: relative; overflow: hidden;">
-              <img src="${p.images[0]}" alt="${p.title}" class="mockup-product-img">
+              <img src="${p.images[0]}" alt="${p.title}" class="mockup-product-img" loading="lazy" decoding="async">
               ${p.video ? `
                 <video class="mockup-product-video" data-src="${p.video}" loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
               ` : ''}

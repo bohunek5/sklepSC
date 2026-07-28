@@ -4,7 +4,8 @@
   <link rel="icon" type="image/png" href="images/prescot-pattern.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="js/mobile-app-shell.js"></script>
+  <script>if (window.matchMedia('(max-width: 768px)').matches) document.write('<script src="js/mobile-app-shell.js"><\/script>');</script>
+  <link rel="preload" as="image" href="images/led_showroom.png" fetchpriority="high">
   <title>Prescot LED - O nas</title>
   
   <!-- Fonts -->
