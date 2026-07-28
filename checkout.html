@@ -86,17 +86,74 @@
       margin-bottom: 30px;
     }
 
+    .checkout-home-return {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 38px;
+      margin-bottom: 18px;
+      padding: 0 14px;
+      border: 1px solid rgba(11, 26, 48, 0.16);
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 7px 20px rgba(11, 26, 48, 0.07);
+      color: var(--primary-color);
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.45px;
+      line-height: 1;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .checkout-home-return i {
+      color: var(--accent-color);
+      font-size: 16px;
+      transition: transform 0.25s ease;
+    }
+
+    .checkout-home-return:hover,
+    .checkout-home-return:focus-visible {
+      border-color: var(--primary-color);
+      background: var(--primary-color);
+      box-shadow: 0 10px 24px rgba(11, 26, 48, 0.16);
+      color: #fff;
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .checkout-home-return:hover i,
+    .checkout-home-return:focus-visible i {
+      transform: translateX(-2px);
+    }
+
     .checkout-breadcrumbs {
       display: flex;
+      align-items: center;
       gap: 10px;
       font-size: 12px;
       color: #999;
       margin-bottom: 40px;
     }
 
-    .checkout-breadcrumbs a {
+    .checkout-cart-breadcrumb {
+      appearance: none;
+      padding: 0;
+      border: 0;
+      background: transparent;
       color: #333;
+      cursor: pointer;
+      font: inherit;
       text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .checkout-cart-breadcrumb:hover,
+    .checkout-cart-breadcrumb:focus-visible {
+      color: var(--accent-color);
+      outline: none;
     }
 
     .checkout-breadcrumbs span.active {
@@ -2676,11 +2733,15 @@
     </section>
     <section class="checkout-summary-panel">
       <div class="checkout-summary-sticky-container">
+        <a class="checkout-home-return" href="index.html">
+          <i class="ph ph-arrow-left" aria-hidden="true"></i>
+          <span>Powrót na stronę główną</span>
+        </a>
         <div class="checkout-logo">
           <a href="index.html"><img alt="Prescot Logo" src="images/logo.png" /></a>
         </div>
         <div class="checkout-breadcrumbs">
-          <a href="javascript:void(0);" onclick="openCartDrawer();">Koszyk</a>
+          <button class="checkout-cart-breadcrumb" id="checkoutCartBreadcrumb" type="button">Koszyk</button>
           <span>&gt;</span>
           <span class="active">Dane do wysyłki</span>
           <span>&gt;</span>
@@ -2721,7 +2782,7 @@
   </div>
   <script>
     // Load summary list from cart localStorage
-    const cart = JSON.parse(localStorage.getItem('prescot_cart')) || [];
+    const checkoutCart = JSON.parse(localStorage.getItem('prescot_cart')) || [];
     const checkoutItemsList = document.getElementById('checkoutItemsList');
     const summarySubtotal = document.getElementById('summarySubtotal');
     const summaryTotal = document.getElementById('summaryTotal');
@@ -2730,13 +2791,13 @@
       checkoutItemsList.innerHTML = '';
       let subtotal = 0;
 
-      if (cart.length === 0) {
+      if (checkoutCart.length === 0) {
         // If cart is empty, redirect back to shop
         window.location.href = 'shop.html';
         return;
       }
 
-      cart.forEach(item => {
+      checkoutCart.forEach(item => {
         const pTotal = item.price * item.qty;
         subtotal += pTotal;
 
@@ -3217,6 +3278,12 @@
   <script src="js/shared-popups.js"></script>
   <script>
     initSharedPopups();
+
+    document.getElementById('checkoutCartBreadcrumb')?.addEventListener('click', function () {
+      if (typeof window.openCartDrawer === 'function') {
+        window.openCartDrawer();
+      }
+    });
   </script>
   <style>
     @media (max-width: 768px) {
