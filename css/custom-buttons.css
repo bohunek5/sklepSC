@@ -144,6 +144,15 @@ body .quantity-selector input {
     font-size: 13px !important;
     padding: 0 16px !important;
   }
+
+  body .mockup-product-card .buy-it-now-btn .btn-txt-default {
+    font-size: 11px !important;
+  }
+
+  body .mockup-product-card .buy-it-now-btn .btn-txt-hover {
+    font-size: 8.5px !important;
+    letter-spacing: 0 !important;
+  }
 }
 
 /* Mobile Logo Fix */

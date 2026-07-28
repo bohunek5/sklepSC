@@ -212,21 +212,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function renderProducts(aiBubble, productsList, isBought, headerText) {
-      let html = `<div style="margin-top: 15px; font-weight: 600; font-size: 13px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">${headerText}</div><div style="margin-top: 12px; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px;">`;
+      let html = `<div class="ai-product-results shop-page"><div style="margin-top: 15px; font-weight: 600; font-size: 13px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">${headerText}</div><div class="ai-products-grid">`;
       
       productsList.forEach(p => {
           html += `
-            <div class="mockup-product-card" data-id="${p.id}" style="background: #fff; cursor: pointer;" onclick="if(window.openQuickView) window.openQuickView('${p.id}');">
+            <div class="mockup-product-card" data-id="${p.id}">
               <div class="mockup-product-media" style="position: relative; overflow: hidden;">
                 <div class="catalog-product-badges">
                   <span class="catalog-stock-badge is-available">Dostępny</span>
                 </div>
                 <img src="${productImage(p)}" alt="${p.title}" class="mockup-product-img" loading="lazy" onerror="this.onerror=null;this.src='images/okladka-produkty.webp'">
                 <div class="product-actions-hover">
-                  <button class="action-btn-circle qv-wishlist-btn" data-id="${p.id}" aria-label="Dodaj do listy życzeń" onclick="event.stopPropagation();">
+                  <button class="action-btn-circle qv-wishlist-btn" data-id="${p.id}" aria-label="Dodaj do listy życzeń">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                   </button>
-                  <button class="action-btn-circle qv-eye-btn" data-id="${p.id}" aria-label="Szybki podgląd" onclick="event.stopPropagation(); if(window.openQuickView) window.openQuickView('${p.id}');">
+                  <button class="action-btn-circle qv-eye-btn" data-id="${p.id}" aria-label="Szybki podgląd">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                   </button>
                 </div>
@@ -240,47 +240,27 @@ document.addEventListener('DOMContentLoaded', async () => {
                   <span class="catalog-current-price">${formatPrice(p.price)}</span>
                 </p>
                 <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px; width: 100%;">
-                  <button class="add-to-cart-btn qv-add-cart-btn ai-add-btn" data-id="${p.id}" style="width: 100%;" onclick="event.stopPropagation();">
-                    DODAJ DO KOSZYKA
+                  <button class="add-to-cart-btn qv-add-cart-btn" data-id="${p.id}" style="width: 100%;">
+                    <span class="btn-slide-wrap">
+                      <span class="btn-txt-default">Dodaj do koszyka</span>
+                      <span class="btn-txt-hover"><i class="ph ph-shopping-cart-simple" style="margin-right: 6px;"></i> Dodaj teraz!</span>
+                    </span>
                   </button>
-                  <button class="buy-it-now-btn ai-buy-btn" data-id="${p.id}" style="width: 100%;" onclick="event.stopPropagation();">
-                    SZYBKI ZAKUP
+                  <button class="buy-it-now-btn" type="button" style="width: 100%;" onclick="event.stopPropagation(); window.location.href='checkout.html';">
+                    <span class="btn-slide-wrap">
+                      <span class="btn-txt-default">Szybki zakup</span>
+                      <span class="btn-txt-hover">Przejdź do podsumowania</span>
+                    </span>
                   </button>
                 </div>
               </div>
             </div>
           `;
       });
-      html += '</div>';
+      html += '</div></div>';
 
       const productsContainer = document.createElement('div');
       productsContainer.innerHTML = html;
-      
-      // Add event listeners for per-product buttons
-      productsContainer.querySelectorAll('.ai-add-btn').forEach(btn => {
-        btn.onclick = (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          const p = productsList.find(x => x.id === btn.getAttribute('data-id'));
-          if (p) {
-            addItemsToCart([cartRecord(p, 1)]);
-            btn.className = 'add-to-cart-btn bought';
-            btn.innerHTML = '✓ DODANO';
-          }
-        };
-      });
-
-      productsContainer.querySelectorAll('.ai-buy-btn').forEach(btn => {
-        btn.onclick = (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          const p = productsList.find(x => x.id === btn.getAttribute('data-id'));
-          if (p) {
-            addItemsToCart([cartRecord(p, 1)]);
-            window.location.href = 'checkout.html';
-          }
-        };
-      });
       
       aiBubble.appendChild(productsContainer);
       

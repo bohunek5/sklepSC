@@ -106,9 +106,16 @@ window.showToast = showToast;
 function updateCartBadge() {
   const currentCart = JSON.parse(localStorage.getItem('prescot_cart')) || [];
   const totalItems = currentCart.reduce((sum, item) => sum + (item.qty || 1), 0);
-  
-  // Find all cart buttons/links EXCEPT the ones in checkout breadcrumbs
-  const cartBtns = document.querySelectorAll('a[href*="cart.html"]:not(.checkout-breadcrumbs a), .mockup-actions a[aria-label="Koszyk"], .cart-toggle');
+
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  if (isMobile) {
+    document.querySelectorAll('.config-bottom-nav .cart-badge, .mobile-bottom-nav .cart-badge').forEach((badge) => badge.remove());
+  }
+
+  // On mobile the quantity belongs only to the top-right cart icon.
+  const cartBtns = document.querySelectorAll(isMobile
+    ? '.mockup-header .mockup-actions a[aria-label="Koszyk"], .site-header .header-actions a[aria-label="Koszyk"], .config-header .header-actions a[aria-label="Koszyk"]'
+    : 'a[href*="cart.html"]:not(.checkout-breadcrumbs a), .mockup-actions a[aria-label="Koszyk"], .cart-toggle');
   
   cartBtns.forEach(btn => {
     btn.style.position = 'relative'; // ensure badge anchors correctly
@@ -206,6 +213,461 @@ customStyles.innerHTML = `
   .cart-badge.visible {
     opacity: 1;
     transform: scale(1);
+  }
+
+  /* Shared premium footer refresh. */
+  body .premium-footer {
+    position: relative !important;
+    isolation: isolate !important;
+    overflow: hidden !important;
+    margin-top: clamp(56px, 7vw, 104px) !important;
+    padding: clamp(58px, 6vw, 82px) max(5%, calc((100vw - 1600px) / 2)) 30px !important;
+    border-top: 0 !important;
+    background:
+      radial-gradient(circle at 8% 12%, rgba(232, 76, 35, 0.13), transparent 25%),
+      radial-gradient(circle at 91% 9%, rgba(34, 211, 238, 0.09), transparent 24%),
+      linear-gradient(145deg, #071321 0%, #0b1a30 52%, #0d223a 100%) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  }
+  body .premium-footer::before {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 0 auto !important;
+    z-index: 0 !important;
+    height: 3px !important;
+    background: linear-gradient(90deg, transparent 3%, #e84c23 22%, #f59e72 43%, rgba(34, 211, 238, 0.7) 70%, transparent 97%) !important;
+  }
+  body .premium-footer::after {
+    content: '' !important;
+    position: absolute !important;
+    right: -110px !important;
+    bottom: -170px !important;
+    z-index: 0 !important;
+    width: 420px !important;
+    height: 420px !important;
+    border: 1px solid rgba(255, 255, 255, 0.055) !important;
+    border-radius: 50% !important;
+    box-shadow:
+      0 0 0 54px rgba(255, 255, 255, 0.018),
+      0 0 0 108px rgba(255, 255, 255, 0.012) !important;
+    pointer-events: none !important;
+  }
+  body .premium-footer .footer-grid,
+  body .premium-footer .footer-bottom {
+    position: relative !important;
+    z-index: 1 !important;
+    width: 100% !important;
+    max-width: 1600px !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+  body .premium-footer .footer-grid {
+    grid-template-columns: minmax(280px, 1.75fr) repeat(2, minmax(150px, 0.85fr)) minmax(240px, 1.25fr) !important;
+    gap: clamp(28px, 4vw, 68px) !important;
+    align-items: start !important;
+    margin-bottom: 48px !important;
+  }
+  body .premium-footer .brand-col {
+    padding: 28px !important;
+    border: 1px solid rgba(255, 255, 255, 0.085) !important;
+    border-radius: 20px !important;
+    background: rgba(255, 255, 255, 0.035) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.14) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+  }
+  body .premium-footer .footer-logo img {
+    width: auto !important;
+    height: 34px !important;
+    margin-bottom: 20px !important;
+    filter: drop-shadow(0 7px 18px rgba(0, 0, 0, 0.28)) !important;
+  }
+  body .premium-footer .brand-desc {
+    max-width: 540px !important;
+    margin-bottom: 24px !important;
+    color: rgba(232, 239, 247, 0.68) !important;
+    font-size: 14px !important;
+    line-height: 1.75 !important;
+  }
+  body .premium-footer h3 {
+    display: flex !important;
+    align-items: center !important;
+    gap: 9px !important;
+    margin: 5px 0 22px !important;
+    color: #ffffff !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    letter-spacing: 1.7px !important;
+    line-height: 1.2 !important;
+    text-transform: uppercase !important;
+  }
+  body .premium-footer h3::before {
+    content: '' !important;
+    display: block !important;
+    width: 18px !important;
+    height: 2px !important;
+    flex: 0 0 18px !important;
+    border-radius: 2px !important;
+    background: #e84c23 !important;
+    box-shadow: 0 0 10px rgba(232, 76, 35, 0.42) !important;
+  }
+  body .premium-footer ul li {
+    margin-bottom: 11px !important;
+  }
+  body .premium-footer ul li a {
+    position: relative !important;
+    color: rgba(232, 239, 247, 0.66) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 1.45 !important;
+    transition: color 0.22s ease, transform 0.22s ease !important;
+  }
+  body .premium-footer ul li a::before {
+    content: '›' !important;
+    display: inline-block !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    color: #e84c23 !important;
+    opacity: 0 !important;
+    transition: width 0.22s ease, opacity 0.22s ease !important;
+  }
+  body .premium-footer ul li a:hover {
+    padding-left: 0 !important;
+    color: #ffffff !important;
+    transform: translateX(3px) !important;
+  }
+  body .premium-footer ul li a:hover::before {
+    width: 13px !important;
+    opacity: 1 !important;
+  }
+  body .premium-footer .contact-info {
+    display: grid !important;
+    gap: 9px !important;
+  }
+  body .premium-footer .contact-info li {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin: 0 !important;
+    padding: 10px 12px !important;
+    border: 1px solid rgba(255, 255, 255, 0.065) !important;
+    border-radius: 11px !important;
+    background: rgba(255, 255, 255, 0.027) !important;
+    color: rgba(232, 239, 247, 0.72) !important;
+    font-size: 13px !important;
+    line-height: 1.45 !important;
+  }
+  body .premium-footer .contact-info i {
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    color: #f07450 !important;
+    font-size: 18px !important;
+  }
+  body .premium-footer .social-links {
+    gap: 10px !important;
+  }
+  body .premium-footer .social-links a {
+    width: 40px !important;
+    height: 40px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, 0.055) !important;
+    color: rgba(255, 255, 255, 0.82) !important;
+    box-shadow: none !important;
+  }
+  body .premium-footer .social-links a:hover {
+    border-color: rgba(232, 76, 35, 0.6) !important;
+    background: #e84c23 !important;
+    color: #ffffff !important;
+    transform: translateY(-3px) !important;
+  }
+  body .premium-footer .footer-bottom {
+    margin-bottom: 0 !important;
+    padding-top: 24px !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.09) !important;
+    color: rgba(232, 239, 247, 0.46) !important;
+  }
+  body .premium-footer .footer-bottom p {
+    margin: 0 !important;
+    color: inherit !important;
+    font-size: 12px !important;
+    letter-spacing: 0.25px !important;
+  }
+  body .premium-footer .payment-methods {
+    gap: 8px !important;
+    color: rgba(255, 255, 255, 0.62) !important;
+  }
+  body .premium-footer .payment-methods i {
+    display: inline-flex !important;
+    width: 38px !important;
+    height: 30px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 8px !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    font-size: 20px !important;
+  }
+
+  @keyframes prescotMobilePatternShimmer {
+    0%, 100% {
+      opacity: 0.9;
+      filter: drop-shadow(0 0 2px rgba(232, 76, 35, 0.18));
+    }
+    50% {
+      opacity: 1;
+      filter: drop-shadow(0 0 7px rgba(232, 76, 35, 0.55));
+    }
+  }
+
+  @media (max-width: 768px) {
+    body .premium-footer {
+      margin-top: 54px !important;
+      margin-bottom: 0 !important;
+      padding: 45px 18px calc(96px + env(safe-area-inset-bottom)) !important;
+    }
+    body .premium-footer .footer-grid {
+      grid-template-columns: 1fr !important;
+      gap: 16px !important;
+      margin-bottom: 30px !important;
+    }
+    body .premium-footer .brand-col {
+      padding: 22px !important;
+      border-radius: 17px !important;
+    }
+    body .premium-footer h3 {
+      margin: 0 !important;
+      padding: 15px 2px !important;
+      border-bottom-color: rgba(255, 255, 255, 0.09) !important;
+    }
+    body .premium-footer .footer-col.active h3 {
+      color: #ffffff !important;
+    }
+    body .premium-footer .footer-col.active ul {
+      max-height: 320px !important;
+      margin: 5px 0 12px !important;
+    }
+    body .premium-footer .footer-bottom {
+      gap: 15px !important;
+      padding-top: 20px !important;
+      text-align: center !important;
+    }
+
+    /* One predictable mobile header: logo on the left, cart on the right. */
+    body .mockup-header {
+      grid-template-columns: auto auto !important;
+      justify-content: space-between !important;
+    }
+    body .mockup-header .mockup-actions,
+    body .site-header .header-actions {
+      display: flex !important;
+      flex: 0 0 auto !important;
+      width: auto !important;
+      min-width: 44px !important;
+      align-items: center !important;
+      justify-content: flex-end !important;
+      margin-left: auto !important;
+      gap: 0 !important;
+    }
+    body .mockup-header .mockup-search-container,
+    body .site-header .header-search,
+    body .mockup-header .mockup-actions > button,
+    body .mockup-header .mockup-actions > .wishlist-trigger,
+    body .site-header .header-actions > button,
+    body .site-header .header-actions > a:not([aria-label="Koszyk"]) {
+      display: none !important;
+    }
+    body .mockup-header .mockup-actions > a[aria-label="Koszyk"],
+    body .site-header .header-actions > a[aria-label="Koszyk"] {
+      display: inline-flex !important;
+      flex: 0 0 44px !important;
+      width: 44px !important;
+      height: 44px !important;
+      min-width: 44px !important;
+      min-height: 44px !important;
+      align-items: center !important;
+      justify-content: center !important;
+      margin: 0 !important;
+      border-radius: 50% !important;
+    }
+    body .mockup-header:not(.scrolled) .mockup-actions > a[aria-label="Koszyk"],
+    body .site-header:not(.scrolled) .header-actions > a[aria-label="Koszyk"] {
+      color: #fff !important;
+      border: 1px solid rgba(255, 255, 255, 0.78) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      box-shadow: none !important;
+    }
+    body .mockup-header:not(.scrolled) .mockup-actions > a[aria-label="Koszyk"] svg,
+    body .site-header:not(.scrolled) .header-actions > a[aria-label="Koszyk"] svg {
+      color: #fff !important;
+      fill: none !important;
+      stroke: #fff !important;
+    }
+    body .mockup-header .mockup-actions > a[aria-label="Koszyk"]:hover,
+    body .site-header .header-actions > a[aria-label="Koszyk"]:hover {
+      color: #e84c23 !important;
+      border-color: rgba(232, 76, 35, 0.72) !important;
+      background: rgba(232, 76, 35, 0.09) !important;
+      box-shadow: 0 0 0 3px rgba(232, 76, 35, 0.1) !important;
+    }
+    body .mockup-header .mockup-actions > a[aria-label="Koszyk"]:hover svg,
+    body .site-header .header-actions > a[aria-label="Koszyk"]:hover svg {
+      color: #e84c23 !important;
+      stroke: #e84c23 !important;
+    }
+
+    /* Home hero: message card first, navigation arrows directly below it. */
+    body .mockup-hero-slider .slide {
+      padding-bottom: 174px !important;
+    }
+    body .mockup-hero-slider .hero-controls-bar {
+      bottom: calc(72px + env(safe-area-inset-bottom) + 16px) !important;
+    }
+
+    /* Shared five-item mobile navigation. */
+    body .config-bottom-nav {
+      position: fixed !important;
+      inset: auto 0 0 !important;
+      z-index: 9999 !important;
+      display: grid !important;
+      grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+      width: 100% !important;
+      height: calc(72px + env(safe-area-inset-bottom)) !important;
+      padding: 5px 4px calc(5px + env(safe-area-inset-bottom)) !important;
+      overflow: visible !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+      background: rgba(6, 16, 28, 0.98) !important;
+      box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.16) !important;
+      backdrop-filter: blur(20px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+    }
+    body .config-bottom-nav > a,
+    body .config-bottom-nav > button {
+      position: relative !important;
+      display: flex !important;
+      min-width: 0 !important;
+      min-height: 0 !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-direction: column !important;
+      gap: 3px !important;
+      margin: 0 !important;
+      padding: 3px 1px 2px !important;
+      color: rgba(255, 255, 255, 0.55) !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      text-decoration: none !important;
+      transform: none !important;
+    }
+    body .config-bottom-nav .mobile-bottom-icon {
+      display: inline-flex !important;
+      width: 25px !important;
+      height: 25px !important;
+      min-width: 25px !important;
+      min-height: 25px !important;
+      align-items: center !important;
+      justify-content: center !important;
+      margin: 0 !important;
+      border: 0 !important;
+      border-radius: 50% !important;
+      background: transparent !important;
+      color: inherit !important;
+      box-shadow: none !important;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.25s ease !important;
+    }
+    body .config-bottom-nav .mobile-bottom-icon i {
+      margin: 0 !important;
+      font-size: 21px !important;
+      line-height: 1 !important;
+    }
+    body .config-bottom-nav .mobile-bottom-label {
+      position: relative !important;
+      top: 0 !important;
+      font-size: clamp(7px, 2.1vw, 9px) !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.02em !important;
+      line-height: 1 !important;
+      text-transform: none !important;
+      white-space: nowrap !important;
+      transform: none !important;
+      transition: color 0.2s ease !important;
+    }
+    body .config-bottom-nav > .active {
+      color: #fff !important;
+    }
+    body .config-bottom-nav > .active:not(.mobile-home-link) .mobile-bottom-icon {
+      width: 34px !important;
+      height: 34px !important;
+      min-width: 34px !important;
+      min-height: 34px !important;
+      margin-top: -11px !important;
+      color: #e84c23 !important;
+      border: 2px solid #e84c23 !important;
+      background: #10233a !important;
+      box-shadow: 0 0 15px rgba(232, 76, 35, 0.24) !important;
+    }
+    body .config-bottom-nav > a:hover,
+    body .config-bottom-nav > button:hover {
+      transform: none !important;
+    }
+    body .config-bottom-nav > a:hover .mobile-bottom-icon,
+    body .config-bottom-nav > button:hover .mobile-bottom-icon {
+      transform: translateY(-3px) !important;
+    }
+    body .config-bottom-nav > a:hover .mobile-bottom-label,
+    body .config-bottom-nav > button:hover .mobile-bottom-label {
+      top: 0 !important;
+      transform: scale(1.06) !important;
+      transform-origin: center top !important;
+    }
+    body .config-bottom-nav .cart-badge,
+    body .mobile-bottom-nav .cart-badge {
+      display: none !important;
+    }
+    body .config-bottom-nav .mobile-home-pattern {
+      display: block !important;
+      width: 25px !important;
+      height: 25px !important;
+      object-fit: contain !important;
+      animation: prescotMobilePatternShimmer 3.2s ease-in-out infinite !important;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    }
+    body .config-bottom-nav > .mobile-home-link.active .mobile-bottom-icon {
+      width: 29px !important;
+      height: 29px !important;
+      min-width: 29px !important;
+      min-height: 29px !important;
+      margin-top: -2px !important;
+      border: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+    body .config-bottom-nav > .mobile-home-link.active .mobile-home-pattern {
+      transform: scale(1.13) !important;
+    }
+  }
+
+  @media (max-width: 600px) {
+    body .mockup-hero-slider .slide {
+      padding-right: 10px !important;
+      padding-bottom: 164px !important;
+      padding-left: 10px !important;
+    }
+    body .mockup-hero-slider .slide-banner-box {
+      width: 100% !important;
+      max-width: 480px !important;
+    }
+    body .mockup-hero-slider .slide-banner-box p {
+      margin-top: 7px !important;
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 1024px) {
+    body .mockup-hero-slider .slide {
+      padding-bottom: 210px !important;
+    }
   }
 `;
 document.head.appendChild(customStyles);
@@ -366,10 +828,10 @@ function injectCartDrawer() {
         
         <div style="display: flex; gap: 12px; flex-direction: row;">
         <div style="display: flex; gap: 12px; flex-direction: row; width: 100%;">
-          <button id="cartDrawerGoToCart" class="add-to-cart-btn" onclick="window.location.href='cart.html'" style="flex: 1; padding: 0; min-height: 44px; font-size: 13px;">
+          <button id="cartDrawerGoToCart" class="add-to-cart-btn" type="button" aria-label="Zwiń koszyk" style="flex: 1; padding: 0; min-height: 44px; font-size: 13px;">
             <span class="btn-slide-wrap">
-              <span class="btn-txt-default">Do koszyka</span>
-              <span class="btn-txt-hover">Edytuj</span>
+              <span class="btn-txt-default">Powrót</span>
+              <span class="btn-txt-hover">Zamknij koszyk</span>
             </span>
           </button>
           <button id="cartDrawerCheckout" class="buy-it-now-btn" onclick="window.location.href='checkout.html'" style="flex: 1; padding: 0; min-height: 44px; font-size: 13px;">
@@ -1123,6 +1585,8 @@ function initSharedPopups() {
     cartDrawer.style.right = '-450px';
   }
 
+  window.closeCartDrawer = closeCart;
+
   if (closeCartDrawer) closeCartDrawer.addEventListener('click', closeCart);
 
   // Notes toggle
@@ -1153,13 +1617,10 @@ function initSharedPopups() {
     });
   }
 
-  // Go to cart
+  // Collapse the drawer and return to the page.
   const goToCartBtn = document.getElementById('cartDrawerGoToCart');
   if (goToCartBtn) {
-    goToCartBtn.addEventListener('click', () => {
-      closeCart();
-      window.location.href = 'cart.html';
-    });
+    goToCartBtn.addEventListener('click', closeCart);
   }
 
   // Checkout
@@ -2337,6 +2798,51 @@ function upgradeMobileCommerceNavigation() {
     : `<a class="mobile-nav-item ${entry.active ? 'active' : ''}" href="${entry.href}">${entry.icon}<span>${entry.label}</span></a>`
   ).join('');
   document.querySelectorAll('.mobile-nav-items').forEach((navigation) => { navigation.innerHTML = markup; });
+
+  const bottomEntries = [
+    {
+      label: 'Start',
+      href: 'index.html',
+      active: path === '' || path === 'index.html',
+      className: 'mobile-home-link',
+      icon: '<img class="mobile-home-pattern" src="images/prescot-pattern.png" alt="" aria-hidden="true">'
+    },
+    {
+      label: 'Sklep',
+      href: 'shop.html',
+      active: path === 'shop.html',
+      icon: '<i class="ph ph-shopping-cart-simple" aria-hidden="true"></i>'
+    },
+    {
+      label: 'Zakup AI',
+      href: 'ai-shopping.html',
+      active: path === 'ai-shopping.html',
+      icon: '<i class="ph ph-sparkle" aria-hidden="true"></i>'
+    },
+    {
+      label: 'O nas',
+      href: 'about.html',
+      active: path === 'about.html',
+      icon: '<i class="ph ph-users-three" aria-hidden="true"></i>'
+    },
+    {
+      label: 'Kontakt',
+      href: 'contact.html',
+      active: path === 'contact.html',
+      icon: '<i class="ph ph-headset" aria-hidden="true"></i>'
+    }
+  ];
+  const bottomMarkup = bottomEntries.map((entry) => {
+    const content = `<span class="mobile-bottom-icon">${entry.icon}</span>
+      <span class="mobile-bottom-label">${entry.label}</span>`;
+    const className = `${entry.active ? 'active ' : ''}${entry.className || ''}`;
+    return entry.action
+      ? `<button class="${className}" type="button" onclick="${entry.onClick}">${content}</button>`
+      : `<a class="${className}" href="${entry.href}">${content}</a>`;
+  }).join('');
+  document.querySelectorAll('.config-bottom-nav').forEach((navigation) => {
+    navigation.innerHTML = bottomMarkup;
+  });
 }
 
 if (document.readyState === 'loading') {

@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/configurator.css">
   <link rel="stylesheet" href="css/custom-buttons.css">
   <link rel="stylesheet" href="css/prescot-responsive.css">
+  <link rel="stylesheet" href="css/shop-catalog.css">
   <style>
     /* Futuristic AI Chat Design - LLM Style */
     body.ai-shopping-body {
@@ -148,6 +149,34 @@
     .ai-suggestion-pill:hover {
       background: rgba(255, 255, 255, 0.2);
       border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Product results reuse the catalog card design without changing the AI page background. */
+    .ai-product-results.shop-page {
+      width: 100%;
+      background: transparent;
+    }
+
+    .ai-products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+      align-items: stretch;
+    }
+
+    .ai-product-results .mockup-product-card {
+      flex-direction: column !important;
+    }
+
+    .ai-product-results .mockup-product-info {
+      flex-direction: column !important;
+    }
+
+    @media (max-width: 620px) {
+      .ai-products-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
     /* AI input styled like LLM prompt box */
@@ -562,7 +591,7 @@
     <button id="mobileCartButton" type="button"  onclick="openCartDrawer && openCartDrawer()"><i class="ph ph-shopping-cart-simple" aria-hidden="true"></i><span>Koszyk</span></button>
   </nav>
 
-
+  <script src="js/products-data.js"></script>
   <script src="js/configurator-core.js"></script>
   <script src="js/ai-agent.js"></script>
   <script src="js/smart-search.js"></script>

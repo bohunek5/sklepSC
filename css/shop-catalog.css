@@ -993,9 +993,19 @@
 
   .shop-page .product-actions-hover,
   .shop-page .mockup-product-card:hover .product-actions-hover {
-    inset: auto 7px 7px auto !important;
+    inset: auto auto 7px 50% !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 7px !important;
+    padding: 4px !important;
     opacity: 1 !important;
-    transform: none !important;
+    transform: translateX(-50%) !important;
+    border: 1px solid rgba(203, 213, 225, 0.72) !important;
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, 0.88) !important;
+    box-shadow: 0 6px 16px rgba(11, 26, 48, 0.1) !important;
+    backdrop-filter: blur(9px) !important;
+    -webkit-backdrop-filter: blur(9px) !important;
   }
 
   .shop-page .action-btn-circle {
@@ -1055,6 +1065,35 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr) 145px;
     gap: 10px;
+    align-items: end;
+  }
+
+  .shop-page .shop-catalog-heading {
+    min-width: 0;
+  }
+
+  .shop-page .shop-catalog-heading h2 {
+    width: 100%;
+    min-width: 0;
+    min-height: 42px;
+    align-items: center !important;
+    gap: 7px;
+    margin: 0 !important;
+    padding: 0 11px;
+    overflow: hidden;
+    border: 1px solid #ced8e3;
+    border-radius: 10px;
+    background: #fff;
+    font-size: 14px;
+    letter-spacing: -.01em;
+    line-height: 1.15;
+  }
+
+  .shop-page #shopCatalogTitle {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .shop-page .catalog-eyebrow {
@@ -1062,6 +1101,8 @@
   }
 
   .shop-page #shopResultSummary {
+    flex: 0 0 auto;
+    margin-left: 0 !important;
     font-size: 11px;
   }
 

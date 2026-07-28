@@ -3994,8 +3994,8 @@
       <div class="filter-toggle-wrapper">
         <div class="pro-toggle-switch" id="proToggleSwitch">
           <div class="toggle-slider"></div>
-          <button class="toggle-btn active" data-mode="b2c" type="button"><i class="ph ph-house-line" aria-hidden="true"></i>Dla domu</button>
-          <button class="toggle-btn" data-mode="b2b" type="button"><i class="ph ph-toolbox" aria-hidden="true"></i>Znam się</button>
+          <button class="toggle-btn active" data-mode="b2c" type="button"><i class="ph ph-house-line" aria-hidden="true"></i>Strefy</button>
+          <button class="toggle-btn" data-mode="b2b" type="button"><i class="ph ph-toolbox" aria-hidden="true"></i>Parametry</button>
         </div>
       </div>
       
@@ -4093,36 +4093,44 @@
         <div class="filter-group">
           <div class="filter-group-title">Barwa światła</div>
           <div class="horizontal-scroll-pills">
-            <button class="color-swatch-btn filter-pill" data-type="color" data-val="ciepła">
-              <div class="swatch-circle" style="background: linear-gradient(135deg, #ffddaa, #ffb347);"></div>
-              <span>Ciepła</span>
+            <button class="color-swatch-btn filter-pill" data-type="color" data-val="2700k" title="Bardzo ciepła, nastrojowa biel">
+              <div class="swatch-circle"></div>
+              <span>2700K</span>
+            </button>
+            <button class="color-swatch-btn filter-pill" data-type="color" data-val="3000k" title="Ciepła, uniwersalna biel">
+              <div class="swatch-circle"></div>
+              <span>3000K</span>
+            </button>
+            <button class="color-swatch-btn filter-pill" data-type="color" data-val="3200k" title="Łagodnie ciepła biel">
+              <div class="swatch-circle"></div>
+              <span>3200K</span>
             </button>
             <button class="color-swatch-btn filter-pill" data-type="color" data-val="neutralna">
-              <div class="swatch-circle" style="background: #ffffff; border: 1px solid #ddd;"></div>
-              <span>Neutralna</span>
+              <div class="swatch-circle"></div>
+              <span>Neutralna 4000K</span>
             </button>
             <button class="color-swatch-btn filter-pill" data-type="color" data-val="zimna">
-              <div class="swatch-circle" style="background: linear-gradient(135deg, #e0f7fa, #80deea);"></div>
-              <span>Zimna</span>
+              <div class="swatch-circle"></div>
+              <span>Zimna 6000K</span>
             </button>
             <button class="color-swatch-btn filter-pill" data-type="color" data-val="rgb">
-              <div class="swatch-circle" style="background: linear-gradient(135deg, #ff0000, #00ff00, #0000ff);"></div>
+              <div class="swatch-circle"></div>
               <span>RGB</span>
             </button>
             <button class="color-swatch-btn filter-pill" data-type="color" data-val="cct">
-              <div class="swatch-circle" style="background: linear-gradient(135deg, #ffddaa, #ffffff, #e0f7fa); border: 2px solid #f59e0b; box-shadow: inset 0 0 0 1px #fff;"></div>
+              <div class="swatch-circle"></div>
               <span>CCT</span>
             </button>
             <button class="color-swatch-btn filter-pill" data-type="color" data-val="rgbw">
-              <div class="swatch-circle" style="background: conic-gradient(#ff0000, #00ff00, #0000ff, #ffffff, #ff0000); border: 2px solid #ec4899; box-shadow: inset 0 0 0 1px #fff;"></div>
+              <div class="swatch-circle"></div>
               <span>RGBW</span>
             </button>
             <button class="color-swatch-btn filter-pill" data-type="color" data-val="rgb-cct">
-              <div class="swatch-circle" style="background: conic-gradient(#ff0000, #00ff00, #0000ff, #ffddaa, #80deea, #ff0000); border: 2px solid #8b5cf6; box-shadow: inset 0 0 0 1px #fff;"></div>
+              <div class="swatch-circle"></div>
               <span>RGB+CCT</span>
             </button>
             <button class="color-swatch-btn filter-pill" data-type="color" data-val="cyfrowe-mono">
-              <div class="swatch-circle" style="background: #ffffff; border: 2px solid #3b82f6; box-shadow: inset 0 0 0 1px #fff;"></div>
+              <div class="swatch-circle"></div>
               <span>Cyfrowe MONO</span>
             </button>
           </div>
@@ -4158,7 +4166,7 @@
     <div class="shop-grid-wrapper" style="flex: 1;">
       <header class="shop-catalog-toolbar">
         <div class="shop-catalog-heading">
-          <h2 style="display: flex; align-items: baseline; margin: 0;">Produkty <span id="shopResultSummary" style="font-size: 16px; color: #64748b; font-weight: normal; margin-left: 8px;">(Wczytuję...)</span></h2>
+          <h2 style="display: flex; align-items: baseline; margin: 0;"><span id="shopCatalogTitle">Produkty</span><span id="shopResultSummary" style="font-size: 16px; color: #64748b; font-weight: normal; margin-left: 8px;">(Wczytuję...)</span></h2>
         </div>
         <div class="shop-toolbar-controls">
           <label class="catalog-sort-control" for="shopSortSelect">
@@ -4385,6 +4393,18 @@
       const shopCategoryFilters = document.getElementById('shopCategoryFilters');
       const shopSortSelect = document.getElementById('shopSortSelect');
       const shopResultSummary = document.getElementById('shopResultSummary');
+      const shopCatalogTitle = document.getElementById('shopCatalogTitle');
+
+      function updateShopCatalogTitle() {
+        if (!shopCatalogTitle) return;
+        const fullLabel = currentCategory === 'all' ? 'Produkty' : currentCategory;
+        const branches = String(fullLabel)
+          .split(/\s*(?:\/|›|>|→)\s*/)
+          .map((branch) => branch.trim())
+          .filter(Boolean);
+        shopCatalogTitle.textContent = branches.at(-1) || 'Produkty';
+        shopCatalogTitle.title = currentCategory === 'all' ? 'Produkty' : currentCategory;
+      }
 
       // Helper function to bind Chip Container
       function bindChipContainer(containerId, onSelectCallback) {
@@ -4705,6 +4725,7 @@
           return;
         }
 
+        updateShopCatalogTitle();
         let filtered = [...products];
 
         // Search Filter
@@ -4745,7 +4766,9 @@
         if (currentColorTemp !== 'all') {
           filtered = filtered.filter((product) => {
             const spec = productSpecText(product);
-            if (currentColorTemp === 'ciepła') return /ciepla|2200k|2400k|2700k|3000k/.test(spec);
+            if (currentColorTemp === '2700k') return /2700k|ww27/.test(spec);
+            if (currentColorTemp === '3000k') return /3000k|ww30/.test(spec);
+            if (currentColorTemp === '3200k') return /3200k|ww32/.test(spec);
             if (currentColorTemp === 'neutralna') return /neutralna|3500k|4000k|4500k/.test(spec);
             if (currentColorTemp === 'zimna') return /zimna|5000k|6000k|6500k/.test(spec);
             if (currentColorTemp === 'rgb') return /\brgb\b/.test(spec);
@@ -4958,10 +4981,16 @@
                   </p>
                   <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px; width: 100%;">
                     <button class="add-to-cart-btn qv-add-cart-btn" data-id="${p.id}" style="width: 100%;">
-                      DODAJ DO KOSZYKA
+                      <span class="btn-slide-wrap">
+                        <span class="btn-txt-default">Dodaj do koszyka</span>
+                        <span class="btn-txt-hover"><i class="ph ph-shopping-cart-simple" style="margin-right: 6px;"></i> Dodaj teraz!</span>
+                      </span>
                     </button>
                     <button class="buy-it-now-btn" onclick="window.location.href='checkout.html'" style="width: 100%;">
-                      SZYBKI ZAKUP
+                      <span class="btn-slide-wrap">
+                        <span class="btn-txt-default">Szybki zakup</span>
+                        <span class="btn-txt-hover">Przejdź do podsumowania</span>
+                      </span>
                     </button>
                   </div>
                 </div>
@@ -5357,4 +5386,3 @@ body.index-page .site-header:not(.scrolled) {
 
 </body>
 </html>
-
