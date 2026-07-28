@@ -100,6 +100,15 @@
   border-bottom: 1px solid var(--catalog-border) !important;
 }
 
+.shop-page .filter-scroll-area > .filter-group.catalog-category-group {
+  margin-bottom: 4px !important;
+  padding-bottom: 8px !important;
+}
+
+.shop-page .filter-scroll-area > .filter-toggle-wrapper {
+  padding-top: 8px !important;
+}
+
 .shop-page .pro-toggle-switch {
   min-height: 44px;
   padding: 4px !important;
