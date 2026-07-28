@@ -216,21 +216,37 @@ document.addEventListener('DOMContentLoaded', async () => {
       
       productsList.forEach(p => {
           html += `
-            <div class="pro-product-card" style="padding: 12px; border: 1px solid rgba(255,255,255,0.05); background: rgba(15,23,42,0.6); backdrop-filter: blur(8px); border-radius: 12px; transition: transform 0.2s; display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="if(window.openQuickView) window.openQuickView('${p.id}');">
-              <div style="display: flex; align-items: center; gap: 12px; width: 100%;">
-                <div style="flex-shrink: 0;"><img src="${productImage(p)}" style="width: 54px; height: 54px; object-fit: cover; border-radius: 8px; background: #fff;"></div>
-                <div style="flex: 1;">
-                  <div style="font-weight: 600; font-size: 14px; margin-bottom: 4px; line-height: 1.3; color: #f8fafc;">${p.title}</div>
-                  <div style="font-size: 12px; color: #64748b;">${p.category || 'Produkt'}</div>
+            <div class="mockup-product-card" data-id="${p.id}" style="background: #fff; cursor: pointer;" onclick="if(window.openQuickView) window.openQuickView('${p.id}');">
+              <div class="mockup-product-media" style="position: relative; overflow: hidden;">
+                <div class="catalog-product-badges">
+                  <span class="catalog-stock-badge is-available">Dostępny</span>
                 </div>
-                <div style="text-align: right;">
-                  <div style="font-weight: 700; color: #0b1a30; font-size: 15px; margin-bottom: 5px;">${formatPrice(p.price)}</div>
-                  <button type="button" class="mockup-btn mockup-btn-outline" style="padding: 4px 10px; font-size: 11px; height: auto;" onclick="event.stopPropagation(); if(window.openQuickView) window.openQuickView('${p.id}');">Sprawdź produkt</button>
+                <img src="${productImage(p)}" alt="${p.title}" class="mockup-product-img" loading="lazy" onerror="this.onerror=null;this.src='images/okladka-produkty.webp'">
+                <div class="product-actions-hover">
+                  <button class="action-btn-circle qv-wishlist-btn" data-id="${p.id}" aria-label="Dodaj do listy życzeń" onclick="event.stopPropagation();">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                  </button>
+                  <button class="action-btn-circle qv-eye-btn" data-id="${p.id}" aria-label="Szybki podgląd" onclick="event.stopPropagation(); if(window.openQuickView) window.openQuickView('${p.id}');">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
                 </div>
               </div>
-              <div class="product-actions" style="display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 4px;">
-                <button type="button" class="add-to-cart-btn ai-add-btn" data-id="${p.id}" style="width: 100%;">DODAJ DO KOSZYKA</button>
-                <button type="button" class="buy-it-now-btn ai-buy-btn" data-id="${p.id}" style="width: 100%;">SZYBKI ZAKUP</button>
+              <div class="mockup-product-info">
+                <div class="catalog-product-meta">
+                  <span>${p.category || 'Produkt LED'}</span>
+                </div>
+                <h3 class="mockup-product-title"><a href="product.html?id=${p.id}" onclick="event.stopPropagation();">${p.title}</a></h3>
+                <p class="mockup-product-price">
+                  <span class="catalog-current-price">${formatPrice(p.price)}</span>
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px; width: 100%;">
+                  <button class="add-to-cart-btn qv-add-cart-btn ai-add-btn" data-id="${p.id}" style="width: 100%;" onclick="event.stopPropagation();">
+                    DODAJ DO KOSZYKA
+                  </button>
+                  <button class="buy-it-now-btn ai-buy-btn" data-id="${p.id}" style="width: 100%;" onclick="event.stopPropagation();">
+                    SZYBKI ZAKUP
+                  </button>
+                </div>
               </div>
             </div>
           `;
@@ -239,38 +255,47 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const productsContainer = document.createElement('div');
       productsContainer.innerHTML = html;
+      
+      // Add event listeners for per-product buttons
+      productsContainer.querySelectorAll('.ai-add-btn').forEach(btn => {
+        btn.onclick = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const p = productsList.find(x => x.id === btn.getAttribute('data-id'));
+          if (p) {
+            addItemsToCart([cartRecord(p, 1)]);
+            btn.className = 'add-to-cart-btn bought';
+            btn.innerHTML = '✓ DODANO';
+          }
+        };
+      });
+
+      productsContainer.querySelectorAll('.ai-buy-btn').forEach(btn => {
+        btn.onclick = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const p = productsList.find(x => x.id === btn.getAttribute('data-id'));
+          if (p) {
+            addItemsToCart([cartRecord(p, 1)]);
+            window.location.href = 'checkout.html';
+          }
+        };
+      });
+      
+      aiBubble.appendChild(productsContainer);
+      
       if (isBought) {
         const cta = document.createElement('button');
         cta.type = 'button';
         cta.className = 'add-to-cart-btn bought';
-        
-        // Add event listeners for per-product buttons
-        productsContainer.querySelectorAll('.ai-add-btn').forEach(btn => {
-          btn.onclick = (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const p = productsList.find(x => x.id === btn.getAttribute('data-id'));
-            if (p) {
-              addItemsToCart([cartRecord(p, 1)]);
-              btn.className = 'add-to-cart-btn bought';
-              btn.innerHTML = '✓ DODANO';
-            }
-          };
-        });
-
-        productsContainer.querySelectorAll('.ai-buy-btn').forEach(btn => {
-          btn.onclick = (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const p = productsList.find(x => x.id === btn.getAttribute('data-id'));
-            if (p) {
-              addItemsToCart([cartRecord(p, 1)]);
-              window.location.href = 'checkout.html';
-            }
-          };
-        });
-        
-        aiBubble.appendChild(productsContainer);
+        cta.style.width = '100%';
+        cta.style.marginTop = '12px';
+        cta.style.border = 'none';
+        cta.innerHTML = '✓ DODANO — Przejdź do kasy';
+        cta.onclick = (e) => { e.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
+        aiBubble.appendChild(cta);
+      }
+      
       scrollToBottom();
   }
 
