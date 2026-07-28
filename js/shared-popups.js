@@ -658,6 +658,12 @@ customStyles.innerHTML = `
       animation: prescotMobilePatternShimmer 3.2s ease-in-out infinite !important;
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
     }
+    body .config-bottom-nav > .mobile-home-link .mobile-bottom-icon {
+      width: 29px !important;
+      height: 29px !important;
+      min-width: 29px !important;
+      min-height: 29px !important;
+    }
     body .config-bottom-nav > .mobile-home-link.active .mobile-bottom-icon {
       width: 29px !important;
       height: 29px !important;
@@ -670,6 +676,10 @@ customStyles.innerHTML = `
     }
     body .config-bottom-nav > .mobile-home-link.active .mobile-home-pattern {
       transform: scale(1.13) !important;
+    }
+    body .config-bottom-nav > a:hover .mobile-bottom-icon,
+    body .config-bottom-nav > button:hover .mobile-bottom-icon {
+      transform: scale(1.06) !important;
     }
   }
 
@@ -2833,7 +2843,7 @@ function upgradeMobileCommerceNavigation() {
     {
       label: 'Sklep',
       href: 'shop.html',
-      active: path === 'shop.html',
+      active: ['shop.html', 'product.html', 'cart.html', 'checkout.html'].includes(path),
       icon: '<i class="ph ph-shopping-cart-simple" aria-hidden="true"></i>'
     },
     {
@@ -2863,9 +2873,13 @@ function upgradeMobileCommerceNavigation() {
       ? `<button class="${className}" type="button" onclick="${entry.onClick}">${content}</button>`
       : `<a class="${className}" href="${entry.href}">${content}</a>`;
   }).join('');
-  document.querySelectorAll('.config-bottom-nav').forEach((navigation) => {
+  const bottomNavigations = document.querySelectorAll('.config-bottom-nav');
+  bottomNavigations.forEach((navigation) => {
     navigation.innerHTML = bottomMarkup;
   });
+  if (bottomNavigations.length) {
+    document.documentElement.classList.add('mobile-nav-ready');
+  }
 }
 
 if (document.readyState === 'loading') {

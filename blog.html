@@ -5,6 +5,8 @@
   <link rel="icon" type="image/png" href="images/prescot-pattern.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/mobile-app-shell.css">
+  <script src="js/mobile-app-shell.js"></script>
   <title>Prescot LED - Blog & Inspiracje</title>
 
   <!-- Fonts -->
@@ -2976,11 +2978,13 @@
     initSharedPopups();
 
     // Mobile Navigation Toggle
-    const menuToggle = document.getElementById('menuToggle');
+    const menuToggle = document.getElementById('menuToggle') || document.getElementById('menuButton');
     const mobileMenu = document.getElementById('mobileMenu');
-    menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('active');
-    });
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+      });
+    }
 
     // Blog Modal Functions
     window.openBlogModal = function (blogId) {
