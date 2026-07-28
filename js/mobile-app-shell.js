@@ -35,43 +35,43 @@
       position: fixed;
       top: 50%;
       left: 50%;
-      z-index: 2147483001;
-      width: 48px;
-      height: 48px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: 15px;
-      background-color: #0b1a30;
+      z-index: 2147482999;
+      width: 108px;
+      height: 108px;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23e84c23' d='M3 5h10v5H3V5Zm0 8.5h9v5H3v-5ZM3 22h10v5H3v-5Zm13-17h5.2C26.7 5 30 9.2 30 16s-3.3 11-8.8 11H16v-5h5.1c2.6 0 3.9-2 3.9-6s-1.3-6-3.9-6H16V5Zm0 8.5h6v5h-6v-5Z'/%3E%3C/svg%3E");
       background-position: center;
-      background-size: 26px 26px;
+      background-size: 88px 88px;
       background-repeat: no-repeat;
-      box-shadow: 0 16px 38px rgba(6, 16, 28, 0.22);
       content: "";
       opacity: 0;
       pointer-events: none;
-      transform: translate(-50%, -44%) scale(0.88);
-      transition: opacity 0.18s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      filter: drop-shadow(0 10px 24px rgba(232, 76, 35, 0.2));
+      transform: translate(-50%, -50%) scale(0.9);
+      transition: opacity 0.18s ease, transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
     }
     html.mobile-app-arriving::after,
     html.mobile-app-leaving::after {
       opacity: 1;
-      backdrop-filter: blur(9px);
-      -webkit-backdrop-filter: blur(9px);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
     html.mobile-app-leaving::after {
-      background: rgba(11, 26, 48, 0.2);
+      background: rgba(11, 26, 48, 0.14);
     }
+    html.mobile-app-arriving::before,
     html.mobile-app-leaving::before {
-      opacity: 1;
+      opacity: 0.68;
       transform: translate(-50%, -50%) scale(1);
-      animation: mobilePrescotLoader 0.9s ease-in-out infinite alternate;
+      animation: mobilePrescotPatternBreath 0.85s ease-in-out infinite alternate;
     }
-    @keyframes mobilePrescotLoader {
+    @keyframes mobilePrescotPatternBreath {
       from {
-        box-shadow: 0 14px 34px rgba(6, 16, 28, 0.2), 0 0 0 0 rgba(232, 76, 35, 0.08);
+        opacity: 0.46;
+        transform: translate(-50%, -50%) scale(0.94);
       }
       to {
-        box-shadow: 0 18px 42px rgba(6, 16, 28, 0.28), 0 0 0 8px rgba(232, 76, 35, 0.12);
+        opacity: 0.72;
+        transform: translate(-50%, -50%) scale(1.03);
       }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -112,6 +112,34 @@
 
   window.addEventListener('pageshow', revealPage);
 
+  const prefetchedPages = new Set();
+
+  function prefetchTouchedPage(event) {
+    const link = event.target.closest?.('a[href]');
+    if (!link || link.hasAttribute('download') || (link.target && link.target !== '_self')) return;
+
+    const rawHref = link.getAttribute('href');
+    if (!rawHref || rawHref.startsWith('#') || rawHref.startsWith('javascript:') || rawHref.startsWith('mailto:') || rawHref.startsWith('tel:')) {
+      return;
+    }
+
+    const destination = new URL(link.href, window.location.href);
+    if (destination.origin !== window.location.origin || destination.href === window.location.href || prefetchedPages.has(destination.href)) {
+      return;
+    }
+
+    prefetchedPages.add(destination.href);
+    const prefetch = document.createElement('link');
+    prefetch.rel = 'prefetch';
+    prefetch.as = 'document';
+    prefetch.href = destination.href;
+    prefetch.fetchPriority = 'low';
+    document.head.appendChild(prefetch);
+  }
+
+  document.addEventListener('touchstart', prefetchTouchedPage, { passive: true, capture: true });
+  document.addEventListener('pointerover', prefetchTouchedPage, { passive: true, capture: true });
+
   document.addEventListener('click', function (event) {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
       return;
@@ -151,7 +179,7 @@
       // Continue with the visual transition even without storage.
     }
 
-    const delay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 170;
+    const delay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 90;
     navigationTimer = window.setTimeout(function () {
       window.location.assign(destination.href);
     }, delay);
