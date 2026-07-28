@@ -17,7 +17,17 @@
     html.mobile-nav-ready .config-bottom-nav {
       visibility: visible !important;
       opacity: 1 !important;
-      transition: opacity 0.2s ease !important;
+      pointer-events: auto !important;
+      transform: translate3d(0, 0, 0) !important;
+      transition:
+        opacity 0.2s ease,
+        transform 0.32s cubic-bezier(0.22, 1, 0.36, 1) !important;
+      will-change: transform;
+    }
+    html.mobile-nav-ready.mobile-bottom-nav-hidden .config-bottom-nav {
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transform: translate3d(0, calc(100% + 12px), 0) !important;
     }
     html.mobile-app-shell::after {
       position: fixed;
@@ -111,6 +121,65 @@
   }
 
   window.addEventListener('pageshow', revealPage);
+
+  let previousScrollY = Math.max(0, window.scrollY);
+  let accumulatedScroll = 0;
+  let previousDirection = 0;
+  let scrollFramePending = false;
+
+  function setBottomNavigationHidden(hidden) {
+    root.classList.toggle('mobile-bottom-nav-hidden', hidden);
+  }
+
+  function updateBottomNavigationVisibility() {
+    scrollFramePending = false;
+
+    const currentScrollY = Math.max(0, window.scrollY);
+    const scrollDifference = currentScrollY - previousScrollY;
+    const direction = Math.sign(scrollDifference);
+
+    if (currentScrollY <= 28) {
+      setBottomNavigationHidden(false);
+      accumulatedScroll = 0;
+      previousDirection = 0;
+      previousScrollY = currentScrollY;
+      return;
+    }
+
+    if (direction && direction !== previousDirection) {
+      accumulatedScroll = 0;
+    }
+
+    if (direction) {
+      accumulatedScroll += scrollDifference;
+      previousDirection = direction;
+    }
+
+    if (currentScrollY > 112 && accumulatedScroll > 20) {
+      setBottomNavigationHidden(true);
+      accumulatedScroll = 0;
+    } else if (accumulatedScroll < -12) {
+      setBottomNavigationHidden(false);
+      accumulatedScroll = 0;
+    }
+
+    previousScrollY = currentScrollY;
+  }
+
+  window.addEventListener('scroll', function () {
+    if (scrollFramePending) return;
+    scrollFramePending = true;
+    requestAnimationFrame(updateBottomNavigationVisibility);
+  }, { passive: true });
+
+  window.addEventListener('pageshow', function () {
+    previousScrollY = Math.max(0, window.scrollY);
+    setBottomNavigationHidden(previousScrollY > 112);
+  });
+
+  window.addEventListener('resize', function () {
+    if (window.scrollY <= 28) setBottomNavigationHidden(false);
+  }, { passive: true });
 
   const prefetchedPages = new Set();
 
