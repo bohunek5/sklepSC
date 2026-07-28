@@ -215,6 +215,30 @@ customStyles.innerHTML = `
     transform: scale(1);
   }
 
+  #cartDrawer .cart-drawer-actions {
+    display: flex !important;
+    width: 100% !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+  #cartDrawer .cart-drawer-actions > #cartDrawerGoToCart,
+  #cartDrawer .cart-drawer-actions > #cartDrawerCheckout {
+    flex: 1 1 0 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    max-height: 44px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-self: stretch !important;
+    transform: none !important;
+  }
+  #cartDrawer .cart-drawer-actions > #cartDrawerGoToCart:hover,
+  #cartDrawer .cart-drawer-actions > #cartDrawerCheckout:hover {
+    transform: none !important;
+  }
+
   /* Shared premium footer refresh. */
   body .premium-footer {
     position: relative !important;
@@ -826,15 +850,14 @@ function injectCartDrawer() {
         </div>
         <p style="font-size: 11px; color: #777; margin: 0 0 20px 0;">Podatki i koszt dostawy obliczane przy kasie</p>
         
-        <div style="display: flex; gap: 12px; flex-direction: row;">
-        <div style="display: flex; gap: 12px; flex-direction: row; width: 100%;">
-          <button id="cartDrawerGoToCart" class="add-to-cart-btn" type="button" aria-label="Zwiń koszyk" style="flex: 1; padding: 0; min-height: 44px; font-size: 13px;">
+        <div class="cart-drawer-actions">
+          <button id="cartDrawerGoToCart" class="add-to-cart-btn" type="button" aria-label="Zwiń koszyk" style="flex: 1 1 0; width: auto; height: 44px; min-height: 44px; margin: 0; padding: 0; font-size: 13px;">
             <span class="btn-slide-wrap">
               <span class="btn-txt-default">Powrót</span>
               <span class="btn-txt-hover">Zamknij koszyk</span>
             </span>
           </button>
-          <button id="cartDrawerCheckout" class="buy-it-now-btn" onclick="window.location.href='checkout.html'" style="flex: 1; padding: 0; min-height: 44px; font-size: 13px;">
+          <button id="cartDrawerCheckout" class="buy-it-now-btn" onclick="window.location.href='checkout.html'" style="flex: 1 1 0; width: auto; height: 44px; min-height: 44px; margin: 0; padding: 0; font-size: 13px;">
             <span class="btn-slide-wrap">
               <span class="btn-txt-default">Do kasy</span>
               <span class="btn-txt-hover">Płatność</span>
