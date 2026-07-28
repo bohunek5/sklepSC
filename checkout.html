@@ -325,8 +325,44 @@
       font-size: 14px;
       font-weight: 700;
       color: var(--primary-color);
-      flex-shrink: 0;
       white-space: nowrap;
+    }
+
+    .summary-product-actions {
+      display: flex;
+      flex-shrink: 0;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 7px;
+    }
+
+    .checkout-remove-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 0;
+      border: 0;
+      background: transparent;
+      color: #777;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: color 0.2s ease;
+    }
+
+    .checkout-remove-item i {
+      font-size: 13px;
+      text-decoration: none;
+    }
+
+    .checkout-remove-item:hover,
+    .checkout-remove-item:focus-visible {
+      color: var(--accent-color);
+      outline: none;
     }
 
     /* Subtotal card */
@@ -2782,7 +2818,7 @@
   </div>
   <script>
     // Load summary list from cart localStorage
-    const checkoutCart = JSON.parse(localStorage.getItem('prescot_cart')) || [];
+    let checkoutCart = JSON.parse(localStorage.getItem('prescot_cart')) || [];
     const checkoutItemsList = document.getElementById('checkoutItemsList');
     const summarySubtotal = document.getElementById('summarySubtotal');
     const summaryTotal = document.getElementById('summaryTotal');
@@ -2797,7 +2833,7 @@
         return;
       }
 
-      checkoutCart.forEach(item => {
+      checkoutCart.forEach((item, index) => {
         const pTotal = item.price * item.qty;
         subtotal += pTotal;
 
@@ -2813,7 +2849,13 @@
               </h4>
               <div class="summary-product-meta">Kolor: ${item.color ? `<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${item.color}; vertical-align:middle;"></span>` : 'Domyślny'} / Rozmiar: ${item.size || 'Domyślny'}</div>
             </div>
-            <div class="summary-product-price">${pTotal.toFixed(2)} zł</div>
+            <div class="summary-product-actions">
+              <div class="summary-product-price">${pTotal.toFixed(2)} zł</div>
+              <button class="checkout-remove-item" type="button" data-remove-index="${index}" aria-label="Usuń ${item.title} z koszyka">
+                <i class="ph ph-trash" aria-hidden="true"></i>
+                <span>Usuń</span>
+              </button>
+            </div>
           </div>
         `;
         checkoutItemsList.insertAdjacentHTML('beforeend', itemHTML);
@@ -2822,6 +2864,28 @@
       summarySubtotal.textContent = `${subtotal.toFixed(2)} zł`;
       summaryTotal.textContent = `${subtotal.toFixed(2)} zł`;
     }
+
+    checkoutItemsList.addEventListener('click', function (event) {
+      const removeButton = event.target.closest('.checkout-remove-item');
+      if (!removeButton) return;
+
+      const itemIndex = Number(removeButton.dataset.removeIndex);
+      if (!Number.isInteger(itemIndex) || !checkoutCart[itemIndex]) return;
+
+      checkoutCart.splice(itemIndex, 1);
+      localStorage.setItem('prescot_cart', JSON.stringify(checkoutCart));
+
+      if (checkoutCart.length === 0) {
+        window.location.href = 'shop.html';
+        return;
+      }
+
+      loadCheckoutSummary();
+
+      if (typeof updateCartBadge === 'function') {
+        updateCartBadge();
+      }
+    });
 
     // Toggle between payment tabs
     function togglePaymentTab(method) {
