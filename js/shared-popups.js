@@ -607,12 +607,16 @@ customStyles.innerHTML = `
       line-height: 1 !important;
     }
     body .config-bottom-nav .mobile-bottom-label {
-      position: relative !important;
+      position: static !important;
+      display: flex !important;
+      height: 12px !important;
+      align-items: center !important;
+      justify-content: center !important;
       top: 0 !important;
-      font-size: clamp(7px, 2.1vw, 9px) !important;
-      font-weight: 600 !important;
+      font-size: clamp(9px, 2.55vw, 10.5px) !important;
+      font-weight: 650 !important;
       letter-spacing: 0.02em !important;
-      line-height: 1 !important;
+      line-height: 12px !important;
       text-transform: none !important;
       white-space: nowrap !important;
       transform: none !important;
@@ -643,8 +647,7 @@ customStyles.innerHTML = `
     body .config-bottom-nav > a:hover .mobile-bottom-label,
     body .config-bottom-nav > button:hover .mobile-bottom-label {
       top: 0 !important;
-      transform: scale(1.06) !important;
-      transform-origin: center top !important;
+      transform: none !important;
     }
     body .config-bottom-nav .cart-badge,
     body .mobile-bottom-nav .cart-badge {
@@ -654,7 +657,8 @@ customStyles.innerHTML = `
       display: block !important;
       width: 25px !important;
       height: 25px !important;
-      object-fit: contain !important;
+      overflow: visible !important;
+      color: #e84c23 !important;
       animation: prescotMobilePatternShimmer 3.2s ease-in-out infinite !important;
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
     }
@@ -2820,6 +2824,10 @@ function injectMobileCategoriesDrawer() {
 function upgradeMobileCommerceNavigation() {
   const path = window.location.pathname.split('/').pop() || 'index.html';
   const icon = (content) => `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${content}</svg>`;
+  const homePatternIcon = `
+    <svg class="mobile-home-pattern" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path fill="currentColor" d="M3 5h10v5H3V5Zm0 8.5h9v5H3v-5ZM3 22h10v5H3v-5Zm13-17h5.2C26.7 5 30 9.2 30 16s-3.3 11-8.8 11H16v-5h5.1c2.6 0 3.9-2 3.9-6s-1.3-6-3.9-6H16V5Zm0 8.5h6v5h-6v-5Z"/>
+    </svg>`;
   const entries = [
     { label: 'Home', href: 'index.html', active: path === '' || path === 'index.html', icon: icon('<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>') },
     { label: 'Kategorie', action: true, onClick: 'openMobileCategories()', active: false, icon: icon('<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>') },
@@ -2838,7 +2846,7 @@ function upgradeMobileCommerceNavigation() {
       href: 'index.html',
       active: path === '' || path === 'index.html',
       className: 'mobile-home-link',
-      icon: '<img class="mobile-home-pattern" src="images/prescot-pattern.png" alt="" aria-hidden="true">'
+      icon: homePatternIcon
     },
     {
       label: 'Sklep',
@@ -2856,7 +2864,7 @@ function upgradeMobileCommerceNavigation() {
       label: 'O nas',
       href: 'about.html',
       active: path === 'about.html',
-      icon: '<i class="ph ph-users-three" aria-hidden="true"></i>'
+      icon: '<i class="ph ph-buildings" aria-hidden="true"></i>'
     },
     {
       label: 'Kontakt',

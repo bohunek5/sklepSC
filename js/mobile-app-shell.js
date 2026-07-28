@@ -40,7 +40,11 @@
       height: 48px;
       border: 1px solid rgba(255, 255, 255, 0.16);
       border-radius: 15px;
-      background: #0b1a30 url("images/prescot-pattern.png") center / 26px 26px no-repeat;
+      background-color: #0b1a30;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23e84c23' d='M3 5h10v5H3V5Zm0 8.5h9v5H3v-5ZM3 22h10v5H3v-5Zm13-17h5.2C26.7 5 30 9.2 30 16s-3.3 11-8.8 11H16v-5h5.1c2.6 0 3.9-2 3.9-6s-1.3-6-3.9-6H16V5Zm0 8.5h6v5h-6v-5Z'/%3E%3C/svg%3E");
+      background-position: center;
+      background-size: 26px 26px;
+      background-repeat: no-repeat;
       box-shadow: 0 16px 38px rgba(6, 16, 28, 0.22);
       content: "";
       opacity: 0;
