@@ -166,6 +166,7 @@
   background: transparent !important;
 }
 
+.shop-page #b2cFilters.active > .filter-group:first-child,
 .shop-page #b2bFilters.active > .filter-group:first-child {
   margin-top: 20px !important;
 }
