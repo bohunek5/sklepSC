@@ -3925,6 +3925,7 @@
 
 
   <link rel="stylesheet" href="css/advanced-filters.css">
+  <link rel="stylesheet" href="css/shop-catalog.css">
 </head>
 <body class="shop-page">
   
@@ -4738,156 +4739,123 @@
       }
 
       // 8. Primary Filter and Render Function
-      function renderFilteredProducts() {
-        if (typeof products === 'undefined' || !Array.isArray(products)) {
-          console.error("Products array is undefined!");
-          if (shopGrid) shopGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 100px 0; color: #ef4444;">Błąd ładowania bazy produktów. Odśwież stronę.</div>`;
-          return;
-        }
-
-        updateShopCatalogTitle();
+      function getFilteredProducts(state) {
+        if (typeof products === 'undefined' || !Array.isArray(products)) return [];
         let filtered = [...products];
 
-        // Search Filter
-        if (currentSearch) {
-          const normalizedSearch = normalizeCatalogText(currentSearch);
+        if (state.search) {
+          const normalizedSearch = normalizeCatalogText(state.search);
           filtered = filtered.filter((product) => productFullText(product).includes(normalizedSearch));
         }
-
-        // Category Filter
-        if (currentCategory !== 'all') {
-          const targetCategory = normalizeCatalogText(currentCategory);
+        if (state.category !== 'all') {
+          const targetCategory = normalizeCatalogText(state.category);
           filtered = filtered.filter((product) => {
             const productCategory = normalizeCatalogText(product.category);
             return productCategory === targetCategory || productCategory.includes(targetCategory) || targetCategory.includes(productCategory);
           });
         }
-
-        // Price Filter (PLN)
-        if (currentPriceRange !== 'all') {
-          if (currentPriceRange === '0-50') {
-            filtered = filtered.filter(p => p.price <= 50);
-          } else if (currentPriceRange === '50-100') {
-            filtered = filtered.filter(p => p.price > 50 && p.price <= 100);
-          } else if (currentPriceRange === '100-250') {
-            filtered = filtered.filter(p => p.price > 100 && p.price <= 250);
-          } else if (currentPriceRange === '250+') {
-            filtered = filtered.filter(p => p.price > 250);
-          }
+        if (state.price !== 'all') {
+          if (state.price === '0-50') filtered = filtered.filter(p => p.price <= 50);
+          else if (state.price === '50-100') filtered = filtered.filter(p => p.price > 50 && p.price <= 100);
+          else if (state.price === '100-250') filtered = filtered.filter(p => p.price > 100 && p.price <= 250);
+          else if (state.price === '250+') filtered = filtered.filter(p => p.price > 250);
         }
-
-        // Voltage Filter
-        if (currentVoltage !== 'all') {
-          const targetVoltage = normalizeCatalogText(currentVoltage).replace(/\s/g, '');
+        if (state.voltage !== 'all') {
+          const targetVoltage = normalizeCatalogText(state.voltage).replace(/\s/g, '');
           filtered = filtered.filter((product) => productSpecText(product).replace(/\s/g, '').includes(targetVoltage));
         }
-
-        // Color Temp Filter
-        if (currentColorTemp !== 'all') {
+        if (state.colorTemp !== 'all') {
           filtered = filtered.filter((product) => {
             const spec = productSpecText(product);
-            if (currentColorTemp === '2700k') return /2700k|ww27/.test(spec);
-            if (currentColorTemp === '3000k') return /3000k|ww30/.test(spec);
-            if (currentColorTemp === '3200k') return /3200k|ww32/.test(spec);
-            if (currentColorTemp === 'neutralna') return /neutralna|3500k|4000k|4500k/.test(spec);
-            if (currentColorTemp === 'zimna') return /zimna|5000k|6000k|6500k/.test(spec);
-            if (currentColorTemp === 'rgb') return /\brgb\b/.test(spec);
-            if (currentColorTemp === 'cct') return /\bcct\b/.test(spec);
-            if (currentColorTemp === 'rgbw') return /\brgbw\b/.test(spec);
-            if (currentColorTemp === 'rgb-cct') return /\brgb\+?cct\b/.test(spec);
-            if (currentColorTemp === 'cyfrowe-mono') return /cyfrow[ea] mono|\bmono\b/.test(spec);
+            if (state.colorTemp === '2700k') return /2700k|ww27/.test(spec);
+            if (state.colorTemp === '3000k') return /3000k|ww30/.test(spec);
+            if (state.colorTemp === '3200k') return /3200k|ww32/.test(spec);
+            if (state.colorTemp === 'neutralna') return /neutralna|3500k|4000k|4500k/.test(spec);
+            if (state.colorTemp === 'zimna') return /zimna|5000k|6000k|6500k/.test(spec);
+            if (state.colorTemp === 'rgb') return /\brgb\b/.test(spec);
+            if (state.colorTemp === 'cct') return /\bcct\b/.test(spec);
+            if (state.colorTemp === 'rgbw') return /\brgbw\b/.test(spec);
+            if (state.colorTemp === 'rgb-cct') return /\brgb\+?cct\b/.test(spec);
+            if (state.colorTemp === 'cyfrowe-mono') return /cyfrow[ea] mono|\bmono\b/.test(spec);
             return true;
           });
         }
-
-        // Lumens Filter
-        if (currentLumens !== 'all') {
+        if (state.lumens !== 'all') {
           filtered = filtered.filter(p => {
             const attrJ = (p.attributes && p.attributes["Jasność"]) || (p.attributes && p.attributes["Strumień świetlny"]) || "";
             const title = p.title || "";
             const match = (attrJ + " " + title).match(/(\d+)\s*lm/i);
             if (match) {
               const lm = parseInt(match[1], 10);
-              if (currentLumens === 'low') return lm < 600;
-              if (currentLumens === 'mid') return lm >= 600 && lm <= 1000;
-              if (currentLumens === 'high') return lm > 1000;
+              if (state.lumens === 'low') return lm < 600;
+              if (state.lumens === 'mid') return lm >= 600 && lm <= 1000;
+              if (state.lumens === 'high') return lm > 1000;
             }
             return true;
           });
         }
-
-        // IP Rating Filter
-        if (currentIP !== 'all') {
+        if (state.ip !== 'all') {
           filtered = filtered.filter(p => {
-            if (currentIP === 'IP20') return productIPRating(p) === 20;
-            if (currentIP === 'IP65+') return productIPRating(p) >= 63;
+            if (state.ip === 'IP20') return productIPRating(p) === 20;
+            if (state.ip === 'IP65+') return productIPRating(p) >= 63;
             return true;
           });
         }
-
-        if (currentRoom !== 'all') {
-          filtered = filtered.filter((product) => matchesRoom(product, currentRoom));
+        if (state.room !== 'all') {
+          filtered = filtered.filter((product) => matchesRoom(product, state.room));
         }
-
-        if (currentExpectation !== 'all') {
-          filtered = filtered.filter((product) => matchesExpectation(product, currentExpectation));
+        if (state.expect !== 'all') {
+          filtered = filtered.filter((product) => matchesExpectation(product, state.expect));
         }
-
-        if (currentPCB !== 'all') {
-            const reqPCB = currentPCB.toLowerCase().replace(/\s+/g, '');
+        if (state.pcb !== 'all') {
+            const reqPCB = state.pcb.toLowerCase().replace(/\s+/g, '');
             filtered = filtered.filter(p => {
               const specList = p.specs ? p.specs.map(s => s.toLowerCase().replace(/\s+/g, '')) : [];
               return specList.some(s => s.includes('pcb') && s.includes(reqPCB)) || 
                      (p.title && p.title.toLowerCase().replace(/\s+/g, '').includes(reqPCB));
             });
-          }
-          
-          if (currentCRI !== 'all') {
-            const reqCRI = currentCRI.toLowerCase().replace(/\s+/g, '');
+        }
+        if (state.cri !== 'all') {
+            const reqCRI = state.cri.toLowerCase().replace(/\s+/g, '');
             filtered = filtered.filter(p => {
               const specList = p.specs ? p.specs.map(s => s.toLowerCase().replace(/\s+/g, '')) : [];
               return specList.some(s => s.includes(reqCRI)) || 
                      (p.title && p.title.toLowerCase().replace(/\s+/g, '').includes(reqCRI));
             });
-          }
-
-          if (currentR9 !== 'all') {
-            const reqR9 = currentR9.toLowerCase().replace(/\s+/g, '');
+        }
+        if (state.r9 !== 'all') {
+            const reqR9 = state.r9.toLowerCase().replace(/\s+/g, '');
             filtered = filtered.filter(p => {
               const specList = p.specs ? p.specs.map(s => s.toLowerCase().replace(/\s+/g, '')) : [];
               return specList.some(s => s.includes(reqR9)) || 
                      (p.title && p.title.toLowerCase().replace(/\s+/g, '').includes(reqR9));
             });
-          }
-
-          if (currentOZ !== 'all') {
-            const reqOZ = currentOZ.toLowerCase().replace(/\s+/g, '');
+        }
+        if (state.oz !== 'all') {
+            const reqOZ = state.oz.toLowerCase().replace(/\s+/g, '');
             filtered = filtered.filter(p => {
               const specList = p.specs ? p.specs.map(s => s.toLowerCase().replace(/\s+/g, '')) : [];
               return specList.some(s => s.includes(reqOZ)) || 
                      (p.title && p.title.toLowerCase().replace(/\s+/g, '').includes(reqOZ));
             });
-          }
-
-          if (currentCover !== 'all') {
-            const reqCover = currentCover.toLowerCase();
+        }
+        if (state.cover !== 'all') {
+            const reqCover = state.cover.toLowerCase();
             filtered = filtered.filter(p => {
               const specList = p.specs ? p.specs.map(s => s.toLowerCase()) : [];
               return specList.some(s => s.includes(reqCover)) || 
                      (p.title && p.title.toLowerCase().includes(reqCover));
             });
-          }
-
-          if (currentProfileColor !== 'all') {
-            const reqColor = currentProfileColor.toLowerCase();
+        }
+        if (state.profileColor !== 'all') {
+            const reqColor = state.profileColor.toLowerCase();
             filtered = filtered.filter(p => {
               const specList = p.specs ? p.specs.map(s => s.toLowerCase()) : [];
               return specList.some(s => s.includes(reqColor)) || 
                      (p.title && p.title.toLowerCase().includes(reqColor));
             });
-          }
-
-        if (currentProfile !== 'all') {
+        }
+        if (state.profile !== 'all') {
           const profilePatterns = {
             Wpuszczany: /wpuszcz|do zabudowy/i,
             GK: /g-k|gk|gips/i,
@@ -4896,9 +4864,89 @@
             Zwieszany: /zwiesz/i,
             Zewnętrzny: /zewn\u0119trz|elewac/i
           };
-          const pattern = profilePatterns[currentProfile];
+          const pattern = profilePatterns[state.profile];
           if (pattern) filtered = filtered.filter((product) => pattern.test(productSpecText(product)));
         }
+
+        return filtered;
+      }
+
+      function updateFilterAvailability(currentState) {
+        const typeMap = {
+          room: 'room',
+          expect: 'expect',
+          voltage: 'voltage',
+          color: 'colorTemp',
+          pcb: 'pcb',
+          cri: 'cri',
+          r9: 'r9',
+          oz: 'oz',
+          cover: 'cover',
+          profile_color: 'profileColor',
+          profile: 'profile',
+          price: 'price'
+        };
+
+        const pills = document.querySelectorAll('.advanced-filter-container .filter-pill, .advanced-filter-container .color-swatch-btn, .advanced-filter-container .svg-filter-btn');
+        
+        pills.forEach(pill => {
+          if (pill.classList.contains('active')) {
+             pill.classList.remove('unavailable');
+             pill.disabled = false;
+             return;
+          }
+          const type = pill.dataset.type;
+          const val = pill.dataset.val;
+          const stateKey = typeMap[type];
+          
+          if (!stateKey) return;
+          
+          const testState = { ...currentState };
+          testState[stateKey] = val;
+          
+          const matchingProducts = getFilteredProducts(testState);
+          if (matchingProducts.length === 0) {
+             pill.classList.add('unavailable');
+             pill.disabled = true;
+          } else {
+             pill.classList.remove('unavailable');
+             pill.disabled = false;
+          }
+        });
+      }
+
+      function renderFilteredProducts() {
+        if (typeof products === 'undefined' || !Array.isArray(products)) {
+          console.error("Products array is undefined!");
+          if (shopGrid) shopGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 100px 0; color: #ef4444;">Błąd ładowania bazy produktów. Odśwież stronę.</div>`;
+          return;
+        }
+
+        updateShopCatalogTitle();
+        
+        const currentState = {
+          search: currentSearch,
+          category: currentCategory,
+          price: currentPriceRange,
+          voltage: currentVoltage,
+          colorTemp: currentColorTemp,
+          lumens: currentLumens,
+          ip: currentIP,
+          room: currentRoom,
+          expect: currentExpectation,
+          pcb: currentPCB,
+          cri: currentCRI,
+          r9: currentR9,
+          oz: currentOZ,
+          cover: currentCover,
+          profileColor: currentProfileColor,
+          profile: currentProfile
+        };
+
+        let filtered = getFilteredProducts(currentState);
+        
+        // Update filter UI dynamically
+        updateFilterAvailability(currentState);
 
         // Sorting
         if (currentSort === 'price-asc') {
@@ -5401,8 +5449,6 @@ body.index-page .site-header:not(.scrolled) {
   }
 }
 </style>
-
-<link rel="stylesheet" href="css/shop-catalog.css">
 
 </body>
 </html>
