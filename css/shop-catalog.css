@@ -922,7 +922,7 @@
 
   .shop-page .mobile-fab-filter {
     position: fixed !important;
-    inset: auto 16px 88px !important;
+    inset: auto 16px calc(84px + env(safe-area-inset-bottom)) !important;
     z-index: 940 !important;
     display: flex !important;
     width: calc(100% - 32px);
@@ -940,6 +940,11 @@
     font-size: 13px !important;
     font-weight: 800 !important;
     transform: none !important;
+    transition: bottom .32s cubic-bezier(.22, 1, .36, 1), box-shadow .2s ease, background-color .2s ease !important;
+  }
+
+  html.mobile-bottom-nav-hidden body.shop-page .mobile-fab-filter {
+    bottom: calc(12px + env(safe-area-inset-bottom)) !important;
   }
 
   .shop-page .shop-catalog-toolbar {
