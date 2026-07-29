@@ -1574,6 +1574,7 @@ function initSharedPopups() {
         closeWishlist();
         showToast('Dodano do koszyka: 1 szt.', 'cart');
         triggerCartIconAnimation();
+        openCart();
       });
     });
   }
@@ -2283,6 +2284,7 @@ function initSharedPopups() {
       showToast(`Dodano do koszyka: ${qvQty} szt.`, 'cart');
       triggerCartIconAnimation();
       window.dispatchEvent(new Event('storage'));
+      openCart();
     });
   }
 
@@ -2359,6 +2361,7 @@ function initSharedPopups() {
       const hoverLabel = addCartBtn.querySelector('.btn-txt-hover');
       if (defaultLabel) defaultLabel.textContent = 'Dodano do koszyka';
       if (hoverLabel) hoverLabel.innerHTML = '<i class="ph ph-shopping-cart-simple" aria-hidden="true" style="margin-right: 6px;"></i> Przejdź do koszyka';
+      openCart();
       return;
     }
 
@@ -2709,6 +2712,7 @@ function initSharedPopups() {
       showToast(`Dodano do koszyka: ${qty} szt.`, 'cart');
       triggerCartIconAnimation();
       window.dispatchEvent(new Event('storage'));
+      openCart();
     });
   }
 

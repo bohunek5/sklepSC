@@ -260,6 +260,8 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('prescot_cart', JSON.stringify(cart));
     updateCartBadge();
     showToast(items.length > 1 ? 'Zestaw zapisany w koszyku.' : 'Taśma zapisana w koszyku.');
+    window.dispatchEvent(new Event('storage'));
+    if (typeof window.openCartDrawer === 'function') window.openCartDrawer();
   }
 
   function bindResultActions() {
