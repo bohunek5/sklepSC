@@ -2321,6 +2321,12 @@ function initSharedPopups() {
       e.preventDefault();
       e.stopPropagation();
       e.stopImmediatePropagation();
+
+      if (addCartBtn.classList.contains('is-added')) {
+        if (typeof window.openCartDrawer === 'function') window.openCartDrawer();
+        return;
+      }
+
       const pId = parseInt(addCartBtn.dataset.id);
       const p = products.find(prod => prod.id === pId);
       if (!p) return;
@@ -2346,10 +2352,50 @@ function initSharedPopups() {
       showToast('Dodano do koszyka: 1 szt.', 'cart');
       triggerCartIconAnimation();
       window.dispatchEvent(new Event('storage'));
+
+      addCartBtn.classList.add('is-added');
+      addCartBtn.setAttribute('aria-label', 'Przejdź do koszyka');
+      const defaultLabel = addCartBtn.querySelector('.btn-txt-default');
+      const hoverLabel = addCartBtn.querySelector('.btn-txt-hover');
+      if (defaultLabel) defaultLabel.textContent = 'Dodano do koszyka';
+      if (hoverLabel) hoverLabel.innerHTML = '<i class="ph ph-shopping-cart-simple" aria-hidden="true" style="margin-right: 6px;"></i> Przejdź do koszyka';
       return;
     }
 
-    // 2. Quick view (eye icon)
+    // 2. Buy directly from a catalog or AI recommendation card
+    const quickBuyBtn = e.target.closest('.catalog-quick-buy-btn');
+    if (quickBuyBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+
+      const pId = parseInt(quickBuyBtn.dataset.id);
+      const p = products.find(prod => prod.id === pId);
+      if (!p) return;
+
+      const cartItem = {
+        id: p.id,
+        title: p.title,
+        price: p.price,
+        image: p.images[0],
+        qty: 1,
+        color: p.colors?.[0] || null,
+        size: p.sizes?.[0] || null
+      };
+      const existingIndex = cart.findIndex(item => item.id === cartItem.id && item.color === cartItem.color && item.size === cartItem.size);
+      if (existingIndex > -1) {
+        cart[existingIndex].qty++;
+      } else {
+        cart.push(cartItem);
+      }
+
+      updateLocalStorage();
+      window.dispatchEvent(new Event('storage'));
+      window.location.assign('checkout.html');
+      return;
+    }
+
+    // 3. Quick view (eye icon)
     const eyeBtn = e.target.closest('.qv-eye-btn');
     if (eyeBtn) {
       e.preventDefault();
@@ -2358,7 +2404,7 @@ function initSharedPopups() {
       return;
     }
 
-    // 3. 3D view
+    // 4. 3D view
     const tdBtn = e.target.closest('.qv-3d-btn');
     if (tdBtn) {
       e.preventDefault();
@@ -2367,7 +2413,7 @@ function initSharedPopups() {
       return;
     }
 
-    // 4. 360 view
+    // 5. 360 view
     const sxtyBtn = e.target.closest('.qv-360-btn');
     if (sxtyBtn) {
       e.preventDefault();

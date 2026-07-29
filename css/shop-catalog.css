@@ -600,11 +600,26 @@
 .shop-page .mockup-product-info {
   display: flex !important;
   flex: 1;
+  flex-direction: column !important;
   width: 100% !important;
   min-width: 0;
   align-items: stretch !important;
   padding: 0 !important;
   text-align: left !important;
+}
+
+.shop-page .catalog-card-actions {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.shop-page .catalog-card-actions > button {
+  width: 100% !important;
+  min-width: 0;
+  cursor: pointer !important;
 }
 
 .shop-page .catalog-product-meta {
@@ -1057,6 +1072,14 @@
 
   .shop-page .catalog-current-price {
     font-size: 15px;
+  }
+
+  .shop-page .catalog-card-actions {
+    gap: 7px;
+  }
+
+  .shop-page .catalog-card-actions > button {
+    padding-inline: 5px !important;
   }
 
   .shop-page .mockup-product-price del {
