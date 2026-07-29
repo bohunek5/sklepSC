@@ -3035,7 +3035,7 @@ function openInquiryModal(presetText = '') {
         <div style="font-size: 11px; font-weight: 800; color: #0b1a30; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">Wycena Indywidualna</div>
         <h3 style="margin-bottom: 8px; font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 22px; color: #0b1a30;">Zapytaj o produkt / ofertę</h3>
         <p style="font-size: 13.5px; color: #64748b; margin-bottom: 20px; line-height: 1.4;">Nasi specjaliści przygotują wycenę indywidualną taśmy LED i dedykowanego zasilacza.</p>
-        <form id="askQuestionForm" onsubmit="event.preventDefault(); alert('Dziękujemy! Twoje zapytanie zostało wysłane. Odpowiemy w ciągu 24 godzin.'); document.getElementById('popupZapytaj').style.display='none';">
+        <form id="askQuestionForm" onsubmit="return submitProductInquiry(event);">
           <div style="margin-bottom: 14px;">
             <label style="display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 5px; color: #0b1a30;">Twoje Imię i Nazwisko</label>
             <input type="text" required style="width: 100%; padding: 11px 14px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 13.5px; font-family: inherit; outline: none;" placeholder="np. Jan Kowalski">
@@ -3048,7 +3048,12 @@ function openInquiryModal(presetText = '') {
             <label style="display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 5px; color: #0b1a30;">Preferencje i treść zapytania</label>
             <textarea id="askQuestionTextarea" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 13px; height: 130px; font-family: inherit; resize: vertical; outline: none; line-height: 1.4;" placeholder="Opisz swoje wymagania..."></textarea>
           </div>
-          <button type="submit" style="background: linear-gradient(135deg, #0b1a30 0%, #162a45 100%) !important; color: #ffffff !important; width: 100%; border: none !important; cursor: pointer; height: 48px; border-radius: 99px; font-weight: 800; text-transform: uppercase; font-size: 13px; letter-spacing: 0.5px; box-shadow: 0 6px 20px rgba(11,26,48,0.25);">Wyślij Zapytanie</button>
+          <button type="submit" class="inquiry-submit-btn">
+            <span class="btn-slide-wrap">
+              <span class="btn-txt-default">Wyślij zapytanie</span>
+              <span class="btn-txt-hover">Wyślij</span>
+            </span>
+          </button>
         </form>
       </div>
     `;
@@ -3061,6 +3066,33 @@ function openInquiryModal(presetText = '') {
   modal.style.display = 'flex';
 }
 window.openInquiryModal = openInquiryModal;
+
+function submitProductInquiry(event) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const name = form.querySelector('input[type="text"]')?.value.trim() || '';
+  const email = form.querySelector('input[type="email"]')?.value.trim() || '';
+  const message = form.querySelector('textarea')?.value.trim() || '';
+  const productTitle = document.getElementById('pTitle')?.textContent.trim() || 'ofertę Prescot LED';
+  const subject = `Zapytanie o produkt: ${productTitle}`;
+  const body = [
+    `Imię i nazwisko: ${name}`,
+    `E-mail: ${email}`,
+    `Produkt: ${productTitle}`,
+    `Link: ${window.location.href}`,
+    '',
+    message
+  ].join('\n');
+
+  const modal = document.getElementById('popupZapytaj');
+  if (modal) modal.style.display = 'none';
+  window.location.href = `mailto:sekretariat@prescot.pl?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  if (typeof window.showToast === 'function') {
+    window.showToast('Otwieramy zapytanie do sekretariatu.', 'info');
+  }
+  return false;
+}
+window.submitProductInquiry = submitProductInquiry;
 
 window.addEventListener('DOMContentLoaded', () => {
   if (window.location.search.includes('cart=open')) {

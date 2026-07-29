@@ -83,6 +83,41 @@ body .buy-it-now-btn:hover .btn-txt-hover {
   color: #ffffff !important;
 }
 
+/* Contact and product inquiry buttons */
+body .inquiry-submit-btn {
+  display: inline-flex !important;
+  min-height: 48px;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  border: 2px solid #0b1a30 !important;
+  border-radius: 8px !important;
+  color: #ffffff !important;
+  background: #0b1a30 !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease !important;
+}
+
+body .product-popup-box .inquiry-submit-btn {
+  width: 100% !important;
+}
+
+body .inquiry-submit-btn:hover {
+  border-color: #0b1a30 !important;
+  color: #0b1a30 !important;
+  background: #ffffff !important;
+  box-shadow: 0 5px 14px rgba(11, 26, 48, 0.12) !important;
+  transform: translateY(-1px) !important;
+}
+
+body .inquiry-submit-btn .btn-txt-default,
+body .inquiry-submit-btn .btn-txt-hover,
+body .inquiry-submit-btn:hover .btn-txt-default,
+body .inquiry-submit-btn:hover .btn-txt-hover {
+  color: inherit !important;
+}
+
 
 /* Quantity Selector Styling */
 body .quantity-selector {
@@ -204,12 +239,14 @@ body .quantity-selector input {
 .mockup-btn:hover .btn-slide-wrap .btn-txt-default,
 .add-to-cart-btn:hover .btn-slide-wrap .btn-txt-default,
 .buy-it-now-btn:hover .btn-slide-wrap .btn-txt-default,
+.inquiry-submit-btn:hover .btn-slide-wrap .btn-txt-default,
 body #qvAddToCart:hover .btn-slide-wrap .btn-txt-default {
   transform: translateY(-100%) !important;
 }
 .mockup-btn:hover .btn-slide-wrap .btn-txt-hover,
 .add-to-cart-btn:hover .btn-slide-wrap .btn-txt-hover,
 .buy-it-now-btn:hover .btn-slide-wrap .btn-txt-hover,
+.inquiry-submit-btn:hover .btn-slide-wrap .btn-txt-hover,
 body #qvAddToCart:hover .btn-slide-wrap .btn-txt-hover {
   transform: translateY(-100%) !important;
 }

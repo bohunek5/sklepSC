@@ -4412,7 +4412,7 @@
   <div class="product-popup-box" style="max-width: 500px; padding: 30px;">
     <button class="popup-close" onclick="document.getElementById('popupZapytaj').style.display='none'">✕</button>
     <h3 style="margin-bottom: 20px; font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--primary-color);">Zapytaj o produkt</h3>
-    <form id="askQuestionForm" onsubmit="event.preventDefault(); alert('Dziękujemy! Twoja wiadomość została wysłana. Odpowiemy w ciągu 24 godzin.'); document.getElementById('popupZapytaj').style.display='none';">
+    <form id="askQuestionForm" onsubmit="return submitProductInquiry(event);">
       <div style="margin-bottom: 15px;">
         <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #333;">Twoje Imię</label>
         <input type="text" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; font-family: inherit;" placeholder="np. Jan Kowalski">
@@ -4425,7 +4425,12 @@
         <label style="display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #333;">Treść pytania</label>
         <textarea id="askQuestionTextarea" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; height: 120px; font-family: inherit; resize: vertical;" placeholder="Wpisz treść swojego zapytania..."></textarea>
       </div>
-      <button type="submit" class="buy-it-now-btn" style="background: var(--primary-color) !important; color: #fff !important; width: 100%; border: none !important; cursor: pointer; height: 48px; border-radius: 8px; font-weight: 700; text-transform: uppercase; font-size: 13px; display: flex; align-items: center; justify-content: center;">Wyślij zapytanie</button>
+      <button type="submit" class="inquiry-submit-btn">
+        <span class="btn-slide-wrap">
+          <span class="btn-txt-default">Wyślij zapytanie</span>
+          <span class="btn-txt-hover">Wyślij</span>
+        </span>
+      </button>
     </form>
   </div>
 </div>
