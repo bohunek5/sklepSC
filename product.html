@@ -5108,6 +5108,16 @@
     const sixtyViewerContainer = document.getElementById('sixtyViewerContainer');
     const sixtyImg = document.getElementById('sixtyImg');
     const sixtyLoading = document.getElementById('sixtyLoading');
+    const product360Images = Array.isArray(product.images360) ? product.images360.filter(Boolean) : [];
+    const product360Pattern = typeof product.images360Pattern === 'string' ? product.images360Pattern : '';
+    const totalSixtyImages = product360Pattern
+      ? (product.images360Count || 39)
+      : Math.max(1, product360Images.length);
+
+    function getSixtyImageSource(index) {
+      if (product360Pattern) return product360Pattern.replace('{index}', index);
+      return product360Images[index - 1] || product360Images[0] || product.images[0];
+    }
 
     // 1. Show triggers if product supports them
     if (product.has3D) {
@@ -5117,13 +5127,12 @@
       trigger360.style.display = 'flex';
 
       // Preload 360 images
-      const imagesCount = product.images360Count || 39;
-      const pattern = product.images360Pattern;
+      const imagesCount = totalSixtyImages;
       let loadedCount = 0;
       const preloadedImages = [];
 
       for (let i = 1; i <= imagesCount; i++) {
-        const src = pattern.replace('{index}', i);
+        const src = getSixtyImageSource(i);
         const img = new Image();
         img.src = src;
         img.onload = () => {
@@ -5136,7 +5145,7 @@
       }
 
       // Set initial image
-      sixtyImg.src = pattern.replace('{index}', 1);
+      sixtyImg.src = getSixtyImageSource(1);
     }
 
     const mainVideo = document.getElementById('mainVideo');
@@ -5214,13 +5223,12 @@
 
     // 3. 360 Degree Rotation Logic
     let activeSixtyIndex = 1;
-    const totalSixtyImages = product.images360Count || 39;
 
     function showSixtyImage(index) {
       if (index < 1) index = totalSixtyImages;
       if (index > totalSixtyImages) index = 1;
       activeSixtyIndex = index;
-      sixtyImg.src = product.images360Pattern.replace('{index}', index);
+      sixtyImg.src = getSixtyImageSource(index);
     }
 
     // Drag / Swipe Interaction
