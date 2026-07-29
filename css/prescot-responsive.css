@@ -36,6 +36,13 @@ canvas {
   outline-offset: 3px;
 }
 
+/* Hero breadcrumbs: the current page must stay readable on the dark glass pill. */
+.hero-breadcrumbs > span:last-child {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
 /* Wyróżnione wejście do konfiguratora na każdej stronie sklepu. */
 body .mockup-header .mockup-nav a.configurator-nav-link:not(.active) {
   color: #fff !important;
