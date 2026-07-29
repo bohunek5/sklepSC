@@ -258,8 +258,14 @@ body .mobile-menu a.configurator-nav-link:not(.active) {
   }
 
   #heroProductTitle {
-    font-size: clamp(26px, 7.5vw, 34px) !important;
-    line-height: 1.08 !important;
+    max-width: calc(100vw - 36px) !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: clamp(19px, 5.4vw, 25px) !important;
+    line-height: 1.32 !important;
+    font-weight: 500 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    text-wrap: balance;
   }
 
   .page-hero p,
