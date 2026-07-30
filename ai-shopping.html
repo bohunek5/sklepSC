@@ -168,6 +168,13 @@
       background: rgba(255, 255, 255, 0.2);
       border-color: rgba(255, 255, 255, 0.4);
     }
+    
+    @media (max-width: 768px) {
+      .ai-suggestion-pill {
+        padding: 6px 12px;
+        font-size: 11px;
+      }
+    }
 
     /* Product results reuse the catalog card design without changing the AI page background. */
     .ai-product-results.shop-page {
@@ -373,7 +380,8 @@
     .mobile-nav-item.active i { color: #f8fafc; }
     .mobile-nav-item:active i { transform: scale(0.9); }
 
-    body.keyboard-open .mobile-bottom-nav {
+    body.keyboard-open .mobile-bottom-nav,
+    body.keyboard-open .ai-quick-replies {
       display: none !important;
     }
     body.keyboard-open .ai-hero {

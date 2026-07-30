@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="pl">
 <head>
@@ -6427,6 +6427,16 @@ body.index-page .site-header:not(.scrolled) {
 }
 
 /* 4. New Bottom Navigation */
+@property --nav-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes nav-spin {
+  0% { --nav-angle: 0deg; }
+  100% { --nav-angle: 360deg; }
+}
+
 .new-glass-nav {
   display: none;
   position: fixed;
@@ -6442,6 +6452,23 @@ body.index-page .site-header:not(.scrolled) {
   z-index: 9999;
   padding: 8px 10px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3) !important;
+}
+
+.new-glass-nav::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 26px; /* Matches outer border radius */
+  background: conic-gradient(
+      from var(--nav-angle), 
+      transparent 10%, #00e5ff 25%, 
+      transparent 35%, #ff0055 50%, 
+      transparent 60%, #00e5ff 75%, 
+      transparent 85%, #ff0055 100%
+  );
+  animation: nav-spin 4s linear infinite;
+  z-index: -1;
+  opacity: 0.9;
 }
 .new-glass-nav .mobile-nav-items {
   display: flex;

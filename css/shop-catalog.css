@@ -953,7 +953,7 @@
   }
 
   html.mobile-bottom-nav-hidden body.shop-page .mobile-fab-filter {
-    bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+    inset: auto 16px calc(16px + env(safe-area-inset-bottom)) !important;
   }
 
   .shop-page .shop-catalog-toolbar {
