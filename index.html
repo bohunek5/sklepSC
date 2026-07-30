@@ -5692,6 +5692,31 @@
     }
     /* --- ULTIMATE DROPDOWN OVERRIDE END --- */
 
+    /* --- AUTO-SCROLL TRENDING GRID --- */
+    #trendingGrid {
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 20px !important;
+      padding-bottom: 20px !important;
+      will-change: scroll-position;
+    }
+    #trendingGrid::-webkit-scrollbar { display: none; }
+    #trendingGrid > .mockup-product-card {
+      flex: 0 0 auto !important;
+      width: calc(25% - 15px) !important;
+      scroll-snap-align: start;
+    }
+    @media (max-width: 991px) {
+      #trendingGrid > .mockup-product-card { width: calc(33.333% - 14px) !important; }
+    }
+    @media (max-width: 768px) {
+      #trendingGrid { gap: 12px !important; padding: 0 10px 15px !important; }
+      #trendingGrid > .mockup-product-card { width: calc(50% - 6px) !important; }
+    }
 </style>
 <section class="mockup-products">
 <div class="mockup-section-header">
@@ -6233,6 +6258,32 @@
         `;
         trendingGrid.insertAdjacentHTML('beforeend', cardHTML);
       });
+
+      // Auto-scroll logic for trendingGrid
+      let trendingScrollInterval;
+      
+      const startTrendingScroll = () => {
+        trendingScrollInterval = setInterval(() => {
+          if (!trendingGrid) return;
+          const card = trendingGrid.querySelector('.mockup-product-card');
+          if (!card) return;
+          const gap = parseInt(window.getComputedStyle(trendingGrid).gap || 0);
+          const scrollStep = card.offsetWidth + gap;
+          
+          if (trendingGrid.scrollLeft + trendingGrid.clientWidth >= trendingGrid.scrollWidth - 10) {
+            trendingGrid.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            trendingGrid.scrollBy({ left: scrollStep, behavior: 'smooth' });
+          }
+        }, 3500);
+      };
+
+      startTrendingScroll();
+
+      trendingGrid.addEventListener('mouseenter', () => clearInterval(trendingScrollInterval));
+      trendingGrid.addEventListener('mouseleave', startTrendingScroll);
+      trendingGrid.addEventListener('touchstart', () => clearInterval(trendingScrollInterval), {passive: true});
+      trendingGrid.addEventListener('touchend', () => setTimeout(startTrendingScroll, 3000), {passive: true});
     }
 
     // Header Search bar logic
