@@ -46,18 +46,17 @@
       top: 50%;
       left: 50%;
       z-index: 2147482999;
-      width: 126px;
-      height: 90px;
-      background-image: url("images/PRESCOT_pattern2.svg");
-      background-position: center;
-      background-size: contain;
-      background-repeat: no-repeat;
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 15px;
+      background: #0b1a30 url("images/prescot-pattern.png") center / 26px 26px no-repeat;
+      box-shadow: 0 16px 38px rgba(6, 16, 28, 0.22);
       content: "";
       opacity: 0;
       pointer-events: none;
-      filter: drop-shadow(0 10px 24px rgba(232, 76, 35, 0.2));
-      transform: translate(-50%, -50%) scale(0.9);
-      transition: opacity 0.18s ease, transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translate(-50%, -44%) scale(0.88);
+      transition: opacity 0.18s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     }
     html.mobile-app-arriving::after,
     html.mobile-app-leaving::after {

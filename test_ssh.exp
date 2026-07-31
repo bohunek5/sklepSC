@@ -1,0 +1,9 @@
+#!/usr/bin/expect -f
+set timeout 10
+spawn ssh -o StrictHostKeyChecking=no serwer194525@serwer194525.lh.pl
+expect "password:"
+send "xc12RaIqPh|-#GFU\r"
+expect "$ "
+send "ls -la\r"
+expect "$ "
+send "exit\r"

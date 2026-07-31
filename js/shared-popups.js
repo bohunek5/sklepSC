@@ -2890,7 +2890,7 @@ function injectMobileCategoriesDrawer() {
 function upgradeMobileCommerceNavigation() {
   const path = window.location.pathname.split('/').pop() || 'index.html';
   const icon = (content) => `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${content}</svg>`;
-  const homePatternIcon = '<img class="mobile-home-pattern" src="images/PRESCOT_pattern2.svg" alt="" aria-hidden="true">';
+  const homePatternIcon = '<img class="mobile-home-pattern" src="images/prescot-pattern.png" alt="" aria-hidden="true">';
   const entries = [
     { label: 'Home', href: 'index.html', active: path === '' || path === 'index.html', icon: icon('<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>') },
     { label: 'Kategorie', action: true, onClick: 'openMobileCategories()', active: false, icon: icon('<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>') },

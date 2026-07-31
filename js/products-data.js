@@ -1,5 +1,48 @@
 const defaultProducts = [
   {
+    "id": 99999,
+    "title": "Zasilacz PR-MAD-XX-1224",
+    "category": "Zasilacze",
+    "original_category": "Zasilacze",
+    "price": 149.99,
+    "compareAtPrice": 199.99,
+    "stock": "50,000000",
+    "ean": "5901234567890",
+    "kod_handlowy": "PR-MAD-XX-1224",
+    "kod_katalogowy": "PR-MAD-XX-1224",
+    "producent": "Prescot",
+    "description": "<p>Nowoczesny zasilacz PR-MAD-XX-1224 z możliwością podglądu 360 stopni i VR. Wysoce wydajny i niezawodny, stworzony dla wymagających zastosowań. Zobacz jego detale ze wszystkich stron!</p>",
+    "images": [
+      "images/360/PR-MAD-XX-1224/frame_1.png"
+    ],
+    "attributes": {
+      "Producent": "Prescot",
+      "Kod_produktu": "PR-MAD-XX-1224",
+      "EAN": "5901234567890",
+      "Kod_producenta": "PR-MAD-XX-1224",
+      "Nazwa galerii": "PR-MAD-XX-1224",
+      "Gwarancja": "24 miesiące",
+      "Producent odpowiedzialny": "producer_1",
+      "Podmiot odpowiedzialny": "responsible_1"
+    },
+    "gpsr": {
+      "producer": {
+        "name": "Prescot Sp. z o.o.",
+        "address": "",
+        "contact": ""
+      },
+      "responsible_person": {
+        "name": "Prescot",
+        "address": "",
+        "contact": ""
+      }
+    },
+    "has360": true,
+    "images360Pattern": "images/360/PR-MAD-XX-1224/frame_{index}.png",
+    "images360Count": 72,
+    "has3D": false
+  },
+  {
     "id": 6282,
     "title": "Sterownik LED Mono 1x30A + pilot RF 12-24V Prescot",
     "category": "Sterowniki LED",
