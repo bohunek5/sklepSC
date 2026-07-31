@@ -617,11 +617,11 @@
     <button id="mobileCartButton" type="button"  onclick="openCartDrawer && openCartDrawer()"><i class="ph ph-shopping-cart-simple" aria-hidden="true"></i><span>Koszyk</span></button>
   </nav>
 
-  <script src="js/products-data.js"></script>
+  <script src="js/products-data.js" defer></script>
   <script src="js/configurator-core.js"></script>
-  <script src="js/ai-agent.js"></script>
-  <script src="js/smart-search.js"></script>
-  <script src="js/shared-popups.js"></script>
+  <script src="js/ai-agent.js" defer></script>
+  <script src="js/smart-search.js" defer></script>
+  <script src="js/shared-popups.js" defer></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       if (typeof initSharedPopups === 'function') initSharedPopups();

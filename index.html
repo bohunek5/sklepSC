@@ -3716,7 +3716,6 @@
     }
     /* Hardware acceleration to fix scroll lag globally */
     .mockup-header, .category-banner-card, .category-banner-bg, .mockup-category-card {
-      will-change: transform;
       transform: translate3d(0, 0, 0);
     }
 
@@ -6034,18 +6033,23 @@
       header.classList.add('force-scrolled');
     }
     
+    let ticking = false;
     window.addEventListener('scroll', () => {
-      if (!header) return;
-      if (header.classList.contains('force-scrolled')) return;
-      
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-        if (headerLogo) headerLogo.src = 'images/logo-dark.png';
-      } else {
-        header.classList.remove('scrolled');
-        if (headerLogo) headerLogo.src = 'images/logo-white.png';
+      if (!header || header.classList.contains('force-scrolled')) return;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+            if (headerLogo) headerLogo.src = 'images/logo-dark.png';
+          } else {
+            header.classList.remove('scrolled');
+            if (headerLogo) headerLogo.src = 'images/logo-white.png';
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
-    });
+    }, { passive: true });
 
     // Mobile Navigation Toggle
     const menuToggle = document.getElementById('menuToggle');
@@ -6284,8 +6288,8 @@
     })();
   </script>
 <!-- Load Shared Interactive Popups Script -->
-<script src="js/products-data.js"></script>
-  <script src="js/shared-popups.js"></script>
+<script src="js/products-data.js" defer></script>
+  <script src="js/shared-popups.js" defer></script>
   <script>
 
     // Render 8 trending products on homepage
@@ -6500,7 +6504,7 @@
     });
   </script>
 
-  <script src="js/smart-search.js"></script>
+  <script src="js/smart-search.js" defer></script>
 
 
 
