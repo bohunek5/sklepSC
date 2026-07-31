@@ -4693,28 +4693,44 @@
         .toLowerCase();
 
       function productSpecText(product) {
-        return normalizeCatalogText([
-          product.title,
-          product.category,
-          product.original_category,
-          ...Object.entries(product.attributes || {}).flat()
-        ].join(' '));
+        if (!product._specText) {
+          product._specText = normalizeCatalogText([
+            product.title,
+            product.category,
+            product.original_category,
+            ...Object.entries(product.attributes || {}).flat()
+          ].join(' '));
+        }
+        return product._specText;
       }
 
       function productFullText(product) {
-        return `${productSpecText(product)} ${normalizeCatalogText(product.description)}`;
+        if (!product._fullText) {
+          product._fullText = `${productSpecText(product)} ${normalizeCatalogText(product.description)}`;
+        }
+        return product._fullText;
       }
 
       function productIPRating(product) {
-        const matches = productSpecText(product).match(/\bip\s*(\d{2})\b/g) || [];
-        return Math.max(0, ...matches.map((match) => Number(match.replace(/\D/g, ''))));
+        if (typeof product._ipRating === 'undefined') {
+          const matches = productSpecText(product).match(/\bip\s*(\d{2})\b/g) || [];
+          product._ipRating = Math.max(0, ...matches.map((match) => Number(match.replace(/\D/g, ''))));
+        }
+        return product._ipRating;
+      }
+
+      function getNormCategory(product) {
+        if (!product._normCategory) {
+          product._normCategory = normalizeCatalogText(product.category);
+        }
+        return product._normCategory;
       }
 
       function matchesRoom(product, room) {
         if (room === 'all') return true;
         const spec = productSpecText(product);
         const full = productFullText(product);
-        const category = normalizeCatalogText(product.category);
+        const category = getNormCategory(product);
         if (room.includes('Łazienka')) return productIPRating(product) >= 63 || /\blazien|prysznic|wilgoc/.test(full);
         if (room.includes('Kuchnia')) {
           return /kuchni|podszaf|blat/.test(full) || /tasmy led|akcesoria/.test(category) && /profil|tasma led|opraw/.test(spec);
@@ -4750,7 +4766,7 @@
         if (state.category !== 'all') {
           const targetCategory = normalizeCatalogText(state.category);
           filtered = filtered.filter((product) => {
-            const productCategory = normalizeCatalogText(product.category);
+            const productCategory = getNormCategory(product);
             return productCategory === targetCategory || productCategory.includes(targetCategory) || targetCategory.includes(productCategory);
           });
         }
