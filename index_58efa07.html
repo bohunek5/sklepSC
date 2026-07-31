@@ -3101,13 +3101,8 @@ body.index-page .site-header:not(.scrolled) {
 
 
 <style id="global-config-nav-css">
-@property --nav-angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-@keyframes nav-spin {
-  0% { --nav-angle: 0deg; }
+
+
   100% { --nav-angle: 360deg; }
 }
 
@@ -3124,22 +3119,7 @@ body.index-page .site-header:not(.scrolled) {
     box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.4);
   }
   
-  /* The Animated Border */
-  .config-bottom-nav::before {
-    content: '';
-    position: absolute;
-    inset: -2px 0 0 0; /* Only top border glow */
-    background: conic-gradient(
-        from var(--nav-angle), 
-        transparent 10%, #00e5ff 25%, 
-        transparent 35%, #ff0055 50%, 
-        transparent 60%, #00e5ff 75%, 
-        transparent 85%, #ff0055 100%
-    );
-    animation: nav-spin 4s linear infinite;
-    z-index: -1;
-    opacity: 0.9;
-  }
+  
   
   .config-bottom-nav a, .config-bottom-nav button { 
     min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 0; border: 0; 
