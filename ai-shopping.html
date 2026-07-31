@@ -635,22 +635,31 @@
       // Typing background glow logic
       const aiChatInput = document.getElementById('aiChatInput');
       const aiHero = document.querySelector('.ai-hero');
+      const inputArea = document.querySelector('.ai-input-area');
       let typingTimeout;
 
       if (aiChatInput && aiHero) {
         aiChatInput.addEventListener('input', () => {
           aiHero.classList.add('typing');
+          if (inputArea) inputArea.classList.add('focused');
+          
           clearTimeout(typingTimeout);
           typingTimeout = setTimeout(() => {
             aiHero.classList.remove('typing');
+            // If not focused anymore, remove focused class
+            if (document.activeElement !== aiChatInput && inputArea) {
+              inputArea.classList.remove('focused');
+            }
           }, 400); // Effect lingers for 400ms after last keystroke
         });
 
         // Hide bottom nav on mobile when input is focused
         aiChatInput.addEventListener('focus', () => {
           document.body.classList.add('keyboard-open');
+          if (inputArea) inputArea.classList.add('focused');
         });
         aiChatInput.addEventListener('blur', () => {
+          if (inputArea) inputArea.classList.remove('focused');
           setTimeout(() => {
             document.body.classList.remove('keyboard-open');
           }, 100);
