@@ -1704,7 +1704,7 @@ function initSharedPopups() {
           id: p.id,
           title: p.title,
           price: p.price,
-          image: p.images[0]
+          image: (p.images && p.images[0]) ? p.images[0] : 'images/okladka-produkty.webp'
         });
         updateWishlistStorage();
         showToast('Dodano produkt do listy życzeń!', 'wishlist');
@@ -1883,7 +1883,7 @@ function initSharedPopups() {
     recList.innerHTML = `
       <div style="display: flex; align-items: center; gap: 15px; background: #fff; padding: 10px; border-radius: 8px; border: 1px solid #eee;">
         <div style="width: 50px; height: 50px; flex-shrink: 0; background: #fff; border: 1px solid #eee; border-radius: 6px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-          <img src="${rec.images[0]}" style="width: 100%; height: 100%; object-fit: contain;">
+          <img src="${rec.images && rec.images[0] ? rec.images[0] : 'images/okladka-produkty.webp'}" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.onerror=null;this.src='images/okladka-produkty.webp'">
         </div>
         <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px;">
           <h5 style="font-size: 13px; font-weight: 600; color: #1a1a1a; margin: 0; line-height: 1.2;">${rec.title}</h5>
@@ -1906,7 +1906,7 @@ function initSharedPopups() {
             id: p.id,
             title: p.title,
             price: p.price,
-            image: p.images[0],
+            image: (p.images && p.images[0]) ? p.images[0] : 'images/okladka-produkty.webp',
             qty: 1,
             color: p.colors && p.colors[0],
             size: p.sizes && p.sizes[0]
@@ -2090,7 +2090,7 @@ function initSharedPopups() {
     } else {
       if (qvImage) {
         qvImage.style.display = 'block';
-        qvImage.src = selectedProduct.images[0];
+        qvImage.src = (selectedProduct.images && selectedProduct.images[0]) ? selectedProduct.images[0] : 'images/okladka-produkty.webp';
       }
     }
 
@@ -2367,7 +2367,7 @@ function initSharedPopups() {
         id: selectedProduct.id,
         title: selectedProduct.title,
         price: selectedProduct.price,
-        image: selectedProduct.images[0],
+        image: (selectedProduct.images && selectedProduct.images[0]) ? selectedProduct.images[0] : 'images/okladka-produkty.webp',
         qty: qvQty,
         color: selectedColor,
         size: selectedSize
@@ -2408,7 +2408,7 @@ function initSharedPopups() {
           id: p.id,
           title: p.title,
           price: p.price,
-          image: p.images[0]
+          image: (p.images && p.images[0]) ? p.images[0] : 'images/okladka-produkty.webp'
         });
         updateWishlistStorage();
         showToast('Dodano produkt do listy życzeń!', 'wishlist');
@@ -2438,7 +2438,7 @@ function initSharedPopups() {
         id: p.id,
         title: p.title,
         price: p.price,
-        image: p.images[0],
+        image: (p.images && p.images[0]) ? p.images[0] : 'images/okladka-produkty.webp',
         qty: 1,
         color: p.colors?.[0] || null,
         size: p.sizes?.[0] || null
@@ -2481,7 +2481,7 @@ function initSharedPopups() {
         id: p.id,
         title: p.title,
         price: p.price,
-        image: p.images[0],
+        image: (p.images && p.images[0]) ? p.images[0] : 'images/okladka-produkty.webp',
         qty: 1,
         color: p.colors?.[0] || null,
         size: p.sizes?.[0] || null
@@ -2601,7 +2601,7 @@ function initSharedPopups() {
         return `
           <div class="mockup-product-card" data-id="${p.id}">
             <div class="mockup-product-media" style="position: relative; overflow: hidden; width: 100%; aspect-ratio: 1/1;">
-              <img src="${p.images[0]}" alt="${p.title}" class="mockup-product-img">
+              <img src="${p.images && p.images[0] ? p.images[0] : 'images/okladka-produkty.webp'}" alt="${p.title}" class="mockup-product-img" onerror="this.onerror=null;this.src='images/okladka-produkty.webp'">
               ${p.video ? `
                 <video class="mockup-product-video" src="${p.video}" loop muted playsinline autoplay style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
               ` : ''}

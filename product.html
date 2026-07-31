@@ -4894,7 +4894,7 @@
 
     // Main Image & Gallery
     const mainImg = document.getElementById('mainImg');
-    mainImg.src = product.images[0];
+    mainImg.src = (product.images && product.images[0]) ? product.images[0] : 'images/okladka-produkty.webp';
     mainImg.alt = product.title;
 
     const qvThumbnails = document.getElementById('qvThumbnails');
@@ -4902,12 +4902,12 @@
     // First image thumbnail
     const firstThumb = document.createElement('img');
     firstThumb.className = 'thumbnail active';
-    firstThumb.src = product.images[0];
+    firstThumb.src = (product.images && product.images[0]) ? product.images[0] : 'images/okladka-produkty.webp';
     firstThumb.alt = `${product.title} - 1`;
     firstThumb.addEventListener('click', () => {
       resetGalleryTabs();
       mainImg.style.display = 'block';
-      mainImg.src = product.images[0];
+      mainImg.src = (product.images && product.images[0]) ? product.images[0] : 'images/okladka-produkty.webp';
       document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
       firstThumb.classList.add('active');
     });
@@ -4920,7 +4920,7 @@
       videoThumb.style.position = 'relative';
       videoThumb.style.cursor = 'pointer';
       videoThumb.innerHTML = `
-        <img src="${product.images[0]}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6; border-radius: inherit;">
+        <img src="${(product.images && product.images[0]) ? product.images[0] : 'images/okladka-produkty.webp'}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6; border-radius: inherit;" onerror="this.onerror=null;this.src='images/okladka-produkty.webp'">
         <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--primary-color); color: #fff; width: 22px; height: 22px;  display: flex; align-items: center; justify-content: center; font-size: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">▶</div>
       `;
       videoThumb.addEventListener('click', () => {
@@ -5116,7 +5116,7 @@
 
     function getSixtyImageSource(index) {
       if (product360Pattern) return product360Pattern.replace('{index}', index);
-      return product360Images[index - 1] || product360Images[0] || product.images[0];
+      return product360Images[index - 1] || product360Images[0] || ((product.images && product.images[0]) ? product.images[0] : 'images/okladka-produkty.webp');
     }
 
     // 1. Show triggers if product supports them
@@ -5407,7 +5407,7 @@
         const cardHTML = `
           <div class="mockup-product-card" data-id="${p.id}">
             <div class="mockup-product-media" style="position: relative; overflow: hidden;">
-              <img src="${p.images[0]}" alt="${p.title}" class="mockup-product-img">
+              <img src="${p.images && p.images[0] ? p.images[0] : 'images/okladka-produkty.webp'}" alt="${p.title}" class="mockup-product-img" onerror="this.onerror=null;this.src='images/okladka-produkty.webp'">
               ${p.video ? `
                 <video class="mockup-product-video" data-src="${p.video}" loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
               ` : ''}
@@ -5445,7 +5445,7 @@
     const mainCartBtn = document.getElementById('addToCart');
     
     if (stickyCartBar && mainCartBtn && product) {
-      document.getElementById('stickyCartImg').src = product.images[0];
+      document.getElementById('stickyCartImg').src = (product.images && product.images[0]) ? product.images[0] : 'images/okladka-produkty.webp';
       document.getElementById('stickyCartTitle').textContent = product.title;
       document.getElementById('stickyCartPrice').textContent = product.price.toFixed(2) + ' zł';
       
@@ -5500,7 +5500,7 @@
           const cardHTML = `
             <div class="mockup-product-card" data-id="${p.id}">
               <div class="mockup-product-media" style="position: relative; overflow: hidden;">
-                <img src="${p.images[0]}" alt="${p.title}" class="mockup-product-img">
+                <img src="${p.images && p.images[0] ? p.images[0] : 'images/okladka-produkty.webp'}" alt="${p.title}" class="mockup-product-img" onerror="this.onerror=null;this.src='images/okladka-produkty.webp'">
                 ${p.video ? `
                   <video class="mockup-product-video" data-src="${p.video}" loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></video>
                 ` : ''}
