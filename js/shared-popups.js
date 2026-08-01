@@ -365,16 +365,19 @@ customStyles.innerHTML = `
   body .premium-footer::after {
     content: '' !important;
     position: absolute !important;
-    right: -110px !important;
-    bottom: -170px !important;
+    right: -58px !important;
+    bottom: -92px !important;
     z-index: 0 !important;
-    width: 420px !important;
-    height: 420px !important;
-    border: 1px solid rgba(255, 255, 255, 0.055) !important;
-    border-radius: 50% !important;
-    box-shadow:
-      0 0 0 54px rgba(255, 255, 255, 0.018),
-      0 0 0 108px rgba(255, 255, 255, 0.012) !important;
+    width: clamp(320px, 34vw, 560px) !important;
+    height: clamp(230px, 25vw, 400px) !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: rgba(255, 255, 255, 0.16) !important;
+    -webkit-mask: url('images/PRESCOT_pattern2.svg') center / contain no-repeat !important;
+    mask: url('images/PRESCOT_pattern2.svg') center / contain no-repeat !important;
+    filter: blur(3.2px) drop-shadow(0 0 28px rgba(255, 255, 255, 0.08)) !important;
+    opacity: 0.34 !important;
+    box-shadow: none !important;
     pointer-events: none !important;
   }
   body .premium-footer .footer-grid,
@@ -543,6 +546,12 @@ customStyles.innerHTML = `
       opacity: 1;
       filter: drop-shadow(0 0 7px rgba(232, 76, 35, 0.55));
     }
+  }
+
+  /* The bottom navigation is mobile-only. Keep it hidden on desktop even when
+     an older page contains a malformed inline CSS block. */
+  body .config-bottom-nav {
+    display: none !important;
   }
 
   @media (max-width: 768px) {

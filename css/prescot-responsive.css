@@ -1224,3 +1224,10 @@ img, video, canvas {
   flex-shrink: 0;
 }
 
+/* The compact navigation belongs only to phones. Some generated pages contain
+   a broken inline keyframe block, so enforce the desktop boundary globally. */
+@media (min-width: 769px) {
+  html body .config-bottom-nav {
+    display: none !important;
+  }
+}

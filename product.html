@@ -4617,8 +4617,10 @@
 </footer>
 
 <!-- App Data & Logic -->
-<script src="js/products-data.js" defer></script>
-<script src="js/shared-popups.js" defer></script>
+<!-- Product data must finish loading before the page module reads `products`.
+     The file is large enough that `defer` raced with the inline module on GitHub Pages. -->
+<script src="js/products-data.js?v=20260801-product-ready"></script>
+<script src="js/shared-popups.js?v=20260801-product-ready"></script>
 <script type="module">
     // Mobile Collapsible Footer Columns
     document.querySelectorAll('.footer-col h3').forEach(h3 => {
@@ -4680,7 +4682,7 @@
         } else {
           barwy = [{ label: "Mono", desc: "Jednokolorowy", color: "#fff" }];
         }
-      } else if (p.category === "Zasilacze LED") {
+      } else if (p.category === "Zasilacze LED" || p.category === "Zasilacze") {
         const power = p.title.match(/\d+W/) ? p.title.match(/\d+W/)[0] : "18W";
         const voltage = p.title.includes("24V") ? "24V DC" : "12V DC";
         specs = [
