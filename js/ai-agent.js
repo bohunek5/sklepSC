@@ -10,6 +10,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   let catalog = [];
   let tapes = [];
+  const applicationLabels = {
+    kitchen: { chip: 'kuchnia', phrase: 'kuchni' },
+    living: { chip: 'salon', phrase: 'salonu' },
+    stairs: { chip: 'schody', phrase: 'schodów' },
+    bathroom: { chip: 'łazienka', phrase: 'łazienki' },
+    outdoor: { chip: 'taras / ogród', phrase: 'tarasu lub ogrodu' },
+    commercial: { chip: 'lokal / biuro', phrase: 'lokalu lub biura' }
+  };
+
+  function applicationLabel(application, form = 'phrase') {
+    return applicationLabels[application]?.[form] || 'Twojego projektu';
+  }
 
   // --- Context Manager & State Machine ---
   let aiSessionState = {
@@ -126,6 +138,46 @@ document.addEventListener('DOMContentLoaded', async () => {
   function productImage(product) {
     return product?.images?.[0] || 'images/okladka-produkty.webp';
   }
+
+  function escapeHTML(value) {
+    return String(value ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function currentContextChips() {
+    const lightLabels = {
+      warm: 'ciepła',
+      neutral: 'neutralna',
+      cold: 'zimna',
+      cct: 'regulowana CCT',
+      rgb: 'RGB',
+      rgbw: 'RGBW'
+    };
+    const chips = [];
+
+    if (aiSessionState.application) chips.push(applicationLabel(aiSessionState.application, 'chip'));
+    if (aiSessionState.length) chips.push(`${aiSessionState.length} m`);
+    if (aiSessionState.light) chips.push(`barwa ${lightLabels[aiSessionState.light] || aiSessionState.light}`);
+    if (aiSessionState.technology && aiSessionState.technology !== 'auto') chips.push(aiSessionState.technology.toUpperCase());
+    if (aiSessionState.voltage && aiSessionState.voltage !== 'auto') chips.push(`${aiSessionState.voltage} V`);
+
+    return chips.slice(0, 5);
+  }
+
+  function recommendationMeta(product, index) {
+    const productText = `${product.category || ''} ${product.title || ''}`.toLowerCase();
+    if (/zasilacz|driver|power supply/.test(productText)) {
+      return { role: 'Zasilanie zestawu', reason: 'Moc dobrana z bezpiecznym zapasem' };
+    }
+    if (index === 0) {
+      return { role: 'Rekomendacja główna', reason: 'Najlepsze dopasowanie do podanych parametrów' };
+    }
+    return { role: 'Pasujący element', reason: 'Agent uwzględnił kontekst Twojego projektu' };
+  }
   
   function updateCartBadge() {
     const cart = JSON.parse(localStorage.getItem('prescot_cart') || '[]');
@@ -181,26 +233,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function renderQuickReplies(aiBubble, options) {
     const container = document.createElement('div');
-    container.style.display = 'flex';
-    container.style.flexWrap = 'wrap';
-    container.style.gap = '8px';
-    container.style.marginTop = '12px';
+    container.className = 'ai-quick-replies ai-quick-replies-dynamic';
 
     options.forEach(opt => {
         const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'ai-suggestion-pill';
         btn.textContent = opt.label;
-        btn.style.padding = '8px 16px';
-        btn.style.borderRadius = '20px';
-        btn.style.border = '1px solid rgba(11, 26, 48, 0.4)';
-        btn.style.background = 'rgba(11, 26, 48, 0.1)';
-        btn.style.color = '#fff';
-        btn.style.fontSize = '13px';
-        btn.style.cursor = 'pointer';
-        btn.style.transition = 'all 0.2s';
-        
-        btn.onmouseover = () => { btn.style.background = '#0b1a30'; };
-        btn.onmouseout = () => { btn.style.background = 'rgba(11, 26, 48, 0.1)'; };
-        
         btn.onclick = () => {
             container.remove();
             processUserInput(opt.value);
@@ -212,41 +251,63 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function renderProducts(aiBubble, productsList, isBought, headerText) {
-      let html = `<div class="ai-product-results shop-page"><div style="margin-top: 15px; font-weight: 600; font-size: 13px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">${headerText}</div><div class="ai-products-grid">`;
+      const contextChips = currentContextChips();
+      const itemCount = productsList.length;
+      let html = `
+        <section class="ai-product-results shop-page" aria-label="Produkty wybrane przez Agenta AI">
+          <div class="ai-recommendation-head">
+            <span class="ai-recommendation-orbit" aria-hidden="true"><i class="ph ph-sparkle"></i></span>
+            <div class="ai-recommendation-heading">
+              <span>Dobór Agenta AI</span>
+              <strong>${escapeHTML(headerText)}</strong>
+            </div>
+            <span class="ai-recommendation-count">${itemCount} ${itemCount === 1 ? 'produkt' : (itemCount < 5 ? 'produkty' : 'produktów')}</span>
+          </div>
+          ${contextChips.length ? `<div class="ai-context-strip" aria-label="Zapamiętane parametry">${contextChips.map(chip => `<span><i class="ph ph-check-circle" aria-hidden="true"></i>${escapeHTML(chip)}</span>`).join('')}</div>` : ''}
+          <div class="ai-products-grid">
+      `;
       
-      productsList.forEach(p => {
+      productsList.forEach((p, index) => {
+          const recommendation = recommendationMeta(p, index);
+          const quantity = Math.max(1, Number(p.qty || p.quantity || 1));
+          const stockValue = Number.parseFloat(String(p.stock ?? '1').replace(',', '.'));
+          const productId = Number(p.id);
           html += `
-            <div class="mockup-product-card" data-id="${p.id}">
+            <article class="mockup-product-card ai-recommendation-card" data-id="${productId}" style="--ai-card-index: ${index}">
               <div class="mockup-product-media" style="position: relative; overflow: hidden;">
                 <div class="catalog-product-badges">
-                  <span class="catalog-stock-badge is-available">Dostępny</span>
+                  <span class="ai-match-badge"><i class="ph ph-sparkle" aria-hidden="true"></i> Dobór AI</span>
+                  <span class="catalog-stock-badge ${stockValue > 0 ? 'is-available' : 'is-unavailable'}">${stockValue > 0 ? 'Dostępny' : 'Na zamówienie'}</span>
                 </div>
-                <img src="${productImage(p)}" alt="${p.title}" class="mockup-product-img" loading="lazy" onerror="this.onerror=null;this.src='images/okladka-produkty.webp'">
+                <img src="${escapeHTML(productImage(p))}" alt="${escapeHTML(p.title)}" class="mockup-product-img" loading="lazy" onerror="this.onerror=null;this.src='images/okladka-produkty.webp'">
                 <div class="product-actions-hover">
-                  <button class="action-btn-circle qv-wishlist-btn" data-id="${p.id}" aria-label="Dodaj do listy życzeń">
+                  <button class="action-btn-circle qv-wishlist-btn" data-id="${productId}" aria-label="Dodaj do listy życzeń">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                   </button>
-                  <button class="action-btn-circle qv-eye-btn" data-id="${p.id}" aria-label="Szybki podgląd">
+                  <button class="action-btn-circle qv-eye-btn" data-id="${productId}" aria-label="Szybki podgląd">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                   </button>
                 </div>
               </div>
               <div class="mockup-product-info">
+                <div class="ai-product-role"><span>${escapeHTML(recommendation.role)}</span><small>${quantity} szt. w zestawie</small></div>
                 <div class="catalog-product-meta">
-                  <span>${p.category || 'Produkt LED'}</span>
+                  <span>${escapeHTML(p.category || 'Produkt LED')}</span>
                 </div>
-                <h3 class="mockup-product-title"><a href="product.html?id=${p.id}" onclick="event.stopPropagation();">${p.title}</a></h3>
+                <h3 class="mockup-product-title"><a href="product.html?id=${productId}" onclick="event.stopPropagation();">${escapeHTML(p.title)}</a></h3>
+                <p class="ai-match-reason"><i class="ph ph-check-circle" aria-hidden="true"></i>${escapeHTML(recommendation.reason)}</p>
                 <p class="mockup-product-price">
                   <span class="catalog-current-price">${formatPrice(p.price)}</span>
                 </p>
+                <a class="ai-product-details-link" href="product.html?id=${productId}" onclick="event.stopPropagation();">Pełna karta produktu <i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
                 <div class="catalog-card-actions">
-                  <button class="add-to-cart-btn qv-add-cart-btn" type="button" data-id="${p.id}" aria-label="Dodaj do koszyka">
+                  <button class="add-to-cart-btn qv-add-cart-btn" type="button" data-id="${productId}" data-qty="${quantity}" aria-label="Dodaj do koszyka">
                     <span class="btn-slide-wrap">
                       <span class="btn-txt-default">Dodaj do koszyka</span>
                       <span class="btn-txt-hover"><i class="ph ph-shopping-cart-simple" style="margin-right: 6px;"></i> Dodaj teraz!</span>
                     </span>
                   </button>
-                  <button class="buy-it-now-btn catalog-quick-buy-btn" type="button" data-id="${p.id}" aria-label="Szybki zakup">
+                  <button class="buy-it-now-btn catalog-quick-buy-btn" type="button" data-id="${productId}" data-qty="${quantity}" aria-label="Szybki zakup">
                     <span class="btn-slide-wrap">
                       <span class="btn-txt-default">Szybki zakup</span>
                       <span class="btn-txt-hover">Przejdź do podsumowania</span>
@@ -254,10 +315,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                   </button>
                 </div>
               </div>
-            </div>
+            </article>
           `;
       });
-      html += '</div></div>';
+      html += '</div></section>';
 
       const productsContainer = document.createElement('div');
       productsContainer.innerHTML = html;
@@ -267,11 +328,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (isBought) {
         const cta = document.createElement('button');
         cta.type = 'button';
-        cta.className = 'add-to-cart-btn bought';
-        cta.style.width = '100%';
-        cta.style.marginTop = '12px';
-        cta.style.border = 'none';
-        cta.innerHTML = '✓ DODANO — Przejdź do kasy';
+        cta.className = 'add-to-cart-btn bought ai-cart-confirmation';
+        cta.innerHTML = '<span><i class="ph ph-check-circle" aria-hidden="true"></i> Zestaw jest w koszyku</span><strong>Przejdź do kasy <i class="ph ph-arrow-right" aria-hidden="true"></i></strong>';
         cta.onclick = (e) => { e.preventDefault(); if(window.openCartDrawer) window.openCartDrawer(); };
         aiBubble.appendChild(cta);
       }
@@ -352,7 +410,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (aiSessionState.application) {
         if (!aiSessionState.length) {
             aiSessionState.awaitingClarification = 'length';
-            streamText(aiBubble, `Zanotowałem, że robimy oświetlenie do **${ConfiguratorCore.labels?.application?.[aiSessionState.application] || 'tego pomieszczenia'}**. Ile dokładnie **metrów** taśmy potrzebujesz?`, () => {
+            streamText(aiBubble, `Zanotowałem, że robimy oświetlenie do **${applicationLabel(aiSessionState.application)}**. Ile dokładnie **metrów** taśmy potrzebujesz?`, () => {
                 renderQuickReplies(aiBubble, [
                     { label: 'Około 3 metry', value: '3m' },
                     { label: '5 metrów (standard)', value: '5m' },
@@ -364,7 +422,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         if (!aiSessionState.light) {
             aiSessionState.awaitingClarification = 'light';
-            streamText(aiBubble, `Super, mamy ustalone **${aiSessionState.length}m** do **${ConfiguratorCore.labels?.application?.[aiSessionState.application] || 'tego pomieszczenia'}**. Jaką barwę światła wolisz?`, () => {
+            streamText(aiBubble, `Super, mamy ustalone **${aiSessionState.length}m** do **${applicationLabel(aiSessionState.application)}**. Jaką barwę światła wolisz?`, () => {
                 renderQuickReplies(aiBubble, [
                     { label: 'Ciepła (przytulna)', value: 'Ciepła' },
                     { label: 'Neutralna (dzienna)', value: 'Neutralna' },
@@ -398,7 +456,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         aiSessionState.lastProposedItems = newProposedItems;
         
-        let txt = `Dobrałem idealny zestaw! Do **${ConfiguratorCore.labels?.application?.[activeState.application]}** (${activeState.length}m) proponuję taśmę **${primary.technology || 'SMD'} ${primary.voltage}V**. `;
+        let txt = `Dobrałem idealny zestaw! Do **${applicationLabel(activeState.application)}** (${activeState.length}m) proponuję taśmę **${primary.technology || 'SMD'} ${primary.voltage}V**. `;
         if (primary.technology === 'COB') txt += `Zapewni ona jednolitą, piękną linię światła. `;
         else txt += `Jest jasna i wydajna (${primary.power}W/m). `;
         
@@ -482,7 +540,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
             
             return { product: p, score };
-        }).filter(x => x.score > 0).sort((a, b) => b.score - a.score).map(x => x.product).slice(0, 24);
+        }).filter(x => x.score > 0).sort((a, b) => b.score - a.score).map(x => x.product).slice(0, 6);
     }
 
     if (matchedProducts.length > 0) {

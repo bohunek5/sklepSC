@@ -537,15 +537,20 @@ customStyles.innerHTML = `
     font-size: 20px !important;
   }
 
-  @keyframes prescotMobilePatternShimmer {
+  @keyframes prescotMobilePatternNeon {
     0%, 100% {
-      opacity: 0.9;
-      filter: drop-shadow(0 0 2px rgba(232, 76, 35, 0.18));
+      opacity: 0.94;
+      filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.34)) drop-shadow(0 0 5px rgba(232, 76, 35, 0.52));
     }
     50% {
       opacity: 1;
-      filter: drop-shadow(0 0 7px rgba(232, 76, 35, 0.55));
+      filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.58)) drop-shadow(0 0 10px rgba(232, 76, 35, 0.82)) drop-shadow(0 0 17px rgba(0, 216, 245, 0.26));
     }
+  }
+
+  @keyframes prescotMobileHaloPulse {
+    0%, 100% { opacity: .48; transform: scale(.9); }
+    50% { opacity: .82; transform: scale(1.08); }
   }
 
   /* The bottom navigation is mobile-only. Keep it hidden on desktop even when
@@ -696,6 +701,7 @@ customStyles.innerHTML = `
       transform: none !important;
     }
     body .config-bottom-nav .mobile-bottom-icon {
+      position: relative !important;
       display: inline-flex !important;
       width: 25px !important;
       height: 25px !important;
@@ -764,14 +770,18 @@ customStyles.innerHTML = `
       display: none !important;
     }
     body .config-bottom-nav .mobile-home-pattern {
+      position: relative !important;
+      z-index: 2 !important;
       display: block !important;
       width: 29px !important;
       height: 22px !important;
       object-fit: contain !important;
       object-position: center !important;
       overflow: visible !important;
-      animation: prescotMobilePatternShimmer 3.2s ease-in-out infinite !important;
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+      opacity: .68 !important;
+      filter: saturate(.78) brightness(.88) !important;
+      animation: none !important;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity .25s ease, filter .25s ease !important;
     }
     body .config-bottom-nav > .mobile-home-link .mobile-bottom-icon {
       width: 29px !important;
@@ -789,12 +799,33 @@ customStyles.innerHTML = `
       background: transparent !important;
       box-shadow: none !important;
     }
+    body .config-bottom-nav > .mobile-home-link.active .mobile-bottom-icon::before {
+      content: '' !important;
+      position: absolute !important;
+      z-index: 0 !important;
+      inset: -8px -10px !important;
+      border-radius: 50% !important;
+      background: radial-gradient(circle, rgba(232, 76, 35, .25) 0, rgba(0, 216, 245, .08) 45%, transparent 72%) !important;
+      filter: blur(3px) !important;
+      pointer-events: none !important;
+      animation: prescotMobileHaloPulse 2.8s ease-in-out infinite !important;
+    }
     body .config-bottom-nav > .mobile-home-link.active .mobile-home-pattern {
       transform: scale(1.13) !important;
+      opacity: 1 !important;
+      filter: none !important;
+      animation: prescotMobilePatternNeon 2.8s ease-in-out infinite !important;
     }
     body .config-bottom-nav > a:hover .mobile-bottom-icon,
     body .config-bottom-nav > button:hover .mobile-bottom-icon {
       transform: scale(1.06) !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body .config-bottom-nav > .mobile-home-link.active .mobile-bottom-icon::before,
+    body .config-bottom-nav > .mobile-home-link.active .mobile-home-pattern {
+      animation: none !important;
     }
   }
 
@@ -1233,6 +1264,12 @@ function injectMobileMenuOverlay() {
 
 // --- INIT POPUPS AND DRAWER ACTIONS ---
 function initSharedPopups() {
+  if (window.__prescotSharedPopupsInitialized) {
+    if (typeof window.refreshSharedProductCards === 'function') window.refreshSharedProductCards();
+    return;
+  }
+  window.__prescotSharedPopupsInitialized = true;
+
   injectWishlistDrawer();
   injectProductModals();
   injectCartDrawer();
@@ -2398,6 +2435,23 @@ function initSharedPopups() {
     });
   }
 
+  // Warm up product details just before a user clicks a catalog or AI card.
+  const prefetchedProductPages = new Set();
+  document.addEventListener('pointerover', (event) => {
+    if (navigator.connection?.saveData || /(^|-)2g$/.test(navigator.connection?.effectiveType || '')) return;
+    const directLink = event.target.closest('a[href*="product.html?id="]');
+    const card = event.target.closest('.mockup-product-card');
+    const href = directLink?.getAttribute('href') || (card?.dataset.id ? `product.html?id=${card.dataset.id}` : '');
+    if (!href || prefetchedProductPages.has(href)) return;
+
+    prefetchedProductPages.add(href);
+    const prefetch = document.createElement('link');
+    prefetch.rel = 'prefetch';
+    prefetch.href = href;
+    prefetch.as = 'document';
+    document.head.appendChild(prefetch);
+  }, { passive: true });
+
   // --- CONNECT INTERACTIVE BUTTONS WITH REAL IDs (EVENT DELEGATION) ---
   document.addEventListener('click', (e) => {
     // 0. Add to wishlist
@@ -2442,26 +2496,27 @@ function initSharedPopups() {
       const pId = parseInt(addCartBtn.dataset.id);
       const p = products.find(prod => prod.id === pId);
       if (!p) return;
+      const requestedQty = Math.max(1, Number.parseInt(addCartBtn.dataset.qty || '1', 10) || 1);
 
       const cartItem = {
         id: p.id,
         title: p.title,
         price: p.price,
         image: (p.images && p.images[0]) ? p.images[0] : 'images/okladka-produkty.webp',
-        qty: 1,
+        qty: requestedQty,
         color: p.colors?.[0] || null,
         size: p.sizes?.[0] || null
       };
 
       const existingIndex = cart.findIndex(item => item.id === cartItem.id && item.color === cartItem.color && item.size === cartItem.size);
       if (existingIndex > -1) {
-        cart[existingIndex].qty++;
+        cart[existingIndex].qty += requestedQty;
       } else {
         cart.push(cartItem);
       }
 
       updateLocalStorage();
-      showToast('Dodano do koszyka: 1 szt.', 'cart');
+      showToast(`Dodano do koszyka: ${requestedQty} szt.`, 'cart');
       triggerCartIconAnimation();
       window.dispatchEvent(new Event('storage'));
 
@@ -2485,19 +2540,20 @@ function initSharedPopups() {
       const pId = parseInt(quickBuyBtn.dataset.id);
       const p = products.find(prod => prod.id === pId);
       if (!p) return;
+      const requestedQty = Math.max(1, Number.parseInt(quickBuyBtn.dataset.qty || '1', 10) || 1);
 
       const cartItem = {
         id: p.id,
         title: p.title,
         price: p.price,
         image: (p.images && p.images[0]) ? p.images[0] : 'images/okladka-produkty.webp',
-        qty: 1,
+        qty: requestedQty,
         color: p.colors?.[0] || null,
         size: p.sizes?.[0] || null
       };
       const existingIndex = cart.findIndex(item => item.id === cartItem.id && item.color === cartItem.color && item.size === cartItem.size);
       if (existingIndex > -1) {
-        cart[existingIndex].qty++;
+        cart[existingIndex].qty += requestedQty;
       } else {
         cart.push(cartItem);
       }
@@ -2867,6 +2923,7 @@ function initSharedPopups() {
     }
   }
 
+  window.refreshSharedProductCards = initGlobalCardVideos;
   initGlobalCardVideos();
 }
 

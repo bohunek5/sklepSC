@@ -459,7 +459,14 @@
   padding: 0 !important;
   align-items: stretch;
   opacity: 1;
-  transition: opacity .18s ease;
+  transform: translateZ(0);
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+.shop-page .shop-grid.catalog-is-updating {
+  opacity: .62;
+  transform: translateY(3px) translateZ(0);
+  pointer-events: none;
 }
 
 .shop-page .catalog-loading-state {

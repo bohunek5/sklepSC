@@ -6291,6 +6291,7 @@
 <script src="js/products-data.js" defer></script>
   <script src="js/shared-popups.js" defer></script>
   <script>
+    document.addEventListener('DOMContentLoaded', () => {
 
     // Render 8 trending products on homepage
     const trendingGrid = document.getElementById('trendingGrid');
@@ -6456,6 +6457,7 @@
     }
 
     initSharedPopups();
+    });
   </script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <script>

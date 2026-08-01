@@ -88,7 +88,7 @@
     /* Chat window styled like a pro LLM */
     .ai-chat-interface {
       width: 100%;
-      max-width: 800px;
+      max-width: 1080px;
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -167,6 +167,20 @@
     .ai-suggestion-pill:hover {
       background: rgba(255, 255, 255, 0.2);
       border-color: rgba(255, 255, 255, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
+    }
+
+    .ai-suggestion-pill:focus-visible {
+      outline: 2px solid #00d8f5;
+      outline-offset: 3px;
+    }
+
+    .ai-quick-replies-dynamic {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
     }
     
     @media (max-width: 768px) {
@@ -176,31 +190,378 @@
       }
     }
 
-    /* Product results reuse the catalog card design without changing the AI page background. */
+    /* Product results keep the store language while making the AI choice explicit. */
     .ai-product-results.shop-page {
       width: 100%;
+      margin-top: 22px;
+      padding: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 184, 215, 0.2);
+      border-radius: 24px;
       background: transparent;
+      background-image: linear-gradient(145deg, rgba(255,255,255,.075), rgba(0,216,245,.025) 50%, rgba(232,76,35,.045));
+      box-shadow: 0 20px 60px rgba(1, 9, 19, .24);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .ai-recommendation-head {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      padding: 5px 4px 13px;
+    }
+
+    .ai-recommendation-orbit {
+      position: relative;
+      display: inline-flex;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid rgba(0, 216, 245, .38);
+      border-radius: 14px;
+      color: #fff;
+      background: linear-gradient(145deg, rgba(0, 216, 245, .22), rgba(232, 76, 35, .2));
+      box-shadow: 0 0 24px rgba(0, 216, 245, .14);
+    }
+
+    .ai-recommendation-orbit::before {
+      content: '';
+      position: absolute;
+      width: 58px;
+      height: 16px;
+      background: rgba(255,255,255,.28);
+      filter: blur(9px);
+      transform: rotate(-28deg) translateX(-42px);
+      animation: aiOrbitSweep 3.8s ease-in-out infinite;
+    }
+
+    .ai-recommendation-orbit i {
+      position: relative;
+      z-index: 1;
+      font-size: 21px;
+    }
+
+    .ai-recommendation-heading {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .ai-recommendation-heading span {
+      color: #65e9fb;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .ai-recommendation-heading strong {
+      overflow: hidden;
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 19px;
+      letter-spacing: -.01em;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .ai-recommendation-count {
+      padding: 7px 10px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      color: #cbd8e6;
+      background: rgba(4, 15, 28, .45);
+      font-size: 10px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .ai-context-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin: 0 4px 14px;
+    }
+
+    .ai-context-strip span {
+      display: inline-flex;
+      min-height: 28px;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 9px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      color: #cbd8e6;
+      background: rgba(255,255,255,.055);
+      font-size: 10px;
+      font-weight: 650;
+    }
+
+    .ai-context-strip i {
+      color: #38d59b;
+      font-size: 13px;
     }
 
     .ai-products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 12px;
-      margin-top: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
       align-items: stretch;
     }
 
-    .ai-product-results .mockup-product-card {
+    .ai-product-results .mockup-product-card.ai-recommendation-card {
+      position: relative;
       flex-direction: column !important;
+      padding: 0 16px 16px !important;
+      border-color: rgba(188, 204, 220, .72) !important;
+      border-radius: 20px !important;
+      box-shadow: 0 14px 36px rgba(0, 8, 18, .16) !important;
+      transform: none !important;
+      opacity: 1;
+      animation: aiCardReveal .55s cubic-bezier(.2,.8,.2,1) backwards;
+      animation-delay: calc(var(--ai-card-index, 0) * 80ms);
+      transition: transform .28s cubic-bezier(.2,.8,.2,1), border-color .25s ease, box-shadow .25s ease !important;
+    }
+
+    .ai-product-results .mockup-product-card.ai-recommendation-card::before {
+      content: '';
+      position: absolute;
+      z-index: 5;
+      inset: 0 18% auto;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, #00d8f5, #e84c23, transparent);
+      opacity: .78;
+    }
+
+    .ai-product-results .mockup-product-card.ai-recommendation-card:hover {
+      border-color: rgba(0, 171, 207, .65) !important;
+      box-shadow: 0 22px 48px rgba(0, 8, 18, .24), 0 0 0 1px rgba(0,216,245,.1) !important;
+      transform: translateY(-5px) !important;
+    }
+
+    .ai-product-results .mockup-product-media {
+      width: calc(100% + 32px) !important;
+      margin-right: -16px !important;
+      margin-left: -16px !important;
+      aspect-ratio: 4 / 3 !important;
+    }
+
+    .ai-product-results .mockup-product-img,
+    .ai-product-results .mockup-product-card:hover .mockup-product-img {
+      aspect-ratio: 4 / 3 !important;
+      padding: 20px !important;
+    }
+
+    .ai-product-results .mockup-product-card:hover .mockup-product-img {
+      transform: scale(1.045) !important;
+    }
+
+    .ai-product-results .catalog-product-badges {
+      align-items: flex-start;
+    }
+
+    .ai-product-results .ai-match-badge {
+      display: inline-flex;
+      min-height: 26px;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 8px;
+      border: 1px solid rgba(0, 152, 184, .24);
+      border-radius: 999px;
+      color: #075b72;
+      background: rgba(229, 251, 255, .95);
+      box-shadow: 0 4px 12px rgba(11, 26, 48, .08);
+      font-size: 9px;
+      font-weight: 850;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .ai-product-results .catalog-stock-badge {
+      margin-left: auto;
     }
 
     .ai-product-results .mockup-product-info {
       flex-direction: column !important;
     }
 
+    .ai-product-role {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin: 2px 0 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e8eef4;
+    }
+
+    .ai-product-role span {
+      color: #0b657b;
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .ai-product-role small {
+      color: #77869a;
+      font-size: 10px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+
+    .ai-product-results .mockup-product-title {
+      min-height: 40px;
+      -webkit-line-clamp: 2;
+    }
+
+    .ai-match-reason {
+      display: flex;
+      min-height: 34px;
+      align-items: flex-start;
+      gap: 6px;
+      margin: -2px 0 9px;
+      color: #63748a;
+      font-size: 10.5px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .ai-match-reason i {
+      flex: 0 0 auto;
+      margin-top: 1px;
+      color: #16a66a;
+      font-size: 14px;
+    }
+
+    .ai-product-details-link {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 5px;
+      margin: -3px 0 12px;
+      color: #52667d !important;
+      font-size: 10.5px;
+      font-weight: 750;
+      text-decoration: none !important;
+    }
+
+    .ai-product-details-link:hover {
+      color: #0b1a30 !important;
+    }
+
+    .ai-product-details-link i {
+      transition: transform .2s ease;
+    }
+
+    .ai-product-details-link:hover i {
+      transform: translate(2px, -2px);
+    }
+
+    .ai-product-results .catalog-card-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .ai-product-results .catalog-card-actions > button {
+      min-height: 44px;
+      border-radius: 11px !important;
+      font-size: 10px !important;
+      letter-spacing: .02em;
+    }
+
+    .ai-cart-confirmation {
+      display: flex !important;
+      width: 100% !important;
+      min-height: 54px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 12px;
+      padding: 0 18px !important;
+      border: 1px solid rgba(56, 213, 155, .38) !important;
+      border-radius: 15px !important;
+      color: #fff !important;
+      background: linear-gradient(105deg, rgba(17, 137, 95, .95), rgba(11, 91, 105, .96)) !important;
+      box-shadow: 0 14px 34px rgba(0,0,0,.2) !important;
+    }
+
+    .ai-cart-confirmation span,
+    .ai-cart-confirmation strong {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .ai-cart-confirmation strong {
+      font-size: 12px;
+    }
+
+    @keyframes aiCardReveal {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes aiOrbitSweep {
+      0%, 25% { transform: rotate(-28deg) translateX(-42px); }
+      65%, 100% { transform: rotate(-28deg) translateX(42px); }
+    }
+
     @media (max-width: 620px) {
+      .ai-product-results.shop-page {
+        padding: 10px;
+        border-radius: 19px;
+      }
+
+      .ai-recommendation-head {
+        grid-template-columns: 42px minmax(0, 1fr);
+      }
+
+      .ai-recommendation-orbit {
+        width: 39px;
+        height: 39px;
+        border-radius: 12px;
+      }
+
+      .ai-recommendation-heading strong {
+        font-size: 16px;
+      }
+
+      .ai-recommendation-count {
+        display: none;
+      }
+
       .ai-products-grid {
         grid-template-columns: minmax(0, 1fr);
+      }
+
+      .ai-product-results .catalog-card-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .ai-cart-confirmation {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 12px 14px !important;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ai-recommendation-orbit::before,
+      .ai-product-results .mockup-product-card.ai-recommendation-card {
+        animation: none !important;
+      }
+
+      .ai-product-results .mockup-product-card.ai-recommendation-card {
+        opacity: 1;
+        transform: none !important;
       }
     }
 
@@ -570,7 +931,7 @@
     <section class="ai-hero">
       <div class="ai-chat-interface">
         
-        <div class="chat-history">
+        <div class="chat-history" aria-live="polite" aria-label="Rozmowa z Agentem AI">
           <div class="chat-message">
             <div class="avatar avatar-ai">
               <img class="gemini-icon" src="images/prescot-pattern.png" style="width: 14px; height: 14px; object-fit: contain; margin-left: 4px; vertical-align: middle;">

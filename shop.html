@@ -4341,16 +4341,19 @@
       }
 
       if (headerSearchInput) {
+        let liveSearchTimer = 0;
         headerSearchInput.addEventListener('keypress', (e) => {
           if (e.key === 'Enter') {
             e.preventDefault();
+            window.clearTimeout(liveSearchTimer);
             executeHeaderSearch();
           }
         });
         headerSearchInput.addEventListener('input', (e) => {
           currentSearch = e.target.value.toLowerCase().trim();
           currentPage = 1;
-          renderFilteredProducts();
+          window.clearTimeout(liveSearchTimer);
+          liveSearchTimer = window.setTimeout(renderFilteredProducts, 140);
         });
       }
 
@@ -4991,8 +4994,9 @@
         }
         window.updateAdvancedFilterProductCount?.(totalItems);
 
-        // Render Grid
+        // Render Grid in one DOM write to avoid a reflow for every product card.
         if (shopGrid) {
+          shopGrid.classList.add('catalog-is-updating');
           shopGrid.innerHTML = '';
           if (itemsToShow.length === 0) {
             shopGrid.innerHTML = `
@@ -5004,9 +5008,11 @@
               </div>
             `;
             if (shopPagination) shopPagination.innerHTML = '';
+            requestAnimationFrame(() => shopGrid.classList.remove('catalog-is-updating'));
             return;
           }
 
+          const cardsHTML = [];
           itemsToShow.forEach(p => {
             let thirdBtn = '';
             if (p.has3D) {
@@ -5080,8 +5086,10 @@
                 </div>
               </div>
             `;
-            shopGrid.insertAdjacentHTML('beforeend', cardHTML);
+            cardsHTML.push(cardHTML);
           });
+          shopGrid.innerHTML = cardsHTML.join('');
+          requestAnimationFrame(() => shopGrid.classList.remove('catalog-is-updating'));
         }
 
         // Render Pagination Controls
