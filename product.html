@@ -5628,7 +5628,8 @@
     }
     
     // Initialize Shared Popups
-    initSharedPopups();
+    if (typeof initSharedPopups === 'function') initSharedPopups();
+    else document.addEventListener('DOMContentLoaded', () => window.initSharedPopups?.(), { once: true });
 
     // Mobile Navigation Toggle
     const menuToggle = document.getElementById('menuToggle');

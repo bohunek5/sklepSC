@@ -565,6 +565,15 @@ customStyles.innerHTML = `
       margin-bottom: 0 !important;
       padding: 45px 18px calc(96px + env(safe-area-inset-bottom)) !important;
     }
+    body .premium-footer::after {
+      top: 260px !important;
+      right: -40px !important;
+      bottom: auto !important;
+      width: 312px !important;
+      height: 230px !important;
+      filter: blur(2px) drop-shadow(0 0 24px rgba(232, 76, 35, .12)) !important;
+      opacity: .34 !important;
+    }
     body .premium-footer .footer-grid {
       grid-template-columns: 1fr !important;
       gap: 16px !important;
@@ -573,6 +582,21 @@ customStyles.innerHTML = `
     body .premium-footer .brand-col {
       padding: 22px !important;
       border-radius: 17px !important;
+    }
+    body .premium-footer .brand-col::after {
+      content: 'POLSKI PRODUCENT TAŚM LED' !important;
+      display: inline-flex !important;
+      min-height: 28px !important;
+      align-items: center !important;
+      margin-top: 16px !important;
+      padding: 5px 10px !important;
+      border: 1px solid rgba(232, 76, 35, .38) !important;
+      border-radius: 999px !important;
+      color: rgba(255,255,255,.78) !important;
+      background: rgba(232, 76, 35, .08) !important;
+      font-size: 8px !important;
+      font-weight: 800 !important;
+      letter-spacing: .12em !important;
     }
     body .premium-footer h3 {
       margin: 0 !important;
@@ -666,19 +690,36 @@ customStyles.innerHTML = `
     /* Shared five-item mobile navigation. */
     body .config-bottom-nav {
       position: fixed !important;
-      inset: auto 0 0 !important;
+      inset: auto 10px calc(8px + env(safe-area-inset-bottom)) !important;
       z-index: 9999 !important;
       display: grid !important;
       grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
-      width: 100% !important;
-      height: calc(72px + env(safe-area-inset-bottom)) !important;
-      padding: 5px 4px calc(5px + env(safe-area-inset-bottom)) !important;
+      box-sizing: border-box !important;
+      width: auto !important;
+      height: 68px !important;
+      padding: 5px 4px !important;
       overflow: visible !important;
-      border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-      background: rgba(6, 16, 28, 0.98) !important;
-      box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.16) !important;
-      backdrop-filter: blur(20px) !important;
-      -webkit-backdrop-filter: blur(20px) !important;
+      border: 1px solid rgba(111, 147, 180, .3) !important;
+      border-radius: 21px !important;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(232, 76, 35, .13), transparent 30%),
+        radial-gradient(circle at 86% 0%, rgba(0, 216, 245, .08), transparent 27%),
+        rgba(5, 17, 31, .965) !important;
+      box-shadow: 0 16px 42px rgba(0, 0, 0, .34), inset 0 1px 0 rgba(255,255,255,.07) !important;
+      backdrop-filter: blur(24px) saturate(145%) !important;
+      -webkit-backdrop-filter: blur(24px) saturate(145%) !important;
+    }
+    body .config-bottom-nav::before {
+      content: '' !important;
+      position: absolute !important;
+      top: -1px !important;
+      left: 18% !important;
+      right: 18% !important;
+      height: 1px !important;
+      border-radius: 999px !important;
+      background: linear-gradient(90deg, transparent, rgba(232,76,35,.9), rgba(0,216,245,.72), transparent) !important;
+      box-shadow: 0 0 12px rgba(232, 76, 35, .26) !important;
+      pointer-events: none !important;
     }
     body .config-bottom-nav > a,
     body .config-bottom-nav > button {
@@ -691,10 +732,10 @@ customStyles.innerHTML = `
       flex-direction: column !important;
       gap: 3px !important;
       margin: 0 !important;
-      padding: 3px 1px 2px !important;
-      color: rgba(255, 255, 255, 0.55) !important;
+      padding: 4px 1px 3px !important;
+      color: rgba(255, 255, 255, 0.5) !important;
       border: 0 !important;
-      border-radius: 0 !important;
+      border-radius: 14px !important;
       background: transparent !important;
       box-shadow: none !important;
       text-decoration: none !important;
@@ -740,17 +781,18 @@ customStyles.innerHTML = `
     }
     body .config-bottom-nav > .active {
       color: #fff !important;
+      background: linear-gradient(180deg, rgba(255,255,255,.055), transparent) !important;
     }
     body .config-bottom-nav > .active:not(.mobile-home-link) .mobile-bottom-icon {
-      width: 34px !important;
-      height: 34px !important;
-      min-width: 34px !important;
-      min-height: 34px !important;
-      margin-top: -11px !important;
+      width: 36px !important;
+      height: 36px !important;
+      min-width: 36px !important;
+      min-height: 36px !important;
+      margin-top: -10px !important;
       color: #e84c23 !important;
       border: 2px solid #e84c23 !important;
-      background: #10233a !important;
-      box-shadow: 0 0 15px rgba(232, 76, 35, 0.24) !important;
+      background: linear-gradient(145deg, #102b46, #071525) !important;
+      box-shadow: 0 0 0 4px rgba(232,76,35,.08), 0 0 20px rgba(232, 76, 35, .32) !important;
     }
     body .config-bottom-nav > a:hover,
     body .config-bottom-nav > button:hover {
@@ -794,7 +836,7 @@ customStyles.innerHTML = `
       height: 29px !important;
       min-width: 29px !important;
       min-height: 29px !important;
-      margin-top: -2px !important;
+      margin-top: -8px !important;
       border: 0 !important;
       background: transparent !important;
       box-shadow: none !important;
@@ -3010,8 +3052,16 @@ function upgradeMobileCommerceNavigation() {
       ? `<button class="${className}" type="button" onclick="${entry.onClick}">${content}</button>`
       : `<a class="${className}" href="${entry.href}">${content}</a>`;
   }).join('');
-  const bottomNavigations = document.querySelectorAll('.config-bottom-nav');
+  let bottomNavigations = document.querySelectorAll('.config-bottom-nav');
+  if (!bottomNavigations.length && document.body) {
+    const navigation = document.createElement('nav');
+    navigation.className = 'config-bottom-nav';
+    navigation.setAttribute('aria-label', 'Główna nawigacja mobilna');
+    document.body.appendChild(navigation);
+    bottomNavigations = document.querySelectorAll('.config-bottom-nav');
+  }
   bottomNavigations.forEach((navigation) => {
+    navigation.classList.add('prescot-mobile-dock');
     navigation.innerHTML = bottomMarkup;
   });
   if (bottomNavigations.length) {

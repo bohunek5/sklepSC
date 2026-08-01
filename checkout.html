@@ -3344,7 +3344,8 @@
   <script src="js/products-data.js" defer></script>
   <script src="js/shared-popups.js" defer></script>
   <script>
-    initSharedPopups();
+    if (typeof initSharedPopups === 'function') initSharedPopups();
+    else document.addEventListener('DOMContentLoaded', () => window.initSharedPopups?.(), { once: true });
 
     document.getElementById('checkoutCartBreadcrumb')?.addEventListener('click', function () {
       if (typeof window.openCartDrawer === 'function') {

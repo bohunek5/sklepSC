@@ -3287,7 +3287,8 @@
       headerSearchBtn.addEventListener('click', performHeaderSearch);
     }
 
-    initSharedPopups();
+    if (typeof initSharedPopups === 'function') initSharedPopups();
+    else document.addEventListener('DOMContentLoaded', () => window.initSharedPopups?.(), { once: true });
   </script>
 
 

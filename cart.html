@@ -2808,7 +2808,8 @@
     }
 
     // Initialize Shared Popups
-    initSharedPopups();
+    if (typeof initSharedPopups === 'function') initSharedPopups();
+    else document.addEventListener('DOMContentLoaded', () => window.initSharedPopups?.(), { once: true });
 
     // Local cart render logic
     let localCart = JSON.parse(localStorage.getItem('prescot_cart')) || [];

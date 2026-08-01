@@ -212,6 +212,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
+  function revealProductResults(container) {
+    if (!window.matchMedia('(max-width: 620px)').matches) {
+      scrollToBottom();
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      const top = Math.max(0, window.scrollY + container.getBoundingClientRect().top - 82);
+      window.scrollTo({ top, behavior: 'smooth' });
+      const revealNavigation = () => document.documentElement.classList.remove('mobile-bottom-nav-hidden');
+      window.addEventListener('scrollend', revealNavigation, { once: true });
+      window.setTimeout(revealNavigation, 1000);
+    });
+  }
+
   function addMessageBubble(isUser = false) {
     const msg = document.createElement('div');
     msg.className = `chat-message ${isUser ? 'user' : ''}`;
@@ -251,6 +266,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function renderProducts(aiBubble, productsList, isBought, headerText) {
+      aiBubble.closest('.chat-message')?.classList.add('has-product-results');
       const contextChips = currentContextChips();
       const itemCount = productsList.length;
       let html = `
@@ -334,7 +350,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         aiBubble.appendChild(cta);
       }
       
-      scrollToBottom();
+      revealProductResults(productsContainer);
   }
 
   // Parses markdown bold **text** to HTML

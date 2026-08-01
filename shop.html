@@ -3991,8 +3991,8 @@
     <!-- === ADVANCED FILTERS UI (B2B/B2C) === -->
     
     <!-- Mobile FAB -->
-    <button id="mobileFabFilterBtn" class="mobile-fab-filter">
-      <i class="ph ph-faders"></i> Filtruj i Sortuj <span id="fabFilterCount">(0)</span>
+    <button id="mobileFabFilterBtn" class="mobile-fab-filter" type="button">
+      <i class="ph ph-sliders-horizontal" aria-hidden="true"></i> Filtry i sortowanie <span id="fabFilterCount">(0)</span>
     </button>
     
     <!-- Backdrop for mobile sheet -->
@@ -4006,7 +4006,7 @@
         </div>
         <div class="filter-header-actions">
           <button id="catalogResetFilters" class="catalog-reset-filters" type="button">Wyczyść</button>
-          <button id="closeFilterSheetBtn" class="close-sheet-btn" type="button" aria-label="Zamknij filtry"><i class="ph ph-x" aria-hidden="true"></i></button>
+          <button id="closeFilterSheetBtn" class="close-sheet-btn" type="button" aria-label="Zamknij filtry"><span>Zamknij</span><i class="ph ph-x" aria-hidden="true"></i></button>
         </div>
       </div>
       
@@ -4198,6 +4198,13 @@
               <option value="title-asc">Nazwa: A–Z</option>
             </select>
           </label>
+          <div class="catalog-view-control" role="group" aria-label="Widok produktów">
+            <span>Widok</span>
+            <div>
+              <button class="catalog-view-btn" type="button" data-catalog-view="single" aria-label="Jedna kolumna" title="Jedna kolumna"><i class="ph ph-rows" aria-hidden="true"></i></button>
+              <button class="catalog-view-btn" type="button" data-catalog-view="compact" aria-label="Dwie kolumny" title="Dwie kolumny"><i class="ph ph-squares-four" aria-hidden="true"></i></button>
+            </div>
+          </div>
         </div>
       </header>
 
@@ -4418,6 +4425,33 @@
       const shopSortSelect = document.getElementById('shopSortSelect');
       const shopResultSummary = document.getElementById('shopResultSummary');
       const shopCatalogTitle = document.getElementById('shopCatalogTitle');
+      const catalogViewButtons = [...document.querySelectorAll('.catalog-view-btn')];
+
+      function setCatalogView(view, persist = true) {
+        const nextView = view === 'compact' ? 'compact' : 'single';
+        document.documentElement.dataset.catalogView = nextView;
+        catalogViewButtons.forEach((button) => {
+          const isActive = button.dataset.catalogView === nextView;
+          button.classList.toggle('active', isActive);
+          button.setAttribute('aria-pressed', String(isActive));
+        });
+        if (persist) {
+          try { localStorage.setItem('prescot_catalog_mobile_view', nextView); } catch (error) { /* Preference is optional. */ }
+        }
+      }
+
+      let savedCatalogView = 'single';
+      try { savedCatalogView = localStorage.getItem('prescot_catalog_mobile_view') || 'single'; } catch (error) { /* Use the readable default. */ }
+      setCatalogView(savedCatalogView, false);
+      catalogViewButtons.forEach((button) => button.addEventListener('click', () => setCatalogView(button.dataset.catalogView)));
+
+      const shopFooter = document.querySelector('.premium-footer');
+      if (shopFooter && 'IntersectionObserver' in window) {
+        const footerObserver = new IntersectionObserver((entries) => {
+          document.body.classList.toggle('catalog-footer-visible', entries.some((entry) => entry.isIntersecting));
+        }, { rootMargin: '0px 0px -12% 0px' });
+        footerObserver.observe(shopFooter);
+      }
 
       function updateShopCatalogTitle() {
         if (!shopCatalogTitle) return;
