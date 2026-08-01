@@ -1215,3 +1215,11 @@ img, video, canvas {
 .configurator-mobile-link span {
   white-space: nowrap;
 }
+
+/* Fix huge SVG bug in footer */
+.mockup-footer svg.ph,
+.premium-footer svg.ph {
+  width: 1em !important;
+  height: 1em !important;
+}
+
