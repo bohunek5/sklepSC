@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node -e \"fs.cpSync('js', 'dist/js', {recursive: true})\"",
+    "build": "vite build && node -e \"fs.cpSync('js', 'dist/js', {recursive: true}); fs.cpSync('images', 'dist/images', {recursive: true}); fs.cpSync('videos', 'dist/videos', {recursive: true})\"",
     "preview": "vite preview",
     "test:configurator": "node test_configurator.mjs",
     "test:led-configurator": "node test_led_configurator.mjs"
