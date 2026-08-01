@@ -56563,7 +56563,7 @@ const defaultProducts = [
 
 function getProducts() {
   if (typeof window !== 'undefined' && localStorage) {
-    const cacheVersion = "v_prescot_cloud_xml_v1";
+    const cacheVersion = "v_prescot_cloud_xml_v2";
     const storedVersion = localStorage.getItem('sklepSC_products_version');
     if (storedVersion !== cacheVersion) {
       localStorage.removeItem('sklepSC_products');
@@ -56573,7 +56573,12 @@ function getProducts() {
     const localStr = localStorage.getItem('sklepSC_products');
     if (localStr) {
       try {
-        return JSON.parse(localStr);
+        let parsed = JSON.parse(localStr);
+        if (!parsed.find(p => p.id === 99999)) {
+          const zasilacz = defaultProducts.find(p => p.id === 99999);
+          if (zasilacz) parsed.unshift(zasilacz);
+        }
+        return parsed;
       } catch (e) {
         console.error(e);
       }
