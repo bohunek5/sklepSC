@@ -56574,10 +56574,12 @@ function getProducts() {
     if (localStr) {
       try {
         let parsed = JSON.parse(localStr);
-        if (!parsed.find(p => p.id === 99999)) {
-          const zasilacz = defaultProducts.find(p => p.id === 99999);
-          if (zasilacz) parsed.unshift(zasilacz);
-        }
+        // Ensure all default products are always available even if local cache exists
+        defaultProducts.forEach(dp => {
+          if (!parsed.find(p => p.id === dp.id)) {
+            parsed.push(dp);
+          }
+        });
         return parsed;
       } catch (e) {
         console.error(e);
