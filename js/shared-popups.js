@@ -756,7 +756,7 @@ customStyles.innerHTML = `
       background: transparent !important;
       color: inherit !important;
       box-shadow: none !important;
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.25s ease !important;
+      transition: transform 0.24s cubic-bezier(.22, 1, .36, 1), color 0.2s ease, filter .2s ease !important;
     }
     body .config-bottom-nav .mobile-bottom-icon i {
       margin: 0 !important;
@@ -781,18 +781,38 @@ customStyles.innerHTML = `
     }
     body .config-bottom-nav > .active {
       color: #fff !important;
-      background: linear-gradient(180deg, rgba(255,255,255,.055), transparent) !important;
+      background: linear-gradient(180deg, rgba(232,76,35,.14), rgba(0,216,245,.025) 76%, transparent) !important;
+      box-shadow: inset 0 0 0 1px rgba(232,76,35,.1) !important;
+    }
+    body .config-bottom-nav > .active::after {
+      content: '' !important;
+      position: absolute !important;
+      top: 2px !important;
+      left: 50% !important;
+      width: 24px !important;
+      height: 2px !important;
+      border-radius: 999px !important;
+      background: linear-gradient(90deg, #e84c23, #ff936f) !important;
+      box-shadow: 0 0 10px rgba(232,76,35,.72) !important;
+      transform: translateX(-50%) !important;
+      pointer-events: none !important;
     }
     body .config-bottom-nav > .active:not(.mobile-home-link) .mobile-bottom-icon {
-      width: 36px !important;
-      height: 36px !important;
-      min-width: 36px !important;
-      min-height: 36px !important;
-      margin-top: -10px !important;
-      color: #e84c23 !important;
-      border: 2px solid #e84c23 !important;
-      background: linear-gradient(145deg, #102b46, #071525) !important;
-      box-shadow: 0 0 0 4px rgba(232,76,35,.08), 0 0 20px rgba(232, 76, 35, .32) !important;
+      width: 27px !important;
+      height: 27px !important;
+      min-width: 27px !important;
+      min-height: 27px !important;
+      margin: 0 !important;
+      color: #ff7048 !important;
+      border: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      filter: drop-shadow(0 0 7px rgba(232,76,35,.62)) !important;
+      transform: translateY(-1px) !important;
+    }
+    body .config-bottom-nav > .active .mobile-bottom-label {
+      color: #fff !important;
+      font-weight: 780 !important;
     }
     body .config-bottom-nav > a:hover,
     body .config-bottom-nav > button:hover {
@@ -800,7 +820,7 @@ customStyles.innerHTML = `
     }
     body .config-bottom-nav > a:hover .mobile-bottom-icon,
     body .config-bottom-nav > button:hover .mobile-bottom-icon {
-      transform: translateY(-3px) !important;
+      transform: scale(1.05) !important;
     }
     body .config-bottom-nav > a:hover .mobile-bottom-label,
     body .config-bottom-nav > button:hover .mobile-bottom-label {
@@ -836,7 +856,7 @@ customStyles.innerHTML = `
       height: 29px !important;
       min-width: 29px !important;
       min-height: 29px !important;
-      margin-top: -8px !important;
+      margin: 0 !important;
       border: 0 !important;
       background: transparent !important;
       box-shadow: none !important;
@@ -845,7 +865,7 @@ customStyles.innerHTML = `
       content: '' !important;
       position: absolute !important;
       z-index: 0 !important;
-      inset: -8px -10px !important;
+      inset: -5px -8px !important;
       border-radius: 50% !important;
       background: radial-gradient(circle, rgba(232, 76, 35, .25) 0, rgba(0, 216, 245, .08) 45%, transparent 72%) !important;
       filter: blur(3px) !important;

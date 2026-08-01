@@ -63,13 +63,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (event.key === 'Escape' && filterContainer?.classList.contains('active')) closeFilterSheet();
   });
 
-  let touchStartY = 0;
+  let touchStartY = null;
   filterContainer?.addEventListener('touchstart', (event) => {
-    touchStartY = event.changedTouches[0].screenY;
+    const startedOnHeader = event.target.closest('.filter-sheet-header');
+    touchStartY = startedOnHeader ? event.changedTouches[0].screenY : null;
   }, { passive: true });
   filterContainer?.addEventListener('touchend', (event) => {
-    if (event.changedTouches[0].screenY - touchStartY > 100) closeFilterSheet();
+    if (touchStartY !== null && event.changedTouches[0].screenY - touchStartY > 90) closeFilterSheet();
+    touchStartY = null;
   }, { passive: true });
+  filterContainer?.addEventListener('touchcancel', () => { touchStartY = null; }, { passive: true });
 
   function setMode(mode, { update = true } = {}) {
     currentMode = mode === 'b2b' ? 'b2b' : 'b2c';
