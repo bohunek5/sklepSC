@@ -4269,8 +4269,7 @@
 <!-- Media triggers on top of the main image/canvas -->
 <div class="gallery-media-triggers" style="position: absolute; bottom: 20px; right: 20px; display: flex; gap: 10px; z-index: 10;">
 <button class="media-trigger-btn active" id="triggerImage"><i class="ph ph-image" style="font-size:16px;"></i> Galeria</button>
-<button class="media-trigger-btn" id="trigger3D" style="display: none;"><i class="ph ph-bounding-box" style="font-size:16px;"></i> 3D / AR</button>
-<button class="media-trigger-btn" id="trigger360" style="display: none;"><i class="ph ph-arrows-clockwise" style="font-size:16px;"></i> 360˚</button>
+<!-- AR and 360 buttons removed from overlay as requested -->
 </div>
 </div>
 <div class="product-thumbnails" id="qvThumbnails"></div>
@@ -4732,15 +4731,7 @@
         `);
       }
 
-      // 3. Model 3D / AR
-      if (product.has3D) {
-        items.push(`
-          <button class="product-action-item" id="actionBar3DBtn">
-            <i class="ph ph-cube"></i>
-            <span>Model 3D (AR)</span>
-          </button>
-        `);
-      }
+      // Removed 3D/AR from action bar as requested
 
       // 4. Widok 360
       if (product.has360) {
@@ -4782,19 +4773,11 @@
       actionsBar.innerHTML = items.join('<div class="product-action-divider"></div>');
 
       // Bind events directly
-      const btn3D = document.getElementById('actionBar3DBtn');
-      if (btn3D) {
-        btn3D.addEventListener('click', () => {
-          const trigger = document.getElementById('trigger3D');
-          if (trigger) trigger.click();
-        });
-      }
-
       const btn360 = document.getElementById('actionBar360Btn');
       if (btn360) {
         btn360.addEventListener('click', () => {
-          const trigger = document.getElementById('trigger360');
-          if (trigger) trigger.click();
+          resetGalleryTabs();
+          sixtyViewerContainer.style.display = 'flex';
         });
       }
 
@@ -4896,6 +4879,7 @@
 
     // Main Image & Gallery
     const mainImg = document.getElementById('mainImg');
+    const mainVideo = document.getElementById('mainVideo');
     mainImg.src = (product.images && product.images[0]) ? product.images[0] : 'images/okladka-produkty.webp';
     mainImg.alt = product.title;
 
@@ -5104,8 +5088,6 @@
 
     // 3D and 360 View Triggers & Logic
     const triggerImage = document.getElementById('triggerImage');
-    const trigger3D = document.getElementById('trigger3D');
-    const trigger360 = document.getElementById('trigger360');
     const modelViewerContainer = document.getElementById('modelViewerContainer');
     const sixtyViewerContainer = document.getElementById('sixtyViewerContainer');
     const sixtyImg = document.getElementById('sixtyImg');
@@ -5121,12 +5103,12 @@
       return product360Images[index - 1] || product360Images[0] || ((product.images && product.images[0]) ? product.images[0] : 'images/okladka-produkty.webp');
     }
 
-    // 1. Show triggers if product supports them
-    if (product.has3D) {
-      trigger3D.style.display = 'flex';
-    }
+    // 1. Setup 360 viewer if product supports it
+    // Removed AR and 360 overlay buttons as per user request
     if (product.has360) {
-      trigger360.style.display = 'flex';
+      // Auto-start 360 viewer on load
+      resetGalleryTabs();
+      sixtyViewerContainer.style.display = 'flex';
 
       // Preload 360 images
       const imagesCount = totalSixtyImages;
@@ -5150,8 +5132,6 @@
       sixtyImg.src = getSixtyImageSource(1);
     }
 
-    const mainVideo = document.getElementById('mainVideo');
-
     // 2. Tab switching inside gallery
     function resetGalleryTabs() {
       mainImg.style.display = 'none';
@@ -5163,8 +5143,6 @@
       modelViewerContainer.style.display = 'none';
       sixtyViewerContainer.style.display = 'none';
       triggerImage.classList.remove('active');
-      trigger3D.classList.remove('active');
-      trigger360.classList.remove('active');
 
       // Stop 360 interval if playing
       stopSixtyAutoPlay();
@@ -5195,33 +5173,6 @@
     if (product.video && mainVideo) {
       mainVideo.src = product.video;
     }
-
-    trigger3D.addEventListener('click', () => {
-      resetGalleryTabs();
-      modelViewerContainer.style.display = 'block';
-      trigger3D.classList.add('active');
-
-      // Lazy load model-viewer if not already inside container
-      if (!modelViewerContainer.querySelector('model-viewer')) {
-        modelViewerContainer.innerHTML = `
-          <model-viewer 
-            src="${product.modelSrc}" 
-            poster="${product.posterSrc}" 
-            camera-controls 
-            ar 
-            ar-modes="webxr scene-viewer quick-look" 
-            style="width: 100%; height: 100%; min-height: 500px;" 
-            alt="${product.title}">
-          </model-viewer>
-        `;
-      }
-    });
-
-    trigger360.addEventListener('click', () => {
-      resetGalleryTabs();
-      sixtyViewerContainer.style.display = 'flex';
-      trigger360.classList.add('active');
-    });
 
     // 3. 360 Degree Rotation Logic
     let activeSixtyIndex = 1;
@@ -5482,13 +5433,7 @@
 
       recommended.forEach(p => {
         let thirdBtn = '';
-        if (p.has3D) {
-          thirdBtn = `
-            <button class="action-btn-circle qv-3d-btn" data-id="${p.id}" aria-label="Podgląd 3D">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-            </button>
-          `;
-        } else if (p.has360) {
+        if (p.has360) {
           thirdBtn = `
             <button class="action-btn-circle qv-360-btn" data-id="${p.id}" aria-label="Podgląd 360">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: auto;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
