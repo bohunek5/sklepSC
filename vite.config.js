@@ -14,6 +14,7 @@ export default defineConfig({
         configurator: resolve(__dirname, 'configurator.html'),
         ledConfigurator: resolve(__dirname, 'konfigurator-led.html'),
         product: resolve(__dirname, 'product.html'),
+        setHandoff: resolve(__dirname, 'zestaw.html'),
         about: resolve(__dirname, 'about.html'),
         contact: resolve(__dirname, 'contact.html'),
         cart: resolve(__dirname, 'cart.html'),

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,follow">
+  <title>Twój zestaw LED — Prescot</title>
+  <link rel="stylesheet" href="set-handoff.css">
+  <script src="js/products-data.js" defer></script>
+  <script type="module" src="js/set-handoff.js"></script>
+</head>
+<body>
+  <header><a class="logo" href="index.html">PRESCOT <span>LED</span></a><nav aria-label="Sklep"><a href="shop.html">Cały sklep ↗</a><a href="cart.html">Koszyk</a></nav></header>
+  <main>
+    <a class="back" href="https://bohunek5.github.io/prescotpl/produkty/?dobierz=1">← Wróć do doboru</a>
+    <div class="intro"><span class="eyebrow">Z POMYSŁU DO ŚWIATŁA</span><h1>Twój zestaw jest tutaj<span>.</span></h1><p>Sprawdź elementy i ilości. Zestaw dodasz do koszyka jednym przyciskiem.</p></div>
+    <section id="set-status" role="status" aria-live="polite">Sprawdzam zestaw i katalog sklepu…</section>
+    <section id="set-products" aria-label="Elementy zestawu"></section>
+    <section class="summary" hidden><div><span>Suma produktów netto</span><strong id="set-total"></strong><p>Ceny według katalogu sklepSC. Dostawę i ostateczną kwotę sprawdzisz w koszyku.</p></div><button id="set-add" type="button">Dodaj zestaw do koszyka →</button></section>
+    <a id="set-cart" class="cart-link" href="cart.html" hidden>Przejdź do koszyka →</a>
+  </main>
+  <footer>PRESCOT LED · Taśma + zasilanie + sterowanie</footer>
+</body>
+</html>
