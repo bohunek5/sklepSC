@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="referrer" content="same-origin">
+  <title>Prescot LED — dostęp do podglądu</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100svh; display: grid; place-items: center; padding: 24px; color: #edf1f5; background: #18212a; font-family: Arial, sans-serif; }
+    main { width: 100%; max-width: 420px; padding: 36px 30px; border: 1px solid #3a424a; border-radius: 22px; background: #222c35; }
+    .brand { margin: 0 0 32px; font-size: 25px; font-weight: 800; letter-spacing: -1px; }
+    .brand span { color: #ed4a25; }
+    h1 { margin: 0 0 12px; font-size: 25px; }
+    p { color: #bfcad6; font-size: 15px; line-height: 1.6; }
+    label { display: block; margin: 22px 0 8px; font-size: 14px; }
+    input, button { width: 100%; min-height: 48px; border-radius: 10px; font: inherit; }
+    input { border: 1px solid #59636d; padding: 12px; background: #18212a; color: white; }
+    input:focus-visible, button:focus-visible { outline: 3px solid #ff9a75; outline-offset: 3px; }
+    button { margin-top: 26px; border: 0; padding: 12px; color: white; background: #cf3c1b; font-weight: 700; cursor: pointer; }
+    button:disabled { opacity: .7; cursor: wait; }
+    #error { min-height: 24px; margin: 14px 0 0; color: #ffb6a4; font-size: 14px; }
+    @media (max-width: 380px) { main { padding: 28px 22px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand">PRESCOT <span>LED</span></div>
+    <h1>Dostęp do podglądu</h1>
+    <p>Wpisz login i hasło, aby otworzyć stronę.</p>
+    <form id="login-form">
+      <label for="username">Login</label>
+      <input id="username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+      <label for="password">Hasło</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+      <button type="submit" id="submit">Zaloguj się</button>
+      <p id="error" role="alert" aria-live="polite"></p>
+    </form>
+    <noscript><p>Włącz JavaScript w przeglądarce, aby się zalogować.</p></noscript>
+  </main>
+  <script id="preview-payload" type="application/json">__PREVIEW_PAYLOAD__</script>
+  <script>
+    (() => {
+      const payload = JSON.parse(document.getElementById('preview-payload').textContent);
+      const form = document.getElementById('login-form');
+      const button = document.getElementById('submit');
+      const error = document.getElementById('error');
+      const storageKey = 'prescot-sklepsc-preview-v1';
+      const decode = value => Uint8Array.from(atob(value), char => char.charCodeAt(0));
+      const encode = value => btoa(String.fromCharCode(...new Uint8Array(value)));
+      const clearSession = () => { try { sessionStorage.removeItem(storageKey); } catch {} };
+
+      async function openPage(rawKey, expires) {
+        const key = await crypto.subtle.importKey('raw', rawKey, 'AES-GCM', false, ['decrypt']);
+        const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: decode(payload.iv) }, key, decode(payload.ciphertext));
+        let html = new TextDecoder().decode(plain);
+        html = html.replace(/<head\b[^>]*>/i, '$&<meta name="robots" content="noindex, nofollow, noarchive">');
+        document.open();
+        document.write(html);
+        document.close();
+        setTimeout(() => { clearSession(); location.reload(); }, Math.max(0, expires - Date.now()));
+        window.addEventListener('pageshow', event => {
+          if (!event.persisted) return;
+          try {
+            const saved = JSON.parse(sessionStorage.getItem(storageKey));
+            if (saved?.buildId === payload.buildId && saved.expires > Date.now()) return;
+          } catch {}
+          location.reload();
+        });
+        const addLogout = () => {
+          const logout = document.createElement('button');
+          logout.type = 'button';
+          logout.textContent = 'Wyloguj z podglądu';
+          logout.id = 'preview-logout';
+          logout.style.cssText = 'position:fixed;bottom:90px;left:12px;z-index:2147483647;padding:9px 13px;border:1px solid #697582;border-radius:8px;background:#18212a;color:white;font:12px Arial,sans-serif;cursor:pointer';
+          logout.addEventListener('click', () => { clearSession(); location.reload(); });
+          document.body.appendChild(logout);
+        };
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', addLogout, { once: true });
+        else addLogout();
+      }
+
+      form.addEventListener('submit', async event => {
+        event.preventDefault();
+        button.disabled = true;
+        button.textContent = 'Logowanie…';
+        error.textContent = '';
+        let rawKey;
+        try {
+          const credentials = JSON.stringify([form.username.value, form.password.value]);
+          const material = await crypto.subtle.importKey('raw', new TextEncoder().encode(credentials), 'PBKDF2', false, ['deriveKey']);
+          const wrappingKey = await crypto.subtle.deriveKey({ name: 'PBKDF2', hash: 'SHA-256', iterations: payload.access.iterations, salt: decode(payload.access.salt) }, material, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+          const privateBytes = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: decode(payload.access.iv) }, wrappingKey, decode(payload.access.privateKey));
+          const privateKey = await crypto.subtle.importKey('pkcs8', privateBytes, { name: 'RSA-OAEP', hash: 'SHA-256' }, false, ['decrypt']);
+          rawKey = await crypto.subtle.decrypt({ name: 'RSA-OAEP' }, privateKey, decode(payload.wrappedKey));
+        } catch {
+          clearSession();
+          error.textContent = 'Nieprawidłowy login lub hasło.';
+          form.password.value = '';
+          form.password.focus();
+          button.disabled = false;
+          button.textContent = 'Zaloguj się';
+          return;
+        }
+        form.password.value = '';
+        try {
+          // Store only the deployment key for this tab, never the login or password.
+          const expires = Date.now() + 4 * 60 * 60 * 1000;
+          try { sessionStorage.setItem(storageKey, JSON.stringify({ buildId: payload.buildId, key: encode(rawKey), expires })); } catch {}
+          await openPage(rawKey, expires);
+        } catch {
+          clearSession();
+          error.textContent = 'Nie udało się otworzyć strony. Odśwież ją i spróbuj ponownie.';
+          button.disabled = false;
+          button.textContent = 'Zaloguj się';
+        }
+      });
+
+      (async () => {
+        // Finish parsing the login document before document.open replaces it.
+        if (document.readyState !== 'complete') {
+          await new Promise(resolve => window.addEventListener('load', resolve, { once: true }));
+        }
+        if (!window.isSecureContext || !window.crypto?.subtle) {
+          button.disabled = true;
+          error.textContent = 'Otwórz stronę przez HTTPS w aktualnej przeglądarce.';
+          return;
+        }
+        try {
+          const saved = JSON.parse(sessionStorage.getItem(storageKey));
+          if (saved?.buildId === payload.buildId && saved.expires > Date.now()) await openPage(decode(saved.key), saved.expires);
+          else clearSession();
+        } catch { clearSession(); }
+      })();
+    })();
+  </script>
+</body>
+</html>

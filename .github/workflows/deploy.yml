@@ -35,7 +35,7 @@ jobs:
         run: npm ci || npm install
 
       - name: Build
-        run: npm run build
+        run: npm run build:protected
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
